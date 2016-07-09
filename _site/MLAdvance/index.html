@@ -6,7 +6,7 @@
     * Revised:        LijunYu
     -->
     <meta charset="utf-8" />
-    <title>Error | Lijun Yu's blog</title>
+    <title>Lijun Yu's blog</title>
     <meta name="author" content="LijunYu" />
     <meta name="renderer" content="webkit">
     <meta name="description" content="Everything about LijunYu" />
@@ -31,13 +31,67 @@
         </div>
     </div>
 
-    <div id="content">
-    <h2>Oops...</h2>
-<h2>Something goes wrong and no one knows why</h2>
+    <div class="index-content project">
+    <div class="section">
+        <ul class="artical-cate">
+            <li><a href="/"><span>Blog</span></a></li>
+            <li style="text-align:center"><a href="/dump"><span>Dump</span></a></li>
+            <li class="on" style="text-align:right"><a href="/project"><span>Project</span></a></li>
+        </ul>
 
-<h3>And <a href="/dump">here</a>'s something else for you.</h3>
+        <div class="cate-bar"><span id="cateBar"></span></div>
 
+        <ul class="artical-list">
+        
+        </ul>
+    </div>
+    <div class="aside">
+    </div>
 </div>
+
+
+<script type="text/javascript">
+    $(function(){
+        function animateBar($item,noAni){
+            var spanLeft = $item.find('span').offset().left;
+            var conLeft = $item.parent().offset().left;
+            var left = spanLeft - conLeft;
+            var width = $item.find('span').width() + 8;
+
+            if(noAni){
+                $('#cateBar').css({left:left,width:width})
+            }else{
+                $('#cateBar').stop().animate({left:left,width:width},300)
+            }
+        }
+
+        var waitForFinalEvent = (function () {
+            var timers = {};
+            return function (callback, ms, uniqueId) {
+                if (!uniqueId) {
+                    uniqueId = "Don't call this twice without a uniqueId";
+                }
+                if (timers[uniqueId]) {
+                    clearTimeout (timers[uniqueId]);
+                }
+                timers[uniqueId] = setTimeout(callback, ms);
+            };
+        })();
+
+        $('.artical-cate li').mouseenter(function(){
+            animateBar($(this));
+        }).mouseleave(function(){
+            animateBar($('.artical-cate .on'));
+        });
+
+        $(window).resize(function(e){
+            waitForFinalEvent(function(){
+                animateBar($('.artical-cate .on'));
+            })
+        })
+        animateBar($('.artical-cate .on'),true);
+    });
+</script>
 
 
     <script type="text/javascript">

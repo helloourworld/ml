@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 只言
-description: Die Liebe zu Welt.
+description: Learn and Think.
 category: blog
 ---
 
@@ -9,4 +9,4 @@ category: blog
 
 
 
-[Mukosame]:    http://mukosame.github.io  "Mukosame"
+[Lijun Yu]:    http://helloourworld.github.io  "Lijun Yu"

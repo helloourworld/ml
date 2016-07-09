@@ -1,14 +1,14 @@
 auto: true
 
-markdown: rdiscount
+markdown: kramdown
 
 highlighter: 'pygments'
 #paginate: 8
 permalink: /:title
 
-name: “Mukosame's Blog”
-title: Mukosame's blog
-description: Everything about Mukosame.
-url: http://mukosame.github.io
+name: “Lijun Yu's Blog”
+title: Lijun Yu's blog
+description: Everything about Lijun Yu.
+url: http://helloourworld.github.io
 feed: /atom.xml
-author_info: <a href="http://mukosame.github.io/">Mukosame</a>
+author_info: <a href="http://helloourworld.github.io/">Welcome</a>
