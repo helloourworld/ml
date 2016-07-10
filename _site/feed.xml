@@ -6,6 +6,20 @@
 		<link>http://helloourworld.github.io</link>
 		<atom:link href="http://helloourworld.github.io/feed.articles.xml" rel="self" type="application/rss+xml" />
 		
+			
+			<item>
+				<title>Welcome!</title>
+				
+					<description>&lt;p&gt;Welcome to &lt;a href=&quot;http://www.machinelearningadvance.com&quot;&gt;Machine Learning Advance&lt;/a&gt;! From here you can Learn Machine Learning with me, thanks! Check &lt;a href=&quot;https://helloourworld.github.io/Machine_Learning_Advance/README.md&quot;&gt;README&lt;/a&gt; for more info. If you get any problems when roaming, you can ask me on &lt;a href=&quot;https://github.com/helloourworld/Machine_Learning_Advance/issues&quot;&gt;GitHub&lt;/a&gt; or contact me at &lt;a href=&quot;http://blog.sina.com.cn/u/2672280861&quot;&gt;weibo&lt;/a&gt;[@机器学习_大卫君].&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Sun, 07 Feb 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/welcome</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/welcome</guid>
+			</item>
+			
+		
 	</channel>
 </rss>
 
