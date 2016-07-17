@@ -1,8 +1,8 @@
 ---
 layout: post
-title: There you go, only Finace surive.
+title: Lev1_Quants_basic_concept
 category: CFA
-description: The very basic: Quants
+description: The very basic: Quants. There you go, only Finace surive.
 ---
 # Quants  
 ##  05 Time Value of Money
