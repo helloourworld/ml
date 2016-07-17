@@ -27,7 +27,7 @@ description: The very basic_Quants. There you go, only Finace surive.
 
   - [x] 2  切比雪夫不等式（Chebyshev's Inequality）的含义
 
-  - [x] 3  Sharp Ratio的定义
+  - [x] 3  Sharp Ratio的定义 vs  对比CV的概念
 
   - [x] 4  偏度（Skewness）的定义以及正偏（Positively Skewness）、负偏（Negatively Skewness）的判断
 
