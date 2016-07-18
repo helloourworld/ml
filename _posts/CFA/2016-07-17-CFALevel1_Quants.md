@@ -58,7 +58,8 @@ description: The very basic_Quants. There you go, only Finace surive.
 
   - [x] 6  正态分布（Normal Distribution）的三点主要特征
   
- ## 10 Sampling and Estimation
+## 10 Sampling and Estimation
+
   - [x] 1  Standard Error of Sample Mean的计算公式以及它的含义
 
   - [x] 2  什么是t分布（Student's t-distribution）以及其中自由度（Degrees of Freedom，df）的概念
@@ -66,6 +67,7 @@ description: The very basic_Quants. There you go, only Finace surive.
   - [x] 3  t分布的特点以及与正态分布的区别
  
 ## 11 Hypothesis Testing
+
   - [x] 1  Hypothesis Testing的7个步骤（顺序）
 
   - [x] 2  什么是无效假设（Null Hypothesis）和备择假设（Altanative Hypothesis）
