@@ -8,6 +8,81 @@
 		
 			
 			<item>
+				<title>dialogue about start up a business</title>
+				
+					<description>&lt;h2 id=&quot;profile&quot;&gt;profile:&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Tue, 19 Jul 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/dialogue_startup_business</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/dialogue_startup_business</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Lev1_FSA_basic_concept</title>
+				
+					<description>&lt;h2 id=&quot;financial-statement-analysis-introduction&quot;&gt;29 Financial Statement Analysis: Introduction&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;[x] 1 审计的三种结果的含义：Unqualified，Qualified，Adversed Opinion的分别的含义&lt;/li&gt;
+  &lt;li&gt;[x] 2 MD&amp;amp;A（Management’s Discussion and Analysis）记录的内容是什么：一些Disclosure，Discussion&lt;/li&gt;
+  &lt;li&gt;[x] 3 Footnotes记录什么东西：Accounting Methods，&lt;/li&gt;
+  &lt;li&gt;[x] 4 Proxy Statement主要记录什么东西：有关Shareholder的信息&lt;/li&gt;
+  &lt;li&gt;[x] 5 Standard Auditor’s Opinion的三部分内容&lt;/li&gt;
+  &lt;li&gt;[x] 6 FSA Framework的六步：State Objective and Context；Gather Data；Process Data；Analyze Date；Report Conclusion；Update； 以及每步的输入输出&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+				
+				<pubDate>Tue, 19 Jul 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/CFALevel1_FSA</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/CFALevel1_FSA</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Ml_fourier_transform</title>
+				
+					<description>&lt;h2 id=&quot;fourier-transform&quot;&gt;了解傅立叶转换（Fourier transform）&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Mon, 18 Jul 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/ML_Fourier_Transform</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/ML_Fourier_Transform</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Lev1_Economics_basic_concept</title>
+				
+					<description>&lt;h2 id=&quot;introduction&quot;&gt;13 Introduction&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;[x] 1 Price Elasticity of Demand的定义&lt;/li&gt;
+  &lt;li&gt;[x] 2 影响Price Elasticity of Demand的三个方面&lt;/li&gt;
+  &lt;li&gt;[x] 3 Elastic，Inelastic，Perfectly Elastic和Perfectly Inelastic的图形表示&lt;/li&gt;
+  &lt;li&gt;[x] 4 Cross Elasticity of Demand的定义&lt;/li&gt;
+  &lt;li&gt;[x] 5 Income Elasticity的定义以及三个不同等级的商品与它的对应关系&lt;/li&gt;
+  &lt;li&gt;[x] 6 Price Elasticity of Supply的定义&lt;/li&gt;
+  &lt;li&gt;[x] 7 影响Price Elasticity of Supply的两种因素&lt;/li&gt;
+  &lt;li&gt;[x] 8 理解在直线需求曲线（Straight-Ling Demand Curve）时，High Elasticity，Unitary Elasticity以及Low Elasticity的位置（Notes V2 P16）&lt;/li&gt;
+  &lt;li&gt;[x] 9 Demand Curve在价格越高时弹性越大&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+				
+				<pubDate>Mon, 18 Jul 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/CFALevel1_Economics</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/CFALevel1_Economics</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Lev1_Quants_basic_concept</title>
 				
 					<description>&lt;h2 id=&quot;time-value-of-money&quot;&gt;05 Time Value of Money&lt;/h2&gt;
