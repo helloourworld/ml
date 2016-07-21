@@ -7,7 +7,7 @@ description: The very basic of Portfolio. There you go, only Finace surive.
 
 
 ## 49 Asset Allocation Decision
-  - [x] 1 Portfolio Management的四步过程
+  - [★] 1 Portfolio Management的四步过程
   - [x] 2 什么是Capital Preservation目标
   - [x] 3 什么是Capital Appreciation目标
   - [x] 4 什么是Current Income目标
