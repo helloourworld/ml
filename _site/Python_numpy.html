@@ -6,7 +6,7 @@
     * Revised:        LijunYu
     -->
     <meta charset="utf-8" />
-    <title>This is a test! | Lijun Yu's blog</title>
+    <title>hackerrank_numpy | Lijun Yu's blog</title>
     <meta name="author" content="LijunYu" />
     <meta name="renderer" content="webkit">
     <meta name="description" content="Everything about LijunYu" />
@@ -44,28 +44,163 @@
 
 <div id="content">
     <div class="entry">
-        <h1 class="entry-title"><a href="/my-weekend" title="This is a test!">This is a test!</a></h1>
-        <p class="entry-date">2016-07-10</p>
-        <p>This is a test, some picture.</p>
+        <h1 class="entry-title"><a href="/Python_numpy" title="hackerrank_numpy">hackerrank_numpy</a></h1>
+        <p class="entry-date">2016-07-19</p>
+        <h2 id="arrays">Arrays</h2>
 
-<p><img src="/life/IMG_4822.JPG" alt="My food" />
-<img src="/life/IMG_4823.JPG" alt="My food" /></p>
+<p>A NumPy array is a grid of values. They are similar to lists, except that every element of an array must be the same type.</p>
 
-<p>$ssh “email davidy”</p>
-
-<p>hello</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>$ cd desktop
-config dock
-$ mkdir project
+<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+a = numpy.array([1, 2, 3, 4, 5])
+b = numpy.array([1, 2, 3, 4, 5], float)
+`
 </code></pre>
 </div>
 
-<h3 id="hello">hello</h3>
+<p>reverse a np.array</p>
 
-<h2 id="this-is-i-waist-my-time">This is I waist my time</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy as np
+array1 = np.array(map(float,raw_input().split(' ')), float)
+array2 = array1[::-1]
+print array2
+`
+</code></pre>
+</div>
 
-<p><code class="highlighter-rouge">git@github.com</code>的部分不要修改</p>
+<h2 id="shape-and-reshape">Shape and Reshape</h2>
+
+<p>The shape tool gives a tuple of array dimensions and can be used to change the dimensions of an array.</p>
+
+<ul>
+  <li>
+    <p>1 Using shape to get array dimensions</p>
+
+    <p><code class="highlighter-rouge">import numpy
+  my_1D_array = numpy.array([1, 2, 3, 4, 5])
+  print my_1D_array.shape
+  my_2D_array = numpy.array([[1, 2],[3, 4],[6,5]])
+  print my_2D_array.shape
+  </code></p>
+  </li>
+  <li>
+    <p>2 Using shape to change array dimensions</p>
+
+    <p><code class="highlighter-rouge">import numpy
+  change_array = numpy.array([1,2,3,4,5,6])
+  change_array.shape = (3, 2)
+  print change_array
+  </code></p>
+  </li>
+  <li>
+    <p>3 reshape</p>
+  </li>
+</ul>
+
+<p>The reshape tool gives a new shape to an array without changing its data. It creates a new array and does not modify the original array itself.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+my_array = numpy.array([1, 2, 3, 4, 5, 6])
+print my_array.reshape(my_array, (3,2))
+`
+</code></pre>
+</div>
+
+<h2 id="transpose-and-flatten">Transpose and Flatten</h2>
+
+<ul>
+  <li>1 transpose</li>
+</ul>
+
+<p>we can generate the transpostion of an array using the tool numpy.transpose.</p>
+
+<p>It will not affect the original array, but it will create a new array.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy as np
+my_array = np.array([[1, 2, 3],
+                                [4, 5, 6]])
+print np.transpose(my_array)
+`
+</code></pre>
+</div>
+
+<ul>
+  <li>2 Flatten</li>
+</ul>
+
+<p>The tool flatten creates a copy of the input array flattened to one dimension.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy as np
+my_array = np.array([[1, 2, 3], [4, 5, 6]])
+print my_array.flatten()
+`
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <p>3 Hack</p>
+
+    <p><code class="highlighter-rouge">import numpy as np
+  shape1 = np.array(map(int, raw_input().split()))
+  array1 = np.array([raw_input().split() for _ in range(shape1[0])], int)
+  </code></p>
+  </li>
+</ul>
+
+<p>another method</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+shape1 = numpy.array(map(int, raw_input().split(' ')))
+array1 = numpy.array(map(int, raw_input().split(' ')))
+print numpy.transpose(array1.reshape(array1, shape1))
+print array1.flatten()
+`
+</code></pre>
+</div>
+
+<h2 id="concatenate">Concatenate</h2>
+
+<p>Two or more arrays can be concatenated together using the concatenate function with a tuple of the arrays to be joined:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+
+array_1 = numpy.array([1,2,3])
+array_2 = numpy.array([4,5,6])
+array_3 = numpy.array([7,8,9])
+
+print numpy.concatenate((array_1, array_2, array_3))
+
+#Output
+[1 2 3 4 5 6 7 8 9]
+`
+</code></pre>
+</div>
+
+<p>If an array has more than one dimension, it is possible to specify the axis along which multiple arrays are concatenated. By default, it is along the first dimension.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>`
+import numpy
+
+array_1 = numpy.array([[1,2,3],[0,0,0]])
+array_2 = numpy.array([[0,0,0],[7,8,9]])
+
+print numpy.concatenate((array_1, array_2), axis = 1)
+
+#Output
+[[1 2 3 0 0 0]
+ [0 0 0 7 8 9]]
+`
+
+`import numpy
+[n,m,p] = map(int, raw_input().split())
+array1 = numpy.array([raw_input().split() for _ in range(n)], int)
+array2 = numpy.array([raw_input().split() for _ in range(m)], int)
+print numpy.concatenate((array1, array2))
+`
+</code></pre>
+</div>
+
+<p>That’s all. For more please refer to <a href="https://www.hackerrank.com/challenges/np-zeros-and-ones?h_r=next-challenge&amp;h_v=zen">Hackerrank</a></p>
 
         <div id="disqus_container">
             <class="comment"/>

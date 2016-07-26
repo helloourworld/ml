@@ -8,6 +8,99 @@
 		
 			
 			<item>
+				<title>Lev1_AI_basic_concept</title>
+				
+					<description>&lt;h2 id=&quot;alternative-investment&quot;&gt;73 Alternative Investment&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;[x] 1 什么是开放型基金（Open-End Fund）；什么是关闭型基金（Closed-End Fund）&lt;/li&gt;
+  &lt;li&gt;[x] 2 Open-End Fund中的Load和Un-Load的基金有什么不同&lt;/li&gt;
+  &lt;li&gt;[x] 3 什么是Net Asset Value（NAV）&lt;/li&gt;
+  &lt;li&gt;[x] 4 比较Equity Fund主要有哪些策略&lt;/li&gt;
+  &lt;li&gt;[x] 5 什么是ETF（Exchange Traded Fund），它有什么特点（优点、缺点和风险 Notes V5 P245）&lt;/li&gt;
+  &lt;li&gt;[x] 6 “In-Kind”是什么优点&lt;/li&gt;
+  &lt;li&gt;[x] 7 不动产投资（Real Estate Investment）的主要类型&lt;/li&gt;
+  &lt;li&gt;[x] 8 不动产（Real Estate）估价的主要方式&lt;/li&gt;
+  &lt;li&gt;[x] 9 不动产投资中计算NOI（Net Operating Income）的方式（看Notes V5 P248例题）&lt;/li&gt;
+  &lt;li&gt;[x] 10 什么是风险资本投资（Venture Capital Investment）以及它的四个阶段&lt;/li&gt;
+  &lt;li&gt;[x] 11 Venture Capital Investment的主要特点&lt;/li&gt;
+  &lt;li&gt;[x] 12 评估Venture Capital Investment的三个最主要的指标：到期回报（Payoff At Exit），回报时间（Timing of Exit）和失败率&lt;/li&gt;
+  &lt;li&gt;[x] 13 如何根据Possible Payoff和Failure Probabilities计算Venture Capital Investment的NPV（Notes V5 P252）&lt;/li&gt;
+  &lt;li&gt;[x] 14 Hedge Fund的四种主要类型&lt;/li&gt;
+  &lt;li&gt;[x] 15 什么是复合基金投资（Fund of Funds Investing）以及它的优缺点&lt;/li&gt;
+  &lt;li&gt;[x] 16 Hedge Fund的主要风险&lt;/li&gt;
+  &lt;li&gt;[x] 17 衡量Hedge Fund业绩时可能的偏差（Bias），尤其是什么是Survivorship Bias&lt;/li&gt;
+  &lt;li&gt;[x] 18 什么是Closely Held Companies，它的主要评估方式是什么&lt;/li&gt;
+  &lt;li&gt;[x] 19 理解为什么Closely Held Companies估价时会有折价和溢价&lt;/li&gt;
+  &lt;li&gt;[x] 20 什么是Distressed Securities&lt;/li&gt;
+  &lt;li&gt;[x] 21 理解Collateralized Commodities Futures Position收益的来源（Notes V5 P259 例题）&lt;/li&gt;
+  &lt;li&gt;[x] 22 Commodity-Linked Bonds的动机主要有：对冲Inflation&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+				
+				<pubDate>Mon, 25 Jul 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/CFALevel1_AI</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/CFALevel1_AI</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Lev1_Derivative_basic_concept</title>
+				
+					<description>&lt;h2 id=&quot;forward-market-and-contracts&quot;&gt;68 Forward Market and Contracts&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;[x] 1 什么是Forward&lt;/li&gt;
+  &lt;li&gt;[x] 2 什么是FRA（Forward Rate Agreement）&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+				
+				<pubDate>Sun, 24 Jul 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/CFALevel1_Derivative</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/CFALevel1_Derivative</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>How to start applying for Analytics / Data Science Masters in the US Universities?</title>
+				
+					<description>&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Sat, 23 Jul 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/apply-analytics-master</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/apply-analytics-master</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Lev1_FixedIncome_basic_concept</title>
+				
+					<description>&lt;h2 id=&quot;risk-associated-with-investing-in-bonds&quot;&gt;61 Risk Associated with Investing in Bonds&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;[x] 1 熟悉Callable Bond的价格与Option Free的价格的比较关系&lt;/li&gt;
+  &lt;li&gt;[x] 2 Callable Bond的value公式&lt;/li&gt;
+  &lt;li&gt;[x] 3 什么是Reinvestment Risk&lt;/li&gt;
+  &lt;li&gt;[x] 4 什么是Interest Rate Risk，什么是Yield Curve Risk，以及两者的区别&lt;/li&gt;
+  &lt;li&gt;[x] 5 什么是Event Risk，什么是Volatility Risk，以及两者的区别&lt;/li&gt;
+  &lt;li&gt;[x] 6 理解久期（Duration）是用来衡量债券价格对收益率（Yield）敏感性的指标&lt;/li&gt;
+  &lt;li&gt;[x] 7 久期（Duration）的公式&lt;/li&gt;
+  &lt;li&gt;[x] 8 信用风险（Credit Risk）的三种类型以及它们的区别&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+				
+				<pubDate>Sat, 23 Jul 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/CFALevel1_FixedIncome</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/CFALevel1_FixedIncome</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>IP</title>
 				
 					<description>&lt;p&gt;来源：搜狐文化(http://cul.sohu.com/20150625/n415609856.shtml)
@@ -1094,6 +1187,21 @@
 		
 			
 			<item>
+				<title>hackerrank_numpy</title>
+				
+					<description>&lt;h1 id=&quot;section&quot;&gt;#&lt;/h1&gt;
+&lt;p&gt;借助于 Ipython Notebook Viewer 提供的服务，只需下面一行代码，即可在博客中嵌入显示 Notebook：&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Wed, 20 Jul 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/Python_numpy2</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/Python_numpy2</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Lev1_Corporate_Finance_basic_concept</title>
 				
 					<description>&lt;h2 id=&quot;capital-budgeting&quot;&gt;44 Capital Budgeting&lt;/h2&gt;
@@ -1131,6 +1239,20 @@
 				<pubDate>Tue, 19 Jul 2016 00:00:00 +0800</pubDate>
 				<link>http://helloourworld.github.io/dialogue_startup_business</link>
 				<guid isPermaLink="true">http://helloourworld.github.io/dialogue_startup_business</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>hackerrank_numpy</title>
+				
+					<description>&lt;h2 id=&quot;arrays&quot;&gt;Arrays&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Tue, 19 Jul 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/Python_numpy</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/Python_numpy</guid>
 			</item>
 			
 		

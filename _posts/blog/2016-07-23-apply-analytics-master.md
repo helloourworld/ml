@@ -1,22 +1,40 @@
 ---
 layout:     post
-title:      Why I Blog？
+title:      How to start applying for Analytics / Data Science Masters in the US Universities?
 category: blog
-description: Why you learn? Why you live? Why you mark down? Here is the answer.
+description: Planning a masters program in data science in US? But, not completely aware of the application process? Or afraid of the application process?
 ---
 
-## 写给自己
+## Introduction
 
-最近的生活与工作有了较大的变化，心情起伏也比较大，这些更促使自己想要把它们记录下来，由此一个网站诞生了。理由很简单，有些任性。当然，这不仅仅是写给自己的博客。刚开始，只是想要整理整理机器学习方面的资料，在申请域名，创建网站的过程中，想了想，只是技术方面的内容是有些单调，既然做了，那么就将自己的生活也记录记录，将业务方面的知识也系统地归纳下。So，接下来的日子里，会抽空整理一批之前在各个网站博客的东西。
+This aritcle is come from here(http://www.analyticsvidhya.com/blog/2016/07/apply-analytics-data-science-masters-us-universities/?utm_source=feedburner&utm_medium=email&utm_campaign=Feed%3A+AnalyticsVidhya+%28Analytics+Vidhya%29)
 
-## 拟规划版块
-如首页所现：三大版块吧。
+## Table of Contents
 
-* 1 Blog——记录生活，记录工作，记录IT感悟
+I have divided the complete application process into 4 phases, precisely as follows:
 
-* 2 CFA——之所以使用这么装逼的名字，完全不是为了装逼，而是真实地记录自己对金融的思考。更多的是"金融"已经被各大顽主给玩坏了
+* 1 Mental Preparation
 
-* 3 MLAdvance——machine learning advance. 记录对于机器学习、数据挖掘的感悟。
+    >>o Start looking at programs in US Universities
+
+* 2 Taking Pre-requisite Examinations
+
+    >> GRE
+    >> TOEFL
+    >> Preparing for GRE & TOEFL
+    >> How much does GRE & TOEFL score matter in the application?
+
+* 3 Preparing and Submitting Applications
+
+    >> Finalizing Universities (where to go!)
+    >> Statement of Purpose (SOP)
+    >> A Good Strategy to Follow
+    >> Some more advice
+    >> Resume / Curriculum Vitae
+    >> Letter of Recommendation
+    >> Transcripts and Other Formalities
+
+* 4 Selecting from Admits & Flying to US
 
 ## CFA主要方向
 * 1 数量分析[Quant]
