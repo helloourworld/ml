@@ -1,6 +1,6 @@
 ---
 layout: post
-title: hackerrank_numpy
+title: hackerrank_numpy_test
 category: MLAdvance
 description: become an hacker need to parctice.
 ---
@@ -8,11 +8,7 @@ description: become an hacker need to parctice.
 ##
 借助于 Ipython Notebook Viewer 提供的服务，只需下面一行代码，即可在博客中嵌入显示 Notebook：
 
-<iframe src="http://nbviewer.ipython.org/gist ipynb/numpy_dim.ipynb/" width="700" height="400"></iframe>
-不足之处是需要手工设置宽度与高度以符合页面大小。下面是我编写的有关 Numpy 数组维度操作的一个 Notebook [5](https://github.com/helloourworld/advance_python/blob/master/ipynb/numpy_dim.ipynb)：
-
-
-
+<script src="https://gist.github.com/helloourworld/65fa6ea82894cc571c13fb5275e7c7a1.js"></script>
 
 
 That's all. For more please refer to [Hackerrank](https://www.hackerrank.com/challenges/np-zeros-and-ones?h_r=next-challenge&h_v=zen)
