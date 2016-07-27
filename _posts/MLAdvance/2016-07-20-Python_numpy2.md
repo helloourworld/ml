@@ -5,7 +5,8 @@ category: MLAdvance
 description: become an hacker need to parctice.
 ---
 
-##
+## Ipython Notebook convert to blog
+
 借助于 Ipython Notebook Viewer 提供的服务，只需下面一行代码，即可在博客中嵌入显示 Notebook：
 
 <script src="https://gist.github.com/helloourworld/65fa6ea82894cc571c13fb5275e7c7a1.js"></script>
