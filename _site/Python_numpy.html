@@ -595,9 +595,47 @@ print numpy.outer(A, B)     #Output : [[0 0]
 <p>多项式加减乘除
 The functions <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyadd.html#numpy.polyadd">polyadd</a>, <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polysub.html#numpy.polysub">polysub</a>, <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polymul.html">polymul</a>, and <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polydiv.html#numpy.polydiv">polydiv</a> also handle proper addition, subtraction, multiplication, and division of polynomial coefficients, respectively.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>        That's all. For more please refer to [Hackerrank](https://www.hackerrank.com/challenges/np-zeros-and-ones?h_r=next-challenge&amp;h_v=zen)
+<h2 id="linear-algebra">Linear Algebra</h2>
+
+<p>The NumPy module also comes with a number of built-in routines for linear algebra calculations. These can be found in the sub-module linalg.</p>
+
+<ul>
+  <li>1 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.det.html">linalg.det</a></li>
+</ul>
+
+<p>The linalg.det tool computes the determinant of an array.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.linalg.det([[1 , 2], [2, 1]])       #Output : -3.0`
 </code></pre>
 </div>
+
+<ul>
+  <li>2 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.eig.html">linalg.eig</a></li>
+</ul>
+
+<p>numpy.linalg.eig(a)[source]
+Compute the eigenvalues and right eigenvectors of a square array.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>`from numpy import linalg as LA
+w, v = LA.eig(np.diag((1, 2, 3)))`
+</code></pre>
+</div>
+
+<ul>
+  <li>3 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.inv.html">linalg.inv</a></li>
+</ul>
+
+<p>The linalg.inv tool computes the (multiplicative) inverse of a matrix.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.linalg.inv([[1 , 2], [2, 1]])       #Output : [[-0.33333333  0.66666667]
+                                            #          [ 0.66666667 -0.33333333]]
+                                            `
+</code></pre>
+</div>
+
+<p>Other routines can be found <a href="http://docs.scipy.org/doc/numpy/reference/routines.linalg.html">here</a></p>
+
+<p>That’s all. For more please refer to <a href="https://www.hackerrank.com/challenges/np-zeros-and-ones?h_r=next-challenge&amp;h_v=zen">Hackerrank</a>.</p>
 
 
         <div id="disqus_container">

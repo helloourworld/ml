@@ -449,8 +449,33 @@ The polyfit tool fits a polynomial of a specified order to a set of data using a
 多项式加减乘除
 The functions [polyadd](http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyadd.html#numpy.polyadd), [polysub](http://docs.scipy.org/doc/numpy/reference/generated/numpy.polysub.html#numpy.polysub), [polymul](http://docs.scipy.org/doc/numpy/reference/generated/numpy.polymul.html), and [polydiv](http://docs.scipy.org/doc/numpy/reference/generated/numpy.polydiv.html#numpy.polydiv) also handle proper addition, subtraction, multiplication, and division of polynomial coefficients, respectively.
 
+## Linear Algebra
 
+The NumPy module also comes with a number of built-in routines for linear algebra calculations. These can be found in the sub-module linalg.
 
+* 1 [linalg.det](http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.det.html)
 
-            That's all. For more please refer to [Hackerrank](https://www.hackerrank.com/challenges/np-zeros-and-ones?h_r=next-challenge&h_v=zen)
+The linalg.det tool computes the determinant of an array.
+
+    `print numpy.linalg.det([[1 , 2], [2, 1]])       #Output : -3.0`
+
+* 2 [linalg.eig](http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.eig.html)
+
+numpy.linalg.eig(a)[source]
+Compute the eigenvalues and right eigenvectors of a square array.
+
+    `from numpy import linalg as LA
+    w, v = LA.eig(np.diag((1, 2, 3)))`
+
+* 3 [linalg.inv](http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.inv.html)
+
+The linalg.inv tool computes the (multiplicative) inverse of a matrix.
+
+    `print numpy.linalg.inv([[1 , 2], [2, 1]])       #Output : [[-0.33333333  0.66666667]
+                                                #          [ 0.66666667 -0.33333333]]
+                                                `
+
+Other routines can be found [here](http://docs.scipy.org/doc/numpy/reference/routines.linalg.html)
+
+That's all. For more please refer to [Hackerrank](https://www.hackerrank.com/challenges/np-zeros-and-ones?h_r=next-challenge&h_v=zen).
 
