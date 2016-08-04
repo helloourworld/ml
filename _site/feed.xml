@@ -1,10 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
-		<title>“Lijun Yu&#39;s Blog” - Articles</title>
+		<title>“Lijun Yu's Blog” - Articles</title>
 		<description>Everything about Lijun Yu.</description>
 		<link>http://helloourworld.github.io</link>
 		<atom:link href="http://helloourworld.github.io/feed.articles.xml" rel="self" type="application/rss+xml" />
+		
+			
+			<item>
+				<title>Hadoop Mahout</title>
+				
+					<description>&lt;h2 id=&quot;mahout&quot;&gt;开始 Mahout&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/hadoop_mahout</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/hadoop_mahout</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Hadoop 名词速览</title>
+				
+					<description>&lt;h2 id=&quot;hadoop&quot;&gt;Hadoop产品名词速览（不断补充中…）&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/hadoop_glossary</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/hadoop_glossary</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Hadoop生态圈</title>
+				
+					<description>&lt;h2 id=&quot;hadoophivespark-&quot;&gt;如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/hadoop_family_zhihu</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/hadoop_family_zhihu</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Hadoop Family</title>
+				
+					<description>&lt;p&gt;Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka等。对照&lt;a href=&quot;/Hadoop_Ecosystem_Table&quot;&gt;Hadoop_Ecosystem_Table&lt;/a&gt;,我们将其分类为：&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/hadoop_family</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/hadoop_family</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Hadoop Ecosystem Table</title>
+				
+					<description>&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;chrome=1&quot; /&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;Hadoopecosystemtable.github.io : This page is a summary to keep the track of Hadoop related project, and relevant projects around Big Data scene focused on the open source, free software enviroment.&quot; /&gt;
+
+&lt;/head&gt;
+</description>
+				
+				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/Hadoop_Ecosystem_Table</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/Hadoop_Ecosystem_Table</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Hadoop or Spark</title>
+				
+					<description>&lt;p&gt;THis page is mainly from &lt;a href=&quot;http://www.forbes.com/sites/bernardmarr/2015/06/22/spark-or-hadoop-which-is-the-best-big-data-framework/#72907489532c&quot;&gt;Forbes&lt;/a&gt; by Bernard Marr, CONTRIBUTOR&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Wed, 03 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/hadoop_vs_spark</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/hadoop_vs_spark</guid>
+			</item>
+			
 		
 			
 			<item>
@@ -1189,8 +1277,7 @@
 			<item>
 				<title>hackerrank_numpy_test</title>
 				
-					<description>&lt;h1 id=&quot;section&quot;&gt;#&lt;/h1&gt;
-&lt;p&gt;借助于 Ipython Notebook Viewer 提供的服务，只需下面一行代码，即可在博客中嵌入显示 Notebook：&lt;/p&gt;
+					<description>&lt;h2 id=&quot;ipython-notebook-convert-to-blog&quot;&gt;Ipython Notebook convert to blog&lt;/h2&gt;
 
 </description>
 				
