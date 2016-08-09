@@ -153,6 +153,72 @@ Replication：多复本。默认是三个。通过hdfs-site.xml的dfs.replicatio
 
 >>注意：客户端执行write操作后，写完的block才是可见的，正在写的block对客户端是不可见的，只有调用sync方法，客户端才确保该文件的写操作已经全部完成，当客户端调用close方法时，会默认调用sync方法。是否需要手动调用取决你根据程序需要在数据健壮性和吞吐率之间的权衡。
 
+ * >5 HDFS常用命令
+
+[HDFS 常用命令: 官网](http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html)
+
+|	类型	|	[任务]	|
+|	数据获取	|	[通过Hadoop Shell把本地文件上传到HDFS](http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html#put)	|
+|		|	[使用Hadoop Shell在HDFS上创建一个新的目录](http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html#mkdir)	|
+|		|	[从一个关系型数据库中导入数据到HDFS](http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_literal_sqoop_import_literal)	|
+|		|	[导入关系型数据的查询结果到HDFS](http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_free_form_query_imports)	|
+|		|	[从一个关系型数据库中导入数据到一个新的或者已经存在的Hive表里](http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_importing_data_into_hive)	|
+|		|	[从 HDFS里面插入和更新数据到关系型数据库里面](http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_literal_sqoop_export_literal)	|
+|		|	[ 给你一个Flume配置文件，启动一个 Flume agent](https://flume.apache.org/FlumeUserGuide.html#starting-an-agent)	|
+|		|	[给你一个配置好的 sink 和source, 配置一个 Flume 固定容量的内存 channel](https://flume.apache.org/FlumeUserGuide.html#memory-channel)	|
+
 ### 2 MapReduce
+
+#### Explain Map/Reduce in 5 minutes
+
+原文链接: [http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce](http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce) by Aurelien.
+
+* >1 Map/Reduce 有3个阶段 : Map/Shuffle/Reduce
+
+Shuffle部分由Hadoop的自动完成，我们只需要实现Map和Reduce部分。
+
+* >2 Map部分的输入
+
+![](/images/mapred_mapinput.jpg)
+
+图上的城市名称作为key值，所属州以及城市均温为key的value值。ps: 请自动脑补python的dict, jason.
+
+* > 3 Map部分的输出
+
+![](/images/mapred_mapoutput.jpg)
+
+图上显示的Map部分的输出是根据最终我们想要的结果来实现的。我们要得到每个州的平均值，所以根据每个州来进行新的key/value设计。
+
+* > 4 Shuffle部分
+
+![](/images/mapred_shuffle.jpg)
+
+Now, the shuffle task will run on the output of the Map task. It is going to group all the values by Key, and you’ll get a List<Value>.
+
+* > 5 Rduce部分
+
+Reduce部分的输入为以上Shuffle部分的输出。
+
+Reduce任务是数据逻辑的最终完成者，in our case当然就是计算各州的平均温度。最终结果如下：
+
+![](/images/mapred_reduce.jpg)
+
+* > 6 总结
+
+Map/Reduce的并行执行过程：
+
+Mapper<K1，V1> ==》 <K2，V2>
+
+Reducer<K2，List<V2> >==》<K3，V3>
+
+PS: You can find the java code for this example here:
+
+[https://github.com/jsoftbiz/mapreduce_1](https://github.com/jsoftbiz/mapreduce_1)
+
+#### 实例演示
+
+* > 1 演示WordCount
+
+* > 2 演示上述平均温度统计
 
 

@@ -328,7 +328,155 @@ tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml
   </blockquote>
 </blockquote>
 
+<ul>
+  <li>
+    <blockquote>
+      <p>5 HDFS常用命令</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html">HDFS 常用命令: 官网</a></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>类型</td>
+      <td>[任务]</td>
+    </tr>
+    <tr>
+      <td>数据获取</td>
+      <td><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html#put">通过Hadoop Shell把本地文件上传到HDFS</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html#mkdir">使用Hadoop Shell在HDFS上创建一个新的目录</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_literal_sqoop_import_literal">从一个关系型数据库中导入数据到HDFS</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_free_form_query_imports">导入关系型数据的查询结果到HDFS</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_importing_data_into_hive">从一个关系型数据库中导入数据到一个新的或者已经存在的Hive表里</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_literal_sqoop_export_literal">从 HDFS里面插入和更新数据到关系型数据库里面</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="https://flume.apache.org/FlumeUserGuide.html#starting-an-agent"> 给你一个Flume配置文件，启动一个 Flume agent</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="https://flume.apache.org/FlumeUserGuide.html#memory-channel">给你一个配置好的 sink 和source, 配置一个 Flume 固定容量的内存 channel</a></td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="mapreduce">2 MapReduce</h3>
+
+<h4 id="explain-mapreduce-in-5-minutes">Explain Map/Reduce in 5 minutes</h4>
+
+<p>原文链接: <a href="http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce">http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce</a> by Aurelien.</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>1 Map/Reduce 有3个阶段 : Map/Shuffle/Reduce</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>Shuffle部分由Hadoop的自动完成，我们只需要实现Map和Reduce部分。</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>2 Map部分的输入</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><img src="/images/mapred_mapinput.jpg" alt="" /></p>
+
+<p>图上的城市名称作为key值，所属州以及城市均温为key的value值。ps: 请自动脑补python的dict, jason.</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>3 Map部分的输出</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><img src="/images/mapred_mapoutput.jpg" alt="" /></p>
+
+<p>图上显示的Map部分的输出是根据最终我们想要的结果来实现的。我们要得到每个州的平均值，所以根据每个州来进行新的key/value设计。</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>4 Shuffle部分</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><img src="/images/mapred_shuffle.jpg" alt="" /></p>
+
+<p>Now, the shuffle task will run on the output of the Map task. It is going to group all the values by Key, and you’ll get a List<Value>.</Value></p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>5 Rduce部分</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>Reduce部分的输入为以上Shuffle部分的输出。</p>
+
+<p>Reduce任务是数据逻辑的最终完成者，in our case当然就是计算各州的平均温度。最终结果如下：</p>
+
+<p><img src="/images/mapred_reduce.jpg" alt="" /></p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>6 总结</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>Map/Reduce的并行执行过程：</p>
+
+<p>Mapper&lt;K1，V1&gt; ==》 &lt;K2，V2&gt;</p>
+
+<p>Reducer&lt;K2，List<V2> &gt;==》&lt;K3，V3&gt;</V2></p>
+
+<p>PS: You can find the java code for this example here:</p>
+
+<p><a href="https://github.com/jsoftbiz/mapreduce_1">https://github.com/jsoftbiz/mapreduce_1</a></p>
+
+<h4 id="section">实例演示</h4>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>1 演示WordCount</p>
+    </blockquote>
+  </li>
+  <li>
+    <blockquote>
+      <p>2 演示上述平均温度统计</p>
+    </blockquote>
+  </li>
+</ul>
 
 
         <div id="disqus_container">
@@ -403,6 +551,8 @@ tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml
 
         <h2>MLAdvance</h2>
         <ul class="artical-list">
+        
+            <li><a href="/hadoop_family_guide">Hadoop Learn Guide</a></li>
         
             <li><a href="/hadoop_family_site">Hadoop Resource</a></li>
         
