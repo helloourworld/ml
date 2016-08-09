@@ -51,7 +51,7 @@
 <ul>
   <li>1	分布式文件存储系统</li>
   <li>2 分布式编程</li>
-  <li>3 数据库[列存、文档、流存储、KV存储、图数据库]</li>
+  <li>3 数据库[列存储、文档存储、流存储、KV存储、图数存储]</li>
   <li>4 新型数据库</li>
   <li>5 SQL on Hadoop</li>
   <li>6 数据处理</li>
@@ -96,9 +96,9 @@
 
 <p>文件包括：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&gt; ①fsimage:元数据镜像文件。存储某一时段NameNode内存元数据信息。 
-&gt; ②edits:操作日志文件。 
-&gt; ③fstime:保存最近一次checkpoint的时间 
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt; ①fsimage:元数据镜像文件。存储某一时段NameNode内存元数据信息。
+&gt; ②edits:操作日志文件。
+&gt; ③fstime:保存最近一次checkpoint的时间
 </code></pre>
 </div>
 
@@ -111,28 +111,28 @@
 <div class="highlighter-rouge"><pre class="highlight"><code>`
 # 启动服务器：bin/hdfs oiv -i 某个fsimage文件
 
-bash$ bin/hdfs oiv -i fsimage 
-14/04/07 13:25:14 INFO offlineImageViewer.WebImageViewer: WebImageViewer started. 
+bash$ bin/hdfs oiv -i fsimage
+14/04/07 13:25:14 INFO offlineImageViewer.WebImageViewer: WebImageViewer started.
 Listening on /127.0.0.1:5978. Press Ctrl+C to stop the viewer.
 
 # 查看内容：bin/hdfs dfs -ls -R webhdfs://127.0.0.1:5978/
 
-bash$ bin/hdfs dfs -ls webhdfs://127.0.0.1:5978/ 
-Found 2 items 
-drwxrwx–* - root supergroup 0 2014-03-26 20:16 webhdfs://127.0.0.1:5978/tmp 
+bash$ bin/hdfs dfs -ls webhdfs://127.0.0.1:5978/
+Found 2 items
+drwxrwx–* - root supergroup 0 2014-03-26 20:16 webhdfs://127.0.0.1:5978/tmp
 drwxr-xr-x - root supergroup 0 2014-03-31 14:08 webhdfs://127.0.0.1:5978/user
 `
 
-`# 导出fsimage的内容：bin/hdfs oiv -p XML -i 
+`# 导出fsimage的内容：bin/hdfs oiv -p XML -i
 tmp/dfs/name/current/fsimage_0000000000000000055 -o fsimage.xml
 
-bash$ bin/hdfs oiv -p XML -i fsimage -o fsimage.xml 
+bash$ bin/hdfs oiv -p XML -i fsimage -o fsimage.xml
 0000055 -o fsimage.xml
 
-# 查看edtis的内容：bin/hdfs oev -i 
+# 查看edtis的内容：bin/hdfs oev -i
 tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml
 
-bash$ bin/hdfs oev -i 
+bash$ bin/hdfs oev -i
 tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml
 `
 </code></pre>
@@ -328,7 +328,7 @@ tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml
   </blockquote>
 </blockquote>
 
-<h3 id="mapreduce">1 MapReduce</h3>
+<h3 id="mapreduce">2 MapReduce</h3>
 
 
         <div id="disqus_container">
@@ -403,6 +403,8 @@ tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml
 
         <h2>MLAdvance</h2>
         <ul class="artical-list">
+        
+            <li><a href="/hadoop_family_site">Hadoop Resource</a></li>
         
             <li><a href="/hadoop_mahout">Hadoop Mahout</a></li>
         
