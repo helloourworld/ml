@@ -279,6 +279,109 @@
 
 <h2 id="other">Other</h2>
 
+<p>Once the Hadoop cluster is up and running check the web-ui of the components as described below:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Daemon</td>
+      <td>Web Interface</td>
+      <td>Notes</td>
+    </tr>
+    <tr>
+      <td>NameNode</td>
+      <td>http://nn_host:port/</td>
+      <td>Default HTTP port is 50070.</td>
+    </tr>
+    <tr>
+      <td>ResourceManager</td>
+      <td>http://rm_host:port/</td>
+      <td>Default HTTP port is 8088.</td>
+    </tr>
+    <tr>
+      <td>MapReduce JobHistory Server</td>
+      <td>http://jhs_host:port/</td>
+      <td>Default HTTP port is 19888.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>1 通过Web界面来查看NameNode运行状况，默认为：</li>
+</ul>
+
+<p><a href="h1:50070">NameNode</a> or</p>
+
+<p><a href="http://192.168.71.128:50070">NameNode</a></p>
+
+<ul>
+  <li>2 通过Web界面来查看ResourceManager运行状况，默认为：</li>
+</ul>
+
+<p><a href="h1:8088">ResourceManager</a> or</p>
+
+<p><a href="http://192.168.71.128:8088">ResourceManager</a></p>
+
+<ul>
+  <li>3 MapReduce JobHistory Server</li>
+</ul>
+
+<p><a href="h1:19888">MapReduce JobHistory Server</a> or</p>
+
+<p><a href="http://192.168.71.128:19888">MapReduce JobHistory Server</a></p>
+
+<h2 id="operating-the-hadoop-cluster">Operating the Hadoop Cluster</h2>
+
+<p>Once all the necessary configuration is complete, distribute the files to the HADOOP_CONF_DIR directory on all the machines.</p>
+
+<p>This section also describes the various Unix users who should be starting the various components and uses the same Unix accounts and groups used previously:</p>
+
+<p><strong>Hadoop Startup</strong></p>
+
+<p>To start a Hadoop cluster you will need to start both the HDFS and YARN cluster.</p>
+
+<p>Format a new distributed filesystem as hdfs:</p>
+
+<p>[hdfs]$ $HADOOP_PREFIX/bin/hdfs namenode -format <cluster_name>
+Start the HDFS with the following command, run on the designated NameNode as hdfs:</cluster_name></p>
+
+<p>[hdfs]$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh –config $HADOOP_CONF_DIR –script hdfs start namenode
+Run a script to start DataNodes on all slaves as root with a special environment variable HADOOP_SECURE_DN_USER set to hdfs:</p>
+
+<p>[root]$ HADOOP_SECURE_DN_USER=hdfs $HADOOP_PREFIX/sbin/hadoop-daemon.sh –config $HADOOP_CONF_DIR –script hdfs start datanode
+Start the YARN with the following command, run on the designated ResourceManager as yarn:</p>
+
+<p>[yarn]$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh –config $HADOOP_CONF_DIR start resourcemanager
+Run a script to start NodeManagers on all slaves as yarn:</p>
+
+<p>[yarn]$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh –config $HADOOP_CONF_DIR start nodemanager
+Start a standalone WebAppProxy server. Run on the WebAppProxy server as yarn. If multiple servers are used with load balancing it should be run on each of them:</p>
+
+<p>[yarn]$ $HADOOP_YARN_HOME/bin/yarn start proxyserver –config $HADOOP_CONF_DIR
+Start the MapReduce JobHistory Server with the following command, run on the designated server as mapred:</p>
+
+<p>[mapred]$ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver –config $HADOOP_CONF_DIR</p>
+
+<p><strong>Hadoop Shutdown</strong></p>
+
+<p>Stop the NameNode with the following command, run on the designated NameNode as hdfs:</p>
+
+<p>[hdfs]$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh –config $HADOOP_CONF_DIR –script hdfs stop namenode
+Run a script to stop DataNodes on all slaves as root:</p>
+
+<p>[root]$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh –config $HADOOP_CONF_DIR –script hdfs stop datanode
+Stop the ResourceManager with the following command, run on the designated ResourceManager as yarn:</p>
+
+<p>[yarn]$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh –config $HADOOP_CONF_DIR stop resourcemanager
+Run a script to stop NodeManagers on all slaves as yarn:</p>
+
+<p>[yarn]$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh –config $HADOOP_CONF_DIR stop nodemanager
+Stop the WebAppProxy server. Run on the WebAppProxy server as yarn. If multiple servers are used with load balancing it should be run on each of them:</p>
+
+<p>[yarn]$ $HADOOP_YARN_HOME/bin/yarn stop proxyserver –config $HADOOP_CONF_DIR
+Stop the MapReduce JobHistory Server with the following command, run on the designated server as mapred:</p>
+
+<p>[mapred]$ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh stop historyserver –config $HADOOP_CONF_DIR</p>
 
         <div id="disqus_container">
             <class="comment"/>
