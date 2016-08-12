@@ -389,6 +389,11 @@ packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tm
 
 [Apache Hbase](http://hbase.apache.org/book.html#quickstart)安装及测试
 
+提供海量数据存储功能，是一种构建在HDFS之上的分布式、面向列的存储系统。
+
+
+
+
 ## 2 Service Programming
 
 ### 1 Zookeeper
@@ -397,5 +402,87 @@ packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tm
 
 [Apache Zookeeper](https://zookeeper.apache.org/)
 
+### 2 kafka
+
+一个分布式的、分区的、多副本的实时消息发布和订阅系统。提供可扩展、高吞吐、低延迟、高可靠的消息分发服务。
+
+[quickstart](http://kafka.apache.org/documentation.html#quickstart)
+
+视频教程[http://www.jikexueyuan.com/course/kafka/](http://www.jikexueyuan.com/course/kafka/)
+
+集群实现与演示
+
+	`
+[hadoop@NN01 ~]$ ~/tools/runRemoteCmd.sh "/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties" all
+
+[hadoop@DN02 bin]$ ./kafka-console-producer.sh --broker-list NN01.HadoopVM:9092 --sync --topic test
+
+[hadoop@DN01 bin]$ ./kafka-console-consumer.sh --zookeeper NN01.HadoopVM:2181 --topic test --from-beginning
+
+	`
+## 3 Distributed Programming
+
+### 1 Pig
+
+### 2 Hive
+
+[Hive Install](https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-InstallationandConfiguration)
+
+[Hive metastore三种配置方式](http://blog.csdn.net/reesun/article/details/8556078)
+
+建立在Hadoop基础上的开源的数据仓库，提供类似SQL的Hive QL语言操作结构化数据存储服务和基本的数据分析服务。
+
+[Running Hive](https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive)
+
+
+* > 1 Introduction
+
+[Introduction](http://kafka.apache.org/documentation.html#introduction)
+$ kafka-console-producer.sh --broker-list zk1:9092 --sync --topic test
+
+
+
+### 3 Spark
+
+基于内存进行计算的分布式计算框架。
+
+#### Spark Overview
+
+Apache Spark is a fast and general-purpose cluster computing system. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs. It also supports a rich set of higher-level tools including [Spark SQL](http://spark.apache.org/docs/latest/sql-programming-guide.html) for SQL and structured data processing, [MLlib](http://spark.apache.org/docs/latest/ml-guide.html) for machine learning, [GraphX](http://spark.apache.org/docs/latest/graphx-programming-guide.html) for graph processing, and [Spark Streaming](http://spark.apache.org/docs/latest/streaming-programming-guide.html).
+
+Spark的适用场景
+
+Spark是基于内存的迭代计算框架，适用于需要多次操作特定数据集的应用场合。需要反复操作的次数越多，所需读取的数据量越大，受益越大，数据量小但是计算密集度较大的场合，受益就相对较小
+由于RDD的特性，Spark不适用那种异步细粒度更新状态的应用，例如web服务的存储或者是增量的web爬虫和索引。就是对于那种增量修改的应用模型不适合。
+总的来说Spark的适用面比较广泛且比较通用。
+
+运行模式
+本地模式
+Standalone模式
+Mesos模式
+yarn模式
+
+* > 1 Cluster Manager Types
+The system currently supports three cluster managers:
+
+>> 1 Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.
+>> 2 Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.
+>> 3 Hadoop YARN – the resource manager in Hadoop 2.
+
+## 4 Machine Learning
+
+### 1 Mahout
+
+## 5 Data Ingestion
+
+### 1 Storm
+
+### 2 Sqoop
+
+
+
+## 6 System Deployment
+
+### 1 Ambari
 
 

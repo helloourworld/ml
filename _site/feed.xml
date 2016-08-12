@@ -8,6 +8,20 @@
 		
 			
 			<item>
+				<title>Hadoop Mesos</title>
+				
+					<description>&lt;h2 id=&quot;mesosyarn&quot;&gt;mesos和yarn区别&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Fri, 12 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/hadoop_family_mesos</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/hadoop_family_mesos</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Hadoop Learn Guide</title>
 				
 					<description>&lt;h2 id=&quot;section&quot;&gt;前言&lt;/h2&gt;

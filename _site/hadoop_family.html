@@ -618,6 +618,8 @@ File Output Format Counters
 
 <p><a href="http://hbase.apache.org/book.html#quickstart">Apache Hbase</a>安装及测试</p>
 
+<p>提供海量数据存储功能，是一种构建在HDFS之上的分布式、面向列的存储系统。</p>
+
 <h2 id="service-programming">2 Service Programming</h2>
 
 <h3 id="zookeeper">1 Zookeeper</h3>
@@ -625,6 +627,102 @@ File Output Format Counters
 <p><img src="/images/zookeeper_small.gif" alt="" /></p>
 
 <p><a href="https://zookeeper.apache.org/">Apache Zookeeper</a></p>
+
+<h3 id="kafka">2 kafka</h3>
+
+<p>一个分布式的、分区的、多副本的实时消息发布和订阅系统。提供可扩展、高吞吐、低延迟、高可靠的消息分发服务。</p>
+
+<p><a href="http://kafka.apache.org/documentation.html#quickstart">quickstart</a></p>
+
+<p>视频教程<a href="http://www.jikexueyuan.com/course/kafka/">http://www.jikexueyuan.com/course/kafka/</a></p>
+
+<p>集群实现与演示</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>` [hadoop@NN01 ~]$ ~/tools/runRemoteCmd.sh "/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties" all
+</code></pre>
+</div>
+
+<p>[hadoop@DN02 bin]$ ./kafka-console-producer.sh –broker-list NN01.HadoopVM:9092 –sync –topic test</p>
+
+<p>[hadoop@DN01 bin]$ ./kafka-console-consumer.sh –zookeeper NN01.HadoopVM:2181 –topic test –from-beginning</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>` ## 3 Distributed Programming
+</code></pre>
+</div>
+
+<h3 id="pig">1 Pig</h3>
+
+<h3 id="hive">2 Hive</h3>
+
+<p><a href="https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-InstallationandConfiguration">Hive Install</a></p>
+
+<p><a href="http://blog.csdn.net/reesun/article/details/8556078">Hive metastore三种配置方式</a></p>
+
+<p>建立在Hadoop基础上的开源的数据仓库，提供类似SQL的Hive QL语言操作结构化数据存储服务和基本的数据分析服务。</p>
+
+<p><a href="https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive">Running Hive</a></p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>1 Introduction</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><a href="http://kafka.apache.org/documentation.html#introduction">Introduction</a>
+$ kafka-console-producer.sh –broker-list zk1:9092 –sync –topic test</p>
+
+<h3 id="spark">3 Spark</h3>
+
+<p>基于内存进行计算的分布式计算框架。</p>
+
+<h4 id="spark-overview">Spark Overview</h4>
+
+<p>Apache Spark is a fast and general-purpose cluster computing system. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs. It also supports a rich set of higher-level tools including <a href="http://spark.apache.org/docs/latest/sql-programming-guide.html">Spark SQL</a> for SQL and structured data processing, <a href="http://spark.apache.org/docs/latest/ml-guide.html">MLlib</a> for machine learning, <a href="http://spark.apache.org/docs/latest/graphx-programming-guide.html">GraphX</a> for graph processing, and <a href="http://spark.apache.org/docs/latest/streaming-programming-guide.html">Spark Streaming</a>.</p>
+
+<p>Spark的适用场景</p>
+
+<p>Spark是基于内存的迭代计算框架，适用于需要多次操作特定数据集的应用场合。需要反复操作的次数越多，所需读取的数据量越大，受益越大，数据量小但是计算密集度较大的场合，受益就相对较小
+由于RDD的特性，Spark不适用那种异步细粒度更新状态的应用，例如web服务的存储或者是增量的web爬虫和索引。就是对于那种增量修改的应用模型不适合。
+总的来说Spark的适用面比较广泛且比较通用。</p>
+
+<p>运行模式
+本地模式
+Standalone模式
+Mesos模式
+yarn模式</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>1 Cluster Manager Types
+The system currently supports three cluster managers:</p>
+    </blockquote>
+  </li>
+</ul>
+
+<blockquote>
+  <blockquote>
+    <p>1 Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.
+2 Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.
+3 Hadoop YARN – the resource manager in Hadoop 2.</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="machine-learning">4 Machine Learning</h2>
+
+<h3 id="mahout">1 Mahout</h3>
+
+<h2 id="data-ingestion">5 Data Ingestion</h2>
+
+<h3 id="storm">1 Storm</h3>
+
+<h3 id="sqoop">2 Sqoop</h3>
+
+<h2 id="system-deployment">6 System Deployment</h2>
+
+<h3 id="ambari">1 Ambari</h3>
 
 
         <div id="disqus_container">
@@ -699,6 +797,8 @@ File Output Format Counters
 
         <h2>MLAdvance</h2>
         <ul class="artical-list">
+        
+            <li><a href="/hadoop_family_mesos">Hadoop Mesos</a></li>
         
             <li><a href="/hadoop_family_guide">Hadoop Learn Guide</a></li>
         
