@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+    * Author:         BeiYuu
+    * Revised:        LijunYu
+    -->
+    <meta charset="utf-8" />
+    <title>JavaScript 模块化七日谈 | Lijun Yu's blog</title>
+    <meta name="author" content="LijunYu" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="Everything about LijunYu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">LijunYu</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="https://github.com/helloourworld/" target="_blank" style="margin-left:-5px;"><img src="https://github.com/favicon.ico" alt="" width="22"/></a>
+            <a href="http://www.douban.com/people/59824156/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+            <a href="/feed.xml" target="_blank" style="text-align:right"><img src="http://freefavicons.org/download/rss/rss.ico" alt="" width="22"/></a>
+        </div>
+    </div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        /*background-image: url('/')*/
+        height: 500px;
+        overflow: hidden;
+    }
+    header iframe{
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+</style>
+<header class="intro-header" >
+    <iframe src="http://huangxuan.me/js-module-7day/"/>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                            <a class="tag" href="/tags/#前端开发" title="前端开发">前端开发</a>
+                            
+                            <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+                            
+                        </div>
+                        <h1>JavaScript 模块化七日谈</h1>
+                        
+                        
+                        <h2 class="subheading">Slides: JavaScript Modularization Journey</h2>
+                        
+                        <span class="meta">Posted by Hux on July 9, 2015</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </iframe>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="post-container
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1 ">
+
+				<blockquote>
+  <p>下滑这里查看更多内容</p>
+</blockquote>
+
+<p>7月9日，我在公司内部进行了名为「JavaScript 模块化七日谈」分享，并将该 Slides 分享到了微博上。出乎意料地，这篇微博先后被 @JS小组 @尤小右 @寸志 等近 200 人转发，阅读达到 10w，获得了还不错的评价。</p>
+
+<p>于是，我决定将它重新发到我的博客上，并为它专门制作了适用于 Keynote 展示文稿的新布局。它能自动根据屏幕大小/旋转以一定比例填充屏幕，你也可以直接点击下方链接在新页面打开，来获得更好的、沉浸式的全屏体验</p>
+
+<h3 id="watch-slides-httphuangxuanmejs-module-7day"><a href="http://huangxuan.me/js-module-7day">Watch Slides →</a></h3>
+
+<p><img src="http://huangxuan.me/js-module-7day/attach/qrcode.png" width="350" height="350" /></p>
+
+<p><small class="img-hint">你也可以通过扫描二维码在手机上观看</small></p>
+
+<p>这个 Web Slides 开源在<a href="https://github.com/Huxpro/js-module-7day">我的 Github 上</a>，欢迎你帮助我完善这个展示文稿，你可以给我提 issue，可以 fork &amp; pull request。如果它能帮助到你了，希望你还能不吝啬 star 一下这个项目</p>
+
+<h3 id="catalog">Catalog</h3>
+
+<ul>
+  <li>第一日 上古时期 <strong><em>Module?</em></strong> 从设计模式说起</li>
+  <li>第二日 石器时代 <strong><em>Script Loader</em></strong> 只有封装性可不够，我们还需要加载</li>
+  <li>第三日 蒸汽朋克 <strong><em>Module Loader</em></strong> 模块化架构的工业革命</li>
+  <li>第四日 号角吹响 <strong><em>CommonJS</em></strong> 征服世界的第一步是跳出浏览器</li>
+  <li>第五日 双塔奇兵 <strong><em>AMD/CMD</em></strong> 浏览器环境模块化方案</li>
+  <li>第六日 精灵宝钻 <strong><em>Browserify/Webpack</em></strong> 大势所趋，去掉这层包裹！</li>
+  <li>第七日 王者归来 <strong><em>ES6 Module</em></strong> 最后的战役</li>
+</ul>
+
+<h3 id="thanks">Thanks</h3>
+
+<p><a href="http://lab.hakim.se/reveal-js">Reveal.js</a></p>
+
+
+                <hr>
+
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/alitrip-strategy" data-toggle="tooltip" data-placement="top" title="聊聊「阿里旅行 · 去啊」—— 行业与战略 ">
+                        Previous<br>
+                        <span>聊聊「阿里旅行 · 去啊」—— 行业与战略 </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/js-version" data-toggle="tooltip" data-placement="top" title="ES5, ES6, ES2016, ES.Next: JavaScript 的版本是怎么回事？「译」">
+                        Next<br>
+                        <span>ES5, ES6, ES2016, ES.Next: JavaScript 的版本是怎么回事？「译」</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+
+                
+
+            </div>
+
+            <!-- Sidebar Container -->
+            <div class="sidebar-container
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1 ">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- resize header to fullscreen keynotes -->
+<script>
+    var $header = document.getElementsByTagName("header")[0];
+    function resize(){
+        /*
+         * leave 85px to both
+         * - told/imply users that there has more content below
+         * - let user can scroll in mobile device, seeing the keynote-view is unscrollable
+         */
+        $header.style.height = (window.innerHeight-85) + 'px';
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+        resize();
+    })
+    window.addEventListener('load', function(){
+        resize();
+    })
+    window.addEventListener('resize', function(){
+        resize();
+    })
+    resize();
+</script>
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+    </script>
+</body>
+</html>

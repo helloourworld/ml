@@ -48,7 +48,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="30%">Apache HDFS</td>
+	<td width="30%"><font color="red">Apache HDFS
 	<td>
 		The Hadoop Distributed File System (HDFS) offers a way to store large files across
 		multiple machines. Hadoop and HDFS was derived from Google File System (GFS) paper.
@@ -239,7 +239,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache MapReduce</td>
+	<td width="20%"><font color="red">Apache MapReduce
 	<td>
 		MapReduce is a programming model for processing large data sets with a parallel,
 		distributed algorithm on a cluster. Apache MapReduce was derived from Google
@@ -259,7 +259,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache Pig</td>
+	<td width="20%"><font color="red">Apache Pig
 	<td>
 		Pig provides an engine for executing data flows in parallel on Hadoop. It includes a language,
 		Pig Latin, for expressing these data flows. Pig Latin includes operators for many of the
@@ -302,7 +302,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache Spark</td>
+	<td width="20%"><font color="red">Apache Spark
 	<td>
 		Data analytics cluster computing framework originally developed in the AMPLab at UC Berkeley.
 		Spark fits into the Hadoop open-source community, building on top of the Hadoop Distributed File System (HDFS).
@@ -325,7 +325,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache Storm</td>
+	<td width="20%"><font color="red">Apache Storm
 	<td>
 		Storm is a complex event processor (CEP) and distributed computation
 		framework written predominantly in the Clojure programming language.
@@ -543,7 +543,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache Tez</td>
+	<td width="20%"><font color="red">Apache Tez
 	<td>
 		Tez is a proposal to develop a generic application which can be used to process complex data-processing
 		task DAGs and runs natively on Apache Hadoop YARN. Tez generalizes the MapReduce paradigm to a more
@@ -673,7 +673,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache HBase</td>
+	<td width="20%"><font color="red">Apache HBase
 	<td>
 		Google BigTable Inspired. Non-relational distributed database.
 		Ramdom, real-time r/w operations in column-oriented very large
@@ -758,7 +758,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">MongoDB</td>
+	<td width="20%"><font color="red">MongoDB
 	<td>
 		Document-oriented database system. It is part of the NoSQL family of
 		database systems. Instead of storing data in tables as is done in a "classical"
@@ -796,7 +796,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">EventStore</td>
+	<td width="20%"><font color="red">EventStore
 	<td>
 		An open-source, functional database with support for Complex Event Processing.
 		It provides a persistence engine for applications using event-sourcing, or for
@@ -815,7 +815,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Redis DataBase</td>
+	<td width="20%"><font color="red">Redis DataBase
 	<td>
 		Redis is an open-source, networked, in-memory, data structures
 		store with optional durability. It is written in ANSI C.
@@ -883,7 +883,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Neo4j</td>
+	<td width="20%"><font color="red">Neo4j
 	<td>
 		An open-source graph database writting entirely in Java. It is an
 		embedded, disk-based, fully transactional Java persistence engine
@@ -1035,7 +1035,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache Hive</td>
+	<td width="20%"><font color="red">Apache Hive
 	<td>
 		Data Warehouse infrastructure developed by Facebook. Data
 		summarization, query, and analysis. It’s provides SQL-like
@@ -1215,7 +1215,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache Flume</td>
+	<td width="20%"><font color="red">Apache Flume
 	<td>
 		Flume is a distributed, reliable, and available service for
 		efficiently collecting, aggregating, and moving large amounts
@@ -1229,7 +1229,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache Sqoop</td>
+	<td width="20%"><font color="red">Apache Sqoop
 	<td>
 		System for bulk data transfer between HDFS and structured
 		datastores as RDBMS. Like Flume but from HDFS to RDBMS.
@@ -1255,7 +1255,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache Kafka</td>
+	<td width="20%"><font color="red">Apache Kafka
 	<td>
 		Distributed publish-subscribe system for processing large amounts
 		of streaming data. Kafka is a Message Queue developed by LinkedIn
@@ -1373,7 +1373,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache Zookeeper</td>
+	<td width="20%"><font color="red">Apache Zookeeper
 	<td>
 		It’s a coordination service that gives you the tools you need to
 		write correct distributed applications. ZooKeeper was developed
@@ -1533,7 +1533,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache Mahout</td>
+	<td width="20%"><font color="red">Apache Mahout
 	<td>
 		Machine learning library and math library, on top of MapReduce.
 	</td>
@@ -1817,7 +1817,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache Ambari</td>
+	<td width="20%"><font color="red">Apache Ambari
 	<td>
 		Intuitive, easy-to-use Hadoop management web UI backed by its RESTful APIs.
 		Apache Ambari was donated by Hortonworks team to the ASF. It's a powerful and
@@ -1833,7 +1833,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Cloudera HUE</td>
+	<td width="20%"><font color="red">Cloudera HUE
 	<td>
 		Web application for interacting with Apache Hadoop. It's not a deploment tool,
 		is an open-source Web interface that supports Apache Hadoop and its ecosystem,
@@ -1856,7 +1856,7 @@ description:  This page is a summary to keep the track of Hadoop related project
 
 
 	<tr>
-	<td width="20%">Apache Mesos</td>
+	<td width="20%"><font color="red">Apache Mesos&trade
 	<td>
 		Mesos is a cluster manager that provides resource sharing and isolation across
 		cluster applications. Like HTCondor, SGE or Troque can do it. However Mesos

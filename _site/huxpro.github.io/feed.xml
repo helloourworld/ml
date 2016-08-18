@@ -1,0 +1,4146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lijun Yu's blog</title>
+    <description>Everything about Lijun Yu.</description>
+    <link>http://helloourworld.github.io/</link>
+    <atom:link href="http://helloourworld.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Thu, 18 Aug 2016 13:43:14 +0800</pubDate>
+    <lastBuildDate>Thu, 18 Aug 2016 13:43:14 +0800</lastBuildDate>
+    <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Hadoop Tutorial ---- Components Required</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;大数据培训&lt;/h2&gt;
+
+&lt;p&gt;对象：大数据工程师、数据挖掘工程师、数据分析师、程序员…&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;学习内容&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;1 开源框架学习&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;类别&lt;/td&gt;
+      &lt;td&gt;组件名称&lt;/td&gt;
+      &lt;td&gt;学习等级&lt;/td&gt;
+      &lt;td&gt;掌握程度&lt;/td&gt;
+      &lt;td&gt;组件概述&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;文件系统&lt;/td&gt;
+      &lt;td&gt;HDFS&lt;/td&gt;
+      &lt;td&gt;一级&lt;/td&gt;
+      &lt;td&gt;熟练&lt;/td&gt;
+      &lt;td&gt;Hadoop分布式文件系统（Hadoop Distributed File System），提供高吞吐量的数据访问，适合大规模数据集方面的应用。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;分布式编程&lt;/td&gt;
+      &lt;td&gt;MapReduce&lt;/td&gt;
+      &lt;td&gt;一级&lt;/td&gt;
+      &lt;td&gt;熟练&lt;/td&gt;
+      &lt;td&gt;提供快速并行处理大量数据的能力，是一种分布式数据处理模式和执行环境。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;分布式编程&lt;/td&gt;
+      &lt;td&gt;Pig&lt;/td&gt;
+      &lt;td&gt;二级&lt;/td&gt;
+      &lt;td&gt;熟练&lt;/td&gt;
+      &lt;td&gt;Apache Pig是用来处理大规模数据的高级查询语言&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;分布式编程&lt;/td&gt;
+      &lt;td&gt;Spark&lt;/td&gt;
+      &lt;td&gt;特级&lt;/td&gt;
+      &lt;td&gt;精通&lt;/td&gt;
+      &lt;td&gt;基于内存进行计算的分布式计算框架。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;分布式编程&lt;/td&gt;
+      &lt;td&gt;Storm&lt;/td&gt;
+      &lt;td&gt;二级&lt;/td&gt;
+      &lt;td&gt;精通&lt;/td&gt;
+      &lt;td&gt;Apache Storm是一个免费、开源的分布式实时计算系统&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;分布式编程&lt;/td&gt;
+      &lt;td&gt;Tez&lt;/td&gt;
+      &lt;td&gt;二级&lt;/td&gt;
+      &lt;td&gt;熟练&lt;/td&gt;
+      &lt;td&gt;Tez 是 Apache 最新的支持 DAG 作业的开源计算框架,它可以将多个有依赖的作业转换为一个作业从而大幅提升DAG作业的性能。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;列存&lt;/td&gt;
+      &lt;td&gt;Hbbase&lt;/td&gt;
+      &lt;td&gt;二级&lt;/td&gt;
+      &lt;td&gt;精通&lt;/td&gt;
+      &lt;td&gt;提供海量数据存储功能，是一种构建在HDFS之上的分布式、面向列的存储系统。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;文档存储&lt;/td&gt;
+      &lt;td&gt;MongoDB&lt;/td&gt;
+      &lt;td&gt;二级&lt;/td&gt;
+      &lt;td&gt;掌握&lt;/td&gt;
+      &lt;td&gt;MongoDB 是一个基于分布式文件存储的数据库，由C++语言编写，旨在为WEB应用提供可扩展的高性能数据存储解决方案。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;键值存储&lt;/td&gt;
+      &lt;td&gt;Redis&lt;/td&gt;
+      &lt;td&gt;二级&lt;/td&gt;
+      &lt;td&gt;熟练&lt;/td&gt;
+      &lt;td&gt;Redis 是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;数据处理&lt;/td&gt;
+      &lt;td&gt;Hive&lt;/td&gt;
+      &lt;td&gt;特级&lt;/td&gt;
+      &lt;td&gt;精通&lt;/td&gt;
+      &lt;td&gt;建立在Hadoop基础上的开源的数据仓库，提供类似SQL的Hive QL语言操作结构化数据存储服务和基本的数据分析服务。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;数据处理&lt;/td&gt;
+      &lt;td&gt;Flume&lt;/td&gt;
+      &lt;td&gt;一级&lt;/td&gt;
+      &lt;td&gt;精通&lt;/td&gt;
+      &lt;td&gt;Flume是一个分布式、可靠、和高可用的海量日志采集、聚合和传输的系统。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;数据处理&lt;/td&gt;
+      &lt;td&gt;Sqoop&lt;/td&gt;
+      &lt;td&gt;二级&lt;/td&gt;
+      &lt;td&gt;熟练&lt;/td&gt;
+      &lt;td&gt;Sqoop是一个数据库导入导出工具，可以将数据从hadoop导入到关系数据库，或从关系数据库将数据导入到hadoop中。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;数据处理&lt;/td&gt;
+      &lt;td&gt;KafKa&lt;/td&gt;
+      &lt;td&gt;二级&lt;/td&gt;
+      &lt;td&gt;熟练&lt;/td&gt;
+      &lt;td&gt;一个分布式的、分区的、多副本的实时消息发布和订阅系统。提供可扩展、高吞吐、低延迟、高可靠的消息分发服务。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;组件服务&lt;/td&gt;
+      &lt;td&gt;zookeeper&lt;/td&gt;
+      &lt;td&gt;二级&lt;/td&gt;
+      &lt;td&gt;熟练&lt;/td&gt;
+      &lt;td&gt;提供分布式、高可用性的协调服务能力。帮助系统避免单点故障，从而建立可靠的应用程序。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;机器学习&lt;/td&gt;
+      &lt;td&gt;Mahout&lt;/td&gt;
+      &lt;td&gt;二级&lt;/td&gt;
+      &lt;td&gt;熟练&lt;/td&gt;
+      &lt;td&gt;提供一些可扩展的机器学习领域经典算法的实现，旨在帮助开发人员更加方便快捷地创建智能应用程序。Mahout包含许多实现，包括聚类、分类、推荐过滤、频繁子项挖掘。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;系统部署&lt;/td&gt;
+      &lt;td&gt;Ambari&lt;/td&gt;
+      &lt;td&gt;三级&lt;/td&gt;
+      &lt;td&gt;训练&lt;/td&gt;
+      &lt;td&gt;Apache Ambari是一种基于Web的工具，支持Apache Hadoop集群的供应、管理和监控。Ambari目前已支持大多数Hadoop组件，包括HDFS、MapReduce、Hive、Pig、 Hbase、Zookeper、Sqoop和Hcatalog等。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;系统部署&lt;/td&gt;
+      &lt;td&gt;HUE&lt;/td&gt;
+      &lt;td&gt;三级&lt;/td&gt;
+      &lt;td&gt;了解&lt;/td&gt;
+      &lt;td&gt;Hue是一个能够与Apache Hadoop交互的Web应用程序。一个开源的Apache Hadoop UI。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;系统部署&lt;/td&gt;
+      &lt;td&gt;Mesos&lt;/td&gt;
+      &lt;td&gt;三级&lt;/td&gt;
+      &lt;td&gt;了解&lt;/td&gt;
+      &lt;td&gt;Mesos是Apache下的开源分布式资源管理框架,它被称为是分布式系统的内核。&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;2 华为FI 及 Miner 学习&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;TODO&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;at-last&quot;&gt;At Last&lt;/h2&gt;
+
+&lt;p&gt;Practice makes perfect! Do in action!&lt;/p&gt;
+</description>
+        <pubDate>Wed, 17 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://helloourworld.github.io/hadoop_tutorial_1</link>
+        <guid isPermaLink="true">http://helloourworld.github.io/hadoop_tutorial_1</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>LDA</title>
+        <description>&lt;h2 id=&quot;lda&quot;&gt;LDA&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.quora.com/What-is-a-good-explanation-of-Latent-Dirichlet-Allocation&quot;&gt;What-is-a-good-explanation-of-Latent-Dirichlet-Allocation&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 12 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://helloourworld.github.io/LDA</link>
+        <guid isPermaLink="true">http://helloourworld.github.io/LDA</guid>
+        
+        
+        <category>Blog</category>
+        
+      </item>
+    
+      <item>
+        <title>Hadoop Mesos</title>
+        <description>&lt;h2 id=&quot;mesosyarn&quot;&gt;mesos和yarn区别&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/xinghun_4/article/details/47907161&quot;&gt;mesos和yarn区别&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://mesos.apache.org/gettingstarted/&quot;&gt;Getting Started&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;hadoop@NN01.HadoopVM
+hadoop@DN01.HadoopVM
+hadoop@DN02.HadoopVM&lt;/p&gt;
+</description>
+        <pubDate>Fri, 12 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://helloourworld.github.io/hadoop_family_mesos</link>
+        <guid isPermaLink="true">http://helloourworld.github.io/hadoop_family_mesos</guid>
+        
+        
+        <category>MLAdvance</category>
+        
+      </item>
+    
+      <item>
+        <title>Hadoop Learn Guide</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;大数据越来越火，客户要求越来越高。No废话，开始你的大数据之旅，请在不断的旅途当中为自己画饼！本培训主要针对的是有一定编程基础和有一定数据分析基础的同学，感觉有难度的地方请及时提出。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;学习路径图&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;1 了解大数据生态圈及准备你的能力&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;2 开始你的装机之艰难旅程&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;3 组件针对性加强训练&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;4 组件定位与深挖&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;5 与时俱进及案例&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;6 数据挖掘相关课题方向加强训练&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;附录&lt;/h2&gt;
+
+&lt;h2 id=&quot;other&quot;&gt;Other&lt;/h2&gt;
+
+</description>
+        <pubDate>Tue, 09 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://helloourworld.github.io/hadoop_family_guide</link>
+        <guid isPermaLink="true">http://helloourworld.github.io/hadoop_family_guide</guid>
+        
+        
+        <category>MLAdvance</category>
+        
+      </item>
+    
+      <item>
+        <title>Hadoop Resource</title>
+        <description>&lt;h2 id=&quot;apache&quot;&gt;Apache&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://hadoop.apache.org/docs/r2.6.4/hadoop-project-dist&quot;&gt;Apache docs&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;cloudera&quot;&gt;Cloudera&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://blog.cloudera.com/&quot;&gt;Cloudera Engineering Blog&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;storm&quot;&gt;Storm&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/panfeng412/tag/Storm/&quot;&gt;分布式计算 / 实时流计算 / NoSQL存储 (Email: ypf412@163.com, GitHub: https://github.com/ypf412)&lt;/a&gt;
+## hortonworks&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://zh.hortonworks.com/&quot;&gt;hortonworks公司中文网&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://zh.hortonworks.com/training/certification/hdpcd-certification/&quot;&gt;THE HDPCD EXAM&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://ifeve.com/hortonworkshdp-hdpcd/&quot;&gt;Hortonworks(HDP)开发者认证&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;考试内容列表&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;类型&lt;/td&gt;
+      &lt;td&gt;[任务]&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;数据获取&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html#put&quot;&gt;通过Hadoop Shell把本地文件上传到HDFS&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html#mkdir&quot;&gt;使用Hadoop Shell在HDFS上创建一个新的目录&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_literal_sqoop_import_literal&quot;&gt;从一个关系型数据库中导入数据到HDFS&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_free_form_query_imports&quot;&gt;导入关系型数据的查询结果到HDFS&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_importing_data_into_hive&quot;&gt;从一个关系型数据库中导入数据到一个新的或者已经存在的Hive表里&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_literal_sqoop_export_literal&quot;&gt;从 HDFS里面插入和更新数据到关系型数据库里面&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://flume.apache.org/FlumeUserGuide.html#starting-an-agent&quot;&gt; 给你一个Flume配置文件，启动一个 Flume agent&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://flume.apache.org/FlumeUserGuide.html#memory-channel&quot;&gt;[给你一个配置好的 sink 和source, 配置一个 Flume 固定容量的内存 channel](https://flume.apache.org/FlumeUserGuide.html#memory-channel)&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;数据转换&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/start.html#run&quot;&gt;写出并执行一个pig脚本&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/basic.html#load&quot;&gt; 加载一个没有schema信息数据到Pig&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/basic.html#load&quot;&gt;加载数据到Pig里面并关联一个schema&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/HCatalog+LoadStore&quot;&gt;从Hive表里面加载数据到Pig&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/basic.html#foreach&quot;&gt;通过Pig把加载的数据格式化&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/basic.html#foreach&quot;&gt;转换数据匹配一个给定的Hive schema&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/basic.html#group&quot;&gt;对 Pig 中数据进行分组&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/basic.html#filter&quot;&gt;使用Pig移除记录里面关联的空值&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/basic.html#store&quot;&gt;把 Pig 中的数据保存到HDFS中指定目录里面&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/HCatalog+LoadStore&quot;&gt;把 Pig中的数据保存到Hive表里&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/basic.html#order-by&quot;&gt;对Pig数据进行排序输出&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/basic.html#distinct&quot;&gt;把Pig中关联重复数据移除&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/perf.html#parallel&quot;&gt;对Pig MapReduce指定reduce任务数量&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/basic.html#join-innerandhttps://pig.apache.org/docs/r0.14.0/basic.html#join-outer&quot;&gt;使用Pig进行关联操作&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/perf.html#replicated-joins&quot;&gt;通过Pig join操作生成一个副本&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/perf.html#tez-mode&quot;&gt; 运行一个Pig 任务通过 Tez&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/basic.html#registerandhttps://pig.apache.org/docs/r0.14.0/udf.html#piggybank&quot;&gt;在一个Pig 脚本内,通过注册一个Jar来使用定义的函数&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/basic.html#define-udfs&quot;&gt;在Pig 脚本内, 使用定义的函数定义一个别名&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://pig.apache.org/docs/r0.14.0/basic.html#register&quot;&gt;在一个Pig 脚本内, 执行一个用户定义函数&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;数据分析&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/Tutorial&quot;&gt;写并执行一个HIve查询&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-Create/Drop/TruncateTable&quot;&gt;定义一个内部表&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-ExternalTables&quot;&gt;定义一个扩展表&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-PartitionedTables&quot;&gt;定义一个分区表&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-BucketedSortedTables&quot;&gt;定义一个桶表&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTableAsSelect(CTAS)&quot;&gt;通过查询数据定义一个表&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://hortonworks.com/blog/orcfile-in-hdp-2-better-compression-better-performance/&quot;&gt;使用ORCFile 文件格式定义一个表&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://hortonworks.com/blog/orcfile-in-hdp-2-better-compression-better-performance/&quot;&gt;创建一个新的 ORCFile 表从一个非-ORCFile文件的 Hive 表&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-RowFormat,StorageFormat,andSerDe&quot;&gt;为Hive表指定一个存储格式&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://hortonworks.com/hadoop-tutorial/using-hive-data-analysis/&quot;&gt;为Hive表指定一个分隔符&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DML#LanguageManualDML-Loadingfilesintotables&quot;&gt;加载一个目录数据到Hive表中&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DML#LanguageManualDML-Loadingfilesintotables&quot;&gt;从HDFS目录中加载数据到Hive表中&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DML#LanguageManualDML-InsertingdataintoHiveTablesfromqueries&quot;&gt;把查询的结果加载数据到Hive表中&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/CompressedStorage&quot;&gt;加载一个压缩数据到Hive表中&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DML#LanguageManualDML-Update&quot;&gt; 在Hive表中更新一行记录&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DML#LanguageManualDML-Delete&quot;&gt;从 Hive表中删除一条数据&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DML#LanguageManualDML-InsertingvaluesintotablesfromSQL&quot;&gt;插入一条数据到 Hive 表中&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Joins&quot;&gt;对Hive表进行Join操作&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://hortonworks.com/hadoop-tutorial/supercharging-interactive-queries-hive-tez/&quot;&gt; 通过Tez来执行Hive查询&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://hortonworks.com/hadoop-tutorial/supercharging-interactive-queries-hive-tez/&quot;&gt;使用向量化来执行 Hive 查询&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Explain&quot;&gt;输出Hive执行计划操作结果&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+SubQueries&quot;&gt; 对Hive进行子查询操作&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://issues.apache.org/jira/browse/HIVE-1402&quot;&gt;输出Hive统计、排序、交叉、多重操作的查询结果&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/AdminManual+Configuration#AdminManualConfiguration-ConfiguringHive&quot;&gt;设置Hadoop 或Hive 配置属性通过Hive的查询结果中&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;other&quot;&gt;Other&lt;/h2&gt;
+
+&lt;p&gt;Once the Hadoop cluster is up and running check the web-ui of the components as described below:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Daemon&lt;/td&gt;
+      &lt;td&gt;Web Interface&lt;/td&gt;
+      &lt;td&gt;Notes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;NameNode&lt;/td&gt;
+      &lt;td&gt;http://nn_host:port/&lt;/td&gt;
+      &lt;td&gt;Default HTTP port is 50070.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ResourceManager&lt;/td&gt;
+      &lt;td&gt;http://rm_host:port/&lt;/td&gt;
+      &lt;td&gt;Default HTTP port is 8088.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MapReduce JobHistory Server&lt;/td&gt;
+      &lt;td&gt;http://jhs_host:port/&lt;/td&gt;
+      &lt;td&gt;Default HTTP port is 19888.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;1 通过Web界面来查看NameNode运行状况，默认为：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;h1:50070&quot;&gt;NameNode&lt;/a&gt; or&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://192.168.71.128:50070&quot;&gt;NameNode&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;2 通过Web界面来查看ResourceManager运行状况，默认为：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;h1:8088&quot;&gt;ResourceManager&lt;/a&gt; or&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://192.168.71.128:8088&quot;&gt;ResourceManager&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;3 MapReduce JobHistory Server&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;h1:19888&quot;&gt;MapReduce JobHistory Server&lt;/a&gt; or&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://192.168.71.128:19888&quot;&gt;MapReduce JobHistory Server&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;operating-the-hadoop-cluster&quot;&gt;Operating the Hadoop Cluster&lt;/h2&gt;
+
+&lt;p&gt;Once all the necessary configuration is complete, distribute the files to the HADOOP_CONF_DIR directory on all the machines.&lt;/p&gt;
+
+&lt;p&gt;This section also describes the various Unix users who should be starting the various components and uses the same Unix accounts and groups used previously:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Hadoop Startup&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;To start a Hadoop cluster you will need to start both the HDFS and YARN cluster.&lt;/p&gt;
+
+&lt;p&gt;Format a new distributed filesystem as hdfs:&lt;/p&gt;
+
+&lt;p&gt;[hdfs]$ $HADOOP_PREFIX/bin/hdfs namenode -format &lt;cluster_name&gt;
+Start the HDFS with the following command, run on the designated NameNode as hdfs:&lt;/cluster_name&gt;&lt;/p&gt;
+
+&lt;p&gt;[hdfs]$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh –config $HADOOP_CONF_DIR –script hdfs start namenode
+Run a script to start DataNodes on all slaves as root with a special environment variable HADOOP_SECURE_DN_USER set to hdfs:&lt;/p&gt;
+
+&lt;p&gt;[root]$ HADOOP_SECURE_DN_USER=hdfs $HADOOP_PREFIX/sbin/hadoop-daemon.sh –config $HADOOP_CONF_DIR –script hdfs start datanode
+Start the YARN with the following command, run on the designated ResourceManager as yarn:&lt;/p&gt;
+
+&lt;p&gt;[yarn]$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh –config $HADOOP_CONF_DIR start resourcemanager
+Run a script to start NodeManagers on all slaves as yarn:&lt;/p&gt;
+
+&lt;p&gt;[yarn]$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh –config $HADOOP_CONF_DIR start nodemanager
+Start a standalone WebAppProxy server. Run on the WebAppProxy server as yarn. If multiple servers are used with load balancing it should be run on each of them:&lt;/p&gt;
+
+&lt;p&gt;[yarn]$ $HADOOP_YARN_HOME/bin/yarn start proxyserver –config $HADOOP_CONF_DIR
+Start the MapReduce JobHistory Server with the following command, run on the designated server as mapred:&lt;/p&gt;
+
+&lt;p&gt;[mapred]$ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver –config $HADOOP_CONF_DIR&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Hadoop Shutdown&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Stop the NameNode with the following command, run on the designated NameNode as hdfs:&lt;/p&gt;
+
+&lt;p&gt;[hdfs]$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh –config $HADOOP_CONF_DIR –script hdfs stop namenode
+Run a script to stop DataNodes on all slaves as root:&lt;/p&gt;
+
+&lt;p&gt;[root]$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh –config $HADOOP_CONF_DIR –script hdfs stop datanode
+Stop the ResourceManager with the following command, run on the designated ResourceManager as yarn:&lt;/p&gt;
+
+&lt;p&gt;[yarn]$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh –config $HADOOP_CONF_DIR stop resourcemanager
+Run a script to stop NodeManagers on all slaves as yarn:&lt;/p&gt;
+
+&lt;p&gt;[yarn]$ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh –config $HADOOP_CONF_DIR stop nodemanager
+Stop the WebAppProxy server. Run on the WebAppProxy server as yarn. If multiple servers are used with load balancing it should be run on each of them:&lt;/p&gt;
+
+&lt;p&gt;[yarn]$ $HADOOP_YARN_HOME/bin/yarn stop proxyserver –config $HADOOP_CONF_DIR
+Stop the MapReduce JobHistory Server with the following command, run on the designated server as mapred:&lt;/p&gt;
+
+&lt;p&gt;[mapred]$ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh stop historyserver –config $HADOOP_CONF_DIR&lt;/p&gt;
+</description>
+        <pubDate>Sat, 06 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://helloourworld.github.io/hadoop_family_site</link>
+        <guid isPermaLink="true">http://helloourworld.github.io/hadoop_family_site</guid>
+        
+        
+        <category>MLAdvance</category>
+        
+      </item>
+    
+      <item>
+        <title>Hadoop Mahout</title>
+        <description>&lt;h2 id=&quot;mahout&quot;&gt;开始 Mahout&lt;/h2&gt;
+
+&lt;p&gt;Mahout has prepared a bunch of examples and tutorials for users to quickly learn how to use its machine learning algorithms.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/mahout-logo-brudman.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;mahout-&quot;&gt;Mahout 支持的算法&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Mahout 0.12.0 Features by Engine¶&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Single Machine&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;MapReduce&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Spark&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;H2O&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Flink&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Mahout Math-Scala Core Library and Scala DSL&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Mahout Distributed BLAS. Distributed Row Matrix API with R and Matlab like operators. Distributed ALS, SPCA, SSVD, thin-QR. Similarity Analysis.&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Mahout Interactive Shell&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Interactive REPL shell for Spark optimized Mahout DSL&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Collaborative Filtering with CLI drivers&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;User-Based Collaborative Filtering&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Item-Based Collaborative Filtering&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Matrix Factorization with ALS&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Matrix Factorization with ALS on Implicit Feedback&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Weighted Matrix Factorization, SVD++&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Classification with CLI drivers&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Logistic Regression - trained via SGD&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Naive Bayes / Complementary Naive Bayes&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Hidden Markov Models&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Clustering with CLI drivers&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Canopy Clustering&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;k-Means Clustering&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Fuzzy k-Means&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Streaming k-Means&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Spectral Clustering&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Dimensionality Reduction&lt;/strong&gt; note: most scala-based dimensionality reduction algorithms are available through the Mahout Math-Scala Core Library for all engines&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Singular Value Decomposition&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Lanczos Algorithm&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Stochastic SVD&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;PCA (via Stochastic SVD)&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;QR Decomposition&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Topic Models&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Latent Dirichlet Allocation&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Miscellaneous&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;RowSimilarityJob&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Collocations&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Sparse TF-IDF Vectors from Text&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;XML Parsing&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Email Archive Parsing&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;弃用&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Evolutionary Processes&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;a href=&quot;&amp;quot;http://mahout.apache.org/users/basics/algorithms.html&amp;quot;&quot;&gt;mahout algorithms&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;说明&lt;/h2&gt;
+</description>
+        <pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://helloourworld.github.io/hadoop_mahout</link>
+        <guid isPermaLink="true">http://helloourworld.github.io/hadoop_mahout</guid>
+        
+        
+        <category>MLAdvance</category>
+        
+      </item>
+    
+      <item>
+        <title>Hadoop 名词速览</title>
+        <description>&lt;h2 id=&quot;hadoop&quot;&gt;Hadoop产品名词速览（不断补充中…）&lt;/h2&gt;
+
+&lt;p&gt;Apache Hadoop: 是Apache开源组织的一个分布式计算开源框架，提供了一个分布式文件系统子项目(HDFS)和支持MapReduce分布式计算的软件架构。&lt;/p&gt;
+
+&lt;p&gt;Apache Hive: 是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，通过类SQL语句快速实现简单的MapReduce统计，不必开发专门的MapReduce应用，十分适合数据仓库的统计分析。&lt;/p&gt;
+
+&lt;p&gt;Apache Pig: 是一个基于Hadoop的大规模数据分析工具，它提供的SQL-LIKE语言叫Pig Latin，该语言的编译器会把类SQL的数据分析请求转换为一系列经过优化处理的MapReduce运算。&lt;/p&gt;
+
+&lt;p&gt;Apache HBase: 是一个高可靠性、高性能、面向列、可伸缩的分布式存储系统，利用HBase技术可在廉价PC Server上搭建起大规模结构化存储集群。&lt;/p&gt;
+
+&lt;p&gt;Apache Sqoop: 是一个用来将Hadoop和关系型数据库中的数据相互转移的工具，可以将一个关系型数据库（MySQL ,Oracle ,Postgres等）中的数据导进到Hadoop的HDFS中，也可以将HDFS的数据导进到关系型数据库中。&lt;/p&gt;
+
+&lt;p&gt;Apache Zookeeper: 是一个为分布式应用所设计的分布的、开源的协调服务，它主要是用来解决分布式应用中经常遇到的一些数据管理问题，简化分布式应用协调及其管理的难度，提供高性能的分布式服务&lt;/p&gt;
+
+&lt;p&gt;Apache Mahout:是基于Hadoop的机器学习和数据挖掘的一个分布式框架。Mahout用MapReduce实现了部分数据挖掘算法，解决了并行挖掘的问题。&lt;/p&gt;
+
+&lt;p&gt;Apache Cassandra:是一套开源分布式NoSQL数据库系统。它最初由Facebook开发，用于储存简单格式数据，集Google BigTable的数据模型与Amazon Dynamo的完全分布式的架构于一身&lt;/p&gt;
+
+&lt;p&gt;Apache Avro: 是一个数据序列化系统，设计用于支持数据密集型，大批量数据交换的应用。Avro是新的数据序列化格式与传输工具，将逐步取代Hadoop原有的IPC机制&lt;/p&gt;
+
+&lt;p&gt;Apache Ambari: 是一种基于Web的工具，支持Hadoop集群的供应、管理和监控。&lt;/p&gt;
+
+&lt;p&gt;Apache Chukwa: 是一个开源的用于监控大型分布式系统的数据收集系统，它可以将各种各样类型的数据收集成适合 Hadoop 处理的文件保存在 HDFS 中供 Hadoop 进行各种 MapReduce 操作。&lt;/p&gt;
+
+&lt;p&gt;Apache Hama: 是一个基于HDFS的BSP（Bulk Synchronous Parallel)并行计算框架, Hama可用于包括图、矩阵和网络算法在内的大规模、大数据计算。&lt;/p&gt;
+
+&lt;p&gt;Apache Flume: 是一个分布的、可靠的、高可用的海量日志聚合的系统，可用于日志数据收集，日志数据处理，日志数据传输。&lt;/p&gt;
+
+&lt;p&gt;Apache Giraph: 是一个可伸缩的分布式迭代图处理系统， 基于Hadoop平台，灵感来自 BSP (bulk synchronous parallel) 和 Google 的 Pregel。&lt;/p&gt;
+
+&lt;p&gt;Apache Oozie: 是一个工作流引擎服务器, 用于管理和协调运行在Hadoop平台上（HDFS、Pig和MapReduce）的任务。&lt;/p&gt;
+
+&lt;p&gt;Apache Crunch: 是基于Google的FlumeJava库编写的Java库，用于创建MapReduce程序。与Hive，Pig类似，Crunch提供了用于实现如连接数据、执行聚合和排序记录等常见任务的模式库&lt;/p&gt;
+
+&lt;p&gt;Apache Whirr: 是一套运行于云服务的类库（包括Hadoop），可提供高度的互补性。Whirr学支持Amazon EC2和Rackspace的服务。&lt;/p&gt;
+
+&lt;p&gt;Apache Bigtop: 是一个对Hadoop及其周边生态进行打包，分发和测试的工具。&lt;/p&gt;
+
+&lt;p&gt;Apache HCatalog: 是基于Hadoop的数据表和存储管理，实现中央的元数据和模式管理，跨越Hadoop和RDBMS，利用Pig和Hive提供关系视图。Cloudera Hue: 是一个基于WEB的监控和管理系统，实现对HDFS，MapReduce/YARN, HBase, Hive, Pig的web化操作和管理。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;不当之处，请指正&lt;/h2&gt;
+</description>
+        <pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://helloourworld.github.io/hadoop_glossary</link>
+        <guid isPermaLink="true">http://helloourworld.github.io/hadoop_glossary</guid>
+        
+        
+        <category>MLAdvance</category>
+        
+      </item>
+    
+      <item>
+        <title>Hadoop生态圈</title>
+        <description>&lt;h2 id=&quot;hadoophivespark-&quot;&gt;如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？&lt;/h2&gt;
+
+&lt;p&gt;请参照知乎原文，&lt;a href=&quot;https://www.zhihu.com/question/27974418&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://helloourworld.github.io/hadoop_family_zhihu</link>
+        <guid isPermaLink="true">http://helloourworld.github.io/hadoop_family_zhihu</guid>
+        
+        
+        <category>MLAdvance</category>
+        
+      </item>
+    
+      <item>
+        <title>Hadoop Family</title>
+        <description>&lt;p&gt;Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka等。对照&lt;a href=&quot;/Hadoop_Ecosystem_Table&quot;&gt;Hadoop_Ecosystem_Table&lt;/a&gt;,我们将其分类为：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;1	分布式文件存储系统&lt;/li&gt;
+  &lt;li&gt;2 分布式编程&lt;/li&gt;
+  &lt;li&gt;3 数据库[列存储、文档存储、流存储、KV存储、图数存储]&lt;/li&gt;
+  &lt;li&gt;4 新型数据库&lt;/li&gt;
+  &lt;li&gt;5 SQL on Hadoop&lt;/li&gt;
+  &lt;li&gt;6 数据处理&lt;/li&gt;
+  &lt;li&gt;7 服务系统&lt;/li&gt;
+  &lt;li&gt;8 调度系统&lt;/li&gt;
+  &lt;li&gt;9 机器学习&lt;/li&gt;
+  &lt;li&gt;10 其它[标杆及问答、安全、元数据、系统部署、应用、部署架构等等]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;每一分类都是方向上的概括，如同炊具，在其下面都包含多种细类，每一细类旨在解决不同的问题，如同具体的高压锅，面包机等。这一比喻请参照&lt;a href=&quot;/hadoop_family_zhihu&quot;&gt;Hadoop生态圈&lt;/a&gt;的描述。&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;以下图片为广泛传阅的生态图，较早为2015年，出处不详。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/Hadoop-Ecosystem-Map_2015.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;以下图片为最新且常用的生态图，图片源自&lt;a href=&quot;https://www.safaribooksonline.com/library/view/hadoop-essentials/9781784396688/ch02s05.html&quot;&gt;Safari&lt;/a&gt;
+&lt;img src=&quot;/images/Hadoop-Ecosystem-Map_2016.jpg&quot; alt=&quot;&quot; /&gt;，是本文主要介绍的部分。&lt;/p&gt;
+
+&lt;h2 id=&quot;hadoop-core&quot;&gt;1 Hadoop Core&lt;/h2&gt;
+
+&lt;p&gt;主要包括HDFS，MapReduce, HBase.&lt;/p&gt;
+
+&lt;h3 id=&quot;hdfs&quot;&gt;1 HDFS&lt;/h3&gt;
+
+&lt;p&gt;Hadoop Distributed File System (HDFS™): A distributed file system that provides high-throughput access to application data. HDFS 是一个能够面向大规模数据使用的，可进行扩展的文件存储与传递系统，是一种允许文件通过网络在多台主机上分享的文件系统，可让多机器上的多用户分享文件和存储空间。实际上，通过网络来访问文件的动作，在程序与用户看来，就像是访问本地的磁盘一般。即使系统中有某些节点脱机，整体来说系统仍然可以持续运作而不会有数据损失。&lt;/p&gt;
+
+&lt;h4 id=&quot;hdfs-1&quot;&gt;1 HDFS体系结构&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/hdfs_architecture.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;1 Namenode&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Namenode是整个文件系统的管理节点。它维护着整个文件系统的文件目录树，文件/目录的元信息和每个文件对应的数据块列表, 接收用户的操作请求。&lt;/p&gt;
+
+&lt;p&gt;文件包括：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; ①fsimage:元数据镜像文件。存储某一时段NameNode内存元数据信息。
+&amp;gt; ②edits:操作日志文件。
+&amp;gt; ③fstime:保存最近一次checkpoint的时间
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;以上这些文件是保存在linux的文件系统中。通过hdfs-site.xml的dfs.namenode.name.dir属性进行设置。&lt;/p&gt;
+
+&lt;p&gt;查看NameNode的fsimage与edits内容&lt;/p&gt;
+
+&lt;p&gt;这个两个文件中的内容使用普通文本编辑器是无法直接查看的，幸运的是hadoop为此准备了专门的工具用于查看文件的内容，这些工具分别为oev和oiv，可以使用hdfs调用执行。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;`
+# 启动服务器：bin/hdfs oiv -i 某个fsimage文件
+
+bash$ bin/hdfs oiv -i fsimage
+14/04/07 13:25:14 INFO offlineImageViewer.WebImageViewer: WebImageViewer started.
+Listening on /127.0.0.1:5978. Press Ctrl+C to stop the viewer.
+
+# 查看内容：bin/hdfs dfs -ls -R webhdfs://127.0.0.1:5978/
+
+bash$ bin/hdfs dfs -ls webhdfs://127.0.0.1:5978/
+Found 2 items
+drwxrwx–* - root supergroup 0 2014-03-26 20:16 webhdfs://127.0.0.1:5978/tmp
+drwxr-xr-x - root supergroup 0 2014-03-31 14:08 webhdfs://127.0.0.1:5978/user
+`
+
+`# 导出fsimage的内容：bin/hdfs oiv -p XML -i
+tmp/dfs/name/current/fsimage_0000000000000000055 -o fsimage.xml
+
+bash$ bin/hdfs oiv -p XML -i fsimage -o fsimage.xml
+0000055 -o fsimage.xml
+
+# 查看edtis的内容：bin/hdfs oev -i
+tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml
+
+bash$ bin/hdfs oev -i
+tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml
+`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;2 Datanode&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;提供真实文件数据的存储服务。&lt;/p&gt;
+
+&lt;p&gt;文件块（ block）： 最基本的存储单位。&lt;/p&gt;
+
+&lt;p&gt;对于文件内容而言，一个文件的长度大小是size，那么从文件的０偏移开始，按照固定的大小，顺序对文件进行划分并编号，划分好的每一个块称一个Block。 HDFS默认Block大小是128MB， 因此，一个256MB文件，共有256/128=2个Block.&lt;/p&gt;
+
+&lt;p&gt;与普通文件系统不同的是，在 HDFS中，如果一个文件小于一个数据块的大小，并不占用整个数据块存储空间。&lt;/p&gt;
+
+&lt;p&gt;Replication：多复本。默认是三个。通过hdfs-site.xml的dfs.replication属性进行设置。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;3 数据存储： staging&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;HDFS client上传数据到HDFS时，首先，在本地缓存数据，当数据达到一个block大小时，请求NameNode分配一个block。 NameNode会把block所在的DataNode的地址告诉HDFS client。 HDFS client会直接和DataNode通信，把数据写到DataNode节点一个block文件中。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;4 数据存储：读文件操作&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;imageshdfsreadjpg&quot;&gt;&lt;img src=&quot;/images/hdfs_read.jpg&quot; alt=&quot;&quot; /&gt;&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;1.首先调用FileSystem对象的open方法，其实是一个DistributedFileSystem的实例。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;2.DistributedFileSystem通过rpc获得文件的第一批block的locations，同一个block按照重复数会返回多个locations，这些locations按照hadoop拓扑结构排序，距离客户端近的排在前面。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;3.前两步会返回一个FSDataInputStream对象，该对象会被封装DFSInputStream对象，DFSInputStream可以方便的管理datanode和namenode数据流。客户端调用read方法，DFSInputStream最会找出离客户端最近的datanode并连接。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;4.数据从datanode源源不断的流向客户端。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;5.如果第一块的数据读完了，就会关闭指向第一块的datanode连接，接着读取下一块。这些操作对客户端来说是透明的，客户端的角度看来只是读一个持续不断的流。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;6.如果第一批block都读完了， DFSInputStream就会去namenode拿下一批block的locations，然后继续读，如果所有的块都读完，这时就会关闭掉所有的流。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;[Alert!]如果在读数据的时候， DFSInputStream和datanode的通讯发生异常，就会尝试正在读的block的排序第二近的datanode,并且会记录哪个datanode发生错误，剩余的blocks读的时候就会直接跳过该datanode。 DFSInputStream也会检查block数据校验和，如果发现一个坏的block,就会先报告到namenode节点，然后DFSInputStream在其他的datanode上读该block的镜像。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;该设计就是客户端直接连接datanode来检索数据并且namenode来负责为每一个block提供最优的datanode， namenode仅仅处理block location的请求，这些信息都加载在namenode的内存中，hdfs通过datanode集群可以承受大量客户端的并发访问。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;5 数据存储：写文件操作&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/hdfs_write.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;1.客户端通过调用DistributedFileSystem的create方法创建新文件。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;2.DistributedFileSystem通过RPC调用namenode去创建一个没有blocks关联的新文件，创建前， namenode会做各种校验，比如文件是否存在，客户端有无权限去创建等。如果校验通过， namenode就会记录下新文件，否则就会抛出IO异常。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;3.前两步结束后，会返回FSDataOutputStream的对象，与读文件的时候相似， FSDataOutputStream被封装成DFSOutputStream。DFSOutputStream可以协调namenode和datanode。客户端开始写数据到DFSOutputStream，DFSOutputStream会把数据切成一个个小的packet，然后排成队列data quene。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;4.DataStreamer会去处理接受data quene，它先询问namenode这个新的block最适合存储的在哪几个datanode里（比如重复数是3，那么就找到3个最适合的datanode），把他们排成一个pipeline。DataStreamer把packet按队列输出到管道的第一个datanode中，第一个datanode又把packet输出到第二个datanode中，以此类推。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;5.DFSOutputStream还有一个对列叫ack quene，也是由packet组成，等待datanode的收到响应，当pipeline中的所有datanode都表示已经收到的时候，这时akc quene才会把对应的packet包移除掉。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;如果在写的过程中某个datanode发生错误，会采取以下几步：&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;ul&gt;
+      &lt;li&gt;1) pipeline被关闭掉；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;ul&gt;
+      &lt;li&gt;2)为了防止防止丢包ack quene里的packet会同步到data quene里；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;ul&gt;
+      &lt;li&gt;3)把产生错误的datanode上当前在写但未完成的block删掉；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;ul&gt;
+      &lt;li&gt;4)block剩下的部分被写到剩下的两个正常的datanode中；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;ul&gt;
+      &lt;li&gt;5)namenode找到另外的datanode去创建这个块的复制。当然，这些操作对客户端来说是无感知的。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;6.客户端完成写数据后调用close方法关闭写入流。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;7.DataStreamer把剩余得包都刷到pipeline里，然后等待ack信息，收到最后一个ack后，通知datanode把文件标视为已完成。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;注意：客户端执行write操作后，写完的block才是可见的，正在写的block对客户端是不可见的，只有调用sync方法，客户端才确保该文件的写操作已经全部完成，当客户端调用close方法时，会默认调用sync方法。是否需要手动调用取决你根据程序需要在数据健壮性和吞吐率之间的权衡。&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;5 HDFS常用命令&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html&quot;&gt;HDFS 常用命令: 官网&lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;类型&lt;/td&gt;
+      &lt;td&gt;[任务]&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;数据获取&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html#put&quot;&gt;通过Hadoop Shell把本地文件上传到HDFS&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html#mkdir&quot;&gt;使用Hadoop Shell在HDFS上创建一个新的目录&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_literal_sqoop_import_literal&quot;&gt;从一个关系型数据库中导入数据到HDFS&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_free_form_query_imports&quot;&gt;导入关系型数据的查询结果到HDFS&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_importing_data_into_hive&quot;&gt;从一个关系型数据库中导入数据到一个新的或者已经存在的Hive表里&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_literal_sqoop_export_literal&quot;&gt;从 HDFS里面插入和更新数据到关系型数据库里面&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://flume.apache.org/FlumeUserGuide.html#starting-an-agent&quot;&gt; 给你一个Flume配置文件，启动一个 Flume agent&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://flume.apache.org/FlumeUserGuide.html#memory-channel&quot;&gt;给你一个配置好的 sink 和source, 配置一个 Flume 固定容量的内存 channel&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;mapreduce&quot;&gt;2 MapReduce&lt;/h3&gt;
+
+&lt;h4 id=&quot;explain-mapreduce-in-5-minutes&quot;&gt;Explain Map/Reduce in 5 minutes&lt;/h4&gt;
+
+&lt;p&gt;原文链接: &lt;a href=&quot;http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce&quot;&gt;http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce&lt;/a&gt; by Aurelien.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;1 Map/Reduce 有3个阶段 : Map/Shuffle/Reduce&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Shuffle部分由Hadoop的自动完成，我们只需要实现Map和Reduce部分。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;2 Map部分的输入&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/mapred_mapinput.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;图上的城市名称作为key值，所属州以及城市均温为key的value值。ps: 请自动脑补python的dict, jason.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;3 Map部分的输出&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/mapred_mapoutput.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;图上显示的Map部分的输出是根据最终我们想要的结果来实现的。我们要得到每个州的平均值，所以根据每个州来进行新的key/value设计。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;4 Shuffle部分&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/mapred_shuffle.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, the shuffle task will run on the output of the Map task. It is going to group all the values by Key, and you’ll get a List&lt;Value&gt;.&lt;/Value&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;5 Rduce部分&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Reduce部分的输入为以上Shuffle部分的输出。&lt;/p&gt;
+
+&lt;p&gt;Reduce任务是数据逻辑的最终完成者，in our case当然就是计算各州的平均温度。最终结果如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/mapred_reduce.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;6 总结&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Map/Reduce的并行执行过程：&lt;/p&gt;
+
+&lt;p&gt;Mapper&amp;lt;K1，V1&amp;gt; ==》 &amp;lt;K2，V2&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;Reducer&amp;lt;K2，List&lt;V2&gt; &amp;gt;==》&amp;lt;K3，V3&amp;gt;&lt;/V2&gt;&lt;/p&gt;
+
+&lt;p&gt;PS: You can find the java code for this example here:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jsoftbiz/mapreduce_1&quot;&gt;https://github.com/jsoftbiz/mapreduce_1&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;实例演示&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;1 演示WordCount&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;2 演示上述平均温度统计&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;资源链接：&lt;a href=&quot;https://github.com/jsoftbiz/mapreduce_1&quot;&gt;https://github.com/jsoftbiz/mapreduce_1&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;需要使用到&lt;a href=&quot;http://hadoop.apache.org/docs/r2.6.4/hadoop-mapreduce-client/hadoop-mapreduce-client-core/HadoopStreaming.html&quot;&gt;streaming&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;` [hadoop@NN01 temperature]$ hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/*streaming*.jar -input /temperature/input/* -output /temperature/py-output -file mapper.py -mapper mapper.py -file reducer.py -reducer reducer.py 16/08/09 22:26:30 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead. packageJobJar: [mapper.py, reducer.py, /tmp/hadoop-unjar8704173289988394156/] [] /tmp/streamjob6992547910816721479.jar tmpDir=null 16/08/09 22:26:32 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032 16/08/09 22:26:32 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032 16/08/09 22:26:33 INFO mapred.FileInputFormat: Total input paths to process : 1 16/08/09 22:26:33 INFO mapreduce.JobSubmitter: number of splits:2 16/08/09 22:26:33 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1470792183416_0002 16/08/09 22:26:34 INFO impl.YarnClientImpl: Submitted application application_1470792183416_0002 16/08/09 22:26:34 INFO mapreduce.Job: The url to track the job: http://NN01.HadoopVM:8088/proxy/application_1470792183416_0002/ 16/08/09 22:26:34 INFO mapreduce.Job: Running job: job_1470792183416_0002 16/08/09 22:26:47 INFO mapreduce.Job: Job job_1470792183416_0002 running in uber mode : false 16/08/09 22:26:47 INFO mapreduce.Job:  map 0% reduce 0% 16/08/09 22:26:57 INFO mapreduce.Job:  map 50% reduce 0% 16/08/09 22:26:58 INFO mapreduce.Job:  map 100% reduce 0% 16/08/09 22:27:06 INFO mapreduce.Job:  map 100% reduce 100% 16/08/09 22:27:06 INFO mapreduce.Job: Job job_1470792183416_0002 completed successfully 16/08/09 22:27:06 INFO mapreduce.Job: Counters: 49
+File System Counters
+	FILE: Number of bytes read=78
+	FILE: Number of bytes written=330581
+	FILE: Number of read operations=0
+	FILE: Number of large read operations=0
+	FILE: Number of write operations=0
+	HDFS: Number of bytes read=407
+	HDFS: Number of bytes written=18
+	HDFS: Number of read operations=9
+	HDFS: Number of large read operations=0
+	HDFS: Number of write operations=2
+Job Counters
+	Launched map tasks=2
+	Launched reduce tasks=1
+	Data-local map tasks=2
+	Total time spent by all maps in occupied slots (ms)=16690
+	Total time spent by all reduces in occupied slots (ms)=6278
+	Total time spent by all map tasks (ms)=16690
+	Total time spent by all reduce tasks (ms)=6278
+	Total vcore-milliseconds taken by all map tasks=16690
+	Total vcore-milliseconds taken by all reduce tasks=6278
+	Total megabyte-milliseconds taken by all map tasks=17090560
+	Total megabyte-milliseconds taken by all reduce tasks=6428672
+Map-Reduce Framework
+	Map input records=9
+	Map output records=9
+	Map output bytes=54
+	Map output materialized bytes=84
+	Input split bytes=222
+	Combine input records=0
+	Combine output records=0
+	Reduce input groups=3
+	Reduce shuffle bytes=84
+	Reduce input records=9
+	Reduce output records=3
+	Spilled Records=18
+	Shuffled Maps =2
+	Failed Shuffles=0
+	Merged Map outputs=2
+	GC time elapsed (ms)=2002
+	CPU time spent (ms)=5260
+	Physical memory (bytes) snapshot=685187072
+	Virtual memory (bytes) snapshot=6260936704
+	Total committed heap usage (bytes)=498597888
+Shuffle Errors
+	BAD_ID=0
+	CONNECTION=0
+	IO_ERROR=0
+	WRONG_LENGTH=0
+	WRONG_MAP=0
+	WRONG_REDUCE=0
+File Input Format Counters
+	Bytes Read=185
+File Output Format Counters
+	Bytes Written=18 16/08/09 22:27:06 INFO streaming.StreamJob: Output directory: /temperature/py-output
+·
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;3 Writing an Hadoop MapReduce Program in Python&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;原文请参照：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/&quot;&gt;Writing an Hadoop MapReduce Program in Python&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;` [hadoop@NN01 hadoop]$ hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/*streaming*.jar -file /home/hadoop/words/mapper.py -mapper /home/hadoop/words/mapper.py -file /home/hadoop/words/reducer.py -reducer /home/hadoop/words/reducer.py -input /words/input/* -output /words/py-output 16/08/09 20:10:28 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead. packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tmp/hadoop-unjar5100483106189698643/] [] /tmp/streamjob6336434171947928949.jar tmpDir=null 16/08/09 20:10:29 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032 16/08/09 20:10:29 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032 16/08/09 20:10:30 INFO mapred.FileInputFormat: Total input paths to process : 2 16/08/09 20:10:30 INFO mapreduce.JobSubmitter: number of splits:2 16/08/09 20:10:31 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1470792183416_0001 16/08/09 20:10:32 INFO impl.YarnClientImpl: Submitted application application_1470792183416_0001 16/08/09 20:10:32 INFO mapreduce.Job: The url to track the job: http://NN01.HadoopVM:8088/proxy/application_1470792183416_0001/ 16/08/09 20:10:32 INFO mapreduce.Job: Running job: job_1470792183416_0001 16/08/09 20:10:45 INFO mapreduce.Job: Job job_1470792183416_0001 running in uber mode : false 16/08/09 20:10:45 INFO mapreduce.Job:  map 0% reduce 0% 16/08/09 20:10:59 INFO mapreduce.Job:  map 50% reduce 0% 16/08/09 20:11:03 INFO mapreduce.Job:  map 100% reduce 0% 16/08/09 20:11:05 INFO mapreduce.Job:  map 100% reduce 100% 16/08/09 20:11:06 INFO mapreduce.Job: Job job_1470792183416_0001 completed successfully 16/08/09 20:11:06 INFO mapreduce.Job: Counters: 49
+File System Counters
+	FILE: Number of bytes read=47
+	FILE: Number of bytes written=330444
+	FILE: Number of read operations=0
+	FILE: Number of large read operations=0
+	FILE: Number of write operations=0
+	HDFS: Number of bytes read=223
+	HDFS: Number of bytes written=25
+	HDFS: Number of read operations=9
+	HDFS: Number of large read operations=0
+	HDFS: Number of write operations=2
+Job Counters
+	Launched map tasks=2
+	Launched reduce tasks=1
+	Data-local map tasks=2
+	Total time spent by all maps in occupied slots (ms)=24400
+	Total time spent by all reduces in occupied slots (ms)=3381
+	Total time spent by all map tasks (ms)=24400
+	Total time spent by all reduce tasks (ms)=3381
+	Total vcore-milliseconds taken by all map tasks=24400
+	Total vcore-milliseconds taken by all reduce tasks=3381
+	Total megabyte-milliseconds taken by all map tasks=24985600
+	Total megabyte-milliseconds taken by all reduce tasks=3462144
+Map-Reduce Framework
+	Map input records=2
+	Map output records=4
+	Map output bytes=33
+	Map output materialized bytes=53
+	Input split bytes=198
+	Combine input records=0
+	Combine output records=0
+	Reduce input groups=3
+	Reduce shuffle bytes=53
+	Reduce input records=4
+	Reduce output records=3
+	Spilled Records=8
+	Shuffled Maps =2
+	Failed Shuffles=0
+	Merged Map outputs=2
+	GC time elapsed (ms)=1505
+	CPU time spent (ms)=6830
+	Physical memory (bytes) snapshot=677711872
+	Virtual memory (bytes) snapshot=6261100544
+	Total committed heap usage (bytes)=482869248
+Shuffle Errors
+	BAD_ID=0
+	CONNECTION=0
+	IO_ERROR=0
+	WRONG_LENGTH=0
+	WRONG_MAP=0
+	WRONG_REDUCE=0
+File Input Format Counters
+	Bytes Read=25
+File Output Format Counters
+	Bytes Written=25 16/08/09 20:11:06 INFO streaming.StreamJob: Output directory: /words/py-output
+`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;hbase&quot;&gt;3 HBase&lt;/h3&gt;
+
+&lt;h4 id=&quot;introduction-1&quot;&gt;Introduction&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;http://hbase.apache.org/book.html#quickstart&quot;&gt;Apache Hbase&lt;/a&gt;安装及测试&lt;/p&gt;
+
+&lt;p&gt;提供海量数据存储功能，是一种构建在HDFS之上的分布式、面向列的存储系统。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;Browse to the Web UI&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;connect to the UI for the Master&lt;a href=&quot;H1:16010&quot;&gt;H1:16010&lt;/a&gt; or &lt;a href=&quot;H2:16010&quot;&gt;H2:16010&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;the-apache-hbase-shell&quot;&gt;The Apache HBase Shell演示&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;1 &lt;a href=&quot;http://hbase.apache.org/book.html#scripting&quot;&gt;Scripting with Ruby&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2 &lt;a href=&quot;http://hbase.apache.org/book.html#_running_the_shell_in_non_interactive_mode&quot;&gt;Running the Shell in Non-Interactive Mode&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;3 &lt;a href=&quot;http://hbase.apache.org/book.html#hbase.shell.noninteractive&quot;&gt;HBase Shell in OS Scripts&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;4 &lt;a href=&quot;http://hbase.apache.org/book.html#_read_hbase_shell_commands_from_a_command_file&quot;&gt;Read HBase Shell Commands from a Command File&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;data-modelhttphbaseapacheorgbookhtmldatamodel&quot;&gt;&lt;a href=&quot;http://hbase.apache.org/book.html#datamodel&quot;&gt;Data Model&lt;/a&gt;&lt;/h4&gt;
+
+&lt;h2 id=&quot;service-programming&quot;&gt;2 Service Programming&lt;/h2&gt;
+
+&lt;h3 id=&quot;zookeeper&quot;&gt;1 Zookeeper&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/zookeeper_small.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zookeeper.apache.org/&quot;&gt;Apache Zookeeper&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;kafka&quot;&gt;2 kafka&lt;/h3&gt;
+
+&lt;p&gt;一个分布式的、分区的、多副本的实时消息发布和订阅系统。提供可扩展、高吞吐、低延迟、高可靠的消息分发服务。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://kafka.apache.org/documentation.html#quickstart&quot;&gt;quickstart&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;视频教程&lt;a href=&quot;http://www.jikexueyuan.com/course/kafka/&quot;&gt;http://www.jikexueyuan.com/course/kafka/&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;1 Introduction&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://kafka.apache.org/documentation.html#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;集群实现与演示&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;` [hadoop@NN01 ~]$ ~/tools/runRemoteCmd.sh &quot;/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;amp;&quot; all
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;[hadoop@DN02 bin]$ $KAFKA_HOME/bin/kafka-console-producer.sh –broker-list NN01.HadoopVM:9092 –sync –topic test&lt;/p&gt;
+
+&lt;p&gt;[hadoop@DN01 bin]$ $KAFKA_HOME/bin/kafka-console-consumer.sh –zookeeper NN01.HadoopVM:2181 –topic test –from-beginning
+	`&lt;/p&gt;
+
+&lt;h2 id=&quot;distributed-programming&quot;&gt;3 Distributed Programming&lt;/h2&gt;
+
+&lt;h3 id=&quot;pig&quot;&gt;1 Pig&lt;/h3&gt;
+
+&lt;h3 id=&quot;hive&quot;&gt;2 Hive&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-InstallationandConfiguration&quot;&gt;Hive Install&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/reesun/article/details/8556078&quot;&gt;Hive metastore三种配置方式&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;建立在Hadoop基础上的开源的数据仓库，提供类似SQL的Hive QL语言操作结构化数据存储服务和基本的数据分析服务。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive&quot;&gt;Running Hive&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;spark&quot;&gt;3 Spark&lt;/h3&gt;
+
+&lt;p&gt;基于内存进行计算的分布式计算框架。&lt;/p&gt;
+
+&lt;h4 id=&quot;spark-overview&quot;&gt;Spark Overview&lt;/h4&gt;
+
+&lt;p&gt;Apache Spark is a fast and general-purpose cluster computing system. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs. It also supports a rich set of higher-level tools including &lt;a href=&quot;http://spark.apache.org/docs/latest/sql-programming-guide.html&quot;&gt;Spark SQL&lt;/a&gt; for SQL and structured data processing, &lt;a href=&quot;http://spark.apache.org/docs/latest/ml-guide.html&quot;&gt;MLlib&lt;/a&gt; for machine learning, &lt;a href=&quot;http://spark.apache.org/docs/latest/graphx-programming-guide.html&quot;&gt;GraphX&lt;/a&gt; for graph processing, and &lt;a href=&quot;http://spark.apache.org/docs/latest/streaming-programming-guide.html&quot;&gt;Spark Streaming&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Spark的适用场景&lt;/p&gt;
+
+&lt;p&gt;Spark是基于内存的迭代计算框架，适用于需要多次操作特定数据集的应用场合。需要反复操作的次数越多，所需读取的数据量越大，受益越大，数据量小但是计算密集度较大的场合，受益就相对较小
+由于RDD的特性，Spark不适用那种异步细粒度更新状态的应用，例如web服务的存储或者是增量的web爬虫和索引。就是对于那种增量修改的应用模型不适合。
+总的来说Spark的适用面比较广泛且比较通用。&lt;/p&gt;
+
+&lt;p&gt;运行模式
+本地模式
+Standalone模式
+Mesos模式
+yarn模式&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;1 Cluster Manager Types&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The system currently supports three cluster managers:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;1 Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;2 Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;3 Hadoop YARN – the resource manager in Hadoop 2.&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;machine-learning-library-mllib-guidereferhttpsparkapacheorgdocslatestml-guidehtml&quot;&gt;Machine Learning Library (MLlib) Guide&lt;a href=&quot;http://spark.apache.org/docs/latest/ml-guide.html&quot;&gt;refer&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://dblab.xmu.edu.cn/blog/spark-quick-start-guide/&quot;&gt;Spark快速入门指南 – Spark安装与基础使用&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;`
+[hadoop@NN01 sparkapp]$ spark-submit --class &quot;SimpleApp&quot; ~/sparkapp/target/scala-2.11/simple-project_2.11-1.0.jar 2&amp;gt;&amp;amp;1|grep &quot;Line&quot; Lines with a: 4, Lines with b: 2
+`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;machine-learning&quot;&gt;4 Machine Learning&lt;/h2&gt;
+
+&lt;h3 id=&quot;mahout&quot;&gt;1 Mahout&lt;/h3&gt;
+
+&lt;h2 id=&quot;data-ingestion&quot;&gt;5 Data Ingestion&lt;/h2&gt;
+
+&lt;h3 id=&quot;storm&quot;&gt;1 Storm&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/images/storm-flow.png&quot; alt=&quot;&quot; /&gt;
+&lt;a href=&quot;http://storm.apache.org/releases/1.0.1/Setting-up-a-Storm-cluster.html&quot;&gt;Setting up a Storm Cluster&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.oschina.net/translate/history-of-apache-storm-and-lessons-learned?cmp&amp;amp;p=4#&quot;&gt;Apache Storm 的历史及经验教训&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://storm.apache.org/releases/1.0.1/index.html&quot;&gt;Storm Index&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://storm.apache.org/talksAndVideos.html&quot;&gt;Talks and Slideshows&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;命名方式&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;Storm暴风雨：其组件大多也以气象名词命名&lt;/p&gt;
+
+    &lt;p&gt;spout龙卷：形象的理解是把原始数据卷进Storm流式计算中&lt;/p&gt;
+
+    &lt;p&gt;bolt雷电：从spout或者其他bolt中接收数据进行处理或者输出&lt;/p&gt;
+
+    &lt;p&gt;nimbus雨云：主控节点，存在单点问题，不过可以用watchdog来保证其可用性，fast-fail后马上就启动&lt;/p&gt;
+
+    &lt;p&gt;topology拓扑：Storm的任务单元，形象的理解拓扑的点是spout或者bolt，之间的数据流是线，整个构成一个拓扑&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;sqoop&quot;&gt;2 Sqoop&lt;/h3&gt;
+
+&lt;h2 id=&quot;system-deployment&quot;&gt;6 System Deployment&lt;/h2&gt;
+
+&lt;h3 id=&quot;ambari&quot;&gt;1 Ambari&lt;/h3&gt;
+
+</description>
+        <pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://helloourworld.github.io/hadoop_family</link>
+        <guid isPermaLink="true">http://helloourworld.github.io/hadoop_family</guid>
+        
+        
+        <category>MLAdvance</category>
+        
+      </item>
+    
+      <item>
+        <title>Hadoop Ecosystem Table</title>
+        <description>&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;chrome=1&quot; /&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;Hadoopecosystemtable.github.io : This page is a summary to keep the track of Hadoop related project, and relevant projects around Big Data scene focused on the open source, free software enviroment.&quot; /&gt;
+
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen&quot; href=&quot;css/stylesheet.css&quot; /&gt;
+
+    &lt;title&gt;The Hadoop Ecosystem Table&lt;/title&gt;
+    &lt;h2&gt;转载至http://hadoopecosystemtable.github.io/, Please Flolow&lt;/h2&gt;
+  &lt;/head&gt;
+
+&lt;body&gt;
+
+    &lt;!-- HEADER --&gt;
+    &lt;div id=&quot;header_wrap&quot; class=&quot;outer&quot;&gt;
+            &lt;header class=&quot;inner&quot;&gt;
+
+        &lt;/header&gt;
+        &lt;header class=&quot;inner&quot;&gt;
+          &lt;a id=&quot;forkme_banner&quot; href=&quot;https://github.com/hadoopecosystemtable/hadoopecosystemtable.github.io&quot;&gt;Fork Me on GitHub&lt;/a&gt;
+          &lt;h1 id=&quot;project_title&quot;&gt;The Hadoop Ecosystem Table&lt;/h1&gt;
+          &lt;h2 id=&quot;project_tagline&quot;&gt;This page is a summary to keep the track of Hadoop related projects, focused on FLOSS environment.转载至http://hadoopecosystemtable.github.io/, Please Flolow&lt;/h2&gt;
+
+        &lt;/header&gt;
+
+    &lt;/div&gt;
+
+    &lt;!-- MAIN CONTENT --&gt;
+    &lt;div id=&quot;main_content_wrap&quot; class=&quot;outer&quot;&gt;
+
+&lt;section id=&quot;main_content&quot; class=&quot;inner&quot;&gt;
+
+&lt;!-- THE TABLE --&gt;
+&lt;table class=&quot;example3&quot;&gt;
+
+&lt;!--                        --&gt;
+&lt;!-- **1 Distributed Filesystem **--&gt;
+&lt;!--                        --&gt;
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;Distributed Filesystem &lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;30%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache HDFS
+	&lt;td&gt;
+		The Hadoop Distributed File System (HDFS) offers a way to store large files across
+		multiple machines. Hadoop and HDFS was derived from Google File System (GFS) paper.
+		Prior to Hadoop 2.0.0, the NameNode was a single point of failure (SPOF) in an HDFS cluster.
+		With Zookeeper the HDFS High Availability feature addresses this problem by providing
+		the option of running two redundant NameNodes in the same cluster in an Active/Passive
+		configuration with a hot standby.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://hadoop.apache.org/&quot;&gt;1. hadoop.apache.org&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;http://research.google.com/archive/gfs.html&quot;&gt;2. Google FileSystem - GFS Paper&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;http://blog.cloudera.com/blog/2012/07/why-we-build-our-platform-on-hdfs/&quot;&gt;3. Cloudera Why HDFS&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;http://hortonworks.com/blog/thinking-about-the-hdfs-vs-other-storage-technologies/&quot;&gt;4. Hortonworks Why HDFS&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Red Hat GlusterFS&lt;/td&gt;
+	&lt;td&gt;
+		GlusterFS is a scale-out network-attached storage file system. GlusterFS was
+		developed originally by Gluster, Inc., then by Red Hat, Inc., after their
+		purchase of Gluster in 2011. In June 2012, Red Hat Storage Server was
+		announced as a commercially-supported integration of GlusterFS with
+		Red Hat Enterprise Linux. Gluster File System, known now as Red Hat Storage Server.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://www.gluster.org/&quot;&gt;1. www.gluster.org&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;http://www.redhat.com/about/news/archive/2013/10/red-hat-contributes-apache-hadoop-plug-in-to-the-gluster-community&quot;&gt;2. Red Hat Hadoop Plugin&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Quantcast File System QFS&lt;/td&gt;
+	&lt;td&gt;
+		QFS is an open-source distributed file system software package for
+		large-scale MapReduce or other batch-processing workloads. It was
+		designed as an alternative to Apache Hadoop’s HDFS, intended to deliver
+		better performance and cost-efficiency for large-scale processing clusters.
+		It is written in C++ and has fixed-footprint memory management. QFS uses
+		Reed-Solomon error correction as method for assuring reliable access to data.&lt;br /&gt;
+		Reed–Solomon coding is very widely used in mass storage systems to correct the burst
+		errors associated with media defects. Rather than storing three full versions of
+		each file like HDFS, resulting in the need for three times more storage, QFS
+		only needs 1.5x the raw capacity because it stripes data across nine different disk drives.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://www.quantcast.com/engineering/qfs/&quot;&gt;1. QFS site&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;https://github.com/quantcast/qfs&quot;&gt;2. GitHub QFS&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;https://issues.apache.org/jira/browse/HADOOP-8885&quot;&gt;3. HADOOP-8885&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;30%&quot;&gt;Ceph Filesystem&lt;/td&gt;
+	&lt;td&gt;
+		Ceph is a free software storage platform designed to present object, block,
+		and file storage from a single distributed computer cluster. Ceph's main
+		goals are to be completely distributed without a single point of failure,
+		scalable to the exabyte level, and freely-available. The data is replicated,
+		making it fault tolerant.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://ceph.com/ceph-storage/file-system/&quot;&gt;1. Ceph Filesystem site&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;http://ceph.com/docs/next/cephfs/hadoop/&quot;&gt;2. Ceph and Hadoop&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;https://issues.apache.org/jira/browse/HADOOP-6253&quot;&gt;3. HADOOP-6253&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;30%&quot;&gt;Lustre file system&lt;/td&gt;
+	&lt;td&gt;
+		The Lustre filesystem is a high-performance distributed filesystem
+		intended for larger network and high-availability environments.
+		Traditionally, Lustre is configured to manage remote data storage
+		disk devices within a Storage Area Network (SAN), which is two or
+		more remotely attached disk devices communicating via a Small Computer
+		System Interface (SCSI) protocol. This includes Fibre Channel, Fibre
+		Channel over Ethernet (FCoE), Serial Attached SCSI (SAS) and even iSCSI.&lt;br /&gt;
+		With Hadoop HDFS  the software needs a dedicated cluster of computers
+		on which to run.  But folks who run high performance computing clusters
+		for other purposes often don't run HDFS, which leaves them with a bunch
+		of computing power, tasks that could almost certainly benefit from a bit
+		of map reduce and no way to put that power to work running Hadoop. Intel's
+		noticed this and, in version 2.5 of its Hadoop distribution that it quietly
+		released last week, has added support for Lustre: the Intel® HPC Distribution
+		for Apache Hadoop* Software, a new product that combines Intel Distribution
+		for Apache Hadoop software with Intel® Enterprise Edition for Lustre software.
+		This is the only distribution of Apache Hadoop that is integrated with Lustre,
+		the parallel file system used by many of the world's fastest supercomputers
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://wiki.lustre.org/&quot;&gt;1. wiki.lustre.org/&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;http://wiki.lustre.org/index.php/Running_Hadoop_with_Lustre&quot;&gt;2. Hadoop with Lustre&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;http://hadoop.intel.com/products/distribution&quot;&gt;3. Intel HPC Hadoop&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;30%&quot;&gt;Alluxio&lt;/td&gt;
+	&lt;td&gt;
+		Alluxio, the world’s first memory-centric virtual distributed storage system, unifies data access
+		and bridges computation frameworks and underlying storage systems. Applications only need to connect
+		with Alluxio to access data stored in any underlying storage systems. Additionally, Alluxio’s
+		memory-centric architecture enables data access orders of magnitude faster than existing solutions.
+		&lt;br /&gt;
+		In big data ecosystem, Alluxio lies between computation frameworks or jobs, such as Apache Spark,
+		Apache MapReduce, or Apache Flink, and various kinds of storage systems, such as Amazon S3,
+		OpenStack Swift, GlusterFS, HDFS, Ceph, or OSS. Alluxio brings significant performance improvement
+		to the stack; for example, Baidu uses Alluxio to improve their data analytics performance by 30 times.
+		Beyond performance, Alluxio bridges new workloads with data stored in traditional storage systems.
+		Users can run Alluxio using its standalone cluster mode, for example on Amazon EC2, or launch Alluxio
+		with Apache Mesos or Apache Yarn.
+		&lt;br /&gt;
+		Alluxio is Hadoop compatible. This means that existing Spark and MapReduce programs can run on top of
+		Alluxio without any code changes. The project is open source (Apache License 2.0) and is deployed at
+		multiple companies. It is one of the fastest growing open source projects. With less than three years
+		open source history, Alluxio has attracted more than 160 contributors from over 50 institutions,
+		including Alibaba, Alluxio, Baidu, CMU, IBM, Intel, NJU, Red Hat, UC Berkeley, and Yahoo.
+		The project is the storage layer of the Berkeley Data Analytics Stack (BDAS) and also part of the
+		Fedora distribution.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://www.alluxio.org/&quot;&gt;1. Alluxio site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;30%&quot;&gt;GridGain&lt;/td&gt;
+	&lt;td&gt;
+		GridGain is open source project licensed under Apache 2.0. One of the main pieces of this platform is the
+		In-Memory Apache Hadoop Accelerator which aims to accelerate HDFS and Map/Reduce by bringing both, data
+		and computations into memory. This work is done with the GGFS - Hadoop compliant in-memory file system.
+		For I/O intensive jobs GridGain GGFS offers performance close to 100x faster than standard HDFS.
+		Paraphrasing Dmitriy Setrakyan from GridGain Systems talking about GGFS regarding Tachyon:
+		&lt;ul&gt;
+		 &lt;li&gt;GGFS allows read-through and write-through to/from underlying HDFS or any
+			other Hadoop compliant file system with zero code change. Essentially GGFS
+			entirely removes ETL step from integration.&lt;/li&gt;
+		 &lt;li&gt;GGFS has ability to pick and choose what folders stay in memory, what
+			folders stay on disc, and what folders get synchronized with underlying
+			(HD)FS either synchronously or asynchronously.&lt;/li&gt;
+		 &lt;li&gt;GridGain is working on adding native MapReduce component which will
+			provide native complete Hadoop integration without changes in API, like
+			Spark currently forces you to do. Essentially GridGain MR+GGFS will allow
+			to bring Hadoop completely or partially in-memory in Plug-n-Play fashion
+			without any API changes.&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://www.gridgain.org/&quot;&gt;1. GridGain site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;30%&quot;&gt;XtreemFS&lt;/td&gt;
+	&lt;td&gt;
+		XtreemFS is a general purpose storage system and covers most storage needs in a single deployment.
+		It is open-source, requires no special hardware or kernel modules, and can be mounted on Linux,
+		Windows and OS X.
+		XtreemFS runs distributed and offers resilience through replication. XtreemFS Volumes can be accessed
+		through a FUSE component, that offers normal file interaction with POSIX like semantics. Furthermore an
+		implementation of Hadoops FileSystem interface is included which makes XtreemFS available for use with
+		Hadoop, Flink and Spark out of the box.
+		XtreemFS is licensed under the New BSD license. The XtreemFS project is developed by Zuse Institute Berlin.
+		The development of the project is funded by the European Commission since 2006 under
+		Grant Agreements No. FP6-033576, FP7-ICT-257438, and FP7-318521, as well as the German projects MoSGrid,
+		&quot;First We Take Berlin&quot;, FFMK, GeoMultiSens, and BBDC.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://www.xtreemfs.org/&quot;&gt;1. XtreemFS site&lt;/a&gt;
+			&lt;a href=&quot;https://github.com/xtreemfs/xtreemfs/wiki/Apache-Flink-with-XtreemFS&quot;&gt;2. Flink on XtreemFS&lt;/a&gt;
+			&lt;a href=&quot;https://github.com/xtreemfs/xtreemfs/wiki/Apache-Spark-with-XtreemFS&quot;&gt;. Spark XtreemFS&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;!--                        --&gt;
+&lt;!-- Distributed Programming--&gt;
+&lt;!--                        --&gt;
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;Distributed Programming&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Ignite&lt;/td&gt;
+	&lt;td&gt;
+		Apache Ignite In-Memory Data Fabric is a distributed in-memory platform
+		for computing and transacting on large-scale data sets in real-time.
+		It includes a distributed key-value in-memory store, SQL capabilities,
+		map-reduce and other computations, distributed data structures,
+		continuous queries, messaging and events subsystems, Hadoop and Spark integration.
+		Ignite is built in Java and provides .NET and C++ APIs.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://ignite.apache.org/&quot;&gt;1. Apache Ignite&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://apacheignite.readme.io/&quot;&gt;2. Apache Ignite documentation&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache MapReduce
+	&lt;td&gt;
+		MapReduce is a programming model for processing large data sets with a parallel,
+		distributed algorithm on a cluster. Apache MapReduce was derived from Google
+		MapReduce: Simplified Data Processing on Large Clusters paper. The current
+		Apache MapReduce version is built over Apache YARN Framework. YARN stands
+		for “Yet-Another-Resource-Negotiator”. It is a new framework that facilitates
+		writing arbitrary distributed processing frameworks and applications. YARN’s
+		execution model is more generic than the earlier MapReduce implementation.
+		YARN can run applications that do not follow the MapReduce model, unlike the
+		original Apache Hadoop MapReduce (also called MR1). Hadoop YARN is an attempt
+		to take Apache Hadoop beyond MapReduce for data-processing.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://wiki.apache.org/hadoop/MapReduce/&quot;&gt;1. Apache MapReduce&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;http://research.google.com/archive/mapreduce.html&quot;&gt;2. Google MapReduce paper&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;http://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/WritingYarnApplications.html&quot;&gt;3. Writing YARN applications&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache Pig
+	&lt;td&gt;
+		Pig provides an engine for executing data flows in parallel on Hadoop. It includes a language,
+		Pig Latin, for expressing these data flows. Pig Latin includes operators for many of the
+		traditional data operations (join, sort, filter, etc.), as well as the ability for users
+		to develop their own functions for reading, processing, and writing data. Pig runs on Hadoop.
+		It makes use of both the Hadoop Distributed File System, HDFS, and Hadoop’s processing system, MapReduce.&lt;br /&gt;
+		Pig uses MapReduce to execute all of its data processing. It compiles the Pig Latin scripts
+		that users write into a series of one or more MapReduce jobs that it then executes. Pig Latin looks
+		different from many of the programming languages you have seen. There are no if statements or for
+		loops in Pig Latin. This is because traditional procedural and object-oriented programming languages
+		describe control flow, and data flow is a side effect of the program. Pig Latin instead focuses on data flow.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://pig.apache.org/&quot;&gt;1. pig.apache.org/&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://github.com/alanfgates/programmingpig&quot;&gt;2.Pig examples by Alan Gates&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;JAQL&lt;/td&gt;
+	&lt;td&gt;
+		JAQL is a functional, declarative programming language designed especially for working with large
+		volumes of structured, semi-structured and unstructured data. As its name implies, a primary
+		use of JAQL is to handle data stored as JSON documents, but JAQL can work on various types of data.
+		For example, it can support XML, comma-separated values (CSV) data and flat files. A &quot;SQL within JAQL&quot;
+		capability lets programmers work with structured SQL data while employing a JSON data model that's less
+		restrictive than its Structured Query Language counterparts.&lt;br /&gt;
+		Specifically, Jaql allows you to select, join, group, and filter data that is stored in HDFS, much
+		like a blend of Pig and Hive. Jaql’s query language was inspired by many programming and query languages,
+		including Lisp, SQL, XQuery, and Pig. &lt;br /&gt;
+		JAQL was created by workers at IBM Research Labs in 2008 and released to open source. While it continues
+		to be hosted as a project on Google Code, where a downloadable version is available under an Apache 2.0 license,
+		the major development activity around JAQL has remained centered at IBM. The company offers the query language
+		as part of the tools suite associated with InfoSphere BigInsights, its Hadoop platform. Working together with a
+		workflow orchestrator, JAQL is used in BigInsights to exchange data between storage, processing and analytics jobs.
+		It also provides links to external data and services, including relational databases and machine learning data.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://code.google.com/p/jaql/&quot;&gt;1. JAQL in Google Code&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;http://www-01.ibm.com/software/data/infosphere/hadoop/jaql/&quot;&gt;2. What is Jaql? by IBM&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache Spark
+	&lt;td&gt;
+		Data analytics cluster computing framework originally developed in the AMPLab at UC Berkeley.
+		Spark fits into the Hadoop open-source community, building on top of the Hadoop Distributed File System (HDFS).
+		However, Spark provides an easier to use alternative to Hadoop MapReduce and offers performance up to 10 times
+		faster than previous generation systems like Hadoop MapReduce for certain applications.&lt;br /&gt;
+		Spark is a framework for writing fast, distributed programs. Spark solves similar problems as Hadoop MapReduce
+		does but with a fast in-memory approach and a clean functional style API. With its ability to integrate with
+		Hadoop and inbuilt tools for interactive query analysis (Shark), large-scale graph processing and analysis (Bagel),
+		and real-time analysis (Spark Streaming), it can be interactively used to quickly process and query big data sets.&lt;br /&gt;
+		To make programming faster, Spark provides clean, concise APIs in Scala, Java and Python. You can also use Spark
+		interactively from the Scala and Python shells to rapidly query big datasets. Spark is also the engine behind Shark,
+		a fully Apache Hive-compatible data warehousing system that can run 100x faster than Hive.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://spark.apache.org/&quot;&gt;1. Apache Spark&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://github.com/apache/spark&quot;&gt;2. Mirror of Spark on Github&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;http://www.cs.berkeley.edu/~matei/papers/2012/nsdi_spark.pdf&quot;&gt;3. RDDs - Paper&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://people.csail.mit.edu/matei/papers/2010/hotcloud_spark.pdf&quot;&gt;4. Spark: Cluster Computing... - Paper&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;http://spark.apache.org/research.html&quot;&gt;Spark Research&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache Storm
+	&lt;td&gt;
+		Storm is a complex event processor (CEP) and distributed computation
+		framework written predominantly in the Clojure programming language.
+		Is a distributed real-time computation system for processing fast,
+		large streams of data. Storm is an architecture based on master-workers
+		paradigma. So a Storm cluster mainly consists of a master and worker
+		nodes, with coordination done by Zookeeper. &lt;br /&gt;
+		Storm makes use of zeromq (0mq, zeromq), an advanced, embeddable
+		networking library.  It provides a message queue, but unlike
+		message-oriented middleware (MOM), a 0MQ system can run without
+		a dedicated message broker. The library is designed to have a
+		familiar socket-style API.&lt;br /&gt;
+		Originally created by Nathan Marz and team at BackType, the
+		project was open sourced after being acquired by Twitter. Storm
+		was initially developed and deployed at BackType in 2011. After
+		7 months of development BackType was acquired by Twitter in July
+		2011. Storm was open sourced in September 2011. &lt;br /&gt;
+		Hortonworks is developing a Storm-on-YARN version and plans
+		finish the base-level integration in 2013 Q4. This is the plan
+		from Hortonworks. Yahoo/Hortonworks  also plans to move Storm-on-YARN
+		code from github.com/yahoo/storm-yarn to be a subproject of
+		Apache Storm project in the near future.&lt;br /&gt;
+		Twitter has recently released a Hadoop-Storm Hybrid called
+		“Summingbird.” Summingbird fuses the two frameworks into one,
+		allowing for developers to use Storm for short-term processing
+		and Hadoop for deep data dives,. a system that aims to mitigate
+		the tradeoffs between batch processing and stream processing by
+		combining them into a hybrid system.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://storm-project.net/&quot;&gt;1. Storm Project/&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;github.com/yahoo/storm-yarn&quot;&gt;2. Storm-on-YARN&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Flink&lt;/td&gt;
+	&lt;td&gt;
+		Apache Flink (formerly called Stratosphere) features powerful programming abstractions in Java and Scala,
+		a high-performance runtime, and automatic program optimization. It has native support for iterations,
+		incremental iterations, and programs consisting of large DAGs of operations.&lt;br /&gt;
+		Flink is a data processing system and an alternative to Hadoop's MapReduce component. It comes with
+		its own runtime, rather than building on top of MapReduce. As such, it can work completely independently
+		of the Hadoop ecosystem. However, Flink can also access Hadoop's distributed file system (HDFS) to read
+		and write data, and Hadoop's next-generation resource manager (YARN) to provision cluster resources.
+		Since most Flink users are using Hadoop HDFS to store their data, it ships already the required libraries to access HDFS.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://flink.incubator.apache.org/&quot;&gt;1. Apache Flink incubator page&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;http://stratosphere.eu/&quot;&gt;2. Stratosphere site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Apex&lt;/td&gt;
+	&lt;td&gt;
+		Apache Apex is an enterprise grade Apache YARN based big data-in-motion platform that
+		unifies stream processing as well as batch processing. It processes big data
+		in-motion in a highly scalable, highly performant, fault tolerant, stateful,
+		secure, distributed, and an easily operable way. It provides a simple API that
+		enables users to write or re-use generic Java code, thereby lowering the expertise
+		needed to write big data applications. &lt;p&gt;
+		The Apache Apex platform is supplemented by Apache Apex-Malhar,
+		which is a library of operators that implement common business logic
+		functions needed by customers who want to quickly develop applications.
+		These operators provide access to HDFS, S3, NFS, FTP, and other file systems;
+		Kafka, ActiveMQ, RabbitMQ, JMS, and other message systems; MySql, Cassandra,
+		MongoDB, Redis, HBase, CouchDB and other databases along with JDBC connectors.
+		The library also includes a host of other common business logic patterns that
+		help users to significantly reduce the time it takes to go into production.
+		Ease of integration with all other big data technologies is one of the primary
+		missions of Apache Apex-Malhar.&lt;p&gt;
+		Apex, available on GitHub, is the core technology upon which DataTorrent's
+		commercial offering, DataTorrent RTS 3, along with other technology such as
+		a data ingestion tool called dtIngest, are based.
+	&amp;lt;/td&amp;gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://www.datatorrent.com/apex/&quot;&gt;1. Apache Apex from DataTorrent&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;http://apex.incubator.apache.org/&quot;&gt;2. Apache Apex main page&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;https://wiki.apache.org/incubator/ApexProposal&quot;&gt;3. Apache Apex Proposal&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Netflix PigPen&lt;/td&gt;
+	&lt;td&gt;
+		PigPen is map-reduce for Clojure which compiles to Apache Pig. Clojure is dialect of the Lisp programming
+		language created by Rich Hickey, so is a functional general-purpose language, and runs on the Java Virtual Machine,
+		Common Language Runtime, and JavaScript engines. In PigPen there are no special user defined functions (UDFs).
+		Define Clojure functions, anonymously or named, and use them like you would in any Clojure program. This tool
+		is open sourced by Netflix, Inc. the American provider of on-demand Internet streaming media.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/Netflix/PigPen&quot;&gt;1. PigPen on GitHub&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;AMPLab SIMR&lt;/td&gt;
+	&lt;td&gt;
+		Apache Spark was developed thinking in Apache YARN. However, up to now, it has been relatively hard to run
+		Apache Spark on Hadoop MapReduce v1 clusters, i.e. clusters that do not have YARN installed. Typically,
+		users would have to get permission to install Spark/Scala on some subset of the machines, a process that
+		could be time consuming. SIMR allows anyone with access to a Hadoop MapReduce v1 cluster to run Spark out
+		of the box. A user can run Spark directly on top of Hadoop MapReduce v1 without any administrative rights,
+		and without having Spark or Scala installed on any of the nodes.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://databricks.github.io/simr/&quot;&gt;1. SIMR on GitHub&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Facebook Corona&lt;/td&gt;
+	&lt;td&gt;
+		“The next version of Map-Reduce&quot; from Facebook, based in own fork of Hadoop. The current Hadoop implementation
+		of the MapReduce technique uses a single job tracker, which causes scaling issues for very large data sets.
+		The Apache Hadoop developers have been creating their own next-generation MapReduce, called YARN, which Facebook
+		engineers looked at but discounted because of the highly-customised nature of the company's deployment of Hadoop and HDFS.
+		Corona, like YARN, spawns multiple job trackers (one for each job, in Corona's case).
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/facebookarchive/hadoop-20/tree/master/src/contrib/corona&quot;&gt;1. Corona on Github&lt;/a&gt;
+	&lt;/td&gt;
+
+
+    &lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache REEF&lt;/td&gt;
+	&lt;td&gt;
+		Apache REEF&amp;trade; (Retainable Evaluator Execution Framework) is a  library for developing portable
+		applications for cluster resource managers such as Apache Hadoop&amp;trade; YARN or Apache Mesos&amp;trade;.
+		Apache REEF drastically simplifies development of those resource managers through the following features:
+
+		&lt;ul&gt;
+			&lt;li&gt;
+				Centralized Control Flow: Apache REEF turns the chaos of a distributed application into events in a
+				single machine, the Job Driver. Events include container allocation, Task launch, completion and
+				failure. For failures, Apache REEF makes every effort of making the actual `Exception` thrown by the
+				Task available to the Driver.
+			&lt;/li&gt;
+			&lt;li&gt;
+				Task runtime: Apache REEF provides a Task runtime called Evaluator. Evaluators are instantiated in
+				every container of a REEF application. Evaluators can keep data in memory in between Tasks, which
+				enables efficient pipelines on REEF.
+			&lt;/li&gt;
+			&lt;li&gt;
+				Support for multiple resource managers: Apache REEF applications are portable to any supported resource
+				manager with minimal effort. Further, new resource managers are easy to support in REEF.
+			&lt;/li&gt;
+         	&lt;li&gt;
+				 .NET and Java API: Apache REEF is the only API to write YARN or Mesos applications in .NET. Further, a
+				 single REEF application is free to mix and match Tasks written for .NET or Java.
+			&lt;/li&gt;
+        	&lt;li&gt;
+				Plugins: Apache REEF allows for plugins (called &quot;Services&quot;) to augment its feature set without adding
+				bloat to the core. REEF includes many Services, such as a name-based communications between Tasks
+				MPI-inspired group communications (Broadcast, Reduce, Gather, ...) and data ingress.
+			&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://reef.apache.org&quot;&gt;1. Apache REEF Website&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Twill&lt;/td&gt;
+	&lt;td&gt;
+		Twill is an abstraction over Apache Hadoop® YARN that reduces the
+		complexity of developing distributed applications, allowing developers
+		to focus more on their business logic. Twill uses a simple thread-based model that Java
+		programmers will find familiar. YARN can be viewed as a compute
+		fabric of a cluster, which means YARN applications like Twill will
+		run on any Hadoop 2 cluster.&lt;br /&gt;
+		YARN is an open source application that allows the Hadoop cluster
+		to turn into a collection of virtual machines. Weave, developed by
+		Continuuity and initially housed on Github, is a complementary open
+		source application that uses a programming model similar to Java
+		threads, making it easy to write distributed applications. In order to remove
+		a conflict with a similarly named project on Apache, called &quot;Weaver,&quot;
+		Weave's name changed to Twill when it moved to Apache incubation.&lt;br /&gt;
+		Twill functions as a scaled-out proxy. Twill is a middleware layer
+		in between YARN and any application on YARN. When you develop a
+		Twill app, Twill handles APIs in YARN that resemble a multi-threaded application familiar to Java.
+		It is very easy to build multi-processed distributed applications in Twill.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://incubator.apache.org/projects/twill.html&quot;&gt;1. Apache Twill Incubator&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Damballa Parkour&lt;/td&gt;
+	&lt;td&gt;
+		Library for develop MapReduce programs using the LISP like language Clojure. Parkour aims to provide deep Clojure
+		integration for Hadoop.  Programs using Parkour are normal Clojure programs, using standard Clojure functions
+		instead of new framework abstractions.  Programs using Parkour are also full Hadoop programs, with complete
+		access to absolutely everything possible in raw Java Hadoop MapReduce.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/damballa/parkour&quot;&gt;1. Parkour GitHub Project&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Hama&lt;/td&gt;
+	&lt;td&gt;
+		Apache Top-Level open source project, allowing you to do advanced analytics beyond MapReduce. Many data
+		analysis techniques such as machine learning and graph algorithms require iterative computations,
+		this is where Bulk Synchronous Parallel model can be more effective than &quot;plain&quot; MapReduce.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://hama.apache.org/&quot;&gt;1. Hama site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Datasalt Pangool&lt;/td&gt;
+	&lt;td&gt;
+		A new MapReduce paradigm. A new API for MR jobs, in higher level than Java.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://pangool.net&quot;&gt;1.Pangool&lt;/a&gt;
+	&lt;br /&gt; &lt;a href=&quot;https://github.com/datasalt/pangool&quot;&gt;2.GitHub Pangool&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache Tez
+	&lt;td&gt;
+		Tez is a proposal to develop a generic application which can be used to process complex data-processing
+		task DAGs and runs natively on Apache Hadoop YARN. Tez generalizes the MapReduce paradigm to a more
+		powerful framework based on expressing computations as a dataflow graph. Tez is not meant directly for
+		end-users – in fact it enables developers to build end-user applications with much better performance
+		and flexibility. Hadoop has traditionally been a batch-processing platform for large amounts of data.
+		However, there are a lot of use cases for near-real-time performance of query processing. There are also
+		several workloads, such as Machine Learning, which do not fit will into the MapReduce paradigm. Tez helps
+		Hadoop address these use cases. Tez framework constitutes part of Stinger initiative (a low latency
+		based SQL type query interface for Hadoop based on Hive).
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://incubator.apache.org/projects/tez.html&quot;&gt;1. Apache Tez Incubator&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;http://hortonworks.com/hadoop/tez/&quot;&gt;2. Hortonworks Apache Tez page&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache DataFu&lt;/td&gt;
+	&lt;td&gt;
+		DataFu provides a collection of Hadoop MapReduce jobs and functions in higher level languages based
+		on it to perform data analysis. It provides functions for common statistics tasks (e.g. quantiles,
+		sampling), PageRank, stream sessionization, and set and bag operations. DataFu also provides Hadoop
+		jobs for incremental data processing in MapReduce. DataFu is a collection of Pig UDFs (including PageRank,
+		sessionization, set operations, sampling, and much more) that were originally developed at LinkedIn.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://incubator.apache.org/projects/datafu.html&quot;&gt;1. DataFu Apache Incubator&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Pydoop&lt;/td&gt;
+	&lt;td&gt;
+		Pydoop is a Python MapReduce and HDFS API for Hadoop, built upon the C++
+		Pipes and the C libhdfs APIs, that allows to write full-fledged  MapReduce
+		applications with HDFS access. Pydoop has several advantages over Hadoop’s built-in
+		solutions for Python programming, i.e., Hadoop Streaming and Jython: being a CPython
+		package, it allows you to access all standard library and third party modules,
+		some of which may not be available.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://pydoop.sourceforge.net/docs/&quot;&gt;1. SF Pydoop site&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://github.com/crs4/pydoop&quot;&gt;2. Pydoop GitHub Project&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Kangaroo&lt;/td&gt;
+	&lt;td&gt;
+		Open-source project from Conductor for writing MapReduce jobs consuming data from Kafka.
+		The introductory post explains Conductor’s use case—loading data from Kafka to HBase
+		by way of a MapReduce job using the HFileOutputFormat. Unlike other solutions
+		which are limited to a single InputSplit per Kafka partition, Kangaroo can launch
+		multiple consumers at different offsets in the stream of a single partition for
+		increased throughput and parallelism.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://www.conductor.com/nightlight/data-stream-processing-bulk-kafka-hadoop/&quot;&gt;1. Kangaroo Introduction&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://github.com/Conductor/kangaroo&quot;&gt;2. Kangaroo GitHub Project&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;TinkerPop&lt;/td&gt;
+	&lt;td&gt;
+		Graph computing framework written in Java. Provides a core API that graph system vendors can implement.
+		There are various types of graph systems including in-memory graph libraries, OLTP graph databases,
+		and OLAP graph processors. Once the core interfaces are implemented, the underlying graph system
+		can be queried using the graph traversal language Gremlin and processed with TinkerPop-enabled
+		algorithms. For many, TinkerPop is seen as the JDBC of the graph computing community.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://wiki.apache.org/incubator/TinkerPopProposal&quot;&gt;1. Apache Tinkerpop Proposal&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;http://www.tinkerpop.com/&quot;&gt;2. TinkerPop site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Pachyderm MapReduce&lt;/td&gt;
+	&lt;td&gt;
+		Pachyderm is a completely new MapReduce engine built on top Docker and CoreOS.
+		In Pachyderm MapReduce (PMR) a job is an HTTP server inside a Docker container
+		(a microservice). You give Pachyderm a Docker image and it will automatically
+		distribute it throughout the cluster next to your data. Data is POSTed to
+		the container over HTTP and the results are stored back in the file system.
+		You can implement the web server in any language you want and pull in any library.
+		Pachyderm also creates a DAG for all the jobs in the system and their dependencies
+		and it automatically schedules the pipeline such that each job isn’t run until it’s
+		dependencies have completed. Everything in Pachyderm “speaks in diffs” so it knows
+		exactly which data has changed and which subsets of the pipeline need to be rerun.
+		CoreOS is an open source lightweight operating system based on Chrome OS, actually
+		CoreOS is a fork of Chrome OS. CoreOS provides only the minimal functionality
+		required for deploying applications inside software containers, together with
+		built-in mechanisms for service discovery and configuration sharing
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://www.pachyderm.io/&quot;&gt;1. Pachyderm site&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://medium.com/pachyderm-data/lets-build-a-modern-hadoop-4fc160f8d74f&quot;&gt;2. Pachyderm introduction article&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Beam&lt;/td&gt;
+	&lt;td&gt;
+		Apache Beam is an open source, unified model for defining and executing
+		data-parallel processing pipelines, as well as a set of language-specific
+		SDKs for constructing pipelines and runtime-specific Runners for executing them.&lt;p&gt;
+		The model behind Beam evolved from a number of internal Google
+		data processing projects, including MapReduce, FlumeJava, and
+		Millwheel. This model was originally known as the “Dataflow Model”
+		and first implemented as Google Cloud Dataflow, including a Java SDK
+		on GitHub for writing pipelines and fully managed service for
+		executing them on Google Cloud Platform.&lt;p&gt;
+		In January 2016, Google and a number of partners submitted the Dataflow
+		Programming Model and SDKs portion as an Apache Incubator Proposal,
+		under the name Apache Beam (unified Batch + strEAM processing).
+	&amp;lt;/td&amp;gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://wiki.apache.org/incubator/BeamProposal&quot;&gt;1. Apache Beam Proposal&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;https://cloud.google.com/dataflow/blog/dataflow-beam-and-spark-comparison&quot;&gt;2. DataFlow Beam and Spark Comparasion&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;!--                        --&gt;
+&lt;!-- NoSQL ecosystem        --&gt;
+&lt;!--                        --&gt;
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;NoSQL Databases&lt;/th&gt;
+
+
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot; style=&quot;background-color:#0099FF;&quot;&gt;Column Data Model&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache HBase
+	&lt;td&gt;
+		Google BigTable Inspired. Non-relational distributed database.
+		Ramdom, real-time r/w operations in column-oriented very large
+		tables (BDDB: Big Data Data Base). It’s the backing system for
+		MR jobs outputs. It’s the Hadoop database.  It’s for backing
+		Hadoop MapReduce jobs with Apache HBase tables
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://hbase.apache.org/&quot;&gt;1. Apache HBase Home&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://github.com/apache/hbase&quot;&gt;2. Mirror of HBase on Github&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Cassandra&lt;/td&gt;
+	&lt;td&gt;
+		Distributed Non-SQL DBMS, it’s a BDDB. MR can retrieve data from Cassandra.
+		This BDDB can run without HDFS, or on-top of HDFS (DataStax fork of Cassandra).
+		HBase and its required supporting systems are derived from what is known of
+		the original Google BigTable and Google File System designs (as known from the
+		Google File System paper Google published in 2003, and the BigTable paper published
+		in 2006). Cassandra on the other hand is a recent open source fork of a standalone
+		database system initially coded by Facebook, which while implementing the BigTable
+		data model, uses a system inspired by Amazon’s Dynamo for storing data (in fact
+		much of the initial development work on Cassandra was performed by two Dynamo
+		engineers recruited to Facebook from Amazon).
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;
+		&lt;a href=&quot;http://cassandra.apache.org&quot; target=&quot;_blank&quot;&gt;1. Apache HBase Home&lt;/a&gt; &lt;br /&gt;
+		&lt;a href=&quot;https://github.com/apache/cassandra&quot; target=&quot;_blank&quot;&gt;2. Cassandra on GitHub&lt;/a&gt; &lt;br /&gt;
+		&lt;a href=&quot;https://academy.datastax.com&quot; target=&quot;_blank&quot;&gt;3. Training Resources&lt;/a&gt; &lt;br /&gt;
+		&lt;a href=&quot;https://www.cs.cornell.edu/projects/ladis2009/papers/lakshman-ladis2009.pdf&quot; target=&quot;_blank&quot;&gt;4. Cassandra - Paper&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Hypertable&lt;/td&gt;
+	&lt;td&gt;
+		Database system inspired by publications on the design of Google's
+		BigTable. The project is based on experience of engineers who were
+		solving large-scale data-intensive tasks for many years. Hypertable
+		runs on top of a distributed file system such as the Apache Hadoop DFS,
+		GlusterFS, or the Kosmos File System (KFS). It is written almost entirely
+		in C++. Sposored by Baidu the Chinese search engine.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Accumulo&lt;/td&gt;
+	&lt;td&gt;
+		Distributed key/value store is a robust, scalable, high performance
+		data storage and retrieval system. Apache Accumulo is based on Google's
+		BigTable design and is built on top of Apache Hadoop, Zookeeper, and Thrift.
+		Accumulo is software created by the NSA with security features.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://accumulo.apache.org/&quot;&gt;1. Apache Accumulo Home&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Kudu&lt;/td&gt;
+	&lt;td&gt;
+		Distributed, columnar, relational data store optimized for analytical use cases requiring
+		very fast reads with competitive write speeds.
+	  	&lt;ul&gt;
+	  	  &lt;li&gt;Relational data model (tables) with strongly-typed columns and a fast, online alter table operation.&lt;/li&gt;
+	  	  &lt;li&gt;Scale-out and sharded with support for partitioning based on key ranges and/or hashing.&lt;/li&gt;
+	  	  &lt;li&gt;Fault-tolerant and consistent due to its implementation of Raft consensus.&lt;/li&gt;
+	  	  &lt;li&gt;Supported by Apache Impala and Apache Drill, enabling fast SQL reads and writes through those systems.&lt;/li&gt;
+	  	  &lt;li&gt;Integrates with MapReduce and Spark.&lt;/li&gt;
+	  	  &lt;li&gt;Additionally provides &quot;NoSQL&quot; APIs in Java, Python, and C++.&lt;/li&gt;
+	  	&lt;/ul&gt;
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://getkudu.io/&quot;&gt;1. Apache Kudu Home&lt;/a&gt;&lt;br /&gt;
+		&lt;a href=&quot;http://github.com/cloudera/kudu&quot;&gt;2. Kudu on Github&lt;/a&gt;&lt;br /&gt;
+		&lt;a href=&quot;http://getkudu.io/kudu.pdf&quot;&gt;3. Kudu technical whitepaper (pdf)&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot; style=&quot;background-color:#0099FF;&quot;&gt;Document Data Model&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;MongoDB
+	&lt;td&gt;
+		Document-oriented database system. It is part of the NoSQL family of
+		database systems. Instead of storing data in tables as is done in a &quot;classical&quot;
+		relational database, MongoDB stores structured data as JSON-like documents
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://www.mongodb.org/&quot;&gt;1. Mongodb site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;RethinkDB&lt;/td&gt;
+	&lt;td&gt;
+		RethinkDB is built to store JSON documents, and scale to multiple
+		machines with very little effort. It has a pleasant query language
+		that supports really useful queries like table joins and group by,
+		and is easy to setup and learn.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://www.rethinkdb.com/&quot;&gt;1. RethinkDB site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;ArangoDB&lt;/td&gt;
+	&lt;td&gt;
+		An open-source database with a flexible data model for documents, graphs,
+		and key-values. Build high performance applications using a convenient
+		sql-like query language or JavaScript extensions.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://www.arangodb.org/&quot;&gt;1. ArangoDB site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot; style=&quot;background-color:#0099FF;&quot;&gt;Stream Data Model&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;EventStore
+	&lt;td&gt;
+		An open-source, functional database with support for Complex Event Processing.
+		It provides a persistence engine for applications using event-sourcing, or for
+		storing time-series data. Event Store is written in C#, C++ for the server which
+		runs on Mono or the .NET CLR, on Linux or Windows.
+		Applications using Event Store can be written in JavaScript. Event sourcing (ES)
+		is a way of persisting your application's state by storing the history that determines
+		the current state of your application.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://geteventstore.com/&quot;&gt;1. EventStore site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot; style=&quot;background-color:#0099FF;&quot;&gt;Key-value Data Model&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Redis DataBase
+	&lt;td&gt;
+		Redis is an open-source, networked, in-memory, data structures
+		store with optional durability. It is written in ANSI C.
+		In its outer layer, the Redis data model is a dictionary which
+		maps keys to values. One of the main differences between Redis
+		and other structured storage systems is that Redis supports not
+		only strings, but also abstract data types. Sponsored by Redis Labs.
+		It’s BSD licensed.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://redis.io/&quot;&gt;1. Redis site&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;http://redislabs.com/&quot;&gt;2. Redis Labs site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Linkedin Voldemort&lt;/td&gt;
+	&lt;td&gt;
+		Distributed data store that is designed as a key-value store used
+		by LinkedIn for high-scalability storage.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://www.project-voldemort.com/voldemort/&quot;&gt;1. Voldemort site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;RocksDB&lt;/td&gt;
+	&lt;td&gt;
+		RocksDB is an embeddable persistent key-value store for fast storage.
+		RocksDB can also be the foundation for a client-server database but our
+		current focus is on embedded workloads.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://rocksdb.org/&quot;&gt;1. RocksDB site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;OpenTSDB&lt;/td&gt;
+	&lt;td&gt;
+		OpenTSDB is a distributed, scalable Time Series Database (TSDB)
+		written on top of HBase. OpenTSDB was written to address a common
+		need: store, index and serve metrics collected from computer systems
+		(network gear, operating systems, applications) at a large scale,
+		and make this data easily accessible and graphable.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://opentsdb.net/&quot;&gt;1. OpenTSDB site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;!--                        --&gt;
+&lt;!-- NoSQL: Graph Data Model --&gt;
+&lt;!--                        --&gt;
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot; style=&quot;background-color:#0099FF;&quot;&gt;Graph Data Model&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;ArangoDB&lt;/td&gt;
+	&lt;td&gt;
+		An open-source database with a flexible data model for documents,
+		graphs, and key-values. Build high performance applications using
+		a convenient sql-like query language or JavaScript extensions.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://www.arangodb.org/&quot;&gt;1. ArangoDB site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Neo4j
+	&lt;td&gt;
+		An open-source graph database writting entirely in Java. It is an
+		embedded, disk-based, fully transactional Java persistence engine
+		that stores data structured in graphs rather than in tables.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://www.neo4j.org/&quot;&gt;1. Neo4j site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;TitanDB&lt;/td&gt;
+	&lt;td&gt;
+		TitanDB is a highly scalable graph database optimized for storing
+		and querying large graphs with billions of vertices and edges
+		distributed across a multi-machine cluster. Titan is a transactional
+		database that can support thousands of concurrent users.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://thinkaurelius.github.io/titan/&quot;&gt;1. Titan site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;!--                        --&gt;
+&lt;!-- NewSQL ecosystem       --&gt;
+&lt;!--                        --&gt;
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;NewSQL Databases&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;TokuDB&lt;/td&gt;
+	&lt;td&gt;
+		TokuDB is a storage engine for MySQL and MariaDB that is specifically
+		designed for high performance on write-intensive workloads. It achieves
+		this via Fractal Tree indexing. TokuDB is a scalable, ACID and MVCC
+		compliant storage engine. TokuDB is one of the technologies that enable
+		Big Data in MySQL.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;HandlerSocket&lt;/td&gt;
+	&lt;td&gt;
+		HandlerSocket is a NoSQL plugin for MySQL/MariaDB (the storage engine
+		of MySQL). It works as a daemon inside the mysqld process, accepting TCP
+		connections, and executing requests from clients. HandlerSocket does not
+		support SQL queries. Instead, it supports simple CRUD operations on tables.
+		HandlerSocket can be much faster than mysqld/libmysql in some cases because
+		it has lower CPU, disk, and network overhead.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Akiban Server&lt;/td&gt;
+	&lt;td&gt;
+		Akiban Server is an open source database that brings document stores and
+		relational databases together. Developers get powerful document access
+		alongside surprisingly powerful SQL.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Drizzle&lt;/td&gt;
+	&lt;td&gt;
+		Drizzle is a re-designed version of the MySQL v6.0 codebase and
+		is designed around a central concept of having a microkernel
+		architecture. Features such as the query cache and authentication
+		system are now plugins to the database, which follow the general
+		theme of &quot;pluggable storage engines&quot; that were introduced in MySQL 5.1.
+		It supports PAM, LDAP, and HTTP AUTH for authentication via plugins
+		it ships. Via its plugin system it currently supports logging to files,
+		syslog, and remote services such as RabbitMQ and Gearman. Drizzle
+		is an ACID-compliant relational database that supports
+		transactions via an MVCC design
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Haeinsa&lt;/td&gt;
+	&lt;td&gt;
+		Haeinsa is linearly scalable multi-row, multi-table transaction
+		library for HBase. Use Haeinsa if you need strong ACID semantics
+		on your HBase cluster. Is based on Google Perlocator concept.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;SenseiDB&lt;/td&gt;
+	&lt;td&gt;
+		Open-source, distributed, realtime, semi-structured database.
+		Some Features: Full-text search, Fast realtime updates, Structured
+		and faceted search, BQL: SQL-like query language, Fast key-value
+		lookup, High performance under concurrent heavy update and query
+		volumes, Hadoop integration
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://senseidb.com/&quot;&gt;1. SenseiDB site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Sky&lt;/td&gt;
+	&lt;td&gt;
+		Sky is an open source database used for flexible, high performance
+		analysis of behavioral data. For certain kinds of data such as
+		clickstream data and log data, it can be several orders of magnitude
+		faster than traditional approaches such as SQL databases or Hadoop.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://skydb.io/&quot;&gt;1. SkyDB site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;BayesDB&lt;/td&gt;
+	&lt;td&gt;
+		BayesDB, a Bayesian database table, lets users query the probable
+		implications of their tabular data as easily as an SQL database
+		lets them query the data itself. Using the built-in Bayesian Query
+		Language (BQL), users with no statistics training can solve basic
+		data science problems, such as detecting predictive relationships
+		between variables, inferring missing values, simulating probable
+		observations, and identifying statistically similar database entries.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://probcomp.csail.mit.edu/bayesdb/index.html&quot;&gt;1. BayesDB site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;InfluxDB&lt;/td&gt;
+	&lt;td&gt;
+		InfluxDB is an open source distributed time series database with
+		no external dependencies. It's useful for recording metrics, events,
+		and performing analytics. It has a built-in HTTP API so you don't
+		have to write any server side code to get up and running. InfluxDB
+		is designed to be scalable, simple to install and manage, and fast
+		to get data in and out. It aims to answer queries in real-time.
+		That means every data point is indexed as it comes in and is immediately
+		available in queries that should return under 100ms.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://influxdb.org/&quot;&gt;1. InfluxDB site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;SQL-on-Hadoop&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache Hive
+	&lt;td&gt;
+		Data Warehouse infrastructure developed by Facebook. Data
+		summarization, query, and analysis. It’s provides SQL-like
+		language (not SQL92 compliant): HiveQL.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://hive.apache.org/&quot;&gt;1. Apache HIVE site&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://github.com/apache/hive&quot;&gt;2. Apache HIVE GitHub Project&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache HCatalog&lt;/td&gt;
+	&lt;td&gt;
+		HCatalog’s table abstraction presents users with a relational view
+		of data in the Hadoop Distributed File System (HDFS) and ensures
+		that users need not worry about where or in what format their data
+		is stored. Right now HCatalog is part of Hive. Only old versions are separated for download.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Trafodion&lt;/td&gt;
+	&lt;td&gt;
+		Apache Trafodion is a webscale SQL-on-Hadoop solution enabling
+		enterprise-class transactional and operational workloads on
+		HBase. Trafodion is a native MPP ANSI SQL database engine that
+		builds on the scalability, elasticity and flexibility of HDFS and
+		HBase, extending these to provide guaranteed transactional
+		integrity for all workloads including multi-column, multi-row,
+		multi-table, and multi-server updates.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://trafodion.incubator.apache.org&quot;&gt;1. Apache Trafodion website&lt;/a&gt;
+	  &lt;br /&gt; &lt;a href=&quot;https://cwiki.apache.org/confluence/display/TRAFODION/Apache+Trafodion+Home&quot;&gt;2. Apache Trafodion wiki&lt;/a&gt;
+	  &lt;br /&gt; &lt;a href=&quot;https://github.com/apache/incubator-trafodion&quot;&gt;3. Apache Trafodion GitHub Project&lt;/a&gt;
+
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache HAWQ&lt;/td&gt;
+	&lt;td&gt;
+		Apache HAWQ is a Hadoop native SQL query engine that combines
+		key technological advantages of MPP database evolved from Greenplum Database,
+		with the scalability and convenience of Hadoop.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://hawq.incubator.apache.org/&quot;&gt;1. Apache HAWQ site&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://github.com/apache/incubator-hawq&quot;&gt;2. HAWQ GitHub Project&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Drill&lt;/td&gt;
+	&lt;td&gt;
+		Drill is the open source version of Google's Dremel system which
+		is available as an infrastructure service called Google BigQuery.
+		In recent years open source systems have emerged to address the
+		need for scalable batch processing (Apache Hadoop) and stream
+		processing (Storm, Apache S4). Apache Hadoop, originally inspired
+		by Google's internal MapReduce system, is used by thousands of
+		organizations processing large-scale datasets. Apache Hadoop is
+		designed to achieve very high throughput, but is not designed to
+		achieve the sub-second latency needed for interactive data analysis
+		and exploration. Drill, inspired by Google's internal Dremel system,
+		is intended to address this need
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://incubator.apache.org/drill/&quot;&gt;1. Apache Incubator Drill&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Cloudera Impala&lt;/td&gt;
+	&lt;td&gt;
+		The Apache-licensed Impala project brings scalable parallel database
+		technology to Hadoop, enabling users to issue low-latency SQL queries
+		to data stored in HDFS and Apache HBase without requiring data movement
+		or transformation. It's a Google Dremel clone (Big Query google).
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://www.cloudera.com/content/cloudera/en/products-and-services/cdh/impala.html&quot;&gt;1. Cloudera Impala site&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://github.com/cloudera/impala&quot;&gt;2. Impala GitHub Project&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Facebook Presto&lt;/td&gt;
+	&lt;td&gt;
+		Facebook has open sourced Presto, a SQL engine it says is on
+		average 10 times faster than Hive for running queries across
+		large data sets stored in Hadoop and elsewhere.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://prestodb.io/&quot;&gt;1. Presto site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Datasalt Splout SQL&lt;/td&gt;
+	&lt;td&gt;
+		Splout allows serving an arbitrarily big dataset with high QPS
+		rates and at the same time provides full SQL query syntax.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Tajo&lt;/td&gt;
+	&lt;td&gt;
+		Apache Tajo is a robust big data relational and distributed data
+		warehouse system for Apache Hadoop. Tajo is designed for low-latency
+		and scalable ad-hoc queries, online aggregation, and ETL
+		(extract-transform-load process) on large-data sets stored on
+		HDFS (Hadoop Distributed File System) and other data sources.
+		By supporting SQL standards and leveraging advanced database
+		techniques, Tajo allows direct control of distributed execution
+		and data flow across a variety of query evaluation strategies
+		and optimization opportunities. For reference, the Apache
+		Software Foundation announced Tajo as a Top-Level Project in April 2014.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://tajo.apache.org/&quot;&gt;1. Apache Tajo site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Phoenix&lt;/td&gt;
+	&lt;td&gt;
+		Apache Phoenix is a SQL skin over HBase delivered as a
+		client-embedded JDBC driver targeting low latency queries over
+		HBase data. Apache Phoenix takes your SQL query, compiles it into
+		a series of HBase scans, and orchestrates the running of those
+		scans to produce regular JDBC result sets. The table metadata is
+		stored in an HBase table and versioned, such that snapshot queries
+		over prior versions will automatically use the correct schema.
+		Direct use of the HBase API, along with coprocessors and custom
+		filters, results in performance on the order of milliseconds for
+		small queries, or seconds for tens of millions of rows.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://phoenix.incubator.apache.org/index.html&quot;&gt;1. Apache Phoenix site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache MRQL&lt;/td&gt;
+	&lt;td&gt;
+		MRQL is a query processing and optimization system for large-scale,
+		distributed data analysis, built on top of Apache Hadoop, Hama, and Spark.&lt;br /&gt;
+		MRQL (pronounced miracle) is a query processing and optimization
+		system for large-scale, distributed data analysis. MRQL (the MapReduce
+		Query Language) is an SQL-like query language for large-scale data analysis
+		on a cluster of computers. The MRQL query processing system can evaluate MRQL
+		queries in three modes:
+		&lt;ul&gt;
+		 &lt;li&gt;in Map-Reduce mode using Apache Hadoop,&lt;/li&gt;
+		 &lt;li&gt;in BSP mode (Bulk Synchronous Parallel mode) using Apache Hama, and&lt;/li&gt;
+		 &lt;li&gt;in Spark mode using Apache Spark.&lt;/li&gt;
+		 &lt;li&gt;in Flink mode using Apache Flink.&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://mrql.incubator.apache.org/&quot;&gt;1. Apache Incubator MRQL site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Kylin&lt;/td&gt;
+	&lt;td&gt;
+		Kylin is an open source Distributed Analytics Engine from eBay
+		Inc. that provides SQL interface and multi-dimensional analysis
+		(OLAP) on Hadoop supporting extremely large datasets
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://www.kylin.io/&quot;&gt;1. Kylin project site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;!--                        --&gt;
+&lt;!-- Data Ingestion Tools   --&gt;
+&lt;!--                        --&gt;
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;Data Ingestion&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache Flume
+	&lt;td&gt;
+		Flume is a distributed, reliable, and available service for
+		efficiently collecting, aggregating, and moving large amounts
+		of log data. It has a simple and flexible architecture based on
+		streaming data flows. It is robust and fault tolerant with tunable
+		reliability mechanisms and many failover and recovery mechanisms.
+		It uses a simple extensible data model that allows for online analytic application.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://flume.apache.org/&quot;&gt;1. Apache Flume project site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache Sqoop
+	&lt;td&gt;
+		System for bulk data transfer between HDFS and structured
+		datastores as RDBMS. Like Flume but from HDFS to RDBMS.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://sqoop.apache.org/&quot;&gt;1. Apache Sqoop project site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Facebook Scribe&lt;/td&gt;
+	&lt;td&gt;
+		Log agregator in real-time. It’s a Apache Thrift Service.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Chukwa&lt;/td&gt;
+	&lt;td&gt;
+		Large scale log aggregator, and analytics.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache Kafka
+	&lt;td&gt;
+		Distributed publish-subscribe system for processing large amounts
+		of streaming data. Kafka is a Message Queue developed by LinkedIn
+		that persists messages to disk in a very performant manner.
+		Because messages are persisted, it has the interesting ability
+		for clients to rewind a stream and consume the messages again.
+		Another upside of the disk persistence is that bulk importing
+		the data into HDFS for offline analysis can be done very quickly
+		and efficiently. Storm, developed by BackType (which was acquired
+		by Twitter a year ago), is more about transforming a stream of
+		messages into new streams.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://kafka.apache.org/&quot;&gt;1. Apache Kafka&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;https://github.com/apache/kafka/&quot;&gt;2. GitHub source code&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Netflix Suro&lt;/td&gt;
+	&lt;td&gt;
+		Suro has its roots in Apache Chukwa, which was initially adopted
+		by Netflix. Is a log agregattor like Storm, Samza.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Samza&lt;/td&gt;
+	&lt;td&gt;
+		Apache Samza is a distributed stream processing framework.
+		It uses Apache Kafka for messaging, and Apache Hadoop YARN to
+		provide fault tolerance, processor isolation, security, and
+		resource management.
+		Developed by http://www.linkedin.com/in/jaykreps Linkedin.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Cloudera Morphline&lt;/td&gt;
+	&lt;td&gt;
+		Cloudera Morphlines is a new open source framework that reduces
+		the time and skills necessary to integrate, build, and change
+		Hadoop processing applications that extract, transform,
+		and load data into Apache Solr, Apache HBase, HDFS, enterprise
+		data warehouses, or analytic online dashboards.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;HIHO&lt;/td&gt;
+	&lt;td&gt;
+		This project is a framework for connecting disparate data sources
+		with the Apache Hadoop system, making them interoperable. HIHO
+		connects Hadoop with multiple RDBMS and file systems, so that
+		data can be loaded to Hadoop and unloaded from Hadoop
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache NiFi&lt;/td&gt;
+	&lt;td&gt;
+		Apache NiFi is a dataflow system that is currently under
+		incubation at the Apache Software Foundation. NiFi is based on
+		the concepts of flow-based programming and is highly configurable.
+		NiFi uses a component based extension model to rapidly add
+		capabilities to complex dataflows. Out of the box NiFi has
+		several extensions for dealing with file-based dataflows such
+		as FTP, SFTP, and HTTP integration as well as integration with
+		HDFS. One of NiFi’s unique features is a rich, web-based
+		interface for designing, controlling, and monitoring a dataflow.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://nifi.apache.org/index.html&quot;&gt;1. Apache NiFi&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache ManifoldCF&lt;/td&gt;
+	&lt;td&gt;
+		Apache ManifoldCF provides a framework for connecting source content
+		repositories like file systems, DB, CMIS, SharePoint, FileNet ...
+		to target repositories or indexes, such as Apache Solr or ElasticSearch.
+		It's a kind of crawler for multi-content repositories, supporting a lot
+		of sources and multi-format conversion for indexing by means of Apache
+		Tika Content Extractor transformation filter.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://manifoldcf.apache.org/&quot;&gt;1. Apache ManifoldCF&lt;/a&gt;
+	&lt;/td&gt;
+
+
+
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;Service Programming&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Thrift&lt;/td&gt;
+	&lt;td&gt;
+		A cross-language RPC framework for service creations. It’s the
+		service base for Facebook technologies (the original Thrift
+		contributor). Thrift provides a framework for developing and
+		accessing remote services. It allows developers to create
+		services that can be consumed by any application that is written
+		in a language that there are Thrift bindings for. Thrift
+		manages serialization of data to and from a service, as well as
+		the protocol that describes a method invocation, response, etc.
+		Instead of writing all the RPC code -- you can just get straight
+		to your service logic. Thrift uses TCP and so a given service is
+		bound to a particular port.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://thrift.apache.org//&quot;&gt;1. Apache Thrift&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache Zookeeper
+	&lt;td&gt;
+		It’s a coordination service that gives you the tools you need to
+		write correct distributed applications. ZooKeeper was developed
+		at Yahoo! Research. Several Hadoop projects are already using
+		ZooKeeper to coordinate the cluster and provide highly-available
+		distributed services. Perhaps most famous of those are Apache
+		HBase, Storm, Kafka. ZooKeeper is an application library with
+		two principal implementations of the APIs—Java and C—and a service
+		component implemented in Java that runs on an ensemble of dedicated
+		servers. Zookeeper is for building distributed systems, simplifies
+		the development process, making it more agile and enabling more
+		robust implementations. Back in 2006, Google published a paper
+		on &quot;Chubby&quot;, a distributed lock service which gained wide adoption
+		within their data centers. Zookeeper, not surprisingly, is a close
+		clone of Chubby designed to fulfill many of the same roles for
+		HDFS and other Hadoop infrastructure.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://zookeeper.apache.org/&quot;&gt;1. Apache Zookeeper&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;http://research.google.com/archive/chubby.html&quot;&gt;2. Google Chubby paper&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Avro&lt;/td&gt;
+	&lt;td&gt;
+		Apache Avro is a framework for modeling, serializing and making
+		Remote Procedure Calls (RPC). Avro data is described by a schema,
+		and one interesting feature is that the schema is stored in the
+		same file as the data it describes, so files are self-describing.
+		Avro does not require code generation. This framework can compete
+		with other similar tools like: Apache Thrift, Google Protocol Buffers, ZeroC ICE, and so on.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://avro.apache.org/&quot;&gt;1. Apache Avro&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Curator&lt;/td&gt;
+	&lt;td&gt;
+		Curator is a set of Java libraries that make using Apache
+		ZooKeeper much easier.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache karaf&lt;/td&gt;
+	&lt;td&gt;
+		Apache Karaf is an OSGi runtime that runs on top of any OSGi
+		framework and provides you a set of services, a powerful
+		provisioning concept, an extensible shell and more.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Twitter Elephant Bird&lt;/td&gt;
+	&lt;td&gt;
+		Elephant Bird is a project that provides utilities (libraries)
+		for working with LZOP-compressed data. It also provides a
+		container format that supports working with Protocol Buffers,
+		Thrift in MapReduce, Writables, Pig LoadFuncs, Hive SerDe,
+		HBase miscellanea. This open source library is massively
+		used in Twitter.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/kevinweil/elephant-bird&quot;&gt;1. Elephant Bird GitHub&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Linkedin Norbert&lt;/td&gt;
+	&lt;td&gt;
+		Norbert is a library that provides easy cluster management and
+		workload distribution. With Norbert, you can quickly distribute
+		a simple client/server architecture to create a highly scalable
+		architecture capable of handling heavy traffic. Implemented in
+		Scala, Norbert wraps ZooKeeper, Netty and uses Protocol Buffers
+		for transport to make it easy to build a cluster aware application.
+		A Java API is provided and pluggable load balancing strategies
+		are supported with round robin and consistent hash strategies
+		provided out of the box.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://data.linkedin.com/opensource/norbert&quot;&gt;1. Linedin Project&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;https://github.com/rhavyn/norbert&quot;&gt;2. GitHub source code&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;Scheduling&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Oozie&lt;/td&gt;
+	&lt;td&gt;
+		Workflow scheduler system for MR jobs using DAGs
+		(Direct Acyclical Graphs). Oozie Coordinator can trigger jobs
+		by time (frequency) and data availability
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://oozie.apache.org/&quot;&gt;1. Apache Oozie&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;https://github.com/apache/oozie&quot;&gt;2. GitHub source code&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Linkedin Azkaban&lt;/td&gt;
+	&lt;td&gt;
+		Hadoop workflow management. A batch job scheduler can be seen as
+		a combination of the cron and make Unix utilities combined with
+		a friendly UI.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Falcon&lt;/td&gt;
+	&lt;td&gt;
+		Apache Falcon is a data management framework for simplifying
+		data lifecycle management and processing pipelines on Apache
+		Hadoop. It enables users to configure, manage and orchestrate
+		data motion, pipeline processing, disaster recovery, and data
+		retention workflows. Instead of hard-coding complex data lifecycle
+		capabilities, Hadoop applications can now rely on the well-tested
+		Apache Falcon framework for these functions. Falcon’s simplification
+		of data management is quite useful to anyone building apps on
+		Hadoop. Data Management on Hadoop encompasses data motion, process
+		orchestration, lifecycle management, data discovery, etc. among
+		other concerns that are beyond ETL. Falcon is a new data processing
+		and management platform for Hadoop that solves this problem and
+		creates additional opportunities by building on existing components
+		within the Hadoop ecosystem (ex. Apache Oozie, Apache Hadoop
+		DistCp etc.) without reinventing the wheel.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Schedoscope&lt;/td&gt;
+	&lt;td&gt;
+		Schedoscope is a new open-source project providing a scheduling
+		framework for painfree agile development, testing, (re)loading,
+		and monitoring of your datahub, lake, or whatever you choose to
+		call your Hadoop data warehouse these days. Datasets (including
+		dependencies) are defined using a scala DSL, which can embed
+		MapReduce jobs, Pig scripts, Hive queries or Oozie workflows to
+		build the dataset. The tool includes a test framework to verify
+		logic and a command line utility to load and reload data.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/ottogroup/schedoscope&quot;&gt;GitHub source code&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;!--                        --&gt;
+&lt;!-- Machine Learning tools --&gt;
+&lt;!--                        --&gt;
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;Machine Learning&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache Mahout
+	&lt;td&gt;
+		Machine learning library and math library, on top of MapReduce.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;WEKA&lt;/td&gt;
+	&lt;td&gt;
+		Weka (Waikato Environment for Knowledge Analysis) is a popular suite
+		of machine learning software written in Java, developed at the
+		University of Waikato, New Zealand. Weka is free software available
+		under the GNU General Public License.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Cloudera Oryx&lt;/td&gt;
+	&lt;td&gt;
+		The Oryx open source project provides simple, real-time large-scale
+		machine learning / predictive analytics infrastructure. It implements
+		a few classes of algorithm commonly used in business applications:
+		collaborative filtering / recommendation, classification / regression,
+		and clustering.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/cloudera/oryx&quot;&gt;1. Oryx at GitHub&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://community.cloudera.com/t5/Data-Science-and-Machine/bd-p/Mahout&quot;&gt;2. Cloudera forum for Machine Learning&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+ 	&lt;td width=&quot;20%&quot;&gt;Deeplearning4j&lt;/td&gt;
+ 	&lt;td&gt;
+		The Deeplearning4j open-source project is the most widely used deep-learning framework for the JVM. DL4J includes deep neural nets such as recurrent neural networks, Long Short Term Memory Networks (LSTMs), convolutional neural networks, various autoencoders and feedforward neural networks such as restricted Boltzmann machines and deep-belief networks. It also has natural language-processing algorithms such as word2vec, doc2vec, GloVe and TF-IDF. All Deeplearning4j networks run distributed on multiple CPUs and GPUs. They work as Hadoop jobs, and integrate with Spark on the slace level for host-thread orchestration. Deeplearning4j's neural networks are applied to use cases such as fraud and anomaly detection, recommender systems, and predictive maintenance.
+
+ 	&lt;/td&gt;
+ 	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://deeplearning4j.org/&quot;&gt;1. Deeplearning4j Website&lt;/a&gt;
+ 		&lt;br /&gt; &lt;a href=&quot;https://gitter.im/deeplearning4j/deeplearning4j&quot;&gt;2. Gitter Community for Deeplearning4j&lt;/a&gt;
+ 	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;MADlib&lt;/td&gt;
+	&lt;td&gt;
+		The MADlib project leverages the data-processing capabilities of an RDBMS to analyze data.
+		The aim of this project is the integration of statistical data analysis into databases.
+		The MADlib project is self-described as the Big Data Machine Learning in SQL for Data Scientists.
+		The MADlib software project began the following year as a collaboration between researchers
+		at UC Berkeley and engineers and data scientists at EMC/Greenplum (now Pivotal)
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://madlib.net/community/&quot;&gt;1. MADlib Community&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;H2O&lt;/td&gt;
+	&lt;td&gt;
+		&lt;p&gt;H2O is a statistical, machine learning and math runtime tool for bigdata analysis.
+		Developed by the predictive analytics company H2O.ai, H2O has established a leadership
+		in the ML scene together with R and Databricks’ Spark. According to the team, 
+		H2O is the world’s fastest in-memory platform for machine learning and predictive analytics
+		on big data. It is designed to help users scale machine learning, math, and statistics over large datasets.&lt;/p&gt;
+		&lt;p&gt;In addition to H2O’s point and click Web-UI, its REST API allows easy integration into various
+		clients. This means explorative analysis of data can be done in a typical fashion in R, Python, and Scala;
+		and entire workflows can be written up as automated scripts.&lt;/p&gt;
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/h2oai/h2o-dev&quot;&gt;1. H2O at GitHub&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;http://h2o.ai/blog&quot;&gt;2. H2O Blog&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Sparkling Water&lt;/td&gt;
+	&lt;td&gt;
+		&lt;p&gt;Sparkling Water combines two open source technologies: Apache Spark and H2O - a machine learning engine. 
+		It makes H2O’s library of Advanced Algorithms including Deep Learning, GLM, GBM, KMeans, PCA, and Random Forest
+		accessible from Spark workflows.
+		Spark users are provided with the options to select the best features from either platforms to meet their Machine Learning needs. 
+		Users can combine Sparks’ RDD API and Spark MLLib with H2O’s machine learning algorithms,
+		or use H2O independent of Spark in the model building process and post-process the results in Spark. &lt;/p&gt;
+		&lt;p&gt;Sparkling Water provides a transparent integration of H2O’s framework and data structures into Spark’s
+		RDD-based environment by sharing the same execution space as well as providing a RDD-like API for H2O data structures. &lt;/p&gt;
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/h2oai/sparkling-water&quot;&gt;1. Sparkling Water at GitHub&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;https://github.com/h2oai/sparkling-water/tree/master/examples&quot;&gt;2. Sparkling Water Examples&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache SystemML&lt;/td&gt;
+	&lt;td&gt;
+		&lt;p&gt;Apache SystemML was open sourced by IBM and it's pretty
+		related with Apache Spark. If you thinking in Apache Spark as
+		the analytics operating system for any application that taps
+		into huge volumes of streaming data. MLLib, the machine
+		learning library for Spark, provides developers with a rich set
+		of machine learning algorithms. And SystemML enables developers
+		to translate those algorithms so they can easily digest different
+		kinds of data and to run on different kinds of computers.&lt;/p&gt;
+		SystemML allows a developer to write a single machine learning
+		algorithm and automatically scale it up using Spark or Hadoop.
+		&lt;p&gt;
+		SystemML scales for big data analytics with high performance
+		optimizer technology, and empowers users to write customized
+		machine learning algorithms using simple, domain-specific
+		language (DSL) without learning complicated distributed
+		programming. It is an extensible complement framework of Spark
+		MLlib.&lt;/p&gt;
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://systemml.apache.org&quot;&gt;1. Apache SystemML&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;https://wiki.apache.org/incubator/SystemML&quot;&gt;2. Apache Proposal&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;!--                        --&gt;
+&lt;!-- Benchmarking and QA tools     --&gt;
+&lt;!--                        --&gt;
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;Benchmarking and QA Tools&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Hadoop Benchmarking&lt;/td&gt;
+	&lt;td&gt;
+		There are two main JAR files in Apache Hadoop for benchmarking.
+		This JAR are micro-benchmarks for testing particular parts of the
+		infrastructure, for instance TestDFSIO analyzes the disk system,
+		TeraSort evaluates MapReduce tasks, WordCount measures cluster
+		performance, etc. Micro-Benchmarks are packaged in the tests and
+		exmaples JAR files, and you can get a list of them, with descriptions,
+		by invoking the JAR file with no arguments. With regards Apache
+		Hadoop 2.2.0 stable version we have available the following JAR
+		files for test, examples and benchmarking. The Hadoop micro-benchmarks,
+		are bundled in this JAR files: hadoop-mapreduce-examples-2.2.0.jar,
+		hadoop-mapreduce-client-jobclient-2.2.0-tests.jar.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://issues.apache.org/jira/browse/MAPREDUCE-3561&quot;&gt;1. MAPREDUCE-3561 umbrella ticket to track all the issues related to performance&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Yahoo Gridmix3&lt;/td&gt;
+	&lt;td&gt;
+		Hadoop cluster benchmarking from Yahoo engineer team.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;PUMA Benchmarking&lt;/td&gt;
+	&lt;td&gt;
+		Benchmark suite which represents a broad range of MapReduce
+		applications exhibiting application characteristics with
+		high/low computation and high/low shuffle volumes. There are a
+		total of 13 benchmarks, out of which Tera-Sort, Word-Count,
+		and Grep are from Hadoop distribution. The rest of the benchmarks
+		were developed in-house and are currently not part of the Hadoop
+		distribution. The three benchmarks from Hadoop distribution are
+		also slightly modified to take number of reduce tasks as input
+		from the user and generate final time completion statistics of jobs.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://issues.apache.org/jira/browse/MAPREDUCE-5116&quot;&gt;1. MAPREDUCE-5116&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://sites.google.com/site/farazahmad/&quot;&gt;2. Faraz Ahmad researcher&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://sites.google.com/site/farazahmad/pumabenchmarks&quot;&gt;3. PUMA Docs&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Berkeley SWIM Benchmark&lt;/td&gt;
+	&lt;td&gt;
+		The SWIM benchmark (Statistical Workload Injector for MapReduce),
+		is a benchmark representing a real-world big data workload developed
+		by University of California at Berkley in close cooperation with
+		Facebook. This test provides rigorous measurements of the performance
+		of MapReduce systems comprised of real industry workloads..
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/SWIMProjectUCB/SWIM/wiki&quot;&gt;1. GitHub SWIN&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Intel HiBench&lt;/td&gt;
+	&lt;td&gt;
+		HiBench is a Hadoop benchmark suite.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Yetus&lt;/td&gt;
+	&lt;td&gt;
+		To help maintain consistency over a large and disconnected set
+		of committers, automated patch testing was added to Hadoop’s development process.
+		This automated patch testing (now included as part of Apache Yetus)
+		works as follows: when a patch is uploaded to the bug tracking
+		system an automated process downloads the patch, performs some
+		static analysis, and runs the unit tests. These results are posted
+		back to the bug tracker and alerts notify interested parties about
+		the state of the patch.&lt;p&gt;
+		However The Apache Yetus project addresses much more than the traditional
+	       	patch testing, it's a better approach including a massive rewrite of
+		the patch testing facility used in Hadoop.
+	&amp;lt;/td&amp;gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://www.altiscale.com/blog/apache-yetus-faster-more-reliable-software-development/&quot;&gt;1. Altiscale Blog Entry&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://wiki.apache.org/incubator/YetusProposal&quot;&gt;2. Apache Yetus Proposal&lt;/a&gt;
+		&lt;br /&gt; &lt;a href=&quot;https://yetus.apache.org/&quot;&gt;3. Apache Yetus Project site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;Security&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Sentry&lt;/td&gt;
+	&lt;td&gt;
+		Sentry is the next step in enterprise-grade big data security
+		and delivers fine-grained authorization to data stored in Apache
+		Hadoop. An independent security module that integrates with open
+		source SQL query engines Apache Hive and Cloudera Impala, Sentry
+		delivers advanced authorization controls to enable multi-user
+		applications and cross-functional processes for enterprise data
+		sets. Sentry was a Cloudera development.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Knox Gateway&lt;/td&gt;
+	&lt;td&gt;
+		System that provides a single point of secure access for Apache
+		Hadoop clusters. The goal is to simplify Hadoop security for both
+		users (i.e. who access the cluster data and execute jobs) and
+		operators (i.e. who control access and manage the cluster). The
+		Gateway runs as a server (or cluster of servers) that serve one
+		or more Hadoop clusters.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://knox.apache.org/&quot;&gt;1. Apache Knox&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;http://hortonworks.com/hadoop/knox-gateway/&quot;&gt;2. Apache Knox Gateway Hortonworks web&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Ranger&lt;/td&gt;
+	&lt;td&gt;
+		Apache Argus  Ranger (formerly called Apache Argus or HDP Advanced
+		Security) delivers comprehensive approach to central security policy
+		administration across the core enterprise security requirements
+		of authentication, authorization, accounting and data protection.
+		It extends baseline features for coordinated enforcement across
+		Hadoop workloads from batch, interactive SQL and real–time and
+		leverages the extensible architecture to apply policies consistently
+		against additional Hadoop ecosystem components (beyond HDFS, Hive,
+		and HBase) including Storm, Solr, Spark, and more.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://ranger.apache.org/&quot;&gt;1. Apache Ranger&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;http://hortonworks.com/hadoop/ranger/&quot;&gt;2. Apache Ranger Hortonworks web&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;Metadata Management&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Metascope&lt;/td&gt;
+	&lt;td&gt;
+		Metascope is a metadata management and data discovery tool which
+		serves as an add-on to Schedoscope. Metascope is able to collect technical,
+		operational and business metadata from your Hadoop Datahub and provides
+		them easy to search and navigate via a portal.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/ottogroup/metascope&quot;&gt;GitHub source code&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;System Deployment&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache Ambari
+	&lt;td&gt;
+		Intuitive, easy-to-use Hadoop management web UI backed by its RESTful APIs.
+		Apache Ambari was donated by Hortonworks team to the ASF. It's a powerful and
+		nice interface for Hadoop and other typical applications from the Hadoop
+		ecosystem. Apache Ambari is under a heavy development, and it will incorporate
+		new features in a near future. For example Ambari is able to deploy a complete
+		Hadoop system from scratch, however is not possible use this GUI in a Hadoop
+		system that is already running. The ability to provisioning the operating
+		system could be a good addition, however probably is not in the roadmap..
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://ambari.apache.org/&quot;&gt;1. Apache Ambari&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Cloudera HUE
+	&lt;td&gt;
+		Web application for interacting with Apache Hadoop. It's not a deploment tool,
+		is an open-source Web interface that supports Apache Hadoop and its ecosystem,
+		licensed under the Apache v2 license. HUE is used for Hadoop and its ecosystem
+		user operations. For example HUE offers editors for Hive, Impala, Oozie, Pig,
+		notebooks for Spark, Solr Search dashboards, HDFS, YARN, HBase browsers..
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://gethue.com/&quot;&gt;1. HUE home page&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Whirr&lt;/td&gt;
+	&lt;td&gt;
+		Apache Whirr is a set of libraries for running cloud services. It allows you
+		to use simple commands to boot clusters of distributed systems for testing and
+		experimentation. Apache Whirr makes booting clusters easy.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;font color=&quot;red&quot;&gt;Apache Mesos&amp;amp;trade
+	&lt;td&gt;
+		Mesos is a cluster manager that provides resource sharing and isolation across
+		cluster applications. Like HTCondor, SGE or Troque can do it. However Mesos
+		is hadoop centred design
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Myriad&lt;/td&gt;
+	&lt;td&gt;
+		Myriad is a mesos framework designed for scaling YARN clusters on Mesos. Myriad
+		can expand or shrink one or more YARN clusters in response to events as per
+		configured rules and policies.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/mesos/myriad&quot;&gt;1. Myriad Github&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Marathon&lt;/td&gt;
+	&lt;td&gt;
+		Marathon is a Mesos framework for long-running services. Given that you have
+		Mesos running as the kernel for your datacenter, Marathon is the init or upstart daemon.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Brooklyn&lt;/td&gt;
+	&lt;td&gt;
+		Brooklyn is a library that simplifies application deployment and management.
+		For deployment, it is designed to tie in with other tools, giving single-click
+		deploy and adding the concepts of manageable clusters and fabrics:
+		Many common software entities available out-of-the-box.
+		Integrates with Apache Whirr -- and thereby Chef and Puppet -- to deploy well-known
+		services such as Hadoop and elasticsearch (or use POBS, plain-old-bash-scripts)
+		Use PaaS's such as OpenShift, alongside self-built clusters, for maximum flexibility
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Hortonworks HOYA&lt;/td&gt;
+	&lt;td&gt;
+		HOYA is defined as “running HBase On YARN”. The Hoya tool is a Java tool,
+		and is currently CLI driven. It takes in a cluster specification – in terms
+		of the number of regionservers, the location of HBASE_HOME, the ZooKeeper
+		quorum hosts, the configuration that the new HBase cluster instance should
+		use and so on.&lt;br /&gt;
+		So HOYA is for HBase deployment using a tool developed on top of YARN. Once the
+		cluster has been started, the cluster can be made to grow or shrink using the
+		Hoya commands. The cluster can also be stopped and later resumed. Hoya implements
+		the functionality through YARN APIs and HBase’s shell scripts. The goal of
+		the prototype was to have minimal code changes and as of this writing, it has
+		required zero code changes in HBase.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://hortonworks.com/blog/introducing-hoya-hbase-on-yarn/&quot;&gt;1. Hortonworks Blog&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Helix&lt;/td&gt;
+	&lt;td&gt;
+		Apache Helix is a generic cluster management framework used for the automatic
+		management of partitioned, replicated and distributed resources hosted on a
+		cluster of nodes. Originally developed by Linkedin, now is in an incubator
+		project at Apache. Helix is developed on top of Zookeeper for coordination tasks.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://helix.apache.org/&quot;&gt;1. Apache Helix&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Bigtop&lt;/td&gt;
+	&lt;td&gt;
+		Bigtop was originally developed and released as an open source packaging
+		infrastructure by Cloudera. BigTop is used for some vendors to build their
+		own distributions based on Apache Hadoop (CDH, Pivotal HD, Intel's distribution),
+		however Apache Bigtop does many more tasks, like continuous integration testing
+		(with Jenkins, maven, ...) and is useful for packaging (RPM and DEB), deployment
+		with Puppet, and so on.  BigTop also features vagrant recipes for spinning up &quot;n-node&quot;
+		hadoop clusters, and the bigpetstore blueprint application which demonstrates
+		construction of a full stack hadoop app with ETL, machine learning,
+		and dataset generation.  Apache Bigtop could be considered as a community effort
+		with a main focus: put all bits of the Hadoop ecosystem as a whole, rather
+		than individual projects.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://bigtop.apache.org//&quot;&gt;1. Apache Bigtop.&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Buildoop&lt;/td&gt;
+	&lt;td&gt;
+		Buildoop is an open source project licensed under Apache License 2.0, based on Apache BigTop idea.
+		Buildoop is a collaboration project that provides templates and tools to help you create custom
+		Linux-based systems based on Hadoop ecosystem. The project is built from scrach using Groovy language,
+		and is not based on a mixture of tools like BigTop does (Makefile, Gradle, Groovy, Maven), probably
+		is easier to programming than BigTop, and the desing is focused in the basic ideas behind the buildroot
+		Yocto Project. The project is in early stages of development right now.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://buildoop.github.io/&quot;&gt;1. Hadoop Ecosystem Builder.&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Deploop&lt;/td&gt;
+	&lt;td&gt;
+		Deploop is a tool for provisioning, managing and monitoring Apache Hadoop
+		clusters focused in the Lambda Architecture. LA is a generic design based on
+		the concepts of Twitter engineer Nathan Marz. This generic architecture was
+		designed addressing common requirements for big data. The Deploop system is
+		in ongoing development, in alpha phases of maturity. The system is setup
+		on top of highly scalable techologies like Puppet and MCollective.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://deploop.github.io/&quot;&gt;1. The Hadoop Deploy System.&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;SequenceIQ Cloudbreak&lt;/td&gt;
+	&lt;td&gt;
+		Cloudbreak is an effective way to start and run multiple instances and
+		versions of Hadoop clusters in the cloud, Docker containers or bare metal.
+		It is a cloud and infrastructure agnostic and cost effictive Hadoop As-a-Service
+		platform API. Provides automatic scaling, secure multi tenancy and full cloud lifecycle management.
+		&lt;p&gt;Cloudbreak leverages the cloud infrastructure platforms to create host instances,
+		uses Docker technology to deploy the requisite containers cloud-agnostically,
+		and uses Apache Ambari (via Ambari Blueprints) to install and manage a Hortonworks cluster.
+		This is a tool within the HDP ecosystem.
+	&amp;lt;/td&amp;gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/sequenceiq/cloudbreak&quot;&gt;1. GitHub project.&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;http://sequenceiq.com/cloudbreak-docs/latest/#introduction&quot;&gt;2. Cloudbreak introduction.&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;http://hortonworks.com/hadoop/cloudbreak/&quot;&gt;3. Cloudbreak in Hortonworks.&lt;/a&gt;
+	&lt;/td&gt;
+
+
+
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;Applications&lt;/th&gt;
+
+&lt;tr&gt;
+
+	&lt;td width=&quot;20%&quot;&gt;Apache Nutch&lt;/td&gt;
+	&lt;td&gt;
+		Highly extensible and scalable open source web crawler software
+		project. A search engine based on Lucene: A Web crawler is an
+		Internet bot that systematically browses the World Wide Web,
+		typically for the purpose of Web indexing. Web crawlers can copy
+		all the pages they visit for later processing by a search engine
+		that indexes the downloaded pages so that users can search them
+		much more quickly.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Sphnix Search Server&lt;/td&gt;
+	&lt;td&gt;
+		Sphinx lets you either batch index and search data stored in an
+		SQL database, NoSQL storage, or just files quickly and easily —
+		or index and search data on the fly, working with Sphinx pretty
+		much as with a database server.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache OODT&lt;/td&gt;
+	&lt;td&gt;
+		OODT was originally developed at NASA Jet Propulsion Laboratory
+		to support capturing, processing and sharing of data for NASA's
+		scientific archives
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;HIPI Library&lt;/td&gt;
+	&lt;td&gt;
+		HIPI is a library for Hadoop's MapReduce framework that provides
+		an API for performing image processing tasks in a distributed
+		computing environment.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;PivotalR&lt;/td&gt;
+	&lt;td&gt;
+		PivotalR is a package that enables users of R, the most popular open source statistical
+		programming language and environment to interact with the Pivotal (Greenplum) Database
+		as well as Pivotal HD / HAWQ and the open-source database PostgreSQL for Big Data analytics.
+		R is a programming language and data analysis software: you do data analysis in R by writing
+		scripts and functions in the R programming language. R is a complete, interactive,
+		object-oriented language: designed by statisticians, for statisticians. The language
+		provides objects, operators and functions that make the process of exploring, modeling,
+		and visualizing data a natural one.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/gopivotal/PivotalR&quot;&gt;1. PivotalR on GitHub&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;!--                        --&gt;
+&lt;!-- Development Framework  --&gt;
+&lt;!--                        --&gt;
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;Development Frameworks&lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Jumbune&lt;/td&gt;
+	&lt;td&gt;
+		Jumbune is an open source product that sits on top of any Hadoop
+		distribution and assists in development and administration of
+		MapReduce solutions. The objective of the product is to assist
+		analytical solution providers to port fault free applications on
+		production Hadoop environments.&lt;br /&gt; Jumbune supports all active
+		major branches of Apache Hadoop namely 1.x, 2.x, 0.23.x and commercial
+		MapR, HDP 2.x and CDH 5.x distributions of Hadoop. It has the
+		ability to work well with both Yarn and non-Yarn versions of Hadoop.&lt;br /&gt;
+		It has four major modules MapReduce Debugger, HDFS Data Validator,
+		On-demand cluster monitor and MapReduce job profiler. Jumbune can
+		be deployed on any remote user machine and uses a lightweight
+		agent on the NameNode of the cluster to relay relevant information to and fro.&lt;br /&gt;
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://jumbune.org&quot;&gt;1. Jumbune&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;https://github.com/impetus-opensource/jumbune&quot;&gt;2. Jumbune GitHub Project&lt;/a&gt;
+		&lt;br /&gt;&lt;a href=&quot;http://jumbune.org/jira/secure/Dashboard.jspa&quot;&gt;3. Jumbune JIRA page&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Spring XD&lt;/td&gt;
+	&lt;td&gt;
+		Spring XD (Xtreme Data) is a evolution of Spring Java application
+		development framework to help Big Data Applications by Pivotal.
+		SpringSource was the company created by the founders of the
+		Spring Framework. SpringSource was purchased by VMware where it was
+		maintained for some time as a separate division within VMware.
+		Later VMware, and its parent company EMC Corporation, formally created
+		a joint venture called Pivotal. Spring XD is more than development
+		framework library, is a distributed, and extensible system for
+		data ingestion, real time analytics, batch processing, and data
+		export. It could be considered as alternative to Apache
+		Flume/Sqoop/Oozie in some scenarios. Spring XD is part of Pivotal
+		Spring for Apache Hadoop (SHDP). SHDP, integrated with Spring,
+		Spring Batch and Spring Data are part of the Spring IO Platform
+		as foundational libraries. Building on top of, and extending this
+		foundation, the Spring IO platform provides Spring XD as big data
+		runtime. Spring for Apache Hadoop (SHDP) aims to help simplify the
+		development of Hadoop based applications by providing a consistent
+		configuration and API across a wide range of Hadoop ecosystem
+		projects such as Pig, Hive, and Cascading in addition to providing
+		extensions to Spring Batch for orchestrating Hadoop based workflows.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://github.com/spring-projects/spring-xd&quot;&gt;1. Spring XD on GitHub&lt;/a&gt;
+	&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Cask Data Application Platform&lt;/td&gt;
+	&lt;td&gt;
+		Cask Data Application Platform is an open source application
+		development platform for the Hadoop ecosystem that provides
+		developers with data and application virtualization to accelerate
+		application development, address a range of real-time and batch
+		use cases, and deploy applications into production. The deployment
+		is made by Cask Coopr, an open source template-based cluster
+		management solution that provisions, manages, and scales clusters
+		for multi-tiered application stacks on public and private clouds.
+		Another component is Tigon, a distributed framework built on Apache
+		Hadoop and Apache HBase for real-time, high-throughput, low-latency
+		data processing and analytics applications.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;http://cask.co/&quot;&gt;1. Cask Site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;tr&gt;
+&lt;th colspan=&quot;3&quot;&gt;Categorize Pending ... &lt;/th&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Twitter Summingbird&lt;/td&gt;
+	&lt;td&gt;
+		A system that aims to mitigate the tradeoffs between batch
+		processing and stream processing by combining them into a
+		hybrid system. In the case of Twitter, Hadoop handles batch
+		processing, Storm handles stream processing, and the hybrid
+		system is called Summingbird.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Kiji&lt;/td&gt;
+	&lt;td&gt;
+		Build Real-time Big Data Applications on Apache HBase.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;S4 Yahoo&lt;/td&gt;
+	&lt;td&gt;
+		S4 is a general-purpose, distributed, scalable, fault-tolerant,
+		pluggable platform that allows programmers to easily develop
+		applications for processing continuous unbounded streams of data.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Metamarkers Druid&lt;/td&gt;
+	&lt;td&gt;
+		Realtime analytical data store.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Concurrent Cascading&lt;/td&gt;
+	&lt;td&gt;
+		Application framework for Java developers to simply develop
+		robust Data Analytics and Data Management applications on Apache Hadoop.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Concurrent Lingual&lt;/td&gt;
+	&lt;td&gt;
+		Open source project enabling fast and simple Big Data application
+		development on Apache Hadoop.  project that delivers ANSI-standard
+		SQL technology to easily build new and integrate existing
+		applications onto Hadoop
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Concurrent Pattern&lt;/td&gt;
+	&lt;td&gt;
+		Machine Learning for Cascading on Apache Hadoop through an API,
+		and standards based PMML
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Giraph&lt;/td&gt;
+	&lt;td&gt;
+		Apache Giraph is an iterative graph processing system built for
+		high scalability. For example, it is currently used at Facebook
+		to analyze the social graph formed by users and their connections.
+		Giraph originated as the open-source counterpart to Pregel, the
+		graph processing architecture developed at Google
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Talend&lt;/td&gt;
+	&lt;td&gt;
+		Talend is an open source software vendor that provides data
+		integration, data management, enterprise application integration
+		and big data software and solutions.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Akka Toolkit&lt;/td&gt;
+	&lt;td&gt;
+		Akka is an open-source toolkit and runtime simplifying the
+		construction of concurrent applications on the Java platform.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Eclipse BIRT&lt;/td&gt;
+	&lt;td&gt;
+		BIRT is an open source Eclipse-based reporting system that
+		integrates with your Java/Java EE application to produce
+		compelling reports.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Spango BI&lt;/td&gt;
+	&lt;td&gt;
+		SpagoBI is an Open Source Business Intelligence suite,
+		belonging to the free/open source SpagoWorld initiative,
+		founded and supported by Engineering Group. It offers a large
+		range of analytical functions, a highly functional semantic layer
+		often absent in other open source platforms and projects, and a
+		respectable set of advanced data visualization features including
+		geospatial analytics
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Jedox Palo&lt;/td&gt;
+	&lt;td&gt;
+		Palo Suite combines all core applications — OLAP Server, Palo
+		Web, Palo ETL Server and Palo for Excel — into one comprehensive
+		and customisable Business Intelligence platform. The platform is
+		completely based on Open Source products representing a high-end
+		Business Intelligence solution which is available entirely free
+		of any license fees.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Twitter Finagle&lt;/td&gt;
+	&lt;td&gt;
+		Finagle is an asynchronous network stack for the JVM that you
+		can use to build asynchronous Remote Procedure Call (RPC)
+		clients and servers in Java, Scala, or any JVM-hosted language.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Intel GraphBuilder&lt;/td&gt;
+	&lt;td&gt;
+		Library which provides tools to construct large-scale graphs on
+		top of Apache Hadoop
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Tika&lt;/td&gt;
+	&lt;td&gt;
+		Toolkit detects and extracts metadata and structured text content
+		from various documents using existing parser libraries.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;TODO&lt;/td&gt;
+
+
+	&lt;tr&gt;
+	&lt;td width=&quot;20%&quot;&gt;Apache Zeppelin&lt;/td&gt;
+	&lt;td&gt;
+		Zeppelin is a modern web-based tool for the data scientists to
+		collaborate over large-scale data exploration and visualization
+		projects. It is a notebook style interpreter that enable
+		collaborative analysis sessions sharing between users. Zeppelin
+		is independent of the execution framework itself. Current version
+		runs on top of Apache Spark but it has pluggable interpreter APIs
+		to support other data processing systems. More execution frameworks
+		could be added at a later date i.e Apache Flink, Crunch as well
+		as SQL-like backends such as Hive, Tajo, MRQL.
+	&lt;/td&gt;
+	&lt;td width=&quot;20%&quot;&gt;&lt;a href=&quot;https://zeppelin.incubator.apache.org/&quot;&gt;1. Apache Zeppelin site&lt;/a&gt;
+	&lt;/td&gt;
+
+
+&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/section&gt;&lt;/div&gt;&lt;/body&gt;
+</description>
+        <pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://helloourworld.github.io/Hadoop_Ecosystem_Table</link>
+        <guid isPermaLink="true">http://helloourworld.github.io/Hadoop_Ecosystem_Table</guid>
+        
+        
+        <category>MLAdvance</category>
+        
+      </item>
+    
+  </channel>
+</rss>

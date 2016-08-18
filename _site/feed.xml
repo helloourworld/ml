@@ -8,6 +8,34 @@
 		
 			
 			<item>
+				<title>Hadoop Tutorial ---- Components Required</title>
+				
+					<description>&lt;h2 id=&quot;section&quot;&gt;大数据培训&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Wed, 17 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/hadoop_tutorial_1</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/hadoop_tutorial_1</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>LDA</title>
+				
+					<description>&lt;h2 id=&quot;lda&quot;&gt;LDA&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Fri, 12 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/LDA</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/LDA</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Hadoop Mesos</title>
 				
 					<description>&lt;h2 id=&quot;mesosyarn&quot;&gt;mesos和yarn区别&lt;/h2&gt;
@@ -1499,6 +1527,334 @@
 				<pubDate>Sat, 02 Jul 2016 00:00:00 +0800</pubDate>
 				<link>http://helloourworld.github.io/welcome</link>
 				<guid isPermaLink="true">http://helloourworld.github.io/welcome</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Progressive Web App 之我见</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;下滑这里查看更多内容&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Sun, 05 Jun 2016 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/pwa-in-my-pov</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/pwa-in-my-pov</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>React vs Angular 2：冰与火之歌「译」</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;这篇文章转载自&lt;a href=&quot;http://zhuanlan.zhihu.com/FrontendMagazine/20549104&quot;&gt;我在知乎专栏「前端外刊评论」上发表的文章&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Mon, 01 Feb 2016 20:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/React-vs-Angular2</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/React-vs-Angular2</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>都 2015 年了，CSS 怎么还是这么糟糕</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;下滑这里查看更多内容&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/css-sucks-2015</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/css-sucks-2015</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>iOS 9，为前端世界都带来了些什么？「译」</title>
+				
+					<description>&lt;p&gt;2015 年 9 月，Apple 重磅发布了全新的 iPhone 6s/6s Plus、iPad Pro 与全新的操作系统 watchOS 2 与 tvOS 9（是的，这货居然是第 9 版），加上已经发布的 iOS 9，它们都为前端世界带来了哪些变化呢？作为一个 web 开发者，是时候站在我们的角度来说一说了！&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Tue, 15 Dec 2015 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/ios9-safari-web</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/ios9-safari-web</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>「知乎」设计师如何学习前端？</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;这篇文章转载自&lt;a href=&quot;https://www.zhihu.com/question/21921588/answer/69680480&quot;&gt;我在知乎上的回答&lt;/a&gt;，也被刊登于&lt;a href=&quot;http://www.uisdc.com/head-first-front-end&quot;&gt;优秀网页设计&lt;/a&gt;等多个网站上 ;)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Wed, 28 Oct 2015 20:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/how-designer-learn-fe</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/how-designer-learn-fe</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>ES5, ES6, ES2016, ES.Next: JavaScript 的版本是怎么回事？「译」</title>
+				
+					<description>&lt;p&gt;JavaScript 有着很奇怪的命名史。&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Tue, 22 Sep 2015 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/js-version</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/js-version</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>JavaScript 模块化七日谈</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;下滑这里查看更多内容&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Thu, 09 Jul 2015 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/js-module-7day</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/js-module-7day</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>聊聊「阿里旅行 · 去啊」—— 行业与战略 </title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;本篇为该系列第一篇 —— 行业与战略，让我们聊聊行业、战略与格局。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Mon, 15 Jun 2015 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/alitrip-strategy</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/alitrip-strategy</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>JavaScript Module Loader</title>
+				
+					<description>&lt;h2 id=&quot;foreword&quot;&gt;Foreword&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Mon, 25 May 2015 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/js-module-loader</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/js-module-loader</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>See you, Alibaba </title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;世界那么大，我想去看看&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Mon, 11 May 2015 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/see-u-ali</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/see-u-ali</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>hUX 随想录（二）：操作系统的浪漫主义 —— Metro 篇</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;操作系统的背后不只是冷冰冰的 0 和 1 ，数字时代的设计师们，如初神般刻画着新世界的秩序。信息、量子、宇宙，他们取世间万物为灵感来表达自己，那是它们对数字时代最浪漫的隐喻。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Wed, 15 Apr 2015 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/os-metro</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/os-metro</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Unix/Linux 扫盲笔记</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;This document is not completed and will be updated anytime.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Tue, 14 Apr 2015 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/unix-linux-note</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/unix-linux-note</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Definition of End to End User Scenarios</title>
+				
+					<description>&lt;h3 id=&quot;end-to-end&quot;&gt;End to end?&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Tue, 31 Mar 2015 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/e2e_user_scenarios</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/e2e_user_scenarios</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>hUX 随想录（一）：Digital native 数字原住民</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;那是一种与生俱来的天赋，就好像矮人天生擅长舞锤，而精灵则拥有魔法庇护。那些数字时代的原住民们，天生具备着一种操纵数字世界的领悟。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Wed, 25 Mar 2015 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/digital-native</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/digital-native</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>「知乎」如何评价 2015 年 3 月 9 日 Apple 春季发布会？</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;这篇文章转载自&lt;a href=&quot;http://www.zhihu.com/question/28617408/answer/41626694&quot;&gt;我在知乎上的回答&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Tue, 10 Mar 2015 20:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/apple-event-2015</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/apple-event-2015</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Hello 2015</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;“Yeah It’s on. ”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Thu, 29 Jan 2015 20:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/hello-2015</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/hello-2015</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>「知乎」如何看待微信屏蔽快的打车事件？</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;这篇文章转载自&lt;a href=&quot;http://www.zhihu.com/question/26774049/answer/35041458&quot;&gt;我在知乎上的回答&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Sat, 13 Dec 2014 00:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/wechat-block-kuaidi</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/wechat-block-kuaidi</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>「知乎」你们觉得响应式好呢，还是手机和PC端分开来写？</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;这篇文章转载自&lt;a href=&quot;http://www.zhihu.com/question/25836425/answer/31564174&quot;&gt;我在知乎上的回答&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Thu, 20 Nov 2014 20:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/responsive-web-design</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/responsive-web-design</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>「知乎」为什么阿里系软件体验都不好？</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;这篇文章转载自&lt;a href=&quot;http://www.zhihu.com/question/25657351/answer/31278511&quot;&gt;我在知乎上的回答&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Wed, 01 Oct 2014 20:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/why-alibaba-ux-sucks</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/why-alibaba-ux-sucks</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>「知乎」对中国用户而言，Pure Android 是否比 MIUI 或 Flyme 体验更好？</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;这篇文章转载自&lt;a href=&quot;http://www.zhihu.com/question/25104721/answer/30108886&quot;&gt;我在知乎上的回答&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Thu, 04 Sep 2014 20:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/is-pure-android-better</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/is-pure-android-better</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>「知乎」如何评价 MIUI 6？</title>
+				
+					<description>&lt;blockquote&gt;
+  &lt;p&gt;这篇文章转载自&lt;a href=&quot;http://www.zhihu.com/question/24783844/answer/29286896&quot;&gt;我在知乎上的回答&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+				
+				<pubDate>Sat, 16 Aug 2014 20:00:00 +0800</pubDate>
+				<link>http://helloourworld.github.io/miui6</link>
+				<guid isPermaLink="true">http://helloourworld.github.io/miui6</guid>
 			</item>
 			
 		

@@ -387,9 +387,24 @@ packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tm
 
 ### 3 HBase
 
+#### Introduction
 [Apache Hbase](http://hbase.apache.org/book.html#quickstart)安装及测试
 
 提供海量数据存储功能，是一种构建在HDFS之上的分布式、面向列的存储系统。
+
+>> Browse to the Web UI
+
+* connect to the UI for the Master[H1:16010](H1:16010) or [H2:16010](H2:16010)
+
+#### The Apache HBase Shell演示
+
+* 1 [Scripting with Ruby](http://hbase.apache.org/book.html#scripting)
+* 2 [Running the Shell in Non-Interactive Mode](http://hbase.apache.org/book.html#_running_the_shell_in_non_interactive_mode)
+* 3 [HBase Shell in OS Scripts](http://hbase.apache.org/book.html#hbase.shell.noninteractive)
+* 4 [Read HBase Shell Commands from a Command File](http://hbase.apache.org/book.html#_read_hbase_shell_commands_from_a_command_file)
+
+#### [Data Model](http://hbase.apache.org/book.html#datamodel)
+
 
 
 
@@ -410,16 +425,20 @@ packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tm
 
 视频教程[http://www.jikexueyuan.com/course/kafka/](http://www.jikexueyuan.com/course/kafka/)
 
+* > 1 Introduction
+
+[Introduction](http://kafka.apache.org/documentation.html#introduction)
+
 集群实现与演示
 
 	`
-[hadoop@NN01 ~]$ ~/tools/runRemoteCmd.sh "/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties" all
+[hadoop@NN01 ~]$ ~/tools/runRemoteCmd.sh "/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties &" all
 
-[hadoop@DN02 bin]$ ./kafka-console-producer.sh --broker-list NN01.HadoopVM:9092 --sync --topic test
+[hadoop@DN02 bin]$ $KAFKA_HOME/bin/kafka-console-producer.sh --broker-list NN01.HadoopVM:9092 --sync --topic test
 
-[hadoop@DN01 bin]$ ./kafka-console-consumer.sh --zookeeper NN01.HadoopVM:2181 --topic test --from-beginning
-
+[hadoop@DN01 bin]$ $KAFKA_HOME/bin/kafka-console-consumer.sh --zookeeper NN01.HadoopVM:2181 --topic test --from-beginning
 	`
+
 ## 3 Distributed Programming
 
 ### 1 Pig
@@ -434,11 +453,6 @@ packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tm
 
 [Running Hive](https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive)
 
-
-* > 1 Introduction
-
-[Introduction](http://kafka.apache.org/documentation.html#introduction)
-$ kafka-console-producer.sh --broker-list zk1:9092 --sync --topic test
 
 
 
@@ -463,11 +477,24 @@ Mesos模式
 yarn模式
 
 * > 1 Cluster Manager Types
+
 The system currently supports three cluster managers:
 
 >> 1 Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.
+
 >> 2 Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.
+
 >> 3 Hadoop YARN – the resource manager in Hadoop 2.
+
+
+#### Machine Learning Library (MLlib) Guide[refer](http://spark.apache.org/docs/latest/ml-guide.html)
+
+[Spark快速入门指南 – Spark安装与基础使用](http://dblab.xmu.edu.cn/blog/spark-quick-start-guide/)
+
+	`
+	[hadoop@NN01 sparkapp]$ spark-submit --class "SimpleApp" ~/sparkapp/target/scala-2.11/simple-project_2.11-1.0.jar 2>&1|grep "Line"
+Lines with a: 4, Lines with b: 2
+	`
 
 ## 4 Machine Learning
 
@@ -476,6 +503,29 @@ The system currently supports three cluster managers:
 ## 5 Data Ingestion
 
 ### 1 Storm
+![](/images/storm-flow.png)
+[Setting up a Storm Cluster](http://storm.apache.org/releases/1.0.1/Setting-up-a-Storm-cluster.html)
+
+[Apache Storm 的历史及经验教训](http://www.oschina.net/translate/history-of-apache-storm-and-lessons-learned?cmp&p=4#)
+
+[Storm Index](http://storm.apache.org/releases/1.0.1/index.html)
+
+[Talks and Slideshows](http://storm.apache.org/talksAndVideos.html)
+
+#### 命名方式
+
+>> Storm暴风雨：其组件大多也以气象名词命名
+>>
+>> spout龙卷：形象的理解是把原始数据卷进Storm流式计算中
+>>
+>> bolt雷电：从spout或者其他bolt中接收数据进行处理或者输出
+>>
+>> nimbus雨云：主控节点，存在单点问题，不过可以用watchdog来保证其可用性，fast-fail后马上就启动
+>>
+>> topology拓扑：Storm的任务单元，形象的理解拓扑的点是spout或者bolt，之间的数据流是线，整个构成一个拓扑
+
+
+
 
 ### 2 Sqoop
 

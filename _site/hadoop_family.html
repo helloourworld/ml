@@ -616,9 +616,31 @@ File Output Format Counters
 
 <h3 id="hbase">3 HBase</h3>
 
+<h4 id="introduction-1">Introduction</h4>
 <p><a href="http://hbase.apache.org/book.html#quickstart">Apache Hbase</a>安装及测试</p>
 
 <p>提供海量数据存储功能，是一种构建在HDFS之上的分布式、面向列的存储系统。</p>
+
+<blockquote>
+  <blockquote>
+    <p>Browse to the Web UI</p>
+  </blockquote>
+</blockquote>
+
+<ul>
+  <li>connect to the UI for the Master<a href="H1:16010">H1:16010</a> or <a href="H2:16010">H2:16010</a></li>
+</ul>
+
+<h4 id="the-apache-hbase-shell">The Apache HBase Shell演示</h4>
+
+<ul>
+  <li>1 <a href="http://hbase.apache.org/book.html#scripting">Scripting with Ruby</a></li>
+  <li>2 <a href="http://hbase.apache.org/book.html#_running_the_shell_in_non_interactive_mode">Running the Shell in Non-Interactive Mode</a></li>
+  <li>3 <a href="http://hbase.apache.org/book.html#hbase.shell.noninteractive">HBase Shell in OS Scripts</a></li>
+  <li>4 <a href="http://hbase.apache.org/book.html#_read_hbase_shell_commands_from_a_command_file">Read HBase Shell Commands from a Command File</a></li>
+</ul>
+
+<h4 id="data-modelhttphbaseapacheorgbookhtmldatamodel"><a href="http://hbase.apache.org/book.html#datamodel">Data Model</a></h4>
 
 <h2 id="service-programming">2 Service Programming</h2>
 
@@ -636,19 +658,28 @@ File Output Format Counters
 
 <p>视频教程<a href="http://www.jikexueyuan.com/course/kafka/">http://www.jikexueyuan.com/course/kafka/</a></p>
 
+<ul>
+  <li>
+    <blockquote>
+      <p>1 Introduction</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><a href="http://kafka.apache.org/documentation.html#introduction">Introduction</a></p>
+
 <p>集群实现与演示</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>` [hadoop@NN01 ~]$ ~/tools/runRemoteCmd.sh "/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties" all
+<div class="highlighter-rouge"><pre class="highlight"><code>` [hadoop@NN01 ~]$ ~/tools/runRemoteCmd.sh "/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;" all
 </code></pre>
 </div>
 
-<p>[hadoop@DN02 bin]$ ./kafka-console-producer.sh –broker-list NN01.HadoopVM:9092 –sync –topic test</p>
+<p>[hadoop@DN02 bin]$ $KAFKA_HOME/bin/kafka-console-producer.sh –broker-list NN01.HadoopVM:9092 –sync –topic test</p>
 
-<p>[hadoop@DN01 bin]$ ./kafka-console-consumer.sh –zookeeper NN01.HadoopVM:2181 –topic test –from-beginning</p>
+<p>[hadoop@DN01 bin]$ $KAFKA_HOME/bin/kafka-console-consumer.sh –zookeeper NN01.HadoopVM:2181 –topic test –from-beginning
+	`</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>` ## 3 Distributed Programming
-</code></pre>
-</div>
+<h2 id="distributed-programming">3 Distributed Programming</h2>
 
 <h3 id="pig">1 Pig</h3>
 
@@ -661,17 +692,6 @@ File Output Format Counters
 <p>建立在Hadoop基础上的开源的数据仓库，提供类似SQL的Hive QL语言操作结构化数据存储服务和基本的数据分析服务。</p>
 
 <p><a href="https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive">Running Hive</a></p>
-
-<ul>
-  <li>
-    <blockquote>
-      <p>1 Introduction</p>
-    </blockquote>
-  </li>
-</ul>
-
-<p><a href="http://kafka.apache.org/documentation.html#introduction">Introduction</a>
-$ kafka-console-producer.sh –broker-list zk1:9092 –sync –topic test</p>
 
 <h3 id="spark">3 Spark</h3>
 
@@ -696,19 +716,40 @@ yarn模式</p>
 <ul>
   <li>
     <blockquote>
-      <p>1 Cluster Manager Types
-The system currently supports three cluster managers:</p>
+      <p>1 Cluster Manager Types</p>
     </blockquote>
   </li>
 </ul>
 
+<p>The system currently supports three cluster managers:</p>
+
 <blockquote>
   <blockquote>
-    <p>1 Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.
-2 Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.
-3 Hadoop YARN – the resource manager in Hadoop 2.</p>
+    <p>1 Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.</p>
   </blockquote>
 </blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>2 Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>3 Hadoop YARN – the resource manager in Hadoop 2.</p>
+  </blockquote>
+</blockquote>
+
+<h4 id="machine-learning-library-mllib-guidereferhttpsparkapacheorgdocslatestml-guidehtml">Machine Learning Library (MLlib) Guide<a href="http://spark.apache.org/docs/latest/ml-guide.html">refer</a></h4>
+
+<p><a href="http://dblab.xmu.edu.cn/blog/spark-quick-start-guide/">Spark快速入门指南 – Spark安装与基础使用</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>`
+[hadoop@NN01 sparkapp]$ spark-submit --class "SimpleApp" ~/sparkapp/target/scala-2.11/simple-project_2.11-1.0.jar 2&gt;&amp;1|grep "Line" Lines with a: 4, Lines with b: 2
+`
+</code></pre>
+</div>
 
 <h2 id="machine-learning">4 Machine Learning</h2>
 
@@ -717,6 +758,30 @@ The system currently supports three cluster managers:</p>
 <h2 id="data-ingestion">5 Data Ingestion</h2>
 
 <h3 id="storm">1 Storm</h3>
+<p><img src="/images/storm-flow.png" alt="" />
+<a href="http://storm.apache.org/releases/1.0.1/Setting-up-a-Storm-cluster.html">Setting up a Storm Cluster</a></p>
+
+<p><a href="http://www.oschina.net/translate/history-of-apache-storm-and-lessons-learned?cmp&amp;p=4#">Apache Storm 的历史及经验教训</a></p>
+
+<p><a href="http://storm.apache.org/releases/1.0.1/index.html">Storm Index</a></p>
+
+<p><a href="http://storm.apache.org/talksAndVideos.html">Talks and Slideshows</a></p>
+
+<h4 id="section-1">命名方式</h4>
+
+<blockquote>
+  <blockquote>
+    <p>Storm暴风雨：其组件大多也以气象名词命名</p>
+
+    <p>spout龙卷：形象的理解是把原始数据卷进Storm流式计算中</p>
+
+    <p>bolt雷电：从spout或者其他bolt中接收数据进行处理或者输出</p>
+
+    <p>nimbus雨云：主控节点，存在单点问题，不过可以用watchdog来保证其可用性，fast-fail后马上就启动</p>
+
+    <p>topology拓扑：Storm的任务单元，形象的理解拓扑的点是spout或者bolt，之间的数据流是线，整个构成一个拓扑</p>
+  </blockquote>
+</blockquote>
 
 <h3 id="sqoop">2 Sqoop</h3>
 
@@ -755,6 +820,8 @@ The system currently supports three cluster managers:</p>
     <div class="sidenav">
         <h2>Blog</h2>
         <ul class="artical-list">
+        
+            <li><a href="/hadoop_tutorial_1">Hadoop Tutorial ---- Components Required</a></li>
         
             <li><a href="/apply-analytics-master">How to start applying for Analytics / Data Science Masters in the US Universities?</a></li>
         
