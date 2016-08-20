@@ -1,8 +1,11 @@
 ---
-layout: post
+layout: keynote
 title: hackerrank_numpy
 category: MLAdvance
 description: become an hacker need to parctice.
+tags:
+    - Python
+    - maths
 ---
 
 ## Arrays

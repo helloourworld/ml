@@ -1,8 +1,11 @@
 ---
-layout: post
+layout: keynote
 title: Hadoop Mesos
 category: MLAdvance
 description: mesos和yarn区别
+tags:
+    - Big Data
+    - 大数据
 ---
 ## mesos和yarn区别
 

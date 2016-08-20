@@ -1,14 +1,92 @@
-auto: true
+# Site settings
+title: Lijun Yu's Blog
+SEOTitle: Maching Learning | 机器学习笔记
+header-img: images/background.jpg
+email: davidyjun@gmail.com
+description: "关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu"
+keyword: "LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data"
+url: "http://machinelearningadvance.com"
+#url: "http://helloourworld.github.io"              # your host, for absolute URL
+baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
+
+
+# SNS settings
+RSS: false
+weibo_username:     u/2672280861
+zhihu_username:     davidyjun
+github_username:    helloourworld
+#twitter_username:  davidyjun
+facebook_username:  davidyjun
+# linkedin_username:  yu-lijun-0009
+
+
+
+# Build settings
+# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
+highlighter: rouge
+permalink: pretty
+paginate: 10
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
+anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+
+
+
+# Gems
+# from PR#40, to support local preview for Jekyll 3.0
+gems: [jekyll-paginate]
+
+
+
+# Markdown settings
+# replace redcarpet to kramdown,
+# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
+# document: http://jekyllrb.com/docs/configuration/#kramdown
 markdown: kramdown
+kramdown:
+  input: GFM                            # use Github Flavored Markdown !important
 
-highlighter: 'rouge'
-#paginate: 8
-permalink: /:title
 
-name: “Lijun Yu's Blog”
-title: Lijun Yu's blog
-description: Everything about Lijun Yu.
-url: http://helloourworld.github.io
+
+# Disqus settings
+disqus_username: _your_disqus_short_name_
+
+# Duoshuo settings
+duoshuo_username: 清扬vs淡泊
+# Share component is depend on Comment so we can NOT use share only.
+duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+
+
+
+
+# Analytics settings
+# Baidu Analytics
+ba_track_id: 863b1f46c83a8e14e47782106aee7e7f
+# Google Analytics
+ga_track_id: 'UA-82819752-1'            # Format: UA-xxxxxx-xx
+ga_domain: machinelearningadvance.com
+
+
+
+# Sidebar settings
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "写写代码，做做金融，写写代码。世界那么大，我们去看看。"
+sidebar-avatar: /images/MyLove.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+
+
+
+# Featured Tags
+featured-tags: true                     # whether or not using Feature-Tags
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+
+
+
+# Friends
+friends: [
+{
+        title: "前端神盾局",
+        href: "http://wepiaofei.github.io/blog/"
+    }
+]
+
 feed: /atom.xml
-author_info: <a href="http://helloourworld.github.io/">Welcome</a>
