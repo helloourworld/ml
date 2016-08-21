@@ -3,6 +3,9 @@ layout: post
 title: Hadoop Resource
 category: MLAdvance
 description: Limited site of Hadoop Resource.
+tags:
+    - Big Data
+    - 大数据
 ---
 ## Apache
 

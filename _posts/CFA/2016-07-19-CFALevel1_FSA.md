@@ -3,6 +3,8 @@ layout: post
 title: Lev1_FSA_basic_concept
 category: CFA
 description: The very basic_Financial Statement Analysis. There you go, only Finace surive.
+tags:
+    - CFAL1
 ---
 
 ## 29 Financial Statement Analysis: Introduction

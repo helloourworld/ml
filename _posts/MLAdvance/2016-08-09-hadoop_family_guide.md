@@ -3,6 +3,9 @@ layout: post
 title: Hadoop Learn Guide
 category: MLAdvance
 description: Guide of Hadoop Ecosystem.
+tags:
+    - Big Data
+    - 大数据
 ---
 ## 前言
 

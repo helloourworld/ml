@@ -3,6 +3,9 @@ layout: page
 title: Hadoop Ecosystem Table
 category: MLAdvance
 description:  This page is a summary to keep the track of Hadoop related project, and relevant projects around Big Data scene focused on the open source, free software enviroment.
+tags:
+    - Big Data
+    - 大数据
 ---
 
   <head>

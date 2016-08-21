@@ -3,6 +3,9 @@ layout: post
 title: hackerrank_numpy_test
 category: MLAdvance
 description: become an hacker need to parctice.
+tags:
+    - Big Data
+    - 大数据
 ---
 
 ## Ipython Notebook convert to blog

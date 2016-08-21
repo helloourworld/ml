@@ -3,6 +3,9 @@ layout: post
 title: Hadoop Family
 category: MLAdvance
 description:  Hadoop Family. Hadoop 生态圈学习与体会。
+tags:
+    - Big Data
+    - 大数据
 ---
 Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka等。对照[Hadoop_Ecosystem_Table](/Hadoop_Ecosystem_Table),我们将其分类为：
 

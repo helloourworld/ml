@@ -3,6 +3,8 @@ layout: post
 title: Lev1_Equity_basic_concept
 category: CFA
 description: The very basic of Equity. There you go, only Finace surive.
+tags:
+    - CFAL1
 ---
 
 ## 52 Orgnization and Functioning of Securities Market

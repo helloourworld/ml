@@ -3,6 +3,9 @@ layout: post
 title: Hadoop or Spark
 category: MLAdvance
 description:  Which Is The Best Big Data Framework? - Forbes.
+tags:
+    - Big Data
+    - 大数据
 ---
 THis page is mainly from [Forbes](http://www.forbes.com/sites/bernardmarr/2015/06/22/spark-or-hadoop-which-is-the-best-big-data-framework/#72907489532c) by Bernard Marr, CONTRIBUTOR
 

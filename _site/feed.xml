@@ -8,6 +8,21 @@
 		
 			
 			<item>
+				<title>google trends</title>
+				
+					<description>&lt;script type=&quot;text/javascript&quot; src=&quot;https://ssl.gstatic.com/trends_nrtr/680_RC25/embed_loader.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt; trends.embed.renderExploreWidget(&quot;TIMESERIES&quot;, {&quot;comparisonItem&quot;:[{&quot;keyword&quot;:&quot;big data&quot;,&quot;geo&quot;:&quot;&quot;,&quot;time&quot;:&quot;today 5-y&quot;},{&quot;keyword&quot;:&quot;hadoop&quot;,&quot;geo&quot;:&quot;&quot;,&quot;time&quot;:&quot;today 5-y&quot;},{&quot;keyword&quot;:&quot;apache spark&quot;,&quot;geo&quot;:&quot;&quot;,&quot;time&quot;:&quot;today 5-y&quot;},{&quot;keyword&quot;:&quot;cloud computing&quot;,&quot;geo&quot;:&quot;&quot;,&quot;time&quot;:&quot;today 5-y&quot;}],&quot;category&quot;:0,&quot;property&quot;:&quot;&quot;}, {&quot;guestPath&quot;:&quot;https://www.google.com.hk:443/trends/embed/&quot;}); &lt;/script&gt;
+
+</description>
+				
+				<pubDate>Sun, 21 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/blog/2016/08/21/googletrends/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/blog/2016/08/21/googletrends/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Hadoop Tutorial ---- Spark入门实战系列--1.Spark及其生态圈简介</title>
 				
 					<description>&lt;h2 id=&quot;site&quot;&gt;Site&lt;/h2&gt;
@@ -235,7 +250,7 @@
 		
 			
 			<item>
-				<title>How to start applying for Analytics / Data Science Masters in the US Universities?</title>
+				<title>How to start applying for Analytics Data Science Masters in the US Universities?</title>
 				
 					<description>&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 

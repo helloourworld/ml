@@ -3,6 +3,8 @@ layout: post
 title: Lev1_AI_basic_concept
 category: CFA
 description: The very basic of Alternative Investment. There you go, only Finace surive.
+tags:
+    - CFAL1
 ---
 
 

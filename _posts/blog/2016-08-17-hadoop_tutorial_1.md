@@ -3,6 +3,8 @@ layout: post
 title: Hadoop Tutorial ---- Components Required
 category: blog
 description: Limited site of Hadoop Resource.
+tags:
+    - Hadoop
 ---
 
 ## 大数据培训

@@ -3,6 +3,8 @@ layout: post
 title: Lev1_Derivative_basic_concept
 category: CFA
 description: The very basic of Derivative. There you go, only Finace surive.
+tags:
+    - CFAL1
 ---
 
 ## 68 Forward Market and Contracts

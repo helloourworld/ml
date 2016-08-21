@@ -3,6 +3,8 @@ layout: post
 title: Lev1_Portfolio_basic_concept
 category: CFA
 description: The very basic of Portfolio. There you go, only Finace surive.
+tags:
+    - CFAL1
 ---
 
 

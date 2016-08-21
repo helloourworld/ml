@@ -3,6 +3,8 @@ layout: post
 title: Lev1_FixedIncome_basic_concept
 category: CFA
 description: The very basic of Fixed Income. There you go, only Finace surive.
+tags:
+    - CFAL1
 ---
 
 ## 61 Risk Associated with Investing in Bonds
