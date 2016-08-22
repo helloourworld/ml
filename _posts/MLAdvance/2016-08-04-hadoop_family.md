@@ -456,7 +456,10 @@ packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tm
 
 [Running Hive](https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive)
 
-
+	`
+	# Starting from Hive 2.1, we need to run the schematool command below as an initialization step. For example, we can use "derby" as db type.
+	$HIVE_HOME/bin/schematool -dbType <db type> -initSchema
+	`
 
 
 ### 3 Spark

@@ -849,6 +849,13 @@ File Output Format Counters
 
 <p><a href="https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive">Running Hive</a></p>
 
+<div class="highlighter-rouge"><pre class="highlight"><code>`
+# Starting from Hive 2.1, we need to run the schematool command below as an initialization step. For example, we can use "derby" as db type.
+$HIVE_HOME/bin/schematool -dbType &lt;db type&gt; -initSchema
+`
+</code></pre>
+</div>
+
 <h3 id="spark">3 Spark</h3>
 
 <p>基于内存进行计算的分布式计算框架。</p>
@@ -1145,18 +1152,18 @@ yarn模式</p>
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="list-inline text-center">
                     
-                    
-
-                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
-                    
                     <li>
-                        <a target="_blank" href="https://www.zhihu.com/people/davidyjun">
+                        <a href="/feed.xml">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
                             </span>
                         </a>
                     </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
                     
                     
                     <li>
@@ -1190,6 +1197,15 @@ yarn模式</p>
                         </a>
                     </li>
                     
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
                     
                 </ul>
                 <p class="copyright text-muted">
