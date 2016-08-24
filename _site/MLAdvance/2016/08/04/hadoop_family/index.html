@@ -914,6 +914,8 @@ yarn模式</p>
 </code></pre>
 </div>
 
+<h4 id="graphx-programming-guidereferhttpsparkapacheorgdocslatestgraphx-programming-guidehtml">GraphX Programming Guide<a href="http://spark.apache.org/docs/latest/graphx-programming-guide.html">refer</a></h4>
+
 <h2 id="machine-learning">4 Machine Learning</h2>
 
 <h3 id="mahout">1 Mahout</h3>
@@ -948,7 +950,40 @@ yarn模式</p>
 
 <h3 id="sqoop">2 Sqoop</h3>
 
-<h2 id="system-deployment">6 System Deployment</h2>
+<h2 id="databases">6 Databases</h2>
+
+<h3 id="redis">1 Redis</h3>
+
+<h4 id="section-2">集群安装</h4>
+
+<p><code class="highlighter-rouge">
+[hadoop@DN01 init.d]$ sudo cp ~/redis-3.2.3/utils/redis_init_script redis
+[hadoop@DN01 init.d]$ sudo chmod +x redis
+[hadoop@DN01 init.d]$ cd ..
+[hadoop@DN01 etc]$ sudo mkdir redis
+[hadoop@DN01 etc]$ sudo cp ~/redis-3.2.3/redis.conf redis/6379.conf
+</code></p>
+
+<p>官方：</p>
+
+<p><a href="http://redis.io/topics/cluster-tutorial">Redis cluster tutorial</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>` start: $ ./src/redis-server redis.conf close: $ ./src/redis-cli -n 6379 shutdown
+`
+</code></pre>
+</div>
+
+<p>安装python的redis模块</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>` wget --no-check-certificate https://pypi.python.org/packages/source/r/redis/redis-2.8.0.tar.gz tar -zvxf redis-2.8.0.tar.gz mv redis-2.8.0 python-redis-2.8.0 cd python-redis-2.8.0 python setup.py install
+` 部署成功，写段代码验证一下
+
+` import redis client =  redis.StrictRedis(host='localhost', port=6379) print client.ping() True
+`
+</code></pre>
+</div>
+
+<h2 id="system-deployment">7 System Deployment</h2>
 
 <h3 id="ambari">1 Ambari</h3>
 
@@ -1016,6 +1051,10 @@ yarn模式</p>
                     <div class="tags">
         				
                             
+        				
+                            
+        				
+                            
                 				<a href="/tags/#ME" title="ME" rel="2">
                                 ME
                                 </a>
@@ -1056,6 +1095,10 @@ yarn模式</p>
                             
         				
                             
+                				<a href="/tags/#IT" title="IT" rel="2">
+                                IT
+                                </a>
+                            
         				
                             
         				
@@ -1064,6 +1107,12 @@ yarn模式</p>
                             
                 				<a href="/tags/#Hadoop" title="Hadoop" rel="2">
                                 Hadoop
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Scala" title="Scala" rel="2">
+                                Scala
                                 </a>
                             
         				

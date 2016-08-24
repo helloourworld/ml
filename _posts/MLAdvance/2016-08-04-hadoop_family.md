@@ -502,6 +502,10 @@ The system currently supports three cluster managers:
 Lines with a: 4, Lines with b: 2
 	`
 
+#### GraphX Programming Guide[refer](http://spark.apache.org/docs/latest/graphx-programming-guide.html)
+
+
+
 ## 4 Machine Learning
 
 ### 1 Mahout
@@ -535,9 +539,50 @@ Lines with a: 4, Lines with b: 2
 
 ### 2 Sqoop
 
+## 6 Databases
 
+### 1 Redis
 
-## 6 System Deployment
+#### 集群安装
+
+`
+[hadoop@DN01 init.d]$ sudo cp ~/redis-3.2.3/utils/redis_init_script redis
+[hadoop@DN01 init.d]$ sudo chmod +x redis
+[hadoop@DN01 init.d]$ cd ..
+[hadoop@DN01 etc]$ sudo mkdir redis
+[hadoop@DN01 etc]$ sudo cp ~/redis-3.2.3/redis.conf redis/6379.conf
+`
+
+官方：
+
+[Redis cluster tutorial](http://redis.io/topics/cluster-tutorial)
+
+	`
+start:
+$ ./src/redis-server redis.conf
+close:
+$ ./src/redis-cli -n 6379 shutdown
+	`
+
+安装python的redis模块
+
+	`
+wget --no-check-certificate https://pypi.python.org/packages/source/r/redis/redis-2.8.0.tar.gz
+tar -zvxf redis-2.8.0.tar.gz
+mv redis-2.8.0 python-redis-2.8.0
+cd python-redis-2.8.0
+python setup.py install
+	`
+部署成功，写段代码验证一下
+
+	`
+import redis
+client =  redis.StrictRedis(host='localhost', port=6379)
+print client.ping()
+True
+	`
+
+## 7 System Deployment
 
 ### 1 Ambari
 
