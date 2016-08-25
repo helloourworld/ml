@@ -2,7 +2,7 @@
 layout: post
 title: scala Lesson 1
 description: 变量函数，操作符，基本类型
-category: blog
+category: Language
 catalog: yes
 tags:
     - Scala
@@ -141,3 +141,27 @@ Scala中，所有的值都是类对象，而所有的类，包括值类型，都
 * Null是所有引用类型的子类型，而Nothing是所有类型的子类型。Null类只有一个实例对象，null，类似于Java中的null引用。null可以赋值给任意引用类型，但是不能赋值给值类型。
 * Nothing，可以作为没有正常返回值的方法的返回类型，非常直观的告诉你这个方法不会正常返回，而且由于Nothing是其他任意类型的子类，他还能跟要求返回值的方法兼容。
 * Unit类型用来标识过程，也就是没有明确返回值的函数。 由此可见，Unit类似于Java里的void。Unit只有一个实例，()，这个实例也没有实质的意义。
+
+### 关于Scala程序，这是非常要注意以下几点。
+
+区分大小写 -  Scala是大小写敏感的，这意味着标识Hello 和 hello在Scala中会有不同的含义。
+
+类名 - 对于所有的类名的第一个字母要大写。
+
+如果需要使用几个单词来构成一个类的名称，每个单词的第一个字母要大写。
+
+示例：class MyFirstScalaClass
+
+方法名称 - 所有的方法名称的第一个字母用小写。
+
+如果若干单词被用于构成方法的名称，则每个单词的第一个字母应大写。
+
+示例：def myMethodName()
+
+程序文件名 - 程序文件的名称应该与对象名称完全匹配。
+
+保存文件时，应该保存它使用的对象名称（记住Scala是区分大小写），并追加“.scala”为文件扩展名。 （如果文件名和对象名称不匹配，程序将无法编译）。
+
+示例: 假设“HelloWorld”是对象的名称。那么该文件应保存为'HelloWorld.scala“
+
+def main(args: Array[String]) - Scala程序从main()方法开始处理，这是每一个Scala程序的强制程序入口部分。

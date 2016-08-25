@@ -1,11 +1,12 @@
 ---
 layout: post
 title: Hadoop Tutorial ---- Components Required
-category: blog
+category: Hadoop
 catalog: yes
-description: Limited site of Hadoop Resource.
+description: 大数据学习与培训，Let‘s work together！
 tags:
-    - Hadoop
+    - Big Data
+    - 大数据
 ---
 
 ## 大数据培训
