@@ -2,6 +2,7 @@
 layout: keynote
 title: hackerrank_numpy
 category: MLAdvance
+catalog: yes
 description: become an hacker need to parctice.
 tags:
     - Python

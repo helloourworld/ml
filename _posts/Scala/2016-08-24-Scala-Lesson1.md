@@ -3,6 +3,7 @@ layout: post
 title: scala Lesson 1
 description: 变量函数，操作符，基本类型
 category: blog
+catalog: yes
 tags:
     - Scala
 ---

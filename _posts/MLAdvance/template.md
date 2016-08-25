@@ -2,6 +2,7 @@
 layout: post
 title: 匠心
 category: MLAdvance
+catalog: yes
 description:MachineLearningAdvance.
 ---
 # [{{ page.title }}][1]

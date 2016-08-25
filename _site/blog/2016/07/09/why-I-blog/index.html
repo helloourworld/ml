@@ -66,7 +66,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Lijun Yu's Blog</a>
+            <a class="navbar-brand" href="/">Maching Learning | 大数据学习笔记</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -182,7 +182,9 @@
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Lijun Yu's Blog on July 9, 2016</span>
+                    <div class="subheading">Why you learn? Why you live? Why you mark down? Here is the answer.</div>
+                    
+                    <span class="meta">Posted by Maching Learning | 大数据学习笔记 on July 9, 2016</span>
                 </div>
             </div>
         </div>
@@ -200,11 +202,11 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="section">写给自己</h2>
+				<h2 id="xie-gei-zi-ji-">写给自己</h2>
 
 <p>最近的生活与工作有了较大的变化，心情起伏也比较大，这些更促使自己想要把它们记录下来，由此一个网站诞生了。理由很简单，有些任性。当然，这不仅仅是写给自己的博客。刚开始，只是想要整理整理机器学习方面的资料，在申请域名，创建网站的过程中，想了想，只是技术方面的内容是有些单调，既然做了，那么就将自己的生活也记录记录，将业务方面的知识也系统地归纳下。So，接下来的日子里，会抽空整理一批之前在各个网站博客的东西。</p>
 
-<h2 id="section-1">拟规划版块</h2>
+<h2 id="ni-gui-hua-ban-kuai-">拟规划版块</h2>
 <p>如首页所现：三大版块吧。</p>
 
 <ul>
@@ -219,7 +221,7 @@
   </li>
 </ul>
 
-<h2 id="cfa">CFA主要方向</h2>
+<h2 id="cfazhu-yao-fang-xiang-">CFA主要方向</h2>
 <ul>
   <li>
     <p>1 数量分析[Quant]</p>
@@ -232,7 +234,7 @@
   </li>
 </ul>
 
-<h2 id="mladvance">MLAdvance主要实现语言</h2>
+<h2 id="mladvancezhu-yao-shi-xian-yu-yan-">MLAdvance主要实现语言</h2>
 <ul>
   <li>
     <p>1 Python</p>
@@ -248,7 +250,7 @@
   </li>
 </ul>
 
-<h2 id="section-2">博客的写作原则</h2>
+<h2 id="bo-ke-de-xie-zuo-yuan-ze-">博客的写作原则</h2>
 
 <ul>
   <li>
@@ -262,7 +264,7 @@
   </li>
 </ul>
 
-<h2 id="section-3">工作的原则</h2>
+<h2 id="gong-zuo-de-yuan-ze-">工作的原则</h2>
 
 <ul>
   <li>
@@ -279,7 +281,7 @@
   </li>
 </ul>
 
-<h2 id="section-4">生活的原则</h2>
+<h2 id="sheng-huo-de-yuan-ze-">生活的原则</h2>
 
 <ul>
   <li>
@@ -293,7 +295,7 @@
   </li>
 </ul>
 
-<h2 id="section-5">技术支持</h2>
+<h2 id="ji-zhu-zhi-chi-">技术支持</h2>
 <p>特别鸣谢以下几个站点、技术：</p>
 
 <ul>
@@ -306,7 +308,7 @@
 
 <p>本网站完全基于以上技术实现。网上资料太多，不够精，给自己的实现造成了一定困扰，感谢，但是在想我的网站绝不能够成为那样的网站，一定是写自己确信的。参考太多，就不一一列举了，推荐[BeiYuu]:    http://beiyuu.com  “BeiYuu”。看到一句：<strong>生命在于折腾</strong>，共勉。</p>
 
-<h2 id="section-6">格言</h2>
+<h2 id="ge-yan-">格言</h2>
 
 <p>天行健，君子以自强不息；地势坤，君子以厚德载物。</p>
 
@@ -362,6 +364,20 @@
 
     <!-- Side Catalog Container -->
         
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
 
     <!-- Sidebar Container -->
             <div class="
@@ -409,13 +425,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="8">
+                				<a href="/tags/#Big Data" title="Big Data" rel="11">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="9">
+                				<a href="/tags/#大数据" title="大数据" rel="12">
                                 大数据
                                 </a>
                             
@@ -584,7 +600,7 @@
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Lijun Yu's Blog 2016
+                    Copyright &copy; Maching Learning | 大数据学习笔记 2016
                 </p>
             </div>
         </div>
@@ -695,6 +711,50 @@
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 

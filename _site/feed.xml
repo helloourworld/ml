@@ -10,7 +10,7 @@
 			<item>
 				<title>scala Lesson 1</title>
 				
-					<description>&lt;h2 id=&quot;section&quot;&gt;变量函数&lt;/h2&gt;
+					<description>&lt;h2 id=&quot;bian-liang-han-shu-&quot;&gt;变量函数&lt;/h2&gt;
 
 </description>
 				
@@ -25,8 +25,10 @@
 				<title>google trends</title>
 				
 					<description>&lt;script type=&quot;text/javascript&quot; src=&quot;https://ssl.gstatic.com/trends_nrtr/680_RC25/embed_loader.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot;&gt; trends.embed.renderExploreWidget(&quot;TIMESERIES&quot;, {&quot;comparisonItem&quot;:[{&quot;keyword&quot;:&quot;big data&quot;,&quot;geo&quot;:&quot;&quot;,&quot;time&quot;:&quot;today 5-y&quot;},{&quot;keyword&quot;:&quot;hadoop&quot;,&quot;geo&quot;:&quot;&quot;,&quot;time&quot;:&quot;today 5-y&quot;},{&quot;keyword&quot;:&quot;apache spark&quot;,&quot;geo&quot;:&quot;&quot;,&quot;time&quot;:&quot;today 5-y&quot;},{&quot;keyword&quot;:&quot;cloud computing&quot;,&quot;geo&quot;:&quot;&quot;,&quot;time&quot;:&quot;today 5-y&quot;}],&quot;category&quot;:0,&quot;property&quot;:&quot;&quot;}, {&quot;guestPath&quot;:&quot;https://www.google.com.hk:443/trends/embed/&quot;}); &lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt; trends.embed.renderExploreWidget(&quot;TIMESERIES&quot;, {&quot;comparisonItem&quot;:[{&quot;keyword&quot;:&quot;big data&quot;,&quot;geo&quot;:&quot;&quot;,&quot;time&quot;:&quot;today 5-y&quot;},{&quot;keyword&quot;:&quot;hadoop&quot;,&quot;geo&quot;:&quot;&quot;,&quot;time&quot;:&quot;today 5-y&quot;},{&quot;keyword&quot;:&quot;apache spark&quot;,&quot;geo&quot;:&quot;&quot;,&quot;time&quot;:&quot;today 5-y&quot;},{&quot;keyword&quot;:&quot;cloud computing&quot;,&quot;geo&quot;:&quot;&quot;,&quot;time&quot;:&quot;today 5-y&quot;}],&quot;category&quot;:0,&quot;property&quot;:&quot;&quot;}, {&quot;guestPath&quot;:&quot;https://www.google.com.hk:443/trends/embed/&quot;}); &lt;/script
+catalog: yes&gt;
 
+&lt;/script&gt;
 </description>
 				
 				<pubDate>Sun, 21 Aug 2016 00:00:00 +0800</pubDate>
@@ -39,7 +41,7 @@
 			<item>
 				<title>scala with sublime</title>
 				
-					<description>&lt;h2 id=&quot;scala&quot;&gt;Scala特点：&lt;/h2&gt;
+					<description>&lt;h2 id=&quot;scalate-dian-&quot;&gt;Scala特点：&lt;/h2&gt;
 
 </description>
 				
@@ -67,7 +69,7 @@
 			<item>
 				<title>Hadoop Tutorial ---- Components Required</title>
 				
-					<description>&lt;h2 id=&quot;section&quot;&gt;大数据培训&lt;/h2&gt;
+					<description>&lt;h2 id=&quot;da-shu-ju-pei-xun-&quot;&gt;大数据培训&lt;/h2&gt;
 
 </description>
 				
@@ -95,13 +97,13 @@
 			<item>
 				<title>Hadoop Mesos</title>
 				
-					<description>&lt;h2 id=&quot;mesosyarn&quot;&gt;mesos和yarn区别&lt;/h2&gt;
+					<description>&lt;h2 id=&quot;mesoshe-yarnqu-bie-&quot;&gt;mesos和yarn区别&lt;/h2&gt;
 
 </description>
 				
 				<pubDate>Fri, 12 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/12/hadoop_family_mesos/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/12/hadoop_family_mesos/</guid>
+				<link>http://machinelearningadvance.com/hadoop/2016/08/12/hadoop_family_mesos/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/12/hadoop_family_mesos/</guid>
 			</item>
 			
 		
@@ -109,13 +111,13 @@
 			<item>
 				<title>Hadoop Learn Guide</title>
 				
-					<description>&lt;h2 id=&quot;section&quot;&gt;前言&lt;/h2&gt;
+					<description>&lt;h2 id=&quot;qian-yan-&quot;&gt;前言&lt;/h2&gt;
 
 </description>
 				
 				<pubDate>Tue, 09 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/09/hadoop_family_guide/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/09/hadoop_family_guide/</guid>
+				<link>http://machinelearningadvance.com/hadoop/2016/08/09/hadoop_family_guide/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/09/hadoop_family_guide/</guid>
 			</item>
 			
 		
@@ -128,8 +130,8 @@
 </description>
 				
 				<pubDate>Sat, 06 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/06/hadoop_family_site/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/06/hadoop_family_site/</guid>
+				<link>http://machinelearningadvance.com/hadoop/2016/08/06/hadoop_family_site/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/06/hadoop_family_site/</guid>
 			</item>
 			
 		
@@ -137,13 +139,13 @@
 			<item>
 				<title>Hadoop Mahout</title>
 				
-					<description>&lt;h2 id=&quot;mahout&quot;&gt;开始 Mahout&lt;/h2&gt;
+					<description>&lt;h2 id=&quot;kai-shi--mahout&quot;&gt;开始 Mahout&lt;/h2&gt;
 
 </description>
 				
 				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_mahout/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_mahout/</guid>
+				<link>http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_mahout/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_mahout/</guid>
 			</item>
 			
 		
@@ -151,13 +153,13 @@
 			<item>
 				<title>Hadoop 名词速览</title>
 				
-					<description>&lt;h2 id=&quot;hadoop&quot;&gt;Hadoop产品名词速览（不断补充中…）&lt;/h2&gt;
+					<description>&lt;h2 id=&quot;hadoopchan-pin-ming-ci-su-lan-bu-duan-bu-chong-zhong-&quot;&gt;Hadoop产品名词速览（不断补充中…）&lt;/h2&gt;
 
 </description>
 				
 				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_glossary/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_glossary/</guid>
+				<link>http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_glossary/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_glossary/</guid>
 			</item>
 			
 		
@@ -165,27 +167,41 @@
 			<item>
 				<title>Hadoop生态圈</title>
 				
-					<description>&lt;h2 id=&quot;hadoophivespark-&quot;&gt;如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？&lt;/h2&gt;
+					<description>&lt;h2 id=&quot;ru-he-yong-xing-xiang-de-bi-yu-miao-shu-da-shu-ju-de-ji-zhu-sheng-tai-hadoop-hive-spark-zhi-jian-shi-shi-yao-guan-xi-&quot;&gt;如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？&lt;/h2&gt;
 
 </description>
 				
 				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_family_zhihu/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_family_zhihu/</guid>
+				<link>http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_family_zhihu/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_family_zhihu/</guid>
 			</item>
 			
 		
 			
 			<item>
-				<title>Hadoop Family</title>
+				<title>Hadoop Family Integration</title>
 				
-					<description>&lt;p&gt;Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka等。对照&lt;a href=&quot;/Hadoop_Ecosystem_Table&quot;&gt;Hadoop_Ecosystem_Table&lt;/a&gt;,我们将其分类为：&lt;/p&gt;
+					<description>&lt;p&gt;Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka等。对照&lt;a href=&quot;/hadoop/2016/08/04/Hadoop_Ecosystem_Table/&quot;&gt;Hadoop_Ecosystem_Table&lt;/a&gt;,我们将其分类为：&lt;/p&gt;
 
 </description>
 				
 				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_family/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_family/</guid>
+				<link>http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_family/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_family/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Hadoop Ecosystem Evolves-10 Cool Big Data Projects</title>
+				
+					<description>&lt;h2 id=&quot;cool-big-data-projects&quot;&gt;10 Cool Big Data Projects&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_10_years/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_10_years/</guid>
 			</item>
 			
 		
@@ -202,8 +218,8 @@
 </description>
 				
 				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/04/Hadoop_Ecosystem_Table/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/04/Hadoop_Ecosystem_Table/</guid>
+				<link>http://machinelearningadvance.com/hadoop/2016/08/04/Hadoop_Ecosystem_Table/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/04/Hadoop_Ecosystem_Table/</guid>
 			</item>
 			
 		
@@ -216,8 +232,8 @@
 </description>
 				
 				<pubDate>Wed, 03 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/03/hadoop_vs_spark/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/03/hadoop_vs_spark/</guid>
+				<link>http://machinelearningadvance.com/hadoop/2016/08/03/hadoop_vs_spark/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/03/hadoop_vs_spark/</guid>
 			</item>
 			
 		
@@ -1496,7 +1512,7 @@
 			<item>
 				<title>Ml_fourier_transform</title>
 				
-					<description>&lt;h2 id=&quot;fourier-transform&quot;&gt;了解傅立叶转换（Fourier transform）&lt;/h2&gt;
+					<description>&lt;h2 id=&quot;liao-jie-fu-li-xie-zhuan-huan-fourier-transform&quot;&gt;了解傅立叶转换（Fourier transform）&lt;/h2&gt;
 
 </description>
 				
@@ -1563,7 +1579,7 @@
 			<item>
 				<title>Why I Blog？</title>
 				
-					<description>&lt;h2 id=&quot;section&quot;&gt;写给自己&lt;/h2&gt;
+					<description>&lt;h2 id=&quot;xie-gei-zi-ji-&quot;&gt;写给自己&lt;/h2&gt;
 
 </description>
 				

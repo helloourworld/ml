@@ -3,6 +3,7 @@ layout: post
 title: scala with sublime
 description: compile and execute with sublime.
 category: blog
+catalog: yes
 tags:
     - IT
     - Scala

@@ -2,6 +2,7 @@
 layout: post
 title: Hadoop Tutorial ---- Spark入门实战系列--1.Spark及其生态圈简介
 category: blog
+catalog: yes
 description: Spark入门实战系列--1.Spark及其生态圈简介
 tags:
     - Hadoop

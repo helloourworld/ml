@@ -2,6 +2,7 @@
 layout: post
 title: Lev1_Derivative_basic_concept
 category: CFA
+catalog: yes
 description: The very basic of Derivative. There you go, only Finace surive.
 tags:
     - CFAL1

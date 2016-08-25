@@ -66,7 +66,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Lijun Yu's Blog</a>
+            <a class="navbar-brand" href="/">Maching Learning | 大数据学习笔记</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -184,7 +184,9 @@
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Lijun Yu's Blog on August 20, 2016</span>
+                    <div class="subheading">compile and execute with sublime.</div>
+                    
+                    <span class="meta">Posted by Maching Learning | 大数据学习笔记 on August 20, 2016</span>
                 </div>
             </div>
         </div>
@@ -202,7 +204,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="scala">Scala特点：</h2>
+				<h2 id="scalate-dian-">Scala特点：</h2>
 
 <blockquote>
   <ul>
@@ -212,7 +214,7 @@
   </ul>
 </blockquote>
 
-<h2 id="sublime-ide-">sublime IDE 配置</h2>
+<h2 id="sublime-ide-pei-zhi-">sublime IDE 配置</h2>
 <p>【Tools】-&gt;【Build System】-&gt;【New Build System】
 输入如下内容：</p>
 
@@ -243,7 +245,7 @@ java %~n1
 </code></pre>
 </div>
 
-<h2 id="scala-1">scala示例</h2>
+<h2 id="scalashi-li-">scala示例</h2>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>· object Hello {   def main(args: Array[String]): Unit = {
 println("Hello, world!")   } }
@@ -299,6 +301,20 @@ println("Hello, world!")   } }
 
     <!-- Side Catalog Container -->
         
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
 
     <!-- Sidebar Container -->
             <div class="
@@ -346,13 +362,13 @@ println("Hello, world!")   } }
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="8">
+                				<a href="/tags/#Big Data" title="Big Data" rel="11">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="9">
+                				<a href="/tags/#大数据" title="大数据" rel="12">
                                 大数据
                                 </a>
                             
@@ -521,7 +537,7 @@ println("Hello, world!")   } }
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Lijun Yu's Blog 2016
+                    Copyright &copy; Maching Learning | 大数据学习笔记 2016
                 </p>
             </div>
         </div>
@@ -632,6 +648,50 @@ println("Hello, world!")   } }
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 

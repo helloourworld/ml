@@ -2,6 +2,7 @@
 layout: post
 title: Hadoop Tutorial ---- Components Required
 category: blog
+catalog: yes
 description: Limited site of Hadoop Resource.
 tags:
     - Hadoop

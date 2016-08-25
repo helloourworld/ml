@@ -2,6 +2,7 @@
 layout: post
 title: hackerrank_numpy_test
 category: MLAdvance
+catalog: yes
 description: become an hacker need to parctice.
 tags:
     - Big Data

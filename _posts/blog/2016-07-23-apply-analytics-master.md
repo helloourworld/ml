@@ -2,6 +2,7 @@
 layout:     post
 title:      How to start applying for Analytics Data Science Masters in the US Universities?
 category: blog
+catalog: yes
 description: Planning a masters program in data science in US? But, not completely aware of the application process? Or afraid of the application process?
 tags:
     - Other

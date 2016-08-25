@@ -66,7 +66,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Lijun Yu's Blog</a>
+            <a class="navbar-brand" href="/">Maching Learning | 大数据学习笔记</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -182,7 +182,9 @@
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Lijun Yu's Blog on August 24, 2016</span>
+                    <div class="subheading">变量函数，操作符，基本类型</div>
+                    
+                    <span class="meta">Posted by Maching Learning | 大数据学习笔记 on August 24, 2016</span>
                 </div>
             </div>
         </div>
@@ -200,9 +202,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="section">变量函数</h2>
+				<h2 id="bian-liang-han-shu-">变量函数</h2>
 
-<h3 id="varval----immutable">1 变量：var，val，—-immutable</h3>
+<h3 id="bian-liang-varval----immutable">1 变量：var，val，—-immutable</h3>
 
 <blockquote>
   <ul>
@@ -215,7 +217,7 @@
 </code></pre>
 </div>
 
-<h3 id="functionprocedure">2 函数（function），过程（procedure）</h3>
+<h3 id="han-shu-functionguo-cheng-procedure">2 函数（function），过程（procedure）</h3>
 
 <blockquote>
   <ul>
@@ -264,7 +266,7 @@ log(array: _*)
 </code></pre>
 </div>
 
-<h3 id="section-1">操作符</h3>
+<h3 id="cao-zuo-fu-">操作符</h3>
 
 <blockquote>
   <ul>
@@ -288,7 +290,7 @@ log(array: _*)
   </ul>
 </blockquote>
 
-<h3 id="section-2">基本类型</h3>
+<h3 id="ji-ben-lei-xing-">基本类型</h3>
 
 <p>在Scala中，基本类型也是class，比如，Int类型，来自scala.Int，每一个数字，都是scala.Int的一个实例。装箱（boxing）和拆箱（unboxing）操作是透明的，程序员不需要关心（实际上，这是由定义在Predef中的隐式转换完成的）。</p>
 
@@ -418,6 +420,20 @@ println("Result = " + result)
 
     <!-- Side Catalog Container -->
         
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
 
     <!-- Sidebar Container -->
             <div class="
@@ -465,13 +481,13 @@ println("Result = " + result)
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="8">
+                				<a href="/tags/#Big Data" title="Big Data" rel="11">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="9">
+                				<a href="/tags/#大数据" title="大数据" rel="12">
                                 大数据
                                 </a>
                             
@@ -640,7 +656,7 @@ println("Result = " + result)
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Lijun Yu's Blog 2016
+                    Copyright &copy; Maching Learning | 大数据学习笔记 2016
                 </p>
             </div>
         </div>
@@ -751,6 +767,50 @@ println("Result = " + result)
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 

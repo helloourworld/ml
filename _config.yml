@@ -1,5 +1,6 @@
 # Site settings
-title: Lijun Yu's Blog
+#title: Lijun Yu's Blog
+title: Maching Learning | 大数据学习笔记
 SEOTitle: Maching Learning | 机器学习笔记
 header-img: images/background.jpg
 email: davidyjun@gmail.com
@@ -44,7 +45,17 @@ gems: [jekyll-paginate]
 # document: http://jekyllrb.com/docs/configuration/#kramdown
 markdown: kramdown
 kramdown:
-  input: GFM                            # use Github Flavored Markdown !important
+  input:                     GFM
+  auto_ids:                  true
+  footnote_nr:               1
+  entity_output:             as_char
+  toc_levels:                1..6
+  smart_quotes:              lsquo,rsquo,ldquo,rdquo
+  enable_coderay:            false
+  hard_wrap:                 false
+  syntax_highlighter:        rouge
+  transliterated_header_ids: true
+  footnote_backlink:         "&#8617;&#xfe0e;"
 
 
 
@@ -66,7 +77,18 @@ ba_track_id: 863b1f46c83a8e14e47782106aee7e7f
 ga_track_id: 'UA-82819752-1'            # Format: UA-xxxxxx-xx
 ga_domain: machinelearningadvance.com
 
-
+# catalog
+catalog:
+  - id: item 1
+    overview: |
+      overview text
+      more overview text
+    available_to: 2012-01-01
+    foo: |
+      foo text
+      more foo text
+  - id: item2
+    overview: <similar to above>
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.

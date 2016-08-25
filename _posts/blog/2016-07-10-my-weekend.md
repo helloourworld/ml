@@ -3,6 +3,7 @@ layout: post
 title: This is a test!
 description: Welcome!, Let's learn and think together.
 category: MLAdvance
+catalog: yes
 tags:
     - Other
 ---

@@ -66,7 +66,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Lijun Yu's Blog</a>
+            <a class="navbar-brand" href="/">Maching Learning | 大数据学习笔记</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -182,7 +182,9 @@
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Lijun Yu's Blog on July 24, 2016</span>
+                    <div class="subheading">The very basic of Derivative. There you go, only Finace surive.</div>
+                    
+                    <span class="meta">Posted by Maching Learning | 大数据学习笔记 on July 24, 2016</span>
                 </div>
             </div>
         </div>
@@ -280,6 +282,20 @@
 
     <!-- Side Catalog Container -->
         
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
 
     <!-- Sidebar Container -->
             <div class="
@@ -327,13 +343,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="8">
+                				<a href="/tags/#Big Data" title="Big Data" rel="11">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="9">
+                				<a href="/tags/#大数据" title="大数据" rel="12">
                                 大数据
                                 </a>
                             
@@ -502,7 +518,7 @@
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Lijun Yu's Blog 2016
+                    Copyright &copy; Maching Learning | 大数据学习笔记 2016
                 </p>
             </div>
         </div>
@@ -613,6 +629,50 @@
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 

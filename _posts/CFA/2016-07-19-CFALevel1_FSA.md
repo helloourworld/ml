@@ -2,6 +2,7 @@
 layout: post
 title: Lev1_FSA_basic_concept
 category: CFA
+catalog: yes
 description: The very basic_Financial Statement Analysis. There you go, only Finace surive.
 tags:
     - CFAL1

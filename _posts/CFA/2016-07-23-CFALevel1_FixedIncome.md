@@ -2,6 +2,7 @@
 layout: post
 title: Lev1_FixedIncome_basic_concept
 category: CFA
+catalog: yes
 description: The very basic of Fixed Income. There you go, only Finace surive.
 tags:
     - CFAL1
