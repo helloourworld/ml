@@ -8,6 +8,20 @@
 		
 			
 			<item>
+				<title>consistent hashing</title>
+				
+					<description>&lt;h2 id=&quot;qian-yan-&quot;&gt;前言&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Thu, 25 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/hadoop/2016/08/25/IT-Memo-consistent-hashing/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/25/IT-Memo-consistent-hashing/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>scala Lesson 1</title>
 				
 					<description>&lt;h2 id=&quot;bian-liang-han-shu-&quot;&gt;变量函数&lt;/h2&gt;
@@ -151,7 +165,7 @@ catalog: yes&gt;
 		
 			
 			<item>
-				<title>Hadoop 名词速览</title>
+				<title>大数据名词速览</title>
 				
 					<description>&lt;h2 id=&quot;hadoopchan-pin-ming-ci-su-lan-bu-duan-bu-chong-zhong-&quot;&gt;Hadoop产品名词速览（不断补充中…）&lt;/h2&gt;
 
