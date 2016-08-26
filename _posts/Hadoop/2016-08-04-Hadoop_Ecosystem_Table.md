@@ -10,14 +10,6 @@ tags:
     - 大数据
 ---
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Hadoopecosystemtable.github.io : This page is a summary to keep the track of Hadoop related project, and relevant projects around Big Data scene focused on the open source, free software enviroment." />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="css/stylesheet.css">
-  </head>
-
   <body>
 
     <!-- MAIN CONTENT -->

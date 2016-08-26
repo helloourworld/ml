@@ -237,12 +237,9 @@ catalog: yes&gt;
 			<item>
 				<title>Hadoop Ecosystem Table</title>
 				
-					<description>&lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot; /&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;chrome=1&quot; /&gt;
-    &lt;meta name=&quot;description&quot; content=&quot;Hadoopecosystemtable.github.io : This page is a summary to keep the track of Hadoop related project, and relevant projects around Big Data scene focused on the open source, free software enviroment.&quot; /&gt;
+					<description>&lt;body&gt;
 
-&lt;/head&gt;
+&lt;/body&gt;
 </description>
 				
 				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
