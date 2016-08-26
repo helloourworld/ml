@@ -2,10 +2,9 @@
 layout: post
 title: scala with sublime
 description: compile and execute with sublime.
-category: blog
+category: Language
 catalog: yes
 tags:
-    - IT
     - Scala
 ---
 ## Scala特点：

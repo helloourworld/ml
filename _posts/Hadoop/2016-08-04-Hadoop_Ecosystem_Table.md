@@ -3,7 +3,7 @@ layout: post
 title: Hadoop Ecosystem Table
 category: Hadoop
 catalog: yes
-description:  This page is a summary to keep the track of Hadoop related project, and relevant projects around Big Data scene focused on the open source, free software enviroment.转载至http://hadoopecosystemtable.github.io/, Please Flolow
+description:  This page is a summary to keep the track of Hadoop related project, and relevant projects around Big Data scene focused on the open source, free software enviroment.转载至http://hadoopecosystemtable.github.io, Please Flolow
 header-img: images/hadoop/asf_logo.png
 tags:
     - Big Data
