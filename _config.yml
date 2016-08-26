@@ -35,9 +35,16 @@ anchorjs: true                          # if you want to customize anchor. check
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-gems: [jekyll-paginate]
+# gems: [jekyll-paginate]
 
-
+gems:
+   - jekyll-paginate
+   - jekyll-mentions
+   - jemoji
+   - jekyll-redirect-from
+   - jekyll-sitemap
+   - jekyll-feed
+   - rouge
 
 # Markdown settings
 # replace redcarpet to kramdown,
@@ -56,6 +63,7 @@ kramdown:
   syntax_highlighter:        rouge
   transliterated_header_ids: true
   footnote_backlink:         "&#8617;&#xfe0e;"
+
 
 
 
