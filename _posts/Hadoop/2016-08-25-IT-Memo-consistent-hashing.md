@@ -3,7 +3,7 @@ layout: post
 title: consistent hashing
 category: Hadoop
 catalog: yes
-description: 转载请说明出处：http://blog.csdn.net/cywosp/article/details/23397179
+description: 转载请说明出处-http://blog.csdn.net/cywosp/article/details/23397179
 tags:
     - IT
 ---
