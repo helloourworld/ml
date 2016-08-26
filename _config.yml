@@ -45,6 +45,7 @@ gems:
    - jekyll-sitemap
    - jekyll-feed
    - rouge
+   - stringex
 
 # Markdown settings
 # replace redcarpet to kramdown,
