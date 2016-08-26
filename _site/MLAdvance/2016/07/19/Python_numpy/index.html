@@ -2,15 +2,16 @@
 <html lang="en">
 
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
-    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data">
-    <link rel="stylesheet" href="/css/default.css" type="text/css" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <meta name="keywords" content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data">
+    <link rel="stylesheet" href="/css/default.css" type="text/css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml">
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
@@ -166,8 +167,8 @@
         border: 0;
     }
 </style>
-<header class="intro-header" >
-    <iframe src=""/>
+<header class="intro-header">
+    <iframe src=""></iframe>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -189,7 +190,7 @@
                 </div>
             </div>
         </div>
-    </iframe>
+    
 </header>
 
 <!-- Post Content -->
@@ -206,7 +207,8 @@
 
 <p>A NumPy array is a grid of values. They are similar to lists, except that every element of an array must be the same type.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 a = numpy.array([1, 2, 3, 4, 5])
 b = numpy.array([1, 2, 3, 4, 5], float)
 `
@@ -215,7 +217,8 @@ b = numpy.array([1, 2, 3, 4, 5], float)
 
 <p>reverse a np.array</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy as np
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy as np
 array1 = np.array(map(float,raw_input().split(' ')), float)
 array2 = array1[::-1]
 print array2
@@ -254,7 +257,8 @@ print array2
 
 <p>The reshape tool gives a new shape to an array without changing its data. It creates a new array and does not modify the original array itself.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 my_array = numpy.array([1, 2, 3, 4, 5, 6])
 print my_array.reshape(my_array, (3,2))
 `
@@ -271,7 +275,8 @@ print my_array.reshape(my_array, (3,2))
 
 <p>It will not affect the original array, but it will create a new array.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy as np
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy as np
 my_array = np.array([[1, 2, 3],
                                 [4, 5, 6]])
 print np.transpose(my_array)
@@ -285,7 +290,8 @@ print np.transpose(my_array)
 
 <p>The tool flatten creates a copy of the input array flattened to one dimension.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy as np
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy as np
 my_array = np.array([[1, 2, 3], [4, 5, 6]])
 print my_array.flatten()
 `
@@ -305,7 +311,8 @@ print my_array.flatten()
 
 <p>another method</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 shape1 = numpy.array(map(int, raw_input().split(' ')))
 array1 = numpy.array(map(int, raw_input().split(' ')))
 print numpy.transpose(array1.reshape(array1, shape1))
@@ -318,7 +325,8 @@ print array1.flatten()
 
 <p>Two or more arrays can be concatenated together using the concatenate function with a tuple of the arrays to be joined:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 array_1 = numpy.array([1,2,3])
 array_2 = numpy.array([4,5,6])
@@ -334,7 +342,8 @@ print numpy.concatenate((array_1, array_2, array_3))
 
 <p>If an array has more than one dimension, it is possible to specify the axis along which multiple arrays are concatenated. By default, it is along the first dimension.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`
 import numpy
 
 array_1 = numpy.array([[1,2,3],[0,0,0]])
@@ -360,7 +369,8 @@ print numpy.concatenate((array1, array2))
 
 <p>The zeros tool returns a new array with a given shape and type filled with ‘s.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 print numpy.zeros((1,2))                    #Default type is float
 #Output : [[ 0.  0.]]
@@ -375,7 +385,8 @@ print numpy.zeros((1,2), dtype = numpy.int) #Type changes to int
 
 <p>The ones tool returns a new array with a given shape and type filled with ‘s.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 print numpy.ones((1,2))                    #Default type is float
 #Output : [[ 1.  1.]]
@@ -390,7 +401,8 @@ print numpy.ones((1,2), dtype = numpy.int) #Type changes to int
 
 <p>The identity tool returns an identity array. An identity array is a square matrix with all the main diagonal elements as  and the rest as . The default type of elements is float.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 print numpy.identity(3) #3 is for  dimension 3 X 3
 
 #Output
@@ -405,7 +417,8 @@ print numpy.identity(3) #3 is for  dimension 3 X 3
 
 <p>The eye tool returns a 2-D array with ‘s as the diagonal and ‘s elsewhere. The diagonal can be main, upper or lower depending on the optional parameter . A positive  is for the upper diagonal, a negative  is for the lower, and a   (default) is for the main diagonal.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 print numpy.eye(8, 7, k = 1)    # 8 X 7 Dimensional array with first upper diagonal 1.
 
 #Output
@@ -427,7 +440,8 @@ print numpy.eye(8, 7, k = -2)   # 8 X 7 Dimensional array with second lower diag
 
 <p>Basic mathematical functions operate element-wise on arrays. They are available both as operator overloads and as functions in the NumPy module.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 a = numpy.array([1,2,3,4], float)
 b = numpy.array([5,6,7,8], float)
@@ -462,7 +476,8 @@ print numpy.power(a, b)         #[  1.00000000e+00   6.40000000e+01   2.18700000
 <p>The tool floor returns the floor of the input element-wise.
 The floor of x is the largest integer i where i &lt;= x</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 my_array = numpy.array([1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9])
 print numpy.floor(my_array)         #[ 1.  2.  3.  4.  5.  6.  7.  8.  9.]
@@ -477,7 +492,8 @@ print numpy.floor(my_array)         #[ 1.  2.  3.  4.  5.  6.  7.  8.  9.]
 <p>The tool ceil returns the ceiling of the input element-wise.
 The ceiling of x is the smallest integer i where i &gt;= x</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 my_array = numpy.array([1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9])
 print numpy.ceil(my_array)         #[ 2.  3.  4.  5.  6.  7.  8.  9.  10.]
@@ -491,7 +507,8 @@ print numpy.ceil(my_array)         #[ 2.  3.  4.  5.  6.  7.  8.  9.  10.]
 
 <p>The rint tool rounds to the nearest integer of input element-wise.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 my_array = numpy.array([1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9])
 print numpy.rint(my_array)         #[1.  2.  3.  4.  6.  7.  8.  9.  10.]
@@ -507,7 +524,8 @@ print numpy.rint(my_array)         #[1.  2.  3.  4.  6.  7.  8.  9.  10.]
 
 <p>The sum tool returns the sum of array elements over a given axis.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 my_array = numpy.array([ [1, 2], [3, 4] ])
 
@@ -528,7 +546,8 @@ print numpy.sum(my_array)                   #Output : 10
 
 <p>The prod tool returns the product of array elements over a given axis.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 my_array = numpy.array([ [1, 2], [3, 4] ])
 
@@ -548,7 +567,8 @@ print numpy.prod(my_array)                      #Output : 24
 
 <p>hacking</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 N = map(int, raw_input().split())
 array1 = numpy.array([raw_input().split() for _ in range(N[0])], int)
@@ -566,7 +586,8 @@ print numpy.prod(s)
 
 <p>The tool min returns the minimum value along a given axis.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 my_array = numpy.array([[2, 5],
                         [3, 7],
@@ -623,7 +644,8 @@ print numpy.min(my_array)                   #Output : 0
 
 <p>The dot tool returns the <a href="https://en.wikipedia.org/wiki/Dot_product">dot product</a> of two arrays.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 A = numpy.array([ 1, 2 ])
 B = numpy.array([ 3, 4 ])
@@ -639,7 +661,8 @@ print numpy.dot(A, B)       #Output : 11
 
 <p>The cross tool returns the <a href="https://en.wikipedia.org/wiki/Cross_product">cross product</a> of two arrays.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 A = numpy.array([ 1, 2 ])
 B = numpy.array([ 3, 4 ])
@@ -657,7 +680,8 @@ print numpy.cross(A, B)     #Output : -2
 
 <p>The inner tool returns the <a href="https://en.wikipedia.org/wiki/Inner_product_space">inner product</a> of two arrays.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 A = numpy.array([0, 1])
 B = numpy.array([3, 4])
@@ -673,7 +697,8 @@ print numpy.inner(A, B)     #Output : 4
 
 <p>The outer tool returns the <a href="https://en.wikipedia.org/wiki/Outer_product">outer product</a> of two arrays.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`import numpy
 
 A = numpy.array([0, 1])
 B = numpy.array([3, 4])
@@ -687,62 +712,74 @@ print numpy.outer(A, B)     #Output : [[0 0]
 <h2 id="polynomials">Polynomials</h2>
 
 <ul>
-  <li>1 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.poly.html">Poly</a></li>
+  <li>1 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.poly.html">Poly</a>
+</li>
 </ul>
 
 <p>The poly tool returns the coefficients of a polynomial with the given sequence of roots.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.poly([-1, 1, 1, 10])        #Output : [  1 -11   9  11 -10]`
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`print numpy.poly([-1, 1, 1, 10])        #Output : [  1 -11   9  11 -10]`
 </code></pre>
 </div>
 
 <ul>
-  <li>2 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.roots.html">roots</a></li>
+  <li>2 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.roots.html">roots</a>
+</li>
 </ul>
 
 <p>The roots tool returns the roots of a polynomial with the given coefficients.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.roots([1, 0, -1])           #Output : [-1.  1.]`
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`print numpy.roots([1, 0, -1])           #Output : [-1.  1.]`
 </code></pre>
 </div>
 
 <ul>
-  <li>3 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyint.html">polyint</a></li>
+  <li>3 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyint.html">polyint</a>
+</li>
 </ul>
 
 <p>The polyint tool returns an antiderivative (indefinite integral) of a polynomial.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.polyint([1, 1, 1])          #Output : [ 0.33333333  0.5         1.          0.        ]`
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`print numpy.polyint([1, 1, 1])          #Output : [ 0.33333333  0.5         1.          0.        ]`
 </code></pre>
 </div>
 
 <ul>
-  <li>4 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyder.html#numpy.polyder">polyder</a></li>
+  <li>4 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyder.html#numpy.polyder">polyder</a>
+</li>
 </ul>
 
 <p>The polyder tool returns the derivative of the specified order of a polynomial.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.polyder([1, 1, 1, 1])       #Output : [3 2 1]`
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`print numpy.polyder([1, 1, 1, 1])       #Output : [3 2 1]`
 </code></pre>
 </div>
 
 <ul>
-  <li>5 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyval.html#numpy.polyval">polyval</a></li>
+  <li>5 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyval.html#numpy.polyval">polyval</a>
+</li>
 </ul>
 
 <p>The polyval tool evaluates the polynomial at specific value.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.polyval([1, -2, 0, 2], 4)   #Output : 34`
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`print numpy.polyval([1, -2, 0, 2], 4)   #Output : 34`
 </code></pre>
 </div>
 
 <ul>
-  <li>6 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyfit.html">polyfit</a></li>
+  <li>6 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyfit.html">polyfit</a>
+</li>
 </ul>
 
 <p>The polyfit tool fits a polynomial of a specified order to a set of data using a least-squares approach.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.polyfit([0,1,-1, 2, -2], [0,1,1, 4, 4], 2)
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`print numpy.polyfit([0,1,-1, 2, -2], [0,1,1, 4, 4], 2)
 #Output : [  1.00000000e+00   0.00000000e+00  -3.97205465e-16]
 `
 </code></pre>
@@ -756,34 +793,40 @@ The functions <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy
 <p>The NumPy module also comes with a number of built-in routines for linear algebra calculations. These can be found in the sub-module linalg.</p>
 
 <ul>
-  <li>1 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.det.html">linalg.det</a></li>
+  <li>1 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.det.html">linalg.det</a>
+</li>
 </ul>
 
 <p>The linalg.det tool computes the determinant of an array.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.linalg.det([[1 , 2], [2, 1]])       #Output : -3.0`
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`print numpy.linalg.det([[1 , 2], [2, 1]])       #Output : -3.0`
 </code></pre>
 </div>
 
 <ul>
-  <li>2 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.eig.html">linalg.eig</a></li>
+  <li>2 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.eig.html">linalg.eig</a>
+</li>
 </ul>
 
 <p>numpy.linalg.eig(a)[source]
 Compute the eigenvalues and right eigenvectors of a square array.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`from numpy import linalg as LA
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`from numpy import linalg as LA
 w, v = LA.eig(np.diag((1, 2, 3)))`
 </code></pre>
 </div>
 
 <ul>
-  <li>3 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.inv.html">linalg.inv</a></li>
+  <li>3 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.inv.html">linalg.inv</a>
+</li>
 </ul>
 
 <p>The linalg.inv tool computes the (multiplicative) inverse of a matrix.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.linalg.inv([[1 , 2], [2, 1]])       #Output : [[-0.33333333  0.66666667]
+<div class="highlighter-rouge">
+<pre class="highlight"><code>`print numpy.linalg.inv([[1 , 2], [2, 1]])       #Output : [[-0.33333333  0.66666667]
                                             #          [ 0.66666667 -0.33333333]]
                                             `
 </code></pre>
@@ -820,10 +863,7 @@ w, v = LA.eig(np.diag((1, 2, 3)))`
                 
                 <!-- 多说评论框 start -->
                 <div class="comment">
-                    <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/07/19/Python_numpy"
-                        data-title="hackerrank_numpy"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/07/19/Python_numpy/" >
+                    <div class="ds-thread" data-thread-key="/mladvance/2016/07/19/Python_numpy" data-title="hackerrank_numpy" data-url="http://machinelearningadvance.com/mladvance/2016/07/19/Python_numpy/">
                     </div>
                 </div>
                 <!-- 多说评论框 end -->
@@ -882,17 +922,21 @@ w, v = LA.eig(np.diag((1, 2, 3)))`
                             
                         
                             
-                                <a href="/tags/#Big Data" title="Big Data" rel="12">
+                                <a href="/tags/#Big%20Data" title="Big Data" rel="13">
                                     Big Data
                                 </a>
                             
                         
                             
-                                <a href="/tags/#大数据" title="大数据" rel="13">
+                                <a href="/tags/#%E5%A4%A7%E6%95%B0%E6%8D%AE" title="大数据" rel="14">
                                     大数据
                                 </a>
                             
                         
+                            
+                                <a href="/tags/#IT" title="IT" rel="2">
+                                    IT
+                                </a>
                             
                         
                             
@@ -1089,7 +1133,7 @@ w, v = LA.eig(np.diag((1, 2, 3)))`
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Maching Learning | 大数据学习笔记 2016
+                    Copyright © Maching Learning | 大数据学习笔记 2016
                 </p>
             </div>
         </div>
@@ -1097,13 +1141,13 @@ w, v = LA.eig(np.diag((1, 2, 3)))`
 </footer>
 
 <!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
+<script src="/js/jquery.min.js%20"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js "></script>
+<script src="/js/bootstrap.min.js%20"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js "></script>
+<script src="/js/hux-blog.min.js%20"></script>
 
 
 <!-- async load function -->
@@ -1250,7 +1294,7 @@ w, v = LA.eig(np.diag((1, 2, 3)))`
 
 
 <!-- Image to hack wechat -->
-<img src="/images/background.jpg" width="0" height="0" />
+<img src="/images/background.jpg" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

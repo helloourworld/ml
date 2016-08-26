@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>Lev1_Derivative_basic_concept - Maching Learning | 机器学习笔记</title>
+    <title>培训虚拟机使用指南 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/cfa/2016/07/24/CFALevel1_Derivative/">
+    <link rel="canonical" href="http://machinelearningadvance.com/hadoop/2016/08/26/hadoop_tutorial_2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -171,17 +171,19 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#CFAL1" title="CFAL1">CFAL1</a>
+                        <a class="tag" href="/tags/#Big%20Data" title="Big Data">Big Data</a>
+                        
+                        <a class="tag" href="/tags/#%E5%A4%A7%E6%95%B0%E6%8D%AE" title="大数据">大数据</a>
                         
                     </div>
-                    <h1>Lev1_Derivative_basic_concept</h1>
+                    <h1>培训虚拟机使用指南</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <div class="subheading">The very basic of Derivative. There you go, only Finace surive.</div>
+                    <div class="subheading">使用指南</div>
                     
-                    <span class="meta">Posted by Maching Learning | 大数据学习笔记 on July 24, 2016</span>
+                    <span class="meta">Posted by Maching Learning | 大数据学习笔记 on August 26, 2016</span>
                 </div>
             </div>
         </div>
@@ -199,37 +201,67 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="forward-market-and-contracts">68 Forward Market and Contracts</h2>
-<ul>
-  <li>[x] 1 什么是Forward</li>
-  <li>[x] 2 什么是FRA（Forward Rate Agreement）</li>
-</ul>
+				<h2 id="kai-qi-xu-ni-ji-">开启虚拟机</h2>
 
-<h2 id="future-markets-and-contracts">69 Future Markets and Contracts</h2>
-<ul>
-  <li>[x] 1 Future与Forward的区别</li>
-  <li>[x] 2 Marking to Market的机制是怎样的</li>
-  <li>[x] 3 什么是European Call</li>
-</ul>
+<p>确保安装了VMware软件。打开虚拟机后查看IP并更改hosts。注意：请根据本地的IP来更改，查看本地ip方法：ifconfig命令查看。默认NN01为~128；DN01为129；DN02为130。</p>
 
-<h2 id="option-markets-and-contracts">70 Option Markets and Contracts</h2>
-<ul>
-  <li>[x] 1 European Call和American Call的区别</li>
-  <li>[x] 2 什么是期权的价格下限（Lower Bound）</li>
-  <li>[x] 3 欧式看涨期权的价格下限是多少；欧式看跌期权的价格下限是多少；美式看涨期权的价格下限是多少；美式看跌期权的价格下限是多少</li>
-  <li>[x] 4 基础资产的当前价格是欧式和美式看涨期权的价格上限；执行价格是欧式和美式看跌期权的价格上限</li>
-  <li>[x] 5 什么是信托买入期权（Fiduciary Call）以及它的结构</li>
-  <li>[x] 6 什么是保护性看跌（Protective Put）以及它的结构</li>
-  <li>[x] 7 可以解释为什么Fiduciary Call的价格和Protective Put的价格相同</li>
-  <li>[x] 8 Put-Call Parity是怎么回事</li>
-  <li>[x] 9 什么是Long Put（买入看跌期权），为什么Long Put和Call等价</li>
-</ul>
+<div class="highlighter-rouge">
+<pre class="highlight"><code>Last login: Tue Aug 23 18:47:50 2016 from 192.168.71.1
+[hadoop@NN01 ~]$ sudo vim /etc/hosts
+[hadoop@NN01 ~]$ sudo tools/deploy.sh /etc/hosts /etc/hosts slave
+****DN01.HadoopVM*****
+Warning: Permanently added the RSA host key for IP address '192.168.71.134' to the list of known hosts.
+hosts                                 100%  293     0.3KB/s   00:00
+****DN02.HadoopVM*****
+Warning: Permanently added the RSA host key for IP address '192.168.71.133' to the list of known hosts.
+hosts                                 100%  293     0.3KB/s   00:00
+[hadoop@NN01 ~]$
+</code></pre>
+</div>
 
-<h2 id="risk-management-application-of-option-strategies">72 Risk Management Application of Option Strategies</h2>
-<ul>
-  <li>[x] 1 Covered Call是什么意思，其结构是怎样的</li>
-  <li>[x] 2 描述Covered Call的Profit/Loss的线图</li>
-</ul>
+<h2 id="kai-qi-fu-wu-">开启服务</h2>
+
+<p>你可以执行以下脚本来启动，也可以一个个单独启动。</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>[hadoop@NN01 ~]$ ./start_up.sh
+</code></pre>
+</div>
+
+<p>一个个单独启动</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code># start up the hadoop servers
+
+# start up hdfs
+$HADOOP_HOME/sbin/start-all.sh &amp;&amp; sleep 120 &amp;
+$HADOOP_HOME/sbin/mr-jobhistory-daemon.sh start historyserver --config $HADOOP_CONF_DIR &amp;&amp; sleep 90 &amp;
+
+# start up zookeeper
+~/zookeeper.sh start &amp;&amp; exec sleep 90 &amp;
+
+# start up kafka
+# ~/tools/runRemoteCmd.sh "/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;&amp; sleep 3 &amp;&amp; kill -2 $!" all
+
+# start up hbase
+~/hbase/bin/start-hbase.sh &amp;
+
+~/zookeeper.sh status
+</code></pre>
+</div>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code># start up spark
+[hadoop@NN01 ~]$ cd spark
+[hadoop@NN01 spark]$ ls
+bin   data      jars     licenses  NOTICE  R          RELEASE  work
+conf  examples  LICENSE  logs      python  README.md  sbin     yarn
+[hadoop@NN01 spark]$ ./sbin/start-all.sh
+</code></pre>
+</div>
+
+<p>spark启动后可在8080端口查看__<img src="/images/hadoop/spark_ui.png" alt=""></p>
+
 
 
                 <hr>
@@ -238,26 +270,19 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/blog/2016/07/23/apply-analytics-master/" data-toggle="tooltip" data-placement="top" title="How to start applying for Analytics Data Science Masters in the US Universities?">
+                        <a href="/hadoop/2016/08/25/IT-Memo-consistent-hashing/" data-toggle="tooltip" data-placement="top" title="consistent hashing">
                         Previous<br>
-                        <span>How to start applying for Analytics Data Science Masters in the US Universities?</span>
+                        <span>consistent hashing</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/cfa/2016/07/25/CFALevel1_AI/" data-toggle="tooltip" data-placement="top" title="Lev1_AI_basic_concept">
-                        Next<br>
-                        <span>Lev1_AI_basic_concept</span>
-                        </a>
-                    </li>
                     
                 </ul>
 
                 
                 <!-- 多说评论框 start -->
                 <div class="comment">
-                    <div class="ds-thread" data-thread-key="/cfa/2016/07/24/CFALevel1_Derivative" data-title="Lev1_Derivative_basic_concept" data-url="http://machinelearningadvance.com/cfa/2016/07/24/CFALevel1_Derivative/">
+                    <div class="ds-thread" data-thread-key="/hadoop/2016/08/26/hadoop_tutorial_2" data-title="培训虚拟机使用指南" data-url="http://machinelearningadvance.com/hadoop/2016/08/26/hadoop_tutorial_2/">
                     </div>
 
                 </div>
