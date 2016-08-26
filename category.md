@@ -5,7 +5,6 @@ description: keep hungry keep foolish
 header-img: "images/machinelearning.png"
 ---
 
-
 <!-- Page Header -->
 <header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
     <div class="container">
@@ -30,13 +29,11 @@ header-img: "images/machinelearning.png"
                 <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
                 {% endfor %}
             </div>
-
             <!--<blockquote class="tag-comments">
                 标签命名规范：
                     <li>行业观察、职位、公司优先使用中文</li>
                     <li>外国产品、术语优先使用英文</li>
             </blockquote>-->
-
             <!-- 标签列表 -->
             {% for tag in site.categories %}
             <div class="one-tag-list">
@@ -67,7 +64,6 @@ header-img: "images/machinelearning.png"
                 {% endfor %}
             </div>
             {% endfor %}
-
         </div>
     </div>
 </div>
