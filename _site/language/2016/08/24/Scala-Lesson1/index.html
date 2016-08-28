@@ -2,16 +2,15 @@
 <html lang="en">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
-    <meta name="keywords" content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data">
-    <link rel="stylesheet" href="/css/default.css" type="text/css">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
@@ -163,7 +162,7 @@
 
     
 </style>
-<header class="intro-header">
+<header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
         <div class="row">
@@ -210,8 +209,7 @@
   </ul>
 </blockquote>
 
-<div class="language-scala highlighter-rouge">
-<pre class="highlight"><code><span class="k">var:</span> <span class="kt">a:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var:</span> <span class="kt">a:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">5</span>
 </code></pre>
 </div>
 
@@ -223,8 +221,7 @@
   </ul>
 </blockquote>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>def add(x: Int, y: Int): Int = {
+<div class="highlighter-rouge"><pre class="highlight"><code>def add(x: Int, y: Int): Int = {
     x + y
 }
 println("2 + 3 = " + add(2, 3))
@@ -236,8 +233,7 @@ println("2 + 3 = " + add(2, 3))
   </ul>
 </blockquote>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>def sayHiTo(name: String) {
+<div class="highlighter-rouge"><pre class="highlight"><code>def sayHiTo(name: String) {
 println("Hi, " + name)
 }
 sayHiTo("DAVE")
@@ -252,8 +248,7 @@ sayHiTo("DAVE")
 
 <p>(3) 重复参数，类型后面有一个’<em>‘，这表示这个参数可以重复不定次数，包括0次。当参数个数不是0时，重复参数在内部其实是一个Array。使用时跟Array差不多，只是，调用时不能传递直接Array进来。如果需要传递整个Array（或者别的类型的序列）的话，有一个变通方法，那就是，加一个’_</em>‘符号，该符号与参数之间用逗号分隔，比如log(array: _*)。</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>def log(msgs: String*) = {
+<div class="highlighter-rouge"><pre class="highlight"><code>def log(msgs: String*) = {
   println(msgs.getClass.getName)
   println(msgs.mkString(","))
 }
@@ -314,8 +309,7 @@ log(array: _*)
 
 <p>每一个基本类型都有一个相对应的富包装类。 基本类型，在必要的时候通过隐式转换转换为对应的富包装类，从而可调用富包装类提供的方法。</p>
 
-<div class="language-ruby highlighter-rouge">
-<pre class="highlight"><code><span class="err">／／</span><span class="no">RichInt</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="err">／／</span><span class="no">RichInt</span>
 <span class="n">val</span> <span class="n">n1</span> <span class="o">=</span> <span class="mi">2</span> <span class="n">max</span> <span class="mi">3</span>
 <span class="n">println</span><span class="p">(</span><span class="s2">"2 max 3 = "</span> <span class="o">+</span> <span class="n">n1</span><span class="p">)</span>
 
@@ -339,15 +333,13 @@ log(array: _*)
 
 <p>Scala里的String是直接借用了Java的String。不过，由于String实际是一系列Char的不可变的集合，Scala中大部分针对集合的操作，都可以用于String，具体来说，String的这些方法存在于类scala.collection.immutable.StringOps中。 由于String在需要时能隐式转换为StringOps，因此不需要任何额外的转换，String就可以使用这些方法。</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>val r3 = str.filter( _ != 'l') //"Heo"
+<div class="highlighter-rouge"><pre class="highlight"><code>val r3 = str.filter( _ != 'l') //"Heo"
 println("\"Hello\".filter( _ != 'l') = " + r3)
 </code></pre>
 </div>
 <p>与Java或C#一样，String是不可变的，对String进行操作，会得到新的String实例。因此在需要频繁操作String的情况下，请使用StringBuilder。</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>val builder = new StringBuilder
+<div class="highlighter-rouge"><pre class="highlight"><code>val builder = new StringBuilder
 builder.append("Hello")
 builder.append(", world")
 builder += '!'
@@ -360,8 +352,7 @@ println(builder)   //Me: Hello, world!
   <li>3 字面常量：同java。XML扩展。函数常量。</li>
 </ul>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>val fun=
+<div class="highlighter-rouge"><pre class="highlight"><code>val fun=
 new Function2[Int, Int, Int] {
     def apply(x: Int, y: Int): Int = x + y
 }
@@ -376,7 +367,7 @@ println("Result = " + result)
 
 <p>Scala中，所有的值都是类对象，而所有的类，包括值类型，都最终继承自一个统一的根类型Any。统一类型，是Scala的又一大特点。更特别的是，Scala中还定义了几个底层类（Bottom Class），比如Null和Nothing。</p>
 
-<p><img src="/images/scala/anyclass.png" alt=""></p>
+<p><img src="/images/scala/anyclass.png" alt="" /></p>
 
 <ul>
   <li>Null是所有引用类型的子类型，而Nothing是所有类型的子类型。Null类只有一个实例对象，null，类似于Java中的null引用。null可以赋值给任意引用类型，但是不能赋值给值类型。</li>
@@ -434,7 +425,10 @@ println("Result = " + result)
                 
                 <!-- 多说评论框 start -->
                 <div class="comment">
-                    <div class="ds-thread" data-thread-key="/language/2016/08/24/Scala-Lesson1" data-title="scala Lesson 1" data-url="http://machinelearningadvance.com/language/2016/08/24/Scala-Lesson1/">
+                    <div class="ds-thread"
+                        data-thread-key="/language/2016/08/24/Scala-Lesson1"
+                        data-title="scala Lesson 1"
+                        data-url="http://machinelearningadvance.com/language/2016/08/24/Scala-Lesson1/" >
                     </div>
 
                 </div>
@@ -510,13 +504,13 @@ println("Result = " + result)
                             
         				
                             
-                				<a href="/tags/#Big%20Data" title="Big Data" rel="13">
+                				<a href="/tags/#Big Data" title="Big Data" rel="13">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#%E5%A4%A7%E6%95%B0%E6%8D%AE" title="大数据" rel="14">
+                				<a href="/tags/#大数据" title="大数据" rel="14">
                                 大数据
                                 </a>
                             
@@ -681,7 +675,7 @@ println("Result = " + result)
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright © Maching Learning | 大数据学习笔记 2016
+                    Copyright &copy; Maching Learning | 大数据学习笔记 2016
                 </p>
             </div>
         </div>
@@ -689,13 +683,13 @@ println("Result = " + result)
 </footer>
 
 <!-- jQuery -->
-<script src="/js/jquery.min.js%20"></script>
+<script src="/js/jquery.min.js "></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js%20"></script>
+<script src="/js/bootstrap.min.js "></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js%20"></script>
+<script src="/js/hux-blog.min.js "></script>
 
 
 <!-- async load function -->
@@ -842,7 +836,7 @@ println("Result = " + result)
 
 
 <!-- Image to hack wechat -->
-<img src="/images/background.jpg" width="0" height="0">
+<img src="/images/background.jpg" width="0" height="0" />
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

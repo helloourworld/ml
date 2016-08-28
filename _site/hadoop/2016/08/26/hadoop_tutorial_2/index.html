@@ -2,16 +2,15 @@
 <html lang="en">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
-    <meta name="keywords" content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data">
-    <link rel="stylesheet" href="/css/default.css" type="text/css">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
@@ -163,7 +162,7 @@
 
     
 </style>
-<header class="intro-header">
+<header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
         <div class="row">
@@ -171,9 +170,9 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Big%20Data" title="Big Data">Big Data</a>
+                        <a class="tag" href="/tags/#Big Data" title="Big Data">Big Data</a>
                         
-                        <a class="tag" href="/tags/#%E5%A4%A7%E6%95%B0%E6%8D%AE" title="大数据">大数据</a>
+                        <a class="tag" href="/tags/#大数据" title="大数据">大数据</a>
                         
                     </div>
                     <h1>培训虚拟机使用指南</h1>
@@ -205,8 +204,7 @@
 
 <p>确保安装了VMware软件。打开虚拟机后查看IP并更改hosts。注意：请根据本地的IP来更改，查看本地ip方法：ifconfig命令查看。默认NN01为~128；DN01为129；DN02为130。</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>Last login: Tue Aug 23 18:47:50 2016 from 192.168.71.1
+<div class="highlighter-rouge"><pre class="highlight"><code>Last login: Tue Aug 23 18:47:50 2016 from 192.168.71.1
 [hadoop@NN01 ~]$ sudo vim /etc/hosts
 [hadoop@NN01 ~]$ sudo tools/deploy.sh /etc/hosts /etc/hosts slave
 ****DN01.HadoopVM*****
@@ -223,15 +221,13 @@ hosts                                 100%  293     0.3KB/s   00:00
 
 <p>你可以执行以下脚本来启动，也可以一个个单独启动。</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>[hadoop@NN01 ~]$ ./start_up.sh
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 ~]$ ./start_up.sh
 </code></pre>
 </div>
 
 <p>一个个单独启动</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code># start up the hadoop servers
+<div class="highlighter-rouge"><pre class="highlight"><code># start up the hadoop servers
 
 # start up hdfs
 $HADOOP_HOME/sbin/start-all.sh &amp;&amp; sleep 120 &amp;
@@ -250,19 +246,17 @@ $HADOOP_HOME/sbin/mr-jobhistory-daemon.sh start historyserver --config $HADOOP_C
 </code></pre>
 </div>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code># start up spark
+<div class="highlighter-rouge"><pre class="highlight"><code># start up spark
 [hadoop@NN01 ~]$ cd spark
 [hadoop@NN01 spark]$ ./sbin/start-all.sh
 </code></pre>
 </div>
 
-<p>spark启动后可在8080端口查看__<img src="/images/hadoop/spark_ui.png" alt=""></p>
+<p>spark启动后可在8080端口查看__<img src="/images/hadoop/spark_ui.png" alt="" /></p>
 
 <h1 id="guan-bi-fu-wu-">关闭服务</h1>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>[hadoop@NN01 spark]$ ./sbin/stop-all.sh
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 spark]$ ./sbin/stop-all.sh
 hadoop@DN02.HadoopVM: stopping org.apache.spark.deploy.worker.Worker
 hadoop@DN01.HadoopVM: stopping org.apache.spark.deploy.worker.Worker
 hadoop@NN01.HadoopVM: stopping org.apache.spark.deploy.worker.Worker
@@ -297,7 +291,10 @@ stopping org.apache.spark.deploy.master.Master
                 
                 <!-- 多说评论框 start -->
                 <div class="comment">
-                    <div class="ds-thread" data-thread-key="/hadoop/2016/08/26/hadoop_tutorial_2" data-title="培训虚拟机使用指南" data-url="http://machinelearningadvance.com/hadoop/2016/08/26/hadoop_tutorial_2/">
+                    <div class="ds-thread"
+                        data-thread-key="/hadoop/2016/08/26/hadoop_tutorial_2"
+                        data-title="培训虚拟机使用指南"
+                        data-url="http://machinelearningadvance.com/hadoop/2016/08/26/hadoop_tutorial_2/" >
                     </div>
 
                 </div>
@@ -373,13 +370,13 @@ stopping org.apache.spark.deploy.master.Master
                             
         				
                             
-                				<a href="/tags/#Big%20Data" title="Big Data" rel="13">
+                				<a href="/tags/#Big Data" title="Big Data" rel="13">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#%E5%A4%A7%E6%95%B0%E6%8D%AE" title="大数据" rel="14">
+                				<a href="/tags/#大数据" title="大数据" rel="14">
                                 大数据
                                 </a>
                             
@@ -544,7 +541,7 @@ stopping org.apache.spark.deploy.master.Master
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright © Maching Learning | 大数据学习笔记 2016
+                    Copyright &copy; Maching Learning | 大数据学习笔记 2016
                 </p>
             </div>
         </div>
@@ -552,13 +549,13 @@ stopping org.apache.spark.deploy.master.Master
 </footer>
 
 <!-- jQuery -->
-<script src="/js/jquery.min.js%20"></script>
+<script src="/js/jquery.min.js "></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js%20"></script>
+<script src="/js/bootstrap.min.js "></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js%20"></script>
+<script src="/js/hux-blog.min.js "></script>
 
 
 <!-- async load function -->
@@ -705,7 +702,7 @@ stopping org.apache.spark.deploy.master.Master
 
 
 <!-- Image to hack wechat -->
-<img src="/images/background.jpg" width="0" height="0">
+<img src="/images/background.jpg" width="0" height="0" />
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>
