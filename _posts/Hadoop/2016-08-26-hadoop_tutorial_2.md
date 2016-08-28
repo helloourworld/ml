@@ -57,9 +57,6 @@ $HADOOP_HOME/sbin/mr-jobhistory-daemon.sh start historyserver --config $HADOOP_C
 ~~~
 # start up spark
 [hadoop@NN01 ~]$ cd spark
-[hadoop@NN01 spark]$ ls
-bin   data      jars     licenses  NOTICE  R          RELEASE  work
-conf  examples  LICENSE  logs      python  README.md  sbin     yarn
 [hadoop@NN01 spark]$ ./sbin/start-all.sh
 ~~~
 
