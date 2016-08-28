@@ -39,136 +39,6 @@ catalog: yes&gt;
 		
 			
 			<item>
-				<title>Hadoop Mesos</title>
-				
-					<description>&lt;h2 id=&quot;mesosyarn&quot;&gt;mesos和yarn区别&lt;/h2&gt;
-
-</description>
-				
-				<pubDate>Fri, 12 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/12/hadoop_family_mesos/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/12/hadoop_family_mesos/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>Hadoop Learn Guide</title>
-				
-					<description>&lt;h2 id=&quot;section&quot;&gt;前言&lt;/h2&gt;
-
-</description>
-				
-				<pubDate>Tue, 09 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/09/hadoop_family_guide/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/09/hadoop_family_guide/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>Hadoop Resource</title>
-				
-					<description>&lt;h2 id=&quot;apache&quot;&gt;Apache&lt;/h2&gt;
-
-</description>
-				
-				<pubDate>Sat, 06 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/06/hadoop_family_site/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/06/hadoop_family_site/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>Hadoop Mahout</title>
-				
-					<description>&lt;h2 id=&quot;mahout&quot;&gt;开始 Mahout&lt;/h2&gt;
-
-</description>
-				
-				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_mahout/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_mahout/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>Hadoop 名词速览</title>
-				
-					<description>&lt;h2 id=&quot;hadoop&quot;&gt;Hadoop产品名词速览（不断补充中…）&lt;/h2&gt;
-
-</description>
-				
-				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_glossary/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_glossary/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>Hadoop生态圈</title>
-				
-					<description>&lt;h2 id=&quot;hadoophivespark-&quot;&gt;如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？&lt;/h2&gt;
-
-</description>
-				
-				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_family_zhihu/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_family_zhihu/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>Hadoop Family</title>
-				
-					<description>&lt;p&gt;Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka等。对照&lt;a href=&quot;/Hadoop_Ecosystem_Table&quot;&gt;Hadoop_Ecosystem_Table&lt;/a&gt;,我们将其分类为：&lt;/p&gt;
-
-</description>
-				
-				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_family/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/04/hadoop_family/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>Hadoop Ecosystem Table</title>
-				
-					<description>&lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot; /&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;chrome=1&quot; /&gt;
-    &lt;meta name=&quot;description&quot; content=&quot;Hadoopecosystemtable.github.io : This page is a summary to keep the track of Hadoop related project, and relevant projects around Big Data scene focused on the open source, free software enviroment.&quot; /&gt;
-
-&lt;/head&gt;
-</description>
-				
-				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/04/Hadoop_Ecosystem_Table/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/04/Hadoop_Ecosystem_Table/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>Hadoop or Spark</title>
-				
-					<description>&lt;p&gt;THis page is mainly from &lt;a href=&quot;http://www.forbes.com/sites/bernardmarr/2015/06/22/spark-or-hadoop-which-is-the-best-big-data-framework/#72907489532c&quot;&gt;Forbes&lt;/a&gt; by Bernard Marr, CONTRIBUTOR&lt;/p&gt;
-
-</description>
-				
-				<pubDate>Wed, 03 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/08/03/hadoop_vs_spark/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/08/03/hadoop_vs_spark/</guid>
-			</item>
-			
-		
-			
-			<item>
 				<title>Lev1_AI_basic_concept</title>
 				
 					<description>&lt;h2 id=&quot;alternative-investment&quot;&gt;73 Alternative Investment&lt;/h2&gt;
@@ -1348,20 +1218,6 @@ catalog: yes&gt;
 		
 			
 			<item>
-				<title>hackerrank_numpy_test</title>
-				
-					<description>&lt;h2 id=&quot;ipython-notebook-convert-to-blog&quot;&gt;Ipython Notebook convert to blog&lt;/h2&gt;
-
-</description>
-				
-				<pubDate>Wed, 20 Jul 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/07/20/Python_numpy2/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/07/20/Python_numpy2/</guid>
-			</item>
-			
-		
-			
-			<item>
 				<title>Lev1_Corporate_Finance_basic_concept</title>
 				
 					<description>&lt;h2 id=&quot;capital-budgeting&quot;&gt;44 Capital Budgeting&lt;/h2&gt;
@@ -1404,20 +1260,6 @@ catalog: yes&gt;
 		
 			
 			<item>
-				<title>hackerrank_numpy</title>
-				
-					<description>&lt;h2 id=&quot;arrays&quot;&gt;Arrays&lt;/h2&gt;
-
-</description>
-				
-				<pubDate>Tue, 19 Jul 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/07/19/Python_numpy/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/07/19/Python_numpy/</guid>
-			</item>
-			
-		
-			
-			<item>
 				<title>Lev1_FSA_basic_concept</title>
 				
 					<description>&lt;h2 id=&quot;financial-statement-analysis-introduction&quot;&gt;29 Financial Statement Analysis: Introduction&lt;/h2&gt;
@@ -1435,20 +1277,6 @@ catalog: yes&gt;
 				<pubDate>Tue, 19 Jul 2016 00:00:00 +0800</pubDate>
 				<link>http://machinelearningadvance.com/cfa/2016/07/19/CFALevel1_FSA/</link>
 				<guid isPermaLink="true">http://machinelearningadvance.com/cfa/2016/07/19/CFALevel1_FSA/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>Ml_fourier_transform</title>
-				
-					<description>&lt;h2 id=&quot;fourier-transform&quot;&gt;了解傅立叶转换（Fourier transform）&lt;/h2&gt;
-
-</description>
-				
-				<pubDate>Mon, 18 Jul 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/2016/07/18/ML_Fourier_Transform/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/2016/07/18/ML_Fourier_Transform/</guid>
 			</item>
 			
 		

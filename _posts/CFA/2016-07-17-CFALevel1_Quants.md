@@ -2,6 +2,7 @@
 layout: post
 title: Lev1_Quants_basic_concept
 category: CFA
+catalog: yes
 description: The very basic_Quants. There you go, only Finace surive.
 tags:
     - CFAL1

@@ -2,6 +2,7 @@
 layout: post
 title: Lev1_Corporate_Finance_basic_concept
 category: CFA
+catalog: yes
 description: The very basic_Corporate_Finance. There you go, only Finace surive.
 tags:
     - CFAL1
