@@ -36,6 +36,20 @@
 		
 			
 			<item>
+				<title>scala Lesson 1</title>
+				
+					<description>&lt;h2 id=&quot;section&quot;&gt;变量函数&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Wed, 24 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/24/Scala-Lesson1/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/24/Scala-Lesson1/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>google trends</title>
 				
 					<description>&lt;script type=&quot;text/javascript&quot; src=&quot;https://ssl.gstatic.com/trends_nrtr/680_RC25/embed_loader.js&quot;&gt;&lt;/script&gt;
@@ -48,6 +62,20 @@ catalog: yes&gt;
 				<pubDate>Sun, 21 Aug 2016 00:00:00 +0800</pubDate>
 				<link>http://machinelearningadvance.com/blog/2016/08/21/googletrends/</link>
 				<guid isPermaLink="true">http://machinelearningadvance.com/blog/2016/08/21/googletrends/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>scala with sublime</title>
+				
+					<description>&lt;h2 id=&quot;scala&quot;&gt;Scala特点：&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Sat, 20 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/20/sublime-and-scala/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/20/sublime-and-scala/</guid>
 			</item>
 			
 		
@@ -1415,6 +1443,20 @@ catalog: yes&gt;
 		
 			
 			<item>
+				<title>hackerrank_numpy_test</title>
+				
+					<description>&lt;h2 id=&quot;ipython-notebook-convert-to-blog&quot;&gt;Ipython Notebook convert to blog&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Wed, 20 Jul 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2016/07/20/Python_numpy2/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/07/20/Python_numpy2/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Lev1_Corporate_Finance_basic_concept</title>
 				
 					<description>&lt;h2 id=&quot;capital-budgeting&quot;&gt;44 Capital Budgeting&lt;/h2&gt;
@@ -1457,6 +1499,20 @@ catalog: yes&gt;
 		
 			
 			<item>
+				<title>hackerrank_numpy</title>
+				
+					<description>&lt;h2 id=&quot;arrays&quot;&gt;Arrays&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Tue, 19 Jul 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2016/07/19/Python_numpy/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/07/19/Python_numpy/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Lev1_FSA_basic_concept</title>
 				
 					<description>&lt;h2 id=&quot;financial-statement-analysis-introduction&quot;&gt;29 Financial Statement Analysis: Introduction&lt;/h2&gt;
@@ -1474,6 +1530,20 @@ catalog: yes&gt;
 				<pubDate>Tue, 19 Jul 2016 00:00:00 +0800</pubDate>
 				<link>http://machinelearningadvance.com/cfa/2016/07/19/CFALevel1_FSA/</link>
 				<guid isPermaLink="true">http://machinelearningadvance.com/cfa/2016/07/19/CFALevel1_FSA/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Ml_fourier_transform</title>
+				
+					<description>&lt;h2 id=&quot;fourier-transform&quot;&gt;了解傅立叶转换（Fourier transform）&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Mon, 18 Jul 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/2016/07/18/ML_Fourier_Transform/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/2016/07/18/ML_Fourier_Transform/</guid>
 			</item>
 			
 		
