@@ -8,20 +8,6 @@
 		
 			
 			<item>
-				<title>培训虚拟机使用指南</title>
-				
-					<description>&lt;h2 id=&quot;section&quot;&gt;开启虚拟机&lt;/h2&gt;
-
-</description>
-				
-				<pubDate>Fri, 26 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/hadoop/2016/08/26/hadoop_tutorial_2/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/26/hadoop_tutorial_2/</guid>
-			</item>
-			
-		
-			
-			<item>
 				<title>consistent hashing</title>
 				
 					<description>&lt;h2 id=&quot;section&quot;&gt;前言&lt;/h2&gt;
@@ -90,6 +76,20 @@ catalog: yes&gt;
 				<pubDate>Wed, 17 Aug 2016 00:00:00 +0800</pubDate>
 				<link>http://machinelearningadvance.com/hadoop/2016/08/17/hadoop_tutorial_3/</link>
 				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/17/hadoop_tutorial_3/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>培训虚拟机使用指南</title>
+				
+					<description>&lt;h2 id=&quot;section&quot;&gt;开启虚拟机&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Wed, 17 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/hadoop/2016/08/17/hadoop_tutorial_2/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/17/hadoop_tutorial_2/</guid>
 			</item>
 			
 		
