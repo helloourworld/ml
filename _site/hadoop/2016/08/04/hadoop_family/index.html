@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+    <title>Hadoop Family Integration - Maching Learning | 机器学习笔记</title>
+
+    <link rel="canonical" href="http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_family/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Lijun Yu's Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/">Category</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/images/background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/images/background.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Big Data" title="Big Data">Big Data</a>
+                        
+                        <a class="tag" href="/tags/#大数据" title="大数据">大数据</a>
+                        
+                    </div>
+                    <h1>Hadoop Family Integration</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by Lijun Yu's Blog on August 4, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<p>Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka等。对照<a href="/hadoop/2016/08/04/Hadoop_Ecosystem_Table/">Hadoop_Ecosystem_Table</a>,我们将其分类为：</p>
+
+<ul>
+  <li>1分布式文件存储系统</li>
+  <li>2 分布式编程</li>
+  <li>3 数据库[列存储、文档存储、流存储、KV存储、图数存储]</li>
+  <li>4 新型数据库</li>
+  <li>5 SQL on Hadoop</li>
+  <li>6 数据处理</li>
+  <li>7 服务系统</li>
+  <li>8 调度系统</li>
+  <li>9 机器学习</li>
+  <li>10 其它[标杆及问答、安全、元数据、系统部署、应用、部署架构等等]</li>
+</ul>
+
+<p>每一分类都是方向上的概括，如同炊具，在其下面都包含多种细类，每一细类旨在解决不同的问题，如同具体的高压锅，面包机等。这一比喻请参照<a href="/hadoop_family_zhihu">Hadoop生态圈</a>的描述。</p>
+
+<h2 id="back-to-ecosystemtablehadoop20160804hadoopecosystemtable">Back to <a href="/hadoop/2016/08/04/Hadoop_Ecosystem_Table/">Ecosystem_Table</a></h2>
+
+<h2 id="introduction">0 Introduction</h2>
+
+<p>以下图片为广泛传阅的生态图，较早为2015年，出处不详。</p>
+
+<p><img src="/images/Hadoop-Ecosystem-Map_2015.gif" alt="" /></p>
+
+<p>以下图片为最新且常用的生态图，图片源自<a href="https://www.safaribooksonline.com/library/view/hadoop-essentials/9781784396688/ch02s05.html">Safari</a>
+<img src="/images/Hadoop-Ecosystem-Map_2016.jpg" alt="" />，是本文主要介绍的部分。</p>
+
+<h2 id="hadoop-core">1 Hadoop Core</h2>
+
+<p>主要包括HDFS，MapReduce, HBase.</p>
+
+<h3 id="hdfs">1.1 HDFS</h3>
+
+<p>Hadoop Distributed File System (HDFS™): A distributed file system that provides high-throughput access to application data. HDFS 是一个能够面向大规模数据使用的，可进行扩展的文件存储与传递系统，是一种允许文件通过网络在多台主机上分享的文件系统，可让多机器上的多用户分享文件和存储空间。实际上，通过网络来访问文件的动作，在程序与用户看来，就像是访问本地的磁盘一般。即使系统中有某些节点脱机，整体来说系统仍然可以持续运作而不会有数据损失。</p>
+
+<h4 id="hdfs-1">1.1.1 HDFS体系结构</h4>
+
+<p><img src="/images/hdfs_architecture.jpg" alt="" /></p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>1 Namenode</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>Namenode是整个文件系统的管理节点。它维护着整个文件系统的文件目录树，文件/目录的元信息和每个文件对应的数据块列表, 接收用户的操作请求。</p>
+
+<p>文件包括：</p>
+
+<blockquote>
+  <p>①fsimage:元数据镜像文件。存储某一时段NameNode内存元数据信息。
+②edits:操作日志文件。
+③fstime:保存最近一次checkpoint的时间</p>
+</blockquote>
+
+<p>以上这些文件是保存在linux的文件系统中。通过hdfs-site.xml的dfs.namenode.name.dir属性进行设置。</p>
+
+<p>查看NameNode的fsimage与edits内容</p>
+
+<p>这个两个文件中的内容使用普通文本编辑器是无法直接查看的，幸运的是hadoop为此准备了专门的工具用于查看文件的内容，这些工具分别为oev和oiv，可以使用hdfs调用执行。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	# 启动服务器：bin/hdfs oiv -i 某个fsimage文件
+
+	bash$ bin/hdfs oiv -i fsimage
+	14/04/07 13:25:14 INFO offlineImageViewer.WebImageViewer: WebImageViewer started.
+	Listening on /127.0.0.1:5978. Press Ctrl+C to stop the viewer.
+
+	# 查看内容：bin/hdfs dfs -ls -R webhdfs://127.0.0.1:5978/
+
+	bash$ bin/hdfs dfs -ls webhdfs://127.0.0.1:5978/
+	Found 2 items
+	drwxrwx–* - root supergroup 0 2014-03-26 20:16 webhdfs://127.0.0.1:5978/tmp
+	drwxr-xr-x - root supergroup 0 2014-03-31 14:08 webhdfs://127.0.0.1:5978/user
+</code></pre>
+</div>
+
+<p>~~~# 导出fsimage的内容：bin/hdfs oiv -p XML -i
+	tmp/dfs/name/current/fsimage_0000000000000000055 -o fsimage.xml</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>bash$ bin/hdfs oiv -p XML -i fsimage -o fsimage.xml
+0000055 -o fsimage.xml
+
+# 查看edtis的内容：bin/hdfs oev -i
+tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml
+
+bash$ bin/hdfs oev -i
+tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml ~~~
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>2 Datanode</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>提供真实文件数据的存储服务。</p>
+
+<p>文件块（ block）： 最基本的存储单位。</p>
+
+<p>对于文件内容而言，一个文件的长度大小是size，那么从文件的０偏移开始，按照固定的大小，顺序对文件进行划分并编号，划分好的每一个块称一个Block。 HDFS默认Block大小是128MB， 因此，一个256MB文件，共有256/128=2个Block.</p>
+
+<p>与普通文件系统不同的是，在 HDFS中，如果一个文件小于一个数据块的大小，并不占用整个数据块存储空间。</p>
+
+<p>Replication：多复本。默认是三个。通过hdfs-site.xml的dfs.replication属性进行设置。</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>3 数据存储： staging</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>HDFS client上传数据到HDFS时，首先，在本地缓存数据，当数据达到一个block大小时，请求NameNode分配一个block。 NameNode会把block所在的DataNode的地址告诉HDFS client。 HDFS client会直接和DataNode通信，把数据写到DataNode节点一个block文件中。</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>4 数据存储：读文件操作</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><img src="/images/hdfs_read.jpg" alt="" /></p>
+
+<blockquote>
+  <blockquote>
+    <p>1.首先调用FileSystem对象的open方法，其实是一个DistributedFileSystem的实例。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>2.DistributedFileSystem通过rpc获得文件的第一批block的locations，同一个block按照重复数会返回多个locations，这些locations按照hadoop拓扑结构排序，距离客户端近的排在前面。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>3.前两步会返回一个FSDataInputStream对象，该对象会被封装DFSInputStream对象，DFSInputStream可以方便的管理datanode和namenode数据流。客户端调用read方法，DFSInputStream最会找出离客户端最近的datanode并连接。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>4.数据从datanode源源不断的流向客户端。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>5.如果第一块的数据读完了，就会关闭指向第一块的datanode连接，接着读取下一块。这些操作对客户端来说是透明的，客户端的角度看来只是读一个持续不断的流。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>6.如果第一批block都读完了， DFSInputStream就会去namenode拿下一批block的locations，然后继续读，如果所有的块都读完，这时就会关闭掉所有的流。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>[Alert!]如果在读数据的时候， DFSInputStream和datanode的通讯发生异常，就会尝试正在读的block的排序第二近的datanode,并且会记录哪个datanode发生错误，剩余的blocks读的时候就会直接跳过该datanode。 DFSInputStream也会检查block数据校验和，如果发现一个坏的block,就会先报告到namenode节点，然后DFSInputStream在其他的datanode上读该block的镜像。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>该设计就是客户端直接连接datanode来检索数据并且namenode来负责为每一个block提供最优的datanode， namenode仅仅处理block location的请求，这些信息都加载在namenode的内存中，hdfs通过datanode集群可以承受大量客户端的并发访问。</p>
+  </blockquote>
+</blockquote>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>5 数据存储：写文件操作</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><img src="/images/hdfs_write.jpg" alt="" /></p>
+
+<blockquote>
+  <blockquote>
+    <p>1.客户端通过调用DistributedFileSystem的create方法创建新文件。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>2.DistributedFileSystem通过RPC调用namenode去创建一个没有blocks关联的新文件，创建前， namenode会做各种校验，比如文件是否存在，客户端有无权限去创建等。如果校验通过， namenode就会记录下新文件，否则就会抛出IO异常。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>3.前两步结束后，会返回FSDataOutputStream的对象，与读文件的时候相似， FSDataOutputStream被封装成DFSOutputStream。DFSOutputStream可以协调namenode和datanode。客户端开始写数据到DFSOutputStream，DFSOutputStream会把数据切成一个个小的packet，然后排成队列data quene。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>4.DataStreamer会去处理接受data quene，它先询问namenode这个新的block最适合存储的在哪几个datanode里（比如重复数是3，那么就找到3个最适合的datanode），把他们排成一个pipeline。DataStreamer把packet按队列输出到管道的第一个datanode中，第一个datanode又把packet输出到第二个datanode中，以此类推。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>5.DFSOutputStream还有一个对列叫ack quene，也是由packet组成，等待datanode的收到响应，当pipeline中的所有datanode都表示已经收到的时候，这时akc quene才会把对应的packet包移除掉。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>如果在写的过程中某个datanode发生错误，会采取以下几步：</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <ul>
+      <li>1) pipeline被关闭掉；</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <ul>
+      <li>2)为了防止防止丢包ack quene里的packet会同步到data quene里；</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <ul>
+      <li>3)把产生错误的datanode上当前在写但未完成的block删掉；</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <ul>
+      <li>4)block剩下的部分被写到剩下的两个正常的datanode中；</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <ul>
+      <li>5)namenode找到另外的datanode去创建这个块的复制。当然，这些操作对客户端来说是无感知的。</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>6.客户端完成写数据后调用close方法关闭写入流。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>7.DataStreamer把剩余得包都刷到pipeline里，然后等待ack信息，收到最后一个ack后，通知datanode把文件标视为已完成。</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>注意：客户端执行write操作后，写完的block才是可见的，正在写的block对客户端是不可见的，只有调用sync方法，客户端才确保该文件的写操作已经全部完成，当客户端调用close方法时，会默认调用sync方法。是否需要手动调用取决你根据程序需要在数据健壮性和吞吐率之间的权衡。</p>
+  </blockquote>
+</blockquote>
+
+<h4 id="hdfs-2">1.1.2 HDFS常用命令</h4>
+
+<p><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html">HDFS 常用命令: 官网</a></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>类型</td>
+      <td>[任务]</td>
+    </tr>
+    <tr>
+      <td>数据获取</td>
+      <td><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html#put">通过Hadoop Shell把本地文件上传到HDFS</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html#mkdir">使用Hadoop Shell在HDFS上创建一个新的目录</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_literal_sqoop_import_literal">从一个关系型数据库中导入数据到HDFS</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_free_form_query_imports">导入关系型数据的查询结果到HDFS</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_importing_data_into_hive">从一个关系型数据库中导入数据到一个新的或者已经存在的Hive表里</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_literal_sqoop_export_literal">从 HDFS里面插入和更新数据到关系型数据库里面</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="https://flume.apache.org/FlumeUserGuide.html#starting-an-agent"> 给你一个Flume配置文件，启动一个 Flume agent</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="https://flume.apache.org/FlumeUserGuide.html#memory-channel">给你一个配置好的 sink 和source, 配置一个 Flume 固定容量的内存 channel</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="mapreduce">1.2 MapReduce</h3>
+
+<h4 id="explain-mapreduce-in-5-minutes">1.2.1  Explain Map/Reduce in 5 minutes</h4>
+
+<p>原文链接: <a href="http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce">http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce</a> by Aurelien.</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>1 Map/Reduce 有3个阶段 : Map/Shuffle/Reduce</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>Shuffle部分由Hadoop的自动完成，我们只需要实现Map和Reduce部分。</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>2 Map部分的输入</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><img src="/images/mapred_mapinput.jpg" alt="" /></p>
+
+<p>图上的城市名称作为key值，所属州以及城市均温为key的value值。ps: 请自动脑补python的dict, jason.</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>3 Map部分的输出</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><img src="/images/mapred_mapoutput.jpg" alt="" /></p>
+
+<p>图上显示的Map部分的输出是根据最终我们想要的结果来实现的。我们要得到每个州的平均值，所以根据每个州来进行新的key/value设计。</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>4 Shuffle部分</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><img src="/images/mapred_shuffle.jpg" alt="" /></p>
+
+<p>Now, the shuffle task will run on the output of the Map task. It is going to group all the values by Key, and you’ll get a List<Value>.</Value></p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>5 Rduce部分</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>Reduce部分的输入为以上Shuffle部分的输出。</p>
+
+<p>Reduce任务是数据逻辑的最终完成者，in our case当然就是计算各州的平均温度。最终结果如下：</p>
+
+<p><img src="/images/mapred_reduce.jpg" alt="" /></p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>6 总结</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>Map/Reduce的并行执行过程：</p>
+
+<p>Mapper&lt;K1，V1&gt; ==》 &lt;K2，V2&gt;</p>
+
+<p>Reducer&lt;K2，List<V2> &gt;==》&lt;K3，V3&gt;</V2></p>
+
+<p>PS: You can find the java code for this example here:</p>
+
+<p><a href="https://github.com/jsoftbiz/mapreduce_1">https://github.com/jsoftbiz/mapreduce_1</a></p>
+
+<h4 id="section">1.2.2 实例演示</h4>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>1 演示WordCount</p>
+    </blockquote>
+  </li>
+  <li>
+    <blockquote>
+      <p>2 演示上述平均温度统计</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>资源链接：<a href="https://github.com/jsoftbiz/mapreduce_1">https://github.com/jsoftbiz/mapreduce_1</a></p>
+
+<p>需要使用到<a href="http://hadoop.apache.org/docs/r2.6.4/hadoop-mapreduce-client/hadoop-mapreduce-client-core/HadoopStreaming.html">streaming</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 temperature]$ hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/*streaming*.jar -input /temperature/input/* -output /temperature/py-output -file mapper.py -mapper mapper.py -file reducer.py -reducer reducer.py
+16/08/09 22:26:30 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
+packageJobJar: [mapper.py, reducer.py, /tmp/hadoop-unjar8704173289988394156/] [] /tmp/streamjob6992547910816721479.jar tmpDir=null
+16/08/09 22:26:32 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
+16/08/09 22:26:32 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
+16/08/09 22:26:33 INFO mapred.FileInputFormat: Total input paths to process : 1
+16/08/09 22:26:33 INFO mapreduce.JobSubmitter: number of splits:2
+16/08/09 22:26:33 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1470792183416_0002
+16/08/09 22:26:34 INFO impl.YarnClientImpl: Submitted application application_1470792183416_0002
+16/08/09 22:26:34 INFO mapreduce.Job: The url to track the job: http://NN01.HadoopVM:8088/proxy/application_1470792183416_0002/
+16/08/09 22:26:34 INFO mapreduce.Job: Running job: job_1470792183416_0002
+16/08/09 22:26:47 INFO mapreduce.Job: Job job_1470792183416_0002 running in uber mode : false
+16/08/09 22:26:47 INFO mapreduce.Job:  map 0% reduce 0%
+16/08/09 22:26:57 INFO mapreduce.Job:  map 50% reduce 0%
+16/08/09 22:26:58 INFO mapreduce.Job:  map 100% reduce 0%
+16/08/09 22:27:06 INFO mapreduce.Job:  map 100% reduce 100%
+16/08/09 22:27:06 INFO mapreduce.Job: Job job_1470792183416_0002 completed successfully
+16/08/09 22:27:06 INFO mapreduce.Job: Counters: 49
+	File System Counters
+		FILE: Number of bytes read=78
+		FILE: Number of bytes written=330581
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=407
+		HDFS: Number of bytes written=18
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=16690
+		Total time spent by all reduces in occupied slots (ms)=6278
+		Total time spent by all map tasks (ms)=16690
+		Total time spent by all reduce tasks (ms)=6278
+		Total vcore-milliseconds taken by all map tasks=16690
+		Total vcore-milliseconds taken by all reduce tasks=6278
+		Total megabyte-milliseconds taken by all map tasks=17090560
+		Total megabyte-milliseconds taken by all reduce tasks=6428672
+	Map-Reduce Framework
+		Map input records=9
+		Map output records=9
+		Map output bytes=54
+		Map output materialized bytes=84
+		Input split bytes=222
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=3
+		Reduce shuffle bytes=84
+		Reduce input records=9
+		Reduce output records=3
+		Spilled Records=18
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2002
+		CPU time spent (ms)=5260
+		Physical memory (bytes) snapshot=685187072
+		Virtual memory (bytes) snapshot=6260936704
+		Total committed heap usage (bytes)=498597888
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters
+		Bytes Read=185
+	File Output Format Counters
+		Bytes Written=18
+16/08/09 22:27:06 INFO streaming.StreamJob: Output directory: /temperature/py-output
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>3 Writing an Hadoop MapReduce Program in Python</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>原文请参照：</p>
+
+<p><a href="http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/">Writing an Hadoop MapReduce Program in Python</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hadoop]$ hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/*streaming*.jar -file /home/hadoop/words/mapper.py -mapper /home/hadoop/words/mapper.py -file /home/hadoop/words/reducer.py -reducer /home/hadoop/words/reducer.py -input /words/input/* -output /words/py-output
+16/08/09 20:10:28 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
+packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tmp/hadoop-unjar5100483106189698643/] [] /tmp/streamjob6336434171947928949.jar tmpDir=null
+16/08/09 20:10:29 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
+16/08/09 20:10:29 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
+16/08/09 20:10:30 INFO mapred.FileInputFormat: Total input paths to process : 2
+16/08/09 20:10:30 INFO mapreduce.JobSubmitter: number of splits:2
+16/08/09 20:10:31 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1470792183416_0001
+16/08/09 20:10:32 INFO impl.YarnClientImpl: Submitted application application_1470792183416_0001
+16/08/09 20:10:32 INFO mapreduce.Job: The url to track the job: http://NN01.HadoopVM:8088/proxy/application_1470792183416_0001/
+16/08/09 20:10:32 INFO mapreduce.Job: Running job: job_1470792183416_0001
+16/08/09 20:10:45 INFO mapreduce.Job: Job job_1470792183416_0001 running in uber mode : false
+16/08/09 20:10:45 INFO mapreduce.Job:  map 0% reduce 0%
+16/08/09 20:10:59 INFO mapreduce.Job:  map 50% reduce 0%
+16/08/09 20:11:03 INFO mapreduce.Job:  map 100% reduce 0%
+16/08/09 20:11:05 INFO mapreduce.Job:  map 100% reduce 100%
+16/08/09 20:11:06 INFO mapreduce.Job: Job job_1470792183416_0001 completed successfully
+16/08/09 20:11:06 INFO mapreduce.Job: Counters: 49
+	File System Counters
+		FILE: Number of bytes read=47
+		FILE: Number of bytes written=330444
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=223
+		HDFS: Number of bytes written=25
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=24400
+		Total time spent by all reduces in occupied slots (ms)=3381
+		Total time spent by all map tasks (ms)=24400
+		Total time spent by all reduce tasks (ms)=3381
+		Total vcore-milliseconds taken by all map tasks=24400
+		Total vcore-milliseconds taken by all reduce tasks=3381
+		Total megabyte-milliseconds taken by all map tasks=24985600
+		Total megabyte-milliseconds taken by all reduce tasks=3462144
+	Map-Reduce Framework
+		Map input records=2
+		Map output records=4
+		Map output bytes=33
+		Map output materialized bytes=53
+		Input split bytes=198
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=3
+		Reduce shuffle bytes=53
+		Reduce input records=4
+		Reduce output records=3
+		Spilled Records=8
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=1505
+		CPU time spent (ms)=6830
+		Physical memory (bytes) snapshot=677711872
+		Virtual memory (bytes) snapshot=6261100544
+		Total committed heap usage (bytes)=482869248
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters
+		Bytes Read=25
+	File Output Format Counters
+		Bytes Written=25
+16/08/09 20:11:06 INFO streaming.StreamJob: Output directory: /words/py-output
+</code></pre>
+</div>
+
+<h3 id="hbase">1.3 HBase</h3>
+
+<h4 id="introduction-1">1.3.1 Introduction</h4>
+
+<p><a href="http://hbase.apache.org/book.html#quickstart">Apache Hbase</a>安装及测试</p>
+
+<p>提供海量数据存储功能，是一种构建在HDFS之上的分布式、面向列的存储系统。</p>
+
+<blockquote>
+  <blockquote>
+    <p>Browse to the Web UI</p>
+  </blockquote>
+</blockquote>
+
+<ul>
+  <li>connect to the UI for the Master<a href="H1:16010">H1:16010</a> or <a href="H2:16010">H2:16010</a></li>
+</ul>
+
+<h4 id="the-apache-hbase-shell">1.3.2 The Apache HBase Shell演示</h4>
+
+<ul>
+  <li>1 <a href="http://hbase.apache.org/book.html#scripting">Scripting with Ruby</a></li>
+  <li>2 <a href="http://hbase.apache.org/book.html#_running_the_shell_in_non_interactive_mode">Running the Shell in Non-Interactive Mode</a></li>
+  <li>3 <a href="http://hbase.apache.org/book.html#hbase.shell.noninteractive">HBase Shell in OS Scripts</a></li>
+  <li>4 <a href="http://hbase.apache.org/book.html#_read_hbase_shell_commands_from_a_command_file">Read HBase Shell Commands from a Command File</a></li>
+</ul>
+
+<h4 id="data-modelhttphbaseapacheorgbookhtmldatamodel">1.3.3 <a href="http://hbase.apache.org/book.html#datamodel">Data Model</a></h4>
+
+<ul>
+  <li>1 时间戳（Timestamp）：每次数据操作对应的时间戳，可以看作是数据的版本号</li>
+  <li>2 列族（Column Family）：表在水平方向有一个或者多个列族组成，一个列族中可以由任意多个列组成，列族支持动态扩展，无需预先定义列的数量以及类型，所有列均以二进制格式存储，用户需要自行进行类型转换。所有的列族成员的前缀是相同的，例如“abc:a1”和“abc:a2”两个列都属于abc这个列族。</li>
+  <li>3 表和区域（Table&amp;Region）：当表随着记录数不断增加而变大后，会逐渐分裂成多份，成为区域，一个区域是对表的水平划分，不同的区域会被Master分配给相应的RegionServer进行管理</li>
+  <li>4 单元格（Cell）：表存储数据的单元。由{行健，列（列族:标签），时间戳}唯一确定，其中的数据是没有类型的，以二进制的形式存储。</li>
+</ul>
+
+<h2 id="service-programming">2 Service Programming</h2>
+
+<h3 id="zookeeper">2.1 Zookeeper</h3>
+
+<p><img src="/images/zookeeper_small.gif" alt="" /></p>
+
+<p><a href="https://zookeeper.apache.org/">Apache Zookeeper</a></p>
+
+<p>ZooKeeper是Hadoop Ecosystem中非常重要的组件，它的主要功能是为分布式系统提供一致性协调(Coordination)服务，与之对应的Google的类似服务叫Chubby。</p>
+
+<h4 id="zookeeper-1">2.1.1 Zookeeper的基本概念</h4>
+
+<ul>
+  <li>1 Role</li>
+</ul>
+
+<p>Zookeeper中的角色主要有以下三类，如下表所示：</p>
+
+<p><img src="/images/hadoop/zookeeper_role.jpg" alt="" />
+系统模型如图所示：</p>
+
+<p><img src="/images/hadoop/zookeeper_sysmodel.jpg" alt="" /></p>
+
+<ul>
+  <li>
+    <p>2 Target</p>
+  </li>
+  <li>1 最终一致性：client不论连接到哪个Server，展示给它都是同一个视图，这是zookeeper最重要的性能。</li>
+  <li>2 可靠性：具有简单、健壮、良好的性能，如果消息m被到一台服务器接受，那么它将被所有的服务器接受。</li>
+  <li>3 实时性：Zookeeper保证客户端将在一个时间间隔范围内获得服务器的更新信息，或者服务器失效的信息。但由于网络延时等原因，Zookeeper不能保证两个客户端能同时得到刚更新的数据，如果需要最新数据，应该在读数据之前调用sync()接口。*</li>
+  <li>4 等待无关（wait-free）：慢的或者失效的client不得干预快速的client的请求，使得每个client都能有效的等待。</li>
+  <li>5 原子性：更新只能成功或者失败，没有中间状态。</li>
+  <li>6 顺序性：包括全局有序和偏序两种：全局有序是指如果在一台服务器上消息a在消息b前发布，则在所有Server上消息a都将在消息b前被发布；偏序是指如果一个消息b在消息a后被同一个发送者发布，a必将排在b前面。</li>
+</ul>
+
+<h4 id="zookeeper-2">2.1.2 ZooKeeper的工作原理</h4>
+
+<p>Zookeeper的核心是原子广播，这个机制保证了各个Server之间的同步。实现这个机制的协议叫做Zab协议。Zab协议有两种模式，它们分别是恢复模式（选主）和广播模式（同步）。当服务启动或者在领导者崩溃后，Zab就进入了恢复模式，当领导者被选举出来，且大多数Server完成了和leader的状态同步以后，恢复模式就结束了。状态同步保证了leader和Server具有相同的系统状态。</p>
+
+<p>为了保证事务的顺序一致性，zookeeper采用了递增的事务id号（zxid）来标识事务。所有的提议（proposal）都在被提出的时候加上了zxid。实现中zxid是一个64位的数字，它高32位是epoch用来标识leader关系是否改变，每次一个leader被选出来，它都会有一个新的epoch，标识当前属于那个leader的统治时期。低32位用于递增计数。</p>
+
+<p>每个Server在工作过程中有三种状态：</p>
+
+<ul>
+  <li>1 LOOKING：当前Server不知道leader是谁，正在搜寻</li>
+  <li>2 LEADING：当前Server即为选举出来的leader</li>
+  <li>3 FOLLOWING：leader已经选举出来，当前Server与之同步</li>
+</ul>
+
+<p>可以参照此博客<a href="http://cailin.iteye.com/blog/2014486/">详细过程</a></p>
+
+<h3 id="kafka">2.2 kafka</h3>
+
+<p>一个分布式的、分区的、多副本的实时消息发布和订阅系统。提供可扩展、高吞吐、低延迟、高可靠的消息分发服务。</p>
+
+<p><a href="http://kafka.apache.org/documentation.html#quickstart">quickstart</a></p>
+
+<p>视频教程<a href="http://www.jikexueyuan.com/course/kafka/">http://www.jikexueyuan.com/course/kafka/</a></p>
+
+<h4 id="introductionhttpwwwcnblogscomlikehuap3999538html">2.2.1 <a href="http://www.cnblogs.com/likehua/p/3999538.html">Introduction</a></h4>
+
+<p><a href="http://kafka.apache.org/documentation.html#introduction">Introduction</a></p>
+
+<p><img src="/images/hadoop/producer_consumer.png" alt="" /></p>
+
+<p>Kafka is a distributed,partitioned,replicated commit logservice。它提供了类似于JMS的特性，但是在设计实现上完全不同，此外它并不是JMS规范的实现。kafka对消息保存时根据Topic进行归类，发送消息者成为Producer,消息接受者成为Consumer,此外kafka集群有多个kafka实例组成，每个实例(server)成为broker。无论是kafka集群，还是producer和consumer都依赖于zookeeper来保证系统可用性集群保存一些meta信息。</p>
+
+<p><img src="/images/hadoop/consumer-groups.png" alt="" /></p>
+
+<h4 id="section-1">2.2.2 集群实现与演示</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 ~]$ ~/tools/runRemoteCmd.sh "/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;" all
+
+[hadoop@DN02 bin]$ $KAFKA_HOME/bin/kafka-console-producer.sh --broker-list NN01.HadoopVM:9092 --sync --topic test
+
+[hadoop@DN01 bin]$ $KAFKA_HOME/bin/kafka-console-consumer.sh --zookeeper NN01.HadoopVM:2181 --topic test --from-beginning
+</code></pre>
+</div>
+
+<h2 id="distributed-programming">3 Distributed Programming</h2>
+
+<h3 id="pig">3.1 Pig</h3>
+
+<p>pig是hadoop上层的衍生架构，与hive类似。对比hive（hive类似sql，是一种声明式的语言），pig是一种过程语言，类似于存储过程一步一步得进行数据转化。</p>
+
+<h4 id="pig-1">3.1.1 pig数据类型</h4>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>double</td>
+          <td>float</td>
+          <td>long</td>
+          <td>int</td>
+          <td>bytearray</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>tuple</td>
+          <td>bag</td>
+          <td>map</td>
+          <td>chararray</td>
+          <td>bytearray</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>double float long int chararray bytearray都相当于pig的基本类型</li>
+    <li>tuple相当于数组 ，但是可以类型不一，举例(‘dirkzhang’,’dallas’,41)</li>
+    <li>Bag相当于tuple的一个集合，举例{(‘dirk’,41),(‘kedde’,2),(‘terre’,31)}，在group的时候会生成bag</li>
+    <li>Map相当于哈希表，key为chararray，value为任意类型，例如[‘name’#dirk,’age’#36,’num’#41</li>
+    <li>nulls 表示的不只是数据不存在，他更表示数据是unkown</li>
+  </ul>
+</blockquote>
+
+<h4 id="pig-2">3.1.2 pig基本语法</h4>
+
+<p>TODO</p>
+
+<h3 id="hive">3.2 Hive</h3>
+
+<h4 id="hive-introduction">3.2.1 Hive introduction</h4>
+
+<p><a href="https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-InstallationandConfiguration">Hive Install</a></p>
+
+<p><a href="http://blog.csdn.net/reesun/article/details/8556078">Hive metastore三种配置方式</a></p>
+
+<p>建立在Hadoop基础上的开源的数据仓库，提供类似SQL的Hive QL语言操作结构化数据存储服务和基本的数据分析服务。</p>
+
+<h4 id="running-hive">3.2.2 Running Hive</h4>
+
+<p><a href="https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive">Running Hive</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	# Starting from Hive 2.1, we need to run the schematool command below as an initialization step. For example, we can use "derby" as db type.
+	$HIVE_HOME/bin/schematool -dbType &lt;db type&gt; -initSchema
+</code></pre>
+</div>
+
+<h3 id="spark">3.3 Spark</h3>
+
+<p>基于内存进行计算的分布式计算框架。</p>
+
+<h4 id="spark-overview">3.3.1 Spark Overview</h4>
+
+<p>Apache Spark is a fast and general-purpose cluster computing system. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs. It also supports a rich set of higher-level tools including <a href="http://spark.apache.org/docs/latest/sql-programming-guide.html">Spark SQL</a> for SQL and structured data processing, <a href="http://spark.apache.org/docs/latest/ml-guide.html">MLlib</a> for machine learning, <a href="http://spark.apache.org/docs/latest/graphx-programming-guide.html">GraphX</a> for graph processing, and <a href="http://spark.apache.org/docs/latest/streaming-programming-guide.html">Spark Streaming</a>.</p>
+
+<p>Spark的适用场景</p>
+
+<p>Spark是基于内存的迭代计算框架，适用于需要多次操作特定数据集的应用场合。需要反复操作的次数越多，所需读取的数据量越大，受益越大，数据量小但是计算密集度较大的场合，受益就相对较小
+由于RDD的特性，Spark不适用那种异步细粒度更新状态的应用，例如web服务的存储或者是增量的web爬虫和索引。就是对于那种增量修改的应用模型不适合。
+总的来说Spark的适用面比较广泛且比较通用。</p>
+
+<p>** Cluster Manager Types**</p>
+
+<p>The system currently supports three cluster managers:</p>
+
+<blockquote>
+  <p>*1 Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.
+*2 Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.
+*3 Hadoop YARN – the resource manager in Hadoop 2.</p>
+</blockquote>
+
+<p><a href="http://dblab.xmu.edu.cn/blog/spark-quick-start-guide/">Spark快速入门指南 – Spark安装与基础使用</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	[hadoop@NN01 sparkapp]$ spark-submit --class "SimpleApp" ~/sparkapp/target/scala-2.11/simple-project_2.11-1.0.jar 2&gt;&amp;1|grep "Line"
+Lines with a: 4, Lines with b: 2
+</code></pre>
+</div>
+
+<h4 id="spark-sql-dataframes-and-datasets-guidereferhttpsparkapacheorgdocslatestsql-programming-guidehtml">3.3.2 Spark SQL, DataFrames and Datasets Guide<a href="http://spark.apache.org/docs/latest/sql-programming-guide.html">refer</a></h4>
+
+<p>TODO
+#### 3.3.3 Spark Streaming Programming Guide<a href="http://spark.apache.org/docs/latest/streaming-programming-guide.html">refer</a></p>
+
+<p>TODO</p>
+
+<h4 id="machine-learning-library-mllib-guidereferhttpsparkapacheorgdocslatestml-guidehtml">3.3.4 Machine Learning Library (MLlib) Guide<a href="http://spark.apache.org/docs/latest/ml-guide.html">refer</a></h4>
+
+<p>TODO</p>
+
+<h4 id="graphx-programming-guidereferhttpsparkapacheorgdocslatestgraphx-programming-guidehtml">3.3.5 GraphX Programming Guide<a href="http://spark.apache.org/docs/latest/graphx-programming-guide.html">refer</a></h4>
+
+<p>TODO</p>
+
+<h2 id="machine-learning">4 Machine Learning</h2>
+
+<h3 id="mahout">4.1 Mahout</h3>
+
+<h2 id="data-ingestion">5 Data Ingestion</h2>
+
+<h3 id="storm">5.1 Storm</h3>
+
+<p><img src="/images/storm-flow.png" alt="" /></p>
+
+<h4 id="setting-up-a-storm-clusterhttpstormapacheorgreleases101setting-up-a-storm-clusterhtml">5.1.1 <a href="http://storm.apache.org/releases/1.0.1/Setting-up-a-Storm-cluster.html">Setting up a Storm Cluster</a></h4>
+
+<p><a href="http://storm.apache.org/releases/1.0.1/Setting-up-a-Storm-cluster.html">Setting up a Storm Cluster</a></p>
+
+<h4 id="storm-indexhttpstormapacheorgreleases101indexhtml">5.1.2 <a href="http://storm.apache.org/releases/1.0.1/index.html">Storm Index</a></h4>
+
+<p><a href="http://storm.apache.org/releases/1.0.1/index.html">Storm Index</a></p>
+
+<h4 id="storm-resources-for-reference">5.1.3 Storm Resources for reference</h4>
+
+<p><a href="http://storm.apache.org/talksAndVideos.html">Talks and Slideshows</a> __ <a href="http://www.oschina.net/translate/history-of-apache-storm-and-lessons-learned?cmp&amp;p=4#">Apache Storm 的历史及经验教训</a></p>
+
+<h4 id="storm-1">5.1.4 Storm命名方式</h4>
+
+<blockquote>
+  <ul>
+    <li>Storm暴风雨：其组件大多也以气象名词命名</li>
+    <li>spout龙卷：形象的理解是把原始数据卷进Storm流式计算中</li>
+    <li>bolt雷电：从spout或者其他bolt中接收数据进行处理或者输出</li>
+    <li>nimbus雨云：主控节点，存在单点问题，不过可以用watchdog来保证其可用性，fast-fail后马上就启动</li>
+    <li>topology拓扑：Storm的任务单元，形象的理解拓扑的点是spout或者bolt，之间的数据流是线，整个构成一个拓扑</li>
+  </ul>
+</blockquote>
+
+<h3 id="sqoop">5.2 Sqoop</h3>
+
+<p>TODO</p>
+
+<h2 id="databases">6 Databases</h2>
+
+<h3 id="redis">6.1 Redis</h3>
+
+<h4 id="section-2">6.1.1 集群安装</h4>
+
+<p><a href="http://zhoushouby.blog.51cto.com/9150272/1560346">redis 3.0 cluster 集群 学习之路篇 [1]</a></p>
+
+<p><a href="http://www.ithao123.cn/content-2994768.html">Redis分布式部署，一致性hash;分布式与缓存队列</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@DN01 init.d]$ sudo cp ~/redis-3.2.3/utils/redis_init_script redis
+[hadoop@DN01 init.d]$ sudo chmod +x redis
+[hadoop@DN01 init.d]$ cd ..
+[hadoop@DN01 etc]$ sudo mkdir redis
+[hadoop@DN01 etc]$ sudo cp ~/redis-3.2.3/redis.conf redis/6379.conf
+</code></pre>
+</div>
+
+<p>官方：</p>
+
+<p><a href="http://redis.io/topics/cluster-tutorial">Redis cluster tutorial</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>start:
+$ ./src/redis-server redis.conf
+close:
+$ ./src/redis-cli -n 6379 shutdown
+</code></pre>
+</div>
+
+<p>安装python的redis模块</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget --no-check-certificate https://pypi.python.org/packages/source/r/redis/redis-2.8.0.tar.gz
+tar -zvxf redis-2.8.0.tar.gz
+mv redis-2.8.0 python-redis-2.8.0
+cd python-redis-2.8.0
+python setup.py install
+</code></pre>
+</div>
+<p>部署成功，写段代码验证一下</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import redis
+client =  redis.StrictRedis(host='localhost', port=6379)
+print client.ping()
+True
+</code></pre>
+</div>
+
+<h2 id="system-deployment">7 System Deployment</h2>
+
+<h3 id="ambari">7.1 Ambari</h3>
+
+<p>TODO</p>
+
+
+
+                <hr>
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/hadoop/2016/08/04/hadoop_10_years/" data-toggle="tooltip" data-placement="top" title="Hadoop Ecosystem Evolves-10 Cool Big Data Projects">
+                        Previous<br>
+                        <span>Hadoop Ecosystem Evolves-10 Cool Big Data Projects</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/hadoop/2016/08/04/hadoop_family_zhihu/" data-toggle="tooltip" data-placement="top" title="Hadoop生态圈">
+                        Next<br>
+                        <span>Hadoop生态圈</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/hadoop/2016/08/04/hadoop_family"
+                        data-title="Hadoop Family Integration"
+                        data-url="http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_family/" >
+                    </div>
+
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#ME" title="ME" rel="2">
+                                ME
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Other" title="Other" rel="4">
+                                Other
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                CFAL1
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="2">
+                                IT
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Big Data" title="Big Data" rel="12">
+                                Big Data
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#大数据" title="大数据" rel="13">
+                                大数据
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = '清扬vs淡泊';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/2672280861">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/helloourworld">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Lijun Yu's Blog 2016
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-82819752-1';
+    var _gaDomain = 'machinelearningadvance.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '863b1f46c83a8e14e47782106aee7e7f';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/images/background.jpg" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
