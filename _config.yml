@@ -39,10 +39,6 @@ anchorjs: true                          # if you want to customize anchor. check
 
 gems:
    - jekyll-paginate
-   - jekyll-mentions
-   - jekyll-redirect-from
-   - jekyll-sitemap
-   - jekyll-feed
    - rouge
    - stringex
 
