@@ -17,7 +17,7 @@ Last login: Tue Aug 23 18:47:50 2016 from 192.168.71.1
 [hadoop@NN01 ~]$ sudo vim /etc/hosts
 [hadoop@NN01 ~]$ sudo tools/deploy.sh /etc/hosts /etc/hosts slave
 ****DN01.HadoopVM*****
-Warning: Permanently added the RSA host key for IP address '192.168.71.134' to the list of known hosts.
+Warning: Permanently added the RSA host key for IP  address '192.168.71.134' to the list of known hosts.
 hosts                                 100%  293     0.3KB/s   00:00
 ****DN02.HadoopVM*****
 Warning: Permanently added the RSA host key for IP address '192.168.71.133' to the list of known hosts.
@@ -62,4 +62,21 @@ $HADOOP_HOME/sbin/mr-jobhistory-daemon.sh start historyserver --config $HADOOP_C
 
 spark启动后可在8080端口查看__![](/images/hadoop/spark_ui.png)
 
+# 关闭服务
 
+~~~
+[hadoop@NN01 spark]$ ./sbin/stop-all.sh
+hadoop@DN02.HadoopVM: stopping org.apache.spark.deploy.worker.Worker
+hadoop@DN01.HadoopVM: stopping org.apache.spark.deploy.worker.Worker
+hadoop@NN01.HadoopVM: stopping org.apache.spark.deploy.worker.Worker
+stopping org.apache.spark.deploy.master.Master
+[hadoop@NN01 spark]$
+~~~
+
+# 关机
+
+可以使用如下命令关机：
+·[hadoop@NN01 ~]$ ./stop_down.sh·
+
+
+sudo init 0

@@ -620,6 +620,10 @@ TODO
 
 #### 6.1.1 集群安装
 
+[redis 3.0 cluster 集群 学习之路篇 [1]](http://zhoushouby.blog.51cto.com/9150272/1560346)
+
+[Redis分布式部署，一致性hash;分布式与缓存队列](http://www.ithao123.cn/content-2994768.html)
+
 ~~~
 [hadoop@DN01 init.d]$ sudo cp ~/redis-3.2.3/utils/redis_init_script redis
 [hadoop@DN01 init.d]$ sudo chmod +x redis
