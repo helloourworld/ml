@@ -1,1 +1,9 @@
 misc
+#
+
+*.a       #  .a
+!lib.a    # lib.a
+/TODO     # subdir/TODO
+build/    #
+misc/     #
+attach/*.pdf
