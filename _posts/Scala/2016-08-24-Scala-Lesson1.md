@@ -11,11 +11,11 @@ tags:
 
 ### 1 变量：var，val，----immutable
 
->* Scala的变量分两种，var和val。var，即variable，类似于我们在Java等其他语言中接触到的变量，而val，是value，类似于我们在其他语言中用到的不可重新赋值的常量，或者final变量。Scala非常强调不可变（immutable）的概念。
+>* Scala的变量分两种，var和val。var，即variable，类似于我们在Java等其他语言中接触到的变量，而val，是value，类似于我们在其他语言中用到的不可重新赋值的常量，或者final变量。Scala非常强调**不可变（immutable）**的概念。
 >* Scala编译器通过类型推断（Type Inference）可推断出数据类型，也可显式指定变量类型，类型在变量名称后，用冒号（:）分隔。
 
 ~~~scala
-var: a: Int = 5
+var a: Int = 5
 ~~~
 
 ### 2 函数（function），过程（procedure）
