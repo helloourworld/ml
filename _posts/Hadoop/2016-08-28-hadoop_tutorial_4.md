@@ -21,5 +21,7 @@ tags:
 * 2 Spark Streaming（计划1节*40分钟/每节）
 * 3 Spark SQL and Spark DataFrame（计划2节*40分钟/每节）
 * 4 Spark MLlib（计划10节*40分钟/每节）内容包括：[ML Pipelines](http://spark.apache.org/docs/latest/ml-pipeline.html)、[Extracting, transforming and selecting features](http://spark.apache.org/docs/latest/ml-features.html)、[Classification and regression](http://spark.apache.org/docs/latest/ml-classification-regression.html)、[Clustering](http://spark.apache.org/docs/latest/ml-clustering.html#clustering)、[Collaborative Filtering](http://spark.apache.org/docs/latest/ml-collaborative-filtering.html)、[ML Tuning: model selection and hyperparameter tuning](http://spark.apache.org/docs/latest/ml-tuning.html)、[Other]
+* 5 Spark GraphX（计划2节*40分钟/每节）[GraphxProgrammingGuide](http://spark.apache.org/docs/latest/graphx-programming-guide.html#graphx-programming-guide)
+* 6 SparkR（计划3节*40分钟/每节）[R on Spark](http://spark.apache.org/docs/latest/sparkr.html)
 
 参考书: [下载](/attach/OReilly.Learning.Spark.Lightning-Fast.Big.Data.Analysis.pdf)
