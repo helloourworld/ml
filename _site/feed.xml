@@ -8,6 +8,37 @@
 		
 			
 			<item>
+				<title>scala Lesson 3</title>
+				
+					<description>&lt;h3 id=&quot;scala-ifelse-&quot;&gt;Scala IF…ELSE 语句&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Tue, 30 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/30/Scala-Lesson3/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/30/Scala-Lesson3/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>scala Lesson 2</title>
+				
+					<description>&lt;h2 id=&quot;scala-&quot;&gt;Scala 访问修饰符&lt;/h2&gt;
+&lt;p&gt;Scala 访问修饰符基本和Java的一样，分别有：private，protected，public。
+如果没有指定访问修饰符符，默认情况下，Scala对象的访问级别都是 public。
+Scala 中的 private 限定符，比 Java 更严格，在嵌套类情况下，外层类甚至不能访问被嵌套类的私有成员。&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Tue, 30 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/30/Scala-Lesson2/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/30/Scala-Lesson2/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Hadoop Tutorial ---- 学习安排</title>
 				
 					<description>&lt;h2 id=&quot;hive&quot;&gt;Hive专题&lt;/h2&gt;
