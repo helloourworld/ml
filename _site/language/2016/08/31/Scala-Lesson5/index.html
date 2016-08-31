@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+    <title>scala Lesson 5 - Maching Learning | 机器学习笔记</title>
+
+    <link rel="canonical" href="http://machinelearningadvance.com/language/2016/08/31/Scala-Lesson5/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Big Data Memo</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/">Category</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/images/background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/images/background.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Scala" title="Scala">Scala</a>
+                        
+                    </div>
+                    <h1>scala Lesson 5</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by Big Data Memo on August 31, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h3 id="scala-">Scala 字符串</h3>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Strings</span><span class="o">{</span>
+    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+        <span class="n">println</span><span class="o">(</span><span class="n">greeting</span><span class="o">)</span>
+    <span class="o">}</span>
+
+    <span class="k">val</span> <span class="n">greeting</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"Hello, World!"</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>以上实例定义了变量 greeting，为字符串常量，它的类型为 String (java.lang.String)。</li>
+  <li>在 Scala 中，字符串的类型实际上是 Java String，它本身没有 String 类。</li>
+  <li>在 Scala 中，String 是一个不可变的对象，所以该对象不可被修改。这就意味着你如果修改字符串就会产生一个新的字符串对象。</li>
+  <li>但其他对象，如数组就是可变的对象。接下来我们会为大家介绍常用的 java.lang.String 方法。</li>
+</ul>
+
+<h4 id="section">1 创建字符串</h4>
+
+<p>创建字符串实例如下：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">greeting</span> <span class="k">=</span> <span class="s">"Hello, World!"</span>
+<span class="n">or</span>
+<span class="k">var</span> <span class="n">greeting</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"Hello, Wrold!"</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>你不一定为字符串指定 String 类型，因为 Scala 编译器会自动推断出字符串的类型为 String。</li>
+  <li>我们前面提到过 String 对象是不可变的，如果你需要创建一个可以修改的字符串，可以使用 String Builder 类，如下实例:</li>
+</ul>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Strings</span><span class="o">{</span>
+    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+        <span class="k">val</span> <span class="n">buf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">;</span>
+        <span class="n">buf</span> <span class="o">+=</span> <span class="sc">'a'</span>
+        <span class="n">buf</span> <span class="o">++=</span> <span class="s">"bcdef"</span>
+        <span class="n">println</span><span class="o">(</span><span class="s">"buf is : "</span> <span class="o">+</span> <span class="n">buf</span><span class="o">.</span><span class="n">toString</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="section-1">2 字符串长度</h4>
+
+<p>我们可以使用 length() 方法来获取字符串长度：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Strings</span><span class="o">{</span>
+    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+        <span class="k">val</span> <span class="n">palindrome</span> <span class="k">=</span> <span class="s">"www.machinelearningadvance.com"</span><span class="o">;</span>
+        <span class="k">val</span> <span class="n">len</span> <span class="k">=</span> <span class="n">palindrome</span><span class="o">.</span><span class="n">length</span><span class="o">();</span>
+        <span class="n">println</span><span class="o">(</span><span class="s">"String length is : "</span> <span class="o">+</span> <span class="n">len</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="section-2">3 字符串连接</h4>
+
+<p>String 类中使用 concat() 方法来连接两个字符串：</p>
+
+<p><code class="highlighter-rouge">string1.concat(string2);</code></p>
+
+<p>实例演示：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="s">"大数据日志:"</span><span class="o">.</span><span class="n">concat</span><span class="o">(</span><span class="s">"www.machinelearningadvance.com"</span><span class="o">);</span>
+<span class="n">res13</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">大数据日志</span><span class="k">:</span><span class="kt">www.machinelearningadvance.com</span>
+</code></pre>
+</div>
+
+<p>同样你也可以使用加号(+)来连接：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="s">"大数据日志:"</span> <span class="o">+</span> <span class="s">"www.machinelearningadvance.com"</span>
+<span class="n">res14</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">大数据日志</span><span class="k">:</span><span class="kt">www.machinelearningadvance.com</span>
+</code></pre>
+</div>
+
+<h4 id="section-3">4 创建格式化字符串</h4>
+
+<p>String 类中你可以使用 printf() 方法来格式化字符串并输出，String format() 方法可以返回 String 对象而不是 PrintStream 对象。以下实例演示了 printf() 方法的使用：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Prints</span><span class="o">{</span>
+    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+        <span class="k">val</span> <span class="n">floatVar</span> <span class="k">=</span> <span class="mf">12.345</span>
+        <span class="k">var</span> <span class="n">intVar</span> <span class="k">=</span> <span class="mi">2900</span>
+        <span class="k">var</span> <span class="n">stringVar</span> <span class="k">=</span> <span class="s">"Scala学习"</span>
+        <span class="k">var</span> <span class="n">fs</span> <span class="k">=</span> <span class="n">printf</span><span class="o">(</span><span class="s">"浮点型变量为: "</span> <span class="o">+</span> <span class="s">"%f, 整型变量为: %d, 字符串为: "</span> <span class="o">+</span>
+                     <span class="s">"%s"</span><span class="o">,</span> <span class="n">floatVar</span><span class="o">,</span> <span class="n">intVar</span><span class="o">,</span> <span class="n">stringVar</span><span class="o">)</span>
+       <span class="n">println</span><span class="o">(</span><span class="n">fs</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="string-">5 String 方法</h4>
+
+<p>下表列出了 java.lang.String 中常用的方法，你可以在 Scala 中使用：</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>序号</td>
+      <td>方法及描述</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>char charAt(int index)——&gt;返回指定位置的字符</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>int compareTo(Object o)——&gt;比较字符串与对象</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>int compareTo(String anotherString)——&gt;按字典顺序比较两个字符串</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>int compareToIgnoreCase(String str)——&gt;按字典顺序比较两个字符串，不考虑大小写</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>String concat(String str)——&gt;将指定字符串连接到此字符串的结尾</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>boolean contentEquals(StringBuffer sb)——&gt;将此字符串与指定的 StringBuffer 比较。</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>static String copyValueOf(char[] data)——&gt;返回指定数组中表示该字符序列的 String</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>static String copyValueOf(char[] data, int offset, int count)——&gt;返回指定数组中表示该字符序列的 String</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>boolean endsWith(String suffix)——&gt;测试此字符串是否以指定的后缀结束</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>boolean equals(Object anObject)——&gt;将此字符串与指定的对象比较</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>boolean equalsIgnoreCase(String anotherString)——&gt;将此 String 与另一个 String 比较，不考虑大小写</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>byte getBytes()——&gt;使用平台的默认字符集将此 String 编码为 byte 序列，并将结果存储到一个新的 byte 数组中</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>byte[] getBytes(String charsetName)——&gt;使用指定的字符集将此 String 编码为 byte 序列，并将结果存储到一个新的 byte 数组中</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin)——&gt;将字符从此字符串复制到目标字符数组</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>int hashCode()——&gt;返回此字符串的哈希码</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>int indexOf(int ch)——&gt;返回指定字符在此字符串中第一次出现处的索引</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>int indexOf(int ch, int fromIndex)——&gt;返返回在此字符串中第一次出现指定字符处的索引，从指定的索引开始搜索</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>int indexOf(String str)——&gt;返回指定子字符串在此字符串中第一次出现处的索引</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>int indexOf(String str, int fromIndex)——&gt;返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>String intern()——&gt;返回字符串对象的规范化表示形式</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>int lastIndexOf(int ch)——&gt;返回指定字符在此字符串中最后一次出现处的索引</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>int lastIndexOf(int ch, int fromIndex)——&gt;返回指定字符在此字符串中最后一次出现处的索引，从指定的索引处开始进行反向搜索</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>int lastIndexOf(String str)——&gt;返回指定子字符串在此字符串中最右边出现处的索引</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>int lastIndexOf(String str, int fromIndex)——&gt;返回指定子字符串在此字符串中最后一次出现处的索引，从指定的索引开始反向搜索</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>int length()——&gt;返回此字符串的长度</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>boolean matches(String regex)——&gt;告知此字符串是否匹配给定的正则表达式</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len)——&gt;测试两个字符串区域是否相等</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>boolean regionMatches(int toffset, String other, int ooffset, int len)——&gt;测试两个字符串区域是否相等</td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>String replace(char oldChar, char newChar)——&gt;返回一个新的字符串，它是通过用 newChar 替换此字符串中出现的所有 oldChar 得到的</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>String replaceAll(String regex, String replacement)——&gt;使用给定的 replacement 替换此字符串所有匹配给定的正则表达式的子字符串</td>
+    </tr>
+    <tr>
+      <td>31</td>
+      <td>String replaceFirst(String regex, String replacement)——&gt;使用给定的 replacement 替换此字符串匹配给定的正则表达式的第一个子字符串</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>String[] split(String regex)——&gt;根据给定正则表达式的匹配拆分此字符串</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>String[] split(String regex, int limit)——&gt;根据匹配给定的正则表达式来拆分此字符串</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>boolean startsWith(String prefix)——&gt;测试此字符串是否以指定的前缀开始</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>boolean startsWith(String prefix, int toffset)——&gt;测试此字符串从指定索引开始的子字符串是否以指定前缀开始。</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td>CharSequence subSequence(int beginIndex, int endIndex)——&gt;返回一个新的字符序列，它是此序列的一个子序列</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td>String substring(int beginIndex)——&gt;返回一个新的字符串，它是此字符串的一个子字符串</td>
+    </tr>
+    <tr>
+      <td>38</td>
+      <td>String substring(int beginIndex, int endIndex)——&gt;返回一个新字符串，它是此字符串的一个子字符串</td>
+    </tr>
+    <tr>
+      <td>39</td>
+      <td>char[] toCharArray()——&gt;将此字符串转换为一个新的字符数组</td>
+    </tr>
+    <tr>
+      <td>40</td>
+      <td>String toLowerCase()——&gt;使用默认语言环境的规则将此 String 中的所有字符都转换为小写</td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td>String toLowerCase(Locale locale)——&gt;使用给定 Locale 的规则将此 String 中的所有字符都转换为小写</td>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>String toString()——&gt;返回此对象本身（它已经是一个字符串！）</td>
+    </tr>
+    <tr>
+      <td>43</td>
+      <td>String toUpperCase()——&gt;使用默认语言环境的规则将此 String 中的所有字符都转换为大写</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>String toUpperCase(Locale locale)——&gt;使用给定 Locale 的规则将此 String 中的所有字符都转换为大写</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>String trim()——&gt;删除指定字符串的首尾空白符</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>static String valueOf(primitive data type x)——&gt;返回指定类型参数的字符串表示形式</td>
+    </tr>
+  </tbody>
+</table>
+
+
+                <hr>
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/language/2016/08/31/Scala-Lesson4/" data-toggle="tooltip" data-placement="top" title="scala Lesson 4">
+                        Previous<br>
+                        <span>scala Lesson 4</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/language/2016/08/31/Scala-Lesson6/" data-toggle="tooltip" data-placement="top" title="scala Lesson 6">
+                        Next<br>
+                        <span>scala Lesson 6</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/language/2016/08/31/Scala-Lesson5"
+                        data-title="scala Lesson 5"
+                        data-url="http://machinelearningadvance.com/language/2016/08/31/Scala-Lesson5/" >
+                    </div>
+
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#ME" title="ME" rel="2">
+                                ME
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Other" title="Other" rel="4">
+                                Other
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                CFAL1
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#maths" title="maths" rel="2">
+                                maths
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Big Data" title="Big Data" rel="15">
+                                Big Data
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#大数据" title="大数据" rel="15">
+                                大数据
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="2">
+                                IT
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Scala" title="Scala" rel="14">
+                                Scala
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = '清扬vs淡泊';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/2672280861">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/helloourworld">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Big Data Memo 2016
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-82819752-1';
+    var _gaDomain = 'machinelearningadvance.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '863b1f46c83a8e14e47782106aee7e7f';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/images/background.jpg" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

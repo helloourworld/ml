@@ -17,21 +17,22 @@ tags:
  【Tools】->【Build System】->【New Build System】
 输入如下内容：
 
-    `
+~~~sublime
 {
     "cmd": ["scalac", "-d", "%tmp%", "$file", "&", "scala", "-cp", "%tmp%", "$file_base_name"],
     "selector": ["source.scala"],
     "shell": "true"
+    "encoding": "cp936"
 }
-    `
+~~~
 
 保存。然后就可以使用ctrl + b 编译与执行scala脚本了。
 
 ps: 使用同样的配置也能够执行java的编译与执行。方法：
 
-> 将cmdjava替换
+> 将cmdjava替换为如下bat脚本，并放置于javac路径
 
-    `
+~~~bat
     @ECHO OFF
 cd %~dp1
 ECHO Compiling %~nx1......
@@ -43,14 +44,28 @@ IF EXIST %~n1.class (
     ECHO ----------------------OUTPUT--------------
     java %~n1
     )
-    `
+~~~
 
 ## scala示例
 
-    ·
+~~~scala
 object Hello {
   def main(args: Array[String]): Unit = {
     println("Hello, world!")
   }
 }
-    ·
+~~~
+
+## Decode error解决
+
+出现：[Decode error - output not utf-8]
+
+解决：
+发现是print不支持中文字符的输出， 需要修改build的setting， 打开.sublime-build,
+添加：
+
+~~~sublime
+{
+     "encoding": "cp936"
+}
+~~~

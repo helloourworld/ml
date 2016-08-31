@@ -8,6 +8,142 @@
 		
 			
 			<item>
+				<title>Scale tuple</title>
+				
+					<description>&lt;h2 id=&quot;section&quot;&gt;#&lt;/h2&gt;
+</description>
+				
+				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/31/scala-tuples/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/31/scala-tuples/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Scala Set</title>
+				
+					<description>&lt;h2 id=&quot;section&quot;&gt;#&lt;/h2&gt;
+</description>
+				
+				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/31/scala-sets/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/31/scala-sets/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Scala Option</title>
+				
+					<description>&lt;h2 id=&quot;section&quot;&gt;#&lt;/h2&gt;
+</description>
+				
+				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/31/scala-options/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/31/scala-options/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Scala Map</title>
+				
+					<description>&lt;h2 id=&quot;section&quot;&gt;#&lt;/h2&gt;
+</description>
+				
+				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/31/scala-maps/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/31/scala-maps/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Scala List</title>
+				
+					<description>&lt;h3 id=&quot;scala-list&quot;&gt;Scala List(列表)&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/31/scala-lists/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/31/scala-lists/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>scala Iterators</title>
+				
+					<description>&lt;h3 id=&quot;scala-iterator&quot;&gt;Scala Iterator（迭代器）&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/31/scala-iterators/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/31/scala-iterators/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>scala Lesson 7</title>
+				
+					<description>&lt;h3 id=&quot;scala-collection&quot;&gt;Scala Collection&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/31/Scala-Lesson7/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/31/Scala-Lesson7/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>scala Lesson 6</title>
+				
+					<description>&lt;h3 id=&quot;scala-&quot;&gt;Scala 数组&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/31/Scala-Lesson6/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/31/Scala-Lesson6/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>scala Lesson 5</title>
+				
+					<description>&lt;h3 id=&quot;scala-&quot;&gt;Scala 字符串&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/31/Scala-Lesson5/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/31/Scala-Lesson5/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>scala Lesson 4</title>
+				
+					<description>&lt;h3 id=&quot;section&quot;&gt;函数&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/31/Scala-Lesson4/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/31/Scala-Lesson4/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>scala Lesson 3</title>
 				
 					<description>&lt;h3 id=&quot;scala-ifelse-&quot;&gt;Scala IF…ELSE 语句&lt;/h3&gt;

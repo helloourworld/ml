@@ -210,40 +210,57 @@
 <p>【Tools】-&gt;【Build System】-&gt;【New Build System】
 输入如下内容：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>` {
-"cmd": ["scalac", "-d", "%tmp%", "$file", "&amp;", "scala", "-cp", "%tmp%", "$file_base_name"],
-"selector": ["source.scala"],
-"shell": "true" }
-`
+<pre><code class="language-sublime">{
+    "cmd": ["scalac", "-d", "%tmp%", "$file", "&amp;", "scala", "-cp", "%tmp%", "$file_base_name"],
+    "selector": ["source.scala"],
+    "shell": "true"
+    "encoding": "cp936"
+}
 </code></pre>
-</div>
 
 <p>保存。然后就可以使用ctrl + b 编译与执行scala脚本了。</p>
 
 <p>ps: 使用同样的配置也能够执行java的编译与执行。方法：</p>
 
 <blockquote>
-  <p>将cmdjava替换</p>
+  <p>将cmdjava替换为如下bat脚本，并放置于javac路径</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`
-@ECHO OFF cd %~dp1 ECHO Compiling %~nx1...... IF EXIST %~n1.class (
-DEL %~n1.class
-) javac %~nx1 IF EXIST %~n1.class (
-ECHO ----------------------OUTPUT--------------
-java %~n1
-)
-`
+<pre><code class="language-bat">    @ECHO OFF
+cd %~dp1
+ECHO Compiling %~nx1......
+IF EXIST %~n1.class (
+    DEL %~n1.class
+    )
+javac %~nx1
+IF EXIST %~n1.class (
+    ECHO ----------------------OUTPUT--------------
+    java %~n1
+    )
 </code></pre>
-</div>
 
 <h2 id="scala-1">scala示例</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>· object Hello {   def main(args: Array[String]): Unit = {
-println("Hello, world!")   } }
-·
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Hello</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">println</span><span class="o">(</span><span class="s">"Hello, world!"</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 </div>
+
+<h2 id="decode-error">Decode error解决</h2>
+
+<p>出现：[Decode error - output not utf-8]</p>
+
+<p>解决：
+发现是print不支持中文字符的输出， 需要修改build的setting， 打开.sublime-build,
+添加：</p>
+
+<pre><code class="language-sublime">{
+     "encoding": "cp936"
+}
+</code></pre>
 
 
                 <hr>
@@ -372,7 +389,7 @@ println("Hello, world!")   } }
                             
         				
                             
-                				<a href="/tags/#Scala" title="Scala" rel="4">
+                				<a href="/tags/#Scala" title="Scala" rel="14">
                                 Scala
                                 </a>
                             
