@@ -8,6 +8,62 @@
 		
 			
 			<item>
+				<title>travel site</title>
+				
+					<description>&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3308.746305523445!2d98.29872231419827!3d7.898117307849134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30503abb712fb895%3A0x3c957208ecbf03b!2sPalmyra+Patong+Resort+Phuket.!5e1!3m2!1szh-CN!2sjp!4v1472736112493&quot; width=&quot;600&quot; height=&quot;450&quot; frameborder=&quot;0&quot; style=&quot;border:0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+</description>
+				
+				<pubDate>Thu, 01 Sep 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/blog/2016/09/01/travel-site/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/blog/2016/09/01/travel-site/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Scala Lesson 9</title>
+				
+					<description>&lt;h3 id=&quot;scala--io&quot;&gt;Scala 文件 I/O&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Thu, 01 Sep 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/09/01/Scala-Lesson9/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/09/01/Scala-Lesson9/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Scala Lesson 8</title>
+				
+					<description>&lt;h3 id=&quot;scala-&quot;&gt;Scala 类和对象&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Thu, 01 Sep 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/09/01/Scala-Lesson8/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/09/01/Scala-Lesson8/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Scala Lesson 10</title>
+				
+					<description>&lt;h3 id=&quot;scala-trait&quot;&gt;Scala Trait(特征)&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Thu, 01 Sep 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/09/01/Scala-Lesson10/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/09/01/Scala-Lesson10/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Scale tuple</title>
 				
 					<description>&lt;h3 id=&quot;scala-&quot;&gt;Scala 元组&lt;/h3&gt;

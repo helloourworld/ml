@@ -29,27 +29,24 @@
     <link rel="stylesheet" href="/css/syntax.css">
 
     <!-- Custom Fonts -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
     <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     <!-- ga & ba script hoook -->
-    <script></script>
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 </head>
 
 
@@ -182,6 +179,112 @@
             ">
     			
 <div class="post-preview">
+    <a href="/hadoop/2016/08/04/hadoop_family_zhihu/">
+        <h2 class="post-title">
+            Hadoop生态圈
+        </h2>
+        
+        <div class="post-content-preview">
+            如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？
+
+请参照知乎原文，链接
+
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 4, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/08/04/hadoop_family/">
+        <h2 class="post-title">
+            Hadoop Family Integration
+        </h2>
+        
+        <div class="post-content-preview">
+            Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka等。对照H...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 4, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/08/04/hadoop_10_years/">
+        <h2 class="post-title">
+            Hadoop Ecosystem Evolves-10 Cool Big Data Projects
+        </h2>
+        
+        <div class="post-content-preview">
+            10 Cool Big Data Projects
+
+请参照原文，链接
+
+
+  0
+
+
+
+
+
+  1
+
+
+
+
+Hadoop
+
+Hadoop is really the flagship technology for open source big data. It grew out of a side project at Yahoo when developers needed a way...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 4, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/08/04/Hadoop_Ecosystem_Table/">
+        <h2 class="post-title">
+            Hadoop Ecosystem Table
+        </h2>
+        
+        <div class="post-content-preview">
+            
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+Distributed Filesystem 
+
+
+	
+	Apache HDFS
+	
+		The Hadoop Distributed File System (HDFS) offers a way to store large files across
+		multiple machines. Hadoop and HDFS was derive...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 4, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/hadoop/2016/08/03/hadoop_vs_spark/">
         <h2 class="post-title">
             Hadoop or Spark
@@ -308,116 +411,6 @@ This aritcle is come from here(http://www.analyticsvidhya.com/blog/2016/07/apply
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/cfa/2016/07/22/CFALevel1_Equity/">
-        <h2 class="post-title">
-            Lev1_Equity_basic_concept
-        </h2>
-        
-        <div class="post-content-preview">
-            52 Orgnization and Functioning of Securities Market
-
-  [x] 1 什么是Primary Capital Market（一级市场）以及它提供的主要三项服务
-  [x] 2 什么是Secondary Financial Market（二级市场）
-  [x] 3 Call Market和Continuous Market的区别
-
-
-53 Se...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on July 22, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/blog/2016/07/21/LA3/">
-        <h2 class="post-title">
-            Matrix operations and inverses
-        </h2>
-        
-        <div class="post-content-preview">
-            Matrix Multiplication
-
-There are 5 common multiply mmethods
-
-1 just the define
-`A = matrix([
-                  [      ],
-                  [      ]
-                  [a31 a32 a33]])`
-`B = matrix([
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on July 21, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/cfa/2016/07/21/CFALevel1_Portfolio/">
-        <h2 class="post-title">
-            Lev1_Portfolio_basic_concept
-        </h2>
-        
-        <div class="post-content-preview">
-            49 Asset Allocation Decision
-
-  [★] 1 Portfolio Management的四步过程
-  [x] 2 什么是Capital Preservation目标
-  [x] 3 什么是Capital Appreciation目标
-  [x] 4 什么是Current Income目标
-  [x] 5 什么是Total Return目标
-
-
-50 Portfo...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on July 21, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/blog/2016/07/20/sublime/">
-        <h2 class="post-title">
-            sublime keyboard shortcuts
-        </h2>
-        
-        <div class="post-content-preview">
-            
-  
-    
-      快捷键
-      功能
-    
-    
-      ctrl+shift+n
-      打开新Sublime
-    
-    
-      ctrl+shift+w
-      关闭Sublime，关闭所有打开文件
-    
-    
-      ctrl+shift+t
-      重新打开最近关闭文件
-    
-    
-      ctrl+n
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on July 20, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -452,7 +445,7 @@ There are 5 common multiply mmethods
                     <div class="tags">
                         
                             
-                                <a href="/tags/#ME" title="ME" rel="2">
+                                <a href="/tags/#ME" title="ME" rel="3">
                                     ME
                                 </a>
                             
@@ -502,7 +495,7 @@ There are 5 common multiply mmethods
                             
                         
                             
-                                <a href="/tags/#Scala" title="Scala" rel="14">
+                                <a href="/tags/#Scala" title="Scala" rel="17">
                                     Scala
                                 </a>
                             

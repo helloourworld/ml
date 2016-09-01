@@ -29,27 +29,24 @@
     <link rel="stylesheet" href="/css/syntax.css">
 
     <!-- Custom Fonts -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
     <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     <!-- ga & ba script hoook -->
-    <script></script>
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 </head>
 
 
@@ -181,6 +178,96 @@
                 postlist-container
             ">
     			
+<div class="post-preview">
+    <a href="/language/2016/08/31/Scala-Lesson7/">
+        <h2 class="post-title">
+            scala Lesson 7
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala Collection
+
+
+  Scala提供了一套很好的集合实现，提供了一些集合类型的抽象。
+  Scala 集合分为可变的和不可变的集合。
+  可变集合可以在适当的地方被更新或扩展。这意味着你可以修改，添加，移除一个集合的元素。
+  而不可变集合类，相比之下，永远不会改变。不过，你仍然可以模拟添加，移除或更新操作。但是这些操作将在每一种情况下都返回一个新的集合，同时使原来的集合...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 31, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/08/31/Scala-Lesson6/">
+        <h2 class="post-title">
+            scala Lesson 6
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala 数组
+
+Scala 语言中提供的数组是用来存储固定大小的同类型元素，数组对于每一门编辑应语言来说都是重要的数据结构之一。
+声明数组变量并不是声明 number0、number1、…、number99 一个个单独的变量，而是声明一个就像 numbers 这样的变量，然后使用 numbers[0]、numbers[1]、…、numbers[99] 来表示一个个单独的变量。数组中某个指...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 31, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/08/31/Scala-Lesson5/">
+        <h2 class="post-title">
+            scala Lesson 5
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala 字符串
+
+object Strings{
+    def main(args: Array[String]){
+        println(greeting)
+    }
+
+    val greeting: String = "Hello, World!"
+}
+
+
+
+
+  以上实例定义了变量 greeting，为字符串常量，它的类型为 String (java.lang.S...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 31, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/08/31/Scala-Lesson4/">
+        <h2 class="post-title">
+            scala Lesson 4
+        </h2>
+        
+        <div class="post-content-preview">
+            函数
+
+函数是一组一起执行一个任务的语句。 您可以把代码划分到不同的函数中。如何划分代码到不同的函数中是由您来决定的，但在逻辑上，划分通常是根据每个函数执行一个特定的任务来进行的。
+Scala 有函数和方法，二者在语义上的区别很小。Scala 方法是类的一部分，而函数是一个对象可以赋值给一个变量。换句话来说在类中定义的函数即是方法。
+我们可以在任何地方定义函数，甚至可以在函数内定义函数（内嵌...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 31, 2016
+    </p>
+</div>
+<hr>
+
 <div class="post-preview">
     <a href="/language/2016/08/30/Scala-Lesson3/">
         <h2 class="post-title">
@@ -334,113 +421,6 @@ Spark专题
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/language/2016/08/20/sublime-and-scala/">
-        <h2 class="post-title">
-            scala with sublime
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala特点：
-
-
-  
-    Scala是一种纯面向对象的语言，一切都是对象：将原始类型和类统一起来，同时也将函数和操作符统一起来。
-    Scala又是函数式语言，这体现在，函数在Scala中也是一种对象，并且能非常自然的使用高阶函数。
-    Scala是静态类型的语言，但是由于它强大的类型推断，实际需要指定类型的地方并不多。在拥有静态语言和编译型语言的安全高效的优势的同时，Sc...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 20, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/08/17/hadoop_tutorial_3/">
-        <h2 class="post-title">
-            Hadoop Tutorial ---- Spark入门实战系列--1.Spark及其生态圈简介
-        </h2>
-        
-        <div class="post-content-preview">
-            Site
-
-Spark入门实战系列–1.Spark及其生态圈简介
-
-start SparkFrames
-spark-shell –packages graphframes:graphframes:0.2.0-spark2.0-s_2.11
-
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 17, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/08/17/hadoop_tutorial_2/">
-        <h2 class="post-title">
-            培训虚拟机使用指南
-        </h2>
-        
-        <div class="post-content-preview">
-            开启虚拟机
-
-确保安装了VMware软件。打开虚拟机后查看IP并更改hosts。注意：请根据本地的IP来更改，查看本地ip方法：ifconfig命令查看。默认NN01为~128；DN01为129；DN02为130。
-
-Last login: Tue Aug 23 18:47:50 2016 from 192.168.71.1
-[hadoop@NN01 ~]$ sudo vim /etc/ho...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 17, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/08/17/hadoop_tutorial_1/">
-        <h2 class="post-title">
-            Hadoop Tutorial ---- Components Required
-        </h2>
-        
-        <div class="post-content-preview">
-            大数据培训
-
-对象：大数据工程师、数据挖掘工程师、数据分析师、程序员…
-
-学习内容
-
-
-  1 开源框架学习
-
-
-
-
-
-  
-    
-      类别
-      组件名称
-      学习等级
-      掌握程度
-      组件概述
-    
-    
-      文件系统
-      HDFS
-      一级
-      熟练
-      Hadoop分布式文件系统（Hadoop...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 17, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -475,7 +455,7 @@ Last login: Tue Aug 23 18:47:50 2016 from 192.168.71.1
                     <div class="tags">
                         
                             
-                                <a href="/tags/#ME" title="ME" rel="2">
+                                <a href="/tags/#ME" title="ME" rel="3">
                                     ME
                                 </a>
                             
@@ -525,7 +505,7 @@ Last login: Tue Aug 23 18:47:50 2016 from 192.168.71.1
                             
                         
                             
-                                <a href="/tags/#Scala" title="Scala" rel="14">
+                                <a href="/tags/#Scala" title="Scala" rel="17">
                                     Scala
                                 </a>
                             

@@ -29,27 +29,24 @@
     <link rel="stylesheet" href="/css/syntax.css">
 
     <!-- Custom Fonts -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
     <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     <!-- ga & ba script hoook -->
-    <script></script>
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 </head>
 
 
@@ -242,6 +239,8 @@
 sites.get( "baidu" ) : None
 </code></pre>
 
+<h4 id="section">1 模式匹配</h4>
+
 <p>你也可以通过模式匹配来输出匹配值。实例如下：</p>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options2</span> <span class="o">{</span>
@@ -264,6 +263,156 @@ sites.get( "baidu" ) : None
 <span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"baidu"</span><span class="o">))</span> <span class="k">:</span> <span class="kt">?</span>
 </code></pre>
 </div>
+
+<h4 id="getorelse-">2 getOrElse() 方法</h4>
+
+<p>你可以使用 getOrElse() 方法来获取元组中存在的元素或者使用其默认的值，实例如下：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options3</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+
+      <span class="k">val</span> <span class="n">a</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
+      <span class="k">val</span> <span class="n">b</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span>
+
+      <span class="n">println</span><span class="o">(</span><span class="s">"a.getOrElse(0): "</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="n">getOrElse</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">)</span>
+      <span class="n">println</span><span class="o">(</span><span class="s">"b.getOrElse(10): "</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">getOrElse</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span> <span class="o">)</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="isempty-">3 isEmpty() 方法</h4>
+
+<p>你可以使用 isEmpty() 方法来检测元组中的元素是否为 None，实例如下：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options4</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+
+      <span class="k">val</span> <span class="n">a</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
+      <span class="k">val</span> <span class="n">b</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span>
+
+      <span class="n">println</span><span class="o">(</span><span class="s">"a.isEmpty: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="n">isEmpty</span> <span class="o">)</span>
+      <span class="n">println</span><span class="o">(</span><span class="s">"b.isEmpty: "</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">isEmpty</span> <span class="o">)</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="scala-option-">4 Scala Option 常用方法</h4>
+
+<p>下表列出了 Scala Option 常用的方法：</p>
+
+<table>
+<tbody><tr>
+<th style="width:5%">序号</th>
+<th style="width:95%">方法及描述</th>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p><b>def get: A</b></p>
+<p>获取可选值</p>
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p><b>def isEmpty: Boolean</b></p>
+<p>检测可选类型值是否为 None，是的话返回 true，否则返回 false</p>
+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<p><b>def productArity: Int</b></p>
+<p>返回元素个数， A(x_1, ..., x_k), 返回 k</p>
+</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+<p><b>def productElement(n: Int): Any</b></p>
+<p>获取指定的可选项，以 0 为起始。即 A(x_1, ..., x_k), 返回 x_(n+1) ， 0 &lt; n &lt; k.</p>
+</td>
+</tr>
+<tr>
+<td>5</td>
+<td>
+<p><b>def exists(p: (A) =&gt; Boolean): Boolean</b></p>
+<p>如果可选项中指定条件的元素是否存在且不为 None 返回 true，否则返回 false。</p>
+</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+<p><b>def filter(p: (A) =&gt; Boolean): Option[A]</b></p>
+<p>如果选项包含有值，而且传递给 filter 的条件函数返回 true， filter 会返回 Some 实例。 否则，返回值为 None 。</p>
+</td>
+</tr>
+<tr>
+<td>7</td>
+<td>
+<p><b>def filterNot(p: (A) =&gt; Boolean): Option[A]</b></p>
+<p>如果选项包含有值，而且传递给 filter 的条件函数返回 false， filter 会返回 Some 实例。 否则，返回值为 None 。</p>
+</td>
+</tr>
+<tr>
+<td>8</td>
+<td>
+<p><b>def flatMap[B](f: (A) =&gt; Option[B]): Option[B]</b></p>
+<p>如果选项包含有值，则传递给函数 f 处理后返回，否则返回 None</p>
+</td>
+</tr>
+<tr>
+<td>9</td>
+<td>
+<p><b>def foreach[U](f: (A) =&gt; U): Unit</b></p>
+<p>如果选项包含有值，则将每个值传递给函数 f， 否则不处理。 </p>
+</td>
+</tr>
+<tr>
+<td>10</td>
+<td>
+<p><b>def getOrElse[B &gt;: A](default: =&gt; B): B</b></p>
+<p>如果选项包含有值，返回选项值，否则返回设定的默认值。</p>
+</td>
+</tr>
+<tr>
+<td>11</td>
+<td>
+<p><b>def isDefined: Boolean</b></p>
+<p>如果可选值是 Some 的实例返回 true，否则返回 false。 </p>
+</td>
+</tr>
+<tr>
+<td>12</td>
+<td>
+<p><b>def iterator: Iterator[A]</b></p>
+<p>如果选项包含有值，迭代出可选值。如果可选值为空则返回空迭代器。 </p>
+</td>
+</tr>
+<tr>
+<td>13</td>
+<td>
+<p><b>def map[B](f: (A) =&gt; B): Option[B]</b></p>
+<p>如果选项包含有值， 返回由函数 f 处理后的 Some，否则返回 None</p>
+</td>
+</tr>
+<tr>
+<td>14</td>
+<td>
+<p><b>def orElse[B &gt;: A](alternative: =&gt; Option[B]): Option[B]</b></p>
+<p>如果一个 Option 是 None ， orElse 方法会返回传名参数的值，否则，就直接返回这个 Option。</p>
+</td>
+</tr>
+<tr>
+<td>15</td>
+<td>
+<p><b>def orNull</b></p>
+<p>如果选项包含有值返回选项值，否则返回 null。</p>
+</td>
+</tr>
+</tbody></table>
 
 
                 <hr>
@@ -342,7 +491,7 @@ sites.get( "baidu" ) : None
                     <div class="tags">
         				
                             
-                				<a href="/tags/#ME" title="ME" rel="2">
+                				<a href="/tags/#ME" title="ME" rel="3">
                                 ME
                                 </a>
                             
@@ -392,7 +541,7 @@ sites.get( "baidu" ) : None
                             
         				
                             
-                				<a href="/tags/#Scala" title="Scala" rel="14">
+                				<a href="/tags/#Scala" title="Scala" rel="17">
                                 Scala
                                 </a>
                             
