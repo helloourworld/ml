@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="g89MuzujW3" />
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
@@ -196,7 +197,84 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="section">#</h2>
+				<h3 id="scala-">Scala 元组</h3>
+
+<p>与列表一样，元组也是不可变的，但与列表不同的是元组可以包含不同类型的元素。
+元组的值是通过将单个的值包含在圆括号中构成的。例如：</p>
+
+<p><code class="highlighter-rouge">val t = (1, 3.14, "Fred")  </code></p>
+
+<p>以上实例在元组中定义了三个元素，对应的类型分别为[Int, Double, java.lang.String]。
+此外我们也可以使用以上方式来定义：</p>
+
+<p><code class="highlighter-rouge">val t = new Tuple3(1, 3.14, "Fred")</code></p>
+
+<ul>
+  <li>元组的实际类型取决于它的元素的类型，比如 (99, “runoob”) 是 Tuple2[Int, String]。 (‘u’, ‘r’, “the”, 1, 4, “me”) 为 Tuple6[Char, Char, String, Int, Int, String]。</li>
+  <li>目前 Scala 支持的元组最大长度为 22。对于更大长度你可以使用集合，或者扩展元组。</li>
+  <li>访问元组的元素可以通过数字索引，如下一个元组：</li>
+</ul>
+
+<p><code class="highlighter-rouge">val t = (4,3,2,1)</code></p>
+
+<p>我们可以使用 t._1 访问第一个元素， t._2 访问第二个元素，如下所示：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Tuples1</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="n">t</span> <span class="k">=</span> <span class="o">(</span><span class="mi">4</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">)</span>
+
+        <span class="k">val</span> <span class="n">sum</span> <span class="k">=</span> <span class="n">t</span><span class="o">.</span><span class="n">_1</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">_2</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">_3</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">_4</span>
+
+        <span class="n">println</span><span class="o">(</span><span class="s">"tuples entity sum is: "</span> <span class="o">+</span> <span class="n">sum</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre>
+</div>
+
+<h4 id="section">1 迭代元组</h4>
+
+<p>你可以使用 Tuple.productIterator() 方法来迭代输出元组的所有元素：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Tuples2</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="n">t</span> <span class="k">=</span> <span class="o">(</span><span class="mi">4</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">)</span>
+
+        <span class="n">t</span><span class="o">.</span><span class="n">productIterator</span><span class="o">.</span><span class="n">foreach</span><span class="o">{</span><span class="n">i</span> <span class="k">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="s">"Value of "</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">" is: "</span> <span class="o">+</span> <span class="n">i</span><span class="o">)}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="section-1">2 元组转为字符串</h4>
+<p>你可以使用 Tuple.toString() 方法将元组的所有元素组合成一个字符串，实例如下：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Tuples3</span><span class="o">{</span>
+    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="n">t</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Tuple3</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"hello"</span><span class="o">,</span> <span class="nc">Console</span><span class="o">)</span>
+
+        <span class="n">println</span><span class="o">(</span><span class="s">"连接后的字符串为："</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">toString</span><span class="o">())</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="section-2">3 元素交换</h4>
+<p>你可以使用 Tuple.swap 方法来交换元组的元素。如下实例：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Tuples4</span><span class="o">{</span>
+    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="n">t</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Tuple2</span><span class="o">(</span><span class="s">"www.google.com"</span><span class="o">,</span> <span class="s">"www.runoob.com"</span><span class="o">)</span>
+        <span class="n">println</span><span class="o">(</span><span class="s">"交换后的元组: "</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">swap</span><span class="o">)</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="scala-lesson7language20160831scala-lesson7"><a href="/language/2016/08/31/Scala-Lesson7/">返回 Scala-Lesson7</a></h4>
+
 
 
                 <hr>

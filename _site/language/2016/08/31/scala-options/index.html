@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="g89MuzujW3" />
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
@@ -196,7 +197,73 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="section">#</h2>
+				<h3 id="scala-option">Scala Option(选项)</h3>
+
+<ul>
+  <li>Scala Option(选项)类型用来表示一个值是可选的（有值或无值)。</li>
+  <li>Option[T] 是一个类型为 T 的可选值的容器： 如果值存在， Option[T] 就是一个 Some[T] ，如果不存在， Option[T] 就是对象 None 。</li>
+  <li>接下来我们来看一段代码：</li>
+</ul>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// 虽然 Scala 可以不定义变量的类型，不过为了清楚些，我还是
+// 把他显示的定义上了
+</span>
+<span class="k">val</span> <span class="n">myMap</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"key1"</span> <span class="o">-&gt;</span> <span class="s">"value"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">value1</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">myMap</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"key1"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">value2</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">myMap</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"key2"</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">value1</span><span class="o">)</span> <span class="c1">// Some("value1")
+</span><span class="n">println</span><span class="o">(</span><span class="n">value2</span><span class="o">)</span> <span class="c1">// None
+</span></code></pre>
+</div>
+
+<ul>
+  <li>在上面的代码中，myMap 是一个 Key 的类型是 String，Value 的类型是 String 的 hash map，但不一样的是他的 get() 返回的是一个叫 Option[String] 的类别。</li>
+  <li>Scala 使用 Option[String] 来告诉你：「我会想办法回传一个 String，但也可能没有 String 给你」。</li>
+  <li>myMap 里并没有 key2 这笔数据，get() 方法返回 None。</li>
+  <li>Option 有两个子类别，一个是 <strong>Some</strong>，一个是 <strong>None</strong>，当他回传 Some 的时候，代表这个函式成功地给了你一个 String，而你可以透过 get() 这个函式拿到那个 String，如果他返回的是 None，则代表没有字符串可以给你。</li>
+  <li>另一个实例：</li>
+</ul>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options1</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="n">sites</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"runoob"</span> <span class="o">-&gt;</span> <span class="s">"www.runoob.com"</span><span class="o">,</span> <span class="s">"google"</span> <span class="o">-&gt;</span> <span class="s">"www.google.com"</span><span class="o">)</span>
+
+      <span class="n">println</span><span class="o">(</span><span class="s">"sites.get( \"runoob\" ) : "</span> <span class="o">+</span>  <span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"runoob"</span> <span class="o">))</span> <span class="c1">// Some(www.runoob.com)
+</span>      <span class="n">println</span><span class="o">(</span><span class="s">"sites.get( \"baidu\" ) : "</span> <span class="o">+</span>  <span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"baidu"</span> <span class="o">))</span>  <span class="c1">//  None
+</span>   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>result:</p>
+
+<pre><code class="language-sublime">sites.get( "runoob" ) : Some(www.runoob.com)
+sites.get( "baidu" ) : None
+</code></pre>
+
+<p>你也可以通过模式匹配来输出匹配值。实例如下：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options2</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="n">sites</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"runoob"</span> <span class="o">-&gt;</span> <span class="s">"www.runoob.com"</span><span class="o">,</span> <span class="s">"google"</span> <span class="o">-&gt;</span> <span class="s">"www.google.com"</span><span class="o">)</span>
+
+      <span class="n">println</span><span class="o">(</span><span class="s">"show(sites.get( \"runoob\")) : "</span> <span class="o">+</span>
+                                          <span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"runoob"</span><span class="o">))</span> <span class="o">)</span>
+      <span class="n">println</span><span class="o">(</span><span class="s">"show(sites.get( \"baidu\")) : "</span> <span class="o">+</span>
+                                          <span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"baidu"</span><span class="o">))</span> <span class="o">)</span>
+   <span class="o">}</span>
+
+   <span class="k">def</span> <span class="n">show</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="k">=</span> <span class="n">x</span> <span class="k">match</span> <span class="o">{</span>
+      <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">s</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">s</span>
+      <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="s">"?"</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+<span class="k">#</span> <span class="n">result</span>
+<span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"runoob"</span><span class="o">))</span> <span class="k">:</span> <span class="kt">www.runoob.com</span>
+<span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"baidu"</span><span class="o">))</span> <span class="k">:</span> <span class="kt">?</span>
+</code></pre>
+</div>
 
 
                 <hr>

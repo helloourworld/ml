@@ -10,7 +10,8 @@
 			<item>
 				<title>Scale tuple</title>
 				
-					<description>&lt;h2 id=&quot;section&quot;&gt;#&lt;/h2&gt;
+					<description>&lt;h3 id=&quot;scala-&quot;&gt;Scala 元组&lt;/h3&gt;
+
 </description>
 				
 				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
@@ -23,7 +24,8 @@
 			<item>
 				<title>Scala Set</title>
 				
-					<description>&lt;h2 id=&quot;section&quot;&gt;#&lt;/h2&gt;
+					<description>&lt;h3 id=&quot;scala-set&quot;&gt;Scala Set(集合)&lt;/h3&gt;
+
 </description>
 				
 				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
@@ -36,7 +38,8 @@
 			<item>
 				<title>Scala Option</title>
 				
-					<description>&lt;h2 id=&quot;section&quot;&gt;#&lt;/h2&gt;
+					<description>&lt;h3 id=&quot;scala-option&quot;&gt;Scala Option(选项)&lt;/h3&gt;
+
 </description>
 				
 				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
@@ -49,7 +52,8 @@
 			<item>
 				<title>Scala Map</title>
 				
-					<description>&lt;h2 id=&quot;section&quot;&gt;#&lt;/h2&gt;
+					<description>&lt;h3 id=&quot;scala-map&quot;&gt;Scala Map(映射)&lt;/h3&gt;
+
 </description>
 				
 				<pubDate>Wed, 31 Aug 2016 00:00:00 +0800</pubDate>
