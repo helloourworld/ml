@@ -12,13 +12,13 @@ baseurl: ""                             # for example, '/blog' if your blog host
 
 
 # SNS settings
-RSS: false
+RSS: True
 weibo_username:     u/2672280861
-zhihu_username:     davidyjun
+#zhihu_username:     davidyjun
 github_username:    helloourworld
 #twitter_username:  davidyjun
 facebook_username:  davidyjun
-# linkedin_username:  yu-lijun-0009
+linkedin_username:  lijun-yu-13b9b475
 
 
 
@@ -53,7 +53,7 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: _your_disqus_short_name_
+disqus_username: davidyjun
 
 # Duoshuo settings
 duoshuo_username: 清扬vs淡泊
