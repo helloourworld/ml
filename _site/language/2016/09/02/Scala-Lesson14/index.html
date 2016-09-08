@@ -194,7 +194,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="scala-extractor">Scala 提取器(Extractor)</h3>
+				<h3 id="scala-extractorhttpdocsscala-langorgtutorialstourextractor-objectshtml">Scala 提取器(<a href="http://docs.scala-lang.org/tutorials/tour/extractor-objects.html">Extractor</a>)</h3>
 
 <ul>
   <li>提取器是从传递给它的对象中提取出构造该对象的参数。</li>
@@ -274,6 +274,17 @@
 <span class="mi">10</span> <span class="n">是</span> <span class="mi">5</span> <span class="n">的两倍</span><span class="err">！</span>
 </code></pre>
 </div>
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Twice</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">apply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+  <span class="k">def</span> <span class="n">unapply</span><span class="o">(</span><span class="n">z</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">z</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="n">z</span><span class="o">/</span><span class="mi">2</span><span class="o">)</span> <span class="k">else</span> <span class="nc">None</span>
+<span class="o">}</span>
+<span class="k">object</span> <span class="nc">TwiceTest</span> <span class="k">extends</span> <span class="nc">App</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="nc">Twice</span><span class="o">(</span><span class="mi">21</span><span class="o">)</span>
+  <span class="n">println</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+  <span class="n">x</span> <span class="k">match</span> <span class="o">{</span> <span class="k">case</span> <span class="nc">Twice</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Console</span><span class="o">.</span><span class="n">println</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">}</span> <span class="c1">// prints 21
+</span><span class="o">}</span>
+</code></pre>
+</div>
 
 
                 <hr>
@@ -288,6 +299,13 @@
                         </a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/language/2016/09/05/Scala-Lesson15/" data-toggle="tooltip" data-placement="top" title="Scala Lesson 15">
+                        Next<br>
+                        <span>Scala Lesson 15</span>
+                        </a>
+                    </li>
                     
                 </ul>
 
@@ -345,7 +363,7 @@
                     <div class="tags">
         				
                             
-                				<a href="/tags/#ME" title="ME" rel="3">
+                				<a href="/tags/#ME" title="ME" rel="4">
                                 ME
                                 </a>
                             
@@ -395,8 +413,14 @@
                             
         				
                             
-                				<a href="/tags/#Scala" title="Scala" rel="21">
+                				<a href="/tags/#Scala" title="Scala" rel="23">
                                 Scala
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spark" title="Spark" rel="2">
+                                Spark
                                 </a>
                             
         				
@@ -485,18 +509,18 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="list-inline text-center">
                     
-                    
-
-                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
-                    
                     <li>
-                        <a target="_blank" href="https://www.zhihu.com/people/davidyjun">
+                        <a href="/feed.xml">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
                             </span>
                         </a>
                     </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
                     
                     
                     <li>
@@ -530,6 +554,15 @@
                         </a>
                     </li>
                     
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
                     
                 </ul>
                 <p class="copyright text-muted">

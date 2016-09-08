@@ -28,7 +28,7 @@ println(value2) // None
 * 在上面的代码中，myMap 是一个 Key 的类型是 String，Value 的类型是 String 的 hash map，但不一样的是他的 get() 返回的是一个叫 Option[String] 的类别。
 * Scala 使用 Option[String] 来告诉你：「我会想办法回传一个 String，但也可能没有 String 给你」。
 * myMap 里并没有 key2 这笔数据，get() 方法返回 None。
-* Option 有两个子类别，一个是 **Some**，一个是 **None**，当他回传 Some 的时候，代表这个函式成功地给了你一个 String，而你可以透过 get() 这个函式拿到那个 String，如果他返回的是 None，则代表没有字符串可以给你。
+* <u>Option 有两个子类别，一个是 **Some**，一个是 **None**</u>，当他回传 Some 的时候，代表这个函式成功地给了你一个 String，而你可以透过 get() 这个函式拿到那个 String，如果他返回的是 None，则代表没有字符串可以给你。
 * 另一个实例：
 
 ~~~scala
@@ -40,11 +40,7 @@ object Options1 {
       println("sites.get( \"baidu\" ) : " +  sites.get( "baidu" ))  //  None
    }
 }
-~~~
-
-result:
-
-~~~sublime
+# result:
 sites.get( "runoob" ) : Some(www.runoob.com)
 sites.get( "baidu" ) : None
 ~~~

@@ -8,9 +8,65 @@
 		
 			
 			<item>
+				<title>Spark Streaming Lesson 1</title>
+				
+					<description>&lt;h3 id=&quot;overview&quot;&gt;1 Overview&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Thu, 08 Sep 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/hadoop/2016/09/08/hadoop_test/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/09/08/hadoop_test/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>travel Map</title>
+				
+					<description>&lt;iframe src=&quot;http://you.ctrip.com/journeys/Phuket364/504329-map.html?type=0#&quot; width=&quot;700&quot; height=&quot;750&quot; frameborder=&quot;0&quot; style=&quot;border:0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</description>
+				
+				<pubDate>Mon, 05 Sep 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/blog/2016/09/05/travel-map/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/blog/2016/09/05/travel-map/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Scala Lesson 16</title>
+				
+					<description>&lt;p&gt;链接：https://segmentfault.com/a/1190000005043288#articleHeader56&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Mon, 05 Sep 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/09/05/Scala-Lesson16/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/09/05/Scala-Lesson16/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Scala Lesson 15</title>
+				
+					<description>&lt;h2 id=&quot;section&quot;&gt;#&lt;/h2&gt;
+&lt;p&gt;Resilient Distributed Datasets&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Mon, 05 Sep 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/09/05/Scala-Lesson15/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/09/05/Scala-Lesson15/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Scala Lesson 14</title>
 				
-					<description>&lt;h3 id=&quot;scala-extractor&quot;&gt;Scala 提取器(Extractor)&lt;/h3&gt;
+					<description>&lt;h3 id=&quot;scala-extractorhttpdocsscala-langorgtutorialstourextractor-objectshtml&quot;&gt;Scala 提取器(&lt;a href=&quot;http://docs.scala-lang.org/tutorials/tour/extractor-objects.html&quot;&gt;Extractor&lt;/a&gt;)&lt;/h3&gt;
 
 </description>
 				

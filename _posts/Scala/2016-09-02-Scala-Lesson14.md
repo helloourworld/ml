@@ -7,7 +7,7 @@ catalog: yes
 tags:
     - Scala
 ---
-### Scala 提取器(Extractor)
+### Scala 提取器([Extractor](http://docs.scala-lang.org/tutorials/tour/extractor-objects.html))
 
 * 提取器是从传递给它的对象中提取出构造该对象的参数。
 * Scala 标准库包含了一些预定义的提取器，我们会大致的了解一下它们。
@@ -80,4 +80,15 @@ object Extractors2 {
 # output
 10
 10 是 5 的两倍！
+~~~
+~~~scala
+object Twice {
+  def apply(x: Int): Int = x * 2
+  def unapply(z: Int): Option[Int] = if (z%2 == 0) Some(z/2) else None
+}
+object TwiceTest extends App {
+  val x = Twice(21)
+  println(x)
+  x match { case Twice(n) => Console.println(n) } // prints 21
+}
 ~~~

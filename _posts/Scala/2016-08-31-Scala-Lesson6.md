@@ -126,7 +126,8 @@ object Arrays3{
 
 #### 5 创建区间数组
 
-以下实例中，我们使用了 range() 方法来生成一个区间范围内的数组。range() 方法最后一个参数为步长，默认为 1：
+
+以下实例中，我们使用了 range() [方法](http://docs.scala-lang.org/overviews/collections/concrete-immutable-collection-classes.html#ranges)来生成一个区间范围内的数组。range() 方法最后一个参数为步长，默认为 1：
 
 ~~~scala
 import Array._

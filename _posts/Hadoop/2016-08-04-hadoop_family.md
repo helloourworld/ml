@@ -545,7 +545,7 @@ Spark是基于内存的迭代计算框架，适用于需要多次操作特定数
 由于RDD的特性，Spark不适用那种异步细粒度更新状态的应用，例如web服务的存储或者是增量的web爬虫和索引。就是对于那种增量修改的应用模型不适合。
 总的来说Spark的适用面比较广泛且比较通用。
 
- ** Cluster Manager Types**
+ **Cluster Manager Types**
 
 The system currently supports three cluster managers:
 
