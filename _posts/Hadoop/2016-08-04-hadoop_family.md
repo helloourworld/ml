@@ -549,9 +549,9 @@ Spark是基于内存的迭代计算框架，适用于需要多次操作特定数
 
 The system currently supports three cluster managers:
 
-> *1 Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.
-> *2 Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.
-> *3 Hadoop YARN – the resource manager in Hadoop 2.
+* \*1 Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.
+* \*2 Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.
+* \*3 Hadoop YARN – the resource manager in Hadoop 2.
 
 
 [Spark快速入门指南 – Spark安装与基础使用](http://dblab.xmu.edu.cn/blog/spark-quick-start-guide/)
@@ -560,6 +560,97 @@ The system currently supports three cluster managers:
 	[hadoop@NN01 sparkapp]$ spark-submit --class "SimpleApp" ~/sparkapp/target/scala-2.11/simple-project_2.11-1.0.jar 2>&1|grep "Line"
 Lines with a: 4, Lines with b: 2
 ~~~
+**Spark 计算 Pi**
+
+using a [Monte Carlo method to estimate the value of Pi](http://en.wikipedia.org/wiki/Monte_Carlo_method)
+
+在终端中执行如下命令创建一个文件夹 pi  作为应用程序根目录
+
+~~~shell
+[hadoop@NN01 ~]$ cd ~
+[hadoop@NN01 ~]$ mkdir ./pi
+[hadoop@NN01 ~]$ mkdir -p ./pi/src/main/scala
+~~~
+
+Scala脚本
+
+~~~scala
+# [hadoop@NN01 ~]$ vim pi/src/main/scala/Pi.scala
+import scala.math.random
+import org.apache.spark._
+
+/** Computes an approximation to Pi */
+
+object SparkPi{
+    def main(args: Array[String]) {
+        val conf = new SparkConf().setAppName("Spark Pi")
+        val spark = new SparkContext(conf)
+
+        val slices = if(args.length >0) args(0).toInt else 2
+        val n = 100000 * slices
+
+        val count = spark.parallelize(1 to n, slices).map{i =>
+            val x = random * 2 - 1
+            val y = random * 2 - 1
+            if (x * x + y * y < 1) 1 else 0
+        }.reduce(_ + _)
+
+        println("Pi is roughly: " + 4.0 * count / n)
+        spark.stop()
+    }
+}
+~~~
+Link sbt with spark
+
+~~~sbt
+# [hadoop@NN01 ~]$ vim pi/pi.sbt
+name := "Spark Pi"
+
+version := "1.0"
+
+scalaVersion := "2.11.8"
+
+libraryDependencies += "org.apache.spark" %% "spark-core" % "2.0.0"
+~~~
+
+查看目录并打包
+
+~~~shell
+[hadoop@NN01 ~]$ sbt sbt-version
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=256M; support was removed in 8.0
+[info] Set current project to hadoop (in build file:/home/hadoop/)
+[info] 0.13.12
+[hadoop@NN01 ~]$ cd pi
+[hadoop@NN01 pi]$ find .
+.
+./pi.sbt
+./src
+./src/main
+./src/main/scala
+./src/main/scala/Pi.scala
+[hadoop@NN01 pi]$ sbt package
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=256M; support was removed in 8.0
+[info] Set current project to Spark Pi (in build file:/home/hadoop/pi/)
+[info] Updating {file:/home/hadoop/pi/}pi...
+[info] Resolving jline#jline;2.12.1 ...
+[info] Done updating.
+[info] Compiling 1 Scala source to /home/hadoop/pi/target/scala-2.11/classes...
+[info] Packaging /home/hadoop/pi/target/scala-2.11/spark-pi_2.11-1.0.jar ...
+[info] Done packaging.
+[success] Total time: 19 s, completed Sep 10, 2016 1:50:51 AM
+[hadoop@NN01 pi]$ ls
+pi.sbt  project  src  target
+~~~
+
+提交,我们就可以将生成的 jar 包通过 spark-submit 提交到 Spark 中运行了，命令如下：
+
+~~~scala
+[hadoop@NN01 pi]$ spark-submit --class "SparkPi" ~/pi/target/scala-2.11/spark-pi_2.11-1.0.jar
+Pi is roughly: 3.13858
+~~~
+
+![](/images/hadoop/sparkpi.jpg)
+
 
 #### 3.3.2 Spark SQL, DataFrames and Datasets Guide[refer](http://spark.apache.org/docs/latest/sql-programming-guide.html)
 

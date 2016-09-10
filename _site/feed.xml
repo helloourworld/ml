@@ -15,8 +15,8 @@
 </description>
 				
 				<pubDate>Thu, 08 Sep 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/hadoop/2016/09/08/hadoop_test/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/09/08/hadoop_test/</guid>
+				<link>http://machinelearningadvance.com/hadoop/2016/09/08/Streaming_lesson1/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/09/08/Streaming_lesson1/</guid>
 			</item>
 			
 		
@@ -536,6 +536,20 @@ catalog: yes&gt;
 				<pubDate>Sat, 06 Aug 2016 00:00:00 +0800</pubDate>
 				<link>http://machinelearningadvance.com/hadoop/2016/08/06/hadoop_family_site/</link>
 				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/06/hadoop_family_site/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>HadoopMapReduce</title>
+				
+					<description>&lt;iframe src=&quot;http://research.google.com/archive/mapreduce-osdi04-slides/index.html&quot; width=&quot;700&quot; height=&quot;750&quot; frameborder=&quot;0&quot; style=&quot;border:0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+</description>
+				
+				<pubDate>Thu, 04 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_map_reduce/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_map_reduce/</guid>
 			</item>
 			
 		
