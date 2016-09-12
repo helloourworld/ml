@@ -198,20 +198,55 @@
 
 				<p>Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka等。对照<a href="/hadoop/2016/08/04/Hadoop_Ecosystem_Table/">Hadoop_Ecosystem_Table</a>,我们将其分类为：</p>
 
+<p>三大类：</p>
+
 <ul>
-  <li>1分布式文件存储系统</li>
-  <li>2 分布式编程</li>
-  <li>3 数据库[列存储、文档存储、流存储、KV存储、图数存储]</li>
-  <li>4 新型数据库</li>
-  <li>5 SQL on Hadoop</li>
-  <li>6 数据处理</li>
-  <li>7 服务系统</li>
-  <li>8 调度系统</li>
-  <li>9 机器学习</li>
-  <li>10 其它[标杆及问答、安全、元数据、系统部署、应用、部署架构等等]</li>
+  <li>大类1：存储</li>
 </ul>
 
-<p>每一分类都是方向上的概括，如同炊具，在其下面都包含多种细类，每一细类旨在解决不同的问题，如同具体的高压锅，面包机等。这一比喻请参照<a href="/hadoop_family_zhihu">Hadoop生态圈</a>的描述。</p>
+<blockquote>
+  <ul>
+    <li>1分布式文件存储系统</li>
+    <li>3 数据库[列存储、文档存储、流存储、KV存储、图数存储]</li>
+    <li>4 新型数据库</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>大类2：计算</li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>2 分布式编程</li>
+    <li>5 SQL on Hadoop</li>
+    <li>6 数据处理</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>大类3：算法</li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>9 机器学习</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>大类4：其它</li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>7 服务系统</li>
+    <li>8 调度系统</li>
+    <li>10 其它[标杆及问答、安全、元数据、系统部署、应用、部署架构等等]</li>
+  </ul>
+</blockquote>
+
+<p>本文的介绍是一个概览，会对以上重要组分别说明与介绍。</p>
 
 <h2 id="back-to-ecosystemtablehadoop20160804hadoopecosystemtable">Back to <a href="/hadoop/2016/08/04/Hadoop_Ecosystem_Table/">Ecosystem_Table</a></h2>
 
@@ -226,260 +261,115 @@
 
 <h2 id="hadoop-core">1 Hadoop Core</h2>
 
-<p>主要包括HDFS，MapReduce, HBase.</p>
+<p>主要包括HDFS，MapReduce，YARN，HBase.</p>
 
 <h3 id="hdfs">1.1 HDFS</h3>
 
 <p>Hadoop Distributed File System (HDFS™): A distributed file system that provides high-throughput access to application data. HDFS 是一个能够面向大规模数据使用的，可进行扩展的文件存储与传递系统，是一种允许文件通过网络在多台主机上分享的文件系统，可让多机器上的多用户分享文件和存储空间。实际上，通过网络来访问文件的动作，在程序与用户看来，就像是访问本地的磁盘一般。即使系统中有某些节点脱机，整体来说系统仍然可以持续运作而不会有数据损失。</p>
 
-<h4 id="hdfs-1">1.1.1 HDFS体系结构</h4>
+<h4 id="hdfshdfs-architecturehttphadoopapacheorgdocscurrenthadoop-project-disthadoop-hdfshdfsdesignhtmlintroduction">1.1.1 HDFS体系结构（<a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html#Introduction">HDFS Architecture</a>）</h4>
 
-<p><img src="/images/hdfs_architecture.jpg" alt="" /></p>
+<p><img src="/images/hdfs_architecture.jpg" alt="" />
+The NameNode and DataNode are pieces of software designed to run on commodity machines. These machines typically run a GNU/Linux operating system (OS). <strong>HDFS is built using the Java language</strong>; any machine that supports Java can run the NameNode or the DataNode software.</p>
 
-<ul>
-  <li>
-    <blockquote>
-      <p>1 Namenode</p>
-    </blockquote>
-  </li>
-</ul>
+<h5 id="namenode">1.1.1.1 Namenode</h5>
 
 <p>Namenode是整个文件系统的管理节点。它维护着整个文件系统的文件目录树，文件/目录的元信息和每个文件对应的数据块列表, 接收用户的操作请求。</p>
 
+<p>文件目录查看：</p>
+
+<p><img src="/images/hadoop/hdfs_dir.png" alt="" /></p>
+
 <p>文件包括：</p>
 
-<blockquote>
-  <p>①fsimage:元数据镜像文件。存储某一时段NameNode内存元数据信息。
-②edits:操作日志文件。
-③fstime:保存最近一次checkpoint的时间</p>
-</blockquote>
+<ul>
+  <li>①fsimage:元数据镜像文件。存储某一时段NameNode内存元数据信息。</li>
+  <li>②edits:操作日志文件。</li>
+  <li>③fstime:保存最近一次checkpoint的时间</li>
+</ul>
 
 <p>以上这些文件是保存在linux的文件系统中。通过hdfs-site.xml的dfs.namenode.name.dir属性进行设置。</p>
 
-<p>查看NameNode的fsimage与edits内容</p>
+<h5 id="datanode">1.1.1.2 Datanode</h5>
 
-<p>这个两个文件中的内容使用普通文本编辑器是无法直接查看的，幸运的是hadoop为此准备了专门的工具用于查看文件的内容，这些工具分别为oev和oiv，可以使用hdfs调用执行。</p>
+<ul>
+  <li>提供真实文件数据的存储服务。</li>
+  <li>文件块（ block）： 最基本的存储单位。</li>
+  <li>对于文件内容而言，一个文件的长度大小是size，那么从文件的０偏移开始，按照固定的大小，顺序对文件进行划分并编号，划分好的每一个块称一个Block。 HDFS默认Block大小是128MB， 因此，一个256MB文件，共有256/128=2个Block.*</li>
+  <li>与普通文件系统不同的是，在 HDFS中，如果一个文件小于一个数据块的大小，并不占用整个数据块存储空间。</li>
+  <li>Replication：多复本。默认是三个。通过hdfs-site.xml的dfs.replication属性进行设置。</li>
+</ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>	# 启动服务器：bin/hdfs oiv -i 某个fsimage文件
+<p>文件Block查看：</p>
 
-	bash$ bin/hdfs oiv -i fsimage
-	14/04/07 13:25:14 INFO offlineImageViewer.WebImageViewer: WebImageViewer started.
-	Listening on /127.0.0.1:5978. Press Ctrl+C to stop the viewer.
+<p><img src="/images/hadoop/hdfs_block.png" alt="" /></p>
 
-	# 查看内容：bin/hdfs dfs -ls -R webhdfs://127.0.0.1:5978/
+<p>物理存储位置：</p>
 
-	bash$ bin/hdfs dfs -ls webhdfs://127.0.0.1:5978/
-	Found 2 items
-	drwxrwx–* - root supergroup 0 2014-03-26 20:16 webhdfs://127.0.0.1:5978/tmp
-	drwxr-xr-x - root supergroup 0 2014-03-31 14:08 webhdfs://127.0.0.1:5978/user
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 subdir2]<span class="nv">$ </span><span class="nb">pwd</span>
+/home/hadoop/hadoop2.6/hdfs/data/current/BP-1413666402-192.168.71.128-1470385990339/current/finalized/subdir0/subdir2
+<span class="o">[</span>hadoop@NN01 subdir2]<span class="nv">$ </span>find . -name <span class="s2">"*1073742529*"</span>
+./blk_1073742529_1778.meta
+./blk_1073742529
 </code></pre>
 </div>
 
-<p>~~~# 导出fsimage的内容：bin/hdfs oiv -p XML -i
-	tmp/dfs/name/current/fsimage_0000000000000000055 -o fsimage.xml</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>bash$ bin/hdfs oiv -p XML -i fsimage -o fsimage.xml
-0000055 -o fsimage.xml
-
-# 查看edtis的内容：bin/hdfs oev -i
-tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml
-
-bash$ bin/hdfs oev -i
-tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml ~~~
-</code></pre>
-</div>
-
-<ul>
-  <li>
-    <blockquote>
-      <p>2 Datanode</p>
-    </blockquote>
-  </li>
-</ul>
-
-<p>提供真实文件数据的存储服务。</p>
-
-<p>文件块（ block）： 最基本的存储单位。</p>
-
-<p>对于文件内容而言，一个文件的长度大小是size，那么从文件的０偏移开始，按照固定的大小，顺序对文件进行划分并编号，划分好的每一个块称一个Block。 HDFS默认Block大小是128MB， 因此，一个256MB文件，共有256/128=2个Block.</p>
-
-<p>与普通文件系统不同的是，在 HDFS中，如果一个文件小于一个数据块的大小，并不占用整个数据块存储空间。</p>
-
-<p>Replication：多复本。默认是三个。通过hdfs-site.xml的dfs.replication属性进行设置。</p>
-
-<ul>
-  <li>
-    <blockquote>
-      <p>3 数据存储： staging</p>
-    </blockquote>
-  </li>
-</ul>
+<h5 id="staging">1.1.1.3 数据存储： staging</h5>
 
 <p>HDFS client上传数据到HDFS时，首先，在本地缓存数据，当数据达到一个block大小时，请求NameNode分配一个block。 NameNode会把block所在的DataNode的地址告诉HDFS client。 HDFS client会直接和DataNode通信，把数据写到DataNode节点一个block文件中。</p>
 
-<ul>
-  <li>
-    <blockquote>
-      <p>4 数据存储：读文件操作</p>
-    </blockquote>
-  </li>
-</ul>
+<h5 id="section">1.1.1.4 数据存储：读文件操作</h5>
 
 <p><img src="/images/hdfs_read.jpg" alt="" /></p>
 
-<blockquote>
-  <blockquote>
-    <p>1.首先调用FileSystem对象的open方法，其实是一个DistributedFileSystem的实例。</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>2.DistributedFileSystem通过rpc获得文件的第一批block的locations，同一个block按照重复数会返回多个locations，这些locations按照hadoop拓扑结构排序，距离客户端近的排在前面。</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>3.前两步会返回一个FSDataInputStream对象，该对象会被封装DFSInputStream对象，DFSInputStream可以方便的管理datanode和namenode数据流。客户端调用read方法，DFSInputStream最会找出离客户端最近的datanode并连接。</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>4.数据从datanode源源不断的流向客户端。</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>5.如果第一块的数据读完了，就会关闭指向第一块的datanode连接，接着读取下一块。这些操作对客户端来说是透明的，客户端的角度看来只是读一个持续不断的流。</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>6.如果第一批block都读完了， DFSInputStream就会去namenode拿下一批block的locations，然后继续读，如果所有的块都读完，这时就会关闭掉所有的流。</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>[Alert!]如果在读数据的时候， DFSInputStream和datanode的通讯发生异常，就会尝试正在读的block的排序第二近的datanode,并且会记录哪个datanode发生错误，剩余的blocks读的时候就会直接跳过该datanode。 DFSInputStream也会检查block数据校验和，如果发现一个坏的block,就会先报告到namenode节点，然后DFSInputStream在其他的datanode上读该block的镜像。</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>该设计就是客户端直接连接datanode来检索数据并且namenode来负责为每一个block提供最优的datanode， namenode仅仅处理block location的请求，这些信息都加载在namenode的内存中，hdfs通过datanode集群可以承受大量客户端的并发访问。</p>
-  </blockquote>
-</blockquote>
-
 <ul>
-  <li>
-    <blockquote>
-      <p>5 数据存储：写文件操作</p>
-    </blockquote>
-  </li>
+  <li>1.首先调用FileSystem对象的open方法，其实是一个DistributedFileSystem的实例。</li>
+  <li>2.DistributedFileSystem通过rpc获得文件的第一批block的locations，同一个block按照重复数会返回多个locations，这些locations按照hadoop拓扑结构排序，距离客户端近的排在前面。</li>
+  <li>3.前两步会返回一个FSDataInputStream对象，该对象会被封装DFSInputStream对象，DFSInputStream可以方便的管理datanode和namenode数据流。客户端调用read方法，DFSInputStream最会找出离客户端最近的datanode并连接。</li>
+  <li>4.数据从datanode源源不断的流向客户端。</li>
+  <li>5.如果第一块的数据读完了，就会关闭指向第一块的datanode连接，接着读取下一块。这些操作对客户端来说是透明的，客户端的角度看来只是读一个持续不断的流。</li>
+  <li>6.如果第一批block都读完了， DFSInputStream就会去namenode拿下一批block的locations，然后继续读，如果所有的块都读完，这时就会关闭掉所有的流。</li>
 </ul>
+
+<blockquote>
+  <p>[Alert!]如果在读数据的时候， DFSInputStream和datanode的通讯发生异常，就会尝试正在读的block的排序第二近的datanode,并且会记录哪个datanode发生错误，剩余的blocks读的时候就会直接跳过该datanode。 DFSInputStream也会检查block数据校验和，如果发现一个坏的block,就会先报告到namenode节点，然后DFSInputStream在其他的datanode上读该block的镜像。</p>
+</blockquote>
+
+<blockquote>
+  <p>该设计就是客户端直接连接datanode来检索数据并且namenode来负责为每一个block提供最优的datanode， namenode仅仅处理block location的请求，这些信息都加载在namenode的内存中，hdfs通过datanode集群可以承受大量客户端的并发访问。</p>
+</blockquote>
+
+<h5 id="section-1">1.1.1.5 数据存储：写文件操作</h5>
 
 <p><img src="/images/hdfs_write.jpg" alt="" /></p>
 
-<blockquote>
-  <blockquote>
-    <p>1.客户端通过调用DistributedFileSystem的create方法创建新文件。</p>
-  </blockquote>
-</blockquote>
+<ul>
+  <li>1.客户端通过调用DistributedFileSystem的create方法创建新文件。</li>
+  <li>2.DistributedFileSystem通过RPC调用namenode去创建一个没有blocks关联的新文件，创建前， namenode会做各种校验，比如文件是否存在，客户端有无权限去创建等。如果校验通过， namenode就会记录下新文件，否则就会抛出IO异常。</li>
+  <li>3.前两步结束后，会返回FSDataOutputStream的对象，与读文件的时候相似， FSDataOutputStream被封装成DFSOutputStream。DFSOutputStream可以协调namenode和datanode。客户端开始写数据到DFSOutputStream，DFSOutputStream会把数据切成一个个小的packet，然后排成队列data quene。</li>
+  <li>4.DataStreamer会去处理接受data quene，它先询问namenode这个新的block最适合存储的在哪几个datanode里（比如重复数是3，那么就找到3个最适合的datanode），把他们排成一个pipeline。DataStreamer把packet按队列输出到管道的第一个datanode中，第一个datanode又把packet输出到第二个datanode中，以此类推。</li>
+  <li>5.DFSOutputStream还有一个对列叫ack quene，也是由packet组成，等待datanode的收到响应，当pipeline中的所有datanode都表示已经收到的时候，这时akc quene才会把对应的packet包移除掉。</li>
+</ul>
+
+<p>如果在写的过程中某个datanode发生错误，会采取以下几步：</p>
+
+<ul>
+  <li>1) pipeline被关闭掉</li>
+  <li>2)为了防止防止丢包ack quene里的packet会同步到data quene里</li>
+  <li>3)把产生错误的datanode上当前在写但未完成的block删掉</li>
+  <li>4)block剩下的部分被写到剩下的两个正常的datanode中</li>
+  <li>
+    <p>5)namenode找到另外的datanode去创建这个块的复制。当然，这些操作对客户端来说是无感知的</p>
+  </li>
+  <li>6.客户端完成写数据后调用close方法关闭写入流</li>
+  <li>7.DataStreamer把剩余得包都刷到pipeline里，然后等待ack信息，收到最后一个ack后，通知datanode把文件标视为已完成。</li>
+</ul>
 
 <blockquote>
-  <blockquote>
-    <p>2.DistributedFileSystem通过RPC调用namenode去创建一个没有blocks关联的新文件，创建前， namenode会做各种校验，比如文件是否存在，客户端有无权限去创建等。如果校验通过， namenode就会记录下新文件，否则就会抛出IO异常。</p>
-  </blockquote>
+  <p>注意：客户端执行write操作后，写完的block才是可见的，正在写的block对客户端是不可见的，只有调用sync方法，客户端才确保该文件的写操作已经全部完成，当客户端调用close方法时，会默认调用sync方法。是否需要手动调用取决你根据程序需要在数据健壮性和吞吐率之间的权衡。</p>
 </blockquote>
 
-<blockquote>
-  <blockquote>
-    <p>3.前两步结束后，会返回FSDataOutputStream的对象，与读文件的时候相似， FSDataOutputStream被封装成DFSOutputStream。DFSOutputStream可以协调namenode和datanode。客户端开始写数据到DFSOutputStream，DFSOutputStream会把数据切成一个个小的packet，然后排成队列data quene。</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>4.DataStreamer会去处理接受data quene，它先询问namenode这个新的block最适合存储的在哪几个datanode里（比如重复数是3，那么就找到3个最适合的datanode），把他们排成一个pipeline。DataStreamer把packet按队列输出到管道的第一个datanode中，第一个datanode又把packet输出到第二个datanode中，以此类推。</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>5.DFSOutputStream还有一个对列叫ack quene，也是由packet组成，等待datanode的收到响应，当pipeline中的所有datanode都表示已经收到的时候，这时akc quene才会把对应的packet包移除掉。</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>如果在写的过程中某个datanode发生错误，会采取以下几步：</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <ul>
-      <li>1) pipeline被关闭掉；</li>
-    </ul>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <ul>
-      <li>2)为了防止防止丢包ack quene里的packet会同步到data quene里；</li>
-    </ul>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <ul>
-      <li>3)把产生错误的datanode上当前在写但未完成的block删掉；</li>
-    </ul>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <ul>
-      <li>4)block剩下的部分被写到剩下的两个正常的datanode中；</li>
-    </ul>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <ul>
-      <li>5)namenode找到另外的datanode去创建这个块的复制。当然，这些操作对客户端来说是无感知的。</li>
-    </ul>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>6.客户端完成写数据后调用close方法关闭写入流。</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>7.DataStreamer把剩余得包都刷到pipeline里，然后等待ack信息，收到最后一个ack后，通知datanode把文件标视为已完成。</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>注意：客户端执行write操作后，写完的block才是可见的，正在写的block对客户端是不可见的，只有调用sync方法，客户端才确保该文件的写操作已经全部完成，当客户端调用close方法时，会默认调用sync方法。是否需要手动调用取决你根据程序需要在数据健壮性和吞吐率之间的权衡。</p>
-  </blockquote>
-</blockquote>
-
-<h4 id="hdfs-2">1.1.2 HDFS常用命令</h4>
+<h4 id="hdfs-1">1.1.2 HDFS常用命令</h4>
 
 <p><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html">HDFS 常用命令: 官网</a></p>
 
@@ -524,65 +414,44 @@ tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml 
   </tbody>
 </table>
 
+<h4 id="hdfs-2">1.1.3 HDFS问题</h4>
+
+<p><strong>文件存储与分发</strong></p>
+
+<ul>
+  <li>问：存储文件数与位置？</li>
+  <li>答：存储文件数按完整文件个数来讲，是根据dfs.replication来设置的，默认为3份。按照Block来讲，根据文件原始大小来决定Block数（默认Block大小是128MB）。存储位置分配：<strong>存储：不同BlockID被随机分配在各个节点上</strong>，<strong>分发：相同的BlockID会在不同于自身节点上进行复制备份</strong>。参看<a href="/hadoop/2016/08/04/hadoop_family/#datanode">DataNode</a>部分的介绍，图中所示的文件soc-LiveJournal.txt大小为1个G，被拆分为8个Block。同一BlockID被随机地分配在2个DataNode上（注：本集群设置dfs.replication为2）。文件读取时采取就近原则（本地&gt;同网段&gt;跨网段）读取。</li>
+</ul>
+
 <h3 id="mapreduce">1.2 MapReduce</h3>
 
 <h4 id="explain-mapreduce-in-5-minutes">1.2.1  Explain Map/Reduce in 5 minutes</h4>
 
 <p>原文链接: <a href="http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce">http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce</a> by Aurelien.</p>
 
-<ul>
-  <li>
-    <blockquote>
-      <p>1 Map/Reduce 有3个阶段 : Map/Shuffle/Reduce</p>
-    </blockquote>
-  </li>
-</ul>
+<p><strong>1 Map/Reduce 有3个阶段 : Map/Shuffle/Reduce</strong></p>
 
 <p>Shuffle部分由Hadoop的自动完成，我们只需要实现Map和Reduce部分。</p>
 
-<ul>
-  <li>
-    <blockquote>
-      <p>2 Map部分的输入</p>
-    </blockquote>
-  </li>
-</ul>
+<p><strong>2 Map部分的输入</strong></p>
 
 <p><img src="/images/mapred_mapinput.jpg" alt="" /></p>
 
 <p>图上的城市名称作为key值，所属州以及城市均温为key的value值。ps: 请自动脑补python的dict, jason.</p>
 
-<ul>
-  <li>
-    <blockquote>
-      <p>3 Map部分的输出</p>
-    </blockquote>
-  </li>
-</ul>
+<p><strong>3 Map部分的输出</strong></p>
 
 <p><img src="/images/mapred_mapoutput.jpg" alt="" /></p>
 
 <p>图上显示的Map部分的输出是根据最终我们想要的结果来实现的。我们要得到每个州的平均值，所以根据每个州来进行新的key/value设计。</p>
 
-<ul>
-  <li>
-    <blockquote>
-      <p>4 Shuffle部分</p>
-    </blockquote>
-  </li>
-</ul>
+<p><strong>4 Shuffle部分</strong></p>
 
 <p><img src="/images/mapred_shuffle.jpg" alt="" /></p>
 
 <p>Now, the shuffle task will run on the output of the Map task. It is going to group all the values by Key, and you’ll get a List<Value>.</Value></p>
 
-<ul>
-  <li>
-    <blockquote>
-      <p>5 Rduce部分</p>
-    </blockquote>
-  </li>
-</ul>
+<p><strong>5 Rduce部分</strong></p>
 
 <p>Reduce部分的输入为以上Shuffle部分的输出。</p>
 
@@ -590,13 +459,7 @@ tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml 
 
 <p><img src="/images/mapred_reduce.jpg" alt="" /></p>
 
-<ul>
-  <li>
-    <blockquote>
-      <p>6 总结</p>
-    </blockquote>
-  </li>
-</ul>
+<p><strong>6 总结</strong></p>
 
 <p>Map/Reduce的并行执行过程：</p>
 
@@ -608,194 +471,422 @@ tmp/dfs/name/current/edits_0000000000000000057-0000000000000000186 -o edits.xml 
 
 <p><a href="https://github.com/jsoftbiz/mapreduce_1">https://github.com/jsoftbiz/mapreduce_1</a></p>
 
-<h4 id="section">1.2.2 实例演示</h4>
+<h4 id="section-2">1.2.2 实例演示</h4>
 
-<ul>
-  <li>
-    <blockquote>
-      <p>1 演示WordCount</p>
-    </blockquote>
-  </li>
-  <li>
-    <blockquote>
-      <p>2 演示上述平均温度统计</p>
-    </blockquote>
-  </li>
-</ul>
+<h5 id="wordcount">1.2.2.1 演示WordCount</h5>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">file1</span><span class="o">.</span><span class="n">txt</span>
+<span class="nc">Hello</span> <span class="nc">World</span>
+<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">file2</span><span class="o">.</span><span class="n">txt</span>
+<span class="nc">Hello</span> <span class="nc">Hadoop</span>
+<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">duplicate</span><span class="o">.</span><span class="n">txt</span>
+<span class="mi">2</span>
+<span class="mi">8</span>
+<span class="mi">8</span>
+<span class="mi">3</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">5</span>
+<span class="mi">3</span>
+<span class="mi">0</span>
+<span class="mi">2</span>
+<span class="mi">7</span>
+<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">output2</span><span class="o">/</span><span class="n">part</span><span class="o">-</span><span class="n">r</span><span class="o">-</span><span class="mi">00000</span>
+<span class="mi">0</span>	<span class="mi">1</span>
+<span class="mi">2</span>	<span class="mi">3</span>
+<span class="mi">3</span>	<span class="mi">3</span>
+<span class="mi">5</span>	<span class="mi">1</span>
+<span class="mi">7</span>	<span class="mi">1</span>
+<span class="mi">8</span>	<span class="mi">2</span>
+<span class="nc">Hadoop</span>	<span class="mi">1</span>
+<span class="nc">Hello</span>	<span class="mi">2</span>
+<span class="nc">World</span>	<span class="mi">1</span>
+<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">words</span><span class="o">]</span><span class="n">$</span> <span class="n">hadoop</span> <span class="n">jar</span> <span class="n">wc</span><span class="o">.</span><span class="n">jar</span> <span class="nc">WordCount</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">output2</span>
+<span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">11</span> <span class="mi">21</span><span class="k">:</span><span class="err">48</span><span class="kt">:</span><span class="err">27</span> <span class="kt">INFO</span> <span class="kt">client.RMProxy:</span> <span class="kt">Connecting</span> <span class="kt">to</span> <span class="kt">ResourceManager</span> <span class="kt">at</span> <span class="kt">NN01.HadoopVM/</span><span class="err">192</span><span class="kt">.</span><span class="err">168</span><span class="kt">.</span><span class="err">71</span><span class="kt">.</span><span class="err">128</span><span class="kt">:</span><span class="err">8032</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">29</span> <span class="kt">WARN</span> <span class="kt">mapreduce.JobResourceUploader:</span> <span class="kt">Hadoop</span> <span class="kt">command-line</span> <span class="kt">option</span> <span class="kt">parsing</span> <span class="kt">not</span> <span class="kt">performed.</span> <span class="kt">Implement</span> <span class="kt">the</span> <span class="kt">Tool</span> <span class="kt">interface</span> <span class="kt">and</span> <span class="kt">execute</span> <span class="kt">your</span> <span class="kt">application</span> <span class="kt">with</span> <span class="kt">ToolRunner</span> <span class="kt">to</span> <span class="kt">remedy</span> <span class="kt">this.</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">31</span> <span class="kt">INFO</span> <span class="kt">input.FileInputFormat:</span> <span class="kt">Total</span> <span class="kt">input</span> <span class="kt">paths</span> <span class="kt">to</span> <span class="kt">process</span> <span class="kt">:</span> <span class="err">3</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">32</span> <span class="kt">INFO</span> <span class="kt">mapreduce.JobSubmitter:</span> <span class="kt">number</span> <span class="kt">of</span> <span class="kt">splits:</span><span class="err">3</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">32</span> <span class="kt">INFO</span> <span class="kt">mapreduce.JobSubmitter:</span> <span class="kt">Submitting</span> <span class="kt">tokens</span> <span class="kt">for</span> <span class="kt">job:</span> <span class="kt">job_1473644272824_0001</span>
+<span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">11</span> <span class="mi">21</span><span class="k">:</span><span class="err">48</span><span class="kt">:</span><span class="err">33</span> <span class="kt">INFO</span> <span class="kt">impl.YarnClientImpl:</span> <span class="kt">Submitted</span> <span class="kt">application</span> <span class="kt">application_1473644272824_0001</span>
+<span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">11</span> <span class="mi">21</span><span class="k">:</span><span class="err">48</span><span class="kt">:</span><span class="err">34</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span> <span class="kt">The</span> <span class="kt">url</span> <span class="kt">to</span> <span class="kt">track</span> <span class="kt">the</span> <span class="kt">job:</span> <span class="kt">http://NN01.HadoopVM:</span><span class="err">8088</span><span class="kt">/proxy/application_1473644272824_0001/</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">34</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span> <span class="kt">Running</span> <span class="kt">job:</span> <span class="kt">job_1473644272824_0001</span>
+<span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">11</span> <span class="mi">21</span><span class="k">:</span><span class="err">48</span><span class="kt">:</span><span class="err">46</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span> <span class="kt">Job</span> <span class="kt">job_1473644272824_0001</span> <span class="kt">running</span> <span class="kt">in</span> <span class="kt">uber</span> <span class="kt">mode</span> <span class="kt">:</span> <span class="kt">false</span>
+<span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">11</span> <span class="mi">21</span><span class="k">:</span><span class="err">48</span><span class="kt">:</span><span class="err">46</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span>  <span class="kt">map</span> <span class="err">0</span><span class="kt">%</span> <span class="kt">reduce</span> <span class="err">0</span><span class="kt">%</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">56</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span>  <span class="kt">map</span> <span class="err">100</span><span class="kt">%</span> <span class="kt">reduce</span> <span class="err">0</span><span class="kt">%</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">49</span><span class="kt">:</span><span class="err">27</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span>  <span class="kt">map</span> <span class="err">100</span><span class="kt">%</span> <span class="kt">reduce</span> <span class="err">100</span><span class="kt">%</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">49</span><span class="kt">:</span><span class="err">29</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span> <span class="kt">Job</span> <span class="kt">job_1473644272824_0001</span> <span class="kt">completed</span> <span class="kt">successfully</span>
+<span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">11</span> <span class="mi">21</span><span class="k">:</span><span class="err">49</span><span class="kt">:</span><span class="err">29</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span> <span class="kt">Counters:</span> <span class="err">49</span>
+	<span class="kt">File</span> <span class="kt">System</span> <span class="kt">Counters</span>
+		<span class="nc">FILE</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">bytes</span> <span class="kt">read</span><span class="o">=</span><span class="mi">103</span>
+		<span class="nc">FILE</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">bytes</span> <span class="kt">written</span><span class="o">=</span><span class="mi">427675</span>
+		<span class="nc">FILE</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">read</span> <span class="kt">operations</span><span class="o">=</span><span class="mi">0</span>
+		<span class="nc">FILE</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">large</span> <span class="kt">read</span> <span class="kt">operations</span><span class="o">=</span><span class="mi">0</span>
+		<span class="nc">FILE</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">write</span> <span class="kt">operations</span><span class="o">=</span><span class="mi">0</span>
+		<span class="nc">HDFS</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">bytes</span> <span class="kt">read</span><span class="o">=</span><span class="mi">387</span>
+		<span class="nc">HDFS</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">bytes</span> <span class="kt">written</span><span class="o">=</span><span class="mi">49</span>
+		<span class="nc">HDFS</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">read</span> <span class="kt">operations</span><span class="o">=</span><span class="mi">12</span>
+		<span class="nc">HDFS</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">large</span> <span class="kt">read</span> <span class="kt">operations</span><span class="o">=</span><span class="mi">0</span>
+		<span class="nc">HDFS</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">write</span> <span class="kt">operations</span><span class="o">=</span><span class="mi">2</span>
+	<span class="nc">Job</span> <span class="nc">Counters</span>
+		<span class="nc">Launched</span> <span class="n">map</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">3</span>
+		<span class="nc">Launched</span> <span class="n">reduce</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">1</span>
+		<span class="nc">Data</span><span class="o">-</span><span class="n">local</span> <span class="n">map</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">3</span>
+		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">maps</span> <span class="n">in</span> <span class="n">occupied</span> <span class="n">slots</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">24633</span>
+		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">reduces</span> <span class="n">in</span> <span class="n">occupied</span> <span class="n">slots</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">27722</span>
+		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">map</span> <span class="n">tasks</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">24633</span>
+		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">reduce</span> <span class="n">tasks</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">27722</span>
+		<span class="nc">Total</span> <span class="n">vcore</span><span class="o">-</span><span class="n">milliseconds</span> <span class="n">taken</span> <span class="n">by</span> <span class="n">all</span> <span class="n">map</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">24633</span>
+		<span class="nc">Total</span> <span class="n">vcore</span><span class="o">-</span><span class="n">milliseconds</span> <span class="n">taken</span> <span class="n">by</span> <span class="n">all</span> <span class="n">reduce</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">27722</span>
+		<span class="nc">Total</span> <span class="n">megabyte</span><span class="o">-</span><span class="n">milliseconds</span> <span class="n">taken</span> <span class="n">by</span> <span class="n">all</span> <span class="n">map</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">25224192</span>
+		<span class="nc">Total</span> <span class="n">megabyte</span><span class="o">-</span><span class="n">milliseconds</span> <span class="n">taken</span> <span class="n">by</span> <span class="n">all</span> <span class="n">reduce</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">28387328</span>
+	<span class="nc">Map</span><span class="o">-</span><span class="nc">Reduce</span> <span class="nc">Framework</span>
+		<span class="nc">Map</span> <span class="n">input</span> <span class="n">records</span><span class="k">=</span><span class="mi">13</span>
+		<span class="nc">Map</span> <span class="n">output</span> <span class="n">records</span><span class="k">=</span><span class="mi">15</span>
+		<span class="nc">Map</span> <span class="n">output</span> <span class="n">bytes</span><span class="k">=</span><span class="mi">107</span>
+		<span class="nc">Map</span> <span class="n">output</span> <span class="n">materialized</span> <span class="n">bytes</span><span class="k">=</span><span class="mi">115</span>
+		<span class="nc">Input</span> <span class="n">split</span> <span class="n">bytes</span><span class="k">=</span><span class="mi">340</span>
+		<span class="nc">Combine</span> <span class="n">input</span> <span class="n">records</span><span class="k">=</span><span class="mi">15</span>
+		<span class="nc">Combine</span> <span class="n">output</span> <span class="n">records</span><span class="k">=</span><span class="mi">10</span>
+		<span class="nc">Reduce</span> <span class="n">input</span> <span class="n">groups</span><span class="k">=</span><span class="mi">9</span>
+		<span class="nc">Reduce</span> <span class="n">shuffle</span> <span class="n">bytes</span><span class="k">=</span><span class="mi">115</span>
+		<span class="nc">Reduce</span> <span class="n">input</span> <span class="n">records</span><span class="k">=</span><span class="mi">10</span>
+		<span class="nc">Reduce</span> <span class="n">output</span> <span class="n">records</span><span class="k">=</span><span class="mi">9</span>
+		<span class="nc">Spilled</span> <span class="nc">Records</span><span class="k">=</span><span class="mi">20</span>
+		<span class="nc">Shuffled</span> <span class="nc">Maps</span> <span class="k">=</span><span class="mi">3</span>
+		<span class="nc">Failed</span> <span class="nc">Shuffles</span><span class="k">=</span><span class="mi">0</span>
+		<span class="nc">Merged</span> <span class="nc">Map</span> <span class="n">outputs</span><span class="k">=</span><span class="mi">3</span>
+		<span class="nc">GC</span> <span class="n">time</span> <span class="n">elapsed</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">684</span>
+		<span class="nc">CPU</span> <span class="n">time</span> <span class="n">spent</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">3040</span>
+		<span class="nc">Physical</span> <span class="n">memory</span> <span class="o">(</span><span class="n">bytes</span><span class="o">)</span> <span class="n">snapshot</span><span class="k">=</span><span class="mi">869154816</span>
+		<span class="nc">Virtual</span> <span class="n">memory</span> <span class="o">(</span><span class="n">bytes</span><span class="o">)</span> <span class="n">snapshot</span><span class="k">=</span><span class="mi">8342061056</span>
+		<span class="nc">Total</span> <span class="n">committed</span> <span class="n">heap</span> <span class="n">usage</span> <span class="o">(</span><span class="n">bytes</span><span class="o">)</span><span class="k">=</span><span class="mi">639631360</span>
+	<span class="nc">Shuffle</span> <span class="nc">Errors</span>
+		<span class="nc">BAD_ID</span><span class="k">=</span><span class="mi">0</span>
+		<span class="nc">CONNECTION</span><span class="k">=</span><span class="mi">0</span>
+		<span class="nc">IO_ERROR</span><span class="k">=</span><span class="mi">0</span>
+		<span class="nc">WRONG_LENGTH</span><span class="k">=</span><span class="mi">0</span>
+		<span class="nc">WRONG_MAP</span><span class="k">=</span><span class="mi">0</span>
+		<span class="nc">WRONG_REDUCE</span><span class="k">=</span><span class="mi">0</span>
+	<span class="nc">File</span> <span class="nc">Input</span> <span class="nc">Format</span> <span class="nc">Counters</span>
+		<span class="nc">Bytes</span> <span class="nc">Read</span><span class="k">=</span><span class="mi">47</span>
+	<span class="nc">File</span> <span class="nc">Output</span> <span class="nc">Format</span> <span class="nc">Counters</span>
+		<span class="nc">Bytes</span> <span class="nc">Written</span><span class="k">=</span><span class="mi">49</span>
+</code></pre>
+</div>
+
+<h5 id="section-3">1.2.2.2 演示上述平均温度统计</h5>
 
 <p>资源链接：<a href="https://github.com/jsoftbiz/mapreduce_1">https://github.com/jsoftbiz/mapreduce_1</a></p>
 
 <p>需要使用到<a href="http://hadoop.apache.org/docs/r2.6.4/hadoop-mapreduce-client/hadoop-mapreduce-client-core/HadoopStreaming.html">streaming</a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 temperature]$ hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/*streaming*.jar -input /temperature/input/* -output /temperature/py-output -file mapper.py -mapper mapper.py -file reducer.py -reducer reducer.py
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 temperature]<span class="nv">$ </span>hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/<span class="k">*</span>streaming<span class="k">*</span>.jar -input /temperature/input/<span class="k">*</span> -output /temperature/py-output -file mapper.py -mapper mapper.py -file reducer.py -reducer reducer.py
 16/08/09 22:26:30 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
-packageJobJar: [mapper.py, reducer.py, /tmp/hadoop-unjar8704173289988394156/] [] /tmp/streamjob6992547910816721479.jar tmpDir=null
+packageJobJar: <span class="o">[</span>mapper.py, reducer.py, /tmp/hadoop-unjar8704173289988394156/] <span class="o">[]</span> /tmp/streamjob6992547910816721479.jar <span class="nv">tmpDir</span><span class="o">=</span>null
 16/08/09 22:26:32 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
 16/08/09 22:26:32 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
 16/08/09 22:26:33 INFO mapred.FileInputFormat: Total input paths to process : 1
 16/08/09 22:26:33 INFO mapreduce.JobSubmitter: number of splits:2
-16/08/09 22:26:33 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1470792183416_0002
+16/08/09 22:26:33 INFO mapreduce.JobSubmitter: Submitting tokens <span class="k">for </span>job: job_1470792183416_0002
 16/08/09 22:26:34 INFO impl.YarnClientImpl: Submitted application application_1470792183416_0002
 16/08/09 22:26:34 INFO mapreduce.Job: The url to track the job: http://NN01.HadoopVM:8088/proxy/application_1470792183416_0002/
 16/08/09 22:26:34 INFO mapreduce.Job: Running job: job_1470792183416_0002
-16/08/09 22:26:47 INFO mapreduce.Job: Job job_1470792183416_0002 running in uber mode : false
-16/08/09 22:26:47 INFO mapreduce.Job:  map 0% reduce 0%
+16/08/09 22:26:47 INFO mapreduce.Job: Job job_1470792183416_0002 running <span class="k">in </span>uber mode : <span class="nb">false
+</span>16/08/09 22:26:47 INFO mapreduce.Job:  map 0% reduce 0%
 16/08/09 22:26:57 INFO mapreduce.Job:  map 50% reduce 0%
 16/08/09 22:26:58 INFO mapreduce.Job:  map 100% reduce 0%
 16/08/09 22:27:06 INFO mapreduce.Job:  map 100% reduce 100%
 16/08/09 22:27:06 INFO mapreduce.Job: Job job_1470792183416_0002 completed successfully
 16/08/09 22:27:06 INFO mapreduce.Job: Counters: 49
 	File System Counters
-		FILE: Number of bytes read=78
-		FILE: Number of bytes written=330581
-		FILE: Number of read operations=0
-		FILE: Number of large read operations=0
-		FILE: Number of write operations=0
-		HDFS: Number of bytes read=407
-		HDFS: Number of bytes written=18
-		HDFS: Number of read operations=9
-		HDFS: Number of large read operations=0
-		HDFS: Number of write operations=2
+		FILE: Number of bytes <span class="nb">read</span><span class="o">=</span>78
+		FILE: Number of bytes <span class="nv">written</span><span class="o">=</span>330581
+		FILE: Number of <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>0
+		FILE: Number of large <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>0
+		FILE: Number of write <span class="nv">operations</span><span class="o">=</span>0
+		HDFS: Number of bytes <span class="nb">read</span><span class="o">=</span>407
+		HDFS: Number of bytes <span class="nv">written</span><span class="o">=</span>18
+		HDFS: Number of <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>9
+		HDFS: Number of large <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>0
+		HDFS: Number of write <span class="nv">operations</span><span class="o">=</span>2
 	Job Counters
-		Launched map tasks=2
-		Launched reduce tasks=1
-		Data-local map tasks=2
-		Total time spent by all maps in occupied slots (ms)=16690
-		Total time spent by all reduces in occupied slots (ms)=6278
-		Total time spent by all map tasks (ms)=16690
-		Total time spent by all reduce tasks (ms)=6278
-		Total vcore-milliseconds taken by all map tasks=16690
-		Total vcore-milliseconds taken by all reduce tasks=6278
-		Total megabyte-milliseconds taken by all map tasks=17090560
-		Total megabyte-milliseconds taken by all reduce tasks=6428672
+		Launched map <span class="nv">tasks</span><span class="o">=</span>2
+		Launched reduce <span class="nv">tasks</span><span class="o">=</span>1
+		Data-local map <span class="nv">tasks</span><span class="o">=</span>2
+		Total <span class="nb">time </span>spent by all maps <span class="k">in </span>occupied slots <span class="o">(</span>ms<span class="o">)=</span>16690
+		Total <span class="nb">time </span>spent by all reduces <span class="k">in </span>occupied slots <span class="o">(</span>ms<span class="o">)=</span>6278
+		Total <span class="nb">time </span>spent by all map tasks <span class="o">(</span>ms<span class="o">)=</span>16690
+		Total <span class="nb">time </span>spent by all reduce tasks <span class="o">(</span>ms<span class="o">)=</span>6278
+		Total vcore-milliseconds taken by all map <span class="nv">tasks</span><span class="o">=</span>16690
+		Total vcore-milliseconds taken by all reduce <span class="nv">tasks</span><span class="o">=</span>6278
+		Total megabyte-milliseconds taken by all map <span class="nv">tasks</span><span class="o">=</span>17090560
+		Total megabyte-milliseconds taken by all reduce <span class="nv">tasks</span><span class="o">=</span>6428672
 	Map-Reduce Framework
-		Map input records=9
-		Map output records=9
-		Map output bytes=54
-		Map output materialized bytes=84
-		Input split bytes=222
-		Combine input records=0
-		Combine output records=0
-		Reduce input groups=3
-		Reduce shuffle bytes=84
-		Reduce input records=9
-		Reduce output records=3
-		Spilled Records=18
-		Shuffled Maps =2
-		Failed Shuffles=0
-		Merged Map outputs=2
-		GC time elapsed (ms)=2002
-		CPU time spent (ms)=5260
-		Physical memory (bytes) snapshot=685187072
-		Virtual memory (bytes) snapshot=6260936704
-		Total committed heap usage (bytes)=498597888
+		Map input <span class="nv">records</span><span class="o">=</span>9
+		Map output <span class="nv">records</span><span class="o">=</span>9
+		Map output <span class="nv">bytes</span><span class="o">=</span>54
+		Map output materialized <span class="nv">bytes</span><span class="o">=</span>84
+		Input split <span class="nv">bytes</span><span class="o">=</span>222
+		Combine input <span class="nv">records</span><span class="o">=</span>0
+		Combine output <span class="nv">records</span><span class="o">=</span>0
+		Reduce input <span class="nv">groups</span><span class="o">=</span>3
+		Reduce shuffle <span class="nv">bytes</span><span class="o">=</span>84
+		Reduce input <span class="nv">records</span><span class="o">=</span>9
+		Reduce output <span class="nv">records</span><span class="o">=</span>3
+		Spilled <span class="nv">Records</span><span class="o">=</span>18
+		Shuffled Maps <span class="o">=</span>2
+		Failed <span class="nv">Shuffles</span><span class="o">=</span>0
+		Merged Map <span class="nv">outputs</span><span class="o">=</span>2
+		GC <span class="nb">time </span>elapsed <span class="o">(</span>ms<span class="o">)=</span>2002
+		CPU <span class="nb">time </span>spent <span class="o">(</span>ms<span class="o">)=</span>5260
+		Physical memory <span class="o">(</span>bytes<span class="o">)</span> <span class="nv">snapshot</span><span class="o">=</span>685187072
+		Virtual memory <span class="o">(</span>bytes<span class="o">)</span> <span class="nv">snapshot</span><span class="o">=</span>6260936704
+		Total committed heap usage <span class="o">(</span>bytes<span class="o">)=</span>498597888
 	Shuffle Errors
-		BAD_ID=0
-		CONNECTION=0
-		IO_ERROR=0
-		WRONG_LENGTH=0
-		WRONG_MAP=0
-		WRONG_REDUCE=0
+		<span class="nv">BAD_ID</span><span class="o">=</span>0
+		<span class="nv">CONNECTION</span><span class="o">=</span>0
+		<span class="nv">IO_ERROR</span><span class="o">=</span>0
+		<span class="nv">WRONG_LENGTH</span><span class="o">=</span>0
+		<span class="nv">WRONG_MAP</span><span class="o">=</span>0
+		<span class="nv">WRONG_REDUCE</span><span class="o">=</span>0
 	File Input Format Counters
-		Bytes Read=185
+		Bytes <span class="nv">Read</span><span class="o">=</span>185
 	File Output Format Counters
-		Bytes Written=18
+		Bytes <span class="nv">Written</span><span class="o">=</span>18
 16/08/09 22:27:06 INFO streaming.StreamJob: Output directory: /temperature/py-output
 </code></pre>
 </div>
 
-<ul>
-  <li>
-    <blockquote>
-      <p>3 Writing an Hadoop MapReduce Program in Python</p>
-    </blockquote>
-  </li>
-</ul>
+<h5 id="writing-an-hadoop-mapreduce-program-in-python">1.2.2.3 Writing an Hadoop MapReduce Program in Python</h5>
 
 <p>原文请参照：</p>
 
 <p><a href="http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/">Writing an Hadoop MapReduce Program in Python</a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hadoop]$ hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/*streaming*.jar -file /home/hadoop/words/mapper.py -mapper /home/hadoop/words/mapper.py -file /home/hadoop/words/reducer.py -reducer /home/hadoop/words/reducer.py -input /words/input/* -output /words/py-output
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 hadoop]<span class="nv">$ </span>hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/<span class="k">*</span>streaming<span class="k">*</span>.jar -file /home/hadoop/words/mapper.py -mapper /home/hadoop/words/mapper.py -file /home/hadoop/words/reducer.py -reducer /home/hadoop/words/reducer.py -input /words/input/<span class="k">*</span> -output /words/py-output
 16/08/09 20:10:28 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
-packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tmp/hadoop-unjar5100483106189698643/] [] /tmp/streamjob6336434171947928949.jar tmpDir=null
+packageJobJar: <span class="o">[</span>/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tmp/hadoop-unjar5100483106189698643/] <span class="o">[]</span> /tmp/streamjob6336434171947928949.jar <span class="nv">tmpDir</span><span class="o">=</span>null
 16/08/09 20:10:29 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
 16/08/09 20:10:29 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
 16/08/09 20:10:30 INFO mapred.FileInputFormat: Total input paths to process : 2
 16/08/09 20:10:30 INFO mapreduce.JobSubmitter: number of splits:2
-16/08/09 20:10:31 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1470792183416_0001
+16/08/09 20:10:31 INFO mapreduce.JobSubmitter: Submitting tokens <span class="k">for </span>job: job_1470792183416_0001
 16/08/09 20:10:32 INFO impl.YarnClientImpl: Submitted application application_1470792183416_0001
 16/08/09 20:10:32 INFO mapreduce.Job: The url to track the job: http://NN01.HadoopVM:8088/proxy/application_1470792183416_0001/
 16/08/09 20:10:32 INFO mapreduce.Job: Running job: job_1470792183416_0001
-16/08/09 20:10:45 INFO mapreduce.Job: Job job_1470792183416_0001 running in uber mode : false
-16/08/09 20:10:45 INFO mapreduce.Job:  map 0% reduce 0%
+16/08/09 20:10:45 INFO mapreduce.Job: Job job_1470792183416_0001 running <span class="k">in </span>uber mode : <span class="nb">false
+</span>16/08/09 20:10:45 INFO mapreduce.Job:  map 0% reduce 0%
 16/08/09 20:10:59 INFO mapreduce.Job:  map 50% reduce 0%
 16/08/09 20:11:03 INFO mapreduce.Job:  map 100% reduce 0%
 16/08/09 20:11:05 INFO mapreduce.Job:  map 100% reduce 100%
 16/08/09 20:11:06 INFO mapreduce.Job: Job job_1470792183416_0001 completed successfully
 16/08/09 20:11:06 INFO mapreduce.Job: Counters: 49
 	File System Counters
-		FILE: Number of bytes read=47
-		FILE: Number of bytes written=330444
-		FILE: Number of read operations=0
-		FILE: Number of large read operations=0
-		FILE: Number of write operations=0
-		HDFS: Number of bytes read=223
-		HDFS: Number of bytes written=25
-		HDFS: Number of read operations=9
-		HDFS: Number of large read operations=0
-		HDFS: Number of write operations=2
+		FILE: Number of bytes <span class="nb">read</span><span class="o">=</span>47
+		FILE: Number of bytes <span class="nv">written</span><span class="o">=</span>330444
+		FILE: Number of <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>0
+		FILE: Number of large <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>0
+		FILE: Number of write <span class="nv">operations</span><span class="o">=</span>0
+		HDFS: Number of bytes <span class="nb">read</span><span class="o">=</span>223
+		HDFS: Number of bytes <span class="nv">written</span><span class="o">=</span>25
+		HDFS: Number of <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>9
+		HDFS: Number of large <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>0
+		HDFS: Number of write <span class="nv">operations</span><span class="o">=</span>2
 	Job Counters
-		Launched map tasks=2
-		Launched reduce tasks=1
-		Data-local map tasks=2
-		Total time spent by all maps in occupied slots (ms)=24400
-		Total time spent by all reduces in occupied slots (ms)=3381
-		Total time spent by all map tasks (ms)=24400
-		Total time spent by all reduce tasks (ms)=3381
-		Total vcore-milliseconds taken by all map tasks=24400
-		Total vcore-milliseconds taken by all reduce tasks=3381
-		Total megabyte-milliseconds taken by all map tasks=24985600
-		Total megabyte-milliseconds taken by all reduce tasks=3462144
+		Launched map <span class="nv">tasks</span><span class="o">=</span>2
+		Launched reduce <span class="nv">tasks</span><span class="o">=</span>1
+		Data-local map <span class="nv">tasks</span><span class="o">=</span>2
+		Total <span class="nb">time </span>spent by all maps <span class="k">in </span>occupied slots <span class="o">(</span>ms<span class="o">)=</span>24400
+		Total <span class="nb">time </span>spent by all reduces <span class="k">in </span>occupied slots <span class="o">(</span>ms<span class="o">)=</span>3381
+		Total <span class="nb">time </span>spent by all map tasks <span class="o">(</span>ms<span class="o">)=</span>24400
+		Total <span class="nb">time </span>spent by all reduce tasks <span class="o">(</span>ms<span class="o">)=</span>3381
+		Total vcore-milliseconds taken by all map <span class="nv">tasks</span><span class="o">=</span>24400
+		Total vcore-milliseconds taken by all reduce <span class="nv">tasks</span><span class="o">=</span>3381
+		Total megabyte-milliseconds taken by all map <span class="nv">tasks</span><span class="o">=</span>24985600
+		Total megabyte-milliseconds taken by all reduce <span class="nv">tasks</span><span class="o">=</span>3462144
 	Map-Reduce Framework
-		Map input records=2
-		Map output records=4
-		Map output bytes=33
-		Map output materialized bytes=53
-		Input split bytes=198
-		Combine input records=0
-		Combine output records=0
-		Reduce input groups=3
-		Reduce shuffle bytes=53
-		Reduce input records=4
-		Reduce output records=3
-		Spilled Records=8
-		Shuffled Maps =2
-		Failed Shuffles=0
-		Merged Map outputs=2
-		GC time elapsed (ms)=1505
-		CPU time spent (ms)=6830
-		Physical memory (bytes) snapshot=677711872
-		Virtual memory (bytes) snapshot=6261100544
-		Total committed heap usage (bytes)=482869248
+		Map input <span class="nv">records</span><span class="o">=</span>2
+		Map output <span class="nv">records</span><span class="o">=</span>4
+		Map output <span class="nv">bytes</span><span class="o">=</span>33
+		Map output materialized <span class="nv">bytes</span><span class="o">=</span>53
+		Input split <span class="nv">bytes</span><span class="o">=</span>198
+		Combine input <span class="nv">records</span><span class="o">=</span>0
+		Combine output <span class="nv">records</span><span class="o">=</span>0
+		Reduce input <span class="nv">groups</span><span class="o">=</span>3
+		Reduce shuffle <span class="nv">bytes</span><span class="o">=</span>53
+		Reduce input <span class="nv">records</span><span class="o">=</span>4
+		Reduce output <span class="nv">records</span><span class="o">=</span>3
+		Spilled <span class="nv">Records</span><span class="o">=</span>8
+		Shuffled Maps <span class="o">=</span>2
+		Failed <span class="nv">Shuffles</span><span class="o">=</span>0
+		Merged Map <span class="nv">outputs</span><span class="o">=</span>2
+		GC <span class="nb">time </span>elapsed <span class="o">(</span>ms<span class="o">)=</span>1505
+		CPU <span class="nb">time </span>spent <span class="o">(</span>ms<span class="o">)=</span>6830
+		Physical memory <span class="o">(</span>bytes<span class="o">)</span> <span class="nv">snapshot</span><span class="o">=</span>677711872
+		Virtual memory <span class="o">(</span>bytes<span class="o">)</span> <span class="nv">snapshot</span><span class="o">=</span>6261100544
+		Total committed heap usage <span class="o">(</span>bytes<span class="o">)=</span>482869248
 	Shuffle Errors
-		BAD_ID=0
-		CONNECTION=0
-		IO_ERROR=0
-		WRONG_LENGTH=0
-		WRONG_MAP=0
-		WRONG_REDUCE=0
+		<span class="nv">BAD_ID</span><span class="o">=</span>0
+		<span class="nv">CONNECTION</span><span class="o">=</span>0
+		<span class="nv">IO_ERROR</span><span class="o">=</span>0
+		<span class="nv">WRONG_LENGTH</span><span class="o">=</span>0
+		<span class="nv">WRONG_MAP</span><span class="o">=</span>0
+		<span class="nv">WRONG_REDUCE</span><span class="o">=</span>0
 	File Input Format Counters
-		Bytes Read=25
+		Bytes <span class="nv">Read</span><span class="o">=</span>25
 	File Output Format Counters
-		Bytes Written=25
+		Bytes <span class="nv">Written</span><span class="o">=</span>25
 16/08/09 20:11:06 INFO streaming.StreamJob: Output directory: /words/py-output
 </code></pre>
 </div>
 
-<h3 id="hbase">1.3 HBase</h3>
+<h4 id="mapr">1.2.3 MapR问题</h4>
+
+<p><strong>NameNode JobTracker</strong></p>
+
+<ul>
+  <li>问题：是否配置在同一节点？</li>
+  <li>答：JobTracker与TaskTracker 是Hadoop1.x的概念，Hadoop2.x之后被Yarn的RM与NM替代。通常情况是配置在同一节点。官方解释：</li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li><strong>Typically the compute nodes and the storage nodes are the same</strong>, that is, the MapReduce framework and the Hadoop Distributed File System (see HDFS Architecture Guide) are running on the same set of nodes. This configuration allows the framework to effectively schedule tasks on the nodes where data is already present, resulting in very high aggregate bandwidth across the cluster.</li>
+    <li>The MapReduce framework consists of a single master JobTracker and one slave TaskTracker per cluster-node. The master is responsible for scheduling the jobs’ component tasks on the slaves, monitoring them and re-executing the failed tasks. The slaves execute the tasks as directed by the master.</li>
+    <li>Minimally, applications specify the input/output locations and supply map and reduce functions via implementations of appropriate interfaces and/or abstract-classes. These, and other job parameters, comprise the job configuration. The Hadoop job client then submits the job (jar/executable etc.) and configuration to the JobTracker which then assumes the responsibility of distributing the software/configuration to the slaves, scheduling tasks and monitoring them, providing status and diagnostic information to the job-client.</li>
+  </ul>
+</blockquote>
+
+<p><strong>RM与AM和NameNode与DataNode的关系</strong></p>
+
+<ul>
+  <li>问题：以上是否可以指定分配？</li>
+  <li>答：可以。需要改动yarn-site.xml文件并指明ResorceManager并在需要启动ResorceManager的节点上修改相应slave及master文件配置。RM与AM的关系参见<a href="/hadoop/2016/08/04/hadoop_family/#apache-hadoop-yarn">YARN</a>.NameNode与DataNode的关系：NameNode可以看作是分布式文件系统中的管理者，主要负责管理文件系统的命名空间、集群配置信息和存储块的复制等。NameNode会将文件系统的Meta-data存储在内存中，这些信息主要包括了文件信息、每一个文件对应的文件块的信息和每一个文件块在DataNode的信息等。DataNode是文件存储的基本单元，它将Block存储在本地文件系统中，保存了Block的Meta-data，同时周期性地将所有存在的Block信息发送给NameNode。</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@DN01 sbin]<span class="nv">$ </span>jps
+6980 NodeManager
+4870 DataNode
+6873 ResourceManager
+<span class="o">[</span>hadoop@NN01 words]<span class="nv">$ </span>jps
+7819 DataNode
+7997 SecondaryNameNode
+7709 NameNode
+8910 NodeManager
+<span class="o">[</span>hadoop@DN02 ~]<span class="nv">$ </span>jps
+4587 DataNode
+5549 NodeManager
+</code></pre>
+</div>
+
+<p><strong>Map过程读数据位置</strong></p>
+
+<ul>
+  <li>问题：读取文件位置</li>
+  <li>
+    <p>答：同Read过程。</p>
+  </li>
+  <li>How Many Maps?</li>
+  <li>The number of maps is usually driven by the total size of the inputs, that is, the total number of blocks of the input files.</li>
+</ul>
+
+<p>参考：</p>
+
+<p>hadooop提供了一个设置map个数的参数mapred.map.tasks，我们可以通过这个参数来控制map的个数。但是通过这种方式设置map的个数，并不是每次都有效的。原因是mapred.map.tasks只是一个hadoop的参考数值，最终map的个数，还取决于其他的因素。</p>
+
+<ul>
+  <li>为了方便介绍，先来看几个名词：</li>
+  <li>block_size : hdfs的文件块大小，默认为64M，可以通过参数dfs.block.size设置</li>
+  <li>total_size : 输入文件整体的大小</li>
+  <li>input_file_num : 输入文件的个数</li>
+</ul>
+
+<p>（1）默认map个数
+     如果不进行任何设置，默认的map个数是和blcok_size相关的。
+     default_num = total_size / block_size;</p>
+
+<p>（2）期望大小
+     可以通过参数mapred.map.tasks来设置程序员期望的map个数，但是这个个数只有在大于default_num的时候，才会生效。
+     goal_num = mapred.map.tasks;</p>
+
+<p>（3）设置处理的文件大小
+     可以通过mapred.min.split.size 设置每个task处理的文件大小，但是这个大小只有在大于block_size的时候才会生效。
+     split_size = max(mapred.min.split.size, block_size);
+     split_num = total_size / split_size;</p>
+
+<p>（4）计算的map个数
+compute_map_num = min(split_num,  max(default_num, goal_num))</p>
+
+<p>除了这些配置以外，mapreduce还要遵循一些原则。 mapreduce的每一个map处理的数据是不能跨越文件的，也就是说min_map_num &gt;= input_file_num。 所以，最终的map个数应该为：</p>
+
+<p>final_map_num = max(compute_map_num, input_file_num)</p>
+
+<p>经过以上的分析，在设置map个数的时候，可以简单的总结为以下几点：</p>
+
+<ul>
+  <li>（1）如果想增加map个数，则设置mapred.map.tasks 为一个较大的值。</li>
+  <li>（2）如果想减小map个数，则设置mapred.min.split.size 为一个较大的值。</li>
+  <li>
+    <p>（3）如果输入中有很多小文件，依然想减少map个数，则需要将小文件merger为大文件，然后使用准则2。</p>
+  </li>
+  <li>How Many Reduces?</li>
+  <li>The right number of reduces seems to be 0.95 or 1.75 multiplied by (<no. of="" nodes=""> * <no. of="" maximum="" containers="" per="" node="">).</no.></no.></li>
+  <li>With 0.95 all of the reduces can launch immediately and start transferring map outputs as the maps finish. With 1.75 the faster nodes will finish their first round of reduces and launch a second wave of reduces doing a much better job of load balancing.</li>
+  <li>Increasing the number of reduces increases the framework overhead, but increases load balancing and lowers the cost of failures.</li>
+</ul>
+
+<p>The scaling factors above are slightly less than whole numbers to reserve a few reduce slots in the framework for speculative-tasks and failed tasks.</p>
+
+<ul>
+  <li><a href="http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/Partitioner.html">Partitioner</a></li>
+  <li>Partitioner partitions the key space.</li>
+  <li>Partitioner controls the partitioning of the keys of the intermediate map-outputs. The key (or a subset of the key) is used to derive the partition, typically by a hash function. The total number of partitions is the same as the number of reduce tasks for the job. Hence this controls which of the m reduce tasks the intermediate key (and hence the record) is sent to for reduction.</li>
+  <li>
+    <p><a href="http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/lib/partition/HashPartitioner.html">HashPartitioner</a> is the default Partitioner.</p>
+  </li>
+  <li>Counter</li>
+  <li>Counter is a facility for MapReduce applications to report its statistics.</li>
+  <li>Mapper and Reducer implementations can use the Counter to report statistics.</li>
+</ul>
+
+<h3 id="apache-hadoop-yarn">1.3 Apache Hadoop YARN</h3>
 
 <h4 id="introduction-1">1.3.1 Introduction</h4>
+
+<p>The fundamental idea of YARN is to split up the functionalities of resource management and job scheduling/monitoring into separate daemons. The idea is to have a global ResourceManager (RM) and per-application ApplicationMaster (AM). An application is either a single job or a DAG of jobs.</p>
+
+<p>The ResourceManager and the NodeManager form the data-computation framework. The <strong>ResourceManager</strong> is the ultimate authority that arbitrates resources among all the applications in the system. The <strong>NodeManager</strong> is the per-machine framework agent who is responsible for containers, monitoring their resource usage (cpu, memory, disk, network) and reporting the same to the ResourceManager/Scheduler.</p>
+
+<p>The <strong>per-application</strong> <u>ApplicationMaster is, in effect, a framework specific library and is tasked with negotiating resources from the ResourceManager and working with the NodeManager(s) to execute and monitor the tasks**.</u>
+<img src="/images/hadoop/yarn_architecture.gif" alt="" /></p>
+
+<p>The ResourceManager has two main components: <strong>Scheduler</strong> and <strong>ApplicationsManager</strong>.</p>
+
+<p>The Scheduler is responsible for allocating resources to the various running applications subject to familiar constraints of capacities, queues etc. The Scheduler is pure scheduler in the sense that it performs no monitoring or tracking of status for the application. Also, it offers no guarantees about restarting failed tasks either due to application failure or hardware failures. The Scheduler performs its scheduling function based the resource requirements of the applications; it does so based on the abstract notion of a resource Container which incorporates elements such as memory, cpu, disk, network etc.</p>
+
+<p>The Scheduler has a pluggable policy which is responsible for partitioning the cluster resources among the various queues, applications etc. The current schedulers such as the <a href="http://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/CapacityScheduler.html">CapacityScheduler</a> and the <a href="http://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/FairScheduler.html">FairScheduler</a> would be some examples of plug-ins.</p>
+
+<p>The ApplicationsManager is responsible for accepting job-submissions, negotiating the first container for executing the application specific ApplicationMaster and provides the service for restarting the ApplicationMaster container on failure. The per-application ApplicationMaster has the responsibility of negotiating appropriate resource containers from the Scheduler, tracking their status and monitoring for progress.</p>
+
+<h4 id="section-4">1.3.2 应用程序运行过程</h4>
+
+<ul>
+  <li>步骤1：用户将应用程序提交到ResourceManager上；</li>
+  <li>步骤2：ResourceManager为应用程序ApplicationMaster申请资源，并与某个NodeManager通信，以启动ApplicationMaster；</li>
+  <li>步骤3：ApplicationMaster与ResourceManager通信，为内部要执行的任务申请资源，一旦得到资源后，将于NodeManager通信，以启动对应的任务。</li>
+  <li>步骤4：所有任务运行完成后，ApplicationMaster向ResourceManager注销，整个应用程序运行结束。</li>
+</ul>
+
+<p><img src="/images/hadoop/yarn_am.png" alt="" /></p>
+
+<h4 id="resourcemanagerapplicationmasternodemanager">1.3.3 ResourceManager与ApplicationMaster与NodeManager</h4>
+
+<p><img src="/images/hadoop/yarn_client2rm.png" alt="" />
+<img src="/images/hadoop/yarn_rm_am_nm.png" alt="" /></p>
+
+<h3 id="hbase">1.4 HBase</h3>
+
+<h4 id="introduction-2">1.4.1 Introduction</h4>
 
 <p><a href="http://hbase.apache.org/book.html#quickstart">Apache Hbase</a>安装及测试</p>
 
@@ -811,7 +902,7 @@ packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tm
   <li>connect to the UI for the Master<a href="H1:16010">H1:16010</a> or <a href="H2:16010">H2:16010</a></li>
 </ul>
 
-<h4 id="the-apache-hbase-shell">1.3.2 The Apache HBase Shell演示</h4>
+<h4 id="the-apache-hbase-shell">1.4.2 The Apache HBase Shell演示</h4>
 
 <ul>
   <li>1 <a href="http://hbase.apache.org/book.html#scripting">Scripting with Ruby</a></li>
@@ -820,7 +911,7 @@ packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tm
   <li>4 <a href="http://hbase.apache.org/book.html#_read_hbase_shell_commands_from_a_command_file">Read HBase Shell Commands from a Command File</a></li>
 </ul>
 
-<h4 id="data-modelhttphbaseapacheorgbookhtmldatamodel">1.3.3 <a href="http://hbase.apache.org/book.html#datamodel">Data Model</a></h4>
+<h4 id="data-modelhttphbaseapacheorgbookhtmldatamodel">1.4.3 <a href="http://hbase.apache.org/book.html#datamodel">Data Model</a></h4>
 
 <ul>
   <li>1 时间戳（Timestamp）：每次数据操作对应的时间戳，可以看作是数据的版本号</li>
@@ -898,7 +989,7 @@ packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tm
 
 <p><img src="/images/hadoop/consumer-groups.png" alt="" /></p>
 
-<h4 id="section-1">2.2.2 集群实现与演示</h4>
+<h4 id="section-5">2.2.2 集群实现与演示</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 ~]$ ~/tools/runRemoteCmd.sh "/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;" all
 
@@ -977,6 +1068,32 @@ packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tm
 	$HIVE_HOME/bin/schematool -dbType &lt;db type&gt; -initSchema
 </code></pre>
 </div>
+
+<h4 id="hive-">3.3.3 Hive 相关问题</h4>
+
+<ul>
+  <li>问题：HIve只是对MapR的一个翻译？</li>
+  <li>
+    <p>答：是的。参看<a href="http://blog.csdn.net/lw_ghy/article/details/51469753">Hive原理及查询优化</a></p>
+  </li>
+  <li>问题：HIve有没有图形化界面客户端</li>
+  <li>答：Hive目前有以下客户端：</li>
+  <li>Command Line</li>
+  <li>JDBC</li>
+  <li>Python</li>
+  <li>PHP</li>
+  <li>ODBC</li>
+  <li>Thrift</li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>Thrift Java Client</li>
+    <li>Thrift C++ Client</li>
+    <li>Thrift Node Clients</li>
+    <li>Thrift Ruby Client</li>
+  </ul>
+</blockquote>
 
 <h3 id="spark">3.3 Spark</h3>
 
@@ -1155,7 +1272,7 @@ pi.sbt  project  src  target
 
 <h3 id="redis">6.1 Redis</h3>
 
-<h4 id="section-2">6.1.1 集群安装</h4>
+<h4 id="section-6">6.1.1 集群安装</h4>
 
 <p><a href="http://zhoushouby.blog.51cto.com/9150272/1560346">redis 3.0 cluster 集群 学习之路篇 [1]</a></p>
 
