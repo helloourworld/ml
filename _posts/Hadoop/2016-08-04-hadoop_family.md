@@ -9,7 +9,7 @@ tags:
     - Big Data
     - 大数据
 ---
-Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka等。对照[Hadoop_Ecosystem_Table](/hadoop/2016/08/04/Hadoop_Ecosystem_Table/),我们将其分类为：
+Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka, Flink等。对照[Hadoop_Ecosystem_Table](/hadoop/2016/08/04/Hadoop_Ecosystem_Table/),我们将其分类为：
 
 三大类：
 
@@ -494,7 +494,7 @@ packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tm
 **RM与AM和NameNode与DataNode的关系**
 
 * 问题：以上是否可以指定分配？
-* 答：可以。需要改动yarn-site.xml文件并指明ResorceManager并在需要启动ResorceManager的节点上修改相应slave及master文件配置。RM与AM的关系参见[YARN](/hadoop/2016/08/04/hadoop_family/#apache-hadoop-yarn).NameNode与DataNode的关系：NameNode可以看作是分布式文件系统中的管理者，主要负责管理文件系统的命名空间、集群配置信息和存储块的复制等。NameNode会将文件系统的Meta-data存储在内存中，这些信息主要包括了文件信息、每一个文件对应的文件块的信息和每一个文件块在DataNode的信息等。DataNode是文件存储的基本单元，它将Block存储在本地文件系统中，保存了Block的Meta-data，同时周期性地将所有存在的Block信息发送给NameNode。
+* 答：可以。需要改动yarn-site.xml文件并指明ResorceManager并在需要启动ResorceManager的节点上修改相应slave及master文件配置。RM与AM的关系参见[YARN](/hadoop/2016/08/04/hadoop_family/#apache-hadoop-yarn).
 
 ~~~shell
 [hadoop@DN01 sbin]$ jps
@@ -511,13 +511,24 @@ packageJobJar: [/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tm
 5549 NodeManager
 ~~~
 
+NameNode与DataNode的关系：NameNode可以看作是分布式文件系统中的管理者，主要负责管理文件系统的命名空间、集群配置信息和存储块的复制等。NameNode会将文件系统的Meta-data存储在内存中，这些信息主要包括了文件信息、每一个文件对应的文件块的信息和每一个文件块在DataNode的信息等。DataNode是文件存储的基本单元，它将Block存储在本地文件系统中，保存了Block的Meta-data，同时周期性地将所有存在的Block信息发送给NameNode。
+
 **Map过程读数据位置**
 
 * 问题：读取文件位置
 * 答：同Read过程。
 
-* How Many Maps?
-* The number of maps is usually driven by the total size of the inputs, that is, the total number of blocks of the input files.
+* [How Many Maps?](http://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Reducer)
+* <u>The number of maps is usually driven by the total size of the inputs, that is, the total number of blocks of the input files.</u>
+* 默认为2
+
+~~~html
+<property>
+<name>mapreduce.job.maps</name>
+<value>2</value>
+<source>mapred-default.xml</source>
+</property>
+~~~
 
 参考：
 
@@ -554,13 +565,20 @@ final_map_num = max(compute_map_num, input_file_num)
 * （2）如果想减小map个数，则设置mapred.min.split.size 为一个较大的值。
 * （3）如果输入中有很多小文件，依然想减少map个数，则需要将小文件merger为大文件，然后使用准则2。
 
-* How Many Reduces?
-* The right number of reduces seems to be 0.95 or 1.75 multiplied by (<no. of nodes> * <no. of maximum containers per node>).
+* [How Many Reduces?](http://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Reducer)
+* **The right number of reduces seems to be 0.95 or 1.75 multiplied by (\<no. of nodes> * \<no. of maximum containers per node>).**
 * With 0.95 all of the reduces can launch immediately and start transferring map outputs as the maps finish. With 1.75 the faster nodes will finish their first round of reduces and launch a second wave of reduces doing a much better job of load balancing.
 * Increasing the number of reduces increases the framework overhead, but increases load balancing and lowers the cost of failures.
+* The scaling factors above are slightly less than whole numbers to reserve a few reduce slots in the framework for speculative-tasks and failed tasks.
+* 默认为1：
 
-The scaling factors above are slightly less than whole numbers to reserve a few reduce slots in the framework for speculative-tasks and failed tasks.
-
+~~~html
+<property>
+<name>mapreduce.job.reduces</name>
+<value>1</value>
+<source>mapred-default.xml</source>
+</property>
+~~~
 * [Partitioner](http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/Partitioner.html)
 * Partitioner partitions the key space.
 * Partitioner controls the partitioning of the keys of the intermediate map-outputs. The key (or a subset of the key) is used to derive the partition, typically by a hash function. The total number of partitions is the same as the number of reduce tasks for the job. Hence this controls which of the m reduce tasks the intermediate key (and hence the record) is sent to for reduction.
@@ -602,6 +620,7 @@ The ApplicationsManager is responsible for accepting job-submissions, negotiatin
 
 ![](/images/hadoop/yarn_client2rm.png)
 ![](/images/hadoop/yarn_rm_am_nm.png)
+参看：[YARN的设计思想和功能组件简介](http://blog.csdn.net/s646575997/article/details/51802567)
 
 ### 1.4 HBase
 

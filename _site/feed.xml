@@ -8,6 +8,20 @@
 		
 			
 			<item>
+				<title>Setup passphraseless ssh</title>
+				
+					<description>&lt;h2 id=&quot;section&quot;&gt;配置免密码登陆：&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Tue, 13 Sep 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/blog/2016/09/13/Setup-passphraseless-ssh/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/blog/2016/09/13/Setup-passphraseless-ssh/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Spark Streaming Lesson 1</title>
 				
 					<description>&lt;h3 id=&quot;overview&quot;&gt;1 Overview&lt;/h3&gt;
@@ -599,7 +613,7 @@ catalog: yes&gt;
 			<item>
 				<title>Hadoop Family Integration</title>
 				
-					<description>&lt;p&gt;Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka等。对照&lt;a href=&quot;/hadoop/2016/08/04/Hadoop_Ecosystem_Table/&quot;&gt;Hadoop_Ecosystem_Table&lt;/a&gt;,我们将其分类为：&lt;/p&gt;
+					<description>&lt;p&gt;Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka, Flink等。对照&lt;a href=&quot;/hadoop/2016/08/04/Hadoop_Ecosystem_Table/&quot;&gt;Hadoop_Ecosystem_Table&lt;/a&gt;,我们将其分类为：&lt;/p&gt;
 
 </description>
 				

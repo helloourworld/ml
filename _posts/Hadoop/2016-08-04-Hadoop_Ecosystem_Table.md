@@ -254,7 +254,7 @@ tags:
 		describe control flow, and data flow is a side effect of the program. Pig Latin instead focuses on data flow.
 	</td>
 	<td width="20%"><a href="https://pig.apache.org/">1. pig.apache.org/</a>
-		<br> <a href="https://github.com/alanfgates/programmingpig">2.Pig examples by Alan Gates</a>
+		<br> <a href="https://github.com/alanfgates/programmingpig">2. Pig examples by Alan Gates</a>
 	</td>
 
 
@@ -342,7 +342,7 @@ tags:
 
 
 	<tr>
-	<td width="20%">Apache Flink</td>
+	<td width="20%"><font color="red"><h3>Apache Flink
 	<td>
 		Apache Flink (formerly called Stratosphere) features powerful programming abstractions in Java and Scala,
 		a high-performance runtime, and automatic program optimization. It has native support for iterations,

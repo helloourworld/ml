@@ -196,7 +196,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka等。对照<a href="/hadoop/2016/08/04/Hadoop_Ecosystem_Table/">Hadoop_Ecosystem_Table</a>,我们将其分类为：</p>
+				<p>Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka, Flink等。对照<a href="/hadoop/2016/08/04/Hadoop_Ecosystem_Table/">Hadoop_Ecosystem_Table</a>,我们将其分类为：</p>
 
 <p>三大类：</p>
 
@@ -761,7 +761,7 @@ packageJobJar: <span class="o">[</span>/home/hadoop/words/mapper.py, /home/hadoo
 
 <ul>
   <li>问题：以上是否可以指定分配？</li>
-  <li>答：可以。需要改动yarn-site.xml文件并指明ResorceManager并在需要启动ResorceManager的节点上修改相应slave及master文件配置。RM与AM的关系参见<a href="/hadoop/2016/08/04/hadoop_family/#apache-hadoop-yarn">YARN</a>.NameNode与DataNode的关系：NameNode可以看作是分布式文件系统中的管理者，主要负责管理文件系统的命名空间、集群配置信息和存储块的复制等。NameNode会将文件系统的Meta-data存储在内存中，这些信息主要包括了文件信息、每一个文件对应的文件块的信息和每一个文件块在DataNode的信息等。DataNode是文件存储的基本单元，它将Block存储在本地文件系统中，保存了Block的Meta-data，同时周期性地将所有存在的Block信息发送给NameNode。</li>
+  <li>答：可以。需要改动yarn-site.xml文件并指明ResorceManager并在需要启动ResorceManager的节点上修改相应slave及master文件配置。RM与AM的关系参见<a href="/hadoop/2016/08/04/hadoop_family/#apache-hadoop-yarn">YARN</a>.</li>
 </ul>
 
 <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@DN01 sbin]<span class="nv">$ </span>jps
@@ -779,6 +779,8 @@ packageJobJar: <span class="o">[</span>/home/hadoop/words/mapper.py, /home/hadoo
 </code></pre>
 </div>
 
+<p>NameNode与DataNode的关系：NameNode可以看作是分布式文件系统中的管理者，主要负责管理文件系统的命名空间、集群配置信息和存储块的复制等。NameNode会将文件系统的Meta-data存储在内存中，这些信息主要包括了文件信息、每一个文件对应的文件块的信息和每一个文件块在DataNode的信息等。DataNode是文件存储的基本单元，它将Block存储在本地文件系统中，保存了Block的Meta-data，同时周期性地将所有存在的Block信息发送给NameNode。</p>
+
 <p><strong>Map过程读数据位置</strong></p>
 
 <ul>
@@ -786,9 +788,18 @@ packageJobJar: <span class="o">[</span>/home/hadoop/words/mapper.py, /home/hadoo
   <li>
     <p>答：同Read过程。</p>
   </li>
-  <li>How Many Maps?</li>
-  <li>The number of maps is usually driven by the total size of the inputs, that is, the total number of blocks of the input files.</li>
+  <li><a href="http://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Reducer">How Many Maps?</a></li>
+  <li><u>The number of maps is usually driven by the total size of the inputs, that is, the total number of blocks of the input files.</u></li>
+  <li>默认为2</li>
 </ul>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;property&gt;</span>
+<span class="nt">&lt;name&gt;</span>mapreduce.job.maps<span class="nt">&lt;/name&gt;</span>
+<span class="nt">&lt;value&gt;</span>2<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;source&gt;</span>mapred-default.xml<span class="nt">&lt;/source&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+</code></pre>
+</div>
 
 <p>参考：</p>
 
@@ -829,14 +840,21 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
   <li>
     <p>（3）如果输入中有很多小文件，依然想减少map个数，则需要将小文件merger为大文件，然后使用准则2。</p>
   </li>
-  <li>How Many Reduces?</li>
-  <li>The right number of reduces seems to be 0.95 or 1.75 multiplied by (<no. of="" nodes=""> * <no. of="" maximum="" containers="" per="" node="">).</no.></no.></li>
+  <li><a href="http://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Reducer">How Many Reduces?</a></li>
+  <li><strong>The right number of reduces seems to be 0.95 or 1.75 multiplied by (&lt;no. of nodes&gt; * &lt;no. of maximum containers per node&gt;).</strong></li>
   <li>With 0.95 all of the reduces can launch immediately and start transferring map outputs as the maps finish. With 1.75 the faster nodes will finish their first round of reduces and launch a second wave of reduces doing a much better job of load balancing.</li>
   <li>Increasing the number of reduces increases the framework overhead, but increases load balancing and lowers the cost of failures.</li>
+  <li>The scaling factors above are slightly less than whole numbers to reserve a few reduce slots in the framework for speculative-tasks and failed tasks.</li>
+  <li>默认为1：</li>
 </ul>
 
-<p>The scaling factors above are slightly less than whole numbers to reserve a few reduce slots in the framework for speculative-tasks and failed tasks.</p>
-
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;property&gt;</span>
+<span class="nt">&lt;name&gt;</span>mapreduce.job.reduces<span class="nt">&lt;/name&gt;</span>
+<span class="nt">&lt;value&gt;</span>1<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;source&gt;</span>mapred-default.xml<span class="nt">&lt;/source&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+</code></pre>
+</div>
 <ul>
   <li><a href="http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/Partitioner.html">Partitioner</a></li>
   <li>Partitioner partitions the key space.</li>
@@ -882,7 +900,8 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
 <h4 id="resourcemanagerapplicationmasternodemanager">1.3.3 ResourceManager与ApplicationMaster与NodeManager</h4>
 
 <p><img src="/images/hadoop/yarn_client2rm.png" alt="" />
-<img src="/images/hadoop/yarn_rm_am_nm.png" alt="" /></p>
+<img src="/images/hadoop/yarn_rm_am_nm.png" alt="" />
+参看：<a href="http://blog.csdn.net/s646575997/article/details/51802567">YARN的设计思想和功能组件简介</a></p>
 
 <h3 id="hbase">1.4 HBase</h3>
 
@@ -1439,7 +1458,7 @@ True
                             
         				
                             
-                				<a href="/tags/#IT" title="IT" rel="2">
+                				<a href="/tags/#IT" title="IT" rel="3">
                                 IT
                                 </a>
                             
