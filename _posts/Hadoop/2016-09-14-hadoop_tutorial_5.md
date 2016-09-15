@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Hadoop Tutorial 5
+title: Hadoop 集群安装 快速指南
 category: Hadoop
 catalog: yes
 description: Hadoop 安装
