@@ -826,6 +826,81 @@ stopping historyserver
 </code></pre>
 </div>
 
+<h3 id="hadoop">5 Hadoop版本切换</h3>
+
+<p>按照上述配置，配置另一套Hadoop环境于相同节点上。</p>
+
+<p><strong>查看目前版本状态</strong></p>
+
+<p><img src="/images/hadoop/hadoop2.7.3.png" alt="" /></p>
+
+<p><strong>切换</strong></p>
+
+<p>即将软链接改为指向2.6.4即可</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>./tools/runRemoteCmd.sh <span class="s2">"rm ~/hadoop"</span> all
+<span class="k">**************</span>NN01.HadoopVM<span class="k">************</span>
+<span class="k">**************</span>DN01.HadoopVM<span class="k">************</span>
+<span class="k">**************</span>DN02.HadoopVM<span class="k">************</span>
+<span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>./tools/runRemoteCmd.sh <span class="s2">"ln -s ~/hadoop2.6 ~/hadoop"</span> all
+<span class="k">**************</span>NN01.HadoopVM<span class="k">************</span>
+<span class="k">**************</span>DN01.HadoopVM<span class="k">************</span>
+<span class="k">**************</span>DN02.HadoopVM<span class="k">************</span>
+</code></pre>
+</div>
+
+<p><strong>查看目前版本状态</strong></p>
+
+<p><img src="/images/hadoop/hadoop2.6.4.png" alt="" /></p>
+
+<h3 id="other">6 Other</h3>
+
+<p>配置SecondaryNameNode</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hadoop]$ tail etc/hadoop/hdfs-site.xml
+...
+  &lt;property&gt;
+    &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;
+    &lt;value&gt;DN01.HadoopVM:50090&lt;/value&gt;
+  &lt;/property&gt;
+[hadoop@NN01 hadoop]$ ./sbin/start-dfs.sh
+Starting namenodes on [NN01.HadoopVM]
+NN01.HadoopVM: starting namenode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-namenode-NN01.HadoopVM.out
+NN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-NN01.HadoopVM.out
+DN02.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-DN02.HadoopVM.out
+DN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-DN01.HadoopVM.out
+Starting secondary namenodes [DN01.HadoopVM]
+DN01.HadoopVM: starting secondarynamenode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-secondarynamenode-DN01.HadoopVM.out
+[hadoop@DN01 current]$ jps
+4504 DataNode
+4570 SecondaryNameNode
+</code></pre>
+</div>
+
+<p>故障恢复</p>
+
+<p>The latest checkpoint can be imported to the NameNode if all other copies of the image and the edits files are lost. In order to do that one should:</p>
+
+<ul>
+  <li>Create an empty directory specified inthedfs.namenode.name.dir configuration variable;</li>
+  <li>Specify the location of the checkpointdirectory in the configuration variabledfs.namenode.checkpoint.dir;</li>
+  <li>and start the NameNode with-importCheckpoint option.</li>
+</ul>
+
+<p>The NameNode will upload the checkpoint from the dfs.namenode.checkpoint.dir directory and then save it to the NameNode directory(s) set in dfs.namenode.name.dir. The NameNodewill fail if a legal image is contained in dfs.namenode.name.dir. The NameNode verifies that the image indfs.namenode.checkpoint.dir is consistent, but does not modify it in any way.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hdfs]$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh --config $HADOOP_CONF_DIR --script hdfs start namenode -importCheckpoint
+starting namenode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-namenode-NN01.HadoopVM.out
+[hadoop@NN01 hdfs]$ jps
+11571 Jps
+11530 NameNode
+[hadoop@NN01 hdfs]$ $HADOOP_PREFIX/sbin/hadoop-daemons.sh --config $HADOOP_CONF_DIR --script hdfs start datanode
+DN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-DN01.HadoopVM.out
+DN02.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-DN02.HadoopVM.out
+NN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-NN01.HadoopVM.out
+</code></pre>
+</div>
+
 
                 <hr>
 
@@ -841,9 +916,9 @@ stopping historyserver
                     
                     
                     <li class="next">
-                        <a href="/mladvance/2016/09/15/neural-network-zoo/" data-toggle="tooltip" data-placement="top" title="THE NEURAL NETWORK ZOO">
+                        <a href="/cfa/2016/09/15/CFALevel2_Qunat_1/" data-toggle="tooltip" data-placement="top" title="Lev2 Quant 1">
                         Next<br>
-                        <span>THE NEURAL NETWORK ZOO</span>
+                        <span>Lev2 Quant 1</span>
                         </a>
                     </li>
                     
@@ -980,6 +1055,8 @@ stopping historyserver
                 				<a href="/tags/#Spark" title="Spark" rel="2">
                                 Spark
                                 </a>
+                            
+        				
                             
         				
                             

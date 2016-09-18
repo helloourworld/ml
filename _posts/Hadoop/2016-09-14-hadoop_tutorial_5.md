@@ -369,3 +369,76 @@ Stop the MapReduce JobHistory Server with the following command, run on the desi
 [hadoop@NN01 sbin]$ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh --config $HADOOP_CONF_DIR stop historyserver
 stopping historyserver
 ~~~
+
+### 5 Hadoop版本切换
+
+按照上述配置，配置另一套Hadoop环境于相同节点上。
+
+**查看目前版本状态**
+
+![](/images/hadoop/hadoop2.7.3.png)
+
+**切换**
+
+即将软链接改为指向2.6.4即可
+
+~~~shell
+[hadoop@NN01 ~]$ ./tools/runRemoteCmd.sh "rm ~/hadoop" all
+**************NN01.HadoopVM************
+**************DN01.HadoopVM************
+**************DN02.HadoopVM************
+[hadoop@NN01 ~]$ ./tools/runRemoteCmd.sh "ln -s ~/hadoop2.6 ~/hadoop" all
+**************NN01.HadoopVM************
+**************DN01.HadoopVM************
+**************DN02.HadoopVM************
+~~~
+
+**查看目前版本状态**
+
+![](/images/hadoop/hadoop2.6.4.png)
+
+### 6 Other
+
+配置SecondaryNameNode
+
+~~~
+[hadoop@NN01 hadoop]$ tail etc/hadoop/hdfs-site.xml
+...
+  <property>
+    <name>dfs.namenode.secondary.http-address</name>
+    <value>DN01.HadoopVM:50090</value>
+  </property>
+[hadoop@NN01 hadoop]$ ./sbin/start-dfs.sh
+Starting namenodes on [NN01.HadoopVM]
+NN01.HadoopVM: starting namenode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-namenode-NN01.HadoopVM.out
+NN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-NN01.HadoopVM.out
+DN02.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-DN02.HadoopVM.out
+DN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-DN01.HadoopVM.out
+Starting secondary namenodes [DN01.HadoopVM]
+DN01.HadoopVM: starting secondarynamenode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-secondarynamenode-DN01.HadoopVM.out
+[hadoop@DN01 current]$ jps
+4504 DataNode
+4570 SecondaryNameNode
+~~~
+
+故障恢复
+
+The latest checkpoint can be imported to the NameNode if all other copies of the image and the edits files are lost. In order to do that one should:
+
+* Create an empty directory specified inthedfs.namenode.name.dir configuration variable;
+* Specify the location of the checkpointdirectory in the configuration variabledfs.namenode.checkpoint.dir;
+*  and start the NameNode with-importCheckpoint option.
+
+The NameNode will upload the checkpoint from the dfs.namenode.checkpoint.dir directory and then save it to the NameNode directory(s) set in dfs.namenode.name.dir. The NameNodewill fail if a legal image is contained in dfs.namenode.name.dir. The NameNode verifies that the image indfs.namenode.checkpoint.dir is consistent, but does not modify it in any way.
+
+~~~
+[hadoop@NN01 hdfs]$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh --config $HADOOP_CONF_DIR --script hdfs start namenode -importCheckpoint
+starting namenode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-namenode-NN01.HadoopVM.out
+[hadoop@NN01 hdfs]$ jps
+11571 Jps
+11530 NameNode
+[hadoop@NN01 hdfs]$ $HADOOP_PREFIX/sbin/hadoop-daemons.sh --config $HADOOP_CONF_DIR --script hdfs start datanode
+DN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-DN01.HadoopVM.out
+DN02.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-DN02.HadoopVM.out
+NN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-NN01.HadoopVM.out
+~~~
