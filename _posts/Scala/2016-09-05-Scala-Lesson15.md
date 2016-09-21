@@ -18,3 +18,5 @@ https://people.eecs.berkeley.edu/~jegonzal/pyspark/_modules/pyspark/rdd.html
 
 
 [Spark Shuffle初探](http://blog.csdn.net/yunlong34574/article/details/45664379)
+
+[Hadoop家族学习路线图](http://blog.csdn.net/joeyon1985/article/details/42424747)

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="g89MuzujW3" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+    <title>A Tale of Three Apache Spark APIs - Maching Learning | 机器学习笔记</title>
+
+    <link rel="canonical" href="http://machinelearningadvance.com/hadoop/2016/09/20/a-tale-of-three-apache-spark-apis-rdds-dataframes-and-datasets/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- ga & ba script hoook -->
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Big Data Memo</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/">Category</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/images/background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/images/background.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Big Data" title="Big Data">Big Data</a>
+                        
+                        <a class="tag" href="/tags/#Spark" title="Spark">Spark</a>
+                        
+                    </div>
+                    <h1>A Tale of Three Apache Spark APIs</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by Big Data Memo on September 20, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h2 id="three-apache-spark-apis">Three Apache Spark APIs</h2>
+
+<p><a href="https://databricks.com/blog/2016/07/14/a-tale-of-three-apache-spark-apis-rdds-dataframes-and-datasets.html">source</a></p>
+
+<p>In this blog, I explore three sets of APIs—RDDs, DataFrames, and Datasets—available in a pre-release preview of Apache Spark 2.0; why and when you should use each set; outline their performance and optimization benefits; and enumerate scenarios when to use DataFrames and Datasets instead of RDDs. Mostly, I will focus on DataFrames and Datasets, because in <a href="http://go.databricks.com/videos/apache-spark-2">Apache Spark 2.0</a>, these two APIs are unified.</p>
+
+<p>Our primary motivation behind this unification is our quest to simplify Spark by limiting the number of concepts that you have to learn and by offering ways to process structured data. And through structure, Spark can offer higher-level abstraction and APIs as domain specific language constructs.</p>
+
+<h2 id="resilient-distributed-dataset-rdd">Resilient Distributed Dataset (RDD)</h2>
+
+<p>RDD was the primary user-facing API in Spark since its inception. At the core, an RDD is an immutable distributed collection of elements of your data, partitioned across nodes in your cluster that can be operated in parallel with a low-level API that offers transformations and actions.</p>
+
+<p>When to use RDDs?</p>
+
+<p>Consider these scenarios or common use cases for using RDDs when:</p>
+
+<ul>
+  <li>you want low-level transformation and actions and control on your dataset;</li>
+  <li>your data is unstructured, such as media streams or streams of text;</li>
+  <li>you want to manipulate your data with functional programming constructs than domain specific expressions;</li>
+  <li>you don’t care about imposing a schema, such as columnar format, while processing or accessing data attributes by name or column; and</li>
+  <li>you can forgo some optimization and performance benefits available with DataFrames and Datasets for structured and semi-structured data.</li>
+</ul>
+
+<p>What happens to RDDs in Apache Spark 2.0?</p>
+
+<p>You may ask: Are RDDs being relegated as second class citizens? Are they being deprecated?</p>
+
+<p>The answer is a resounding NO!</p>
+
+<p>What’s more, as you will note below, you can seamlessly move between DataFrame or Dataset and RDDs at will—by simple API method calls—and DataFrames and Datasets are built on top of RDDs.</p>
+
+<h2 id="dataframes">DataFrames</h2>
+
+<p>Like an RDD, a <a href="https://databricks.com/blog/2015/02/17/introducing-dataframes-in-spark-for-large-scale-data-science.html">DataFrame</a> is an immutable distributed collection of data. Unlike an RDD, data is organized into named columns, like a table in a relational database. Designed to make large data sets processing even easier, DataFrame allows developers to impose a structure onto a distributed collection of data, allowing higher-level abstraction; it provides a domain specific language API to manipulate your distributed data; and makes Spark accessible to a wider audience, beyond specialized data engineers.</p>
+
+<p>In our preview of Apache Spark 2.0 webinar and subsequent blog, we mentioned that in Spark 2.0, DataFrame APIs will merge with <a href="https://databricks.com/blog/2016/01/04/introducing-spark-datasets.html">Datasets</a> APIs, unifying data processing capabilities across libraries. Because of this unification, developers now have fewer concepts to learn or remember, and work with a single high-level and type-safe API called Dataset.</p>
+
+<p><img src="/images/spark/Unified-Apache-Spark-2.0-API-1.png" alt="" /></p>
+
+<h2 id="datasets">Datasets</h2>
+
+<p>Starting in Spark 2.0, Dataset takes on two distinct APIs characteristics: a <strong>strongly-typed</strong> API and an <strong>untyped</strong> API, as shown in the table below. Conceptually, consider DataFrame as an alias for a collection of generic objects Dataset[Row], where a Row is a generic untyped JVM object. Dataset, by contrast, is a collection of strongly-typed JVM objects, dictated by a case class you define in Scala or a class in Java.</p>
+
+<p>Typed and Un-typed APIs</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Language</td>
+      <td>Main Abstraction</td>
+    </tr>
+    <tr>
+      <td>Scala</td>
+      <td>Dataset[T] &amp; DataFrame (alias for Dataset[Row])</td>
+    </tr>
+    <tr>
+      <td>Java</td>
+      <td>Dataset[T]</td>
+    </tr>
+    <tr>
+      <td>Python*</td>
+      <td>DataFrame</td>
+    </tr>
+    <tr>
+      <td>R*</td>
+      <td>DataFrame</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Note:</strong> Since Python and R have no compile-time type-safety, we only have untyped APIs, namely DataFrames.</p>
+
+<h2 id="benefits-of-dataset-apis">Benefits of Dataset APIs</h2>
+
+<p>As a Spark developer, you benefit with the DataFrame and Dataset unified APIs in Spark 2.0 in a number of ways.</p>
+
+<p><strong>1. Static-typing and runtime type-safety</strong>(.静态类型和运行时类型安全)</p>
+
+<p>Consider static-typing and runtime safety as a spectrum, with SQL least restrictive to Dataset most restrictive. For instance, in your Spark SQL string queries, you won’t know a syntax error until runtime (which could be costly), whereas in DataFrames and Datasets you can catch errors at compile time (which saves developer-time and costs). That is, if you invoke a function in DataFrame that is not part of the API, the compiler will catch it. However, it won’t detect a non-existing column name until runtime.</p>
+
+<p>At the far end of the spectrum is Dataset, most restrictive. Since Dataset APIs are all expressed as lambda functions and JVM typed objects, any mismatch of typed-parameters will be detected at compile time. Also, your analysis error can be detected at compile time too, when using Datasets, hence saving developer-time and costs.</p>
+
+<p>All this translates to is a spectrum of type-safety along syntax and analysis error in your Spark code, with Datasets as most restrictive yet productive for a developer.</p>
+
+<p><img src="/images/spark/sql-vs-dataframes-vs-datasets-type-safety-spectrum.png" alt="" /></p>
+
+<p><strong>2. High-level abstraction and custom view into structured and semi-structured data</strong>(高层次的抽象和为结构化和半结构化数据自定义视图)</p>
+
+<p>DataFrames as a collection of Datasets[Row] render a structured custom view into your semi-structured data. For instance, let’s say, you have a huge IoT device event dataset, expressed as JSON. Since JSON is a semi-structured format, it lends itself well to employing Dataset as a collection of strongly typed-specific Dataset[DeviceIoTData].</p>
+
+<pre><code class="language-jason">{"device_id": 198164, "device_name": "sensor-pad-198164owomcJZ", "ip": "80.55.20.25", "cca2": "PL", "cca3": "POL", "cn": "Poland", "latitude": 53.080000, "longitude": 18.620000, "scale": "Celsius", "temp": 21, "humidity": 65, "battery_level": 8, "c02_level": 1408, "lcd": "red", "timestamp" :1458081226051}
+</code></pre>
+
+<p>You could express each JSON entry as DeviceIoTData, a custom object, with a Scala case class.</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">case</span> <span class="k">class</span> <span class="nc">DeviceIoTData</span> <span class="o">(</span><span class="n">battery_level</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">c02_level</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">cca2</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">cca3</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">cn</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">device_id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">device_name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">humidity</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">ip</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">latitude</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">lcd</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">longitude</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">scale</span><span class="k">:</span><span class="kt">String</span><span class="o">,</span> <span class="n">temp</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">timestamp</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p>Next, we can read the data from a JSON file.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// read the json file and create the dataset from the
+// case class DeviceIoTData
+// ds is now a collection of JVM Scala objects DeviceIoTData
+val ds = spark.read.json("/databricks-public-datasets/data/iot/iot_devices.json").as[DeviceIoTData]
+</code></pre>
+</div>
+
+<p>Three things happen here under the hood in the code above:</p>
+
+<ul>
+  <li>1.Spark reads the JSON, infers the schema, and creates a collection of DataFrames.</li>
+  <li>2.At this point, Spark converts your data into DataFrame = Dataset[Row], a collection of generic Row object, since it does not know the exact type.</li>
+  <li>3.Now, Spark converts the Dataset[Row] -&gt; Dataset[DeviceIoTData] type-specific Scala JVM object, as dictated by the class DeviceIoTData.</li>
+</ul>
+
+<p>Most of us have who work with structured data are accustomed to viewing and processing data in either columnar manner or accessing specific attributes within an object. With Dataset as a collection of Dataset[ElementType] typed objects, you seamlessly get both compile-time safety and custom view for strongly-typed JVM objects. And your resulting strongly-typed Dataset[T] from above code can be easily displayed or processed with high-level methods.</p>
+
+<p><img src="/images/spark/displaying-a-dataset.png" alt="" /></p>
+
+<p><strong>3. Ease-of-use of APIs with structure</strong></p>
+
+<p>Although structure may limit control in what your Spark program can do with data, it introduces rich semantics and an easy set of domain specific operations that can be expressed as high-level constructs. Most computations, however, can be accomplished with Dataset’s high-level APIs. For example, it’s much simpler to perform <strong>agg, select, sum, avg, map, filter, or groupBy</strong> operations by accessing a Dataset typed object’s DeviceIoTData than using RDD rows’ data fields.</p>
+
+<p>Expressing your computation in a domain specific API is far simpler and easier than with relation algebra type expressions (in RDDs). For instance, the code below will filter() and  map() create another immutable Dataset.</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// Use filter(), map(), groupBy() country, and compute avg()
+// for temperatures and humidity. This operation results in
+// another immutable Dataset. The query is simpler to read,
+// and expressive
+</span>
+<span class="k">val</span> <span class="n">dsAvgTmp</span> <span class="k">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">d</span> <span class="k">=&gt;</span> <span class="o">{</span><span class="n">d</span><span class="o">.</span><span class="n">temp</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="o">}).</span><span class="n">map</span><span class="o">(</span><span class="n">d</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">d</span><span class="o">.</span><span class="n">temp</span><span class="o">,</span> <span class="n">d</span><span class="o">.</span><span class="n">humidity</span><span class="o">,</span> <span class="n">d</span><span class="o">.</span><span class="n">cca3</span><span class="o">)).</span><span class="n">groupBy</span><span class="o">(</span><span class="n">$</span><span class="s">"_3"</span><span class="o">).</span><span class="n">avg</span><span class="o">()</span>
+
+<span class="c1">//display the resulting dataset
+</span><span class="n">display</span><span class="o">(</span><span class="n">dsAvgTmp</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p><img src="https://databricks.com/wp-content/uploads/2016/07/displaying-a-dataset-in-databricks.gif" alt="" /></p>
+
+<p><strong>4. Performance and Optimization</strong></p>
+
+<p>Along with all the above benefits, you cannot overlook the space efficiency and performance gains in using DataFrames and Dataset APIs for two reasons.</p>
+
+<p>First, because DataFrame and Dataset APIs are built on top of the Spark SQL engine, it uses Catalyst to generate an optimized logical and physical query plan. Across R, Java, Scala, or Python DataFrame/Dataset APIs, all relation type queries undergo the same code optimizer, providing the space and speed efficiency. Whereas the Dataset[T] typed API is optimized for data engineering tasks, the untyped Dataset[Row] (an alias of DataFrame) is even faster and suitable for interactive analysis.</p>
+
+<p><img src="/images/spark/memory-usage-when-caching-datasets-vs-rdds.png" alt="" /></p>
+
+<p>Second, since <a href="https://databricks.com/blog/2016/05/23/apache-spark-as-a-compiler-joining-a-billion-rows-per-second-on-a-laptop.html">Spark as a compiler</a> understands your Dataset type JVM object, it maps your type-specific JVM object to Tungsten’s internal memory representation using <a href="https://databricks.com/blog/2015/04/28/project-tungsten-bringing-spark-closer-to-bare-metal.html">Encoders</a>. As a result, Tungsten Encoders can efficiently serialize/deserialize JVM objects as well as generate compact bytecode that can execute at superior speeds.</p>
+
+<p>When should I use DataFrames or Datasets?</p>
+
+<ul>
+  <li>If you want rich semantics, high-level abstractions, and domain specific APIs, use DataFrame or Dataset.</li>
+  <li>If your processing demands high-level expressions, filters, maps, aggregation, averages, sum, SQL queries, columnar access and use of lambda functions on semi-structured data, use DataFrame or Dataset.</li>
+  <li>If you want higher degree of type-safety at compile time, want typed JVM objects, take advantage of Catalyst optimization, and benefit from Tungsten’s efficient code generation, use Dataset.</li>
+  <li>If you want unification and simplification of APIs across Spark Libraries, use DataFrame or Dataset.</li>
+  <li>If you are a R user, use DataFrames.</li>
+  <li>If you are a Python user, use DataFrames and resort back to RDDs if you need more control.</li>
+</ul>
+
+<p>Note that you can always seamlessly interoperate or convert from DataFrame and/or Dataset to an RDD, by simple method call .rdd. For instance,</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// select specific fields from the Dataset, apply a predicate
+// using the where() method, convert to an RDD, and show first 10
+// RDD rows
+</span><span class="k">val</span> <span class="n">deviceEventsDS</span> <span class="k">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">select</span><span class="o">(</span><span class="n">$</span><span class="s">"device_name"</span><span class="o">,</span> <span class="n">$</span><span class="s">"cca3"</span><span class="o">,</span> <span class="n">$</span><span class="s">"c02_level"</span><span class="o">).</span><span class="n">where</span><span class="o">(</span><span class="n">$</span><span class="s">"c02_level"</span> <span class="o">&gt;</span> <span class="mi">1300</span><span class="o">)</span>
+<span class="c1">// convert to RDDs and take the first 10 rows
+</span><span class="k">val</span> <span class="n">eventsRDD</span> <span class="k">=</span> <span class="n">deviceEventsDS</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">take</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p><img src="/images/spark/convert-dataset-to-rdd-on-Databricks.png" alt="" /></p>
+
+<p>Bringing It All Together</p>
+
+<p>In summation, the choice of when to use RDD or DataFrame and/or Dataset seems obvious. While the former offers you low-level functionality and control, the latter allows custom view and structure, offers high-level and domain specific operations, saves space, and executes at superior speeds.</p>
+
+<p>As we examined the lessons we learned from early releases of Spark—how to simplify Spark for developers, how to optimize and make it performant—we decided to elevate the low-level RDD APIs to a high-level abstraction as DataFrame and Dataset and to build this unified data abstraction across  libraries atop Catalyst optimizer and Tungsten.</p>
+
+<p>Pick one—DataFrames and/or Dataset or RDDs APIs—that meets your needs and use-case, but I would not be surprised if you fall into the camp of most developers who work with structure and semi-structured data.</p>
+
+<p>run example on <a href="https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/8599738367597028/316920118208967/3601578643761083/latest.html">databricks</a></p>
+
+
+                <hr>
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/hadoop/2016/09/19/SPSS-For-Hadoop-Modeling/" data-toggle="tooltip" data-placement="top" title="SPSS for BigData Modeling">
+                        Previous<br>
+                        <span>SPSS for BigData Modeling</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/hadoop/2016/09/20/hadoop_tutorial_6/" data-toggle="tooltip" data-placement="top" title="Spark安装 快速指南">
+                        Next<br>
+                        <span>Spark安装 快速指南</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                    <div class="ds-share flat"
+                    <div class="ds-thread"
+                        data-thread-key="/hadoop/2016/09/20/a-tale-of-three-apache-spark-apis-rdds-dataframes-and-datasets"
+                        data-title="A Tale of Three Apache Spark APIs"
+                        data-url="http://machinelearningadvance.com/hadoop/2016/09/20/a-tale-of-three-apache-spark-apis-rdds-dataframes-and-datasets/" >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+                        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+                        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                 </div>
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/hadoop/2016/09/20/a-tale-of-three-apache-spark-apis-rdds-dataframes-and-datasets"
+                        data-title="A Tale of Three Apache Spark APIs"
+                        data-url="http://machinelearningadvance.com/hadoop/2016/09/20/a-tale-of-three-apache-spark-apis-rdds-dataframes-and-datasets/" >
+                    </div>
+
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#ME" title="ME" rel="4">
+                                ME
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Other" title="Other" rel="4">
+                                Other
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                CFAL1
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#maths" title="maths" rel="2">
+                                maths
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Big Data" title="Big Data" rel="20">
+                                Big Data
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#大数据" title="大数据" rel="18">
+                                大数据
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="3">
+                                IT
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Scala" title="Scala" rel="23">
+                                Scala
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spark" title="Spark" rel="3">
+                                Spark
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"machinelearningadvance"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/2672280861">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/helloourworld">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Big Data Memo 2016
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-82819752-1';
+    var _gaDomain = 'machinelearningadvance.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '863b1f46c83a8e14e47782106aee7e7f';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/images/background.jpg" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

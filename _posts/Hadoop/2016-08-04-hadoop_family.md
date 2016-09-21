@@ -793,6 +793,17 @@ Spark是基于内存的迭代计算框架，适用于需要多次操作特定数
 由于RDD的特性，Spark不适用那种异步细粒度更新状态的应用，例如web服务的存储或者是增量的web爬虫和索引。就是对于那种增量修改的应用模型不适合。
 总的来说Spark的适用面比较广泛且比较通用。
 
+**Key terms used in Apache Spark:**
+
+![](https://spark.apache.org/docs/2.0.0/img/cluster-overview.png)
+Image source:https://spark.apache.org/docs/2.0.0/img/cluster-overview.png
+
+**Spark Context**: It holds a connection with Spark cluster manager. All Spark applications run as independent set of processes, coordinated by a SparkContext in a program.
+
+**Driver and Worker**: A driver is incharge of the process of running the main() function of an application and creating the SparkContext. A worker, on the other hand, is any node that can run program in the cluster. If a process is launched for an application, then this application acquires executors at worker node.
+
+**Cluster Manager**: Cluster manager allocates resources to each application in driver program. There are three types of cluster managers supported by Apache Spark – Standalone, Mesos and YARN. Apache Spark is agnostic to the underlying cluster manager, so we can install any cluster manager, each has its own unique advantages depending upon the goal. They all are different in terms of scheduling, security and monitoring. Once SparkContext connects to the cluster manager, it acquires executors on a cluster node, these executors are worker nodes on cluster which work independently on each tasks and interact with each other.
+
  **Cluster Manager Types**
 
 The system currently supports three cluster managers:
@@ -801,11 +812,43 @@ The system currently supports three cluster managers:
 * \*2 Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.
 * \*3 Hadoop YARN – the resource manager in Hadoop 2.
 
+**How Apache Spark is better than traditional big data framework?**
 
-[Spark快速入门指南 – Spark安装与基础使用](http://dblab.xmu.edu.cn/blog/spark-quick-start-guide/)
+**Language Support**: Apache Spark has API support for popular data science languages like Python, R, Scala and Java.
+
+**Supports Real time and Batch processing**: Apache Spark supports “Batch data” processing where a group of transactions is collected over a period of time. It also supports real time data processing, where data is continuously flowing from the source. For example, weather information coming in from sensors can be processed by Apache Spark directly.
+
+**Lazy operation**: Lazy operations are used to optimize solutions in Apache Spark. I will discuss about lazy evaluation in later part of this article. For now, we can think that there are some operations which do not execute until we require results.
+
+**Support for multiple transformations and actions**: Another advantage of Apache Spark over Hadoop is that Hadoop supports only MapReduce but Apache Spark support many transformations and actions including MapReduce.
+
+There are further advantages of Apache Spark in comparison to Hadoop. For example, Apache Spark is much faster while doing Map side shuffling and Reduce side shuffling. However, shuffling is a complex topic in itself and requires an entire article in itself. Hence, I am not talking about it in more details here.
+
+**一句话实现MapReduce**
+
+~~~python
+sc.textFile("README.md").flatMap(lambda line: line.split()).map(lambda word: (word, 1)).reduceByKey(lambda a, b: a+b).collect()
+textFile.map(lambda line: len(line.split())).reduce(lambda a, b: a if (a > b) else b)
+...
+textFile.map(lambda line: len(line.split())).reduce(max)
+~~~
+
+~~~spark
+sc.textFile("README.md").flatMap(line => line.split(" ")).map(word => (word,1)).reduceByKey(_ + _).collect()
+textFile.map(line => line.split(" ").size).reduce((a, b) => if (a > b) a else b)
+import java.lang.Math
+textFile.map(line => line.split(" ").length).reduce((a,b) => Math.max(a,b))
+~~~
+
+**[Self-Contained Applications](http://spark.apache.org/docs/latest/quick-start.html#self-contained-applications)**
 
 ~~~
-	[hadoop@NN01 sparkapp]$ spark-submit --class "SimpleApp" ~/sparkapp/target/scala-2.11/simple-project_2.11-1.0.jar 2>&1|grep "Line"
+[hadoop@NN01 sparkapp]$ spark-submit --master spark://NN01.HadoopVm:7077 SimpleApp.py
+/home/hadoop/spark/python/lib/pyspark.zip/pyspark/sql/context.py:477: DeprecationWarning: HiveContext is deprecated in Spark 2.0.0. Please use SparkSession.builder.enableHiveSupport().getOrCreate() instead.
+/home/hadoop/spark/python/lib/pyspark.zip/pyspark/sql/context.py:477: DeprecationWarning: HiveContext is deprecated in Spark 2.0.0. Please use SparkSession.builder.enableHiveSupport().getOrCreate() instead.
+Lines with a: 4, lines with b: 2
+
+[hadoop@NN01 sparkapp]$ spark-submit --class "SimpleApp" ~/sparkapp/target/scala-2.11/simple-project_2.11-1.0.jar 2>&1|grep "Line"
 Lines with a: 4, Lines with b: 2
 ~~~
 **Spark 计算 Pi**
@@ -848,6 +891,7 @@ object SparkPi{
     }
 }
 ~~~
+
 Link sbt with spark
 
 ~~~sbt
@@ -899,10 +943,111 @@ Pi is roughly: 3.13858
 
 ![](/images/hadoop/sparkpi.jpg)
 
+**Caching**
+
+Spark also supports pulling data sets into a cluster-wide in-memory cache. This is very useful when data is accessed repeatedly, such as when querying a small “hot” dataset or when running an iterative algorithm like PageRank. As a simple example, let’s mark our linesWithSpark dataset to be cached:
+
+~~~
+linesWithSpark.cache()
+~~~
+
+**Apache Spark data representations: RDD / Dataframe / Dataset**
+
+Spark has three data representations viz RDD, Dataframe, Dataset. For each data representation, Spark has a different API. For example, later in this article I am going to use ml (a library), which currently supports only Dataframe API. Dataframe is much faster than RDD because it has metadata (some information about data) associated with it, which allows Spark to optimize query plan. Refer to this [link](https://databricks.com/blog/2015/02/17/introducing-dataframes-in-spark-for-large-scale-data-science.html) to know more about optimization. The Dataframe feature in Apache Spark was added in Spark 1.3. If you want to know more in depth about when to use RDD, Dataframe and Dataset you can refer this [link](https://databricks.com/blog/2016/07/14/a-tale-of-three-apache-spark-apis-rdds-dataframes-and-datasets.html).
+
+In this article, I will first spend some time on RDD, to get you started with Apache Spark. Later, I will spend some time on Dataframes. Dataframes share some common characteristics with RDD (transformations and actions). In this article, I am not going to talk about Dataset as this functionality is not included in PySpark.?
+
+**RDD:**
+
+After installing and configuring PySpark, we can start programming using Spark in Python. But to use Spark functionality, we must use RDD. RDD (Resilient Distributed Database) is a collection of elements, that can be divided across multiple nodes in a cluster to run parallel processing. It is also fault tolerant collection of elements, which means it can automatically recover from failures. RDD is immutable, we can create RDD once but can’t change it. We can apply any number of operation on it and can create another RDD by applying some transformations. Here are a few things to keep in mind about RDD:
+
+* **Transformation**: Transformation refers to the operation applied on a RDD to create new RDD.
+* **Action**: Actions refer to an operation which also apply on RDD that perform computation and send the result back to driver.
+
+RDDs use Shared Variable:
+
+The parallel operations in Apache Spark use shared variable. It means that whenever a task is sent by a driver to executors program in a cluster, a copy of shared variable is sent to each node in a cluster, so that they can use this variable while performing task. Accumulator and Broadcast are the two types of shared variables supported by Apache Spark.
+
+* **Broadcast**: We can use the Broadcast variable to save the copy of data across all node.
+* **Accumulator**: In Accumulator variables are used for aggregating the information.
+
+How to Create RDD in Apache Spark
+
+Existing storage: When we want to create a RDD though existing storage in driver program (which we would like to be parallelized). For example, converting a list to RDD, which is already created in a driver program.
+
+External sources: When we want to create a RDD though external sources such as a shared file system, HDFS, HBase, or any data source offering a Hadoop Input Format.
+
+Writing first program in Apache Spark
+
+I have already discussed that RDD supports two type of operations, which are transformation and action. Let us get down to writing our first program:
+
+**Step1: Create SparkContext**
+
+First step in any Apache programming is to create a SparkContext. SparkContext is needed when we want to execute operations in a cluster. SparkContext tells Spark how and where to access a cluster. It is first step to connect with Apache Cluster. If you are using Spark Shell, we will find that this is already created. Otherwise, we can create the Spark Context by importing, initializing and providing the configuration settings. For example:
+
+~~~python
+ from pyspark import SparkContext
+ sc = SparkContext()
+~~~
+
+Step2: Create a RDD
+
+I have already discussed that we can create RDD in two ways: Either from an existing storage or from an external storage. Let’s create our first RDD. SparkContext has parallelize method, which is used for creating the Spark RDD from an iterable (like list, tuple..) already present in driver program.
+
+We can also provide the number of partitions as a parameter to parallelize method. If we do not give number of partition parameter, then Spark will automatically set the number of partition in a cluster. The number of partition can be set manually by passing second parameter to parallelize method. For example, sc.parallelize(data, 10)), where data is an existing data in driver program and 10 is the number of partitions.
+Lets create the first Spark RDD called rdd.
+
+~~~
+data = range(1,1000)
+rdd = sc.parallelize(data)
+~~~
+
+We have a collect method to see the content of RDD.
+
+~~~
+rdd.collect()
+~~~
+
+To see the first n element of a RDD we have a method take:
+
+~~~
+rdd.take(2) # It will print first 2 elements of rdd
+~~~
+
+Step 3: Map transformation.
+
+Map transformation returns a Mapped RDD by applying function to each element of the base RDD. Let’s repeat the first step of creating a RDD from existing source, For example,
+
+~~~
+data = ['Hello' , 'I' , 'AM', 'Ankit ', 'Gupta']
+Rdd = sc.parallelize(data)
+~~~
+
+Now a RDD (name is ‘Rdd’) is created from the existing source, which is a list of string in a driver program. We will now apply lambda function to each element of Rdd and return the mapped (transformed) RDD (word,1) pair in the Rdd1.
+
+~~~
+Rdd1 = Rdd.map(lambda x: (x,1))
+~~~
+
+Let’s see the out of this map operation.
+
+~~~
+Rdd1.collect()
+output: [('Hello', 1), ('I', 1), ('AM', 1), ('Ankit ', 1), ('Gupta', 1)]
+~~~
+
+If you noticed, nothing happened after applying the lambda function on Rdd1 (we won’t see any computation happening in a cluster). This is called the lazy operation. All transformation operations in Spark are lazy, which means that we will not see any computations on RDD, until we need them for further action.
+
+Spark remembers which transformation is applied to which RDD with the help of DAG (Directed a Cyclic Graph). The lazy evaluation helps Spark to optimize the solution because Spark will get time to see the DAG before actually executing the operations on RDD. This enables Spark to run operations more efficiently.
+
+In the code above, collect() and take() are the examples of an action.
+
+ref: [Spark快速入门指南 – Spark安装与基础使用](http://dblab.xmu.edu.cn/blog/spark-quick-start-guide/)
 
 #### 3.3.2 Spark SQL, DataFrames and Datasets Guide[refer](http://spark.apache.org/docs/latest/sql-programming-guide.html)
 
 TODO
+
 #### 3.3.3 Spark Streaming Programming Guide[refer](http://spark.apache.org/docs/latest/streaming-programming-guide.html)
 
 TODO

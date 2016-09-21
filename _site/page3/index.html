@@ -179,6 +179,78 @@
             ">
     			
 <div class="post-preview">
+    <a href="/language/2016/08/31/scala-tuples/">
+        <h2 class="post-title">
+            Scale tuple
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala 元组
+
+与列表一样，元组也是不可变的，但与列表不同的是元组可以包含不同类型的元素。
+元组的值是通过将单个的值包含在圆括号中构成的。例如：
+
+val t = (1, 3.14, "Fred")  
+
+以上实例在元组中定义了三个元素，对应的类型分别为[Int, Double, java.lang.String]。
+此外我们也可以使用以上方式来定义：
+
+val t = new Tupl...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 31, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/08/31/scala-sets/">
+        <h2 class="post-title">
+            Scala Set
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala Set(集合)
+
+
+  Scala Set(集合)是没有重复的对象集合，所有的元素都是唯一的。
+  Scala 集合分为可变的和不可变的集合。
+  默认情况下，Scala 使用的是不可变集合，如果你想使用可变集合，需要引用 scala.collection.mutable.Set 包。
+  默认引用 scala.collection.immutable.Set，不可变集合实例如下...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 31, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/08/31/scala-options/">
+        <h2 class="post-title">
+            Scala Option
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala Option(选项)
+
+
+  Scala Option(选项)类型用来表示一个值是可选的（有值或无值)。
+  Option[T] 是一个类型为 T 的可选值的容器： 如果值存在， Option[T] 就是一个 Some[T] ，如果不存在， Option[T] 就是对象 None 。
+  接下来我们来看一段代码：
+
+
+// 虽然 Scala 可以不定义变量的类型，不过为了清楚些，...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 31, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/language/2016/08/31/scala-maps/">
         <h2 class="post-title">
             Scala Map
@@ -339,92 +411,6 @@ Scala 有函数和方法，二者在语义上的区别很小。Scala 方法是�
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/language/2016/08/30/Scala-Lesson3/">
-        <h2 class="post-title">
-            scala Lesson 3
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala IF…ELSE 语句
-
-1 if语句
-
-语法格式：
-
-if (boole express)
-{
-    // 如果布尔表达式为true则执行该语句块；否则跳过大括号内的语句块，执行大括号之后的语句块。
-}
-
-# ex
-object Ifs {
-    def main(args: Array[String]){
-        var x = 10;
-        if (x ...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 30, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/language/2016/08/30/Scala-Lesson2/">
-        <h2 class="post-title">
-            scala Lesson 2
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala 访问修饰符
-Scala 访问修饰符基本和Java的一样，分别有：private，protected，public。
-如果没有指定访问修饰符符，默认情况下，Scala对象的访问级别都是 public。
-Scala 中的 private 限定符，比 Java 更严格，在嵌套类情况下，外层类甚至不能访问被嵌套类的私有成员。
-
-1 私有(Private)成员
-用private关键字修饰，...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 30, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/08/28/hadoop_tutorial_4/">
-        <h2 class="post-title">
-            Hadoop Tutorial ---- 学习安排
-        </h2>
-        
-        <div class="post-content-preview">
-            Hive专题
-
-第一节 Hive（9月11日）(陈东辉讲)
-
-任务式学习
-参照考试列表（计划3-4节*40分钟/每节）
-
-参考书: 下载
-
-Spark专题
-
-第二节 Scala（9月25日）（陈东辉讲）
-
-
-  1cala语法编程基础（计划3-4节*40分钟/每节）
-
-
-第三节 Streaming&amp;Spark SQL&amp;GraphX（10月16日）（第1、2主题于利君讲，第3主...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 28, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -487,13 +473,13 @@ Spark专题
                             
                         
                             
-                                <a href="/tags/#Big Data" title="Big Data" rel="17">
+                                <a href="/tags/#Big Data" title="Big Data" rel="20">
                                     Big Data
                                 </a>
                             
                         
                             
-                                <a href="/tags/#大数据" title="大数据" rel="17">
+                                <a href="/tags/#大数据" title="大数据" rel="18">
                                     大数据
                                 </a>
                             
@@ -515,7 +501,7 @@ Spark专题
                             
                         
                             
-                                <a href="/tags/#Spark" title="Spark" rel="2">
+                                <a href="/tags/#Spark" title="Spark" rel="3">
                                     Spark
                                 </a>
                             
