@@ -751,6 +751,108 @@ TODO
 
 建立在Hadoop基础上的开源的数据仓库，提供类似SQL的Hive QL语言操作结构化数据存储服务和基本的数据分析服务。
 
+**hive修改默认元数据存储数据库derby改为mysql**
+
+~~~
+sudo yum install mysql
+mysql -uroot -p //[密码修改](http://blog.csdn.net/leili0806/article/details/8573636)
+CREATE USER 'hive' IDENTIFIED BY '*******';
+# SET PASSWORD FOR 'username'@'host' = PASSWORD('newpassword');
+update user set password=password('*******') where user='root';
+flush privileges;
+GRANT ALL PRIVILEGES ON *.* TO 'hive'@'%' WITH GRANT OPTION;
+mysql -uhive -pmysql//以hive用户进入mysql
+create database hive;
+# 将mysql的jdbc驱动放置到hive的lib目录下
+
+wget http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz/from/http://mysql.he.net/
+tar -xvzf mysql-connector-java-5.1.39.tar.gz
+cp mysql-connector-java-5.1.39/*.jar $HIVE_HOME/lib
+~~~
+
+配置hive-site.xml
+
+~~~
+<configuration>
+    <property>
+        <name>hive.metastore.local</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionURL</name>
+        <value>jdbc:mysql://192.168.11.157:3306/hive?characterEncoding=UTF-8</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionDriverName</name>
+        <value>com.mysql.jdbc.Driver</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionUserName</name>
+        <value>hive</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionPassword</name>
+        <value>******</value>
+    </property>
+</configuration>
+~~~
+
+* 1.hive允许远程客户端使用哪些编程语言？
+* 2.已经存在HiveServer为什么还需要HiveServer2？
+* 3.HiveServer2有哪些优点？
+* 4.hive.server2.thrift.min.worker.threads-最小工作线程数，默认为多少？
+* 5.启动Hiveserver2有哪两种方式？
+
+之前的学习和实践Hive中，使用的都是CLI或者hive –e的方式，该方式仅允许使用HiveQL执行查询、更新等操作，并且该方式比较笨拙单一。幸好Hive提供了轻客户端的实现，通过HiveServer或者HiveServer2，客户端可以在不启动CLI的情况下对Hive中的数据进行操作，两者都允许远程客户端使用多种编程语言如Java、Python向Hive提交请求，取回结果。HiveServer或者HiveServer2都是基于Thrift的，但HiveSever有时被称为Thrift server，而HiveServer2却不会。既然已经存在HiveServer为什么还需要HiveServer2呢？这是因为HiveServer不能处理多于一个客户端的并发请求，这是由于HiveServer使用的Thrift接口所导致的限制，不能通过修改HiveServer的代码修正。因此在Hive-0.11.0版本中重写了HiveServer代码得到了HiveServer2，进而解决了该问题。HiveServer2支持多客户端的并发和认证，为开放API客户端如JDBC、ODBC提供了更好的支持。
+
+既然HiveServer2提供了更强大的功能，将会对其进行着重学习，但也会简单了解一下HiveServer的使用方法。在命令中输入hive --service help，结果如下。从结果可以了解到，可以使用hive <parameters> --service serviceName <serviceparameters>启动特定的服务，如cli、hiverserver、hiveserver2等。
+
+配置hiveserver2，修改hive-site.xml
+
+~~~
+Configuration Properties in the hive-site.xml File
+hive.server2.thrift.min.worker.threads – Minimum number of worker threads, default 5.
+hive.server2.thrift.max.worker.threads – Maximum number of worker threads, default 500.
+hive.server2.thrift.port – TCP port number to listen on, default 10000.
+hive.server2.thrift.bind.host – TCP interface to bind to.
+~~~
+
+关于 HIVE Beeline 问题
+
+1  启动 hiveserver2 服务，启动 beeline -u jdbc:hive2:// 正常 ，启动 beeline -u jdbc:hive2://127.0.0.1:10000 包如下错误
+
+Error: Failed to open new session: java.lang.RuntimeException: org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.security.authorize.AuthorizationException): User: root is not allowed to impersonate anonymous (state=,code=0)
+Beeline version 2.1.0 by Apache Hive
+
+分析 ： 访问权限问题
+
+解决 ：在hdfs 的配置文件core-site.xml中加入如下配置，root 为位置填入  User:*  ，etc   hadoop.proxyuser.eamon.hosts
+
+~~~
+<property>
+  <name>hadoop.proxyuser.root.hosts</name>
+  <value>*</value>
+ </property>
+ <property>
+  <name>hadoop.proxyuser.root.groups</name>
+  <value>*</value>
+</property>
+~~~
+
+重新启动HDFS 。
+
+2  执行 beeline -u jdbc:hive2://127.0.0.1:10000 ，报如下错误
+
+Error: Failed to open new session: java.lang.RuntimeException: org.apache.hadoop.security.AccessControlException: Permission denied: user=anonymous, access=EXECUTE, inode="/tmp/hive":root:supergroup:drwx------
+
+分析 ： HDFS 文件系统权限问题
+
+解决 ： 临时解决
+
+~~~
+bin/hdfs dfs -chmod -R 777  /tmp/
+~~~
+
 #### 3.2.2 Running Hive
 
 [Running Hive](https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive)
@@ -759,6 +861,141 @@ TODO
 	# Starting from Hive 2.1, we need to run the schematool command below as an initialization step. For example, we can use "derby" as db type.
 	$HIVE_HOME/bin/schematool -dbType <db type> -initSchema
 ~~~
+
+1 hive 连接测试
+
+~~~
+hive> CREATE TABLE bank(
+    > age int,
+    > job string,
+    > marital string,
+    > education string,
+    > default string,
+    > balance int,
+    > housing string,
+    > loan string,
+    > contact string,
+    > day int,
+    > month string,
+    > duration int,
+    > campaign int,
+    > pdays int,
+    > previous int,
+    > poutcome string,
+    > y string)
+    > ROW FORMAT delimited fields terminated by ',';
+OK
+Time taken: 2.648 seconds
+hive> show tables;
+OK
+bank
+Time taken: 0.074 seconds, Fetched: 1 row(s)
+hive> desc bank;
+OK
+age                 	int
+job                 	string
+marital             	string
+education           	string
+default             	string
+balance             	int
+housing             	string
+loan                	string
+contact             	string
+day                 	int
+month               	string
+duration            	int
+campaign            	int
+pdays               	int
+previous            	int
+poutcome            	string
+y                   	string
+Time taken: 0.324 seconds, Fetched: 17 row(s)
+hive> load data local inpath "/home/hadoop/bank-full.csv" overwrite into table bank;
+Loading data to table default.bank
+OK
+Time taken: 2.019 seconds
+~~~
+
+2 beeline 连接测试
+
+~~~
+beeline> !connect jdbc:hive2://localhost:10000 hive ******
+Connecting to jdbc:hive2://localhost:10000
+Connected to: Apache Hive (version 2.1.0)
+Driver: Hive JDBC (version 2.1.0)
+16/09/22 19:32:52 [main]: WARN jdbc.HiveConnection: Request to set autoCommit to false; Hive does not support autoCommit=false.
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+0: jdbc:hive2://localhost:10000> show databases;
++----------------+--+
+| database_name  |
++----------------+--+
+| default        |
++----------------+--+
+1 row selected (5.569 seconds)
+0: jdbc:hive2://localhost:10000> show tables;
++-----------+--+
+| tab_name  |
++-----------+--+
+| bank      |
+| test      |
++-----------+--+
+2 rows selected (0.32 seconds)
+0: jdbc:hive2://localhost:10000> select count(*) from test;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++--------+--+
+|   c0   |
++--------+--+
+| 45211  |
++--------+--+
+1 row selected (203.928 seconds)
+0: jdbc:hive2://localhost:10000>
+~~~
+
+3 python 连接hive
+
+[安装Pip](http://hxl2009.blog.51cto.com/779549/1334664)
+
+~~~
+wget --no-check-certificate https://pypi.python.org/packages/source/p/pip/pip-1.4.1.tar.gz
+tar zxvf pip-1.4.1.tar.gz
+cd pip-1.4.1
+python setup.py install
+~~~
+
+安装依赖包
+
+~~~
+sudo yum install gcc-c++ python-devel.x86_64 cyrus-sasl-devel.x86_64
+sudo pip install pyhs2
+~~~
+
+python 连接测试
+
+~~~
+[hadoop@DN02 ~]$ python
+
+>>> import pyhs2
+>>> conn = pyhs2.connect(host="NN01.HadoopVM",user='hive',password='hive',authMechanism='PLAIN')
+>>> cur = conn.cursor()
+>>> # Show databases
+>>> cur.getDatabases()
+[['default', '']]
+>>> # Execute query
+>>> cur.execute("select * from bank limit 10")
+>>> # Return column info from query
+>>> print cur.getSchema()
+[{'comment': None, 'columnName': 'bank.age', 'type': 'INT_TYPE'},... {'comment': None, 'columnName': 'bank.y', 'type': 'STRING_TYPE'}]
+>>> # Fetch table results
+>>> for i in cur.fetch():
+...     print i
+...
+[58, 'management', 'married', 'tertiary', 'no', 2143, 'yes', 'no', 'unknown', 5, 'may', 261, 1, -1, 0, 'unknown', 'no']
+...
+~~~
+
+4 连接客户端查看：
+
+![](/images/hadoop/hiveserver2client.png)
 
 #### 3.3.3 Hive 相关问题
 
