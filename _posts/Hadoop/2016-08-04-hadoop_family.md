@@ -993,9 +993,107 @@ python 连接测试
 ...
 ~~~
 
+ windows连接报错
+
+```
+ conn = pyhs2.connect(host="192.168.71.128", user='hive', password='hive', authMechanism='PLAIN')
+Traceback (most recent call last):
+  File "C:\Anaconda2\lib\site-packages\IPython\core\interactiveshell.py", line 2885, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File "<ipython-input-5-04457594e509>", line 1, in <module>
+    conn = pyhs2.connect(host="192.168.71.128", user='hive', password='hive', authMechanism='PLAIN')
+  File "C:\Anaconda2\lib\site-packages\pyhs2\__init__.py", line 7, in connect
+    return Connection(*args, **kwargs)
+  File "C:\Anaconda2\lib\site-packages\pyhs2\connections.py", line 46, in __init__
+    transport.open()
+  File "C:\Anaconda2\lib\site-packages\pyhs2\cloudera\thrift_sasl.py", line 66, in open
+    message=("Could not start SASL: %s" % self.sasl.getError()))
+```
+
+1 In hive-site.xml, set configuration as below:
+
+~~~
+<property>
+   <name>hive.server2.authentication</name>
+   <value>NOSASL</value>
+</property>
+~~~
+
+2 Test again
+
+~~~
+In[6]: import pyhs2
+In[7]: conn = pyhs2.connect(host="192.168.71.128", user='hive', password='hive', authMechanism='NOSASL')
+In[8]: cur= conn.cursor()
+In[9]: cur.execute("show databases")
+In[10]: cur.fetch()
+Out[10]: [['default']]
+In[11]: cur.execute("show tables")
+In[12]: cur.fetch()
+Out[12]: [['bank'], ['david_test'], ['test']]
+~~~
+
 4 连接客户端查看：
 
 ![](/images/hadoop/hiveserver2client.png)
+
+5 hive 命令的调用方式
+
+1) script
+
+~~~
+[hadoop@NN01 hivetest]$ cat hive_script3.sql
+select * from bank limit 10;
+select count(*) from bank;
+[hadoop@NN01 hivetest]$ hive -S -f hive_script3.sql
+...
+58	management	married	tertiary	n2143	yes	no	unknown	5	may	261	1	-1	0	unknown	no
+......
+43	technician	single	secondary	n593	yes	no	unknown	5	may	5-1	0	unknown	no
+45211
+
+~~~
+
+~~~
+# create table
+>>> conn = pyhs2.connect(host="NN01.HadoopVM", user="hive",password = 'hive', authMechanism='PLAIN')>>> cur = conn.cursor()
+>>> cur.execute("create table david_test(id int, name string)")
+>>> cur.execute("desc david_test")
+>>> ll = cur.fetch()
+>>> ll
+[['id', 'int', ''], ['name', 'string', '']]
+>>> cur.execute("insert into david_test(id,name) values (1,'David'),(2, 'Alice')")
+>>> cur.execute("select * from david_test")
+>>> fetch = cur.fetch()
+>>> fetch
+[[1, 'David'], [2, 'Alice']]
+
+# shell fetch
+[hadoop@NN01 hivetest]$ ./start_hql.sh 2
+2	Alice
+[hadoop@NN01 hivetest]$ cat start_hql.sh
+hive\
+	-hivevar id=$1\
+	-hivevar name=$2\
+	-S -f hql.sql
+[hadoop@NN01 hivetest]$ cat hql.sql
+--databases
+use default;
+--tables
+select * from david_test
+where id='${hivevar:id}' ;
+~~~
+
+2) 命令行模式
+
+~~~
+[hadoop@NN01 hivetest]$ hive -e "select count(*) from bank"
+......
+OK
+45211
+Time taken: 36.675 seconds, Fetched: 1 row(s)
+~~~
+
 
 #### 3.3.3 Hive 相关问题
 

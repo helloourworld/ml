@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>Scala Lesson 11 - Maching Learning | 机器学习笔记</title>
+    <title>Zeppelin安装 快速指南 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/language/2016/09/02/Scala-Lesson11/">
+    <link rel="canonical" href="http://machinelearningadvance.com/hadoop/2016/09/26/hadoop_tutorial_7/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,15 +168,17 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Scala" title="Scala">Scala</a>
+                        <a class="tag" href="/tags/#Big Data" title="Big Data">Big Data</a>
+                        
+                        <a class="tag" href="/tags/#大数据" title="大数据">大数据</a>
                         
                     </div>
-                    <h1>Scala Lesson 11</h1>
+                    <h1>Zeppelin安装 快速指南</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on September 2, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on September 26, 2016</span>
                 </div>
             </div>
         </div>
@@ -194,100 +196,14 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="scala-">Scala 模式匹配</h3>
+				<h2 id="hive-interpreter-for-zeppelin">HIve Interpreter for Zeppelin</h2>
 
-<ul>
-  <li>Scala 提供了强大的模式匹配机制，应用也非常广泛。</li>
-  <li>一个模式匹配包含了一系列备选项，每个都开始于关键字 case。每个备选项都包含了一个模式及一到多个表达式。箭头符号 =&gt; 隔开了模式和表达式。</li>
-  <li>以下是一个简单的整型值模式匹配实例：</li>
-</ul>
+<p><strong>Importtant Notice</strong></p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">PatternMatching1</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span> <span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="n">println</span><span class="o">(</span><span class="n">matchTest</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
-    <span class="o">}</span>
-
-    <span class="k">def</span> <span class="n">matchTest</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">x</span> <span class="k">match</span> <span class="o">{</span>
-        <span class="k">case</span> <span class="mi">1</span> <span class="k">=&gt;</span> <span class="s">"one"</span>
-        <span class="k">case</span> <span class="mi">2</span> <span class="k">=&gt;</span> <span class="s">"tow"</span>
-        <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">"many"</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>Hive Interpreter will be deprecated and merged into JDBC Interpreter. You can use Hive Interpreter by using JDBC Interpreter with same functionality. See the example below of settings and dependencies.
 </code></pre>
 </div>
 
-<ul>
-  <li>match 对应 Java 里的 switch，但是写在选择器表达式之后。即： <strong>选择器 match {备选项}</strong>。</li>
-  <li>match 表达式通过以代码编写的<strong>先后次序尝试每个模式来完成计算</strong>，只要发现有一个匹配的case，剩下的case不会继续匹配。</li>
-  <li>接下来我们来看一个不同数据类型的模式匹配：</li>
-</ul>
-
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">PatternMatching2</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span> <span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="n">println</span><span class="o">(</span><span class="n">matchTest</span><span class="o">(</span><span class="s">"two"</span><span class="o">))</span>
-        <span class="n">println</span><span class="o">(</span><span class="n">matchTest</span><span class="o">(</span><span class="s">"2"</span><span class="o">))</span>
-        <span class="n">println</span><span class="o">(</span><span class="n">matchTest</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
-        <span class="n">println</span><span class="o">(</span><span class="n">matchTest</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
-
-    <span class="o">}</span>
-
-    <span class="k">def</span> <span class="n">matchTest</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="n">x</span> <span class="k">match</span> <span class="o">{</span>
-        <span class="k">case</span> <span class="mi">1</span> <span class="k">=&gt;</span> <span class="s">"one"</span>
-        <span class="k">case</span> <span class="s">"two"</span> <span class="k">=&gt;</span> <span class="mi">2</span>
-        <span class="k">case</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="s">"scala.Int"</span>
-        <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">"many"</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-<span class="k">#</span> <span class="n">output</span>
-<span class="mi">2</span>
-<span class="n">many</span>
-<span class="n">one</span>
-<span class="n">scala</span><span class="o">.</span><span class="nc">Int</span>
-</code></pre>
-</div>
-
-<h3 id="section">使用样例类</h3>
-
-<ul>
-  <li>使用了<strong>case</strong>关键字的类定义就是就是样例类(case classes)，样例类是种特殊的类，经过优化以用于模式匹配。</li>
-  <li>以下是样例类的简单实例:</li>
-</ul>
-
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">PatternMatching3</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">alice</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Alice"</span><span class="o">,</span> <span class="mi">28</span><span class="o">)</span>
-        <span class="k">val</span> <span class="n">baobao</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Baobao"</span><span class="o">,</span> <span class="mi">29</span><span class="o">)</span>
-        <span class="k">val</span> <span class="n">charlie</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Charlie"</span><span class="o">,</span> <span class="mi">32</span><span class="o">)</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="n">person</span> <span class="k">&lt;-</span> <span class="nc">List</span><span class="o">(</span><span class="n">alice</span><span class="o">,</span> <span class="n">baobao</span><span class="o">,</span> <span class="n">charlie</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">person</span> <span class="k">match</span> <span class="o">{</span>
-                <span class="k">case</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Alice"</span><span class="o">,</span> <span class="mi">28</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="s">"Hi Alice!"</span><span class="o">)</span>
-                <span class="k">case</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Baobao"</span><span class="o">,</span> <span class="mi">29</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="s">"Hi, Baobao"</span><span class="o">)</span>
-                <span class="k">case</span> <span class="nc">Person</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">age</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="s">"Age: "</span> <span class="o">+</span> <span class="n">age</span> <span class="o">+</span> <span class="s">" year, name: "</span> <span class="o">+</span><span class="n">name</span> <span class="o">+</span> <span class="s">"?"</span><span class="o">)</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="c1">//样例类
-</span>    <span class="k">case</span> <span class="k">class</span> <span class="nc">Person</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">age</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
-<span class="o">}</span>
-
-<span class="k">#</span> <span class="n">output</span>
-<span class="nc">Hi</span> <span class="nc">Alice</span><span class="o">!</span>
-<span class="nc">Hi</span><span class="o">,</span> <span class="nc">Baobao</span>
-<span class="nc">Age</span><span class="k">:</span> <span class="err">32</span> <span class="kt">year</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">Charlie?</span>
-</code></pre>
-</div>
-
-<p>在声明样例类时，下面的过程自动发生了：</p>
-
-<blockquote>
-  <ul>
-    <li>构造器的每个参数都成为val，除非显式被声明为var，但是并不推荐这么做；</li>
-    <li>在伴生对象中提供了apply方法，所以可以不使用new关键字就可构建对象；</li>
-    <li>提供unapply方法使模式匹配可以工作；</li>
-    <li>生成toString、equals、hashCode和copy方法，除非显示给出这些方法的定义。</li>
-  </ul>
-</blockquote>
 
 
                 <hr>
@@ -296,26 +212,19 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2016/09/02/hadoop_kafka/" data-toggle="tooltip" data-placement="top" title="Hadoop_kafka">
+                        <a href="/hadoop/2016/09/20/hadoop_tutorial_6/" data-toggle="tooltip" data-placement="top" title="Spark安装 快速指南">
                         Previous<br>
-                        <span>Hadoop_kafka</span>
+                        <span>Spark安装 快速指南</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/language/2016/09/02/Scala-Lesson12/" data-toggle="tooltip" data-placement="top" title="Scala Lesson 12">
-                        Next<br>
-                        <span>Scala Lesson 12</span>
-                        </a>
-                    </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/language/2016/09/02/Scala-Lesson11"
-                        data-title="Scala Lesson 11"
-                        data-url="http://machinelearningadvance.com/language/2016/09/02/Scala-Lesson11/" >
+                        data-thread-key="/hadoop/2016/09/26/hadoop_tutorial_7"
+                        data-title="Zeppelin安装 快速指南"
+                        data-url="http://machinelearningadvance.com/hadoop/2016/09/26/hadoop_tutorial_7/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -334,9 +243,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/language/2016/09/02/Scala-Lesson11"
-                        data-title="Scala Lesson 11"
-                        data-url="http://machinelearningadvance.com/language/2016/09/02/Scala-Lesson11/" >
+                        data-thread-key="/hadoop/2016/09/26/hadoop_tutorial_7"
+                        data-title="Zeppelin安装 快速指南"
+                        data-url="http://machinelearningadvance.com/hadoop/2016/09/26/hadoop_tutorial_7/" >
                     </div>
 
                 </div>

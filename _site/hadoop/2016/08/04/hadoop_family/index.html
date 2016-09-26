@@ -1323,9 +1323,106 @@ sudo pip install pyhs2
 </code></pre>
 </div>
 
+<p>windows连接报错</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> conn = pyhs2.connect(host="192.168.71.128", user='hive', password='hive', authMechanism='PLAIN')
+Traceback (most recent call last):
+  File "C:\Anaconda2\lib\site-packages\IPython\core\interactiveshell.py", line 2885, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File "&lt;ipython-input-5-04457594e509&gt;", line 1, in &lt;module&gt;
+    conn = pyhs2.connect(host="192.168.71.128", user='hive', password='hive', authMechanism='PLAIN')
+  File "C:\Anaconda2\lib\site-packages\pyhs2\__init__.py", line 7, in connect
+    return Connection(*args, **kwargs)
+  File "C:\Anaconda2\lib\site-packages\pyhs2\connections.py", line 46, in __init__
+    transport.open()
+  File "C:\Anaconda2\lib\site-packages\pyhs2\cloudera\thrift_sasl.py", line 66, in open
+    message=("Could not start SASL: %s" % self.sasl.getError()))
+</code></pre>
+</div>
+
+<p>1 In hive-site.xml, set configuration as below:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;property&gt;
+   &lt;name&gt;hive.server2.authentication&lt;/name&gt;
+   &lt;value&gt;NOSASL&lt;/value&gt;
+&lt;/property&gt;
+</code></pre>
+</div>
+
+<p>2 Test again</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>In[6]: import pyhs2
+In[7]: conn = pyhs2.connect(host="192.168.71.128", user='hive', password='hive', authMechanism='NOSASL')
+In[8]: cur= conn.cursor()
+In[9]: cur.execute("show databases")
+In[10]: cur.fetch()
+Out[10]: [['default']]
+In[11]: cur.execute("show tables")
+In[12]: cur.fetch()
+Out[12]: [['bank'], ['david_test'], ['test']]
+</code></pre>
+</div>
+
 <p>4 连接客户端查看：</p>
 
 <p><img src="/images/hadoop/hiveserver2client.png" alt="" /></p>
+
+<p>5 hive 命令的调用方式</p>
+
+<p>1) script</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hivetest]$ cat hive_script3.sql
+select * from bank limit 10;
+select count(*) from bank;
+[hadoop@NN01 hivetest]$ hive -S -f hive_script3.sql
+...
+58	management	married	tertiary	n2143	yes	no	unknown	5	may	261	1	-1	0	unknown	no
+......
+43	technician	single	secondary	n593	yes	no	unknown	5	may	5-1	0	unknown	no
+45211
+
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># create table
+&gt;&gt;&gt; conn = pyhs2.connect(host="NN01.HadoopVM", user="hive",password = 'hive', authMechanism='PLAIN')&gt;&gt;&gt; cur = conn.cursor()
+&gt;&gt;&gt; cur.execute("create table david_test(id int, name string)")
+&gt;&gt;&gt; cur.execute("desc david_test")
+&gt;&gt;&gt; ll = cur.fetch()
+&gt;&gt;&gt; ll
+[['id', 'int', ''], ['name', 'string', '']]
+&gt;&gt;&gt; cur.execute("insert into david_test(id,name) values (1,'David'),(2, 'Alice')")
+&gt;&gt;&gt; cur.execute("select * from david_test")
+&gt;&gt;&gt; fetch = cur.fetch()
+&gt;&gt;&gt; fetch
+[[1, 'David'], [2, 'Alice']]
+
+# shell fetch
+[hadoop@NN01 hivetest]$ ./start_hql.sh 2
+2	Alice
+[hadoop@NN01 hivetest]$ cat start_hql.sh
+hive\
+	-hivevar id=$1\
+	-hivevar name=$2\
+	-S -f hql.sql
+[hadoop@NN01 hivetest]$ cat hql.sql
+--databases
+use default;
+--tables
+select * from david_test
+where id='${hivevar:id}' ;
+</code></pre>
+</div>
+
+<p>2) 命令行模式</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hivetest]$ hive -e "select count(*) from bank"
+......
+OK
+45211
+Time taken: 36.675 seconds, Fetched: 1 row(s)
+</code></pre>
+</div>
 
 <h4 id="hive-">3.3.3 Hive 相关问题</h4>
 
@@ -1853,13 +1950,13 @@ True
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="20">
+                				<a href="/tags/#Big Data" title="Big Data" rel="21">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="18">
+                				<a href="/tags/#大数据" title="大数据" rel="19">
                                 大数据
                                 </a>
                             
