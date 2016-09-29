@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>IP - Maching Learning | 机器学习笔记</title>
+    <title>Hadoop 开机自启动 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/blog/2016/07/22/IP/">
+    <link rel="canonical" href="http://machinelearningadvance.com/hadoop/2016/09/29/hadoop_startup/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,15 +168,17 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Other" title="Other">Other</a>
+                        <a class="tag" href="/tags/#Big Data" title="Big Data">Big Data</a>
+                        
+                        <a class="tag" href="/tags/#大数据" title="大数据">大数据</a>
                         
                     </div>
-                    <h1>IP</h1>
+                    <h1>Hadoop 开机自启动</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by some on July 22, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on September 29, 2016</span>
                 </div>
             </div>
         </div>
@@ -194,33 +196,85 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>来源：搜狐文化(http://cul.sohu.com/20150625/n415609856.shtml)
-本文为转载。如有侵权，请说明。谢谢！
-文：周铁东。北京新影联影业有限责任公司总经理。</p>
+				<h2 id="etcrcdrclocal">1 把启动程序的命令添加到/etc/rc.d/rc.local</h2>
 
-<p>　　导语：如果你还没听说过【IP】，你out了。随便走进一家咖啡馆，总会看见几个人聊【IP】。被网友黑成渣的《盗墓笔记》就是一个巨大的【IP】,刚刚结束的上海电影节，也达成了很多巨大的巨大的【IP】，那么问题来了。【IP】到底是什么鬼呢？</p>
+<p>加入后的文件如下：</p>
 
-<p>英语世界中的“IP”仅指“IP地址”</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+<span class="c">#</span>
+<span class="c"># This script will be executed *after* all the other init scripts.</span>
+<span class="c"># You can put your own initialization stuff in here if you don't</span>
+<span class="c"># want to do the full Sys V style init stuff.</span>
 
-<p>　　30多年来，无论写了啥说了啥，只要公开发表，都会被无限盗版，以至于本人所有的文章都能在各种期刊网和学术搜索平台上寻到踪影。曾向律师朋友求助想要讨回公道，答曰，可以帮你打赢官司，但赢回来的钱却不够咱俩一顿酒钱。由于中国没有惩罚性赔偿，这种知识产权官司，即使能够打赢，也不够覆盖打官司所付出的机会成本，这无疑是在法律层面上鼓励侵权和盗版。</p>
+touch /var/lock/subsys/local
+<span class="c"># start hadoop</span>
 
-<p>　　可是，就是在这样一个知识产权屡遭侵犯的大环境中，无数对“知识产权”不甚了了甚至连26个英文字母都念不标准的人却在言必谈IP。</p>
+/home/hadoop/sbin/start-all.sh
+/home/hadoop/sbin/mr-jobhistory-daemon.sh start historyserver --config <span class="nv">$HADOOP_CONF_DIR</span>
 
-<p>　　在英语世界，如果提到IP，人们首先想到的只能是“IP地址”。只有特别指出，对方才能明白你说的是“知识财产”（Intellectual Property）。可是，这样一个连外国人都不用的简写概念最近却在中国火烧火燎，炙手可热，大有燎原之势。为此，我曾立帖为证，断言这一热词要不了多久便会被人唾弃，就像“互联网思维”和“大数据”一样，而且将会有无数热钱被忽悠得栽在这个热词上，因为并非所有的“知识财产”都有可被开发成电影项目的潜质：无论什么故事，若要在大银幕上呈现，它必须“可拍摄”（能转化为电影视觉语言），“可融资”（有人愿意砸钱投拍），“可营销”（具有足够的卖点说服投资人砸钱），“可观赏”（影院愿意排片，观众愿意买票）。这几个要素相辅相成，互为因果，缺一不可。</p>
+<span class="c"># start kafka</span>
+/home/hadoop/zookeeper.sh start
 
-<p>　　之所以强调“知识财产”而非大家通常理解和言说的“知识产权”，是因为那些奢谈IP的人根本就不知道，他们口中像口水一样流出的“IP”这两个洋字码实际的所指仅仅是“知识财产”（intellectual property）而已，是一个指称“心智创造”（creations of the mind）的法律术语，包括音乐、文学和其他艺术作品，发现与发明，以及一切倾注了作者心智的语词、短语、符号和设计等被法律赋予独享权利的“知识财产”。这种“独享权利”才是我们耳熟能详的“知识产权”，英文简称是“IPR”（intellectual property rights）。常见的IPR有版权、专利权、工业设计权以及对商标、商业外观、商业包装、商业配方和商业秘密等进行保护的法律权利。正是这些受法律保护的“权利”才使得那些“心智创造”成为“无形资产”。
-***
-###　　与其叫“知识产权” 不如叫“文学潜在财产”</p>
+<span class="c"># start hiveserver2</span>
+hiveserver2
+</code></pre>
+</div>
 
-<p>　　由此可见，那些对“IP”趋之若鹜、垂涎欲滴的国人口中喷出的所谓“IP”其实只不过是诸多“IPR”（他们落了一个R）中可以被改编为电影的“文学财产”而已。所以，与其奢谈语焉不详、大而无当、言不及义的“知识财产”（intellectual property），不如遵循世界电影产业惯例直称“文学财产”（literary property）或“潜在财产”（underlying property）。</p>
+<h2 id="chkconfighttpswwwcentosbz2011077-linux-chkconfig-command-examples">2 <a href="https://www.centos.bz/2011/07/7-linux-chkconfig-command-examples/">chkconfig</a>设置开机启动。</h2>
 
-<p>　　好莱坞对“文学财产”的定义非常简洁明了：可以改编为电影的文学作品；而“潜在财产”的所指则更为宽泛，包含了文学作品之外的可以开发成电影项目的其他作品，如图书、戏剧、故事大纲、故事梗概和原创剧本等。本人在拙著《号脉电影》中曾总结过好莱坞电影产生的三个源头：一是好莱坞之外的素材，如小说、戏剧、新闻报道或报告文学，甚至流行歌曲或电子游戏等。这便是目前在中国炙手可热而在好莱坞早已成为行业事实的所谓“IP”。二是制片人、导演、演员或制片厂经理人想象中的一个故事创意，指派作家将其开发为电影剧本。这一过程通常需要历经很多步骤：故事大纲、处理台本、初稿、改写、润色、定稿。这就是好莱坞按步论酬的“步骤交易”，整个交易过程悉由制片人掌控，编剧仅是雇佣枪手而已，把各方面的想法经他之手形成文字，其创造性劳动被沦为一种雇佣式劳务，从本质上而言与代写情书或代写状纸无异。第三个故事来源则是终年挣扎在好莱坞外围的庞大的原创编剧大军。美国作家协会剧本登记服务处平均每年记录在案的剧本多达35万多个，这还仅仅是记录在案的数字。在全美国，每年出笼的剧本数以百万计，而真正能称为上品者却寥寥无几。因此，从1990年代开始，好莱坞的剧本开发成本便攀升到每年5亿多美元，而且一直居高不下，其中有四分之三都付给了作家去“选定”或改写一些永远不可能投拍的影片。</p>
+<p><a href="http://man.linuxde.net/chkconfig">chkconfig</a> 功能说明：检查，设置系统和各种服务。</p>
 
-<p>　　所谓“选定”，在好莱坞的语境中，是指作家和制片人或制片公司之间经谈判而签定的书面协议书。根据选定协议书，制片方付给某一文学财产（剧本）的所有人（作家）一定的选定费以取得在一定期限内独家开发或出售该文学产权的权利。选定合同的内容通常包括投拍剧本的规定期限、资金到位的规定期限，最后购买剧本的规定期限或者延长选定期的条款以及费用。选定期过后，制片方若无进一步行动，剧本的选定权以及相关权利将会自行失效，重新归原作者所有。选定协议通常是文学财产被开发成影片的第一步，也是作家出卖自己剧本的第一笔收入。这便是目前中国的“挨劈”爱好者们所谓的“囤积IP”了。</p>
+<p>讲法：chkconfig [–add][–del][–list][系统服务]或chkconfig [–level <等级代号>[系统服务][on/off/reset]</等级代号></p>
 
-<p>　　这些每年数以百万计的原创剧本在好莱坞业内有一个不太好听却直奔金钱主题的专门称谓，叫“投机剧本”。正是这种被视为“投机生意”的原创剧本构成了好莱坞剧本贸易的主体。好的原创剧本很有可能通过好的经纪人之手炒作成为一项“热门财产”，使得作者的获益远远超过那些被指派的命题作文。因为好莱坞的制片大亨们都心知肚明：剧本永远是电影的灵魂，只不过早期的制片厂制度将编剧的作用屏蔽在人们的视听和认知之外。在制片厂制度统领着好莱坞电影制作的半个多世纪，编剧本身便是制片厂的合同财产，唯制片老板马首是瞻，毫无创作自主权。随着大片时代的来临，好莱坞制片厂制度解体，其外围才涌现出一批企望靠剧本投机来登堂入室的自由创作大军。</p>
+<ul>
+  <li>–add：增加所指定的系统服务，让chkconfig指令得以管理它，并同时在系统启动的叙述文件内增加相关数据；</li>
+  <li>–del：删除所指定的系统服务，不再由chkconfig指令管理，并同时在系统启动的叙述文件内删除相关数据；</li>
+  <li>–level<等级代号>：指定读系统服务要在哪一个执行等级中开启或关毕。</等级代号></li>
+</ul>
 
-<p>　　无论源头如何，电影的灵魂和根本还是剧本和内容本身。其他的一切都是为这一故事核心服务的。因为观众不会为IP买单，而只会被故事打动。</p>
+<p>等级代号列表</p>
+
+<ul>
+  <li>等级0表示：表示关机 等级1表示：单用户模式</li>
+  <li>等级2表示：无网络连接的多用户命令行模式</li>
+  <li>等级3表示：有网络连接的多用户命令行模式</li>
+  <li>等级4表示：不可用</li>
+  <li>等级5表示：带图形界面的多用户模式</li>
+  <li>等级6表示：重新启动</li>
+</ul>
+
+<p>如何增加一个服务：</p>
+
+<ul>
+  <li>1 服务脚本必须存放在/etc/ini.d/目录下；</li>
+  <li>2 chkconfig –add servicename在chkconfig工具服务列表中增加此服务，此时服务会被在/etc/rc.d/rcN.d中赋予K/S入口了；</li>
+  <li>3 chkconfig –level 35 mysqld on修改服务的默认启动等级。</li>
+</ul>
+
+<p>来自: http://man.linuxde.net/chkconfig
+设置自启动mysql</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># mysqld 放入linux启动管理体系中
+[hadoop@NN01 init.d]$ sudo chkconfig --add mysqld
+# 查看全部服务在各运行级状态
+[hadoop@NN01 init.d]$ sudo chkconfig --list mysqld
+mysqld          0:off   1:off   2:off   3:off   4:off   5:off   6:off
+# 只有级别3启动
+[hadoop@NN01 init.d]$ sudo chkconfig --levels 3 mysqld on
+[hadoop@NN01 init.d]$ sudo chkconfig --list mysqld
+mysqld          0:off   1:off   2:off   3:on    4:off   5:off   6:off
+</code></pre>
+</div>
+
+<h2 id="etcrcdrcsysint">3 把启动程序的命令添加到/etc/rc.d/rc.sysint文件中</h2>
+
+<p>脚本/etc/rc.d/rc.sysint，完成系统服务程序启动，如系统环境变量设置、设置系统时钟、加载字体、检查加载文件系统、生成系统启动信息日志文件等。</p>
+
+<p>比如设置自启动apache:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>echo "/usr.local/appache2/bin/appachect1 start" &gt;&gt; /etc/rc.d/rc.sysint
+</code></pre>
+</div>
 
 
                 <hr>
@@ -229,26 +283,26 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/cfa/2016/07/22/CFALevel1_Equity/" data-toggle="tooltip" data-placement="top" title="Lev1_Equity_basic_concept">
+                        <a href="/hadoop/2016/09/26/hadoop_tutorial_7/" data-toggle="tooltip" data-placement="top" title="Zeppelin安装 快速指南">
                         Previous<br>
-                        <span>Lev1_Equity_basic_concept</span>
+                        <span>Zeppelin安装 快速指南</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/cfa/2016/07/23/CFALevel1_FixedIncome/" data-toggle="tooltip" data-placement="top" title="Lev1_FixedIncome_basic_concept">
+                        <a href="/blog/2016/09/29/Vim_often_use/" data-toggle="tooltip" data-placement="top" title="Vim常用命令">
                         Next<br>
-                        <span>Lev1_FixedIncome_basic_concept</span>
+                        <span>Vim常用命令</span>
                         </a>
                     </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/blog/2016/07/22/IP"
-                        data-title="IP"
-                        data-url="http://machinelearningadvance.com/blog/2016/07/22/IP/" >
+                        data-thread-key="/hadoop/2016/09/29/hadoop_startup"
+                        data-title="Hadoop 开机自启动"
+                        data-url="http://machinelearningadvance.com/hadoop/2016/09/29/hadoop_startup/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -267,9 +321,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/blog/2016/07/22/IP"
-                        data-title="IP"
-                        data-url="http://machinelearningadvance.com/blog/2016/07/22/IP/" >
+                        data-thread-key="/hadoop/2016/09/29/hadoop_startup"
+                        data-title="Hadoop 开机自启动"
+                        data-url="http://machinelearningadvance.com/hadoop/2016/09/29/hadoop_startup/" >
                     </div>
 
                 </div>

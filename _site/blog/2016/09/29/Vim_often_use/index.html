@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>IP - Maching Learning | 机器学习笔记</title>
+    <title>Vim常用命令 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/blog/2016/07/22/IP/">
+    <link rel="canonical" href="http://machinelearningadvance.com/blog/2016/09/29/Vim_often_use/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,15 +168,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Other" title="Other">Other</a>
+                        <a class="tag" href="/tags/#IT" title="IT">IT</a>
                         
                     </div>
-                    <h1>IP</h1>
+                    <h1>Vim常用命令</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by some on July 22, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on September 29, 2016</span>
                 </div>
             </div>
         </div>
@@ -194,33 +194,589 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>来源：搜狐文化(http://cul.sohu.com/20150625/n415609856.shtml)
-本文为转载。如有侵权，请说明。谢谢！
-文：周铁东。北京新影联影业有限责任公司总经理。</p>
+				<h2 id="section">1 切换输入模式</h2>
 
-<p>　　导语：如果你还没听说过【IP】，你out了。随便走进一家咖啡馆，总会看见几个人聊【IP】。被网友黑成渣的《盗墓笔记》就是一个巨大的【IP】,刚刚结束的上海电影节，也达成了很多巨大的巨大的【IP】，那么问题来了。【IP】到底是什么鬼呢？</p>
+<p>命令模式下</p>
 
-<p>英语世界中的“IP”仅指“IP地址”</p>
+<table>
+  <tbody>
+    <tr>
+      <td>a</td>
+      <td>(小写)光标之后进行插入</td>
+    </tr>
+    <tr>
+      <td>A</td>
+      <td>(大写)光标所在行尾进行插入</td>
+    </tr>
+    <tr>
+      <td>i</td>
+      <td>(小写)光标前开始进行插入</td>
+    </tr>
+    <tr>
+      <td>I</td>
+      <td>(大写)光标所在行首进行插入</td>
+    </tr>
+    <tr>
+      <td>o</td>
+      <td>(小写)光标所在行后新插入一空行进行插入</td>
+    </tr>
+    <tr>
+      <td>O</td>
+      <td>(大写)光标所在行前新插入一空行进行插入</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>　　30多年来，无论写了啥说了啥，只要公开发表，都会被无限盗版，以至于本人所有的文章都能在各种期刊网和学术搜索平台上寻到踪影。曾向律师朋友求助想要讨回公道，答曰，可以帮你打赢官司，但赢回来的钱却不够咱俩一顿酒钱。由于中国没有惩罚性赔偿，这种知识产权官司，即使能够打赢，也不够覆盖打官司所付出的机会成本，这无疑是在法律层面上鼓励侵权和盗版。</p>
+<h2 id="section-1">2 保存文件</h2>
 
-<p>　　可是，就是在这样一个知识产权屡遭侵犯的大环境中，无数对“知识产权”不甚了了甚至连26个英文字母都念不标准的人却在言必谈IP。</p>
+<p>命令模式下</p>
 
-<p>　　在英语世界，如果提到IP，人们首先想到的只能是“IP地址”。只有特别指出，对方才能明白你说的是“知识财产”（Intellectual Property）。可是，这样一个连外国人都不用的简写概念最近却在中国火烧火燎，炙手可热，大有燎原之势。为此，我曾立帖为证，断言这一热词要不了多久便会被人唾弃，就像“互联网思维”和“大数据”一样，而且将会有无数热钱被忽悠得栽在这个热词上，因为并非所有的“知识财产”都有可被开发成电影项目的潜质：无论什么故事，若要在大银幕上呈现，它必须“可拍摄”（能转化为电影视觉语言），“可融资”（有人愿意砸钱投拍），“可营销”（具有足够的卖点说服投资人砸钱），“可观赏”（影院愿意排片，观众愿意买票）。这几个要素相辅相成，互为因果，缺一不可。</p>
+<table>
+  <tbody>
+    <tr>
+      <td>:w</td>
+      <td>(小写)保存文件</td>
+    </tr>
+    <tr>
+      <td>​:wq</td>
+      <td>(小写)保存并退出vim</td>
+    </tr>
+    <tr>
+      <td>:w 文件名1</td>
+      <td>将文件另存为文件名1</td>
+    </tr>
+    <tr>
+      <td>:ZZ</td>
+      <td>(大写)保存文件并退出,相当于:wq</td>
+    </tr>
+    <tr>
+      <td>:wq!</td>
+      <td>(小写)文件所有者强制保存只读文件,如果不是文件所有者进行此操作,不能成功</td>
+    </tr>
+    <tr>
+      <td>:q!</td>
+      <td>退出不保存文件</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>　　之所以强调“知识财产”而非大家通常理解和言说的“知识产权”，是因为那些奢谈IP的人根本就不知道，他们口中像口水一样流出的“IP”这两个洋字码实际的所指仅仅是“知识财产”（intellectual property）而已，是一个指称“心智创造”（creations of the mind）的法律术语，包括音乐、文学和其他艺术作品，发现与发明，以及一切倾注了作者心智的语词、短语、符号和设计等被法律赋予独享权利的“知识财产”。这种“独享权利”才是我们耳熟能详的“知识产权”，英文简称是“IPR”（intellectual property rights）。常见的IPR有版权、专利权、工业设计权以及对商标、商业外观、商业包装、商业配方和商业秘密等进行保护的法律权利。正是这些受法律保护的“权利”才使得那些“心智创造”成为“无形资产”。
-***
-###　　与其叫“知识产权” 不如叫“文学潜在财产”</p>
+<h2 id="section-2">3 复制</h2>
 
-<p>　　由此可见，那些对“IP”趋之若鹜、垂涎欲滴的国人口中喷出的所谓“IP”其实只不过是诸多“IPR”（他们落了一个R）中可以被改编为电影的“文学财产”而已。所以，与其奢谈语焉不详、大而无当、言不及义的“知识财产”（intellectual property），不如遵循世界电影产业惯例直称“文学财产”（literary property）或“潜在财产”（underlying property）。</p>
+<p>命令模式下</p>
 
-<p>　　好莱坞对“文学财产”的定义非常简洁明了：可以改编为电影的文学作品；而“潜在财产”的所指则更为宽泛，包含了文学作品之外的可以开发成电影项目的其他作品，如图书、戏剧、故事大纲、故事梗概和原创剧本等。本人在拙著《号脉电影》中曾总结过好莱坞电影产生的三个源头：一是好莱坞之外的素材，如小说、戏剧、新闻报道或报告文学，甚至流行歌曲或电子游戏等。这便是目前在中国炙手可热而在好莱坞早已成为行业事实的所谓“IP”。二是制片人、导演、演员或制片厂经理人想象中的一个故事创意，指派作家将其开发为电影剧本。这一过程通常需要历经很多步骤：故事大纲、处理台本、初稿、改写、润色、定稿。这就是好莱坞按步论酬的“步骤交易”，整个交易过程悉由制片人掌控，编剧仅是雇佣枪手而已，把各方面的想法经他之手形成文字，其创造性劳动被沦为一种雇佣式劳务，从本质上而言与代写情书或代写状纸无异。第三个故事来源则是终年挣扎在好莱坞外围的庞大的原创编剧大军。美国作家协会剧本登记服务处平均每年记录在案的剧本多达35万多个，这还仅仅是记录在案的数字。在全美国，每年出笼的剧本数以百万计，而真正能称为上品者却寥寥无几。因此，从1990年代开始，好莱坞的剧本开发成本便攀升到每年5亿多美元，而且一直居高不下，其中有四分之三都付给了作家去“选定”或改写一些永远不可能投拍的影片。</p>
+<table>
+  <tbody>
+    <tr>
+      <td>yy或 Y</td>
+      <td>复制光标所在整行</td>
+    </tr>
+    <tr>
+      <td>y^</td>
+      <td>复制到光标所在行行首,不包括光标位置字符</td>
+    </tr>
+    <tr>
+      <td>y$</td>
+      <td>复制到光标所在行行尾,包括光标位置字符</td>
+    </tr>
+    <tr>
+      <td>yw</td>
+      <td>复制一个单词,光标必须在单词首部</td>
+    </tr>
+    <tr>
+      <td>yG</td>
+      <td>复制到文件尾</td>
+    </tr>
+    <tr>
+      <td>y1G</td>
+      <td>复制到文件首</td>
+    </tr>
+    <tr>
+      <td>nyy</td>
+      <td>复制光标所在行开始的n行</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>　　所谓“选定”，在好莱坞的语境中，是指作家和制片人或制片公司之间经谈判而签定的书面协议书。根据选定协议书，制片方付给某一文学财产（剧本）的所有人（作家）一定的选定费以取得在一定期限内独家开发或出售该文学产权的权利。选定合同的内容通常包括投拍剧本的规定期限、资金到位的规定期限，最后购买剧本的规定期限或者延长选定期的条款以及费用。选定期过后，制片方若无进一步行动，剧本的选定权以及相关权利将会自行失效，重新归原作者所有。选定协议通常是文学财产被开发成影片的第一步，也是作家出卖自己剧本的第一笔收入。这便是目前中国的“挨劈”爱好者们所谓的“囤积IP”了。</p>
+<h2 id="section-3">4 粘贴</h2>
 
-<p>　　这些每年数以百万计的原创剧本在好莱坞业内有一个不太好听却直奔金钱主题的专门称谓，叫“投机剧本”。正是这种被视为“投机生意”的原创剧本构成了好莱坞剧本贸易的主体。好的原创剧本很有可能通过好的经纪人之手炒作成为一项“热门财产”，使得作者的获益远远超过那些被指派的命题作文。因为好莱坞的制片大亨们都心知肚明：剧本永远是电影的灵魂，只不过早期的制片厂制度将编剧的作用屏蔽在人们的视听和认知之外。在制片厂制度统领着好莱坞电影制作的半个多世纪，编剧本身便是制片厂的合同财产，唯制片老板马首是瞻，毫无创作自主权。随着大片时代的来临，好莱坞制片厂制度解体，其外围才涌现出一批企望靠剧本投机来登堂入室的自由创作大军。</p>
+<p>命令模式下</p>
 
-<p>　　无论源头如何，电影的灵魂和根本还是剧本和内容本身。其他的一切都是为这一故事核心服务的。因为观众不会为IP买单，而只会被故事打动。</p>
+<table>
+  <tbody>
+    <tr>
+      <td>p</td>
+      <td>(小写)粘贴到光标后</td>
+    </tr>
+    <tr>
+      <td>P</td>
+      <td>(大写)粘贴到光标前</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-4">5 删除</h2>
+
+<p>命令模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>x</td>
+      <td>(小写)删除光标前一个字符</td>
+    </tr>
+    <tr>
+      <td>X</td>
+      <td>(大写)删除光标后一个字符</td>
+    </tr>
+    <tr>
+      <td>dd</td>
+      <td>(小写)删除光标所在整行</td>
+    </tr>
+    <tr>
+      <td>dw</td>
+      <td>(小写)删除光标所在处一个单词</td>
+    </tr>
+    <tr>
+      <td>dG</td>
+      <td>删除光标所在整行到文件尾</td>
+    </tr>
+    <tr>
+      <td>dgg</td>
+      <td>删除光标所在整行到文件首</td>
+    </tr>
+    <tr>
+      <td>D</td>
+      <td>(大写)删除到行尾,包含光标处的字符</td>
+    </tr>
+    <tr>
+      <td>d$</td>
+      <td>与D效果相同</td>
+    </tr>
+    <tr>
+      <td>d0</td>
+      <td>删除到行首，不包含光标处的字符</td>
+    </tr>
+    <tr>
+      <td>d^</td>
+      <td>与d0效果相同</td>
+    </tr>
+    <tr>
+      <td>:n1,n2d</td>
+      <td>命令模式下，删除n1-n2行</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-5">6 撤销</h2>
+
+<p>命令模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>u</td>
+      <td>(小写)无限次保存前撤销(大概500多次)</td>
+    </tr>
+    <tr>
+      <td>ctrl+r</td>
+      <td>redo</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-6">7 字符替换</h2>
+
+<p>命令模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>r</td>
+      <td>(小写)替换光标所在处一个字符</td>
+    </tr>
+    <tr>
+      <td>R</td>
+      <td>(大写)开始替换,直到按ESC键退出替换,相当于按下键盘上到insert键</td>
+    </tr>
+    <tr>
+      <td>cc</td>
+      <td>(小写)取代光标所在整行</td>
+    </tr>
+    <tr>
+      <td>S</td>
+      <td>(大写)与ss(小写)效果相同</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>(大写)取代到行尾,包括光标处字符</td>
+    </tr>
+    <tr>
+      <td>c0</td>
+      <td>(小写,数字0)取代到行首,不包括光标处字符</td>
+    </tr>
+    <tr>
+      <td>c^</td>
+      <td>(小写)与c0(小写,数字0)效果相同</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-7">8 字符串查找和替换</h2>
+
+<p>命令模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>/string</td>
+      <td>从光标处开始向下开始查找字符串string</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>/查找模式下</td>
+      <td>按n(小写)查找下一个,按N(大写)查找上一个</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>?string</td>
+      <td>从光标处开始向上开始查找字符从string</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>?查找模式下</td>
+      <td>按n(小写)查找上一个,按N(大写)查找下一个</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>向下完整匹配光标下的单词</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>#</td>
+      <td>向上完整匹配光标下的单词</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>g*</td>
+      <td>向下部分匹配光标下的单词</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>g#</td>
+      <td>向上部分匹配光标下到单词</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>命令模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>:set ic</td>
+      <td>查找时,忽略大小写</td>
+    </tr>
+    <tr>
+      <td>:set noic</td>
+      <td>取消查找时忽略大小写</td>
+    </tr>
+    <tr>
+      <td>:f string</td>
+      <td>(小写f与string有空格)搜索一行中匹配到的string</td>
+    </tr>
+    <tr>
+      <td>:%s/old/new/g</td>
+      <td>全文将old替换为new,不提示</td>
+    </tr>
+    <tr>
+      <td>:%s/old/new/c</td>
+      <td>全文将old替换为new,提示是否替换</td>
+    </tr>
+    <tr>
+      <td>:n1,n2s/old/new/g</td>
+      <td>n1-n2行中,将old替换为new,不提示</td>
+    </tr>
+    <tr>
+      <td>:n1,n2s/old/new/c</td>
+      <td>n1-n2行中,将old替换为new,提示是否替换</td>
+    </tr>
+    <tr>
+      <td>在替换文本old或new中有/字符时,需要用\进行转义</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-8">9 显示行号</h2>
+
+<p>命令模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>:set nu(mber)</td>
+      <td>显示行号</td>
+    </tr>
+    <tr>
+      <td>:set nonu</td>
+      <td>取消显示行号</td>
+    </tr>
+    <tr>
+      <td>:set nu!</td>
+      <td>取消显示行号</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-9">10 简单排版</h2>
+
+<p>命令模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>:ce(nter)</td>
+      <td>居中显示光标所在行</td>
+    </tr>
+    <tr>
+      <td>:ri(ght)</td>
+      <td>靠右显示光标所在行</td>
+    </tr>
+    <tr>
+      <td>:le(ft)</td>
+      <td>靠左显示光标所在行</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>命令模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>J</td>
+      <td>将光标所在下一行合并到光标所在行</td>
+    </tr>
+    <tr>
+      <td>»</td>
+      <td>光标所在行增加缩进(一个tab)</td>
+    </tr>
+    <tr>
+      <td>«</td>
+      <td>光标所在行减少缩进(一个tab)</td>
+    </tr>
+    <tr>
+      <td>n»</td>
+      <td>光标所在行开始的n行增加缩进</td>
+    </tr>
+    <tr>
+      <td>n«</td>
+      <td>光标所在行开始的n行减少缩进</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-10">11 光标移动方式</h2>
+
+<p>命令模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>H</td>
+      <td>(大写,Head)移动到屏幕顶第一个非空白字符</td>
+    </tr>
+    <tr>
+      <td>M</td>
+      <td>(大写,Mid)移动到屏幕中间第一个非空白字符</td>
+    </tr>
+    <tr>
+      <td>L</td>
+      <td>(大写,Last)移动到屏幕底部第一个非空白字符</td>
+    </tr>
+    <tr>
+      <td>(</td>
+      <td>(左小括号)移动到上一个句子首</td>
+    </tr>
+    <tr>
+      <td>)</td>
+      <td>(右小括号)移动到下一个句子首</td>
+    </tr>
+    <tr>
+      <td>{</td>
+      <td>(左大括号)移动到上一个段落首</td>
+    </tr>
+    <tr>
+      <td>}</td>
+      <td>(右大括号)移动到下一个段落首</td>
+    </tr>
+    <tr>
+      <td>%</td>
+      <td>光标跳转到匹配到括号处,支持{}()</td>
+    </tr>
+    <tr>
+      <td>[[</td>
+      <td>光标跳转到代码块开头即{处,要求{独占一行</td>
+    </tr>
+    <tr>
+      <td>gD</td>
+      <td>光标跳转到局部变量定义处</td>
+    </tr>
+    <tr>
+      <td>’’</td>
+      <td>(两个单引号)光标跳转到上次停靠处</td>
+    </tr>
+    <tr>
+      <td>h</td>
+      <td>(小写)光标左移一个字符,相当于左方向键</td>
+    </tr>
+    <tr>
+      <td>l</td>
+      <td>(小写)光标右移一个字符,相当于右方向键</td>
+    </tr>
+    <tr>
+      <td>k</td>
+      <td>(小写)光标垂直上移一行,相当于上方向键</td>
+    </tr>
+    <tr>
+      <td>j</td>
+      <td>(小写)光标垂直下移一行,相当于下方向键</td>
+    </tr>
+    <tr>
+      <td>ctrl+f</td>
+      <td>(forword)向下整页翻页</td>
+    </tr>
+    <tr>
+      <td>ctrl+b</td>
+      <td>(backward)向上整页翻页</td>
+    </tr>
+    <tr>
+      <td>ctrl+u</td>
+      <td>(up)向上翻半页</td>
+    </tr>
+    <tr>
+      <td>ctrl+d</td>
+      <td>(down)向下翻半页</td>
+    </tr>
+    <tr>
+      <td>zz</td>
+      <td>(小写)让光标所在行居于屏幕中央</td>
+    </tr>
+    <tr>
+      <td>zt</td>
+      <td>(小写)让光标所在行居于屏幕最顶部</td>
+    </tr>
+    <tr>
+      <td>zb</td>
+      <td>(小写)让光标所在行居于屏幕底部</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>编辑模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>:n</td>
+      <td>指定移动到第n行</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-11">12 数字前缀与重复</h2>
+
+<p>命令模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>将数字加在命令前,标示该命令处理几次</td>
+      <td>如5dd标示执行5次dd(删除光标所在整行)操作。</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>.</td>
+      <td>(英文句号）</td>
+      <td>为命令重复命令，按下一次执行一次上一次执行过的命令。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="vim">13 vim技巧</h2>
+
+<p><strong>技巧1</strong> 导入文件或shell命令执行结果</p>
+
+<p>编辑模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>:r 文件名1</td>
+      <td>将文件1内容引入到本文件中</td>
+    </tr>
+    <tr>
+      <td>:!shell命令</td>
+      <td>在vim中执行shell命令,执行完后按回车会到vim界面</td>
+    </tr>
+    <tr>
+      <td><strong>:r !shell命令</strong></td>
+      <td>(r与!之间有空格)将shell命令执行的结果导入到本文件中</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>技巧2</strong> 自定义快捷键操作</p>
+
+<p>编辑模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>:map ^x 命令</td>
+      <td>(map与^之间、x与命令之间有空格,此处到^并非键盘上的^,而是按下ctrl+v出现到快捷键,表示ctrl键,后面到x为任意字母)按下ctrl+x后会执行对应到命令</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>例:</p>
+
+<p>:map ^p I#<ESC> 当按下ctrl+p快捷组合键时,在光标所在行行首添加一个#号,并回到命令模式</ESC></p>
+
+<p><strong>技巧3</strong> 连续行注释</p>
+
+<p>编辑模式下</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>:n1,n2/^/#/g</td>
+      <td>(#号为注释符号,在shell中注释符号为#,C++中为//)</td>
+    </tr>
+    <tr>
+      <td>:n1,n2/^/\/\//g</td>
+      <td>C++源文件多行连续注释</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>技巧4</strong> 替换</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>:ab string1 string2</td>
+      <td>在vim中输入string1按空格或回车后,string1会自动替换为string2</td>
+    </tr>
+    <tr>
+      <td>:unab string1</td>
+      <td>取消string1的替换</td>
+    </tr>
+  </tbody>
+</table>
+
 
 
                 <hr>
@@ -229,26 +785,19 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/cfa/2016/07/22/CFALevel1_Equity/" data-toggle="tooltip" data-placement="top" title="Lev1_Equity_basic_concept">
+                        <a href="/hadoop/2016/09/29/hadoop_startup/" data-toggle="tooltip" data-placement="top" title="Hadoop 开机自启动">
                         Previous<br>
-                        <span>Lev1_Equity_basic_concept</span>
+                        <span>Hadoop 开机自启动</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/cfa/2016/07/23/CFALevel1_FixedIncome/" data-toggle="tooltip" data-placement="top" title="Lev1_FixedIncome_basic_concept">
-                        Next<br>
-                        <span>Lev1_FixedIncome_basic_concept</span>
-                        </a>
-                    </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/blog/2016/07/22/IP"
-                        data-title="IP"
-                        data-url="http://machinelearningadvance.com/blog/2016/07/22/IP/" >
+                        data-thread-key="/blog/2016/09/29/Vim_often_use"
+                        data-title="Vim常用命令"
+                        data-url="http://machinelearningadvance.com/blog/2016/09/29/Vim_often_use/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -267,9 +816,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/blog/2016/07/22/IP"
-                        data-title="IP"
-                        data-url="http://machinelearningadvance.com/blog/2016/07/22/IP/" >
+                        data-thread-key="/blog/2016/09/29/Vim_often_use"
+                        data-title="Vim常用命令"
+                        data-url="http://machinelearningadvance.com/blog/2016/09/29/Vim_often_use/" >
                     </div>
 
                 </div>

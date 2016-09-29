@@ -80,6 +80,7 @@ Could not open client transport with JDBC Uri: jdbc:hive2://NN01.HadoopVM:10000:
 
 Modify
 
+![](/images/hadoop/beeline_jdbc_connect_with_nosasl.png)
 
 2 Jackson version is too old 2.5.3
 

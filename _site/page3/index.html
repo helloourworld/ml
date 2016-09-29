@@ -179,6 +179,57 @@
             ">
     			
 <div class="post-preview">
+    <a href="/language/2016/09/01/Scala-Lesson9/">
+        <h2 class="post-title">
+            Scala Lesson 9
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala 文件 I/O
+
+1 文件写操作
+
+Scala 进行文件写操作，直接用的都是 java中 的 I/O 类 （java.io.File)：
+
+import java.io._
+
+object IOs1 {
+   def main(args: Array[String]) {
+      val writer = new PrintWriter(new File("test.txt" ...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 1, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/09/01/Scala-Lesson8/">
+        <h2 class="post-title">
+            Scala Lesson 8
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala 类和对象
+
+
+  类是对象的抽象，而对象是类的具体实例。类是抽象的，不占用内存，而对象是具体的，占用存储空间。类是用于创建对象的蓝图，它是一个定义包括在特定类型的对象中的方法和变量的软件模板。
+  我们可以使用 new 关键字来创建类的对象，实例如下：
+
+
+class Point(xc: Int, yc: Int) {
+   var x: Int = xc
+   var y: I...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 1, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/language/2016/09/01/Scala-Lesson10/">
         <h2 class="post-title">
             Scala Lesson 10
@@ -365,54 +416,6 @@ val site: List[String] = List("Runoob...
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/language/2016/08/31/Scala-Lesson6/">
-        <h2 class="post-title">
-            scala Lesson 6
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala 数组
-
-Scala 语言中提供的数组是用来存储固定大小的同类型元素，数组对于每一门编辑应语言来说都是重要的数据结构之一。
-声明数组变量并不是声明 number0、number1、…、number99 一个个单独的变量，而是声明一个就像 numbers 这样的变量，然后使用 numbers[0]、numbers[1]、…、numbers[99] 来表示一个个单独的变量。数组中某个指...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/language/2016/08/31/Scala-Lesson5/">
-        <h2 class="post-title">
-            scala Lesson 5
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala 字符串
-
-object Strings{
-    def main(args: Array[String]){
-        println(greeting)
-    }
-
-    val greeting: String = "Hello, World!"
-}
-
-
-
-
-  以上实例定义了变量 greeting，为字符串常量，它的类型为 String (java.lang.S...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -475,19 +478,19 @@ object Strings{
                             
                         
                             
-                                <a href="/tags/#Big Data" title="Big Data" rel="21">
+                                <a href="/tags/#Big Data" title="Big Data" rel="22">
                                     Big Data
                                 </a>
                             
                         
                             
-                                <a href="/tags/#大数据" title="大数据" rel="19">
+                                <a href="/tags/#大数据" title="大数据" rel="20">
                                     大数据
                                 </a>
                             
                         
                             
-                                <a href="/tags/#IT" title="IT" rel="3">
+                                <a href="/tags/#IT" title="IT" rel="4">
                                     IT
                                 </a>
                             
