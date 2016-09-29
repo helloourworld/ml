@@ -82,3 +82,54 @@ mysqld          0:off   1:off   2:off   3:on    4:off   5:off   6:off
 ~~~
 echo "/usr.local/appache2/bin/appachect1 start" >> /etc/rc.d/rc.sysint
 ~~~
+
+## 4 Test
+
+~~~
+[hadoop@NN01 init.d]$ sudo vim hadoop
+[hadoop@NN01 init.d]$ cat hadoop
+### BEGIN INIT INFO
+# Provides:          hadoop
+# Required-Start:    sshd
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: hadoop
+# Description:       start hadoop daemons
+### END INIT INFO
+
+# source function library
+. /etc/rc.d/init.d/functions
+
+RETVAL=0
+
+case "$1" in
+    start)
+        /home/hadoop/hadoop/sbin/start-all.sh
+        RETVAL=$?
+        ;;
+    stop)
+        /home/hadoop/hadoop/sbin/stop-all.sh
+        RETVAL=$?
+        ;;
+    *)
+        echo "Ya blew it"
+        RETVAL=2
+esac
+
+exit $RETVAL
+[hadoop@NN01 init.d]$ chkconfig --list hadoop
+service hadoop supports chkconfig, but is not referenced in any runlevel (run 'chkconfig --add hadoop')
+[hadoop@NN01 init.d]$ sudo chmod 755 hadoop
+[hadoop@NN01 init.d]$ sudo chkconfig --add hadoop
+[hadoop@NN01 init.d]$ chkconfig --list hadoop
+hadoop          0:off   1:off   2:on    3:on    4:on    5:on    6:off
+# init 6
+# sudo init 6
+[root@NN01 hadoop]# jps
+4451 DataNode
+4779 NodeManager
+4332 NameNode
+4685 ResourceManager
+~~~
+
