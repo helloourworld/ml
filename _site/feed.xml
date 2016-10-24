@@ -8,6 +8,48 @@
 		
 			
 			<item>
+				<title>Python 2 Kafka 2 SparkStreaming</title>
+				
+					<description>&lt;h2 id=&quot;python-as-kafka-producer&quot;&gt;python as Kafka producer&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Wed, 19 Oct 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/hadoop/2016/10/19/python-kafka-sparkstreaming/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/10/19/python-kafka-sparkstreaming/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>CRC ERROR DETECTION</title>
+				
+					<description>&lt;p&gt;我目前了解的有一下几个用处：&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Mon, 10 Oct 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/blog/2016/10/10/CRC-ERROR-DETECTION/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/blog/2016/10/10/CRC-ERROR-DETECTION/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>travel site</title>
+				
+					<description>&lt;h3 id=&quot;section&quot;&gt;10.2&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Sat, 01 Oct 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/blog/2016/10/01/travel-site/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/blog/2016/10/01/travel-site/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Vim常用命令</title>
 				
 					<description>&lt;h2 id=&quot;section&quot;&gt;1 切换输入模式&lt;/h2&gt;
@@ -277,20 +319,6 @@ tags:
 				<pubDate>Fri, 02 Sep 2016 00:00:00 +0800</pubDate>
 				<link>http://machinelearningadvance.com/2016/09/02/hadoop_kafka/</link>
 				<guid isPermaLink="true">http://machinelearningadvance.com/2016/09/02/hadoop_kafka/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>travel site</title>
-				
-					<description>&lt;h3 id=&quot;section&quot;&gt;10.3&lt;/h3&gt;
-
-</description>
-				
-				<pubDate>Thu, 01 Sep 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/blog/2016/09/01/travel-site/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/blog/2016/09/01/travel-site/</guid>
 			</item>
 			
 		
