@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>CRC ERROR DETECTION - Maching Learning | 机器学习笔记</title>
+    <title>DataMing Tools Collected - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/blog/2016/10/10/CRC-ERROR-DETECTION/">
+    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/05/data-mining-tools/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,15 +168,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#IT" title="IT">IT</a>
+                        <a class="tag" href="/tags/#Tools" title="Tools">Tools</a>
                         
                     </div>
-                    <h1>CRC ERROR DETECTION</h1>
+                    <h1>DataMing Tools Collected</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on October 10, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on November 5, 2016</span>
                 </div>
             </div>
         </div>
@@ -194,45 +194,15 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>我目前了解的有一下几个用处：</p>
+				<h3 id="dataming-tools-collected">DataMing Tools Collected</h3>
 
-<p>1、作为“通配符”，类似Java中的*。如import scala.math._</p>
+<p><a href="http://www.knime.org/knime-analytics-platform">KNIME</a></p>
 
-<p>2、:<em>*作为一个整体，告诉编译器你希望将某个参数当作参数序列处理！例如val s = sum(1 to 5:</em>*)就是将1 to 5当作参数序列处理。</p>
+<p><a href="https://rapidminer.com/products/">rapidminer</a></p>
 
-<p>3、指代一个集合中的每个元素。例如我们要在一个Array a中筛出偶数，并乘以2，可以用以下办法：
-a.filter(<em>%2==0).map(2*</em>)。
-又如要对缓冲数组ArrayBuffer b排序，可以这样：
-val bSorted = b.sorted(_
-4、在元组中，可以用方法_1, _2, _3访问组员。如a._2。其中句点可以用空格替代。</p>
+<p><a href="http://www.datamation.com/data-center/slideshows/8-open-source-big-data-mining-tools.html">8-open-source-big-data-mining-tools</a></p>
 
-<p>5、使用模式匹配可以用来获取元组的组员，例如
-val (first, second, third) = t
-但如果不是所有的部件都需要，那么可以在不需要的部件位置上使用_。比如上一例中val (first, second, _) = t</p>
-
-<p>6、还有一点，下划线_代表的是某一类型的默认值。
-对于Int来说，它是0。
-对于Double来说，它是0.0
-对于引用类型，它是null。</p>
-
-<p>KNIME http://www.knime.org/knime-analytics-platform</p>
-
-<p>rapidminer https://rapidminer.com/products/</p>
-
-<p>http://www.datamation.com/data-center/slideshows/8-open-source-big-data-mining-tools.html</p>
-
-<p>http://optimalbi.com/blog/2016/02/25/looking-for-data-mining-and-analytics-tools-check-out-these-open-source-options/</p>
-
-<p>C struct</p>
-
-<h2 id="sparkrddhttpwwwcnblogscommobinp5384543html">Spark常用函数讲解之键值RDD转换(http://www.cnblogs.com/MOBIN/p/5384543.html)</h2>
-
-<p>val kv2=sc.parallelize(List((“A”,4),(“A”,4),(“C”,3),(“A”,4),(“B”,5)))</p>
-
-<p>kv2.groupByKey().map{
-      x=&gt;(x.<em>1, x._2.reduce(</em>+_)/x._2.count(x=&gt;true))
-}.collect</p>
-
+<p><a href="http://optimalbi.com/blog/2016/02/25/looking-for-data-mining-and-analytics-tools-check-out-these-open-source-options/">looking-for-data-mining-and-analytics-tools-check-out-these-open-source-options</a></p>
 
 
                 <hr>
@@ -241,26 +211,19 @@ val (first, second, third) = t
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/blog/2016/10/01/travel-site/" data-toggle="tooltip" data-placement="top" title="travel site">
-                        Previous<br>
-                        <span>travel site</span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="next">
                         <a href="/hadoop/2016/10/19/python-kafka-sparkstreaming/" data-toggle="tooltip" data-placement="top" title="Python 2 Kafka 2 SparkStreaming">
-                        Next<br>
+                        Previous<br>
                         <span>Python 2 Kafka 2 SparkStreaming</span>
                         </a>
                     </li>
                     
+                    
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/blog/2016/10/10/CRC-ERROR-DETECTION"
-                        data-title="CRC ERROR DETECTION"
-                        data-url="http://machinelearningadvance.com/blog/2016/10/10/CRC-ERROR-DETECTION/" >
+                        data-thread-key="/mladvance/2016/11/05/data-mining-tools"
+                        data-title="DataMing Tools Collected"
+                        data-url="http://machinelearningadvance.com/mladvance/2016/11/05/data-mining-tools/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -279,9 +242,9 @@ val (first, second, third) = t
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/blog/2016/10/10/CRC-ERROR-DETECTION"
-                        data-title="CRC ERROR DETECTION"
-                        data-url="http://machinelearningadvance.com/blog/2016/10/10/CRC-ERROR-DETECTION/" >
+                        data-thread-key="/mladvance/2016/11/05/data-mining-tools"
+                        data-title="DataMing Tools Collected"
+                        data-url="http://machinelearningadvance.com/mladvance/2016/11/05/data-mining-tools/" >
                     </div>
 
                 </div>
@@ -369,7 +332,7 @@ val (first, second, third) = t
                             
         				
                             
-                				<a href="/tags/#IT" title="IT" rel="5">
+                				<a href="/tags/#IT" title="IT" rel="4">
                                 IT
                                 </a>
                             
@@ -379,7 +342,7 @@ val (first, second, third) = t
                             
         				
                             
-                				<a href="/tags/#Scala" title="Scala" rel="23">
+                				<a href="/tags/#Scala" title="Scala" rel="24">
                                 Scala
                                 </a>
                             
@@ -388,6 +351,8 @@ val (first, second, third) = t
                 				<a href="/tags/#Spark" title="Spark" rel="4">
                                 Spark
                                 </a>
+                            
+        				
                             
         				
                             

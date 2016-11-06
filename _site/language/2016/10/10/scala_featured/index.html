@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>SPSS for BigData Modeling - Maching Learning | 机器学习笔记</title>
+    <title>Scala Featured - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/hadoop/2016/09/19/SPSS-For-Hadoop-Modeling/">
+    <link rel="canonical" href="http://machinelearningadvance.com/language/2016/10/10/scala_featured/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,15 +168,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Big Data" title="Big Data">Big Data</a>
+                        <a class="tag" href="/tags/#Scala" title="Scala">Scala</a>
                         
                     </div>
-                    <h1>SPSS for BigData Modeling</h1>
+                    <h1>Scala Featured</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on September 19, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on October 10, 2016</span>
                 </div>
             </div>
         </div>
@@ -194,133 +194,72 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="spss-for-bigdata-modeling">SPSS for BigData Modeling</h1>
+				<h3 id="scala">1 scala中”_“的用法总结</h3>
 
-<h2 id="featured-ibm-analytics-products">1 Featured IBM Analytics products</h2>
+<p>参考链接：</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>SPSS|Predictive analytics</td>
-      <td>IBM SPSS predictive analytics software offers advanced techniques in an easy-to-use package to help you find new opportunities, improve efficiency and minimize risk.</td>
-    </tr>
-    <tr>
-      <td>IBM DB2|Database</td>
-      <td>IBM DB2 is the database of choice for enterprise-wide solutions. Optimized to deliver industry-leading performance while lowering costs, IBM DB2 offers extreme performance, flexibility, scalability and reliability for any size organization.</td>
-    </tr>
-    <tr>
-      <td>Cognos Analytics on Cloud|Business Intelligence</td>
-      <td>Get the self-service you expect, data governance you require, and reporting you trust with a secure business intelligence software-as-a-service (SaaS) solution.</td>
-    </tr>
-    <tr>
-      <td>Hadoop|Data management platform</td>
-      <td>IBM® BigInsights™ for Apache™ Hadoop is an industry standard Hadoop offering that combines the best of open source software with enterprise-grade capabilities.</td>
-    </tr>
-  </tbody>
-</table>
+<p><a href="http://stackoverflow.com/questions/8000903/what-are-all-the-uses-of-an-underscore-in-scala">what-are-all-the-uses-of-an-underscore-in-scala</a></p>
 
-<h2 id="spss-analytic-for-bigdata">2 SPSS Analytic for BigData</h2>
+<p><a href="http://www.slideshare.net/normation/scala-dreaded">http://www.slideshare.net/normation/scala-dreaded</a></p>
 
-<h3 id="section">2.1 分析服务器3.0</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>import scala._    // Wild card -- all of Scala is imported
+import scala.{ Predef =&gt; _, _ } // Exception, everything except Predef
+def f[M[_]]       // Higher kinded type parameter
+def f(m: M[_])    // Existential type
+_ + _             // Anonymous function placeholder parameter
+m _               // Eta expansion of method into method value
+m(_)              // Partial function application
+_ =&gt; 5            // Discarded parameter
+case _ =&gt;         // Wild card pattern -- matches anything
+val (a, _) = (1, 2) // same thing
+for (_ &lt;- 1 to 10)  // same thing
+f(xs: _*)         // Sequence xs is passed as multiple parameters to f(ys: T*)
+case Seq(xs @ _*) // Identifier xs is bound to the whole matched sequence
+var i: Int = _    // Initialization to the default value
+def abc_&lt;&gt;!       // An underscore must separate alphanumerics from symbols on identifiers
+t._2              // Part of a method name, such as tuple getters
+</code></pre>
+</div>
 
-<p>结合使用 IBM SPSS Modeler 与 IBM SPSS Analytic Server 时，分析人员可以在大数据上开发并部署预测性分析，而无需昂贵的技术技能。IBM SPSS Analytic Server 可提供：</p>
+<p><strong>Existential types</strong><br />
+<code class="highlighter-rouge">def foo(l: List[Option[_]]) = ...</code></p>
 
-<ul>
-  <li>使用大数据系统的以数据为中心的开放式集成架构</li>
-  <li>支持各种流行的 Hadoop 版本，例如，IBM InfoSphere® BigInsights™、Cloudera、Hortonworks 和 Apache Hadoop</li>
-  <li>已定义的接口，以合并旨在用于数据的新统计算法</li>
-  <li>熟悉的 IBM SPSS 用户界面，隐藏大数据环境的详细信息，以便分析人员可以专注于数据分析</li>
-  <li>可通过扩展来解决几乎任何规模问题的解决方案</li>
-</ul>
+<p><strong>Higher kinded type parameters</strong><br />
+<code class="highlighter-rouge">case class A[K[_],T](a: K[T])</code></p>
 
-<p><strong>SPSS Analytic Server Architecture</strong></p>
+<p><strong>Ignored variables</strong><br />
+<code class="highlighter-rouge">val _ = 5</code></p>
 
-<p><a href="http://www.ibm.com/support/knowledgecenter/SSWLVY_3.0.0/analytic_server_overview_ddita/analytic_server/overview/ae_architecture.html"><img src="E:/machinelearningadvance/images/spss_as_architecture.jpg" alt="" /></a></p>
+<p><strong>Ignored parameters</strong><br />
+<code class="highlighter-rouge">List(1, 2, 3) foreach { _ =&gt; println("Hi") }</code></p>
 
-<h4 id="analytic-server-httpwwwibmcomsupportknowledgecenterzhsswlvy300analyticserveruser-guidedditaanalyticserveridhadminconsolehtml">2.1.1 <a href="http://www.ibm.com/support/knowledgecenter/zh/SSWLVY_3.0.0/analytic_server_user-guide_ddita/analytic_server/idh_admin_console.html">Analytic Server 管控台</a></h4>
+<p><strong>Ignored names of self types</strong><br />
+<code class="highlighter-rouge">trait MySeq { _: Seq[_] =&gt; }</code></p>
 
-<p>Analytic Server provides a thin client interface for managing data sources and projects.</p>
+<p><strong>Wildcard patterns</strong><br />
+<code class="highlighter-rouge">Some(5) match { case Some(_) =&gt; println("Yes") }</code></p>
 
-<p>A data source is a collection of records, plus a data model, that define a data set for analysis. The source of records can be a file (delimited text, fixed width text, Excel) on HDFS, a relational database, HCatalog, or geospatial.</p>
+<p><strong>Wildcard imports</strong><br />
+<code class="highlighter-rouge">import java.util._</code></p>
 
-<p>Projects are workspaces for storing inputs and accessing outputs of jobs. They provide the top-level organizational structure for containing files and folders. Projects can be shared with individual users and groups.</p>
+<p><strong>Hiding imports</strong><br />
+<code class="highlighter-rouge">import java.util.{ArrayList =&gt; _, _}</code></p>
 
-<h4 id="spss-modeler-httpwwwibmcomsupportknowledgecenterzhsswlvy300analyticserveruser-guidedditaanalyticserveraemodelerintegrationoverviewhtml">2.1.2 <a href="http://www.ibm.com/support/knowledgecenter/zh/SSWLVY_3.0.0/analytic_server_user-guide_ddita/analytic_server/ae_modeler_integration_overview.html">SPSS Modeler 集成</a></h4>
+<p><strong>Joining letters to punctuation</strong><br />
+<code class="highlighter-rouge">def bang_!(x: Int) = 5</code></p>
 
-<p>SPSS® Modeler is a data mining workbench that has a visual approach to analysis. Each distinct action in a job, from accessing a data source to merging records to writing out a new file or building a model, is represented by a node on the canvas. We link these actions together to form an analytic stream. To build an analytic stream that runs with Analytic Server</p>
+<p><strong>Assignment operators</strong><br />
+<code class="highlighter-rouge">def foo_=(x: Int) { ... }</code></p>
 
-<p><strong>受支持的节点</strong></p>
+<p><strong>Placeholder syntax</strong><br />
+<code class="highlighter-rouge">List(1, 2, 3) map (_ + 2)</code></p>
 
-<p>A stream that begins with anything other than an Analytic Server source node will be run locally.</p>
+<p><strong>Partially applied functions</strong><br />
+<code class="highlighter-rouge">List(1, 2, 3) foreach println _</code></p>
 
-<ul>
-  <li><strong>Graphs</strong></li>
-  <li>All Graph nodes are supported.</li>
-  <li><strong>Modeling</strong></li>
-  <li>The following Modeling nodes are supported: Time Series, TCM, Tree-AS, C&amp;R Tree, Quest, CHAID, Linear, Linear-AS, Neural Net, GLE, LSVM, TwoStep-AS, Random Trees, STP, and Association Rules. Further notes on those nodes’ functionality follow.</li>
-</ul>
+<p><strong>Converting call-by-name parameters to functions</strong><br />
+<code class="highlighter-rouge">def toFunction(callByName: =&gt; Int): () =&gt; Int = callByName _</code></p>
 
-<p><strong>案例</strong></p>
-
-<p><a href="http://www.ibm.com/developerworks/cn/data/library/bd-1312hadoop-modeler/">基于 Hadoop 平台下 Modeler 的大数据应用剖析</a></p>
-
-<h3 id="spark--httpwwwibmcomsupportknowledgecenterzhsswlvy300analyticserveroverviewdditaanalyticserveroverviewassparkhtml">2.2 <a href="http://www.ibm.com/support/knowledgecenter/zh/SSWLVY_3.0.0/analytic_server_overview_ddita/analytic_server/overview/as_spark.html">Spark 和 分析服务器</a></h3>
-
-<p>分析服务器 与 Apache Spark 集成以提高性能。</p>
-
-<p><strong>何时使用和不使用 Spark</strong></p>
-
-<p>如果在 Hadoop 集群中将 Spark 作为 Ambari 服务进行安装，那么 分析服务器 使用它来处理大数据作业。 以下准则适用于确定何时不使用 Spark。</p>
-
-<ul>
-  <li>1 如果数据集小于 128 MB，那么 分析服务器 在 分析服务器 JVM 中使用嵌入式 MapReduce 函数并且不使用 Spark 或 Hadoop 集群。</li>
-  <li>2 如果未在集群上安装 Spark，那么 分析服务器 使用 MapReduce v2。</li>
-  <li>3 分析服务器 使用 MapReduce v2 来构建 PSM 模型。 作业以 PSM 模型构建结束时，分析服务器 使用 Spark 通过导致模型构建的所有步骤来处理作业，并写入磁盘，然后使用 MapReduce 来构建 PSM 模型。 例如，如果作业包含后面跟着 PSM 模型构建的连接，那么在 Spark 中运行连接并在 MapReduce 中的连接数据上运行 PSM。</li>
-</ul>
-
-<p><strong>案例</strong></p>
-
-<p><a href="https://developer.ibm.com/predictiveanalytics/2015/11/06/spss-algorithms-optimized-for-apache-spark-spark-algorithms-extending-spss-modeler/">SPSS Algorithms Optimized for Apache Spark &amp; Spark Algorithms Extending SPSS Modeler</a></p>
-
-<p><img src="E:/machinelearningadvance/images/spss_spark_table1105.png" alt="" /></p>
-
-<h3 id="spss--biginsights-httpwwwtuicoolcomarticlesv3qvn23">2.3 <a href="http://www.tuicool.com/articles/V3QVn23">使用 SPSS + BigInsights 共同构架大数据分析平台</a></h3>
-
-<h2 id="supported-language-with-spss-modelerhttpwwwibmcomsupportknowledgecenterss3ra7-180">3 Supported Language with <a href="http://www.ibm.com/support/knowledgecenter/SS3RA7">SPSS Modeler</a> 18.0</h2>
-
-<p><a href="ftp://public.dhe.ibm.com/software/analytics/spss/documentation/modeler/18.0/en/ModelerUsersGuide.pdf">ModelerUsersGuide.pdf</a></p>
-
-<h3 id="r">3.1 R</h3>
-
-<p>IBM® SPSS® Modeler supports R.</p>
-
-<p>f you have a compatible copy of R installed, you can connect to it from IBM SPSS Modeler and carry out model building and model scoring using custom R algorithms that can be deployed in IBM SPSS Modeler. You must also have a copy of IBM SPSS Modeler - Essentials for R installed. IBM SPSS Modeler - Essentials for R provides you with tools you need to start developing custom R applications for use with IBM SPSS Modeler.</p>
-
-<p><a href="http://www.ibm.com/support/knowledgecenter/SS3RA7_18.0.0/modeler_r_nodes_ddita/clementine/r_nodes.html">参考链接</a></p>
-
-<h3 id="python-for-spark">3.2 Python for Spark</h3>
-
-<p>IBM® SPSS® Modeler supports Python scripts for Apache Spark.</p>
-
-<p><a href="http://www.ibm.com/support/knowledgecenter/SS3RA7_18.0.0/modeler_r_nodes_ddita/clementine/r_intro_pyspark.html">参考链接</a></p>
-
-<p><strong>案例</strong></p>
-
-<p><a href="https://developer.ibm.com/predictiveanalytics/2016/03/07/coding-a-pythonspark-modeler-extension-for-collaborative-filtering/">Coding a Python/Spark Modeler Extension for Collaborative Filtering</a></p>
-
-<h2 id="other-resource">4 Other resource</h2>
-
-<p><a href="http://www.ibm.com/analytics/us/en/">IBM Analytics</a></p>
-
-<p><a href="http://www.ibm.com/analytics/us/en/technology/stream-computing/">Stream Computing</a></p>
-
-<p><a href="http://www.ibm.com/cloud-computing/">IBM Cloud Computing</a></p>
-
-<p><a href="http://searchbusinessanalytics.techtarget.com/feature/Comparing-the-leading-big-data-analytics-software-options">Comparing the leading big data analytics software options</a></p>
-
-<p><a href="https://developer.ibm.com/predictiveanalytics/2016/09/07/social-nodes-for-spss-modeler/">Social Nodes for SPSS Modeler</a></p>
-
-<p><a href="https://www.ibm.com/analytics/watson-analytics/us-en/">IBM Watson Analytics</a></p>
 
 
                 <hr>
@@ -329,26 +268,26 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/mladvance/2016/09/15/neural-network-zoo/" data-toggle="tooltip" data-placement="top" title="THE NEURAL NETWORK ZOO">
+                        <a href="/blog/2016/10/01/travel-site/" data-toggle="tooltip" data-placement="top" title="travel site">
                         Previous<br>
-                        <span>THE NEURAL NETWORK ZOO</span>
+                        <span>travel site</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/hadoop/2016/09/20/a-tale-of-three-apache-spark-apis-rdds-dataframes-and-datasets/" data-toggle="tooltip" data-placement="top" title="A Tale of Three Apache Spark APIs">
+                        <a href="/hadoop/2016/10/19/python-kafka-sparkstreaming/" data-toggle="tooltip" data-placement="top" title="Python 2 Kafka 2 SparkStreaming">
                         Next<br>
-                        <span>A Tale of Three Apache Spark APIs</span>
+                        <span>Python 2 Kafka 2 SparkStreaming</span>
                         </a>
                     </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/hadoop/2016/09/19/SPSS For Hadoop Modeling"
-                        data-title="SPSS for BigData Modeling"
-                        data-url="http://machinelearningadvance.com/hadoop/2016/09/19/SPSS-For-Hadoop-Modeling/" >
+                        data-thread-key="/language/2016/10/10/scala_featured"
+                        data-title="Scala Featured"
+                        data-url="http://machinelearningadvance.com/language/2016/10/10/scala_featured/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -367,9 +306,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/hadoop/2016/09/19/SPSS For Hadoop Modeling"
-                        data-title="SPSS for BigData Modeling"
-                        data-url="http://machinelearningadvance.com/hadoop/2016/09/19/SPSS-For-Hadoop-Modeling/" >
+                        data-thread-key="/language/2016/10/10/scala_featured"
+                        data-title="Scala Featured"
+                        data-url="http://machinelearningadvance.com/language/2016/10/10/scala_featured/" >
                     </div>
 
                 </div>

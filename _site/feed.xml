@@ -8,6 +8,20 @@
 		
 			
 			<item>
+				<title>DataMing Tools Collected</title>
+				
+					<description>&lt;h3 id=&quot;dataming-tools-collected&quot;&gt;DataMing Tools Collected&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Sat, 05 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2016/11/05/data-mining-tools/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/11/05/data-mining-tools/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Python 2 Kafka 2 SparkStreaming</title>
 				
 					<description>&lt;h2 id=&quot;python-as-kafka-producer&quot;&gt;python as Kafka producer&lt;/h2&gt;
@@ -22,15 +36,15 @@
 		
 			
 			<item>
-				<title>CRC ERROR DETECTION</title>
+				<title>Scala Featured</title>
 				
-					<description>&lt;p&gt;我目前了解的有一下几个用处：&lt;/p&gt;
+					<description>&lt;h3 id=&quot;scala&quot;&gt;1 scala中”_“的用法总结&lt;/h3&gt;
 
 </description>
 				
 				<pubDate>Mon, 10 Oct 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/blog/2016/10/10/CRC-ERROR-DETECTION/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/blog/2016/10/10/CRC-ERROR-DETECTION/</guid>
+				<link>http://machinelearningadvance.com/language/2016/10/10/scala_featured/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/10/10/scala_featured/</guid>
 			</item>
 			
 		
