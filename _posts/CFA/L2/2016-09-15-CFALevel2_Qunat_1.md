@@ -35,3 +35,8 @@ tags:
 (Institute 255)
 Institute, CFA. 2017 CFA Level II Volume 1 Ethical and Professional Standards, Quantitative Methods, and Economics. CFA Institute, 07/2016. VitalBook file.
 所提供的引文是一个指南。请在使用之前查看每个引文以确保准确性。
+
+
+$$
+Q=[\frac{\sum_{in}+k_{i,in}}{2m}-(\frac{\sum_{tot}+k_{i}}{2m})^2]-[\frac{\sum_{in}}{2m}-(\frac{\sum_{tot}}{2m})^2-(\frac{k_{i}}{2m})^2]
+$$

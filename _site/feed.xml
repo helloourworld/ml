@@ -8,6 +8,48 @@
 		
 			
 			<item>
+				<title>Spark-ML-02</title>
+				
+					<description>&lt;h1 id=&quot;section&quot;&gt;相关性系数&lt;/h1&gt;
+
+</description>
+				
+				<pubDate>Thu, 17 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2016/11/17/correlations/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/11/17/correlations/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Spark-ML-00</title>
+				
+					<description>&lt;h1 id=&quot;spark&quot;&gt;spark机器学习算法研究和源码分析&lt;/h1&gt;
+
+</description>
+				
+				<pubDate>Thu, 17 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2016/11/17/spark-ml-00/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/11/17/spark-ml-00/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>tmp</title>
+				
+					<description>&lt;h2 id=&quot;section&quot;&gt;1 题1&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Fri, 11 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/log/2016/11/11/game1/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/log/2016/11/11/game1/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>DataMing Tools Collected</title>
 				
 					<description>&lt;h3 id=&quot;dataming-tools-collected&quot;&gt;DataMing Tools Collected&lt;/h3&gt;
@@ -24,7 +66,7 @@
 			<item>
 				<title>Python 2 Kafka 2 SparkStreaming</title>
 				
-					<description>&lt;h2 id=&quot;python-as-kafka-producer&quot;&gt;python as Kafka producer&lt;/h2&gt;
+					<description>&lt;h2 id=&quot;sparkstreaming-httpblogcsdnnetzfszhangyuanarticledetails52522974&quot;&gt;[SparkStreaming 原理综述与监测目录下文件]（http://blog.csdn.net/zfszhangyuan/article/details/52522974&lt;/h2&gt;
 
 </description>
 				
@@ -2196,6 +2238,20 @@ catalog: yes&gt;
 				<pubDate>Sat, 02 Jul 2016 00:00:00 +0800</pubDate>
 				<link>http://machinelearningadvance.com/blog/2016/07/02/welcome/</link>
 				<guid isPermaLink="true">http://machinelearningadvance.com/blog/2016/07/02/welcome/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Spark-ML-01</title>
+				
+					<description>&lt;h1 id=&quot;section&quot;&gt;数据类型&lt;/h1&gt;
+
+</description>
+				
+				<pubDate>Thu, 17 Nov 2011 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2011/11/17/data-type/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2011/11/17/data-type/</guid>
 			</item>
 			
 		
