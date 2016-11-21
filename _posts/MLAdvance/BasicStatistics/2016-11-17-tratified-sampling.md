@@ -1,3 +1,14 @@
+---
+layout: post
+title: Spark-ML-0203
+category: MLAdvance
+catalog: yes
+description: Spark机器学习算法学习——BasicStatistics——Stratified sampling
+tags:
+    - Machine Learning
+    -  Spark
+---
+
 # 分层取样
 
 &emsp;&emsp;先将总体的单位按某种特征分为若干次级总体（层），然后再从每一层内进行单纯随机抽样，组成一个样本的统计学计算方法叫做分层抽样。在`spark.mllib`中，用`key`来分层。

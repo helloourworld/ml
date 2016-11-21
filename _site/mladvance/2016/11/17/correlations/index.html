@@ -15,7 +15,7 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>Spark-ML-02 - Maching Learning | 机器学习笔记</title>
+    <title>Spark-ML-0202 - Maching Learning | 机器学习笔记</title>
 
     <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/17/correlations/">
 
@@ -173,7 +173,7 @@
                         <a class="tag" href="/tags/#Spark" title="Spark">Spark</a>
                         
                     </div>
-                    <h1>Spark-ML-02</h1>
+                    <h1>Spark-ML-0202</h1>
                     
                     
                     <h2 class="subheading"></h2>
@@ -202,19 +202,39 @@
 
 <p>  <code class="highlighter-rouge">Statistics</code>提供方法计算数据集的相关性。根据输入的类型，两个<code class="highlighter-rouge">RDD[Double]</code>或者一个<code class="highlighter-rouge">RDD[Vector]</code>，输出将会是一个<code class="highlighter-rouge">Double</code>值或者相关性矩阵。下面是一个应用的例子。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.SparkContext</span>
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.</span><span class="o">{</span><span class="nc">SparkConf</span><span class="o">,</span> <span class="nc">SparkContext</span><span class="o">}</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg._</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.Statistics</span>
-<span class="k">val</span> <span class="n">sc</span><span class="k">:</span> <span class="kt">SparkContext</span> <span class="o">=</span> <span class="o">...</span>
-<span class="k">val</span> <span class="n">seriesX</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// a series
-</span><span class="k">val</span> <span class="n">seriesY</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// must have the same number of partitions and cardinality as seriesX
-// compute the correlation using Pearson's method. Enter "spearman" for Spearman's method. If a
-// method is not specified, Pearson's method will be used by default.
-</span><span class="k">val</span> <span class="n">correlation</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">corr</span><span class="o">(</span><span class="n">seriesX</span><span class="o">,</span> <span class="n">seriesY</span><span class="o">,</span> <span class="s">"pearson"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Vector</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// note that each Vector is a row and not a column
-// calculate the correlation matrix using Pearson's method. Use "spearman" for Spearman's method.
-// If a method is not specified, Pearson's method will be used by default.
-</span><span class="k">val</span> <span class="n">correlMatrix</span><span class="k">:</span> <span class="kt">Matrix</span> <span class="o">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">corr</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="s">"pearson"</span><span class="o">)</span>
+<span class="k">import</span> <span class="nn">org.apache.spark.rdd.RDD</span>
+
+<span class="k">object</span> <span class="nc">Correlations</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">conf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="o">().</span><span class="n">setAppName</span><span class="o">(</span><span class="s">"Correlation"</span><span class="o">).</span><span class="n">setMaster</span><span class="o">(</span><span class="s">"local[2]"</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">sc</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkContext</span><span class="o">(</span><span class="n">conf</span><span class="o">)</span>
+
+    <span class="k">val</span> <span class="n">seriesX</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">5</span><span class="o">))</span>  <span class="c1">// a series
+</span>
+    <span class="k">val</span> <span class="n">seriesY</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mi">11</span><span class="o">,</span> <span class="mi">22</span><span class="o">,</span> <span class="mi">33</span><span class="o">,</span> <span class="mi">33</span><span class="o">,</span> <span class="mi">55</span><span class="o">))</span> <span class="c1">// must have the same number of partitions and cardinality as seriesX
+</span>
+    <span class="c1">// compute the correlation using Pearson's method. Enter "spearman" for Spearman's method. If a
+</span>    <span class="c1">// method is not specified, Pearson's method will be used by default.
+</span>    <span class="k">val</span> <span class="n">correlation</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">corr</span><span class="o">(</span><span class="n">seriesX</span><span class="o">,</span> <span class="n">seriesY</span><span class="o">,</span> <span class="s">"pearson"</span><span class="o">)</span>
+    <span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">"Correlation is: $correlation"</span><span class="o">)</span>
+
+    <span class="k">val</span> <span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Vector</span><span class="o">]</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="o">(</span>
+      <span class="nc">Seq</span><span class="o">(</span>
+        <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">10.0</span><span class="o">,</span> <span class="mf">100.0</span><span class="o">),</span>
+        <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mf">2.0</span><span class="o">,</span> <span class="mf">20.0</span><span class="o">,</span> <span class="mf">200.0</span><span class="o">),</span>
+        <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mf">5.0</span><span class="o">,</span> <span class="mf">33.0</span><span class="o">,</span> <span class="mf">366.0</span><span class="o">))</span>
+    <span class="o">)</span>  <span class="c1">// note that each Vector is a row and not a column
+</span>
+    <span class="c1">// calculate the correlation matrix using Pearson's method. Use "spearman" for Spearman's method
+</span>    <span class="c1">// If a method is not specified, Pearson's method will be used by default.
+</span>    <span class="k">val</span> <span class="n">correlMatrix</span><span class="k">:</span> <span class="kt">Matrix</span> <span class="o">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">corr</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="s">"pearson"</span><span class="o">)</span>
+    <span class="n">println</span><span class="o">(</span><span class="n">correlMatrix</span><span class="o">.</span><span class="n">toString</span><span class="o">)</span>
+  <span class="o">}</span>
+
+<span class="o">}</span>
 </code></pre>
 </div>
 <p>  这个例子中我们看到，计算相关性的入口函数是<code class="highlighter-rouge">Statistics.corr</code>，当输入的数据集是两个<code class="highlighter-rouge">RDD[Double]</code>时，它的实际实现是<code class="highlighter-rouge">Correlations.corr</code>，当输入数据集是<code class="highlighter-rouge">RDD[Vector]</code>时，它的实际实现是<code class="highlighter-rouge">Correlations.corrMatrix</code>。
@@ -247,7 +267,7 @@
 
 <p>  皮尔森相关系数也叫皮尔森积差相关系数，是用来反映两个变量相似程度的统计量。或者说可以用来计算两个向量的相似度（在基于向量空间模型的文本分类、用户喜好推荐系统中都有应用）。皮尔森相关系数计算公式如下：</p>
 
-<div align="center"><img src="imgs/2.1.png" width="620" height="65" alt="2.1" align="center" /></div>
+<script type="math/tex; mode=display">\rho_{X,Y} = corr(X,Y) = \frac{cov(X,Y)}{\sigma_X \sigma_Y} = \frac{E[(X-\mu_x)(Y - \mu_Y)]}{\sigma_X \sigma_Y}=\frac{E(XY)-E(X)E(Y)}{\sqrt{E(X^2)-E^2(X)}\sqrt{E(Y^2)-E^2(Y)}}</script>
 
 <p>  当两个变量的线性关系增强时，相关系数趋于1或-1。正相关时趋于1，负相关时趋于-1。当两个变量独立时相关系统为0，但反之不成立。当<code class="highlighter-rouge">Y</code>和<code class="highlighter-rouge">X</code>服从联合正态分布时，其相互独立和不相关是等价的。
 皮尔森相关系数的计算通过下面代码实现。</p>
@@ -301,12 +321,14 @@
 
 <h2 id="section-2">2 斯皮尔曼相关系数</h2>
 
+<p>In statistics, Spearman’s rank correlation coefficient or Spearman’s rho, named after Charles Spearman and often denoted by the Greek letter <script type="math/tex">{\displaystyle \rho } \rho  (rho) or as {\displaystyle r_{s}} r_{s}</script>, is a nonparametric measure of rank correlation (statistical dependence between the ranking of two variables). It assesses how well the relationship between two variables can be described using a <strong>monotonic</strong> function.</p>
+
 <p>  使用皮尔森线性相关系数有2个局限：首先，必须假设数据是成对地从正态分布中取得的；其次，数据至少在逻辑范围内是等距的。对不服从正态分布的资料不符合使用矩相关系数来描述关联性。
 此时可采用秩相关（<code class="highlighter-rouge">rank correlation</code>），也称等级相关，来描述两个变量之间的关联程度与方向。斯皮尔曼秩相关系数就是其中一种。</p>
 
-<p>  斯皮尔曼秩相关系数定义为排序变量(<code class="highlighter-rouge">ranked variables</code>)之间的皮尔逊相关系数。对于大小为<code class="highlighter-rouge">n</code>的样本集，将原始的数据<code class="highlighter-rouge">X_i</code>和<code class="highlighter-rouge">Y_i</code>转换成排序变量<code class="highlighter-rouge">rgX_i</code>和<code class="highlighter-rouge">rgY_i</code>，然后按照皮尔森相关系数的计算公式进行计算。</p>
+<script type="math/tex; mode=display">\gamma_s = \rho_{rg_X,rg_Y} = \frac{cov(rg_X, rg_Y)}{\sigma_{rg_X} \sigma_{rg_Y}}</script>
 
-<div align="center"><img src="imgs/2.2.png" width="270" height="60" alt="2.2" align="center" /></div>
+<p>  斯皮尔曼秩相关系数定义为排序变量(<code class="highlighter-rouge">ranked variables</code>)之间的皮尔逊相关系数。对于大小为<code class="highlighter-rouge">n</code>的样本集，将原始的数据<script type="math/tex">`X_i`和`Y_i`</script>转换成排序变量<script type="math/tex">`rgX_i`和`rgY_i`</script>，然后按照皮尔森相关系数的计算公式进行计算。</p>
 
 <p>  下面的代码将原始数据转换成了排序数据。</p>
 
@@ -358,7 +380,7 @@
 </div>
 <p>  在每个分区内部，对于列索引相同且值相同的数据对，我们为其分配平均<code class="highlighter-rouge">rank</code>值。平均<code class="highlighter-rouge">rank</code>的计算方式如下面公式所示：</p>
 
-<div align="center"><img src="imgs/2.3.png" width="250" height="45" alt="2.3" align="center" /></div>
+<script type="math/tex; mode=display">rank_{avg} = rank_{start} + \frac{n-1}{2}</script>
 
 <p>  其中<code class="highlighter-rouge">rank_start</code>表示列索引相同且值相同的数据对在分区中第一次出现时的索引位置，<code class="highlighter-rouge">n</code>表示列索引相同且值相同的数据对出现的次数。</p>
 
@@ -385,11 +407,18 @@
                     </li>
                     
                     
+                    <li class="next">
+                        <a href="/mladvance/2016/11/17/hypothesis-testing/" data-toggle="tooltip" data-placement="top" title="Spark-ML-0204">
+                        Next<br>
+                        <span>Spark-ML-0204</span>
+                        </a>
+                    </li>
+                    
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/11/17/correlations"
-                        data-title="Spark-ML-02"
+                        data-title="Spark-ML-0202"
                         data-url="http://machinelearningadvance.com/mladvance/2016/11/17/correlations/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
@@ -410,7 +439,7 @@
                 <div class="comment">
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/11/17/correlations"
-                        data-title="Spark-ML-02"
+                        data-title="Spark-ML-0202"
                         data-url="http://machinelearningadvance.com/mladvance/2016/11/17/correlations/" >
                     </div>
 
@@ -459,13 +488,13 @@
                     <div class="tags">
         				
                             
-                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="4">
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="7">
                                 Machine Learning
                                 </a>
                             
         				
                             
-                				<a href="/tags/#Spark" title="Spark" rel="7">
+                				<a href="/tags/#Spark" title="Spark" rel="10">
                                 Spark
                                 </a>
                             

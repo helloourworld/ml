@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Spark-ML-02
+title: Spark-ML-0202
 category: MLAdvance
 catalog: yes
-description: Spark机器学习算法学习——数据类型
+description: Spark机器学习算法学习——BasicStatistics——Correlations
 tags:
     - Machine Learning
     -  Spark
@@ -15,19 +15,39 @@ tags:
 &emsp;&emsp;`Statistics`提供方法计算数据集的相关性。根据输入的类型，两个`RDD[Double]`或者一个`RDD[Vector]`，输出将会是一个`Double`值或者相关性矩阵。下面是一个应用的例子。
 
 ```scala
-import org.apache.spark.SparkContext
+import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.mllib.linalg._
 import org.apache.spark.mllib.stat.Statistics
-val sc: SparkContext = ...
-val seriesX: RDD[Double] = ... // a series
-val seriesY: RDD[Double] = ... // must have the same number of partitions and cardinality as seriesX
-// compute the correlation using Pearson's method. Enter "spearman" for Spearman's method. If a
-// method is not specified, Pearson's method will be used by default.
-val correlation: Double = Statistics.corr(seriesX, seriesY, "pearson")
-val data: RDD[Vector] = ... // note that each Vector is a row and not a column
-// calculate the correlation matrix using Pearson's method. Use "spearman" for Spearman's method.
-// If a method is not specified, Pearson's method will be used by default.
-val correlMatrix: Matrix = Statistics.corr(data, "pearson")
+import org.apache.spark.rdd.RDD
+
+object Correlations {
+  def main(args: Array[String]): Unit = {
+    val conf = new SparkConf().setAppName("Correlation").setMaster("local[2]")
+    val sc = new SparkContext(conf)
+
+    val seriesX: RDD[Double] = sc.parallelize(Array(1, 2, 3, 3, 5))  // a series
+
+    val seriesY: RDD[Double] = sc.parallelize(Array(11, 22, 33, 33, 55)) // must have the same number of partitions and cardinality as seriesX
+
+    // compute the correlation using Pearson's method. Enter "spearman" for Spearman's method. If a
+    // method is not specified, Pearson's method will be used by default.
+    val correlation: Double = Statistics.corr(seriesX, seriesY, "pearson")
+    println(s"Correlation is: $correlation")
+
+    val data: RDD[Vector] = sc.parallelize(
+      Seq(
+        Vectors.dense(1.0, 10.0, 100.0),
+        Vectors.dense(2.0, 20.0, 200.0),
+        Vectors.dense(5.0, 33.0, 366.0))
+    )  // note that each Vector is a row and not a column
+
+    // calculate the correlation matrix using Pearson's method. Use "spearman" for Spearman's method
+    // If a method is not specified, Pearson's method will be used by default.
+    val correlMatrix: Matrix = Statistics.corr(data, "pearson")
+    println(correlMatrix.toString)
+  }
+
+}
 ```
 &emsp;&emsp;这个例子中我们看到，计算相关性的入口函数是`Statistics.corr`，当输入的数据集是两个`RDD[Double]`时，它的实际实现是`Correlations.corr`，当输入数据集是`RDD[Vector]`时，它的实际实现是`Correlations.corrMatrix`。
 下文会分别分析这两个函数。
@@ -59,7 +79,7 @@ def computeCorrelationWithMatrixImpl(x: RDD[Double], y: RDD[Double]): Double = {
 
 &emsp;&emsp;皮尔森相关系数也叫皮尔森积差相关系数，是用来反映两个变量相似程度的统计量。或者说可以用来计算两个向量的相似度（在基于向量空间模型的文本分类、用户喜好推荐系统中都有应用）。皮尔森相关系数计算公式如下：
 
-<div  align="center"><img src="imgs/2.1.png" width = "620" height = "65" alt="2.1" align="center" /></div>
+$$\rho_{X,Y} = corr(X,Y) = \frac{cov(X,Y)}{\sigma_X \sigma_Y} = \frac{E[(X-\mu_x)(Y - \mu_Y)]}{\sigma_X \sigma_Y}=\frac{E(XY)-E(X)E(Y)}{\sqrt{E(X^2)-E^2(X)}\sqrt{E(Y^2)-E^2(Y)}}$$
 
 &emsp;&emsp;当两个变量的线性关系增强时，相关系数趋于1或-1。正相关时趋于1，负相关时趋于-1。当两个变量独立时相关系统为0，但反之不成立。当`Y`和`X`服从联合正态分布时，其相互独立和不相关是等价的。
 皮尔森相关系数的计算通过下面代码实现。
@@ -113,12 +133,15 @@ def computeCorrelationMatrixFromCovariance(covarianceMatrix: Matrix): Matrix = {
 
 ## 2 斯皮尔曼相关系数
 
+In statistics, Spearman's rank correlation coefficient or Spearman's rho, named after Charles Spearman and often denoted by the Greek letter $${\displaystyle \rho } \rho  (rho) or as {\displaystyle r_{s}} r_{s}$$, is a nonparametric measure of rank correlation (statistical dependence between the ranking of two variables). It assesses how well the relationship between two variables can be described using a **monotonic** function.
+
 &emsp;&emsp;使用皮尔森线性相关系数有2个局限：首先，必须假设数据是成对地从正态分布中取得的；其次，数据至少在逻辑范围内是等距的。对不服从正态分布的资料不符合使用矩相关系数来描述关联性。
 此时可采用秩相关（`rank correlation`），也称等级相关，来描述两个变量之间的关联程度与方向。斯皮尔曼秩相关系数就是其中一种。
 
-&emsp;&emsp;斯皮尔曼秩相关系数定义为排序变量(`ranked variables`)之间的皮尔逊相关系数。对于大小为`n`的样本集，将原始的数据`X_i`和`Y_i`转换成排序变量`rgX_i`和`rgY_i`，然后按照皮尔森相关系数的计算公式进行计算。
+$$\gamma_s = \rho_{rg_X,rg_Y} = \frac{cov(rg_X, rg_Y)}{\sigma_{rg_X} \sigma_{rg_Y}}$$
 
-<div  align="center"><img src="imgs/2.2.png" width = "270" height = "60" alt="2.2" align="center" /></div>
+&emsp;&emsp;斯皮尔曼秩相关系数定义为排序变量(`ranked variables`)之间的皮尔逊相关系数。对于大小为`n`的样本集，将原始的数据$$`X_i`和`Y_i`$$转换成排序变量$$`rgX_i`和`rgY_i`$$，然后按照皮尔森相关系数的计算公式进行计算。
+
 
 &emsp;&emsp;下面的代码将原始数据转换成了排序数据。
 
@@ -170,7 +193,7 @@ override def computeCorrelationMatrix(X: RDD[Vector]): Matrix = {
 ```
 &emsp;&emsp;在每个分区内部，对于列索引相同且值相同的数据对，我们为其分配平均`rank`值。平均`rank`的计算方式如下面公式所示：
 
-<div  align="center"><img src="imgs/2.3.png" width = "250" height = "45" alt="2.3" align="center" /></div>
+$$rank_{avg} = rank_{start} + \frac{n-1}{2}$$
 
 &emsp;&emsp;其中`rank_start`表示列索引相同且值相同的数据对在分区中第一次出现时的索引位置，`n`表示列索引相同且值相同的数据对出现的次数。
 

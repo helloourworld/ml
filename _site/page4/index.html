@@ -179,6 +179,133 @@
             ">
     			
 <div class="post-preview">
+    <a href="/2016/09/02/hadoop_kafka/">
+        <h2 class="post-title">
+            Hadoop_kafka
+        </h2>
+        
+        <div class="post-content-preview">
+            ﻿—
+layout: post
+title:kafka组件深度解析
+category: Hadoop
+catalog: yes
+description:  kafka组件深度解析
+tags:
+    - Big Data
+    - 大数据
+—
+
+
+kafka组件深度解析kafka1,kafka介绍关于kafka入门的文章最好的就莫过于kafka的官方文档了，这上面对kafka的定义是：Ka...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 2, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/09/01/Scala-Lesson9/">
+        <h2 class="post-title">
+            Scala Lesson 9
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala 文件 I/O
+
+1 文件写操作
+
+Scala 进行文件写操作，直接用的都是 java中 的 I/O 类 （java.io.File)：
+
+import java.io._
+
+object IOs1 {
+   def main(args: Array[String]) {
+      val writer = new PrintWriter(new File("test.txt" ...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 1, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/09/01/Scala-Lesson8/">
+        <h2 class="post-title">
+            Scala Lesson 8
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala 类和对象
+
+
+  类是对象的抽象，而对象是类的具体实例。类是抽象的，不占用内存，而对象是具体的，占用存储空间。类是用于创建对象的蓝图，它是一个定义包括在特定类型的对象中的方法和变量的软件模板。
+  我们可以使用 new 关键字来创建类的对象，实例如下：
+
+
+class Point(xc: Int, yc: Int) {
+   var x: Int = xc
+   var y: I...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 1, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/09/01/Scala-Lesson10/">
+        <h2 class="post-title">
+            Scala Lesson 10
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala Trait(特征)
+
+
+  Scala Trait(特征) 相当于 Java 的接口，实际上它比接口还功能强大。
+  与接口不同的是，它还可以定义属性和方法的实现。
+  一般情况下Scala的类只能够继承单一父类，但是如果是 Trait(特征) 的话就可以继承多个，从结果来看就是实现了多重继承。
+  Trait(特征) 定义的方式与类类似，但它使用的关键字是 trait，如下所示...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 1, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/08/31/scala-tuples/">
+        <h2 class="post-title">
+            Scale tuple
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala 元组
+
+与列表一样，元组也是不可变的，但与列表不同的是元组可以包含不同类型的元素。
+元组的值是通过将单个的值包含在圆括号中构成的。例如：
+
+val t = (1, 3.14, "Fred")  
+
+以上实例在元组中定义了三个元素，对应的类型分别为[Int, Double, java.lang.String]。
+此外我们也可以使用以上方式来定义：
+
+val t = new Tupl...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 31, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/language/2016/08/31/scala-sets/">
         <h2 class="post-title">
             Scala Set
@@ -295,127 +422,6 @@ val site: List[String] = List("Runoob...
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/language/2016/08/31/Scala-Lesson7/">
-        <h2 class="post-title">
-            scala Lesson 7
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala Collection
-
-
-  Scala提供了一套很好的集合实现，提供了一些集合类型的抽象。
-  Scala 集合分为可变的和不可变的集合。
-  可变集合可以在适当的地方被更新或扩展。这意味着你可以修改，添加，移除一个集合的元素。
-  而不可变集合类，相比之下，永远不会改变。不过，你仍然可以模拟添加，移除或更新操作。但是这些操作将在每一种情况下都返回一个新的集合，同时使原来的集合...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/language/2016/08/31/Scala-Lesson6/">
-        <h2 class="post-title">
-            scala Lesson 6
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala 数组
-
-Scala 语言中提供的数组是用来存储固定大小的同类型元素，数组对于每一门编辑应语言来说都是重要的数据结构之一。
-声明数组变量并不是声明 number0、number1、…、number99 一个个单独的变量，而是声明一个就像 numbers 这样的变量，然后使用 numbers[0]、numbers[1]、…、numbers[99] 来表示一个个单独的变量。数组中某个指...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/language/2016/08/31/Scala-Lesson5/">
-        <h2 class="post-title">
-            scala Lesson 5
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala 字符串
-
-object Strings{
-    def main(args: Array[String]){
-        println(greeting)
-    }
-
-    val greeting: String = "Hello, World!"
-}
-
-
-
-
-  以上实例定义了变量 greeting，为字符串常量，它的类型为 String (java.lang.S...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/language/2016/08/31/Scala-Lesson4/">
-        <h2 class="post-title">
-            scala Lesson 4
-        </h2>
-        
-        <div class="post-content-preview">
-            函数
-
-函数是一组一起执行一个任务的语句。 您可以把代码划分到不同的函数中。如何划分代码到不同的函数中是由您来决定的，但在逻辑上，划分通常是根据每个函数执行一个特定的任务来进行的。
-Scala 有函数和方法，二者在语义上的区别很小。Scala 方法是类的一部分，而函数是一个对象可以赋值给一个变量。换句话来说在类中定义的函数即是方法。
-我们可以在任何地方定义函数，甚至可以在函数内定义函数（内嵌...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/language/2016/08/30/Scala-Lesson3/">
-        <h2 class="post-title">
-            scala Lesson 3
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala IF…ELSE 语句
-
-1 if语句
-
-语法格式：
-
-if (boole express)
-{
-    // 如果布尔表达式为true则执行该语句块；否则跳过大括号内的语句块，执行大括号之后的语句块。
-}
-
-# ex
-object Ifs {
-    def main(args: Array[String]){
-        var x = 10;
-        if (x ...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 30, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -450,13 +456,13 @@ object Ifs {
                     <div class="tags">
                         
                             
-                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="4">
+                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="7">
                                     Machine Learning
                                 </a>
                             
                         
                             
-                                <a href="/tags/#Spark" title="Spark" rel="7">
+                                <a href="/tags/#Spark" title="Spark" rel="10">
                                     Spark
                                 </a>
                             

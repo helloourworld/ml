@@ -179,9 +179,120 @@
             ">
     			
 <div class="post-preview">
+    <a href="/mladvance/2016/11/17/tratified-sampling/">
+        <h2 class="post-title">
+            Spark-ML-0203
+        </h2>
+        
+        <div class="post-content-preview">
+            分层取样
+
+  先将总体的单位按某种特征分为若干次级总体（层），然后再从每一层内进行单纯随机抽样，组成一个样本的统计学计算方法叫做分层抽样。在spark.mllib中，用key来分层。
+
+  与存在于spark.mllib中的其它统计函数不同，分层采样方法sampleByKey和sampleByKeyExact可以在key-value对的RDD上执行。在分层采样中，可以认为key是一个标签，...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/statistics/">
+        <h2 class="post-title">
+            Spark-ML-0201
+        </h2>
+        
+        <div class="post-content-preview">
+            概括统计
+
+  MLlib支持RDD[Vector]列的概括统计，它通过调用Statistics的colStats方法实现。colStats返回一个MultivariateStatisticalSummary对象，这个对象包含列式的最大值、最小值、均值、方差等等。
+下面是一个应用例子：
+
+import org.apache.spark.mllib.linalg.Vector
+import o...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/11/17/random-data-generation/">
+        <h2 class="post-title">
+            Random Data Generation
+        </h2>
+        
+        <div class="post-content-preview">
+            随机数生成
+
+  随机数生成在随机算法、性能测试中非常有用，spark.mllib支持生成随机的RDD,RDD的独立同分布(iid)的值来自于给定的分布：均匀分布、标准正太分布、泊松分布。
+
+  RandomRDDs提供工厂方法生成随机的双精度RDD或者向量RDD。下面的例子生成了一个随机的双精度RDD，它的值来自于标准的正太分布N(0,1)。
+
+import org.apache.spar...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/11/17/kernel-density-estimation/">
+        <h2 class="post-title">
+            Kernel Density Estimation
+        </h2>
+        
+        <div class="post-content-preview">
+            核密度估计
+
+1 理论分析
+
+  核密度估计是在概率论中用来估计未知的密度函数，属于非参数检验方法之一。假设我们有n个数，要计算某个数X的概率密度有多大，
+可以通过下面的核密度估计方法估计。
+
+
+
+
+  在上面的式子中，K为核密度函数，h为窗宽。核密度函数的原理比较简单，在我们知道某一事物的概率分布的情况下，如果某一个数在观察中出现了，我们可以认为这个数的概率密度很大，和这个数比较近的数的概...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/hypothesis-testing/">
+        <h2 class="post-title">
+            Spark-ML-0204
+        </h2>
+        
+        <div class="post-content-preview">
+            假设检测
+
+  假设检测是统计中有力的工具，它用于判断一个结果是否在统计上是显著的、这个结果是否有机会发生。spark.mllib目前支持皮尔森卡方检测。输入属性的类型决定是作拟合优度(goodness of fit)检测还是作独立性检测。
+拟合优度检测需要输入数据的类型是vector，独立性检测需要输入数据的类型是Matrix。
+
+  spark.mllib也支持输入数据类型为RDD[La...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/mladvance/2016/11/17/correlations/">
         <h2 class="post-title">
-            Spark-ML-02
+            Spark-ML-0202
         </h2>
         
         <div class="post-content-preview">
@@ -319,167 +430,6 @@ Spark Streaming Direct Approach (No Receivers) 分析
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/language/2016/10/10/scala_featured/">
-        <h2 class="post-title">
-            Scala Featured
-        </h2>
-        
-        <div class="post-content-preview">
-            1 scala中”_“的用法总结
-
-参考链接：
-
-what-are-all-the-uses-of-an-underscore-in-scala
-
-http://www.slideshare.net/normation/scala-dreaded
-
-import scala._    // Wild card -- all of Scala is imported
-import scala....
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on October 10, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/blog/2016/10/01/travel-site/">
-        <h2 class="post-title">
-            travel site
-        </h2>
-        
-        <div class="post-content-preview">
-            10.2
-
-
-
-10.3
-
-
-
-10.4
-
-
-
-10.5
-
-
-
-10.6
-
-
-
-10.7
-
-
-
-10.8
-
-
-
-10.2–10.8
-
-
-
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on October 1, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/blog/2016/09/29/Vim_often_use/">
-        <h2 class="post-title">
-            Vim常用命令
-        </h2>
-        
-        <div class="post-content-preview">
-            1 切换输入模式
-
-命令模式下
-
-
-  
-    
-      a
-      (小写)光标之后进行插入
-    
-    
-      A
-      (大写)光标所在行尾进行插入
-    
-    
-      i
-      (小写)光标前开始进行插入
-    
-    
-      I
-      (大写)光标所在行首进行插入
-    
-    
-      o
-      (小写)...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 29, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/09/29/hadoop_startup/">
-        <h2 class="post-title">
-            Hadoop 开机自启动
-        </h2>
-        
-        <div class="post-content-preview">
-            1 把启动程序的命令添加到/etc/rc.d/rc.local
-
-加入后的文件如下：
-
-#!/bin/sh
-#
-# This script will be executed *after* all the other init scripts.
-# You can put your own initialization stuff in here if you don't
-# want to...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 29, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/09/26/hadoop_tutorial_7/">
-        <h2 class="post-title">
-            Zeppelin安装 快速指南
-        </h2>
-        
-        <div class="post-content-preview">
-            Zeppelin Installation
-
-Stable binary package, please visit Apache Zeppelin download Page.
-
-Start Apache Zeppelin with a service manager
-
-zeppelin.server and port modify:
-
- 22 &lt;property&gt;
- 23  ...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 26, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -510,13 +460,13 @@ zeppelin.server and port modify:
                     <div class="tags">
                         
                             
-                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="4">
+                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="7">
                                     Machine Learning
                                 </a>
                             
                         
                             
-                                <a href="/tags/#Spark" title="Spark" rel="7">
+                                <a href="/tags/#Spark" title="Spark" rel="10">
                                     Spark
                                 </a>
                             

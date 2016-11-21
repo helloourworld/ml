@@ -1,3 +1,13 @@
+---
+layout: post
+title: Spark-ML-0204
+category: MLAdvance
+catalog: yes
+description: Spark机器学习算法学习——BasicStatistics——Hypothesis testing
+tags:
+    - Machine Learning
+    -  Spark
+---
 # 假设检测
 
 &emsp;&emsp;假设检测是统计中有力的工具，它用于判断一个结果是否在统计上是显著的、这个结果是否有机会发生。`spark.mllib`目前支持皮尔森卡方检测。输入属性的类型决定是作拟合优度(`goodness of fit`)检测还是作独立性检测。
@@ -12,12 +22,12 @@ import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.stat.Statistics._
 val sc: SparkContext = ...
 val vec: Vector = ... // a vector composed of the frequencies of events
-// 作皮尔森拟合优度检测 
+// 作皮尔森拟合优度检测
 val goodnessOfFitTestResult = Statistics.chiSqTest(vec)
-println(goodnessOfFitTestResult) 
+println(goodnessOfFitTestResult)
 val mat: Matrix = ... // a contingency matrix
-// 作皮尔森独立性检测
-val independenceTestResult = Statistics.chiSqTest(mat) 
+// [作皮尔森独立性检测](https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test)
+val independenceTestResult = Statistics.chiSqTest(mat)
 println(independenceTestResult) // summary of the test including the p-value, degrees of freedom...
 val obs: RDD[LabeledPoint] = ... // (feature, label) pairs.
 // 独立性检测用于特征选择
@@ -38,7 +48,7 @@ import org.apache.spark.mllib.stat.Statistics
 val data: RDD[Double] = ... // an RDD of sample data
 // run a KS test for the sample versus a standard normal distribution
 val testResult = Statistics.kolmogorovSmirnovTest(data, "norm", 0, 1)
-println(testResult) 
+println(testResult)
 // perform a KS test using a cumulative distribution function of our making
 val myCDF: Double => Double = ...
 val testResult2 = Statistics.kolmogorovSmirnovTest(data, myCDF)
@@ -82,3 +92,4 @@ out.print()
 # 参考文献
 
 【1】[显著性检验](http://wiki.mbalib.com/wiki/Significance_Testing)
+[作皮尔森独立性检测](https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test)

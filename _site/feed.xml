@@ -8,7 +8,77 @@
 		
 			
 			<item>
-				<title>Spark-ML-02</title>
+				<title>Spark-ML-0203</title>
+				
+					<description>&lt;h1 id=&quot;section&quot;&gt;分层取样&lt;/h1&gt;
+
+</description>
+				
+				<pubDate>Thu, 17 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2016/11/17/tratified-sampling/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/11/17/tratified-sampling/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Spark-ML-0201</title>
+				
+					<description>&lt;h1 id=&quot;section&quot;&gt;概括统计&lt;/h1&gt;
+
+</description>
+				
+				<pubDate>Thu, 17 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2016/11/17/statistics/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/11/17/statistics/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Random Data Generation</title>
+				
+					<description>&lt;h1 id=&quot;section&quot;&gt;随机数生成&lt;/h1&gt;
+
+</description>
+				
+				<pubDate>Thu, 17 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/2016/11/17/random-data-generation/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/2016/11/17/random-data-generation/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Kernel Density Estimation</title>
+				
+					<description>&lt;h1 id=&quot;section&quot;&gt;核密度估计&lt;/h1&gt;
+
+</description>
+				
+				<pubDate>Thu, 17 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/2016/11/17/kernel-density-estimation/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/2016/11/17/kernel-density-estimation/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Spark-ML-0204</title>
+				
+					<description>&lt;h1 id=&quot;section&quot;&gt;假设检测&lt;/h1&gt;
+
+</description>
+				
+				<pubDate>Thu, 17 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2016/11/17/hypothesis-testing/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/11/17/hypothesis-testing/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Spark-ML-0202</title>
 				
 					<description>&lt;h1 id=&quot;section&quot;&gt;相关性系数&lt;/h1&gt;
 

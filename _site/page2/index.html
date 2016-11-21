@@ -179,6 +179,167 @@
             ">
     			
 <div class="post-preview">
+    <a href="/language/2016/10/10/scala_featured/">
+        <h2 class="post-title">
+            Scala Featured
+        </h2>
+        
+        <div class="post-content-preview">
+            1 scala中”_“的用法总结
+
+参考链接：
+
+what-are-all-the-uses-of-an-underscore-in-scala
+
+http://www.slideshare.net/normation/scala-dreaded
+
+import scala._    // Wild card -- all of Scala is imported
+import scala....
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on October 10, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/blog/2016/10/01/travel-site/">
+        <h2 class="post-title">
+            travel site
+        </h2>
+        
+        <div class="post-content-preview">
+            10.2
+
+
+
+10.3
+
+
+
+10.4
+
+
+
+10.5
+
+
+
+10.6
+
+
+
+10.7
+
+
+
+10.8
+
+
+
+10.2–10.8
+
+
+
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on October 1, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/blog/2016/09/29/Vim_often_use/">
+        <h2 class="post-title">
+            Vim常用命令
+        </h2>
+        
+        <div class="post-content-preview">
+            1 切换输入模式
+
+命令模式下
+
+
+  
+    
+      a
+      (小写)光标之后进行插入
+    
+    
+      A
+      (大写)光标所在行尾进行插入
+    
+    
+      i
+      (小写)光标前开始进行插入
+    
+    
+      I
+      (大写)光标所在行首进行插入
+    
+    
+      o
+      (小写)...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 29, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/09/29/hadoop_startup/">
+        <h2 class="post-title">
+            Hadoop 开机自启动
+        </h2>
+        
+        <div class="post-content-preview">
+            1 把启动程序的命令添加到/etc/rc.d/rc.local
+
+加入后的文件如下：
+
+#!/bin/sh
+#
+# This script will be executed *after* all the other init scripts.
+# You can put your own initialization stuff in here if you don't
+# want to...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 29, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/09/26/hadoop_tutorial_7/">
+        <h2 class="post-title">
+            Zeppelin安装 快速指南
+        </h2>
+        
+        <div class="post-content-preview">
+            Zeppelin Installation
+
+Stable binary package, please visit Apache Zeppelin download Page.
+
+Start Apache Zeppelin with a service manager
+
+zeppelin.server and port modify:
+
+ 22 &lt;property&gt;
+ 23  ...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 26, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/hadoop/2016/09/20/hadoop_tutorial_6/">
         <h2 class="post-title">
             Spark安装 快速指南
@@ -290,127 +451,6 @@ In this blog, I explore three sets of APIs—RDDs, DataFrames, and Datasets—av
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/hadoop/2016/09/14/hadoop_tutorial_5/">
-        <h2 class="post-title">
-            Hadoop 集群安装 快速指南
-        </h2>
-        
-        <div class="post-content-preview">
-            Prerequisites
-
-3台虚拟机
-SSH免密登陆
-Java已安装
-Hadoop安装包已经下载
-tools工具已经下载
-
-配置
-
-配置分配目录：
-
-
-  
-    
-      目录
-      说明
-    
-    
-      hdfs
-      存放hdfs相关文件，一般存放namenode、datanode、logs信息文件
-    
-    
-      logs
-   ...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 14, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/blog/2016/09/13/Setup-passphraseless-ssh/">
-        <h2 class="post-title">
-            Setup passphraseless ssh
-        </h2>
-        
-        <div class="post-content-preview">
-            配置免密码登陆：
-
-1、生成公钥
-
-[hadoop@NN01 ~]$ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
-Generating public/private rsa key pair.
-Your identification has been saved in /home/hadoop/.ssh/id_rsa.
-Your public key h...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 13, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/09/08/Streaming_lesson1/">
-        <h2 class="post-title">
-            Spark Streaming Lesson 1
-        </h2>
-        
-        <div class="post-content-preview">
-            1 Overview
-
-Spark Streaming is an extension of the core Spark API that enables scalable, high-throughput(高吞吐), fault-tolerant(容错机制) stream processing of live data streams(实时流处理). Data can be ingest...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 8, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/blog/2016/09/05/travel-map/">
-        <h2 class="post-title">
-            travel Map
-        </h2>
-        
-        <div class="post-content-preview">
-            
-
-
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 5, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/language/2016/09/05/Scala-Lesson16/">
-        <h2 class="post-title">
-            Scala Lesson 16
-        </h2>
-        
-        <div class="post-content-preview">
-            链接：https://segmentfault.com/a/1190000005043288#articleHeader56
-
-Databricks Scala 编程风格指南
-
-声明 (Disclaimer)
-
-The Chinese version of the Databricks Scala Guide is contributed and maintained by communit...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 5, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -445,13 +485,13 @@ The Chinese version of the Databricks Scala Guide is contributed and maintained 
                     <div class="tags">
                         
                             
-                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="4">
+                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="7">
                                     Machine Learning
                                 </a>
                             
                         
                             
-                                <a href="/tags/#Spark" title="Spark" rel="7">
+                                <a href="/tags/#Spark" title="Spark" rel="10">
                                     Spark
                                 </a>
                             

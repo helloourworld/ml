@@ -1,0 +1,88 @@
+<h1 id="section">核密度估计</h1>
+
+<h2 id="section-1">1 理论分析</h2>
+
+<p>  核密度估计是在概率论中用来估计未知的密度函数，属于非参数检验方法之一。假设我们有<code class="highlighter-rouge">n</code>个数<img src="http://www.forkosh.com/mathtex.cgi?{X}_{1},{X}_{2},...,{X}_{n}" />，要计算某个数<code class="highlighter-rouge">X</code>的概率密度有多大，
+可以通过下面的核密度估计方法估计。</p>
+
+<div align="center"><img src="imgs/5.1.png" width="200" height="65" alt="5.1" align="center" /></div>
+<p><br /></p>
+
+<p>  在上面的式子中，<code class="highlighter-rouge">K</code>为核密度函数，<code class="highlighter-rouge">h</code>为窗宽。核密度函数的原理比较简单，在我们知道某一事物的概率分布的情况下，如果某一个数在观察中出现了，我们可以认为这个数的概率密度很大，和这个数比较近的数的概率密度也会比较大，而那些离这个数远的数的概率密度会比较小。</p>
+
+<p>  基于这种想法，针对观察中的第一个数，我们可以用<code class="highlighter-rouge">K</code>去拟合我们想象中的那个远小近大概率密度。对每一个观察数拟合出的多个概率密度分布函数，取平均。如果某些数是比较重要的，则可以取加权平均。需要说明的一点是，核密度的估计并不是找到真正的分布函数。</p>
+
+<p>  在<code class="highlighter-rouge">MLlib</code>中，仅仅支持以高斯核做核密度估计。以高斯核做核密度估计时核密度估计公式<strong>（1）</strong>如下：</p>
+
+<div align="center"><img src="imgs/5.2.png" width="250" height="80" alt="5.1" align="center" /></div>
+<p><br /></p>
+
+<h2 id="section-2">2 例子</h2>
+
+<p>  <code class="highlighter-rouge">KernelDensity</code>提供了方法通过样本<code class="highlighter-rouge">RDD</code>计算核密度估计。下面的例子给出了使用方法。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.KernelDensity</span>
+<span class="k">import</span> <span class="nn">org.apache.spark.rdd.RDD</span>
+<span class="k">val</span> <span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of sample data
+// Construct the density estimator with the sample data and a standard deviation for the Gaussian
+// kernels
+</span><span class="k">val</span> <span class="n">kd</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">KernelDensity</span><span class="o">()</span>
+  <span class="o">.</span><span class="n">setSample</span><span class="o">(</span><span class="n">data</span><span class="o">)</span>
+  <span class="o">.</span><span class="n">setBandwidth</span><span class="o">(</span><span class="mf">3.0</span><span class="o">)</span>
+<span class="c1">// Find density estimates for the given values
+</span><span class="k">val</span> <span class="n">densities</span> <span class="k">=</span> <span class="n">kd</span><span class="o">.</span><span class="n">estimate</span><span class="o">(</span><span class="nc">Array</span><span class="o">(-</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">5.0</span><span class="o">))</span>
+</code></pre>
+</div>
+
+<h2 id="section-3">3 代码实现</h2>
+
+<p>  通过调用<code class="highlighter-rouge">KernelDensity.estimate</code>方法来实现核密度函数估计。看下面的代码。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">estimate</span><span class="o">(</span><span class="n">points</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">sample</span> <span class="k">=</span> <span class="k">this</span><span class="o">.</span><span class="n">sample</span>
+    <span class="k">val</span> <span class="n">bandwidth</span> <span class="k">=</span> <span class="k">this</span><span class="o">.</span><span class="n">bandwidth</span>
+    <span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="n">points</span><span class="o">.</span><span class="n">length</span>
+    <span class="c1">// 在每个高斯密度函数计算中，这个值都需要计算，所以提前计算。
+</span>    <span class="k">val</span> <span class="n">logStandardDeviationPlusHalfLog2Pi</span> <span class="k">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="n">bandwidth</span><span class="o">)</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="nc">Pi</span><span class="o">)</span>
+    <span class="k">val</span> <span class="o">(</span><span class="n">densities</span><span class="o">,</span> <span class="n">count</span><span class="o">)</span> <span class="k">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">aggregate</span><span class="o">((</span><span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">),</span> <span class="mi">0L</span><span class="o">))(</span>
+      <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+        <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">x</span><span class="o">.</span><span class="n">_1</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+=</span> <span class="n">normPdf</span><span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">bandwidth</span><span class="o">,</span> <span class="n">logStandardDeviationPlusHalfLog2Pi</span><span class="o">,</span> <span class="n">points</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
+          <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="o">}</span>
+        <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="n">_1</span><span class="o">,</span> <span class="n">x</span><span class="o">.</span><span class="n">_2</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+      <span class="o">},</span>
+      <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+        <span class="c1">//daxpy函数的作用是将一个向量加上另一个向量的值，即：dy[i]+=da*dx[i]，其中da为常数
+</span>        <span class="n">blas</span><span class="o">.</span><span class="n">daxpy</span><span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">,</span> <span class="n">y</span><span class="o">.</span><span class="n">_1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">x</span><span class="o">.</span><span class="n">_1</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+        <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="n">_1</span><span class="o">,</span> <span class="n">x</span><span class="o">.</span><span class="n">_2</span> <span class="o">+</span> <span class="n">y</span><span class="o">.</span><span class="n">_2</span><span class="o">)</span>
+      <span class="o">})</span>
+    <span class="c1">//在向量上乘一个常数
+</span>    <span class="n">blas</span><span class="o">.</span><span class="n">dscal</span><span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">count</span><span class="o">,</span> <span class="n">densities</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="n">densities</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+<p>  上述代码的<code class="highlighter-rouge">seqOp</code>函数中调用了<code class="highlighter-rouge">normPdf</code>，这个函数用于计算核函数为高斯分布的概率密度函数。参见上面的公式<strong>(1)</strong>。公式<strong>(1)</strong>的实现如下面代码。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code> <span class="k">def</span> <span class="n">normPdf</span><span class="o">(</span>
+      <span class="n">mean</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
+      <span class="n">standardDeviation</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
+      <span class="n">logStandardDeviationPlusHalfLog2Pi</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
+      <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">x0</span> <span class="k">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">mean</span>
+    <span class="k">val</span> <span class="n">x1</span> <span class="k">=</span> <span class="n">x0</span> <span class="o">/</span> <span class="n">standardDeviation</span>
+    <span class="k">val</span> <span class="n">logDensity</span> <span class="k">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">logStandardDeviationPlusHalfLog2Pi</span>
+    <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(</span><span class="n">logDensity</span><span class="o">)</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
+<p>  该方法首先将公式<strong>(1)</strong>取对数，计算结果，然后再对计算结果取指数。</p>
+
+<h2 id="section-4">参考文献</h2>
+
+<p>【1】<a href="http://blog.163.com/zhuandi_h/blog/static/1802702882012111092743556/">核密度估计</a></p>
+
+<p>【2】<a href="http://blog.sina.com.cn/s/blog_62b37bfe0101homb.html">R语言与非参数统计（核密度估计）</a></p>

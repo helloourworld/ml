@@ -1,3 +1,13 @@
+---
+layout: post
+title: Spark-ML-0201
+category: MLAdvance
+catalog: yes
+description: Spark机器学习算法学习——BasicStatistics——Summary statistics
+tags:
+    - Machine Learning
+    -  Spark
+---
 # 概括统计
 
 &emsp;&emsp;`MLlib`支持`RDD[Vector]`列的概括统计，它通过调用`Statistics`的`colStats`方法实现。`colStats`返回一个`MultivariateStatisticalSummary`对象，这个对象包含列式的最大值、最小值、均值、方差等等。
@@ -20,7 +30,7 @@ def colStats(X: RDD[Vector]): MultivariateStatisticalSummary = {
     new RowMatrix(X).computeColumnSummaryStatistics()
   }
 ```
-&emsp;&emsp;上面的代码非常明显，利用传人的`RDD`创建`RowMatrix`对象，利用方法`computeColumnSummaryStatistics`统计指标。
+&emsp;&emsp;上面的代码非常明显，利用传入的`RDD`创建`RowMatrix`对象，利用方法`computeColumnSummaryStatistics`统计指标。
 
 ```scala
 def computeColumnSummaryStatistics(): MultivariateStatisticalSummary = {
@@ -82,13 +92,21 @@ def computeColumnSummaryStatistics(): MultivariateStatisticalSummary = {
 ```
 &emsp;&emsp;这段代码使用了在线算法来计算均值和方差。根据文献【1】的介绍，计算均值和方差遵循如下的迭代公式：
 
-<div  align="center"><img src="imgs/1.1.png" width = "425" height = "50" alt="1.1" align="center" /></div>
+$$\bar{x}_n = \frac{(n-1)\bar{x}_{n-1} + x_n}{n} = \bar{x}_{n-1} + \frac{x_n - \bar{x}_{n-1}}{n}$$
 
-<div  align="center"><img src="imgs/1.2.png" width = "340" height = "120" alt="1.2" align="center" /></div>
+$$s_n^2 = \frac{(n-2)}{(n-1)}s_{n-1}^2 + \frac{(x_n - \bar{x}_{n-1})^2}{n}, n >1$$
+
+$$\sigma_n^2 = \frac{(n-1) \sigma_{n-1}^2 + (x_n - \bar{x}_{n-1}) (x_n - \bar{x}_n)}{n}$$
+
+$$M_{2,n} = M_{2,n-1} + (x_n - \bar{x}_{n-1})(x_n - \bar{x}_n)$$
+
+$$s_n^2 = {M_{2,n}}{n-1}$$
+
+$$\sigma_n^2 = {M_{2,n}}{n}$$
 
 &emsp;&emsp;在上面的公式中，`x`表示样本均值，`s`表示样本方差，`delta`表示总体方差。`MLlib`实现的是带有权重的计算，所以使用的迭代公式略有不同，参考文献【2】。
 
-<div  align="center"><img src="imgs/1.3.png" width = "370" height = "270" alt="1.1" align="center" /></div>
+![](/images\spark\ml\basicstatistics/1.3.png)
 
 &emsp;&emsp;`merge`方法相对比较简单，它只是对两个`MultivariateOnlineSummarizer`对象的指标作合并操作。
 
@@ -138,13 +156,11 @@ def computeColumnSummaryStatistics(): MultivariateStatisticalSummary = {
 ```
 &emsp;&emsp;这里需要注意的是，在线算法的并行化实现是一种特殊情况。例如样本集`X`分到两个不同的分区，分别为`X_A`和`X_B`，那么它们的合并需要满足下面的公式：
 
-<div  align="center"><img src="imgs/1.6.png" width = "310" height = "110" alt="1.6" align="center" /></div>
+![](/images\spark\ml\basicstatistics/1.6.png)
 
 &emsp;&emsp;依靠文献【3】我们可以知道，样本方差的无偏估计由下面的公式给出：
-
-<div  align="center"><img src="imgs/1.4.png" width = "200" height = "70" alt="1.4" align="center" /></div>
-
-<div  align="center"><img src="imgs/1.5.png" width = "475" height = "85" alt="1.5" align="center" /></div>
+![](/images\spark\ml\basicstatistics/1.4.png)
+![](/images\spark\ml\basicstatistics/1.5.png)
 
 &emsp;&emsp;所以，真实的样本均值和样本方差通过下面的代码实现。
 
