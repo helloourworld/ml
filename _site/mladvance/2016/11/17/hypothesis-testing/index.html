@@ -15,7 +15,7 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>Spark-ML-0204 - Maching Learning | 机器学习笔记</title>
+    <title>Spark-ML-0204-Hypothesis testing - Maching Learning | 机器学习笔记</title>
 
     <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/17/hypothesis-testing/">
 
@@ -173,7 +173,7 @@
                         <a class="tag" href="/tags/#Spark" title="Spark">Spark</a>
                         
                     </div>
-                    <h1>Spark-ML-0204</h1>
+                    <h1>Spark-ML-0204-Hypothesis testing</h1>
                     
                     
                     <h2 class="subheading"></h2>
@@ -198,32 +198,55 @@
 
 				<h1 id="section">假设检测</h1>
 
-<p>  假设检测是统计中有力的工具，它用于判断一个结果是否在统计上是显著的、这个结果是否有机会发生。<code class="highlighter-rouge">spark.mllib</code>目前支持皮尔森卡方检测。输入属性的类型决定是作拟合优度(<code class="highlighter-rouge">goodness of fit</code>)检测还是作独立性检测。
+<p>  假设检测是统计中有力的工具，它用于判断一个结果是否在统计上是显著的、这个结果是否有机会发生。<code class="highlighter-rouge">spark.mllib</code>目前支持皮尔森卡方检测。输入属性的类型决定是作拟合优度(<a href="https://en.wikipedia.org/wiki/Goodness_of_fit">goodness of fit</a>)检测还是作独立性检测。
 拟合优度检测需要输入数据的类型是<code class="highlighter-rouge">vector</code>，独立性检测需要输入数据的类型是<code class="highlighter-rouge">Matrix</code>。</p>
 
 <p>  <code class="highlighter-rouge">spark.mllib</code>也支持输入数据类型为<code class="highlighter-rouge">RDD[LabeledPoint]</code>，它用来通过卡方独立性检测作特征选择。<code class="highlighter-rouge">Statistics</code>提供方法用来作皮尔森卡方检测。下面是一个例子：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.SparkContext</span>
-<span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg._</span>
-<span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LabeledPoint</span>
-<span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.Statistics._</span>
-<span class="k">val</span> <span class="n">sc</span><span class="k">:</span> <span class="kt">SparkContext</span> <span class="o">=</span> <span class="o">...</span>
-<span class="k">val</span> <span class="n">vec</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="o">...</span> <span class="c1">// a vector composed of the frequencies of events
-// 作皮尔森拟合优度检测
-</span><span class="k">val</span> <span class="n">goodnessOfFitTestResult</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">chiSqTest</span><span class="o">(</span><span class="n">vec</span><span class="o">)</span>
-<span class="n">println</span><span class="o">(</span><span class="n">goodnessOfFitTestResult</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">mat</span><span class="k">:</span> <span class="kt">Matrix</span> <span class="o">=</span> <span class="o">...</span> <span class="c1">// a contingency matrix
-// [作皮尔森独立性检测](https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test)
-</span><span class="k">val</span> <span class="n">independenceTestResult</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">chiSqTest</span><span class="o">(</span><span class="n">mat</span><span class="o">)</span>
-<span class="n">println</span><span class="o">(</span><span class="n">independenceTestResult</span><span class="o">)</span> <span class="c1">// summary of the test including the p-value, degrees of freedom...
-</span><span class="k">val</span> <span class="n">obs</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// (feature, label) pairs.
-// 独立性检测用于特征选择
-</span><span class="k">val</span> <span class="n">featureTestResults</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">ChiSqTestResult</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">chiSqTest</span><span class="o">(</span><span class="n">obs</span><span class="o">)</span>
-<span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">1</span>
-<span class="n">featureTestResults</span><span class="o">.</span><span class="n">foreach</span> <span class="o">{</span> <span class="n">result</span> <span class="k">=&gt;</span>
-    <span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">"Column $i:\n$result"</span><span class="o">)</span>
-    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="o">}</span>
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code>    <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg._</span>
+    <span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LabeledPoint</span>
+    <span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.Statistics</span>
+    <span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.test.ChiSqTestResult</span>
+    <span class="k">import</span> <span class="nn">org.apache.spark.rdd.RDD</span>
+
+    <span class="c1">// a vector composed of the frequencies of events
+</span>    <span class="k">val</span> <span class="n">vec</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">)</span>
+<span class="c1">//    val vec: Vector = Vectors.dense(0.1, 0.15, 0.2, 0.3, 0.25)
+</span>
+    <span class="c1">// compute the goodness of fit. If a second vector to test against is not supplied
+</span>    <span class="c1">// as a parameter, the test runs against a uniform distribution.
+</span>    <span class="k">val</span> <span class="n">goodnessOfFitTestResult</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">chiSqTest</span><span class="o">(</span><span class="n">vec</span><span class="o">)</span>
+    <span class="c1">// summary of the test including the p-value, degrees of freedom, test statistic, the method
+</span>    <span class="c1">// used, and the null hypothesis.
+</span>    <span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">"$goodnessOfFitTestResult\n"</span><span class="o">)</span>
+
+    <span class="c1">// a contingency matrix. Create a dense matrix ((1.0, 2.0), (3.0, 4.0), (5.0, 6.0))
+</span>    <span class="k">val</span> <span class="n">mat</span><span class="k">:</span> <span class="kt">Matrix</span> <span class="o">=</span> <span class="nc">Matrices</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">,</span> <span class="mf">5.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">4.0</span><span class="o">,</span> <span class="mf">6.0</span><span class="o">))</span>
+
+    <span class="c1">// conduct Pearson's independence test on the input contingency matrix
+</span>    <span class="k">val</span> <span class="n">independenceTestResult</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">chiSqTest</span><span class="o">(</span><span class="n">mat</span><span class="o">)</span>
+    <span class="c1">// summary of the test including the p-value, degrees of freedom
+</span>    <span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">"$independenceTestResult\n"</span><span class="o">)</span>
+
+    <span class="k">val</span> <span class="n">obs</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">]</span> <span class="k">=</span>
+      <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="o">(</span>
+        <span class="nc">Seq</span><span class="o">(</span>
+          <span class="nc">LabeledPoint</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">)),</span>
+          <span class="nc">LabeledPoint</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">)),</span>
+          <span class="nc">LabeledPoint</span><span class="o">(-</span><span class="mf">1.0</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(-</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">)</span>
+          <span class="o">)</span>
+        <span class="o">)</span>
+      <span class="o">)</span> <span class="c1">// (feature, label) pairs.
+</span>
+    <span class="c1">// The contingency table is constructed from the raw (feature, label) pairs and used to conduct
+</span>    <span class="c1">// the independence test. Returns an array containing the ChiSquaredTestResult for every feature
+</span>    <span class="c1">// against the label.
+</span>    <span class="k">val</span> <span class="n">featureTestResults</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">ChiSqTestResult</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">chiSqTest</span><span class="o">(</span><span class="n">obs</span><span class="o">)</span>
+    <span class="n">featureTestResults</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="o">.</span><span class="n">foreach</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="k">=&gt;</span>
+      <span class="n">println</span><span class="o">(</span><span class="s">"Column "</span> <span class="o">+</span> <span class="o">(</span><span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="o">).</span><span class="n">toString</span> <span class="o">+</span> <span class="s">":"</span><span class="o">)</span>
+      <span class="n">println</span><span class="o">(</span><span class="n">k</span> <span class="o">+</span> <span class="s">"\n"</span><span class="o">)</span>
+    <span class="o">}</span>  <span class="c1">// summary of the test
+</span>
 </code></pre>
 </div>
 <p>  另外，<code class="highlighter-rouge">spark.mllib</code>提供了一个<code class="highlighter-rouge">Kolmogorov-Smirnov (KS)</code>检测的<code class="highlighter-rouge">1-sample, 2-sided</code>实现，用来检测概率分布的相等性。通过提供理论分布（现在仅仅支持正太分布）的名字以及它相应的参数，
@@ -231,14 +254,22 @@
 
 <p>  <code class="highlighter-rouge">Statistics</code>提供了一个运行<code class="highlighter-rouge">1-sample, 2-sided KS</code>检测的方法，下面就是一个应用的例子。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.Statistics</span>
-<span class="k">val</span> <span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of sample data
-// run a KS test for the sample versus a standard normal distribution
-</span><span class="k">val</span> <span class="n">testResult</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">kolmogorovSmirnovTest</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="s">"norm"</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
-<span class="n">println</span><span class="o">(</span><span class="n">testResult</span><span class="o">)</span>
-<span class="c1">// perform a KS test using a cumulative distribution function of our making
-</span><span class="k">val</span> <span class="n">myCDF</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=&gt;</span> <span class="nc">Double</span> <span class="k">=</span> <span class="o">...</span>
-<span class="k">val</span> <span class="n">testResult2</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">kolmogorovSmirnovTest</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">myCDF</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code>    <span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.Statistics</span>
+    <span class="k">import</span> <span class="nn">org.apache.spark.rdd.RDD</span>
+
+    <span class="k">val</span> <span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="o">(</span><span class="nc">Seq</span><span class="o">(</span><span class="mf">0.1</span><span class="o">,</span> <span class="mf">0.15</span><span class="o">,</span> <span class="mf">0.2</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">,</span> <span class="mf">0.25</span><span class="o">))</span>  <span class="c1">// an RDD of sample data
+</span>
+    <span class="c1">// run a KS test for the sample versus a standard normal distribution
+</span>    <span class="k">val</span> <span class="n">testResult</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">kolmogorovSmirnovTest</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="s">"norm"</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="c1">// summary of the test including the p-value, test statistic, and null hypothesis if our p-value
+</span>    <span class="c1">// indicates significance, we can reject the null hypothesis.
+</span>    <span class="n">println</span><span class="o">(</span><span class="n">testResult</span><span class="o">)</span>
+    <span class="n">println</span><span class="o">()</span>
+
+    <span class="c1">// perform a KS test using a cumulative distribution function of our making
+</span>    <span class="k">val</span> <span class="n">myCDF</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="mf">0.1</span> <span class="o">-&gt;</span> <span class="mf">0.2</span><span class="o">,</span> <span class="mf">0.15</span> <span class="o">-&gt;</span> <span class="mf">0.6</span><span class="o">,</span> <span class="mf">0.2</span> <span class="o">-&gt;</span> <span class="mf">0.05</span><span class="o">,</span> <span class="mf">0.3</span> <span class="o">-&gt;</span> <span class="mf">0.05</span><span class="o">,</span> <span class="mf">0.25</span> <span class="o">-&gt;</span> <span class="mf">0.1</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">testResult2</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">kolmogorovSmirnovTest</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">myCDF</span><span class="o">)</span>
+    <span class="n">println</span><span class="o">(</span><span class="n">testResult2</span><span class="o">)</span>
 </code></pre>
 </div>
 
@@ -289,8 +320,8 @@
 
 <h1 id="section-2">参考文献</h1>
 
-<p>【1】<a href="http://wiki.mbalib.com/wiki/Significance_Testing">显著性检验</a>
-<a href="https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test">作皮尔森独立性检测</a></p>
+<p>【1】<a href="http://wiki.mbalib.com/wiki/Significance_Testing">显著性检验</a><br />
+<a href="https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test">皮尔森独立性检测</a></p>
 
 
                 <hr>
@@ -299,17 +330,17 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/mladvance/2016/11/17/correlations/" data-toggle="tooltip" data-placement="top" title="Spark-ML-0202">
+                        <a href="/mladvance/2016/11/17/correlations/" data-toggle="tooltip" data-placement="top" title="Spark-ML-0202-Correlations">
                         Previous<br>
-                        <span>Spark-ML-0202</span>
+                        <span>Spark-ML-0202-Correlations</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2016/11/17/kernel-density-estimation/" data-toggle="tooltip" data-placement="top" title="Kernel Density Estimation">
+                        <a href="/mladvance/2016/11/17/kernel-density-estimation/" data-toggle="tooltip" data-placement="top" title="Spark-ML-0206-Kernel density estimation">
                         Next<br>
-                        <span>Kernel Density Estimation</span>
+                        <span>Spark-ML-0206-Kernel density estimation</span>
                         </a>
                     </li>
                     
@@ -317,7 +348,7 @@
                     <div class="ds-share flat"
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/11/17/hypothesis-testing"
-                        data-title="Spark-ML-0204"
+                        data-title="Spark-ML-0204-Hypothesis testing"
                         data-url="http://machinelearningadvance.com/mladvance/2016/11/17/hypothesis-testing/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
@@ -338,7 +369,7 @@
                 <div class="comment">
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/11/17/hypothesis-testing"
-                        data-title="Spark-ML-0204"
+                        data-title="Spark-ML-0204-Hypothesis testing"
                         data-url="http://machinelearningadvance.com/mladvance/2016/11/17/hypothesis-testing/" >
                     </div>
 
@@ -387,13 +418,13 @@
                     <div class="tags">
         				
                             
-                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="7">
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="10">
                                 Machine Learning
                                 </a>
                             
         				
                             
-                				<a href="/tags/#Spark" title="Spark" rel="10">
+                				<a href="/tags/#Spark" title="Spark" rel="13">
                                 Spark
                                 </a>
                             

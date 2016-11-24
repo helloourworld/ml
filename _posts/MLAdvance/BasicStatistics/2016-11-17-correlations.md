@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spark-ML-0202
+title: Spark-ML-0202-Correlations
 category: MLAdvance
 catalog: yes
 description: Spark机器学习算法学习——BasicStatistics——Correlations

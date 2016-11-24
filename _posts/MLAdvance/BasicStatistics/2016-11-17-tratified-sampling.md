@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spark-ML-0203
+title: Spark-ML-0203-Stratified sampling
 category: MLAdvance
 catalog: yes
 description: Spark机器学习算法学习——BasicStatistics——Stratified sampling

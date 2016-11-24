@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="g89MuzujW3" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+    <title>Spark-ML-04-collaborative-filtering - Maching Learning | 机器学习笔记</title>
+
+    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/19/ALS/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- ga & ba script hoook -->
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Big Data Memo</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/">Category</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/images/background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/images/background.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Machine Learning" title="Machine Learning">Machine Learning</a>
+                        
+                        <a class="tag" href="/tags/#Spark" title="Spark">Spark</a>
+                        
+                    </div>
+                    <h1>Spark-ML-04-collaborative-filtering</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by Big Data Memo on November 19, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h3 id="section">1 推荐算法概述</h3>
+<p>需求背景：
+<img src="/images/spark/ml/CollaborativeFiltering/UserItemRating.png" alt="" /></p>
+
+<p>上图所示为用户评分矩阵，其中用户评分为1-5，?所示为需要估算的用户评分。如果能够快速估算出用户的评分那么就可以对用户进行推荐了，估计的方法非常多，以下为常用的推荐算法概述。</p>
+
+<p><img src="/images/spark/ml/CollaborativeFiltering/RecommentSystemSummary.png" alt="" /></p>
+
+<p>本章节主要介绍CF中ALS算法。</p>
+
+<h3 id="als">2 什么是ALS</h3>
+
+<p><code class="highlighter-rouge">ALS</code>是交替最小二乘（<code class="highlighter-rouge">alternating least squares</code>）的简称。在机器学习中，<code class="highlighter-rouge">ALS</code>特指使用交替最小二乘求解的一个协同推荐算法。它通过观察到的所有用户给商品的打分，通过提取主要因素来对上图中”?”进行打分，进而推断每个用户的喜好并向用户推荐适合的商品。<br />
+<code class="highlighter-rouge">ALS</code>的核心就是这样一个假设：打分矩阵是近似低秩的。换句话说，就是一个<code class="highlighter-rouge">m*n</code>的打分矩阵可以由分解的两个小矩阵<code class="highlighter-rouge">U（m*k）</code>和<code class="highlighter-rouge">V（k*n）</code>的乘积来近似，即<script type="math/tex">A=U{V}^{T},k \le m,n</script>。这就是<code class="highlighter-rouge">ALS</code>的矩阵分解方法。这样我们把系统的自由度从<code class="highlighter-rouge">O(mn)</code>降到了<code class="highlighter-rouge">O((m+n)k)</code>。<br />
+那么<code class="highlighter-rouge">ALS</code>的低秩假设为什么是合理的呢？我们描述一个人的喜好经常是在一个抽象的低维空间上进行的，并不需要一一列出他喜好的事物。例如，我喜好看侦探影片，可能代表我喜欢《神探夏洛特》、《神探狄仁杰》等。这些影片都符合我对自己喜好的描述，也就是说他们在这个抽象的低维空间的投影和我的喜好相似。<br />
+再抽象一些来描述这个问题，我们把某个人的喜好映射到了低维向量<script type="math/tex">u_i</script>上，同时将某个影片的特征映射到了维度相同的向量<script type="math/tex">v_j</script>上，那么这个人和这个影片的相似度就可以表述成这两个向量之间的内积<script type="math/tex">u_i^Tv_j</script>。 我们把打分理解成相似度，那么打分矩阵A就可以由用户喜好矩阵和产品特征矩阵的乘积<script type="math/tex">U{V}^{T}</script>来近似了。<br />
+我们大致解释了 ALS 低秩假设的合理性，接下来的问题是怎么选这个抽象的低维空间。这个低维空间要能够有效的区分事物，如果我说我喜欢看 16:9 宽屏的彩色立体声电影，那一定是我真心不想透露我的喜好。但 ALS 是很难从实质上理解“黑色幽默”和“彩色”的区别是什么的，它需要一个更明确的可以量化的目标，这就是重构误差。既然我们的假设是打分矩阵A可以通过<script type="math/tex">UV^T</script>来近似，那么一个最直接的可以量化的目标就是通过U,V重构A所产生的误差。在 ALS 里，我们使用 Frobenius范数，<script type="math/tex">\Arrowvert A-UV^T\Arrowvert_F^2</script>，来量化重构误差，就是每个元素的重构误差的平方和。这里存在一个问题，我们只观察到部分打分，A 中的大量未知元正是我们想推断的，所以这个重构误差是包含未知数的。解决方案很简单很暴力：就<strong>只看对已知打分的重构误差</strong>吧。所以 ALS 的优化目标是：<script type="math/tex">\sum_{(i,j)\in R}(a_{ij}-u_i^Tv_j)^2</script>。这里 R 指观察到的 （用户，产品）集。</p>
+
+<p>我们把一个协同推荐的问题通过低秩假设成功转变成了一个优化问题。下面要讨论的内容很显然：这个优化问题怎么解？其实答案已经在 ALS 的名字里给出——交替最小二乘。ALS 的目标函数不是凸的，而且变量互相耦合在一起，所以它并不算好解。但如果我们把用户特征矩阵U和产品特征矩阵V固定其一，这个问题立刻变成了一个凸的而且可拆分的问题。比如我们固定U，那么目标函数就可以写成<script type="math/tex">\sum_j\sum_{i,(i,j)\in R}(a_{ij}-u_i^Tv_j)^2</script>。其中关于每个产品特征<script type="math/tex">v_j</script>的部分是独立的，也就是说固定U求<script type="math/tex">v_j</script>，我们只需要最小化<script type="math/tex">\sum_{i,(i,j)\in R}(a_{ij}-u_i^Tv_j)^2</script>就好了，这个问题就是经典的最小二乘问题。所谓“交替”，就是指我们先随机生成<script type="math/tex">U^{(0)}</script>，然后固定它求解<script type="math/tex">V^{(0)}</script>，再固定<script type="math/tex">V^{(0)}</script>求解<script type="math/tex">U^{(1)}</script>，这样交替进行下去。因为每步迭代都会降低重构误差，并且误差是有下界的，所以 ALS 一定会收敛。但由于问题是非凸的，ALS 并不保证会收敛到全局最优解。但在实际应用中，ALS 对初始点不是很敏感，是不是全局最优解造成的影响并不大。</p>
+
+<h3 id="sparkals">3 spark中ALS的实现原理</h3>
+
+<p><code class="highlighter-rouge">Spark</code>利用交换最小二乘解决矩阵分解问题分两种情况：数据集是显式反馈和数据集是隐式反馈。由于隐式反馈算法的原理是在显示反馈算法原理的基础上作的修改，所以我们在此只会具体讲解数据集为隐式反馈的算法。
+算法实现所依据的文献见参考文献【1】。</p>
+
+<h4 id="section-1">3.1 介绍</h4>
+
+<p>从广义上讲，推荐系统基于两种不同的策略：基于内容的方法和基于协同过滤的方法。<code class="highlighter-rouge">Spark</code>中使用协同过滤的方式。协同过滤分析用户以及用户相关的产品的相关性，用以识别新的用户-产品相关性。协同过滤系统需要的唯一信息是用户过去的行为信息，比如对产品的评价信息。协同过滤是领域无关的，所以它可以方便解决基于内容方法难以解决的许多问题。</p>
+
+<p>推荐系统依赖不同类型的输入数据，最方便的是高质量的显式反馈数据，它们包含用户对感兴趣商品明确的评价。例如，<code class="highlighter-rouge">Netflix</code>收集的用户对电影评价的星星等级数据。但是显式反馈数据不一定总是找得到，因此推荐系统可以从更丰富的隐式反馈信息中推测用户的偏好。
+隐式反馈类型包括购买历史、浏览历史、搜索模式甚至鼠标动作。例如，购买同一个作者许多书的用户可能喜欢这个作者。</p>
+
+<p>许多研究都集中在处理显式反馈，然而在很多应用场景下，应用程序重点关注隐式反馈数据。因为可能用户不愿意评价商品或者由于系统限制我们不能收集显式反馈数据。在隐式模型中，一旦用户允许收集可用的数据，在客户端并不需要额外的显式数据。文献中的系统避免主动地向用户收集显式反馈信息，所以系统仅仅依靠隐式信息。</p>
+
+<p>了解隐式反馈的特点非常重要，因为这些特质使我们避免了直接调用基于显式反馈的算法。最主要的特点有如下几种：</p>
+
+<ul>
+  <li>
+    <p>（1） 没有负反馈。通过观察用户行为，我们可以推测那个商品他可能喜欢，然后购买，但是我们很难推测哪个商品用户不喜欢。这在显式反馈算法中并不存在，因为用户明确告诉了我们哪些他喜欢哪些他不喜欢。</p>
+  </li>
+  <li>
+    <p>（2） 隐式反馈是内在的噪音。虽然我们拼命的追踪用户行为，但是我们仅仅只是猜测他们的偏好和真实动机。例如，我们可能知道一个人的购买行为，但是这并不能完全说明偏好和动机，因为这个商品可能作为礼物被购买而用户并不喜欢它。</p>
+  </li>
+  <li>
+    <p>（3） 显示反馈的数值值表示偏好（<code class="highlighter-rouge">preference</code>），隐式回馈的数值值表示信任（<code class="highlighter-rouge">confidence</code>）。基于显示反馈的系统用星星等级让用户表达他们的喜好程度，例如一颗星表示很不喜欢，五颗星表示非常喜欢。基于隐式反馈的数值值描述的是动作的频率，例如用户购买特定商品的次数。一个较大的值并不能表明更多的偏爱。但是这个值是有用的，它描述了在一个特定观察中的信任度。
+一个发生一次的事件可能对用户偏爱没有用，但是一个周期性事件更可能反映一个用户的选择。</p>
+  </li>
+  <li>
+    <p>（4） 评价隐式反馈推荐系统需要合适的手段。</p>
+  </li>
+</ul>
+
+<h4 id="section-2">3.2 显式反馈模型</h4>
+
+<p>潜在因素模型由一个针对协同过滤的交替方法组成，它以一个更加全面的方式发现潜在特征来解释观察的<code class="highlighter-rouge">ratings</code>数据。我们关注的模型由奇异值分解（<code class="highlighter-rouge">SVD</code>）推演而来。一个典型的模型将每个用户<code class="highlighter-rouge">u</code>（包含一个用户-因素向量<script type="math/tex">u_i</script>）和每个商品<code class="highlighter-rouge">v</code>（包含一个用户-因素向量<script type="math/tex">v_j</script>）联系起来。
+预测通过内积<script type="math/tex">r_{ij}=u_i^{T}{v}_{j}</script>来实现。另一个需要关注的地方是参数估计。许多当前的工作都应用到了显式反馈数据集中，这些模型仅仅基于观察到的<code class="highlighter-rouge">rating</code>数据直接建模，同时通过一个适当的正则化来避免过拟合。公式如下：</p>
+
+<script type="math/tex; mode=display">min_{u,v}\sum_{r_{ij}}(r_{ij} - u_i^Tv_j)^2 + \lambda(\Arrowvert u_i \Arrowvert^2 + \Arrowvert v_j \Arrowvert^2)</script>
+
+<p>在上述公式中，<code class="highlighter-rouge">lambda</code>是正则化的参数。正规化是为了防止过拟合的情况发生，具体参见文献【3】。这样，我们用最小化重构误差来解决协同推荐问题。我们也成功将推荐问题转换为了最优化问题。</p>
+
+<h4 id="section-3">3.3 隐式反馈模型</h4>
+
+<p>在显式反馈的基础上，我们需要做一些改动得到我们的隐式反馈模型。首先，我们需要形式化由<script type="math/tex">{r}_{ij}</script>变量衡量的信任度的概念。我们引入了一组二元变量<script type="math/tex">{p}_{ij}</script>，它表示用户<code class="highlighter-rouge">u</code>对商品<code class="highlighter-rouge">v</code>的偏好。<script type="math/tex">{p}_{ij}</script>的公式如下：</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+p_{ij} =
+\begin{cases}
+ 1, & r_{ij} > 0 \\
+0, & r_{ij} = 0
+\end{cases} %]]></script>
+
+<p>换句话说，如果用户购买了商品，我们认为用户喜欢该商品，否则我们认为用户不喜欢该商品。然而我们的信念（<code class="highlighter-rouge">beliefs</code>）与变化的信任（<code class="highlighter-rouge">confidence</code>）等级息息相关。首先，很自然的，<script type="math/tex">{p}_{ij}</script>的值为0和低信任有关。用户对一个商品没有得到一个正的偏好可能源于多方面的原因，并不一定是不喜欢该商品。例如，用户可能并不知道该商品的存在。</p>
+
+<p>另外，用户购买一个商品也并不一定是用户喜欢它。因此我们需要一个新的信任等级来显示用户偏爱某个商品。一般情况下，<script type="math/tex">{r}_{ij}</script>越大，越能暗示用户喜欢某个商品。因此，我们引入了一组变量<script type="math/tex">{c}_{ij}</script>，它衡量了我们观察到<script type="math/tex">{p}_{ij}</script>的信任度。<script type="math/tex">{c}_{ij}</script>一个合理的选择如下所示：</p>
+
+<script type="math/tex; mode=display">C_{ij} = 1 + \alpha\gamma_{ij}</script>
+
+<p>按照这种方式，我们存在最小限度的信任度，并且随着我们观察到的正偏向的证据越来越多，信任度也会越来越大。</p>
+
+<p>我们的目的是找到用户向量<script type="math/tex">u_i</script>以及商品向量<script type="math/tex">v_i</script>来表明用户偏好。这些向量分别是用户因素（特征）向量和商品因素（特征）向量。本质上，这些向量将用户和商品映射到一个公用的隐式因素空间，从而使它们可以直接比较。这和用于显式数据集的矩阵分解技术类似，但是包含两点不一样的地方：
+（1）我们需要考虑不同的信任度，（2）最优化需要考虑所有可能的<code class="highlighter-rouge">u，v</code>对，而不仅仅是和观察数据相关的<code class="highlighter-rouge">u，v</code>对。因此，通过最小化下面的损失函数来计算相关因素（<code class="highlighter-rouge">factors</code>）。</p>
+
+<script type="math/tex; mode=display">min_{u,v}\sum_{i,j}c_{ij}(p_{ij} - u_i^Tv_j)^2 + \lambda(\sum_u\Arrowvert u_i \Arrowvert^2 + \sum_i\Arrowvert v_j \Arrowvert^2)</script>
+
+<h4 id="section-4">3.4 求解最小化损失函数</h4>
+
+<p>考虑到损失函数包含<code class="highlighter-rouge">m*n</code>个元素，<code class="highlighter-rouge">m</code>是用户的数量，<code class="highlighter-rouge">n</code>是商品的数量。一般情况下，<code class="highlighter-rouge">m*n</code>可以到达几百亿。这么多的元素应该避免使用随机梯度下降法来求解，因此，spark选择使用交替最优化方式求解。</p>
+
+<p>公式（2.1）和公式（2.4）是非凸函数，无法求解最优解。但是，固定公式中的用户-特征向量或者商品-特征向量，公式就会变成二次方程，可以求出全局的极小值。交替最小二乘的计算过程是：交替的重新计算用户-特征向量和商品-特征向量，每一步都保证降低损失函数的值，直到找到极小值。
+交替最小二乘法的处理过程如下所示：</p>
+
+<p><img src="/images/spark/ml/CollaborativeFiltering/ALS.2.1.png" alt="" /></p>
+
+<h3 id="alsspark">4 ALS在spark中的实现</h3>
+
+<p>在<code class="highlighter-rouge">spark</code>的源代码中，<code class="highlighter-rouge">ALS</code>算法实现于<code class="highlighter-rouge">org.apache.spark.ml.recommendation.ALS.scala</code>文件中。我们以官方文档中的例子为起点，来分析<code class="highlighter-rouge">ALS</code>算法的分布式实现。下面是官方的例子：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//处理训练数据
+</span><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="s">"data/mllib/als/test.data"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">ratings</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="sc">','</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span> <span class="k">case</span> <span class="nc">Array</span><span class="o">(</span><span class="n">user</span><span class="o">,</span> <span class="n">item</span><span class="o">,</span> <span class="n">rate</span><span class="o">)</span> <span class="k">=&gt;</span>
+  <span class="nc">Rating</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="n">toInt</span><span class="o">,</span> <span class="n">item</span><span class="o">.</span><span class="n">toInt</span><span class="o">,</span> <span class="n">rate</span><span class="o">.</span><span class="n">toDouble</span><span class="o">)</span>
+<span class="o">})</span>
+<span class="c1">// 使用ALS训练推荐模型
+</span><span class="k">val</span> <span class="n">rank</span> <span class="k">=</span> <span class="mi">10</span>
+<span class="k">val</span> <span class="n">numIterations</span> <span class="k">=</span> <span class="mi">10</span>
+<span class="k">val</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">ALS</span><span class="o">.</span><span class="n">train</span><span class="o">(</span><span class="n">ratings</span><span class="o">,</span> <span class="n">rank</span><span class="o">,</span> <span class="n">numIterations</span><span class="o">,</span> <span class="mf">0.01</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p>从代码中我们知道，训练模型用到了<code class="highlighter-rouge">ALS.scala</code>文件中的<code class="highlighter-rouge">train</code>方法，下面我们将详细介绍<code class="highlighter-rouge">train</code>方法的实现。在此之前，我们先了解一下<code class="highlighter-rouge">train</code>方法的参数表示的含义。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">train</span><span class="o">(</span>
+    <span class="n">ratings</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Rating</span><span class="o">[</span><span class="kt">ID</span><span class="o">]],</span>  <span class="c1">//训练数据
+</span>    <span class="n">rank</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span><span class="o">,</span>   <span class="c1">//隐含特征数
+</span>    <span class="n">numUserBlocks</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span><span class="o">,</span> <span class="c1">//分区数
+</span>    <span class="n">numItemBlocks</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span><span class="o">,</span>
+    <span class="n">maxIter</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span><span class="o">,</span>   <span class="c1">//迭代次数
+</span>    <span class="n">regParam</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">,</span>
+    <span class="n">implicitPrefs</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="o">,</span>
+    <span class="n">alpha</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">,</span>
+    <span class="n">nonnegative</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="o">,</span>
+    <span class="n">intermediateRDDStorageLevel</span><span class="k">:</span> <span class="kt">StorageLevel</span> <span class="o">=</span> <span class="nc">StorageLevel</span><span class="o">.</span><span class="nc">MEMORY_AND_DISK</span><span class="o">,</span>
+    <span class="n">finalRDDStorageLevel</span><span class="k">:</span> <span class="kt">StorageLevel</span> <span class="o">=</span> <span class="nc">StorageLevel</span><span class="o">.</span><span class="nc">MEMORY_AND_DISK</span><span class="o">,</span>
+    <span class="n">checkpointInterval</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span><span class="o">,</span>
+    <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">)</span><span class="k">:</span> <span class="kt">MatrixFactorizationModel</span>
+</code></pre>
+</div>
+
+<p>以上定义中，<code class="highlighter-rouge">ratings</code>指用户提供的训练数据，它包括用户<code class="highlighter-rouge">id</code>集、商品<code class="highlighter-rouge">id</code>集以及相应的打分集。<code class="highlighter-rouge">rank</code>表示隐含因素的数量，也即特征的数量。<code class="highlighter-rouge">numUserBlocks</code>和<code class="highlighter-rouge">numItemBlocks</code>分别指用户和商品的块数量，即分区数量。<code class="highlighter-rouge">maxIter</code>表示迭代次数。<code class="highlighter-rouge">regParam</code>表示最小二乘法中<code class="highlighter-rouge">lambda</code>值的大小。
+<code class="highlighter-rouge">implicitPrefs</code>表示我们的训练数据是否是隐式反馈数据。<code class="highlighter-rouge">Nonnegative</code>表示求解的最小二乘的值是否是非负,根据<code class="highlighter-rouge">Nonnegative</code>的值的不同，<code class="highlighter-rouge">spark</code>使用了不同的求解方法。</p>
+
+<p>下面我们分步骤分析<code class="highlighter-rouge">train</code>方法的处理流程。</p>
+
+<ul>
+  <li><strong>(1) 初始化<code class="highlighter-rouge">ALSPartitioner</code>和<code class="highlighter-rouge">LocalIndexEncoder</code></strong>。</li>
+</ul>
+
+<p><code class="highlighter-rouge">ALSPartitioner</code>实现了基于<code class="highlighter-rouge">hash</code>的分区，它根据用户或者商品<code class="highlighter-rouge">id</code>的<code class="highlighter-rouge">hash</code>值来进行分区。<code class="highlighter-rouge">LocalIndexEncoder</code>对<code class="highlighter-rouge">（blockid，localindex）</code>即<code class="highlighter-rouge">（分区id，分区内索引）</code>进行编码，并将其转换为一个整数，这个整数在高位存分区<code class="highlighter-rouge">ID</code>，在低位存对应分区的索引，在空间上尽量做到了不浪费。
+同时也可以根据这个转换的整数分别获得<code class="highlighter-rouge">blockid</code>和<code class="highlighter-rouge">localindex</code>。这两个对象在后续的代码中会用到。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">userPart</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ALSPartitioner</span><span class="o">(</span><span class="n">numUserBlocks</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">itemPart</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ALSPartitioner</span><span class="o">(</span><span class="n">numItemBlocks</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">userLocalIndexEncoder</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LocalIndexEncoder</span><span class="o">(</span><span class="n">userPart</span><span class="o">.</span><span class="n">numPartitions</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">itemLocalIndexEncoder</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LocalIndexEncoder</span><span class="o">(</span><span class="n">itemPart</span><span class="o">.</span><span class="n">numPartitions</span><span class="o">)</span>
+
+
+<span class="c1">//ALSPartitioner即HashPartitioner
+</span><span class="k">class</span> <span class="nc">HashPartitioner</span><span class="o">(</span><span class="n">partitions</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Partitioner</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">numPartitions</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">partitions</span>
+  <span class="k">def</span> <span class="n">getPartition</span><span class="o">(</span><span class="n">key</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">key</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="kc">null</span> <span class="k">=&gt;</span> <span class="mi">0</span>
+    <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="nc">Utils</span><span class="o">.</span><span class="n">nonNegativeMod</span><span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="n">hashCode</span><span class="o">,</span> <span class="n">numPartitions</span><span class="o">)</span>
+  <span class="o">}</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">equals</span><span class="o">(</span><span class="n">other</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="n">other</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="n">h</span><span class="k">:</span> <span class="kt">HashPartitioner</span> <span class="o">=&gt;</span>
+      <span class="n">h</span><span class="o">.</span><span class="n">numPartitions</span> <span class="o">==</span> <span class="n">numPartitions</span>
+    <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span>
+      <span class="kc">false</span>
+  <span class="o">}</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">hashCode</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">numPartitions</span>
+<span class="o">}</span>
+
+<span class="c1">//LocalIndexEncoder
+</span><span class="k">private</span><span class="o">[</span><span class="kt">recommendation</span><span class="o">]</span> <span class="k">class</span> <span class="nc">LocalIndexEncoder</span><span class="o">(</span><span class="n">numBlocks</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Serializable</span> <span class="o">{</span>
+
+    <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">final</span> <span class="k">val</span> <span class="n">numLocalIndexBits</span> <span class="k">=</span>
+      <span class="n">math</span><span class="o">.</span><span class="n">min</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="nc">Integer</span><span class="o">.</span><span class="n">numberOfLeadingZeros</span><span class="o">(</span><span class="n">numBlocks</span> <span class="o">-</span> <span class="mi">1</span><span class="o">),</span> <span class="mi">31</span><span class="o">)</span>
+    <span class="c1">//左移（&lt;&lt;,相当于乘2），右移（&gt;&gt;，相当于除2）和无符号右移（&gt;&gt;&gt;，无符号右移，忽略符号位，空位都以0补齐）
+</span>    <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">final</span> <span class="k">val</span> <span class="n">localIndexMask</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">numLocalIndexBits</span><span class="o">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="c1">//encodeIndex高位存分区ID，在低位存对应分区的索引
+</span>    <span class="k">def</span> <span class="n">encode</span><span class="o">(</span><span class="n">blockId</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">localIndex</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+      <span class="o">(</span><span class="n">blockId</span> <span class="o">&lt;&lt;</span> <span class="n">numLocalIndexBits</span><span class="o">)</span> <span class="o">|</span> <span class="n">localIndex</span>
+    <span class="o">}</span>
+    <span class="nd">@inline</span>
+    <span class="k">def</span> <span class="n">blockId</span><span class="o">(</span><span class="n">encoded</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+      <span class="n">encoded</span> <span class="o">&gt;&gt;&gt;</span> <span class="n">numLocalIndexBits</span>
+    <span class="o">}</span>
+
+    <span class="nd">@inline</span>
+    <span class="k">def</span> <span class="n">localIndex</span><span class="o">(</span><span class="n">encoded</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+      <span class="n">encoded</span> <span class="o">&amp;</span> <span class="n">localIndexMask</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li><strong>(2) 根据<code class="highlighter-rouge">nonnegative</code>参数选择解决矩阵分解的方法</strong>。</li>
+</ul>
+
+<p>如果需要解的值为非负,即<code class="highlighter-rouge">nonnegative</code>为<code class="highlighter-rouge">true</code>，那么用非负最小二乘（<code class="highlighter-rouge">NNLS</code>）来解，如果没有这个限制，用乔里斯基（<code class="highlighter-rouge">Cholesky</code>）分解来解。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">solver</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">nonnegative</span><span class="o">)</span> <span class="k">new</span> <span class="nc">NNLSSolver</span> <span class="k">else</span> <span class="k">new</span> <span class="nc">CholeskySolver</span>
+</code></pre>
+</div>
+<p>乔里斯基分解分解是把一个对称正定的矩阵表示成一个上三角矩阵<code class="highlighter-rouge">U</code>的转置和其本身的乘积的分解。在<code class="highlighter-rouge">ml</code>代码中，直接调用<a href="https://github.com/fommil/netlib-java">netlib-java</a>封装的<code class="highlighter-rouge">dppsv</code>方法实现。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">lapack</span><span class="o">.</span><span class="n">dppsv</span><span class="o">(</span><span class="err">“</span><span class="n">u</span><span class="err">”</span><span class="o">,</span> <span class="n">k</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">ne</span><span class="o">.</span><span class="n">ata</span><span class="o">,</span> <span class="n">ne</span><span class="o">.</span><span class="n">atb</span><span class="o">,</span> <span class="n">k</span><span class="o">,</span> <span class="n">info</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p>可以深入<code class="highlighter-rouge">dppsv</code>代码（<code class="highlighter-rouge">Fortran</code>代码）了解更深的细节。我们分析的重点是非负正则化最小二乘的实现，因为在某些情况下，方程组的解为负数是没有意义的。虽然方程组可以得到精确解，但却不能取负值解。在这种情况下，其非负最小二乘解比方程的精确解更有意义。``NNLS`在最优化模块会作详细讲解。</p>
+
+<ul>
+  <li><strong>(3) 将<code class="highlighter-rouge">ratings</code>数据转换为分区的格式</strong>。</li>
+</ul>
+
+<p>将<code class="highlighter-rouge">ratings</code>数据转换为分区的形式，即<code class="highlighter-rouge">（（用户分区id，商品分区id），分区数据集blocks））</code>的形式，并缓存到内存中。其中分区id的计算是通过<code class="highlighter-rouge">ALSPartitioner</code>的<code class="highlighter-rouge">getPartitions</code>方法获得的，分区数据集由<code class="highlighter-rouge">RatingBlock</code>组成，
+它表示<code class="highlighter-rouge">（用户分区id，商品分区id ）</code>对所对应的用户id集，商品id集，以及打分集，即<code class="highlighter-rouge">（用户id集，商品id集，打分集）</code>。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">blockRatings</span> <span class="k">=</span> <span class="n">partitionRatings</span><span class="o">(</span><span class="n">ratings</span><span class="o">,</span> <span class="n">userPart</span><span class="o">,</span> <span class="n">itemPart</span><span class="o">)</span>
+  <span class="o">.</span><span class="n">persist</span><span class="o">(</span><span class="n">intermediateRDDStorageLevel</span><span class="o">)</span>
+
+<span class="c1">//以下是partitionRatings的实现
+</span>  <span class="c1">//默认是10*10
+</span>  <span class="k">val</span> <span class="n">numPartitions</span> <span class="k">=</span> <span class="n">srcPart</span><span class="o">.</span><span class="n">numPartitions</span> <span class="o">*</span> <span class="n">dstPart</span><span class="o">.</span><span class="n">numPartitions</span>
+  <span class="n">ratings</span><span class="o">.</span><span class="n">mapPartitions</span> <span class="o">{</span> <span class="n">iter</span> <span class="k">=&gt;</span>
+      <span class="k">val</span> <span class="n">builders</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">fill</span><span class="o">(</span><span class="n">numPartitions</span><span class="o">)(</span><span class="k">new</span> <span class="nc">RatingBlockBuilder</span><span class="o">[</span><span class="kt">ID</span><span class="o">])</span>
+      <span class="n">iter</span><span class="o">.</span><span class="n">flatMap</span> <span class="o">{</span> <span class="n">r</span> <span class="k">=&gt;</span>
+        <span class="k">val</span> <span class="n">srcBlockId</span> <span class="k">=</span> <span class="n">srcPart</span><span class="o">.</span><span class="n">getPartition</span><span class="o">(</span><span class="n">r</span><span class="o">.</span><span class="n">user</span><span class="o">)</span>
+        <span class="k">val</span> <span class="n">dstBlockId</span> <span class="k">=</span> <span class="n">dstPart</span><span class="o">.</span><span class="n">getPartition</span><span class="o">(</span><span class="n">r</span><span class="o">.</span><span class="n">item</span><span class="o">)</span>
+        <span class="c1">//当前builder的索引位置
+</span>        <span class="k">val</span> <span class="n">idx</span> <span class="k">=</span> <span class="n">srcBlockId</span> <span class="o">+</span> <span class="n">srcPart</span><span class="o">.</span><span class="n">numPartitions</span> <span class="o">*</span> <span class="n">dstBlockId</span>
+        <span class="k">val</span> <span class="n">builder</span> <span class="k">=</span> <span class="n">builders</span><span class="o">(</span><span class="n">idx</span><span class="o">)</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="n">r</span><span class="o">)</span>
+        <span class="c1">//如果某个builder的数量大于2048，那么构建一个分区
+</span>        <span class="k">if</span> <span class="o">(</span><span class="n">builder</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">2048</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// 2048 * (3 * 4) = 24k
+</span>          <span class="n">builders</span><span class="o">(</span><span class="n">idx</span><span class="o">)</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">RatingBlockBuilder</span>
+          <span class="c1">//单元素集合
+</span>          <span class="nc">Iterator</span><span class="o">.</span><span class="n">single</span><span class="o">(((</span><span class="n">srcBlockId</span><span class="o">,</span> <span class="n">dstBlockId</span><span class="o">),</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="o">()))</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+          <span class="nc">Iterator</span><span class="o">.</span><span class="n">empty</span>
+        <span class="o">}</span>
+      <span class="o">}</span> <span class="o">++</span> <span class="o">{</span>
+        <span class="n">builders</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">_1</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">).</span><span class="n">map</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">block</span><span class="o">,</span> <span class="n">idx</span><span class="o">)</span> <span class="k">=&gt;</span>
+          <span class="c1">//用户分区id
+</span>          <span class="k">val</span> <span class="n">srcBlockId</span> <span class="k">=</span> <span class="n">idx</span> <span class="o">%</span> <span class="n">srcPart</span><span class="o">.</span><span class="n">numPartitions</span>
+          <span class="c1">//商品分区id
+</span>          <span class="k">val</span> <span class="n">dstBlockId</span> <span class="k">=</span> <span class="n">idx</span> <span class="o">/</span> <span class="n">srcPart</span><span class="o">.</span><span class="n">numPartitions</span>
+          <span class="o">((</span><span class="n">srcBlockId</span><span class="o">,</span> <span class="n">dstBlockId</span><span class="o">),</span> <span class="n">block</span><span class="o">.</span><span class="n">build</span><span class="o">())</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+    <span class="o">}.</span><span class="n">groupByKey</span><span class="o">().</span><span class="n">mapValues</span> <span class="o">{</span> <span class="n">blocks</span> <span class="k">=&gt;</span>
+      <span class="k">val</span> <span class="n">builder</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">RatingBlockBuilder</span><span class="o">[</span><span class="kt">ID</span><span class="o">]</span>
+      <span class="n">blocks</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">builder</span><span class="o">.</span><span class="n">merge</span><span class="o">)</span>
+      <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="o">()</span>
+    <span class="o">}.</span><span class="n">setName</span><span class="o">(</span><span class="s">"ratingBlocks"</span><span class="o">)</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li><strong>（4）获取<code class="highlighter-rouge">inblocks</code>和<code class="highlighter-rouge">outblocks</code>数据</strong>。</li>
+</ul>
+
+<p>获取<code class="highlighter-rouge">inblocks</code>和<code class="highlighter-rouge">outblocks</code>数据是数据处理的重点。我们知道，通信复杂度是分布式实现一个算法时要重点考虑的问题，不同的实现可能会对性能产生很大的影响。我们假设最坏的情况：即求解商品需要的所有用户特征都需要从其它节点获得。
+如下图所示，求解<code class="highlighter-rouge">v1</code>需要获得<code class="highlighter-rouge">u1</code>,<code class="highlighter-rouge">u2</code>，求解<code class="highlighter-rouge">v2</code>需要获得<code class="highlighter-rouge">u1</code>,<code class="highlighter-rouge">u2</code>,<code class="highlighter-rouge">u3</code>等，在这种假设下，每步迭代所需的交换数据量是<code class="highlighter-rouge">O(m*rank)</code>，其中<code class="highlighter-rouge">m</code>表示所有观察到的打分集大小，<code class="highlighter-rouge">rank</code>表示特征数量。</p>
+
+<p><img src="/images/spark/ml/CollaborativeFiltering/ALS.3.1.png" alt="" /></p>
+
+<p>从上图中，我们知道，如果计算<code class="highlighter-rouge">v1</code>和<code class="highlighter-rouge">v2</code>是在同一个分区上进行的，那么我们只需要把<code class="highlighter-rouge">u1</code>和<code class="highlighter-rouge">u2</code>一次发给这个分区就好了，而不需要将<code class="highlighter-rouge">u2</code>分别发给<code class="highlighter-rouge">v1</code>,<code class="highlighter-rouge">v2</code>，这样就省掉了不必要的数据传输。</p>
+
+<p>下图描述了如何在分区的情况下通过<code class="highlighter-rouge">U</code>来求解<code class="highlighter-rouge">V</code>，注意节点之间的数据交换量减少了。使用这种分区结构，我们需要在原始打分数据的基础上额外保存一些信息。</p>
+
+<p><img src="/images/spark/ml/CollaborativeFiltering/ALS.3.2.png" alt="" /></p>
+
+<p>在<code class="highlighter-rouge">Q1</code>中，我们需要知道和<code class="highlighter-rouge">v1</code>相关联的用户向量及其对应的打分，从而构建最小二乘问题并求解。这部分数据不仅包含原始打分数据，还包含从每个用户分区收到的向量排序信息，在代码里称作<code class="highlighter-rouge">InBlock</code>。在<code class="highlighter-rouge">P1</code>中，我们要知道把<code class="highlighter-rouge">u1</code>,<code class="highlighter-rouge">u2</code> 发给<code class="highlighter-rouge">Q1</code>。我们可以查看和<code class="highlighter-rouge">u1</code>相关联的所有产品来确定需要把<code class="highlighter-rouge">u1</code>发给谁，但每次迭代都扫一遍数据很不划算，所以在<code class="highlighter-rouge">spark</code>的实现中只计算一次这个信息，然后把结果通过<code class="highlighter-rouge">RDD</code>缓存起来重复使用。这部分数据我们在代码里称作<code class="highlighter-rouge">OutBlock</code>。
+所以从<code class="highlighter-rouge">U</code>求解<code class="highlighter-rouge">V</code>，我们需要通过用户的<code class="highlighter-rouge">OutBlock</code>信息把用户向量发给商品分区，然后通过商品的<code class="highlighter-rouge">InBlock</code>信息构建最小二乘问题并求解。从<code class="highlighter-rouge">V</code>求解<code class="highlighter-rouge">U</code>，我们需要商品的<code class="highlighter-rouge">OutBlock</code>信息和用户的<code class="highlighter-rouge">InBlock</code>信息。所有的<code class="highlighter-rouge">InBlock</code>和<code class="highlighter-rouge">OutBlock</code>信息在迭代过程中都通过<code class="highlighter-rouge">RDD</code>缓存。打分数据在用户的<code class="highlighter-rouge">InBlock</code>和商品的<code class="highlighter-rouge">InBlock</code>各存了一份，但分区方式不同。这么做可以避免在迭代过程中原始数据的交换。</p>
+
+<p>下面介绍获取<code class="highlighter-rouge">InBlock</code>和<code class="highlighter-rouge">OutBlock</code>的方法。下面的代码用来分别获取用户和商品的<code class="highlighter-rouge">InBlock</code>和<code class="highlighter-rouge">OutBlock</code>。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="o">(</span><span class="n">userInBlocks</span><span class="o">,</span> <span class="n">userOutBlocks</span><span class="o">)</span> <span class="k">=</span><span class="n">makeBlocks</span><span class="o">(</span><span class="s">"user"</span><span class="o">,</span> <span class="n">blockRatings</span><span class="o">,</span>
+ <span class="n">userPart</span><span class="o">,</span> <span class="n">itemPart</span><span class="o">,</span><span class="n">intermediateRDDStorageLevel</span><span class="o">)</span>
+<span class="c1">//交换userBlockId和itemBlockId以及其对应的数据
+</span><span class="k">val</span> <span class="n">swappedBlockRatings</span> <span class="k">=</span> <span class="n">blockRatings</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span>
+  <span class="k">case</span> <span class="o">((</span><span class="n">userBlockId</span><span class="o">,</span> <span class="n">itemBlockId</span><span class="o">),</span> <span class="nc">RatingBlock</span><span class="o">(</span><span class="n">userIds</span><span class="o">,</span> <span class="n">itemIds</span><span class="o">,</span> <span class="n">localRatings</span><span class="o">))</span> <span class="k">=&gt;</span>
+    <span class="o">((</span><span class="n">itemBlockId</span><span class="o">,</span> <span class="n">userBlockId</span><span class="o">),</span> <span class="nc">RatingBlock</span><span class="o">(</span><span class="n">itemIds</span><span class="o">,</span> <span class="n">userIds</span><span class="o">,</span> <span class="n">localRatings</span><span class="o">))</span>
+<span class="o">}</span>
+<span class="k">val</span> <span class="o">(</span><span class="n">itemInBlocks</span><span class="o">,</span> <span class="n">itemOutBlocks</span><span class="o">)</span> <span class="k">=</span><span class="n">makeBlocks</span><span class="o">(</span><span class="s">"item"</span><span class="o">,</span> <span class="n">swappedBlockRatings</span><span class="o">,</span>
+ <span class="n">itemPart</span><span class="o">,</span> <span class="n">userPart</span><span class="o">,</span><span class="n">intermediateRDDStorageLevel</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p>我们会以求商品的<code class="highlighter-rouge">InBlock</code>以及用户的<code class="highlighter-rouge">OutBlock</code>为例来分析<code class="highlighter-rouge">makeBlocks</code>方法。因为在第（5）步中构建最小二乘的讲解中，我们会用到这两部分数据。</p>
+
+<p>下面的代码用来求商品的<code class="highlighter-rouge">InBlock</code>信息。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">inBlocks</span> <span class="k">=</span> <span class="n">ratingBlocks</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span>
+  <span class="k">case</span> <span class="o">((</span><span class="n">srcBlockId</span><span class="o">,</span> <span class="n">dstBlockId</span><span class="o">),</span> <span class="nc">RatingBlock</span><span class="o">(</span><span class="n">srcIds</span><span class="o">,</span> <span class="n">dstIds</span><span class="o">,</span> <span class="n">ratings</span><span class="o">))</span> <span class="k">=&gt;</span>
+    <span class="k">val</span> <span class="n">start</span> <span class="k">=</span> <span class="nc">System</span><span class="o">.</span><span class="n">nanoTime</span><span class="o">()</span>
+    <span class="k">val</span> <span class="n">dstIdSet</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">OpenHashSet</span><span class="o">[</span><span class="kt">ID</span><span class="o">](</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="o">)</span>
+    <span class="c1">//将用户id保存到hashset中，用来去重
+</span>    <span class="n">dstIds</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">dstIdSet</span><span class="o">.</span><span class="n">add</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">sortedDstIds</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">ID</span><span class="o">](</span><span class="n">dstIdSet</span><span class="o">.</span><span class="n">size</span><span class="o">)</span>
+    <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
+    <span class="k">var</span> <span class="n">pos</span> <span class="k">=</span> <span class="n">dstIdSet</span><span class="o">.</span><span class="n">nextPos</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">pos</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">sortedDstIds</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="n">dstIdSet</span><span class="o">.</span><span class="n">getValue</span><span class="o">(</span><span class="n">pos</span><span class="o">)</span>
+      <span class="n">pos</span> <span class="k">=</span> <span class="n">dstIdSet</span><span class="o">.</span><span class="n">nextPos</span><span class="o">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+      <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="o">}</span>
+    <span class="c1">//对用户id进行排序
+</span>    <span class="nc">Sorting</span><span class="o">.</span><span class="n">quickSort</span><span class="o">(</span><span class="n">sortedDstIds</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">dstIdToLocalIndex</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">OpenHashMap</span><span class="o">[</span><span class="kt">ID</span>, <span class="kt">Int</span><span class="o">](</span><span class="n">sortedDstIds</span><span class="o">.</span><span class="n">length</span><span class="o">)</span>
+    <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">sortedDstIds</span><span class="o">.</span><span class="n">length</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">dstIdToLocalIndex</span><span class="o">.</span><span class="n">update</span><span class="o">(</span><span class="n">sortedDstIds</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">i</span><span class="o">)</span>
+      <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="o">}</span>
+    <span class="c1">//求取块内，用户id的本地位置
+</span>    <span class="k">val</span> <span class="n">dstLocalIndices</span> <span class="k">=</span> <span class="n">dstIds</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">dstIdToLocalIndex</span><span class="o">.</span><span class="n">apply</span><span class="o">)</span>
+    <span class="c1">//返回数据集
+</span>    <span class="o">(</span><span class="n">srcBlockId</span><span class="o">,</span> <span class="o">(</span><span class="n">dstBlockId</span><span class="o">,</span> <span class="n">srcIds</span><span class="o">,</span> <span class="n">dstLocalIndices</span><span class="o">,</span> <span class="n">ratings</span><span class="o">))</span>
+<span class="o">}.</span><span class="n">groupByKey</span><span class="o">(</span><span class="k">new</span> <span class="nc">ALSPartitioner</span><span class="o">(</span><span class="n">srcPart</span><span class="o">.</span><span class="n">numPartitions</span><span class="o">))</span>
+  <span class="o">.</span><span class="n">mapValues</span> <span class="o">{</span> <span class="n">iter</span> <span class="k">=&gt;</span>
+    <span class="k">val</span> <span class="n">builder</span> <span class="k">=</span>
+      <span class="k">new</span> <span class="nc">UncompressedInBlockBuilder</span><span class="o">[</span><span class="kt">ID</span><span class="o">](</span><span class="k">new</span> <span class="nc">LocalIndexEncoder</span><span class="o">(</span><span class="n">dstPart</span><span class="o">.</span><span class="n">numPartitions</span><span class="o">))</span>
+    <span class="n">iter</span><span class="o">.</span><span class="n">foreach</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">dstBlockId</span><span class="o">,</span> <span class="n">srcIds</span><span class="o">,</span> <span class="n">dstLocalIndices</span><span class="o">,</span> <span class="n">ratings</span><span class="o">)</span> <span class="k">=&gt;</span>
+      <span class="n">builder</span><span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="n">dstBlockId</span><span class="o">,</span> <span class="n">srcIds</span><span class="o">,</span> <span class="n">dstLocalIndices</span><span class="o">,</span> <span class="n">ratings</span><span class="o">)</span>
+    <span class="o">}</span>
+    <span class="c1">//构建非压缩块，并压缩为InBlock
+</span>    <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="o">().</span><span class="n">compress</span><span class="o">()</span>
+  <span class="o">}.</span><span class="n">setName</span><span class="o">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s">"InBlocks"</span><span class="o">)</span>
+  <span class="o">.</span><span class="n">persist</span><span class="o">(</span><span class="n">storageLevel</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p>这段代码首先对<code class="highlighter-rouge">ratingBlocks</code>数据集作<code class="highlighter-rouge">map</code>操作，将<code class="highlighter-rouge">ratingBlocks</code>转换成<code class="highlighter-rouge">（商品分区id，（用户分区id，商品集合，用户id在分区中相对应的位置，打分）</code>这样的集合形式。然后对这个数据集作<code class="highlighter-rouge">groupByKey</code>操作，以商品分区<code class="highlighter-rouge">id</code>为<code class="highlighter-rouge">key</code>值，处理<code class="highlighter-rouge">key</code>对应的值，将数据集转换成<code class="highlighter-rouge">（商品分区id，InBlocks）</code>的形式。
+这里值得我们去分析的是输入块（<code class="highlighter-rouge">InBlock</code>）的结构。为简单起见，我们用图3.2为例来说明输入块的结构。</p>
+
+<p>以<code class="highlighter-rouge">Q1</code>为例，我们需要知道关于<code class="highlighter-rouge">v1</code>和<code class="highlighter-rouge">v2</code>的所有打分：<code class="highlighter-rouge">(v1, u1, r11)，(v2, u1, r12)， (v1, u2, r21)， (v2, u2, r22)， (v2, u3, r32)</code>，把这些项以<code class="highlighter-rouge">Tuple</code>的形式存储会存在问题，第一，<code class="highlighter-rouge">Tuple</code>有额外开销，每个<code class="highlighter-rouge">Tuple</code>实例都需要一个指针，而每个<code class="highlighter-rouge">Tuple</code>所存的数据不过是两个ID和一个打分；
+第二，存储大量的<code class="highlighter-rouge">Tuple</code>会降低垃圾回收的效率。所以<code class="highlighter-rouge">spark</code>实现中，是使用三个数组来存储打分的，如<code class="highlighter-rouge">([v1, v2, v1, v2, v2], [u1, u1, u2, u2, u3], [r11, r12, r21, r22, r32])</code>。这样不仅大幅减少了实例数量，还有效地利用了连续内存。</p>
+
+<p>但是，光这么做并不够，<code class="highlighter-rouge">spark</code>代码实现中，并没有存储用户的真实id，而是存储的使用<code class="highlighter-rouge">LocalIndexEncoder</code>生成的编码，这样节省了空间，格式为<code class="highlighter-rouge">UncompressedInBlock</code>:<code class="highlighter-rouge">（商品id集，用户id集对应的编码集，打分集）</code>，
+如，<code class="highlighter-rouge">([v1, v2, v1, v2, v2], [ui1, ui1, ui2, ui2, ui3], [r11, r12, r21, r22, r32])</code>。这种结构仍旧有压缩的空间，<code class="highlighter-rouge">spark</code>调用<code class="highlighter-rouge">compress</code>方法将商品<code class="highlighter-rouge">id</code>进行排序（排序有两个好处，除了压缩以外，后文构建最小二乘也会因此受益），
+并且转换为<code class="highlighter-rouge">（不重复的有序的商品id集，商品位置偏移集，用户id集对应的编码集，打分集）</code>的形式，以获得更优的存储效率（代码中就是将矩阵的<code class="highlighter-rouge">coo</code>格式转换为<code class="highlighter-rouge">csc</code>格式，你可以更进一步了解矩阵存储，以获得更多信息）。
+以这样的格式修改<code class="highlighter-rouge">([v1, v2, v1, v2, v2], [ui1, ui1, ui2, ui2, ui3], [r11, r12, r21, r22, r32])</code>，得到的结果是<code class="highlighter-rouge">([v1, v2], [0, 2, 5], [ui1, ui2, ui1, ui2, ui3], [r11, r21, r12, r22, r32])</code>。其中<code class="highlighter-rouge">[0, 2]</code>指<code class="highlighter-rouge">v1</code>对应的打分的区间是<code class="highlighter-rouge">[0, 2]</code>，<code class="highlighter-rouge">[2, 5]</code>指<code class="highlighter-rouge">v2</code>对应的打分的区间是<code class="highlighter-rouge">[2, 5]</code>。</p>
+
+<p><code class="highlighter-rouge">Compress</code>方法利用<code class="highlighter-rouge">spark</code>内置的<code class="highlighter-rouge">Timsort</code>算法将<code class="highlighter-rouge">UncompressedInBlock</code>进行排序并转换为<code class="highlighter-rouge">InBlock</code>。代码如下所示：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">compress</span><span class="o">()</span><span class="k">:</span> <span class="kt">InBlock</span><span class="o">[</span><span class="kt">ID</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="n">sz</span> <span class="k">=</span> <span class="n">length</span>
+  <span class="c1">//Timsort排序
+</span>  <span class="n">sort</span><span class="o">()</span>
+  <span class="k">val</span> <span class="n">uniqueSrcIdsBuilder</span> <span class="k">=</span> <span class="n">mutable</span><span class="o">.</span><span class="nc">ArrayBuilder</span><span class="o">.</span><span class="n">make</span><span class="o">[</span><span class="kt">ID</span><span class="o">]</span>
+  <span class="k">val</span> <span class="n">dstCountsBuilder</span> <span class="k">=</span> <span class="n">mutable</span><span class="o">.</span><span class="nc">ArrayBuilder</span><span class="o">.</span><span class="n">make</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span>
+  <span class="k">var</span> <span class="n">preSrcId</span> <span class="k">=</span> <span class="n">srcIds</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+  <span class="n">uniqueSrcIdsBuilder</span> <span class="o">+=</span> <span class="n">preSrcId</span>
+  <span class="k">var</span> <span class="n">curCount</span> <span class="k">=</span> <span class="mi">1</span>
+  <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">1</span>
+  <span class="k">var</span> <span class="n">j</span> <span class="k">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">sz</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">srcId</span> <span class="k">=</span> <span class="n">srcIds</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">srcId</span> <span class="o">!=</span> <span class="n">preSrcId</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">uniqueSrcIdsBuilder</span> <span class="o">+=</span> <span class="n">srcId</span>
+      <span class="n">dstCountsBuilder</span> <span class="o">+=</span> <span class="n">curCount</span>
+      <span class="n">preSrcId</span> <span class="k">=</span> <span class="n">srcId</span>
+      <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="n">curCount</span> <span class="k">=</span> <span class="mi">0</span>
+    <span class="o">}</span>
+    <span class="n">curCount</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="o">}</span>
+  <span class="n">dstCountsBuilder</span> <span class="o">+=</span> <span class="n">curCount</span>
+  <span class="k">val</span> <span class="n">uniqueSrcIds</span> <span class="k">=</span> <span class="n">uniqueSrcIdsBuilder</span><span class="o">.</span><span class="n">result</span><span class="o">()</span>
+  <span class="k">val</span> <span class="n">numUniqueSrdIds</span> <span class="k">=</span> <span class="n">uniqueSrcIds</span><span class="o">.</span><span class="n">length</span>
+  <span class="k">val</span> <span class="n">dstCounts</span> <span class="k">=</span> <span class="n">dstCountsBuilder</span><span class="o">.</span><span class="n">result</span><span class="o">()</span>
+  <span class="k">val</span> <span class="n">dstPtrs</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">](</span><span class="n">numUniqueSrdIds</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+  <span class="k">var</span> <span class="n">sum</span> <span class="k">=</span> <span class="mi">0</span>
+  <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
+  <span class="c1">//计算偏移量
+</span>  <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">numUniqueSrdIds</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">sum</span> <span class="o">+=</span> <span class="n">dstCounts</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">dstPtrs</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="n">sum</span>
+  <span class="o">}</span>
+  <span class="nc">InBlock</span><span class="o">(</span><span class="n">uniqueSrcIds</span><span class="o">,</span> <span class="n">dstPtrs</span><span class="o">,</span> <span class="n">dstEncodedIndices</span><span class="o">,</span> <span class="n">ratings</span><span class="o">)</span>
+<span class="o">}</span>
+<span class="k">private</span> <span class="k">def</span> <span class="n">sort</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="n">sz</span> <span class="k">=</span> <span class="n">length</span>
+  <span class="k">val</span> <span class="n">sortId</span> <span class="k">=</span> <span class="nc">Utils</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">nextInt</span><span class="o">()</span>
+  <span class="k">val</span> <span class="n">sorter</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Sorter</span><span class="o">(</span><span class="k">new</span> <span class="nc">UncompressedInBlockSort</span><span class="o">[</span><span class="kt">ID</span><span class="o">])</span>
+  <span class="n">sorter</span><span class="o">.</span><span class="n">sort</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">length</span><span class="o">,</span> <span class="nc">Ordering</span><span class="o">[</span><span class="kt">KeyWrapper</span><span class="o">[</span><span class="kt">ID</span><span class="o">]])</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
+
+<p>下面的代码用来求用户的<code class="highlighter-rouge">OutBlock</code>信息。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">outBlocks</span> <span class="k">=</span> <span class="n">inBlocks</span><span class="o">.</span><span class="n">mapValues</span> <span class="o">{</span> <span class="k">case</span> <span class="nc">InBlock</span><span class="o">(</span><span class="n">srcIds</span><span class="o">,</span> <span class="n">dstPtrs</span><span class="o">,</span> <span class="n">dstEncodedIndices</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="k">=&gt;</span>
+  <span class="k">val</span> <span class="n">encoder</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LocalIndexEncoder</span><span class="o">(</span><span class="n">dstPart</span><span class="o">.</span><span class="n">numPartitions</span><span class="o">)</span>
+  <span class="k">val</span> <span class="n">activeIds</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">fill</span><span class="o">(</span><span class="n">dstPart</span><span class="o">.</span><span class="n">numPartitions</span><span class="o">)(</span><span class="n">mutable</span><span class="o">.</span><span class="nc">ArrayBuilder</span><span class="o">.</span><span class="n">make</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span>
+  <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
+  <span class="k">val</span> <span class="n">seen</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">](</span><span class="n">dstPart</span><span class="o">.</span><span class="n">numPartitions</span><span class="o">)</span>
+  <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">srcIds</span><span class="o">.</span><span class="n">length</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">var</span> <span class="n">j</span> <span class="k">=</span> <span class="n">dstPtrs</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+    <span class="n">ju</span><span class="o">.</span><span class="nc">Arrays</span><span class="o">.</span><span class="n">fill</span><span class="o">(</span><span class="n">seen</span><span class="o">,</span> <span class="kc">false</span><span class="o">)</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">dstPtrs</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="n">dstBlockId</span> <span class="k">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">blockId</span><span class="o">(</span><span class="n">dstEncodedIndices</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+      <span class="k">if</span> <span class="o">(!</span><span class="n">seen</span><span class="o">(</span><span class="n">dstBlockId</span><span class="o">))</span> <span class="o">{</span>
+        <span class="n">activeIds</span><span class="o">(</span><span class="n">dstBlockId</span><span class="o">)</span> <span class="o">+=</span> <span class="n">i</span>
+        <span class="n">seen</span><span class="o">(</span><span class="n">dstBlockId</span><span class="o">)</span> <span class="k">=</span> <span class="kc">true</span>
+      <span class="o">}</span>
+      <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="o">}</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="o">}</span>
+  <span class="n">activeIds</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">x</span> <span class="k">=&gt;</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">result</span><span class="o">()</span>
+  <span class="o">}</span>
+<span class="o">}.</span><span class="n">setName</span><span class="o">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s">"OutBlocks"</span><span class="o">)</span>
+  <span class="o">.</span><span class="n">persist</span><span class="o">(</span><span class="n">storageLevel</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p>这段代码中，<code class="highlighter-rouge">inBlocks</code>表示用户的输入分区块，格式为<code class="highlighter-rouge">（用户分区id，（不重复的用户id集，用户位置偏移集，商品id集对应的编码集，打分集））</code>。
+<code class="highlighter-rouge">activeIds</code>表示商品分区中涉及的用户id集，也即上文所说的需要发送给确定的商品分区的用户信息。<code class="highlighter-rouge">activeIds</code>是一个二维数组，第一维表示分区，第二维表示用户id集。用户<code class="highlighter-rouge">OutBlocks</code>的最终格式是<code class="highlighter-rouge">（用户分区id，OutBlocks）</code>。</p>
+
+<p>通过用户的<code class="highlighter-rouge">OutBlock</code>把用户信息发给商品分区，然后结合商品的<code class="highlighter-rouge">InBlock</code>信息构建最小二乘问题，我们就可以借此解得商品的极小解。反之，通过商品<code class="highlighter-rouge">OutBlock</code>把商品信息发送给用户分区，然后结合用户的<code class="highlighter-rouge">InBlock</code>信息构建最小二乘问题，我们就可以解得用户解。
+第（6）步会详细介绍如何构建最小二乘。</p>
+
+<ul>
+  <li><strong>（5）初始化用户特征矩阵和商品特征矩阵。</strong></li>
+</ul>
+
+<p>交换最小二乘算法是分别固定用户特征矩阵和商品特征矩阵来交替计算下一次迭代的商品特征矩阵和用户特征矩阵。通过下面的代码初始化第一次迭代的特征矩阵。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">userFactors</span> <span class="k">=</span> <span class="n">initialize</span><span class="o">(</span><span class="n">userInBlocks</span><span class="o">,</span> <span class="n">rank</span><span class="o">,</span> <span class="n">seedGen</span><span class="o">.</span><span class="n">nextLong</span><span class="o">())</span>
+<span class="k">var</span> <span class="n">itemFactors</span> <span class="k">=</span> <span class="n">initialize</span><span class="o">(</span><span class="n">itemInBlocks</span><span class="o">,</span> <span class="n">rank</span><span class="o">,</span> <span class="n">seedGen</span><span class="o">.</span><span class="n">nextLong</span><span class="o">())</span>
+</code></pre>
+</div>
+
+<p>初始化后的<code class="highlighter-rouge">userFactors</code>的格式是<code class="highlighter-rouge">（用户分区id，用户特征矩阵factors）</code>，其中<code class="highlighter-rouge">factors</code>是一个二维数组，第一维的长度是用户数，第二维的长度是<code class="highlighter-rouge">rank</code>数。初始化的值是异或随机数的F范式。<code class="highlighter-rouge">itemFactors</code>的初始化与此类似。</p>
+
+<ul>
+  <li><strong>（6）利用inblock和outblock信息构建最小二乘。</strong></li>
+</ul>
+
+<p>构建最小二乘的方法是在<code class="highlighter-rouge">computeFactors</code>方法中实现的。我们以商品<code class="highlighter-rouge">inblock</code>信息结合用户<code class="highlighter-rouge">outblock</code>信息构建最小二乘为例来说明这个过程。代码首先用用户<code class="highlighter-rouge">outblock</code>与<code class="highlighter-rouge">userFactor</code>进行<code class="highlighter-rouge">join</code>操作，然后以商品分区<code class="highlighter-rouge">id</code>为<code class="highlighter-rouge">key</code>进行分组。
+每一个商品分区包含一组所需的用户分区及其对应的用户<code class="highlighter-rouge">factor</code>信息，格式即<code class="highlighter-rouge">（用户分区id集，用户分区对应的factor集）</code>。紧接着，用商品<code class="highlighter-rouge">inblock</code>信息与<code class="highlighter-rouge">merged</code>进行<code class="highlighter-rouge">join</code>操作，得到商品分区所需要的所有信息，即<code class="highlighter-rouge">（商品inblock，（用户分区id集，用户分区对应的factor集））</code>。
+有了这些信息，构建最小二乘的数据就齐全了。详细代码如下：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">srcOut</span> <span class="k">=</span> <span class="n">srcOutBlocks</span><span class="o">.</span><span class="n">join</span><span class="o">(</span><span class="n">srcFactorBlocks</span><span class="o">).</span><span class="n">flatMap</span> <span class="o">{</span>
+  <span class="k">case</span> <span class="o">(</span><span class="n">srcBlockId</span><span class="o">,</span> <span class="o">(</span><span class="n">srcOutBlock</span><span class="o">,</span> <span class="n">srcFactors</span><span class="o">))</span> <span class="k">=&gt;</span>
+    <span class="n">srcOutBlock</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">activeIndices</span><span class="o">,</span> <span class="n">dstBlockId</span><span class="o">)</span> <span class="k">=&gt;</span>
+      <span class="o">(</span><span class="n">dstBlockId</span><span class="o">,</span> <span class="o">(</span><span class="n">srcBlockId</span><span class="o">,</span> <span class="n">activeIndices</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">idx</span> <span class="k">=&gt;</span> <span class="n">srcFactors</span><span class="o">(</span><span class="n">idx</span><span class="o">))))</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="k">val</span> <span class="n">merged</span> <span class="k">=</span> <span class="n">srcOut</span><span class="o">.</span><span class="n">groupByKey</span><span class="o">(</span><span class="k">new</span> <span class="nc">ALSPartitioner</span><span class="o">(</span><span class="n">dstInBlocks</span><span class="o">.</span><span class="n">partitions</span><span class="o">.</span><span class="n">length</span><span class="o">))</span>
+<span class="n">dstInBlocks</span><span class="o">.</span><span class="n">join</span><span class="o">(</span><span class="n">merged</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p>我们知道求解商品值时，我们需要通过所有和商品关联的用户向量信息来构建最小二乘问题。这里有两个选择，第一是扫一遍<code class="highlighter-rouge">InBlock</code>信息，同时对所有的产品构建对应的最小二乘问题；
+第二是对于每一个产品，扫描<code class="highlighter-rouge">InBlock</code>信息，构建并求解其对应的最小二乘问题。第一种方式复杂度较高，具体的复杂度计算在此不作推导。<code class="highlighter-rouge">spark</code>选取第二种方法求解最小二乘问题，同时也做了一些优化。
+做优化的原因是二种方法针对每个商品，都会扫描一遍<code class="highlighter-rouge">InBlock</code>信息，这会浪费较多时间，为此，将<code class="highlighter-rouge">InBlock</code>按照商品<code class="highlighter-rouge">id</code>进行排序（前文已经提到过），我们通过一次扫描就可以创建所有的最小二乘问题并求解。
+构建代码如下所示：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">dstIds</span><span class="o">.</span><span class="n">length</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">ls</span><span class="o">.</span><span class="n">reset</span><span class="o">()</span>
+  <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="n">srcPtrs</span><span class="o">(</span><span class="n">j</span><span class="o">)</span>
+  <span class="k">var</span> <span class="n">numExplicits</span> <span class="k">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">srcPtrs</span><span class="o">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">encoded</span> <span class="k">=</span> <span class="n">srcEncodedIndices</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">blockId</span> <span class="k">=</span> <span class="n">srcEncoder</span><span class="o">.</span><span class="n">blockId</span><span class="o">(</span><span class="n">encoded</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">localIndex</span> <span class="k">=</span> <span class="n">srcEncoder</span><span class="o">.</span><span class="n">localIndex</span><span class="o">(</span><span class="n">encoded</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">srcFactor</span> <span class="k">=</span> <span class="n">sortedSrcFactors</span><span class="o">(</span><span class="n">blockId</span><span class="o">)(</span><span class="n">localIndex</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">rating</span> <span class="k">=</span> <span class="n">ratings</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+    <span class="n">ls</span><span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="n">srcFactor</span><span class="o">,</span> <span class="n">rating</span><span class="o">)</span>
+    <span class="n">numExplicits</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="o">}</span>
+   <span class="n">dstFactors</span><span class="o">(</span><span class="n">j</span><span class="o">)</span> <span class="k">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="o">(</span><span class="n">ls</span><span class="o">,</span> <span class="n">numExplicits</span> <span class="o">*</span> <span class="n">regParam</span><span class="o">)</span>
+  <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>到了这一步，构建显式反馈算法的最小二乘就结束了。隐式反馈算法的实现与此类似，不同的地方是它将<code class="highlighter-rouge">YtY</code>这个值预先计算了（可以参考文献【1】了解更多信息），而不用在每次迭代中都计算一遍。代码如下：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//在循环之外计算
+</span><span class="k">val</span> <span class="nc">YtY</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">implicitPrefs</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="n">computeYtY</span><span class="o">(</span><span class="n">srcFactorBlocks</span><span class="o">,</span> <span class="n">rank</span><span class="o">))</span> <span class="k">else</span> <span class="nc">None</span>
+
+<span class="c1">//在每个循环内
+</span><span class="k">if</span> <span class="o">(</span><span class="n">implicitPrefs</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">ls</span><span class="o">.</span><span class="n">merge</span><span class="o">(</span><span class="nc">YtY</span><span class="o">.</span><span class="n">get</span><span class="o">)</span>
+<span class="o">}</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">implicitPrefs</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">// Extension to the original paper to handle b &lt; 0. confidence is a function of |b|
+</span>  <span class="c1">// instead so that it is never negative. c1 is confidence - 1.0.
+</span>  <span class="k">val</span> <span class="n">c1</span> <span class="k">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">abs</span><span class="o">(</span><span class="n">rating</span><span class="o">)</span>
+  <span class="c1">// For rating &lt;= 0, the corresponding preference is 0. So the term below is only added
+</span>  <span class="c1">// for rating &gt; 0. Because YtY is already added, we need to adjust the scaling here.
+</span>  <span class="k">if</span> <span class="o">(</span><span class="n">rating</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">numExplicits</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">ls</span><span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="n">srcFactor</span><span class="o">,</span> <span class="o">(</span><span class="n">c1</span> <span class="o">+</span> <span class="mf">1.0</span><span class="o">)</span> <span class="o">/</span> <span class="n">c1</span><span class="o">,</span> <span class="n">c1</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>后面的问题就如何求解最小二乘了。我们会在最优化章节介绍<code class="highlighter-rouge">spark</code>版本的<a href="../最优化算法/非负最小二乘/NNLS.md">NNLS</a>。</p>
+
+<h3 id="section-5">参考文献</h3>
+
+<p><a href="/attach/SVD/Collaborative Filtering for Implicit Feedback Datasets.pdf">【1】 Yifan Hu，Yehuda Koren∗，Chris Volinsky. Collaborative Filtering for Implicit Feedback Datasets</a></p>
+
+<p><a href="/attach/SVD/Matrix Factorization Techniques for Recommender Systems.pdf">【2】 Yehuda Koren, Robert Bell and Chris Volinsky. Matrix Factorization Techniques for Recommender Systems</a></p>
+
+<p><a href="/attach/SVD/Large-scale Parallel Collaborative Filtering the Netflix Prize.pdf">【3】 Yunhong Zhou, Dennis Wilkinson, Robert Schreiber and Rong Pan. Large-scale Parallel Collaborative Filtering for the Netflix Prize</a></p>
+
+<p><a href="http://www.ams.org/samplings/feature-column/fcarc-svd">【4】We Recommend a Singular Value Decomposition</a></p>
+
+
+                <hr>
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/mladvance/2016/11/17/tratified-sampling/" data-toggle="tooltip" data-placement="top" title="Spark-ML-0203-Stratified sampling">
+                        Previous<br>
+                        <span>Spark-ML-0203-Stratified sampling</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                    <div class="ds-share flat"
+                    <div class="ds-thread"
+                        data-thread-key="/mladvance/2016/11/19/ALS"
+                        data-title="Spark-ML-04-collaborative-filtering"
+                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/ALS/" >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+                        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+                        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                 </div>
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/mladvance/2016/11/19/ALS"
+                        data-title="Spark-ML-04-collaborative-filtering"
+                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/ALS/" >
+                    </div>
+
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="10">
+                                Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spark" title="Spark" rel="13">
+                                Spark
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ME" title="ME" rel="4">
+                                ME
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Other" title="Other" rel="4">
+                                Other
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                CFAL1
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#maths" title="maths" rel="2">
+                                maths
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                                Big Data
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#大数据" title="大数据" rel="20">
+                                大数据
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="4">
+                                IT
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Scala" title="Scala" rel="24">
+                                Scala
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+<script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"machinelearningadvance"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/2672280861">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/helloourworld">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Big Data Memo 2016
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-82819752-1';
+    var _gaDomain = 'machinelearningadvance.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '863b1f46c83a8e14e47782106aee7e7f';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/images/background.jpg" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

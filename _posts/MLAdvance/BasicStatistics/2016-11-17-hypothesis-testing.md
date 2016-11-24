@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spark-ML-0204
+title: Spark-ML-0204-Hypothesis testing
 category: MLAdvance
 catalog: yes
 description: Spark机器学习算法学习——BasicStatistics——Hypothesis testing
@@ -10,33 +10,56 @@ tags:
 ---
 # 假设检测
 
-&emsp;&emsp;假设检测是统计中有力的工具，它用于判断一个结果是否在统计上是显著的、这个结果是否有机会发生。`spark.mllib`目前支持皮尔森卡方检测。输入属性的类型决定是作拟合优度(`goodness of fit`)检测还是作独立性检测。
+&emsp;&emsp;假设检测是统计中有力的工具，它用于判断一个结果是否在统计上是显著的、这个结果是否有机会发生。`spark.mllib`目前支持皮尔森卡方检测。输入属性的类型决定是作拟合优度([goodness of fit](https://en.wikipedia.org/wiki/Goodness_of_fit))检测还是作独立性检测。
 拟合优度检测需要输入数据的类型是`vector`，独立性检测需要输入数据的类型是`Matrix`。
 
 &emsp;&emsp;`spark.mllib`也支持输入数据类型为`RDD[LabeledPoint]`，它用来通过卡方独立性检测作特征选择。`Statistics`提供方法用来作皮尔森卡方检测。下面是一个例子：
 
 ```scala
-import org.apache.spark.SparkContext
-import org.apache.spark.mllib.linalg._
-import org.apache.spark.mllib.regression.LabeledPoint
-import org.apache.spark.mllib.stat.Statistics._
-val sc: SparkContext = ...
-val vec: Vector = ... // a vector composed of the frequencies of events
-// 作皮尔森拟合优度检测
-val goodnessOfFitTestResult = Statistics.chiSqTest(vec)
-println(goodnessOfFitTestResult)
-val mat: Matrix = ... // a contingency matrix
-// [作皮尔森独立性检测](https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test)
-val independenceTestResult = Statistics.chiSqTest(mat)
-println(independenceTestResult) // summary of the test including the p-value, degrees of freedom...
-val obs: RDD[LabeledPoint] = ... // (feature, label) pairs.
-// 独立性检测用于特征选择
-val featureTestResults: Array[ChiSqTestResult] = Statistics.chiSqTest(obs)
-var i = 1
-featureTestResults.foreach { result =>
-    println(s"Column $i:\n$result")
-    i += 1
-}
+    import org.apache.spark.mllib.linalg._
+    import org.apache.spark.mllib.regression.LabeledPoint
+    import org.apache.spark.mllib.stat.Statistics
+    import org.apache.spark.mllib.stat.test.ChiSqTestResult
+    import org.apache.spark.rdd.RDD
+
+    // a vector composed of the frequencies of events
+    val vec: Vector = Vectors.dense(1,2,3,4,5)
+//    val vec: Vector = Vectors.dense(0.1, 0.15, 0.2, 0.3, 0.25)
+
+    // compute the goodness of fit. If a second vector to test against is not supplied
+    // as a parameter, the test runs against a uniform distribution.
+    val goodnessOfFitTestResult = Statistics.chiSqTest(vec)
+    // summary of the test including the p-value, degrees of freedom, test statistic, the method
+    // used, and the null hypothesis.
+    println(s"$goodnessOfFitTestResult\n")
+
+    // a contingency matrix. Create a dense matrix ((1.0, 2.0), (3.0, 4.0), (5.0, 6.0))
+    val mat: Matrix = Matrices.dense(3, 2, Array(1.0, 3.0, 5.0, 2.0, 4.0, 6.0))
+
+    // conduct Pearson's independence test on the input contingency matrix
+    val independenceTestResult = Statistics.chiSqTest(mat)
+    // summary of the test including the p-value, degrees of freedom
+    println(s"$independenceTestResult\n")
+
+    val obs: RDD[LabeledPoint] =
+      sc.parallelize(
+        Seq(
+          LabeledPoint(1.0, Vectors.dense(1.0, 0.0, 3.0)),
+          LabeledPoint(1.0, Vectors.dense(1.0, 2.0, 0.0)),
+          LabeledPoint(-1.0, Vectors.dense(-1.0, 0.0, -0.5)
+          )
+        )
+      ) // (feature, label) pairs.
+
+    // The contingency table is constructed from the raw (feature, label) pairs and used to conduct
+    // the independence test. Returns an array containing the ChiSquaredTestResult for every feature
+    // against the label.
+    val featureTestResults: Array[ChiSqTestResult] = Statistics.chiSqTest(obs)
+    featureTestResults.zipWithIndex.foreach { case (k, v) =>
+      println("Column " + (v + 1).toString + ":")
+      println(k + "\n")
+    }  // summary of the test
+
 ```
 &emsp;&emsp;另外，`spark.mllib`提供了一个`Kolmogorov-Smirnov (KS)`检测的`1-sample, 2-sided`实现，用来检测概率分布的相等性。通过提供理论分布（现在仅仅支持正太分布）的名字以及它相应的参数，
 或者提供一个计算累积分布(`cumulative distribution`)的函数，用户可以检测原假设或零假设(`null hypothesis`)：即样本是否来自于这个分布。用户检测正太分布，但是不提供分布参数，检测会默认该分布为标准正太分布。
@@ -44,14 +67,22 @@ featureTestResults.foreach { result =>
 &emsp;&emsp;`Statistics`提供了一个运行`1-sample, 2-sided KS`检测的方法，下面就是一个应用的例子。
 
 ```scala
-import org.apache.spark.mllib.stat.Statistics
-val data: RDD[Double] = ... // an RDD of sample data
-// run a KS test for the sample versus a standard normal distribution
-val testResult = Statistics.kolmogorovSmirnovTest(data, "norm", 0, 1)
-println(testResult)
-// perform a KS test using a cumulative distribution function of our making
-val myCDF: Double => Double = ...
-val testResult2 = Statistics.kolmogorovSmirnovTest(data, myCDF)
+    import org.apache.spark.mllib.stat.Statistics
+    import org.apache.spark.rdd.RDD
+
+    val data: RDD[Double] = sc.parallelize(Seq(0.1, 0.15, 0.2, 0.3, 0.25))  // an RDD of sample data
+
+    // run a KS test for the sample versus a standard normal distribution
+    val testResult = Statistics.kolmogorovSmirnovTest(data, "norm", 0, 1)
+    // summary of the test including the p-value, test statistic, and null hypothesis if our p-value
+    // indicates significance, we can reject the null hypothesis.
+    println(testResult)
+    println()
+
+    // perform a KS test using a cumulative distribution function of our making
+    val myCDF = Map(0.1 -> 0.2, 0.15 -> 0.6, 0.2 -> 0.05, 0.3 -> 0.05, 0.25 -> 0.1)
+    val testResult2 = Statistics.kolmogorovSmirnovTest(data, myCDF)
+    println(testResult2)
 ```
 
 ## 流式显著性检测
@@ -91,5 +122,5 @@ out.print()
 
 # 参考文献
 
-【1】[显著性检验](http://wiki.mbalib.com/wiki/Significance_Testing)
-[作皮尔森独立性检测](https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test)
+【1】[显著性检验](http://wiki.mbalib.com/wiki/Significance_Testing)\\
+[皮尔森独立性检测](https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test)

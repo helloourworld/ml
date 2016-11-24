@@ -1,3 +1,13 @@
+---
+layout: post
+title: Spark-ML-0205-Random data generation
+category: MLAdvance
+catalog: yes
+description: Spark机器学习算法学习——BasicStatistics——Random data generation
+tags:
+    - Machine Learning
+    -  Spark
+---
 # 随机数生成
 
 &emsp;&emsp;随机数生成在随机算法、性能测试中非常有用，`spark.mllib`支持生成随机的`RDD`,`RDD`的独立同分布(`iid`)的值来自于给定的分布：均匀分布、标准正太分布、泊松分布。
@@ -7,7 +17,9 @@
 ```scala
 import org.apache.spark.SparkContext
 import org.apache.spark.mllib.random.RandomRDDs._
+
 val sc: SparkContext = ...
+
 // Generate a random double RDD that contains 1 million i.i.d. values drawn from the
 // standard normal distribution `N(0, 1)`, evenly distributed in 10 partitions.
 val u = normalRDD(sc, 1000000L, 10)

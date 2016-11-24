@@ -1,11 +1,21 @@
+---
+layout: post
+title: Spark-ML-0206-Kernel density estimation
+category: MLAdvance
+catalog: yes
+description: Spark机器学习算法学习——BasicStatistics——Kernel density estimation
+tags:
+    - Machine Learning
+    -  Spark
+---
 # 核密度估计
 
 ## 1 理论分析
 
-&emsp;&emsp;核密度估计是在概率论中用来估计未知的密度函数，属于非参数检验方法之一。假设我们有`n`个数<img src="http://www.forkosh.com/mathtex.cgi?{X}_{1},{X}_{2},...,{X}_{n}">，要计算某个数`X`的概率密度有多大，
+&emsp;&emsp;核密度估计是在概率论中用来估计未知的密度函数，属于非参数检验方法之一。假设我们有`n`个数$$X_{1},X_{2},...,X_{n}$$，要计算某个数`X`的概率密度有多大，
 可以通过下面的核密度估计方法估计。
 
-<div  align="center"><img src="imgs/5.1.png" width = "200" height = "65" alt="5.1" align="center" /></div><br>
+$$f(x) = \frac{1}{nh}\sum_{i=1}^n K(\frac{x - X_i}{h})$$
 
 &emsp;&emsp;在上面的式子中，`K`为核密度函数，`h`为窗宽。核密度函数的原理比较简单，在我们知道某一事物的概率分布的情况下，如果某一个数在观察中出现了，我们可以认为这个数的概率密度很大，和这个数比较近的数的概率密度也会比较大，而那些离这个数远的数的概率密度会比较小。
 
@@ -13,7 +23,7 @@
 
 &emsp;&emsp;在`MLlib`中，仅仅支持以高斯核做核密度估计。以高斯核做核密度估计时核密度估计公式**（1）**如下：
 
-<div  align="center"><img src="imgs/5.2.png" width = "250" height = "80" alt="5.1" align="center" /></div><br>
+$$P_n(x) = \frac{1}{\sqrt{2\pi}nh_n}\sum_{j=1}^n e^{-\frac{(x - x_j)^2}{2h_n^2}}$$
 
 ## 2 例子
 
@@ -22,12 +32,16 @@
 ```scala
 import org.apache.spark.mllib.stat.KernelDensity
 import org.apache.spark.rdd.RDD
-val data: RDD[Double] = ... // an RDD of sample data
-// Construct the density estimator with the sample data and a standard deviation for the Gaussian
-// kernels
+
+// an RDD of sample data
+val data: RDD[Double] = sc.parallelize(Seq(1, 1, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 9))
+
+// Construct the density estimator with the sample data and a standard deviation
+// for the Gaussian kernels
 val kd = new KernelDensity()
   .setSample(data)
   .setBandwidth(3.0)
+
 // Find density estimates for the given values
 val densities = kd.estimate(Array(-1.0, 2.0, 5.0))
 ```
@@ -78,6 +92,12 @@ def estimate(points: Array[Double]): Array[Double] = {
   }
 ```
 &emsp;&emsp;该方法首先将公式**(1)**取对数，计算结果，然后再对计算结果取指数。
+
+```
+![][1]
+[1]: http://latex.codecogs.com/gif.latex?\prod\(n_{i}\)+1
+```
+$$A=U{A}^{T},k <= m,n$$
 
 ## 参考文献
 

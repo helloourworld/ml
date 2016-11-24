@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spark-ML-0201
+title: Spark-ML-0201-Summary statistics
 category: MLAdvance
 catalog: yes
 description: Spark机器学习算法学习——BasicStatistics——Summary statistics
