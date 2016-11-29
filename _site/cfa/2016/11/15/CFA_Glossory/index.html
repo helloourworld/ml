@@ -1,0 +1,3848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="g89MuzujW3" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+    <title>Lev2 Glossary - Maching Learning | 机器学习笔记</title>
+
+    <link rel="canonical" href="http://machinelearningadvance.com/cfa/2016/11/15/CFA_Glossory/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- ga & ba script hoook -->
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Big Data Memo</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/">Category</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/images/background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/images/background.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Glossary" title="Glossary">Glossary</a>
+                        
+                    </div>
+                    <h1>Lev2 Glossary</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by Big Data Memo on November 15, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h4 id="a"><strong>A</strong></h4>
+
+<ul>
+  <li>Abandonment option</li>
+  <li>
+    <p>The ability to terminate a project at some future time if the financial results are disappointing.</p>
+  </li>
+  <li>Abnormal earnings</li>
+  <li>
+    <p>See residual income.</p>
+  </li>
+  <li>Abnormal return</li>
+  <li>
+    <p>The return on an asset in excess of the asset’s required rate of return; the risk-adjusted return.</p>
+  </li>
+  <li>Absolute convergence</li>
+  <li>
+    <p>The idea that developing countries, regardless of their particular characteristics, will eventually catch up with the developed countries and match them in per capita output.</p>
+  </li>
+  <li>Absolute valuation model</li>
+  <li>
+    <p>A model that specifies an asset’s intrinsic value.</p>
+  </li>
+  <li>Absolute version of PPP</li>
+  <li>
+    <p>The extension of the law of one price to the broad range of goods and services that are consumed in different countries.</p>
+  </li>
+  <li>Accounting estimates</li>
+  <li>
+    <p>Estimates used in calculating the value of assets or liabilities and in the amount of revenue and expense to allocate to a period. Examples of accounting estimates include, among others, the useful lives of depreciable assets, the salvage value of depreciable assets, product returns, warranty costs, and the amount of uncollectible receivables.</p>
+  </li>
+  <li>Accumulated benefit obligation</li>
+  <li>
+    <p>The actuarial present value of benefits (whether vested or non-vested) attributed, generally by the pension benefit formula, to employee service rendered before a specified date and based on employee service and compensation (if applicable) before that date. The accumulated benefit obligation differs from the projected benefit obligation in that it includes no assumption about future compensation levels.</p>
+  </li>
+  <li>Acquirer</li>
+  <li>
+    <p>The company in a merger or acquisition that is acquiring the target.</p>
+  </li>
+  <li>Acquiring company</li>
+  <li>
+    <p>The company in a merger or acquisition that is acquiring the target.</p>
+  </li>
+  <li>Acquisition</li>
+  <li>
+    <p>The purchase of some portion of one company by another; the purchase may be for assets, a definable segment of another entity, or the purchase of an entire company.</p>
+  </li>
+  <li>Active factor risk</li>
+  <li>
+    <p>The contribution to active risk squared resulting from the portfolio’s different-than-benchmark exposures relative to factors specified in the risk model.</p>
+  </li>
+  <li>Active return</li>
+  <li>
+    <p>The return on a portfolio minus the return on the portfolio’s benchmark.</p>
+  </li>
+  <li>Active risk</li>
+  <li>
+    <p>The standard deviation of active returns.</p>
+  </li>
+  <li>Active risk squared</li>
+  <li>
+    <p>The variance of active returns; active risk raised to the second power.</p>
+  </li>
+  <li>Active share</li>
+  <li>
+    <p>A measure of how similar a portfolio is to its benchmark. A manager who precisely replicates the benchmark will have an active share of zero; a manager with no holdings in common with the benchmark will have an active share of one.</p>
+  </li>
+  <li>Active specific risk</li>
+  <li>
+    <p>The contribution to active risk squared resulting from the portfolio’s active weights on individual assets as those weights interact with assets’ residual risk.</p>
+  </li>
+  <li>Adjusted funds from operations</li>
+  <li>
+    <p>Funds from operations (FFO) adjusted to remove any non-cash rent reported under straight-line rent accounting and to subtract maintenance-type capital expenditures and leasing costs, including leasing agents’ commissions and tenants’ improvement allowances.</p>
+  </li>
+  <li>Adjusted present value</li>
+  <li>
+    <p>(APV) As an approach to valuing a company, the sum of the value of the company, assuming no use of debt, and the net present value of any effects of debt on company value.</p>
+  </li>
+  <li>Adjusted R2</li>
+  <li>
+    <p>A measure of goodness-of-fit of a regression that is adjusted for degrees of freedom and hence does not automatically increase when another independent variable is added to a regression.</p>
+  </li>
+  <li>Administrative regulations or administrative law</li>
+  <li>
+    <p>Rules issued by government agencies or other regulators.</p>
+  </li>
+  <li>Advanced set</li>
+  <li>
+    <p>The reference interest rate is set at beginning of the settlement period.</p>
+  </li>
+  <li>Advanced settled</li>
+  <li>
+    <p>An arrangement in which the settlement is made at the beginning of the settlement period.</p>
+  </li>
+  <li>Agency costs</li>
+  <li>
+    <p>Costs associated with the conflict of interest present when a company is managed by non-owners. Agency costs result from the inherent conflicts of interest between managers and equity owners.</p>
+  </li>
+  <li>Agency costs of equity</li>
+  <li>
+    <p>The smaller the stake that managers have in the company, the less is their share in bearing the cost of excessive perquisite consumption or not giving their best efforts in running the company.</p>
+  </li>
+  <li>Agency issues</li>
+  <li>
+    <p>Conflicts of interest that arise when the agent in an agency relationship has goals and incentives that differ from the principal to whom the agent owes a fiduciary duty. Also called agency problems or principal–agent problems.</p>
+  </li>
+  <li>Agency problem</li>
+  <li>
+    <p>A conflict of interest that arises when the agent in an agency relationship has goals and incentives that differ from the principal to whom the agent owes a fiduciary duty.</p>
+  </li>
+  <li>Alpha</li>
+  <li>
+    <p>The return on an asset in excess of the asset’s required rate of return; the risk-adjusted return.</p>
+  </li>
+  <li>American Depositary Receipt</li>
+  <li>
+    <p>A negotiable certificate issued by a depositary bank that represents ownership in a non-US company’s deposited equity (i.e., equity held in custody by the depositary bank in the company’s home market).</p>
+  </li>
+  <li>Analysis of variance (ANOVA)</li>
+  <li>
+    <p>The analysis of the total variability of a dataset (such as observations on the dependent variable in a regression) into components representing different sources of variation; with reference to regression, ANOVA provides the inputs for an F-test of the significance of the regression as a whole.</p>
+  </li>
+  <li>Arbitrage</li>
+  <li>
+    <p>1) The simultaneous purchase of an undervalued asset or portfolio and sale of an overvalued but equivalent asset or portfolio, in order to obtain a riskless profit on the price differential. Taking advantage of a market inefficiency in a risk-free manner. 2) The condition in a financial market in which equivalent assets or combinations of assets sell for two different prices, creating an opportunity to profit at no risk with no commitment of money. In a well-functioning financial market, few arbitrage opportunities are possible. 3) A risk-free operation that earns an expected positive net profit but requires no net investment of money.</p>
+  </li>
+  <li>Arbitrage-free models</li>
+  <li>
+    <p>Term structure models that project future interest rate paths that emanate from the existing term structure. Resulting prices are based on a no-arbitrage condition.</p>
+  </li>
+  <li>Arbitrage-free valuation</li>
+  <li>
+    <p>An approach to valuation that determines security values that are consistent with the absence of arbitrage opportunities.</p>
+  </li>
+  <li>Arbitrage opportunity</li>
+  <li>
+    <p>An opportunity to conduct an arbitrage; an opportunity to earn an expected positive net profit without risk and with no net investment of money.</p>
+  </li>
+  <li>Arbitrage portfolio</li>
+  <li>
+    <p>The portfolio that exploits an arbitrage opportunity.</p>
+  </li>
+  <li>Asset-backed securities</li>
+  <li>
+    <p>A type of bond issued by a legal entity called a special purpose vehicle (SPV), on a collection of assets that the SPV owns. Also, securities backed by receivables and loans other than mortgage loans.</p>
+  </li>
+  <li>Asset-based approach</li>
+  <li>
+    <p>Approach that values a private company based on the values of the underlying assets of the entity less the value of any related liabilities.</p>
+  </li>
+  <li>Asset-based valuation</li>
+  <li>
+    <p>An approach to valuing natural resource companies that estimates company value on the basis of the market value of the natural resources the company controls.</p>
+  </li>
+  <li>Asset beta</li>
+  <li>
+    <p>The unlevered beta; reflects the business risk of the assets; the asset’s systematic risk.</p>
+  </li>
+  <li>Asset purchase</li>
+  <li>
+    <p>An acquisition in which the acquirer purchases the target company’s assets and payment is made directly to the target company.</p>
+  </li>
+  <li>Asymmetric information</li>
+  <li>
+    <p>The differential of information between corporate insiders and outsiders regarding the company’s performance and prospects. Managers typically have more information about the company’s performance and prospects than owners and creditors.</p>
+  </li>
+  <li>At market</li>
+  <li>
+    <p>When a forward contract is established, the forward price is negotiated so that the market value of the forward contract on the initiation date is zero.</p>
+  </li>
+  <li>At-the-money</li>
+  <li>
+    <p>An option in which the underlying value equals the exercise price.</p>
+  </li>
+  <li>Autocorrelation</li>
+  <li>
+    <p>The correlation of a time series with its own past values.</p>
+  </li>
+  <li>Autoregressive model (AR)</li>
+  <li>
+    <p>A time series regressed on its own past values, in which the independent variable is a lagged value of the dependent variable.</p>
+  </li>
+  <li>Available-for-sale investments</li>
+  <li>
+    <p>Debt and equity securities not classified as either held-to-maturity or fair value through profit or loss securities. The investor is willing to sell but not actively planning to sell.</p>
+  </li>
+  <li>In general, available-for-sale securities are reported at fair value on the balance sheet.</li>
+</ul>
+
+<h4 id="b"><strong>B</strong></h4>
+
+<ul>
+  <li>Backward integration</li>
+  <li>
+    <p>A merger involving the purchase of a target ahead of the acquirer in the value or production chain; for example, to acquire a supplier.</p>
+  </li>
+  <li>Backwardation</li>
+  <li>
+    <p>A condition in futures markets in which the spot price exceeds the futures price; also, the condition in which the near-term (closer to expiration) futures contract price is higher than the longer-term futures contract price.</p>
+  </li>
+  <li>Bankruptcy</li>
+  <li>
+    <p>A declaration provided for by a country’s laws that typically involves the establishment of a legal procedure that forces creditors to defer their claims.</p>
+  </li>
+  <li>Basic earnings per share</li>
+  <li>
+    <p>(EPS) Net earnings available to common shareholders (i.e., net income minus preferred dividends) divided by the weighted average number of common shares outstanding during the period.</p>
+  </li>
+  <li>Basis</li>
+  <li>
+    <p>The difference between the spot price and the futures price.</p>
+  </li>
+  <li>Basis trade</li>
+  <li>
+    <p>A trade based on the pricing of credit in the bond market versus the price of the same credit in the CDS market. To execute a basis trade, go long the “underpriced” credit and short the “overpriced” credit. A profit is realized when the price of credit between the short and long position converges.</p>
+  </li>
+  <li>Bear hug</li>
+  <li>
+    <p>A tactic used by acquirers to circumvent target management’s objections to a proposed merger by submitting the proposal directly to the target company’s board of directors.</p>
+  </li>
+  <li>Bear spread</li>
+  <li>
+    <p>A spread that becomes more valuable when the price of the underlying asset declines.</p>
+  </li>
+  <li>Benchmark</li>
+  <li>
+    <p>A comparison portfolio; a point of reference or comparison.</p>
+  </li>
+  <li>Benchmark value of the multiple</li>
+  <li>
+    <p>In using the method of comparables, the value of a price multiple for the comparison asset; when we have comparison assets (a group), the mean or median value of the multiple for the group of assets.</p>
+  </li>
+  <li>Bill-and-hold basis</li>
+  <li>
+    <p>Sales on a bill-and-hold basis involve selling products but not delivering those products until a later date.</p>
+  </li>
+  <li>Blockage factor</li>
+  <li>
+    <p>An illiquidity discount that occurs when an investor sells a large amount of stock relative to its trading volume (assuming it is not large enough to constitute a controlling ownership).</p>
+  </li>
+  <li>Bond indenture</li>
+  <li>
+    <p>A legal contract specifying the terms of a bond issue.</p>
+  </li>
+  <li>Bond yield plus risk premium method</li>
+  <li>
+    <p>An estimate of the cost of common equity that is produced by summing the before-tax cost of debt and a risk premium that captures the additional yield on a company’s stock relative to its bonds. The additional yield is often estimated using historical spreads between bond yields and stock yields.</p>
+  </li>
+  <li>Bonding costs</li>
+  <li>
+    <p>Costs borne by management to assure owners that they are working in the owners’ best interest (e.g., implicit cost of non-compete agreements).</p>
+  </li>
+  <li>Book value</li>
+  <li>
+    <p>Shareholders’ equity (total assets minus total liabilities) minus the value of preferred stock; common shareholders’ equity.</p>
+  </li>
+  <li>Book value of equity</li>
+  <li>
+    <p>Shareholders’ equity (total assets minus total liabilities) minus the value of preferred stock; common shareholders’ equity.</p>
+  </li>
+  <li>Book value per share</li>
+  <li>
+    <p>The amount of book value (also called carrying value) of common equity per share of common stock, calculated by dividing the book value of shareholders’ equity by the number of shares of common stock outstanding.</p>
+  </li>
+  <li>Bootstrapping</li>
+  <li>
+    <p>A statistical method for estimating a sample distribution based on the properties of an approximating distribution.</p>
+  </li>
+  <li>Bottom-up approach</li>
+  <li>
+    <p>With respect to forecasting, an approach that usually begins at the level of the individual company or a unit within the company.</p>
+  </li>
+  <li>Bottom-up investing</li>
+  <li>
+    <p>An approach to investing that focuses on the individual characteristics of securities rather than on macroeconomic or overall market forecasts.</p>
+  </li>
+  <li>Breakup value</li>
+  <li>
+    <p>The value derived using a sum-of-the-parts valuation.</p>
+  </li>
+  <li>Breusch–Pagan test</li>
+  <li>
+    <p>A test for conditional heteroskedasticity in the error term of a regression.</p>
+  </li>
+  <li>Brokerage</li>
+  <li>
+    <p>The business of acting as agents for buyers or sellers, usually in return for commissions.</p>
+  </li>
+  <li>Bull spread</li>
+  <li>
+    <p>A spread that becomes more valuable when the price of the underlying asset rises.</p>
+  </li>
+  <li>Buy-side analysts</li>
+  <li>Analysts who work for investment management firms, trusts, and bank trust departments, and similar institutions.</li>
+</ul>
+
+<h4 id="c"><strong>C</strong></h4>
+
+<ul>
+  <li>Calendar spread</li>
+  <li>
+    <p>A strategy in which an investor sells (or buys) a near-dated call and buys (or sells) a longer-dated one on the same underlying asset and with the same strike.</p>
+  </li>
+  <li>Callable bond</li>
+  <li>
+    <p>Bond that includes an embedded call option that gives the issuer the right to redeem the bond issue prior to maturity, typically when interest rates have fallen or when the issuer’s credit quality has improved.</p>
+  </li>
+  <li>Cannibalization</li>
+  <li>
+    <p>Cannibalization occurs when an investment takes customers and sales away from another part of the company.</p>
+  </li>
+  <li>Cap rate</li>
+  <li>
+    <p>See capitalization rate.</p>
+  </li>
+  <li>Capital charge</li>
+  <li>
+    <p>The company’s total cost of capital in money terms.</p>
+  </li>
+  <li>Capital deepening</li>
+  <li>
+    <p>An increase in the capital-to-labor ratio.</p>
+  </li>
+  <li>Capital rationing</li>
+  <li>
+    <p>A capital rationing environment assumes that the company has a fixed amount of funds to invest.</p>
+  </li>
+  <li>Capital structure</li>
+  <li>
+    <p>The mix of debt and equity that a company uses to finance its business; a company’s specific mixture of long-term financing.</p>
+  </li>
+  <li>Capitalization of earnings method</li>
+  <li>
+    <p>In the context of private company valuation, valuation model based on an assumption of a constant growth rate of free cash flow to the firm or a constant growth rate of free cash flow to equity.</p>
+  </li>
+  <li>Capitalization rate</li>
+  <li>
+    <p>The divisor in the expression for the value of perpetuity. In the context of real estate, the divisor in the direct capitalization method of estimating value. The cap rate equals net operating income divided by value.</p>
+  </li>
+  <li>Capitalized cash flow method</li>
+  <li>
+    <p>In the context of private company valuation, valuation model based on an assumption of a constant growth rate of free cash flow to the firm or a constant growth rate of free cash flow to equity. Also called capitalized cash flow model.</p>
+  </li>
+  <li>Capitalized cash flow model</li>
+  <li>
+    <p>In the context of private company valuation, valuation model based on an assumption of a constant growth rate of free cash flow to the firm or a constant growth rate of free cash flow to equity. Also called capitalized cash flow method.</p>
+  </li>
+  <li>Capitalized income method</li>
+  <li>
+    <p>In the context of private company valuation, valuation model based on an assumption of a constant growth rate of free cash flow to the firm or a constant growth rate of free cash flow to equity.</p>
+  </li>
+  <li>Capped floater</li>
+  <li>
+    <p>Floating-rate bond with a cap provision that prevents the coupon rate from increasing above a specified maximum rate. It protects the issuer against rising interest rates.</p>
+  </li>
+  <li>Carried interest</li>
+  <li>
+    <p>A share of any profits that is paid to the general partner (manager) of an investment partnership, such as a private equity or hedge fund, as a form of compensation designed to be an incentive to the manager to maximize performance of the investment fund.</p>
+  </li>
+  <li>Carry arbitrage model</li>
+  <li>
+    <p>A no-arbitrage approach in which the underlying instrument is either bought or sold along with an opposite position in a forward contract.</p>
+  </li>
+  <li>Carry benefits</li>
+  <li>
+    <p>Benefits that arise from owning certain underlyings; for example, dividends, foreign interest, and bond coupon payments.</p>
+  </li>
+  <li>Carry costs</li>
+  <li>
+    <p>Costs that arise from owning certain underlyings. They are generally a function of the physical characteristics of the underlying asset and also the interest forgone on the funds tied up in the asset.</p>
+  </li>
+  <li>Cash available for distribution</li>
+  <li>
+    <p>Funds from operations (FFO) adjusted to remove any non-cash rent reported under straight-line rent accounting and to subtract maintenance-type capital expenditures and leasing costs, including leasing agents’ commissions and tenants’ improvement allowances.</p>
+  </li>
+  <li>Cash-generating unit</li>
+  <li>
+    <p>The smallest identifiable group of assets that generates cash inflows that are largely independent of the cash inflows of other assets or groups of assets.</p>
+  </li>
+  <li>Cash offering</li>
+  <li>
+    <p>A merger or acquisition that is to be paid for with cash; the cash for the merger might come from the acquiring company’s existing assets or from a debt issue.</p>
+  </li>
+  <li>Cash-secured put</li>
+  <li>
+    <p>An option strategy involving the writing of a put option and simultaneously depositing an amount of money equal to the exercise price into a designated account.</p>
+  </li>
+  <li>Cash settled</li>
+  <li>
+    <p>A procedure used in certain derivative transactions that specifies that the long and short parties engage in the equivalent cash value of a delivery transaction.</p>
+  </li>
+  <li>Cash settlement</li>
+  <li>
+    <p>A procedure used in certain derivative transactions that specifies that the long and short parties engage in the equivalent cash value of a delivery transaction.</p>
+  </li>
+  <li>Catalyst</li>
+  <li>
+    <p>An event or piece of information that causes the marketplace to re-evaluate the prospects of a company.</p>
+  </li>
+  <li>CDS spread</li>
+  <li>
+    <p>A periodic premium paid by the buyer to the seller that serves as a return over Libor required to protect against credit risk.</p>
+  </li>
+  <li>Chain rule of forecasting</li>
+  <li>
+    <p>A forecasting process in which the next period’s value as predicted by the forecasting equation is substituted into the right-hand side of the equation to give a predicted value two periods ahead.</p>
+  </li>
+  <li>Cheapest-to-deliver</li>
+  <li>
+    <p>The debt instrument that can be purchased and delivered at the lowest cost yet has the same seniority as the reference obligation.</p>
+  </li>
+  <li>Clean surplus accounting</li>
+  <li>
+    <p>Accounting that satisfies the condition that all changes in the book value of equity other than transactions with owners are reflected in income. The bottom-line income reflects all changes in shareholders’ equity arising from other than owner transactions. In the absence of owner transactions, the change in shareholders’ equity should equal net income. No adjustments such as translation adjustments bypass the income statement and go directly to shareholders equity.</p>
+  </li>
+  <li>Clean surplus relation</li>
+  <li>
+    <p>The relationship between earnings, dividends, and book value in which ending book value is equal to the beginning book value plus earnings less dividends, apart from ownership transactions.</p>
+  </li>
+  <li>Clientele effect</li>
+  <li>
+    <p>The preference some investors have for shares that exhibit certain characteristics.</p>
+  </li>
+  <li>Club convergence</li>
+  <li>
+    <p>The idea that only rich and middle-income countries sharing a set of favorable attributes (i.e., are members of the “club”) will converge to the income level of the richest countries.</p>
+  </li>
+  <li>Cobb–Douglas production function</li>
+  <li>
+    <p>A function of the form Y = Kα L1–α relating output (Y) to labor (L) and capital (K) inputs.</p>
+  </li>
+  <li>Cointegrated</li>
+  <li>
+    <p>Describes two time series that have a long-term financial or economic relationship such that they do not diverge from each other without bound in the long run.</p>
+  </li>
+  <li>Collar</li>
+  <li>
+    <p>An option position in which the investor is long shares of stock and then buys a put with an exercise price below the current underlying price and writes a call with an exercise price above the current underlying price.</p>
+  </li>
+  <li>Collateral return</li>
+  <li>
+    <p>The component of the total return on a commodity futures position attributable to the yield for the bonds or cash used to maintain the futures position. Also called collateral yield.</p>
+  </li>
+  <li>Commercial real estate properties</li>
+  <li>
+    <p>Income-producing real estate properties, properties purchased with the intent to let, lease, or rent (in other words, produce income).</p>
+  </li>
+  <li>Commodity swap</li>
+  <li>
+    <p>A type of swap involving the exchange of payments over multiple dates as determined by specified reference prices or indexes relating to commodities.</p>
+  </li>
+  <li>Common size statements</li>
+  <li>
+    <p>Financial statements in which all elements (accounts) are stated as a percentage of a key figure such as revenue for an income statement or total assets for a balance sheet.</p>
+  </li>
+  <li>Company fundamental factors</li>
+  <li>
+    <p>Factors related to the company’s internal performance, such as factors relating to earnings growth, earnings variability, earnings momentum, and financial leverage.</p>
+  </li>
+  <li>Company share-related factors</li>
+  <li>
+    <p>Valuation measures and other factors related to share price or the trading characteristics of the shares, such as earnings yield, dividend yield, and book-to-market value.</p>
+  </li>
+  <li>Comparables</li>
+  <li>
+    <p>Assets used as benchmarks when applying the method of comparables to value an asset. Also called comps, guideline assets, or guideline companies.</p>
+  </li>
+  <li>Compiled financial statements</li>
+  <li>
+    <p>Financial statements that are not accompanied by an auditor’s opinion letter.</p>
+  </li>
+  <li>Comprehensive income</li>
+  <li>
+    <p>All changes in equity other than contributions by, and distributions to, owners; income under clean surplus accounting; includes all changes in equity during a period except those resulting from investments by owners and distributions to owners; comprehensive income equals net income plus other comprehensive income.</p>
+  </li>
+  <li>Comps</li>
+  <li>
+    <p>Assets used as benchmarks when applying the method of comparables to value an asset.</p>
+  </li>
+  <li>Conditional convergence</li>
+  <li>
+    <p>The idea that convergence of per capita income is conditional on the countries having the same savings rate, population growth rate, and production function.</p>
+  </li>
+  <li>Conditional heteroskedasticity</li>
+  <li>
+    <p>Heteroskedasticity in the error variance that is correlated with the values of the independent variable(s) in the regression.</p>
+  </li>
+  <li>Conditional VaR (CVaR)</li>
+  <li>
+    <p>The average loss conditional on exceeding the VaR cutoff; sometimes referred to as the expected tail loss or expected shortfall.</p>
+  </li>
+  <li>Conglomerate discount</li>
+  <li>
+    <p>The discount possibly applied by the market to the stock of a company operating in multiple, unrelated businesses.</p>
+  </li>
+  <li>Conglomerate merger</li>
+  <li>
+    <p>A merger involving companies that are in unrelated businesses.</p>
+  </li>
+  <li>Consolidation</li>
+  <li>
+    <p>The combining of the results of operations of subsidiaries with the parent company to present financial statements as if they were a single economic unit. The assets, liabilities, revenues and expenses of the subsidiaries are combined with those of the parent company, eliminating intercompany transactions.</p>
+  </li>
+  <li>Constant dividend payout ratio policy</li>
+  <li>
+    <p>A policy in which a constant percentage of net income is paid out in dividends.</p>
+  </li>
+  <li>Constant returns to scale</li>
+  <li>
+    <p>The condition that if all inputs into the production process are increased by a given percentage, then output rises by that same percentage.</p>
+  </li>
+  <li>Contango</li>
+  <li>
+    <p>A condition in futures markets in which the spot price is lower than the futures price; also, the condition in which the near-term (closer to expiration) futures contract price is lower than the longer-term futures contract price.</p>
+  </li>
+  <li>Contingent consideration</li>
+  <li>
+    <p>Potential future payments to the seller that are contingent on the achievement of certain agreed on occurrences.</p>
+  </li>
+  <li>Continuing earnings</li>
+  <li>
+    <p>Earnings excluding nonrecurring components. Also referred to as core earnings, persistent earnings, or underlying earnings.</p>
+  </li>
+  <li>Continuing residual income</li>
+  <li>
+    <p>Residual income after the forecast horizon.</p>
+  </li>
+  <li>Continuing value</li>
+  <li>
+    <p>The analyst’s estimate of a stock’s value at a particular point in the future.</p>
+  </li>
+  <li>Control premium</li>
+  <li>
+    <p>An increment or premium to value associated with a controlling ownership interest in a company.</p>
+  </li>
+  <li>Conventional cash flow</li>
+  <li>
+    <p>A conventional cash flow pattern is one with an initial outflow followed by a series of inflows.</p>
+  </li>
+  <li>Convergence</li>
+  <li>
+    <p>The property of forward and futures contracts in which the derivative price becomes the spot price at expiration of the derivative.</p>
+  </li>
+  <li>Conversion period</li>
+  <li>
+    <p>For a convertible bond, the period during which bondholders have the right to convert their bonds into shares.</p>
+  </li>
+  <li>Conversion price</li>
+  <li>
+    <p>For a convertible bond, the price per share at which the bond can be converted into shares.</p>
+  </li>
+  <li>Conversion ratio</li>
+  <li>
+    <p>For a convertible bond, the number of shares of common stock that a bondholder receives from converting the bond into shares.</p>
+  </li>
+  <li>Conversion value</li>
+  <li>
+    <p>For a convertible bond, the value of the bond if it is converted at the market price of the shares. Also called parity value.</p>
+  </li>
+  <li>Convertible bond</li>
+  <li>
+    <p>Bond with an embedded conversion option that gives the bondholder the right to convert their bonds into the issuer’s common stock during a pre-determined period at a pre-determined price.</p>
+  </li>
+  <li>Convexity</li>
+  <li>
+    <p>A measure of how interest rate sensitivity changes with a change in interest rates.</p>
+  </li>
+  <li>Core earnings</li>
+  <li>
+    <p>Earnings excluding nonrecurring components. Also referred to as continuing earnings, persistent earnings, or underlying earnings.</p>
+  </li>
+  <li>Corporate governance</li>
+  <li>
+    <p>The system of principles, policies, procedures, and clearly defined responsibilities and accountabilities used by stakeholders to overcome the conflicts of interest inherent in the corporate form.</p>
+  </li>
+  <li>Corporate raider</li>
+  <li>
+    <p>A person or organization seeking to profit by acquiring a company and reselling it, or seeking to profit from the takeover attempt itself (e.g., greenmail).</p>
+  </li>
+  <li>Corporation</li>
+  <li>
+    <p>A legal entity with rights similar to those of a person. The chief officers, executives, or top managers act as agents for the firm and are legally entitled to authorize corporate activities and to enter into contracts on behalf of the business.</p>
+  </li>
+  <li>Correlation analysis</li>
+  <li>
+    <p>The analysis of the strength of the linear relationship between two data series.</p>
+  </li>
+  <li>Cost approach</li>
+  <li>
+    <p>Approach that values a private company based on the values of the underlying assets of the entity less the value of any related liabilities. In the context of real estate, this approach estimates the value of a property based on what it would cost to buy the land and construct a new property on the site that has the same utility or functionality as the property being appraised.</p>
+  </li>
+  <li>Cost of debt</li>
+  <li>
+    <p>The cost of debt financing to a company, such as when it issues a bond or takes out a bank loan.</p>
+  </li>
+  <li>Cost of equity</li>
+  <li>
+    <p>The required rate of return on common stock.</p>
+  </li>
+  <li>Covariance stationary</li>
+  <li>
+    <p>Describes a time series when its expected value and variance are constant and finite in all periods and when its covariance with itself for a fixed number of periods in the past or future is constant and finite in all periods.</p>
+  </li>
+  <li>Covered call</li>
+  <li>
+    <p>An option strategy in which an investor who already owns the underlying asset sells a call option giving someone else the right to buy the asset at the exercise price.</p>
+  </li>
+  <li>Covered interest rate parity</li>
+  <li>
+    <p>Relationship among the spot exchange rate, forward exchange rate, and the interest rates in two currencies that ensures that the return on a hedged (i.e., covered) foreign risk-free investment is the same as the return on a domestic risk-free investment. Also called interest rate parity.</p>
+  </li>
+  <li>Cox–Ingersoll–Ross model</li>
+  <li>
+    <p>A partial equilibrium term structure model that assumes interest rates are mean reverting and interest rate volatility is directly related to the level of interest rates.</p>
+  </li>
+  <li>Credit correlation</li>
+  <li>
+    <p>The correlation of credits contained in an index CDS.</p>
+  </li>
+  <li>Credit curve</li>
+  <li>
+    <p>The credit spreads for a range of maturities of a company’s debt; applies to non-government borrowers and incorporates credit risk into each rate.</p>
+  </li>
+  <li>Credit default swap</li>
+  <li>
+    <p>A derivative contract between two parties in which the buyer makes a series of cash payments to the seller and receives a promise of compensation for credit losses resulting from the default.</p>
+  </li>
+  <li>Credit derivative</li>
+  <li>
+    <p>A derivative instrument in which the underlying is a measure of the credit quality of a borrower.</p>
+  </li>
+  <li>Credit event</li>
+  <li>
+    <p>The outcome that triggers a payment from the credit protection seller to the credit protection buyer.</p>
+  </li>
+  <li>Credit protection buyer</li>
+  <li>
+    <p>One party to a credit default swap; the buyer makes a series of cash payments to the seller and receives a promise of compensation for credit losses resulting from the default.</p>
+  </li>
+  <li>Credit protection seller</li>
+  <li>
+    <p>One party to a credit default swap; the buyer makes a series of cash payments to the seller and receives a promise of compensation for credit losses resulting from the default.</p>
+  </li>
+  <li>Credit ratings</li>
+  <li>
+    <p>Ordinal rankings of the credit risk of a company, government (sovereign), quasi-government, or asset-backed security.</p>
+  </li>
+  <li>Credit risk</li>
+  <li>
+    <p>The risk that the borrower will not repay principal and interest. Also called default risk.</p>
+  </li>
+  <li>Credit scoring</li>
+  <li>
+    <p>Ordinal rankings of a retail borrower’s credit riskiness. It is called an ordinal ranking because it only orders borrowers’ riskiness from highest to lowest.</p>
+  </li>
+  <li>Credit spreads</li>
+  <li>
+    <p>The difference between the yields on default-free and credit risky zero-coupon bonds.</p>
+  </li>
+  <li>Current exchange rate</li>
+  <li>
+    <p>For accounting purposes, the spot exchange rate on the balance sheet date.</p>
+  </li>
+  <li>Current rate method</li>
+  <li>
+    <p>Approach to translating foreign currency financial statements for consolidation in which all assets and liabilities are translated at the current exchange rate. The current rate method is the prevalent method of translation.</p>
+  </li>
+  <li>Curvature</li>
+  <li>
+    <p>One of the three factors (the other two are level and steepness) that empirically explain most of the changes in the shape of the yield curve. A shock to the curvature factor affects mid-maturity interest rates, resulting in the term structure becoming either more or less hump-shaped.</p>
+  </li>
+  <li>Curve trade</li>
+  <li>
+    <p>Buying a CDS of one maturity and selling a CDS on the same reference entity with a different maturity.</p>
+  </li>
+  <li>Cyclical businesses</li>
+  <li>Businesses with high sensitivity to business- or industry-cycle influences.</li>
+</ul>
+
+<h4 id="d"><strong>D</strong></h4>
+
+<ul>
+  <li>Data mining</li>
+  <li>
+    <p>The practice of determining a model by extensive searching through a dataset for statistically significant patterns.</p>
+  </li>
+  <li>“Dead-hand” provision</li>
+  <li>
+    <p>A poison pill provision that allows for the redemption or cancellation of a poison pill provision only by a vote of continuing directors (generally directors who were on the target company’s board prior to the takeover attempt).</p>
+  </li>
+  <li>Debt ratings</li>
+  <li>
+    <p>An objective measure of the quality and safety of a company’s debt based upon an analysis of the company’s ability to pay the promised cash flows, as well as an analysis of any indentures.</p>
+  </li>
+  <li>Decision rule</li>
+  <li>
+    <p>With respect to hypothesis testing, the rule according to which the null hypothesis will be rejected or not rejected; involves the comparison of the test statistic to rejection point(s).</p>
+  </li>
+  <li>Default intensity</li>
+  <li>
+    <p>Gives the probability of default over the next instant [t, t + Δ] when the economy is in state Xt.</p>
+  </li>
+  <li>Default probability</li>
+  <li>
+    <p>See probability of default.</p>
+  </li>
+  <li>Default risk</li>
+  <li>
+    <p>See credit risk.</p>
+  </li>
+  <li>Defined benefit pension plans</li>
+  <li>
+    <p>Plan in which the company promises to pay a certain annual amount (defined benefit) to the employee after retirement. The company bears the investment risk of the plan assets.</p>
+  </li>
+  <li>Defined contribution pension plans</li>
+  <li>
+    <p>Individual accounts to which an employee and typically the employer makes contributions, generally on a tax-advantaged basis. The amounts of contributions are defined at the outset, but the future value of the benefit is unknown. The employee bears the investment risk of the plan assets.</p>
+  </li>
+  <li>Definition of value</li>
+  <li>
+    <p>A specification of how “value” is to be understood in the context of a specific valuation.</p>
+  </li>
+  <li>Definitive merger agreement</li>
+  <li>
+    <p>A contract signed by both parties to a merger that clarifies the details of the transaction, including the terms, warranties, conditions, termination details, and the rights of all parties.</p>
+  </li>
+  <li>Delta</li>
+  <li>
+    <p>The relationship between the option price and the underlying price, which reflects the sensitivity of the price of the option to changes in the price of the underlying. Delta is a good approximation of how an option price will change for a small change in the stock.</p>
+  </li>
+  <li>Dependent variable</li>
+  <li>
+    <p>The variable whose variation about its mean is to be explained by the regression; the left-hand-side variable in a regression equation.</p>
+  </li>
+  <li>Depository Trust and Clearinghouse Corporation</li>
+  <li>
+    <p>A US-headquartered entity providing post-trade clearing, settlement, and information services.</p>
+  </li>
+  <li>Depreciated replacement cost</li>
+  <li>
+    <p>In the context of real estate, the replacement cost of a building adjusted different types of depreciation.</p>
+  </li>
+  <li>Derivative</li>
+  <li>
+    <p>A financial instrument whose value depends on the value of some underlying asset or factor (e.g., a stock price, an interest rate, or exchange rate).</p>
+  </li>
+  <li>Descriptive statistics</li>
+  <li>
+    <p>The study of how data can be summarized effectively.</p>
+  </li>
+  <li>Diluted earnings per share</li>
+  <li>
+    <p>(diluted EPS) Net income, minus preferred dividends, divided by the weighted average number of common shares outstanding considering all dilutive securities (e.g., convertible debt and options); the EPS that would result if all dilutive securities were converted into common shares.</p>
+  </li>
+  <li>Dilution</li>
+  <li>
+    <p>A reduction in proportional ownership interest as a result of the issuance of new shares.</p>
+  </li>
+  <li>Diminishing marginal productivity</li>
+  <li>
+    <p>When each additional unit of an input, keeping the other inputs unchanged, increases output by a smaller increment.</p>
+  </li>
+  <li>Direct capitalization method</li>
+  <li>
+    <p>In the context of real estate, this method estimates the value of an income-producing property based on the level and quality of its net operating income.</p>
+  </li>
+  <li>Discount</li>
+  <li>
+    <p>To reduce the value of a future payment in allowance for how far away it is in time; to calculate the present value of some future amount. Also, the amount by which an instrument is priced below its face value.</p>
+  </li>
+  <li>Discount factor</li>
+  <li>
+    <p>The present value or price of a risk-free single-unit payment when discounted using the appropriate spot rate.</p>
+  </li>
+  <li>Discount for lack of control</li>
+  <li>
+    <p>An amount or percentage deducted from the pro rata share of 100 percent of the value of an equity interest in a business to reflect the absence of some or all of the powers of control.</p>
+  </li>
+  <li>Discount for lack of marketability</li>
+  <li>
+    <p>An amount of percentage deducted from the value of an ownership interest to reflect the relative absence of marketability.</p>
+  </li>
+  <li>Discount function</li>
+  <li>
+    <p>Discount factors for the range of all possible maturities. The spot curve can be derived from the discount function and vice versa.</p>
+  </li>
+  <li>Discount rate</li>
+  <li>
+    <p>Any rate used in finding the present value of a future cash flow.</p>
+  </li>
+  <li>Discounted abnormal earnings model</li>
+  <li>
+    <p>A model of stock valuation that views intrinsic value of stock as the sum of book value per share plus the present value of the stock’s expected future residual income per share.</p>
+  </li>
+  <li>Discounted cash flow (DCF) analysis</li>
+  <li>
+    <p>In the context of merger analysis, it is an estimate of a target company’s value found by discounting the company’s expected future free cash flows to the present.</p>
+  </li>
+  <li>Discounted cash flow method</li>
+  <li>
+    <p>Income approach that values an asset based on estimates of future cash flows discounted to present value by using a discount rate reflective of the risks associated with the cash flows. In the context of real estate, this method estimates the value of an income-producing property based by discounting future projected cash flows.</p>
+  </li>
+  <li>Discounted cash flow model</li>
+  <li>
+    <p>A model of intrinsic value that views the value of an asset as the present value of the asset’s expected future cash flows.</p>
+  </li>
+  <li>Discriminant analysis</li>
+  <li>
+    <p>A multivariate classification technique used to discriminate between groups, such as companies that either will or will not become bankrupt during some time frame.</p>
+  </li>
+  <li>Diversified REITs</li>
+  <li>
+    <p>REITs that own and operate in more than one type of property; they are more common in Europe and Asia than in the United States.</p>
+  </li>
+  <li>Divestiture</li>
+  <li>
+    <p>The sale, liquidation, or spin-off of a division or subsidiary.</p>
+  </li>
+  <li>Dividend coverage ratio</li>
+  <li>
+    <p>The ratio of net income to dividends.</p>
+  </li>
+  <li>Dividend discount model</li>
+  <li>
+    <p>(DDM) A present value model of stock value that views the intrinsic value of a stock as present value of the stock’s expected future dividends.</p>
+  </li>
+  <li>Dividend displacement of earnings</li>
+  <li>
+    <p>The concept that dividends paid now displace earnings in all future periods.</p>
+  </li>
+  <li>Dividend imputation tax system</li>
+  <li>
+    <p>A taxation system which effectively assures that corporate profits distributed as dividends are taxed just once, at the shareholder’s tax rate.</p>
+  </li>
+  <li>Dividend payout ratio</li>
+  <li>
+    <p>The ratio of cash dividends paid to earnings for a period.</p>
+  </li>
+  <li>Dividend policy</li>
+  <li>
+    <p>The strategy a company follows with regard to the amount and timing of dividend payments.</p>
+  </li>
+  <li>Dividend rate</li>
+  <li>
+    <p>the annualized amount of the most recent dividend.</p>
+  </li>
+  <li>Dominance</li>
+  <li>
+    <p>An arbitrage opportunity when a financial asset with a risk-free payoff in the future must have a positive price today.</p>
+  </li>
+  <li>Double taxation system</li>
+  <li>
+    <p>Corporate earnings are taxed twice when paid out as dividends. First, corporate earnings are taxed regardless of whether they will be distributed as dividends or retained at the G-13 corporate level, and second, dividends are taxed again at the individual shareholder level.</p>
+  </li>
+  <li>DOWNREIT</li>
+  <li>
+    <p>A variation of the UPREIT structure under which the REIT owns more than one partnership and may own properties at both the REIT level and the partnership level.</p>
+  </li>
+  <li>Downstream</li>
+  <li>
+    <p>A transaction between two related companies, an investor company (or a parent company) and an associate company (or a subsidiary) such that the investor company records a profit on its income statement. An example is a sale of inventory by the investor company to the associate or by a parent to a subsidiary company.</p>
+  </li>
+  <li>Due diligence</li>
+  <li>
+    <p>Investigation and analysis in support of a recommendation; the failure to exercise due diligence may sometimes result in liability according to various securities laws.</p>
+  </li>
+  <li>Dummy variable</li>
+  <li>
+    <p>A type of qualitative variable that takes on a value of 1 if a particular condition is true and 0 if that condition is false.</p>
+  </li>
+  <li>Duration</li>
+  <li>
+    <p>A measure of the approximate sensitivity of a security to a change in interest rates (i.e., a measure of interest rate risk).</p>
+  </li>
+  <li>Dutch disease</li>
+  <li>A situation in which currency appreciation driven by strong export demand for resources makes other segments of the economy (particularly manufacturing) globally uncompetitive.</li>
+</ul>
+
+<h4 id="e"><strong>E</strong></h4>
+
+<ul>
+  <li>Earnings surprise</li>
+  <li>
+    <p>The difference between reported EPS and expected EPS. Also referred to as unexpected earnings.</p>
+  </li>
+  <li>Earnings yield</li>
+  <li>
+    <p>EPS divided by price; the reciprocal of the P/E ratio.</p>
+  </li>
+  <li>Economic growth</li>
+  <li>
+    <p>The expansion of production possibilities that results from capital accumulation and technological change.</p>
+  </li>
+  <li>Economic obsolescence</li>
+  <li>
+    <p>In the context of real estate, a reduction in value due to current economic conditions.</p>
+  </li>
+  <li>Economic profit</li>
+  <li>
+    <p>See residual income.</p>
+  </li>
+  <li>Economic sectors</li>
+  <li>
+    <p>Large industry groupings.</p>
+  </li>
+  <li>Economic value added</li>
+  <li>
+    <p>(EVA®) A commercial implementation of the residual income concept; the computation of EVA® is the net operating profit after taxes minus the cost of capital, where these inputs are adjusted for a number of items.</p>
+  </li>
+  <li>Economies of scale</li>
+  <li>
+    <p>A situation in which average costs per unit of good or service produced fall as volume rises. In reference to mergers, the savings achieved through the consolidation of operations and elimination of duplicate resources.</p>
+  </li>
+  <li>Edwards–Bell–Ohlson model</li>
+  <li>
+    <p>A model of stock valuation that views intrinsic value of stock as the sum of book value per share plus the present value of the stock’s expected future residual income per share.</p>
+  </li>
+  <li>Effective convexity</li>
+  <li>
+    <p>Sensitivity of duration to changes in interest rates.</p>
+  </li>
+  <li>Effective duration</li>
+  <li>
+    <p>Sensitivity of the bond’s price to a 100 bps parallel shift of the benchmark yield curve, assuming no change in the bond’s credit spread.</p>
+  </li>
+  <li>Embedded options</li>
+  <li>
+    <p>Contingency provisions found in a bond’s indenture or offering circular representing rights that enable their holders to take advantage of interest rate movements. They can be exercised by the issuer, by the bondholder, or automatically depending on the course of interest rates.</p>
+  </li>
+  <li>Enterprise value</li>
+  <li>
+    <p>(EV) Total company value (the market value of debt, common equity, and preferred equity) minus the value of cash and investments.</p>
+  </li>
+  <li>Enterprise value multiple</li>
+  <li>
+    <p>A valuation multiple that relates the total market value of all sources of a company’s capital (net of cash) to a measure of fundamental value for the entire company (such as a pre-interest earnings measure).</p>
+  </li>
+  <li>Entry price</li>
+  <li>
+    <p>The price paid to acquire an asset.</p>
+  </li>
+  <li>Equilibrium</li>
+  <li>
+    <p>The condition in which supply equals demand.</p>
+  </li>
+  <li>Equity carve-out</li>
+  <li>
+    <p>A form of restructuring that involves the creation of a new legal entity and the sale of equity in it to outsiders.</p>
+  </li>
+  <li>Equity charge</li>
+  <li>
+    <p>The estimated cost of equity capital in money terms.</p>
+  </li>
+  <li>Equity REIT</li>
+  <li>
+    <p>A REIT that owns, operates, and/or selectively develops income-producing real estate.</p>
+  </li>
+  <li>Equity swap</li>
+  <li>
+    <p>A swap transaction in which at least one cash flow is tied to the return on an equity portfolio position, often an equity index.</p>
+  </li>
+  <li>Error autocorrelation</li>
+  <li>
+    <p>The autocorrelation of the error term.</p>
+  </li>
+  <li>Error term</li>
+  <li>
+    <p>The portion of the dependent variable that is not explained by the independent variable(s) in the regression.</p>
+  </li>
+  <li>Estimated parameters</li>
+  <li>
+    <p>With reference to a regression analysis, the estimated values of the population intercept and population slope coefficient(s) in a regression.</p>
+  </li>
+  <li>Ex ante tracking error</li>
+  <li>
+    <p>A measure of the degree to which the performance of a given investment portfolio might be expected to deviate from its benchmark; also known as relative VaR.</p>
+  </li>
+  <li>Ex ante version of PPP</li>
+  <li>
+    <p>Hypothesis that expected changes in the spot exchange rate are equal to expected differences in national inflation rates. An extension of relative purchasing power parity to expected future changes in the exchange rate.</p>
+  </li>
+  <li>Ex-dividend</li>
+  <li>
+    <p>Trading ex-dividend refers to shares that no longer carry the right to the next dividend payment.</p>
+  </li>
+  <li>Ex-dividend date</li>
+  <li>
+    <p>The first date that a share trades without (i.e., “ex”) the dividend.</p>
+  </li>
+  <li>Ex-dividend price</li>
+  <li>
+    <p>The price at which a share first trades without (i.e., “ex”) the right to receive an upcoming dividend.</p>
+  </li>
+  <li>Excess earnings method</li>
+  <li>
+    <p>Income approach that estimates the value of all intangible assets of the business by capitalizing future earnings in excess of the estimated return requirements associated with working capital and fixed assets.</p>
+  </li>
+  <li>Exchange ratio</li>
+  <li>
+    <p>The number of shares that target stockholders are to receive in exchange for each of their shares in the target company.</p>
+  </li>
+  <li>Exercise date</li>
+  <li>
+    <p>The date when employees actually exercise stock options and convert them to stock.</p>
+  </li>
+  <li>Exercise value</li>
+  <li>
+    <p>The value of an option if it were exercised. Also sometimes called intrinsic value.</p>
+  </li>
+  <li>Exit price</li>
+  <li>
+    <p>The price received to sell an asset or paid to transfer a liability.</p>
+  </li>
+  <li>Expanded CAPM</li>
+  <li>
+    <p>An adaptation of the CAPM that adds to the CAPM a premium for small size and company-specific risk.</p>
+  </li>
+  <li>Expectations approach</li>
+  <li>
+    <p>A procedure for obtaining the value of an option derived from discounting at the risk-free rate its expected future payoff based on risk neutral probabilities.</p>
+  </li>
+  <li>Expected holding-period return</li>
+  <li>
+    <p>The expected total return on an asset over a stated holding period; for stocks, the sum of the expected dividend yield and the expected price appreciation over the holding period.</p>
+  </li>
+  <li>Expected loss</li>
+  <li>
+    <p>The probability of default multiplied by the loss given default; the full amount owed minus the expected recovery.</p>
+  </li>
+  <li>Expected shortfall</li>
+  <li>
+    <p>See conditional VaR.</p>
+  </li>
+  <li>Expected tail loss</li>
+  <li>
+    <p>See conditional VaR.</p>
+  </li>
+  <li>Exposure to foreign exchange risk</li>
+  <li>
+    <p>The risk of a change in value of an asset or liability denominated in a foreign currency due to a change in exchange rates.</p>
+  </li>
+  <li>Extendible bond</li>
+  <li>
+    <p>Bond with an embedded option that gives the bondholder the right to keep the bond for a number of years after maturity, possibly with a different coupon.</p>
+  </li>
+  <li>External growth</li>
+  <li>
+    <p>Company growth in output or sales that is achieved by buying the necessary resources externally (i.e., achieved through mergers and acquisitions).</p>
+  </li>
+  <li>External sustainability approach</li>
+  <li>An approach to assessing the equilibrium exchange rate that focuses on exchange rate adjustments required to ensure that a country’s net foreign-asset/GDP ratio or net foreign-liability/GDP ratio stabilizes at a sustainable level.</li>
+</ul>
+
+<h4 id="f"><strong>F</strong></h4>
+
+<ul>
+  <li>Factor</li>
+  <li>
+    <p>A common or underlying element with which several variables are correlated.</p>
+  </li>
+  <li>Factor betas</li>
+  <li>
+    <p>An asset’s sensitivity to a particular factor; a measure of the response of return to each unit of increase in a factor, holding all other factors constant.</p>
+  </li>
+  <li>Factor portfolio</li>
+  <li>
+    <p>See pure factor portfolio.</p>
+  </li>
+  <li>Factor price</li>
+  <li>
+    <p>The expected return in excess of the risk-free rate for a portfolio with a sensitivity of 1 to one factor and a sensitivity of 0 to all other factors.</p>
+  </li>
+  <li>Factor risk premium</li>
+  <li>
+    <p>The expected return in excess of the risk-free rate for a portfolio with a sensitivity of 1 to one factor and a sensitivity of 0 to all other factors. Also called factor price.</p>
+  </li>
+  <li>Factor sensitivity</li>
+  <li>
+    <p>See factor betas.</p>
+  </li>
+  <li>Failure to pay</li>
+  <li>
+    <p>When a borrower does not make a scheduled payment of principal or interest on any outstanding obligations after a grace period.</p>
+  </li>
+  <li>Fair market value</li>
+  <li>
+    <p>The market price of an asset or liability that trades regularly.</p>
+  </li>
+  <li>Fair value</li>
+  <li>
+    <p>The amount at which an asset (or liability) could be bought (or incurred) or sold (or settled) in a current transaction between willing parties, that is, other than in a forced or liquidation sale; as defined in IFRS and US GAAP, the price that would be received to sell an asset or paid to transfer a liability in an orderly transaction between market participants at the measurement date.</p>
+  </li>
+  <li>Financial contagion</li>
+  <li>
+    <p>A situation where financial shocks spread from their place of origin to other locales; in essence, a faltering economy infects other, healthier economies.</p>
+  </li>
+  <li>Financial distress</li>
+  <li>
+    <p>Heightened uncertainty regarding a company’s ability to meet its various obligations because of lower or negative earnings.</p>
+  </li>
+  <li>Financial risk</li>
+  <li>
+    <p>The risk that environmental, social, or governance risk factors will result in significant costs or other losses to a company and its shareholders; the risk arising from a company’s obligation to meet required payments under its financing agreements.</p>
+  </li>
+  <li>Financial transaction</li>
+  <li>
+    <p>A purchase involving a buyer having essentially no material synergies with the target (e.g., the purchase of a private company by a company in an unrelated industry or by a private equity firm would typically be a financial transaction).</p>
+  </li>
+  <li>First-differencing</li>
+  <li>
+    <p>A transformation that subtracts the value of the time series in period t – 1 from its value in period t.</p>
+  </li>
+  <li>First-order serial correlation</li>
+  <li>
+    <p>Correlation between adjacent observations in a time series.</p>
+  </li>
+  <li>Fitted parameters</li>
+  <li>
+    <p>With reference to a regression analysis, the estimated values of the population intercept and population slope coefficient(s) in a regression.</p>
+  </li>
+  <li>Fixed-rate perpetual preferred stock</li>
+  <li>
+    <p>Nonconvertible, noncallable preferred stock with a specified dividend rate that has a claim on earnings senior to the claim of common stock, and no maturity date.</p>
+  </li>
+  <li>Flip-in pill</li>
+  <li>
+    <p>A poison pill takeover defense that dilutes an acquirer’s ownership in a target by giving other existing target company shareholders the right to buy additional target company shares at a discount.</p>
+  </li>
+  <li>Flip-over pill</li>
+  <li>
+    <p>A poison pill takeover defense that gives target company shareholders the right to purchase shares of the acquirer at a significant discount to the market price, which has the effect of causing dilution to all existing acquiring company shareholders.</p>
+  </li>
+  <li>Floored floater</li>
+  <li>
+    <p>Floating-rate bond with a floor provision that prevents the coupon rate from decreasing below a specified minimum rate. It protects the investor against declining interest rates.</p>
+  </li>
+  <li>Flotation cost</li>
+  <li>
+    <p>Fees charged to companies by investment bankers and other costs associated with raising new capital.</p>
+  </li>
+  <li>Forced conversion</li>
+  <li>
+    <p>For a convertible bond, when the issuer calls the bond and forces bondholders to convert their bonds into shares, which typically happens when the underlying share price increases above the conversion price.</p>
+  </li>
+  <li>Foreign currency transactions</li>
+  <li>
+    <p>Transactions that are denominated in a currency other than a company’s functional currency.</p>
+  </li>
+  <li>Forward curve</li>
+  <li>
+    <p>The term structure of forward rates for loans made on a specific initiation date.</p>
+  </li>
+  <li>Forward dividend yield</li>
+  <li>
+    <p>A dividend yield based on the anticipated dividend during the next 12 months.</p>
+  </li>
+  <li>Forward integration</li>
+  <li>
+    <p>A merger involving the purchase of a target that is farther along the value or production chain; for example, to acquire a distributor.</p>
+  </li>
+  <li>
+    <p>Forward P/<strong>E</strong></p>
+  </li>
+  <li>
+    <p>A P/E calculated on the basis of a forecast of EPS; a stock’s current price divided by next year’s expected earnings.</p>
+  </li>
+  <li>Forward price</li>
+  <li>
+    <p>The fixed price or rate at which the transaction scheduled to occur at the expiration of a forward contract will take place. This price is agreed to at the initiation date of the contract.</p>
+  </li>
+  <li>Forward pricing model</li>
+  <li>
+    <p>The model that describes the valuation of forward contracts.</p>
+  </li>
+  <li>Forward rate</li>
+  <li>
+    <p>An interest rate that is determined today for a loan that will be initiated in a future time period.</p>
+  </li>
+  <li>Forward rate agreement</li>
+  <li>
+    <p>A forward contract calling for one party to make a fixed interest payment and the other to make an interest payment at a rate to be determined at the contract expiration.</p>
+  </li>
+  <li>Forward rate model</li>
+  <li>
+    <p>The forward pricing model expressed in terms of spot and forward interest rates.</p>
+  </li>
+  <li>Forward value</li>
+  <li>
+    <p>The monetary value of an existing forward contract.</p>
+  </li>
+  <li>Franking credit</li>
+  <li>
+    <p>A tax credit received by shareholders for the taxes that a corporation paid on its distributed earnings.</p>
+  </li>
+  <li>Free cash flow</li>
+  <li>
+    <p>The actual cash that would be available to the company’s investors after making all investments necessary to maintain the company as an ongoing enterprise (also referred to as free cash flow to the firm); the internally generated funds that can be distributed to the company’s investors (e.g., shareholders and bondholders) without impairing the value of the company.</p>
+  </li>
+  <li>Free cash flow hypothesis</li>
+  <li>
+    <p>The hypothesis that higher debt levels discipline managers by forcing them to make fixed debt service payments and by reducing the company’s free cash flow.</p>
+  </li>
+  <li>Free cash flow method</li>
+  <li>
+    <p>Income approach that values an asset based on estimates of future cash flows discounted to present value by using a discount rate reflective of the risks associated with the cash flows.</p>
+  </li>
+  <li>Free cash flow to equity</li>
+  <li>
+    <p>The cash flow available to a company’s common shareholders after all operating expenses, interest, and principal payments have been made, and necessary investments in working and fixed capital have been made.</p>
+  </li>
+  <li>Free cash flow to equity model</li>
+  <li>
+    <p>A model of stock valuation that views a stock’s intrinsic value as the present value of expected future free cash flows to equity.</p>
+  </li>
+  <li>Free cash flow to the firm</li>
+  <li>
+    <p>The cash flow available to the company’s suppliers of capital after all operating expenses (including taxes) have been paid and necessary investments in working and fixed capital have been made.</p>
+  </li>
+  <li>Free cash flow to the firm model</li>
+  <li>
+    <p>A model of stock valuation that views the value of a firm as the present value of expected future free cash flows to the firm.</p>
+  </li>
+  <li>Friendly transaction</li>
+  <li>
+    <p>A potential business combination that is endorsed by the managers of both companies.</p>
+  </li>
+  <li>Functional currency</li>
+  <li>
+    <p>The currency of the primary economic environment in which an entity operates.</p>
+  </li>
+  <li>Functional obsolescence</li>
+  <li>
+    <p>In the context of real estate, a reduction in value due to a design that differs from that of a new building constructed for the intended use of the property.</p>
+  </li>
+  <li>Fundamental factor models</li>
+  <li>
+    <p>A multifactor model in which the factors are attributes of stocks or companies that are important in explaining cross-sectional differences in stock prices.</p>
+  </li>
+  <li>Fundamentals</li>
+  <li>
+    <p>Economic characteristics of a business such as profitability, financial strength, and risk.</p>
+  </li>
+  <li>Funds available for distribution</li>
+  <li>
+    <p>Funds from operations (FFO) adjusted to remove any non-cash rent reported under straight-line rent accounting and to subtract maintenance-type capital expenditures and leasing costs, including leasing agents’ commissions and tenants’ improvement allowances.</p>
+  </li>
+  <li>Funds from operations</li>
+  <li>
+    <p>Accounting net earnings excluding (1) depreciation charges on real estate, (2) deferred tax charges, and (3) gains or losses from sales of property and debt restructuring.</p>
+  </li>
+  <li>Futures price</li>
+  <li>
+    <p>The price at which the parties to a futures contract agree to exchange the underlying (or cash). In commodity markets, the price agreed on to deliver or receive a defined quantity (and often quality) of a commodity at a future date.</p>
+  </li>
+  <li>Futures value</li>
+  <li>
+    <p>The monetary value of an existing futures contract.</p>
+  </li>
+  <li>FX carry trade</li>
+  <li>An investment strategy that involves taking on long positions in high-yield currencies and short positions in low-yield currencies.</li>
+</ul>
+
+<h4 id="g"><strong>G</strong></h4>
+
+<ul>
+  <li>Gamma</li>
+  <li>
+    <p>A measure of how sensitive an option’s delta is to a change in the underlying. The change in a given instrument’s delta for a given small change in the underlying’s value, holding everything else constant.</p>
+  </li>
+  <li>Generalized least squares</li>
+  <li>
+    <p>A regression estimation technique that addresses heteroskedasticity of the error term.</p>
+  </li>
+  <li>Going-concern assumption</li>
+  <li>
+    <p>The assumption that the business will maintain its business activities into the foreseeable future.</p>
+  </li>
+  <li>Going-concern value</li>
+  <li>
+    <p>A business’s value under a going-concern assumption.</p>
+  </li>
+  <li>Goodwill</li>
+  <li>
+    <p>An intangible asset that represents the excess of the purchase price of an acquired company over the value of the net identifiable assets acquired.</p>
+  </li>
+  <li>Grant date</li>
+  <li>
+    <p>The day that stock options are granted to employees.</p>
+  </li>
+  <li>Gross domestic product</li>
+  <li>
+    <p>A money measure of the goods and services produced within a country’s borders over a stated time period.</p>
+  </li>
+  <li>Gross lease</li>
+  <li>
+    <p>A lease under which the tenant pays a gross rent to the landlord who is responsible for all operating costs, utilities, maintenance expenses, and real estate taxes relating to the property.</p>
+  </li>
+  <li>Growth accounting equation</li>
+  <li>
+    <p>The production function written in the form of growth rates. For the basic Cobb–Douglas production function, it states that the growth rate of output equals the rate of technological change plus α times the growth rate of capital plus (1 – α) times the growth rate of labor.</p>
+  </li>
+  <li>Growth capital expenditures</li>
+  <li>
+    <p>Capital expenditures needed for expansion.</p>
+  </li>
+  <li>Growth option</li>
+  <li>
+    <p>The ability to make additional investments in a project at some future time if the financial results are strong. Also called expansion option.</p>
+  </li>
+  <li>Guideline assets</li>
+  <li>
+    <p>Assets used as benchmarks when applying the method of comparables to value an asset.</p>
+  </li>
+  <li>Guideline companies</li>
+  <li>
+    <p>Assets used as benchmarks when applying the method of comparables to value an asset.</p>
+  </li>
+  <li>Guideline public companies</li>
+  <li>
+    <p>Public-company comparables for the company being valued.</p>
+  </li>
+  <li>Guideline public company method</li>
+  <li>
+    <p>A variation of the market approach; establishes a value estimate based on the observed multiples from trading activity in the shares of public companies viewed as reasonably comparable to the subject private company.</p>
+  </li>
+  <li>Guideline transactions method</li>
+  <li>A variation of the market approach; establishes a value estimate based on pricing multiples derived from the acquisition of control of entire public or private companies that were acquired.</li>
+</ul>
+
+<h4 id="h"><strong>H</strong></h4>
+
+<ul>
+  <li>Harmonic mean</li>
+  <li>
+    <p>A type of weighted mean computed by averaging the reciprocals of the observations, then taking the reciprocal of that average.</p>
+  </li>
+  <li>Hazard rate</li>
+  <li>
+    <p>The probability that an event will occur, given that it has not already occurred.</p>
+  </li>
+  <li>Hazard rate estimation</li>
+  <li>
+    <p>A technique for estimating the probability of a binary event, such as default/no default, mortality/no mortality, and prepay/no prepay.</p>
+  </li>
+  <li>Health care REITs</li>
+  <li>
+    <p>REITs that invest in skilled nursing facilities (nursing homes), assisted living and independent residential facilities for retired persons, hospitals, medical office buildings, or rehabilitation centers.</p>
+  </li>
+  <li>Held for trading investments</li>
+  <li>
+    <p>Debt or equity securities acquired with the intent to sell them in the near term.</p>
+  </li>
+  <li>Held-to-maturity investments</li>
+  <li>
+    <p>Debt (fixed-income) securities that a company intends to hold to maturity; these are presented at their original cost, updated for any amortization of discounts or premiums.</p>
+  </li>
+  <li>Herfindahl–Hirschman Index (HHI)</li>
+  <li>
+    <p>A measure of market concentration that is calculated by summing the squared market shares for competing companies in an industry; high HHI readings or mergers that would result in large HHI increases are more likely to result in regulatory challenges.</p>
+  </li>
+  <li>Heteroskedastic</li>
+  <li>
+    <p>With reference to the error term of regression, having a variance that differs across observations.</p>
+  </li>
+  <li>Heteroskedasticity</li>
+  <li>
+    <p>The property of having a nonconstant variance; refers to an error term with the property that its variance differs across observations.</p>
+  </li>
+  <li>Heteroskedasticity-consistent standard errors</li>
+  <li>
+    <p>Standard errors of the estimated parameters of a regression that correct for the presence of heteroskedasticity in the regression’s error term.</p>
+  </li>
+  <li>Historical exchange rates</li>
+  <li>
+    <p>For accounting purposes, the exchange rates that existed when the assets and liabilities were initially recorded.</p>
+  </li>
+  <li>Historical simulation method</li>
+  <li>
+    <p>The application of historical price changes to the current portfolio.</p>
+  </li>
+  <li>Ho–Lee model</li>
+  <li>
+    <p>The first arbitrage-free term structure model. The model is calibrated to market data and uses a binomial lattice approach to generate a distribution of possible future interest rates.</p>
+  </li>
+  <li>Holding period return</li>
+  <li>
+    <p>The return that an investor earns during a specified holding period; a synonym for total return.</p>
+  </li>
+  <li>Homoskedasticity</li>
+  <li>
+    <p>The property of having a constant variance; refers to an error term that is constant across observations.</p>
+  </li>
+  <li>Horizontal merger</li>
+  <li>
+    <p>A merger involving companies in the same line of business, usually as competitors.</p>
+  </li>
+  <li>Hostile transaction</li>
+  <li>
+    <p>An attempt to acquire a company against the wishes of the target’s managers.</p>
+  </li>
+  <li>Hotel REITs</li>
+  <li>
+    <p>REITs that own hotel properties but, similar to health care REITs, in many countries they must refrain from operating their properties themselves to maintain their tax-advantaged REIT status.</p>
+  </li>
+  <li>Human capital</li>
+  <li>
+    <p>The accumulated knowledge and skill that workers acquire from education, training, or life experience.</p>
+  </li>
+  <li>Hybrid approach</li>
+  <li>
+    <p>With respect to forecasting, an approach that combines elements of both top-down and bottom-up analysis.</p>
+  </li>
+  <li>Hybrid REITs</li>
+  <li>REITs that own and operate income-producing real estate and invest in mortgages as well; REITs that have positions in both real estate assets and real estate debt.</li>
+</ul>
+
+<h4 id="i"><strong>I</strong></h4>
+
+<ul>
+  <li>I-spreads</li>
+  <li>
+    <p>Shortened form of “interpolated spreads” and a reference to a linearly interpolated yield.</p>
+  </li>
+  <li>Illiquidity discount</li>
+  <li>
+    <p>A reduction or discount to value that reflects the lack of depth of trading or liquidity in that asset’s market.</p>
+  </li>
+  <li>Impairment</li>
+  <li>
+    <p>Diminishment in value as a result of carrying (book) value exceeding fair value and/or recoverable value.</p>
+  </li>
+  <li>Impairment of capital rule</li>
+  <li>
+    <p>A legal restriction that dividends cannot exceed retained earnings.</p>
+  </li>
+  <li>Implied volatility</li>
+  <li>
+    <p>The standard deviation that causes an option pricing model to give the current option price.</p>
+  </li>
+  <li>In-sample forecast errors</li>
+  <li>
+    <p>The residuals from a fitted time-series model within the sample period used to fit the model.</p>
+  </li>
+  <li>Income approach</li>
+  <li>
+    <p>Valuation approach that values an asset as the present discounted value of the income expected from it. In the context of real estate, this approach estimates the value of a property based on an expected rate of return; the estimated value is the present value of the expected future income from the property, including proceeds from resale at the end of a typical investment holding period.</p>
+  </li>
+  <li>Incremental cash flow</li>
+  <li>
+    <p>The cash flow that is realized because of a decision; the changes or increments to cash flows resulting from a decision or action.</p>
+  </li>
+  <li>Incremental VaR (IVaR)</li>
+  <li>
+    <p>A measure of the incremental effect of an asset on the VaR of a portfolio by measuring the difference between the portfolio’s VaR while including a specified asset and the portfolio’s VaR with that asset eliminated.</p>
+  </li>
+  <li>Indenture</li>
+  <li>
+    <p>A written contract between a lender and borrower that specifies the terms of the loan, such as interest rate, interest payment schedule, maturity, etc.</p>
+  </li>
+  <li>Independent projects</li>
+  <li>
+    <p>Independent projects are projects whose cash flows are independent of each other.</p>
+  </li>
+  <li>Independent regulators</li>
+  <li>
+    <p>Regulators recognized and granted authority by a government body or agency. They are not government agencies per se and typically do not rely on government funding.</p>
+  </li>
+  <li>Independent variable</li>
+  <li>
+    <p>A variable used to explain the dependent variable in a regression; a right-hand-side variable in a regression equation.</p>
+  </li>
+  <li>Index CDS</li>
+  <li>
+    <p>A type of credit default swap that involves a combination of borrowers.</p>
+  </li>
+  <li>Indexing</li>
+  <li>
+    <p>An investment strategy in which an investor constructs a portfolio to mirror the performance of a specified index.</p>
+  </li>
+  <li>Industrial REITs</li>
+  <li>
+    <p>REITs that hold portfolios of single-tenant or multi-tenant industrial properties that are used as warehouses, distribution centers, light manufacturing facilities, and small office or “flex” space.</p>
+  </li>
+  <li>Industry structure</li>
+  <li>
+    <p>An industry’s underlying economic and technical characteristics.</p>
+  </li>
+  <li>Information ratio</li>
+  <li>
+    <p>(IR) Mean active return divided by active risk; or alpha divided by the standard deviation of diversifiable risk.</p>
+  </li>
+  <li>Informational frictions</li>
+  <li>
+    <p>Forces that restrict availability, quality, and/or flow of information and its use.</p>
+  </li>
+  <li>Initial public offering</li>
+  <li>
+    <p>(IPO) The initial issuance of common stock registered for public trading by a formerly private corporation.</p>
+  </li>
+  <li>Inter-temporal rate of substitution</li>
+  <li>
+    <p>The ratio of the marginal utility of consumption s periods in the future (the numerator) to the marginal utility of consumption today (the denominator).</p>
+  </li>
+  <li>Interest rate parity</li>
+  <li>
+    <p>See covered interest rate parity.</p>
+  </li>
+  <li>Interest rate risk</li>
+  <li>
+    <p>Risk that interest rates will change such that the return earned is not commensurate with returns on comparable instruments in the marketplace.</p>
+  </li>
+  <li>Internal rate of return</li>
+  <li>
+    <p>(IRR) Rate of return that discounts future cash flows from an investment to the exact amount of the investment; the discount rate that makes the present value of an investment’s costs (outflows) equal to the present value of the investment’s benefits (inflows).</p>
+  </li>
+  <li>Internal ratings</li>
+  <li>
+    <p>Credit ratings developed internally and used by financial institutions or other entities to manage risk.</p>
+  </li>
+  <li>International Fisher effect</li>
+  <li>
+    <p>Proposition that nominal interest rate differentials across currencies are determined by expected inflation differentials.</p>
+  </li>
+  <li>Intrinsic value</li>
+  <li>
+    <p>The value of an asset given a hypothetically complete understanding of the asset’s investment characteristics; the value obtained if an option is exercised based on current conditions. The difference between the spot exchange rate and the strike price of a currency.</p>
+  </li>
+  <li>Inverse price ratio</li>
+  <li>
+    <p>The reciprocal of a price multiple, e.g., in the case of a P/E ratio, the “earnings yield” E/P (where P is share price and E is earnings per share).</p>
+  </li>
+  <li>Investment objectives</li>
+  <li>
+    <p>Desired investment outcomes; includes risk objectives and return objectives.</p>
+  </li>
+  <li>Investment strategy</li>
+  <li>
+    <p>An approach to investment analysis and security selection.</p>
+  </li>
+  <li>Investment value</li>
+  <li>
+    <p>The value to a specific buyer, taking account of potential synergies based on the investor’s requirements and expectations.</p>
+  </li>
+  <li>ISDA Master Agreement</li>
+  <li>
+    <p>A standard or “master” agreement published by the International Swaps and Derivatives Association.</p>
+  </li>
+  <li>The master agreement establishes the terms for each party involved in the transaction.</li>
+</ul>
+
+<h4 id="j"><strong>J</strong></h4>
+
+<ul>
+  <li>Judicial law</li>
+  <li>
+    <p>Interpretations of courts.</p>
+  </li>
+  <li>
+    <p>Justified (fundamental) P/<strong>E</strong></p>
+  </li>
+  <li>
+    <p>The price-to-earnings ratio that is fair, warranted, or justified on the basis of forecasted fundamentals.</p>
+  </li>
+  <li>Justified price multiple</li>
+  <li>The estimated fair value of the price multiple, usually based on forecasted fundamentals or comparables.</li>
+</ul>
+
+<h4 id="k"><strong>K</strong></h4>
+
+<ul>
+  <li>Key rate durations</li>
+  <li>
+    <p>Sensitivity of a bond’s price to changes in specific maturities on the benchmark yield curve. Also called partial durations.</p>
+  </li>
+  <li>kth order autocorrelation</li>
+  <li>The correlation between observations in a time series separated by k periods.</li>
+</ul>
+
+<h4 id="l"><strong>L</strong></h4>
+
+<ul>
+  <li>Labor force</li>
+  <li>
+    <p>Everyone of working age (ages 16 to 64) that either is employed or is available for work but not working.</p>
+  </li>
+  <li>Labor force participation rate</li>
+  <li>
+    <p>The percentage of the working age population that is in the labor force.</p>
+  </li>
+  <li>Labor productivity</li>
+  <li>
+    <p>The quantity of real GDP produced by an hour of labor. More generally, output per unit of labor input.</p>
+  </li>
+  <li>Labor productivity growth accounting equation</li>
+  <li>
+    <p>States that potential GDP growth equals the growth rate of the labor input plus the growth rate of labor productivity.</p>
+  </li>
+  <li>Lack of marketability discount</li>
+  <li>
+    <p>An extra return to investors to compensate for lack of a public market or lack of marketability.</p>
+  </li>
+  <li>Law of one price</li>
+  <li>
+    <p>A principle that states that if two investments have the same or equivalent future cash flows regardless of what will happen in the future, then these two investments should have the same current price.</p>
+  </li>
+  <li>Leading dividend yield</li>
+  <li>
+    <p>Forecasted dividends per share over the next year divided by current stock price.</p>
+  </li>
+  <li>
+    <p>Leading P/<strong>E</strong></p>
+  </li>
+  <li>
+    <p>A P/E calculated on the basis of a forecast of EPS; a stock’s current price divided by next year’s expected earnings.</p>
+  </li>
+  <li>Legal risk</li>
+  <li>
+    <p>The risk that failures by company managers to effectively manage a company’s environmental, social, and governance risk exposures will lead to lawsuits and other judicial remedies, resulting in potentially catastrophic losses for the company; the risk that the legal system will not enforce a contract in case of dispute or fraud.</p>
+  </li>
+  <li>Legislative and regulatory risk</li>
+  <li>
+    <p>The risk that governmental laws and regulations directly or indirectly affecting a company’s operations will change with potentially severe adverse effects on the company’s continued profitability and even its long-term sustainability.</p>
+  </li>
+  <li>Level</li>
+  <li>
+    <p>One of the three factors (the other two are steepness and curvature) that empirically explain most of the changes in the shape of the yield curve. A shock to the level factor changes the yield for all maturities by an almost identical amount.</p>
+  </li>
+  <li>Leveraged buyout</li>
+  <li>
+    <p>(LBO) A transaction whereby the target company management team converts the target to a privately held company by using heavy borrowing to finance the purchase of the target company’s outstanding shares.</p>
+  </li>
+  <li>Leveraged recapitalization</li>
+  <li>
+    <p>A post-offer takeover defense mechanism that involves the assumption of a large amount of debt that is then used to finance share repurchases; the effect is to dramatically change the company’s capital structure while attempting to deliver a value to target shareholders in excess of a hostile bid.</p>
+  </li>
+  <li>Libor–OIS spread</li>
+  <li>
+    <p>The difference between Libor and the overnight indexed swap (OIS) rate.</p>
+  </li>
+  <li>Linear association</li>
+  <li>
+    <p>A straight-line relationship, as opposed to a relationship that cannot be graphed as a straight line.</p>
+  </li>
+  <li>Linear regression</li>
+  <li>
+    <p>Regression that models the straight-line relationship between the dependent and independent variable(s).</p>
+  </li>
+  <li>Linear trend</li>
+  <li>
+    <p>A trend in which the dependent variable changes at a constant rate with time.</p>
+  </li>
+  <li>Liquidation</li>
+  <li>
+    <p>To sell the assets of a company, division, or subsidiary piecemeal, typically because of bankruptcy; the form of bankruptcy that allows for the orderly satisfaction of creditors’ claims after which the company ceases to exist.</p>
+  </li>
+  <li>Liquidation value</li>
+  <li>
+    <p>The value of a company if the company were dissolved and its assets sold individually.</p>
+  </li>
+  <li>Liquidity preference theory</li>
+  <li>
+    <p>A term structure theory that asserts liquidity premiums exist to compensate investors for the added interest rate risk they face when lending long term.</p>
+  </li>
+  <li>Liquidity premium</li>
+  <li>
+    <p>The premium or incrementally higher yield that investors demand for lending long term.</p>
+  </li>
+  <li>Liquidity risk</li>
+  <li>
+    <p>The risk that a financial instrument cannot be purchased or sold without a significant concession in price due to the size of the market.</p>
+  </li>
+  <li>Local currency</li>
+  <li>
+    <p>The currency of the country where a company is located.</p>
+  </li>
+  <li>Local expectations theory</li>
+  <li>
+    <p>A term structure theory that contends the return for all bonds over short time periods is the risk-free rate.</p>
+  </li>
+  <li>Locational obsolescence</li>
+  <li>
+    <p>In the context of real estate, a reduction in value due to decreased desirability of the location of the building.</p>
+  </li>
+  <li>Lockout period</li>
+  <li>
+    <p>Period during which a bond’s issuer cannot call the bond.</p>
+  </li>
+  <li>Log-linear model</li>
+  <li>
+    <p>With reference to time-series models, a model in which the growth rate of the time series as a function of time is constant.</p>
+  </li>
+  <li>Log-log regression model</li>
+  <li>
+    <p>A regression that expresses the dependent and independent variables as natural logarithms.</p>
+  </li>
+  <li>Logit model</li>
+  <li>
+    <p>A qualitative-dependent-variable multiple regression model based on the logistic probability distribution.</p>
+  </li>
+  <li>Long/short trade</li>
+  <li>
+    <p>A long position in one CDS and a short position in another.</p>
+  </li>
+  <li>Look-ahead bias</li>
+  <li>
+    <p>A bias caused by using information that was not available on the test date.</p>
+  </li>
+  <li>Lookback period</li>
+  <li>
+    <p>The time period used to gather a historical data set.</p>
+  </li>
+  <li>Loss given default</li>
+  <li>The amount that will be lost if a default occurs.</li>
+</ul>
+
+<h4 id="m"><strong>M</strong></h4>
+
+<ul>
+  <li>Macroeconomic balance approach</li>
+  <li>
+    <p>An approach to assessing the equilibrium exchange rate that focuses on exchange rate adjustments needed to close the gap between the medium-term expectation for a country’s current account balance and that country’s normal (or sustainable) current account balance.</p>
+  </li>
+  <li>Macroeconomic factor model</li>
+  <li>
+    <p>A multifactor model in which the factors are surprises in macroeconomic variables that significantly explain equity returns.</p>
+  </li>
+  <li>Macroeconomic factors</li>
+  <li>
+    <p>Factors related to the economy, such as the inflation rate, industrial production, or economic sector membership.</p>
+  </li>
+  <li>Maintenance capital expenditures</li>
+  <li>
+    <p>Capital expenditures needed to maintain operations at the current level.</p>
+  </li>
+  <li>Managerialism theories</li>
+  <li>
+    <p>Theories that posit that corporate executives are motivated to engage in mergers to maximize the size of their company rather than shareholder value.</p>
+  </li>
+  <li>Marginal investor</li>
+  <li>
+    <p>An investor in a given share who is very likely to be part of the next trade in the share and who is therefore important in setting price.</p>
+  </li>
+  <li>Marginal VaR (MVaR)</li>
+  <li>
+    <p>A measure of the effect on portfolio VaR of a small change in a position size.</p>
+  </li>
+  <li>Market approach</li>
+  <li>
+    <p>Valuation approach that values an asset based on pricing multiples from sales of assets viewed as similar to the subject asset.</p>
+  </li>
+  <li>Market conversion premium per share</li>
+  <li>
+    <p>For a convertible bond, the difference between the market conversion price and the underlying share price, which allows investors to identify the premium or discount payable when buying a convertible bond rather than the underlying common stock.</p>
+  </li>
+  <li>Market conversion premium ratio</li>
+  <li>
+    <p>For a convertible bond, the market conversion premium per share expressed as a percentage of the current market price of the shares.</p>
+  </li>
+  <li>Market efficiency</li>
+  <li>
+    <p>A finance perspective on capital markets that deals with the relationship of price to intrinsic value. The traditional efficient markets formulation asserts that an asset’s price is the best available estimate of its intrinsic value. The rational efficient markets formulation asserts that investors should expect to be rewarded for the costs of information gathering and analysis by higher gross returns.</p>
+  </li>
+  <li>Market timing</li>
+  <li>
+    <p>Asset allocation in which the investment in the market is increased if one forecasts that the market will outperform T-bills.</p>
+  </li>
+  <li>Market value</li>
+  <li>
+    <p>The estimated amount for which a property should exchange on the date of valuation between a willing buyer and a willing seller in an arm’s-length transaction after proper marketing wherein the parties had each acted knowledgeably, prudently, and without compulsion.</p>
+  </li>
+  <li>Market value of invested capital</li>
+  <li>
+    <p>The market value of debt and equity.</p>
+  </li>
+  <li>Mature growth rate</li>
+  <li>
+    <p>The earnings growth rate in a company’s mature phase; an earnings growth rate that can be sustained long term.</p>
+  </li>
+  <li>Maximum drawdown</li>
+  <li>
+    <p>The worst-returning month or quarter for the portfolio or the worst peak-to-trough decline in a portfolio’s returns.</p>
+  </li>
+  <li>Mean reversion</li>
+  <li>
+    <p>The tendency of a time series to fall when its level is above its mean and rise when its level is below its mean; a mean-reverting time series tends to return to its long-term mean.</p>
+  </li>
+  <li>Merger</li>
+  <li>
+    <p>The absorption of one company by another; two companies become one entity and one or both of the pre-merger companies ceases to exist as a separate entity.</p>
+  </li>
+  <li>Method based on forecasted fundamentals</li>
+  <li>
+    <p>An approach to using price multiples that relates a price multiple to forecasts of fundamentals through a discounted cash flow model.</p>
+  </li>
+  <li>Method of comparables</li>
+  <li>
+    <p>An approach to valuation that involves using a price multiple to evaluate whether an asset is relatively fairly valued, relatively undervalued, or relatively overvalued when compared to a benchmark value of the multiple.</p>
+  </li>
+  <li>Minority Interest</li>
+  <li>
+    <p>The proportion of the ownership of a subsidiary not held by the parent (controlling) company.</p>
+  </li>
+  <li>Mispricing</li>
+  <li>
+    <p>Any departure of the market price of an asset from the asset’s estimated intrinsic value.</p>
+  </li>
+  <li>Mixed offering</li>
+  <li>
+    <p>A merger or acquisition that is to be paid for with cash, securities, or some combination of the two.</p>
+  </li>
+  <li>Model specification</li>
+  <li>
+    <p>With reference to regression, the set of variables included in the regression and the regression equation’s functional form.</p>
+  </li>
+  <li>Molodovsky effect</li>
+  <li>
+    <p>The observation that P/Es tend to be high on depressed EPS at the bottom of a business cycle, and tend to be low on unusually high EPS at the top of a business cycle.</p>
+  </li>
+  <li>Momentum indicators</li>
+  <li>
+    <p>Valuation indicators that relate either price or a fundamental (such as earnings) to the time series of their own past values (or in some cases to their expected value).</p>
+  </li>
+  <li>Monetary assets and liabilities</li>
+  <li>
+    <p>Assets and liabilities with value equal to the amount of currency contracted for, a fixed amount of currency. Examples are cash, accounts receivable, accounts payable, bonds payable, and mortgages payable. Inventory is not a monetary asset. Most liabilities are monetary.</p>
+  </li>
+  <li>Monetary/non-monetary method</li>
+  <li>
+    <p>Approach to translating foreign currency financial statements for consolidation in which monetary assets and liabilities are translated at the current exchange rate. Non-monetary assets and liabilities are translated at historical exchange rates (the exchange rates that existed when the assets and liabilities were acquired).</p>
+  </li>
+  <li>Monetizing</li>
+  <li>
+    <p>The conversion of the value of a financial transaction into currency.</p>
+  </li>
+  <li>Monitoring costs</li>
+  <li>
+    <p>Costs borne by owners to monitor the management of the company (e.g., board of director expenses).</p>
+  </li>
+  <li>Monte Carlo simulation</li>
+  <li>
+    <p>A method of estimating VaR in which the user develops his or her own assumptions about the statistical characteristics of the distribution and uses those characteristics to generate a distribution that represents hypothetical returns to a portfolio with the specified characteristics.</p>
+  </li>
+  <li>Mortgage-backed securities</li>
+  <li>
+    <p>Asset-backed securitized debt obligations that represent rights to receive cash flows from portfolios of mortgage loans.</p>
+  </li>
+  <li>Mortgage REITs</li>
+  <li>
+    <p>REITs that invest the bulk of their assets in interest-bearing mortgages, mortgage securities, or short-term loans secured by real estate.</p>
+  </li>
+  <li>Mortgages</li>
+  <li>
+    <p>Loans with real estate serving as collateral for the loans.</p>
+  </li>
+  <li>Multi-family/residential REITs</li>
+  <li>
+    <p>REITs that invest in and manage rental apartments for lease to individual tenants, typically using one-year leases.</p>
+  </li>
+  <li>Multicollinearity</li>
+  <li>
+    <p>A regression assumption violation that occurs when two or more independent variables (or combinations of independent variables) are highly but not perfectly correlated with each other.</p>
+  </li>
+  <li>Multiple linear regression</li>
+  <li>
+    <p>Linear regression involving two or more independent variables.</p>
+  </li>
+  <li>Multiple linear regression model</li>
+  <li>
+    <p>A linear regression model with two or more independent variables.</p>
+  </li>
+  <li>Mutually exclusive projects</li>
+  <li>
+    <p>Mutually exclusive projects compete directly with each other.</p>
+  </li>
+  <li>For example, if Projects A and B are mutually exclusive, you can choose A or B, but you cannot choose both.</li>
+</ul>
+
+<h4 id="n"><strong>N</strong></h4>
+
+<ul>
+  <li>n-Period moving average</li>
+  <li>
+    <p>The average of the current and immediately prior n – 1 values of a time series.</p>
+  </li>
+  <li>Naked credit default swap</li>
+  <li>
+    <p>A position where the owner of the CDS does not have a position in the underlying credit.</p>
+  </li>
+  <li>Negative serial correlation</li>
+  <li>
+    <p>Serial correlation in which a positive error for one observation increases the chance of a negative error for another observation, and vice versa.</p>
+  </li>
+  <li>Net asset balance sheet exposure</li>
+  <li>
+    <p>When assets translated at the current exchange rate are greater in amount than liabilities translated at the current exchange rate. Assets exposed to translation gains or losses exceed the exposed liabilities.</p>
+  </li>
+  <li>Net asset value</li>
+  <li>
+    <p>The difference between assets and liabilities, all taken at current market values instead of accounting book values.</p>
+  </li>
+  <li>Net asset value per share</li>
+  <li>
+    <p>Net asset value divided by the number of shares outstanding.</p>
+  </li>
+  <li>Net lease</li>
+  <li>
+    <p>A lease under which the tenant pays a net rent to the landlord as well as an additional amount based on the tenant’s pro rata share of the operating costs, utilities, maintenance expenses, and real estate taxes relating to the property.</p>
+  </li>
+  <li>Net liability balance sheet exposure</li>
+  <li>
+    <p>When liabilities translated at the current exchange rate are greater assets translated at the current exchange rate. Liabilities exposed to translation gains or losses exceed the exposed assets.</p>
+  </li>
+  <li>Net operating income</li>
+  <li>
+    <p>Gross rental revenue minus operating costs, but before deducting depreciation, corporate overhead, and interest expense. In the context of real estate, a measure of the income from the property after deducting operating expenses for such items as property taxes, insurance, maintenance, utilities, repairs, and insurance but before deducting any costs associated with financing and before deducting federal income taxes. It is similar to earnings before interest, taxes, depreciation, and amortization (EBITDA) in a financial reporting context.</p>
+  </li>
+  <li>Net operating profit less adjusted taxes (NOPLAT)</li>
+  <li>
+    <p>A company’s operating profit with adjustments to normalize the effects of capital structure.</p>
+  </li>
+  <li>Net present value (NPV)</li>
+  <li>
+    <p>The present value of an investment’s cash inflows (benefits) minus the present value of its cash outflows (costs).</p>
+  </li>
+  <li>Net regulatory burden</li>
+  <li>
+    <p>The private costs of regulation less the private benefits of regulation.</p>
+  </li>
+  <li>Net rent</li>
+  <li>
+    <p>A rent that consists of a stipulated rent to the landlord and a further amount based on their share of common area costs for utilities, maintenance, and property taxes.</p>
+  </li>
+  <li>Network externalities</li>
+  <li>
+    <p>The impact that users of a good, a service, or a technology have on other users of that product; it can be positive (e.g., a critical mass of users makes a product more useful) or negative (e.g., congestion makes the product less useful).</p>
+  </li>
+  <li>No-arbitrage approach</li>
+  <li>
+    <p>A procedure for obtaining the value of an option based on the creation of a portfolio that replicates the payoffs of the option and deriving the option value from the value of the replicating portfolio.</p>
+  </li>
+  <li>No-growth company</li>
+  <li>
+    <p>A company without positive expected net present value projects.</p>
+  </li>
+  <li>No-growth value per share</li>
+  <li>
+    <p>The value per share of a no-growth company, equal to the expected level amount of earnings divided by the stock’s required rate of return.</p>
+  </li>
+  <li>Non-cash rent</li>
+  <li>
+    <p>An amount equal to the difference between the average contractual rent over a lease term (the straight-line rent) and the cash rent actually paid during a period. This figure is one of the deductions made from FFO to calculate AFFO.</p>
+  </li>
+  <li>Non-convergence trap</li>
+  <li>
+    <p>A situation in which a country remains relative poor, or even falls further behind, because it fails to t implement necessary institutional reforms and/or adopt leading technologies.</p>
+  </li>
+  <li>Non-monetary assets and liabilities</li>
+  <li>
+    <p>Assets and liabilities that are not monetary assets and liabilities. Non-monetary assets include inventory, fixed assets, and intangibles, and non-monetary liabilities include deferred revenue.</p>
+  </li>
+  <li>Non-renewable resources</li>
+  <li>
+    <p>Finite resources that are depleted once they are consumed; oil and coal are examples.</p>
+  </li>
+  <li>Nonconventional cash flow</li>
+  <li>
+    <p>In a nonconventional cash flow pattern, the initial outflow is not followed by inflows only, but the cash flows can flip from positive (inflows) to negative (outflows) again (or even change signs several times).</p>
+  </li>
+  <li>Nonearning assets</li>
+  <li>
+    <p>Cash and investments (specifically cash, cash equivalents, and short-term investments).</p>
+  </li>
+  <li>Nonlinear relation</li>
+  <li>
+    <p>An association or relationship between variables that cannot be graphed as a straight line.</p>
+  </li>
+  <li>Nonstationarity</li>
+  <li>
+    <p>With reference to a random variable, the property of having characteristics such as mean and variance that are not constant through time.</p>
+  </li>
+  <li>Normal EPS</li>
+  <li>
+    <p>The EPS that a business could achieve currently under mid-cyclical conditions. Also called normalized EPS.</p>
+  </li>
+  <li>Normalized earnings</li>
+  <li>
+    <p>The expected level of mid-cycle earnings for a company in the absence of any unusual or temporary factors that affect profitability (either positively or negatively).</p>
+  </li>
+  <li>Normalized EPS</li>
+  <li>
+    <p>The EPS that a business could achieve currently under mid-cyclical conditions. Also called normal EPS.</p>
+  </li>
+  <li>
+    <p>Normalized P/<strong>E</strong></p>
+  </li>
+  <li>
+    <p>P/E based on normalized EPS data.</p>
+  </li>
+  <li>Notional amount</li>
+  <li>
+    <p>The amount of protection being purchased in a CDS.</p>
+  </li>
+  <li>
+    <p>NTM P/<strong>E</strong></p>
+  </li>
+  <li>Next twelve months P/E: current market price divided by an estimated next twelve months EPS.</li>
+</ul>
+
+<h4 id="o"><strong>O</strong></h4>
+
+<ul>
+  <li>Off-the-run</li>
+  <li>
+    <p>A series of securities or indexes that were issued/created prior to the most recently issued/created series.</p>
+  </li>
+  <li>Office REITs</li>
+  <li>
+    <p>REITs that invest in and manage multi-tenanted office properties in central business districts of cities and suburban markets.</p>
+  </li>
+  <li>On-the-run</li>
+  <li>
+    <p>The most recently issued/created series of securities or indexes.</p>
+  </li>
+  <li>One-sided durations</li>
+  <li>
+    <p>Effective durations when interest rates go up or down, which are better at capturing the interest rate sensitivity of bonds with embedded options that do not react symmetrically to positive and negative changes in interest rates of the same magnitude.</p>
+  </li>
+  <li>Operating risk</li>
+  <li>
+    <p>The risk attributed to the operating cost structure, in particular the use of fixed costs in operations; the risk arising from the mix of fixed and variable costs; the risk that a company’s operations may be severely affected by environmental, social, and governance risk factors.</p>
+  </li>
+  <li>Operational risk</li>
+  <li>
+    <p>The risk of loss from failures in a company’s systems and procedures, or from external events.</p>
+  </li>
+  <li>Opportunity cost</li>
+  <li>
+    <p>The value that investors forgo by choosing a particular course of action; the value of something in its best alternative use.</p>
+  </li>
+  <li>Optimal capital structure</li>
+  <li>
+    <p>The capital structure at which the value of the company is maximized.</p>
+  </li>
+  <li>Option-adjusted spread</li>
+  <li>
+    <p>(OAS) Constant spread that, when added to all the one-period forward rates on the interest rate tree, makes the arbitrage-free value of the bond equal to its market price.</p>
+  </li>
+  <li>Option combination</li>
+  <li>
+    <p>An option strategy that typically uses both puts and calls, an example of which is the straddle, which involves buying one call and one put.</p>
+  </li>
+  <li>Option spread</li>
+  <li>
+    <p>The investor buys one call and writes another with a different exercise price or expiration or buys one put and writes another with a different exercise price or expiration.</p>
+  </li>
+  <li>Orderly liquidation value</li>
+  <li>
+    <p>The estimated gross amount of money that could be realized from the liquidation sale of an asset or assets, given a reasonable amount of time to find a purchaser or purchasers.</p>
+  </li>
+  <li>Organic growth</li>
+  <li>
+    <p>Company growth in output or sales that is achieved by making investments internally (i.e., excludes growth achieved through mergers and acquisitions).</p>
+  </li>
+  <li>Other comprehensive income</li>
+  <li>
+    <p>Changes to equity that bypass (are not reported in) the income statement; the difference between comprehensive income and net income.</p>
+  </li>
+  <li>Other post-employment benefits</li>
+  <li>
+    <p>Promises by the company to pay benefits in the future, such as life insurance premiums and all or part of health care insurance for its retirees.</p>
+  </li>
+  <li>Out-of-sample forecast errors</li>
+  <li>
+    <p>The differences between actual and predicted value of time series outside the sample period used to fit the model.</p>
+  </li>
+  <li>Out-of-the-money</li>
+  <li>Options that, if exercised, would require the payment of more money than the value received and therefore would not be currently exercised.</li>
+</ul>
+
+<h4 id="p"><strong>P</strong></h4>
+
+<ul>
+  <li>Pairs trading</li>
+  <li>
+    <p>An approach to trading that uses pairs of closely related stocks, buying the relatively undervalued stock and selling short the relatively overvalued stock.</p>
+  </li>
+  <li>Par curve</li>
+  <li>
+    <p>A hypothetical yield curve for coupon-paying Treasury securities that assumes all securities are priced at par.</p>
+  </li>
+  <li>Par swap</li>
+  <li>
+    <p>A swap in which the fixed rate is set so that no money is exchanged at contract initiation.</p>
+  </li>
+  <li>Parameter instability</li>
+  <li>
+    <p>The problem or issue of population regression parameters that have changed over time.</p>
+  </li>
+  <li>Parametric method</li>
+  <li>
+    <p>A method of estimating VaR which uses the historical mean, standard deviation, and correlation of security price movements to estimate the portfolio VaR. Generally assumes a normal distribution, but can be adapted to non-normal distributions with the addition of skewness and kurtosis. Sometimes called the variance–covariance method or the analytical method.</p>
+  </li>
+  <li>Partial equilibrium models</li>
+  <li>
+    <p>Term structure models that make use of an assumed form of interest rate process. Underlying risk factors, such as the impact of changing interest rates on the economy, are not incorporated in the model.</p>
+  </li>
+  <li>Partial regression coefficients</li>
+  <li>
+    <p>The slope coefficients in a multiple regression. Also called partial slope coefficients.</p>
+  </li>
+  <li>Partial slope coefficients</li>
+  <li>
+    <p>The slope coefficients in a multiple regression. Also called partial regression coefficients.</p>
+  </li>
+  <li>Partnership</li>
+  <li>
+    <p>A business owned and operated by more than one individual.</p>
+  </li>
+  <li>Payout amount</li>
+  <li>
+    <p>The payout ratio times the notional.</p>
+  </li>
+  <li>Payout policy</li>
+  <li>
+    <p>The principles by which a company distributes cash to common shareholders by means of cash dividends and/or share repurchases.</p>
+  </li>
+  <li>Payout ratio</li>
+  <li>
+    <p>An estimate of the expected credit loss.</p>
+  </li>
+  <li>Pecking order theory</li>
+  <li>
+    <p>The theory that managers take into account how their actions might be interpreted by outsiders and thus order their preferences for various forms of corporate financing. Forms of financing that are least visible to outsiders (e.g., internally generated funds) are most preferable to managers and those that are most visible (e.g., equity) are least preferable.</p>
+  </li>
+  <li>PEG</li>
+  <li>
+    <p>The P/E-to-growth ratio, calculated as the stock’s P/E divided by the expected earnings growth rate.</p>
+  </li>
+  <li>Pension obligation</li>
+  <li>
+    <p>The present value of future benefits earned by employees for service provided to date.</p>
+  </li>
+  <li>Perfect capital markets</li>
+  <li>
+    <p>Markets in which, by assumption, there are no taxes, transactions costs, or bankruptcy costs, and in which all investors have equal (“symmetric”) information.</p>
+  </li>
+  <li>Performance appraisal</li>
+  <li>
+    <p>The evaluation of risk-adjusted performance; the evaluation of investment skill.</p>
+  </li>
+  <li>Perpetuity</li>
+  <li>
+    <p>A perpetual annuity, or a set of never-ending level sequential cash flows, with the first cash flow occurring one period from now.</p>
+  </li>
+  <li>Persistent earnings</li>
+  <li>
+    <p>Earnings excluding nonrecurring components. Also referred to as core earnings, continuing earnings, or underlying earnings.</p>
+  </li>
+  <li>Pet projects</li>
+  <li>
+    <p>Projects in which influential managers want the corporation to invest. Often, unfortunately, pet projects are selected without undergoing normal capital budgeting analysis.</p>
+  </li>
+  <li>Physical deterioration</li>
+  <li>
+    <p>In the context of real estate, a reduction in value due to wear and tear.</p>
+  </li>
+  <li>Physical settlement</li>
+  <li>
+    <p>Involves actual delivery of the debt instrument in exchange for a payment by the credit protection seller of the notional amount of the contract.</p>
+  </li>
+  <li>Poison pill</li>
+  <li>
+    <p>A pre-offer takeover defense mechanism that makes it prohibitively costly for an acquirer to take control of a target without the prior approval of the target’s board of directors.</p>
+  </li>
+  <li>Poison puts</li>
+  <li>
+    <p>A pre-offer takeover defense mechanism that gives target company bondholders the right to sell their bonds back to the target at a pre-specified redemption price, typically at or above par value; this defense increases the need for cash and raises the cost of the acquisition.</p>
+  </li>
+  <li>Pooling of interests method</li>
+  <li>
+    <p>A method of accounting in which combined companies were portrayed as if they had always operated as a single economic entity. Called pooling of interests under US GAAP and uniting of interests under IFRS. (No longer allowed under US GAAP or IFRS).</p>
+  </li>
+  <li>Portfolio balance approach</li>
+  <li>
+    <p>A theory of exchange rate determination that emphasizes the portfolio investment decisions of global investors and the requirement that global investors willingly hold all outstanding securities denominated in each currency at prevailing prices and exchange rates.</p>
+  </li>
+  <li>Position delta</li>
+  <li>
+    <p>The overall delta of a position that contains some combination of assets and derivatives.</p>
+  </li>
+  <li>Positive serial correlation</li>
+  <li>
+    <p>Serial correlation in which a positive error for one observation increases the chance of a positive error for another observation, and a negative error for one observation increases the chance of a negative error for another observation.</p>
+  </li>
+  <li>Potential GDP</li>
+  <li>
+    <p>The maximum amount of output an economy can sustainably produce without inducing an increase in the inflation rate. The output level that corresponds to full employment with consistent wage and price expectations.</p>
+  </li>
+  <li>Preferred habitat theory</li>
+  <li>
+    <p>A term structure theory that contends that investors have maturity preferences and require yield incentives before they will buy bonds outside of their preferred maturities.</p>
+  </li>
+  <li>Premise of value</li>
+  <li>
+    <p>The status of a company in the sense of whether it is assumed to be a going concern or not.</p>
+  </li>
+  <li>Premium leg</li>
+  <li>
+    <p>The series of payments the credit protection buyer promises to make to the credit protection seller.</p>
+  </li>
+  <li>Present value model</li>
+  <li>
+    <p>A model of intrinsic value that views the value of an asset as the present value of the asset’s expected future cash flows.</p>
+  </li>
+  <li>Present value of growth opportunities</li>
+  <li>
+    <p>The difference between the actual value per share and the no-growth value per share. Also called value of growth.</p>
+  </li>
+  <li>Present value of the expected loss</li>
+  <li>
+    <p>Conceptually, the largest price one would be willing to pay on a bond to a third party (e.g., an insurer) to entirely remove the credit risk of purchasing and holding the bond.</p>
+  </li>
+  <li>Presentation currency</li>
+  <li>
+    <p>The currency in which financial statement amounts are presented.</p>
+  </li>
+  <li>Price momentum</li>
+  <li>
+    <p>A valuation indicator based on past price movement.</p>
+  </li>
+  <li>Price multiples</li>
+  <li>
+    <p>The ratio of a stock’s market price to some measure of value per share.</p>
+  </li>
+  <li>Price return</li>
+  <li>
+    <p>Measures the price appreciation or percentage change in price of a security or the securities in an index or portfolio.</p>
+  </li>
+  <li>Price-setting option</li>
+  <li>
+    <p>The operational flexibility to adjust prices when demand varies from forecast. For example, when demand exceeds capacity, the company could benefit from the excess demand by increasing prices.</p>
+  </li>
+  <li>Priced risk</li>
+  <li>
+    <p>Risk for which investors demand compensation for bearing (e.g., equity risk, company-specific factors, macroeconomic factors).</p>
+  </li>
+  <li>Principal–agent problem</li>
+  <li>
+    <p>A conflict of interest that arises when the agent in an agency relationship has goals and incentives that differ from the principal to whom the agent owes a fiduciary duty.</p>
+  </li>
+  <li>Principal components analysis</li>
+  <li>
+    <p>(PCA) A non-parametric method of extracting relevant information from high-dimensional data that uses the dependencies between variables to represent information in a more tractable, lower-dimensional form.</p>
+  </li>
+  <li>Principle of no arbitrage</li>
+  <li>
+    <p>In well-functioning markets, prices will adjust until there are no arbitrage opportunities.</p>
+  </li>
+  <li>Prior transaction method</li>
+  <li>
+    <p>A variation of the market approach; considers actual transactions in the stock of the subject private company.</p>
+  </li>
+  <li>Private market value</li>
+  <li>
+    <p>The value derived using a sum-of-the-parts valuation.</p>
+  </li>
+  <li>Probability of default</li>
+  <li>
+    <p>The probability that a bond issuer will not meet its contractual obligations on schedule.</p>
+  </li>
+  <li>Probability of survival</li>
+  <li>
+    <p>The probability that a bond issuer will meet its contractual obligations on schedule.</p>
+  </li>
+  <li>Probit model</li>
+  <li>
+    <p>A qualitative-dependent-variable multiple regression model based on the normal distribution.</p>
+  </li>
+  <li>Procedural law</li>
+  <li>
+    <p>The body of law that focuses on the protection and enforcement of the substantive laws.</p>
+  </li>
+  <li>Production-flexibility</li>
+  <li>
+    <p>The operational flexibility to alter production when demand varies from forecast. For example, if demand is strong, a company may profit from employees working overtime or from adding additional shifts.</p>
+  </li>
+  <li>Project sequencing</li>
+  <li>
+    <p>To defer the decision to invest in a future project until the outcome of some or all of a current project is known. Projects are sequenced through time, so that investing in a project creates the option to invest in future projects.</p>
+  </li>
+  <li>
+    <p>Prospective P/<strong>E</strong></p>
+  </li>
+  <li>
+    <p>A P/E calculated on the basis of a forecast of EPS; a stock’s current price divided by next year’s expected earnings.</p>
+  </li>
+  <li>Protection leg</li>
+  <li>
+    <p>The contingent payment that the credit protection seller may have to make to the credit protection buyer.</p>
+  </li>
+  <li>Protective put</li>
+  <li>
+    <p>An option strategy in which a long position in an asset is combined with a long position in a put.</p>
+  </li>
+  <li>Proxy fight</li>
+  <li>
+    <p>An attempt to take control of a company through a shareholder vote.</p>
+  </li>
+  <li>Proxy statement</li>
+  <li>
+    <p>A public document that provides the material facts concerning matters on which shareholders will vote.</p>
+  </li>
+  <li>Prudential supervision</li>
+  <li>
+    <p>Regulation and monitoring of the safety and soundness of financial institutions to promote financial stability, reduce system-wide risks, and protect customers of financial institutions.</p>
+  </li>
+  <li>Purchasing power gain</li>
+  <li>
+    <p>A gain in value caused by changes in price levels. Monetary liabilities experience purchasing power gains during periods of inflation.</p>
+  </li>
+  <li>Purchasing power loss</li>
+  <li>
+    <p>A loss in value caused by changes in price levels. Monetary assets experience purchasing power loss during periods of inflation.</p>
+  </li>
+  <li>Purchasing power parity (PPP)</li>
+  <li>
+    <p>The idea that exchange rates move to equalize the purchasing power of different currencies.</p>
+  </li>
+  <li>Pure expectations theory</li>
+  <li>
+    <p>A term structure theory that contends the forward rate is an unbiased predictor of the future spot rate. Also called the unbiased expectations theory.</p>
+  </li>
+  <li>Pure factor portfolio</li>
+  <li>
+    <p>A portfolio with sensitivity of 1 to the factor in question and a sensitivity of 0 to all other factors.</p>
+  </li>
+  <li>Putable bond</li>
+  <li>Bond that includes an embedded put option, which gives the bondholder the right to put back the bonds to the issuer prior to maturity, typically when interest rates have risen and higher-yielding bonds are available.</li>
+</ul>
+
+<h4 id="q"><strong>Q</strong></h4>
+
+<ul>
+  <li>Qualitative dependent variables</li>
+  <li>
+    <p>Dummy variables used as dependent variables rather than as independent variables.</p>
+  </li>
+  <li>Quality of earnings analysis</li>
+  <li>The investigation of issues relating to the accuracy of reported accounting results as reflections of economic performance; quality of earnings analysis is broadly understood to include not only earnings management, but also balance sheet management.</li>
+</ul>
+
+<h4 id="r"><strong>R</strong></h4>
+
+<ul>
+  <li>Random walk</li>
+  <li>
+    <p>A time series in which the value of the series in one period is the value of the series in the previous period plus an unpredictable random error.</p>
+  </li>
+  <li>Rational efficient markets formulation</li>
+  <li>
+    <p>See market efficiency.</p>
+  </li>
+  <li>Real estate investment trusts (REITS)</li>
+  <li>
+    <p>Tax-advantaged entities (companies or trusts) that typically own, operate, and—to a limited extent—develop income-producing real estate property.</p>
+  </li>
+  <li>Real estate operating companies</li>
+  <li>
+    <p>Regular taxable real estate ownership companies that operate in the real estate industry in countries that do not have a tax-advantaged REIT regime in place or are engaged in real estate activities of a kind and to an extent that do not fit within their country’s REIT framework.</p>
+  </li>
+  <li>Real exchange rate</li>
+  <li>
+    <p>The relative purchasing power of two currencies, defined in terms of the real goods and services that each can buy at prevailing national price levels and nominal exchange rates. Measured as the ratio of national price levels expressed in a common currency.</p>
+  </li>
+  <li>Real interest rate parity</li>
+  <li>
+    <p>The proposition that real interest rates will converge to the same level across different markets.</p>
+  </li>
+  <li>Real options</li>
+  <li>
+    <p>Options that relate to investment decisions such as the option to time the start of a project, the option to adjust its scale, or the option to abandon a project that has begun.</p>
+  </li>
+  <li>Rebalance return</li>
+  <li>
+    <p>A return from rebalancing the component weights of an index.</p>
+  </li>
+  <li>Reconstitution</li>
+  <li>
+    <p>When dealers recombine appropriate individual zero-coupon securities and reproduce an underlying coupon Treasury.</p>
+  </li>
+  <li>Recovery rate</li>
+  <li>
+    <p>The percentage of the loss recovered.</p>
+  </li>
+  <li>Reduced form models</li>
+  <li>
+    <p>Models of credit analysis based on the outputs of a structural model but with different assumptions. The model’s credit risk measures reflect changing economic conditions.</p>
+  </li>
+  <li>Reference entity</li>
+  <li>
+    <p>The borrower on a single-name CDS.</p>
+  </li>
+  <li>Reference obligation</li>
+  <li>
+    <p>A particular debt instrument issued by the borrower that is the designated instrument being covered.</p>
+  </li>
+  <li>Regime</li>
+  <li>
+    <p>With reference to a time series, the underlying model generating the times series.</p>
+  </li>
+  <li>Regression coefficients</li>
+  <li>
+    <p>The intercept and slope coefficient(s) of a regression.</p>
+  </li>
+  <li>Regulatory arbitrage</li>
+  <li>
+    <p>Entities identify and use some aspect of regulations that allows them to exploit differences in economic substance and regulatory interpretation or in foreign and domestic regulatory regimes to their (the entities) advantage.</p>
+  </li>
+  <li>Regulatory burden</li>
+  <li>
+    <p>The costs of regulation for the regulated entity.</p>
+  </li>
+  <li>Regulatory capture</li>
+  <li>
+    <p>Theory that regulation often arises to enhance the interests of the regulated.</p>
+  </li>
+  <li>Regulatory competition</li>
+  <li>
+    <p>Regulators may compete to provide a regulatory environment designed to attract certain entities.</p>
+  </li>
+  <li>Relative-strength indicators</li>
+  <li>
+    <p>Valuation indicators that compare a stock’s performance during a period either to its own past performance or to the performance of some group of stocks.</p>
+  </li>
+  <li>Relative valuation models</li>
+  <li>
+    <p>A model that specifies an asset’s value relative to the value of another asset.</p>
+  </li>
+  <li>Relative VaR</li>
+  <li>
+    <p>See ex ante tracking error.</p>
+  </li>
+  <li>Relative version of PPP</li>
+  <li>
+    <p>Hypothesis that changes in (nominal) exchange rates over time are equal to national inflation rate differentials.</p>
+  </li>
+  <li>Renewable resources</li>
+  <li>
+    <p>Resources that can be replenished, such as a forest.</p>
+  </li>
+  <li>Rental price of capital</li>
+  <li>
+    <p>The cost per unit of time to rent a unit of capital.</p>
+  </li>
+  <li>Replacement cost</li>
+  <li>
+    <p>In the context of real estate, the value of a building assuming it was built today using current construction costs and standards.</p>
+  </li>
+  <li>Reporting unit</li>
+  <li>
+    <p>For financial reporting under US GAAP, an operating segment or one level below an operating segment (referred to as a component).</p>
+  </li>
+  <li>Reputational risk</li>
+  <li>
+    <p>The risk that a company will suffer an extended diminution in market value relative to other companies in the same industry due to a demonstrated lack of concern for environmental, social, and governance risk factors.</p>
+  </li>
+  <li>Required rate of return</li>
+  <li>
+    <p>The minimum rate of return required by an investor to invest in an asset, given the asset’s riskiness.</p>
+  </li>
+  <li>Residential properties</li>
+  <li>
+    <p>Properties that provide housing for individuals or families. Single-family properties may be owner-occupied or rental properties, whereas multi-family properties are rental properties even if the owner or manager occupies one of the units.</p>
+  </li>
+  <li>Residual autocorrelations</li>
+  <li>
+    <p>The sample autocorrelations of the residuals.</p>
+  </li>
+  <li>Residual dividend policy</li>
+  <li>
+    <p>A policy in which dividends are paid from any internally generated funds remaining after such funds are used to finance positive NPV projects.</p>
+  </li>
+  <li>Residual income</li>
+  <li>
+    <p>Earnings for a given time period, minus a deduction for common shareholders’ opportunity cost in generating the earnings. Also called economic profit or abnormal earnings.</p>
+  </li>
+  <li>Residual income method</li>
+  <li>
+    <p>Income approach that estimates the value of all intangible assets of the business by capitalizing future earnings in excess of the estimated return requirements associated with working capital and fixed assets.</p>
+  </li>
+  <li>Residual income model</li>
+  <li>
+    <p>(RIM) A model of stock valuation that views intrinsic value of stock as the sum of book value per share plus the present value of the stock’s expected future residual income per share. Also called discounted abnormal earnings model or Edwards–Bell–Ohlson model.</p>
+  </li>
+  <li>Residual loss</li>
+  <li>
+    <p>Agency costs that are incurred despite adequate monitoring and bonding of management.</p>
+  </li>
+  <li>Restructuring</li>
+  <li>
+    <p>Reorganizing the financial structure of a firm.</p>
+  </li>
+  <li>Retail REITs</li>
+  <li>
+    <p>REITs that invest in such retail properties as regional shopping malls or community/neighborhood shopping centers.</p>
+  </li>
+  <li>Return on capital employed</li>
+  <li>
+    <p>Operating profit divided by capital employed (debt and equity capital).</p>
+  </li>
+  <li>Return on invested capital</li>
+  <li>
+    <p>A measure of the after-tax profitability of the capital invested by the company’s shareholders and debt holders.</p>
+  </li>
+  <li>Reverse carry arbitrage</li>
+  <li>
+    <p>A strategy in involving the short sale of the underlying and an offsetting opposite position in the derivative.</p>
+  </li>
+  <li>Reverse stress testing</li>
+  <li>
+    <p>A risk management approach in which the user identifies key risk exposures in the portfolio and subjects those exposures to extreme market movements.</p>
+  </li>
+  <li>Reviewed financial statements</li>
+  <li>
+    <p>A type of non-audited financial statements; typically provide an opinion letter with representations and assurances by the reviewing accountant that are less than those in audited financial statements.</p>
+  </li>
+  <li>Rho</li>
+  <li>
+    <p>The change in a given derivative instrument for a given small change in the risk-free interest rate, holding everything else constant. Rho measures the sensitivity of the option to the risk-free interest rate.</p>
+  </li>
+  <li>Riding the yield curve</li>
+  <li>
+    <p>A maturity trading strategy that involves buying bonds with a maturity longer than the intended investment horizon. Also called rolling down the yield curve.</p>
+  </li>
+  <li>Risk budgeting</li>
+  <li>
+    <p>The allocation of an asset owner’s total risk appetite among groups or divisions (in the case of a trading organization) or among strategies and managers (in the case of an institutional or individual investor).</p>
+  </li>
+  <li>Risk decomposition</li>
+  <li>
+    <p>The process of converting a set of holdings in a portfolio into a set of exposures to risk factors.</p>
+  </li>
+  <li>Risk factors</li>
+  <li>
+    <p>Variables or characteristics with which individual asset returns are correlated. Sometimes referred to simply as factors.</p>
+  </li>
+  <li>Risk reversal</li>
+  <li>
+    <p>An option position that consists of the purchase of an out-of-the-money call and the simultaneous sale of an out-of-the-money put with the same “delta,” on the same underlying currency or security, and with the same expiration date.</p>
+  </li>
+  <li>Robust standard errors</li>
+  <li>
+    <p>Standard errors of the estimated parameters of a regression that correct for the presence of heteroskedasticity in the regression’s error term.</p>
+  </li>
+  <li>Roll</li>
+  <li>
+    <p>When an investor moves from one series to a new one.</p>
+  </li>
+  <li>Roll return</li>
+  <li>
+    <p>The component of the return on a commodity futures contract attributable to rolling long futures positions forward through time. Also called roll yield.</p>
+  </li>
+  <li>Rolling down the yield curve</li>
+  <li>
+    <p>A maturity trading strategy that involves buying bonds with a maturity longer than the intended investment horizon. Also called riding the yield curve.</p>
+  </li>
+  <li>Root mean squared error (RMSE)</li>
+  <li>The square root of the average squared forecast error; used to compare the out-of-sample forecasting performance of forecasting models.</li>
+</ul>
+
+<h4 id="s"><strong>S</strong></h4>
+
+<ul>
+  <li>Sales comparison approach</li>
+  <li>
+    <p>In the context of real estate, this approach estimates value based on what similar or comparable properties (comparables) transacted for in the current market.</p>
+  </li>
+  <li>Scaled earnings surprise</li>
+  <li>
+    <p>Unexpected earnings divided by the standard deviation of analysts’ earnings forecasts.</p>
+  </li>
+  <li>Scatter plot</li>
+  <li>
+    <p>A two-dimensional plot of pairs of observations on two data series.</p>
+  </li>
+  <li>Scenario analysis</li>
+  <li>
+    <p>Analysis that involves changing multiple assumptions at the same time.</p>
+  </li>
+  <li>Screening</li>
+  <li>
+    <p>The application of a set of criteria to reduce a set of potential investments to a smaller set having certain desired characteristics.</p>
+  </li>
+  <li>Seasonality</li>
+  <li>
+    <p>A characteristic of a time series in which the data experiences regular and predictable periodic changes, e.g., fan sales are highest during the summer months.</p>
+  </li>
+  <li>Securities offering</li>
+  <li>
+    <p>A merger or acquisition in which target shareholders are to receive shares of the acquirer’s common stock as compensation.</p>
+  </li>
+  <li>Security selection risk</li>
+  <li>
+    <p>See active specific risk.</p>
+  </li>
+  <li>Segmented markets theory</li>
+  <li>
+    <p>A term structure theory that contends yields are solely a function of the supply and demand for funds of a particular maturity.</p>
+  </li>
+  <li>Self-regulating organizations</li>
+  <li>
+    <p>Private, non-governmental organizations that both represent and regulate their members. Some self-regulating organizations are also independent regulators.</p>
+  </li>
+  <li>Sell-side analysts</li>
+  <li>
+    <p>Analysts who work at brokerages.</p>
+  </li>
+  <li>Sensitivity analysis</li>
+  <li>
+    <p>Analysis that shows the range of possible outcomes as specific assumptions are changed; involves changing one assumption at a time.</p>
+  </li>
+  <li>Serially correlated</li>
+  <li>
+    <p>With reference to regression errors, errors that are correlated across observations.</p>
+  </li>
+  <li>Service period</li>
+  <li>
+    <p>For employee stock options, usually the period between the grant date and the vesting date.</p>
+  </li>
+  <li>Settled in arrears</li>
+  <li>
+    <p>An arrangement in which the interest payment is made at the end of the settlement period.</p>
+  </li>
+  <li>Settlement</li>
+  <li>
+    <p>In the case of a credit event, the process by which the two parties to a CDS contract satisfy their respective obligations.</p>
+  </li>
+  <li>Shaping risk</li>
+  <li>
+    <p>The sensitivity of a bond’s price to the changing shape of the yield curve.</p>
+  </li>
+  <li>Shareholders’ equity</li>
+  <li>
+    <p>Total assets minus total liabilities.</p>
+  </li>
+  <li>Shark repellents</li>
+  <li>
+    <p>A pre-offer takeover defense mechanism involving the corporate charter (e.g., staggered boards of directors and supermajority provisions).</p>
+  </li>
+  <li>Shopping center</li>
+  <li>
+    <p>REITs that invest in such retail properties as regional shopping malls or community/neighborhood shopping centers.</p>
+  </li>
+  <li>Single-name CDS</li>
+  <li>
+    <p>Credit default swap on one specific borrower.</p>
+  </li>
+  <li>Sinking fund bond</li>
+  <li>
+    <p>A bond which requires the issuer to set aside funds over time to retire the bond issue, thus reducing credit risk.</p>
+  </li>
+  <li>Sole proprietorship</li>
+  <li>
+    <p>A business owned and operated by a single person.</p>
+  </li>
+  <li>Spin-off</li>
+  <li>
+    <p>A form of restructuring in which shareholders of a parent company receive a proportional number of shares in a new, separate entity; shareholders end up owning stock in two different companies where there used to be one.</p>
+  </li>
+  <li>Split-off</li>
+  <li>
+    <p>A form of restructuring in which shareholders of the parent company are given shares in a newly created entity in exchange for their shares of the parent company.</p>
+  </li>
+  <li>Split-rate tax system</li>
+  <li>
+    <p>In reference to corporate taxes, a split-rate system taxes earnings to be distributed as dividends at a different rate than earnings to be retained. Corporate profits distributed as dividends are taxed at a lower rate than those retained in the business.</p>
+  </li>
+  <li>Spot curve</li>
+  <li>
+    <p>The term structure of spot rates for loans made today.</p>
+  </li>
+  <li>Spot price</li>
+  <li>
+    <p>The current price of an asset or security. For commodities, the current price to deliver a physical commodity to a specific location or purchase and transport it away from a designated location.</p>
+  </li>
+  <li>Spot rate</li>
+  <li>
+    <p>The interest rate that is determined today for a risk-free, single-unit payment at a specified future date.</p>
+  </li>
+  <li>Spot yield curve</li>
+  <li>
+    <p>The term structure of spot rates for loans made today.</p>
+  </li>
+  <li>Spurious correlation</li>
+  <li>
+    <p>A correlation that misleadingly points toward associations between variables.</p>
+  </li>
+  <li>Stabilized NOI</li>
+  <li>
+    <p>In the context of real estate, the expected NOI when a renovation is complete.</p>
+  </li>
+  <li>Stable dividend policy</li>
+  <li>
+    <p>A policy in which regular dividends are paid that reflect long-run expected earnings. In contrast to a constant dividend payout ratio policy, a stable dividend policy does not reflect short-term volatility in earnings.</p>
+  </li>
+  <li>Standard deviation</li>
+  <li>
+    <p>The positive square root of the variance; a measure of dispersion in the same units as the original data.</p>
+  </li>
+  <li>Standard of value</li>
+  <li>
+    <p>A specification of how “value” is to be understood in the context of a specific valuation.</p>
+  </li>
+  <li>Standardized beta</li>
+  <li>
+    <p>With reference to fundamental factor models, the value of the attribute for an asset minus the average value of the attribute across all stocks, divided by the standard deviation of the attribute across all stocks.</p>
+  </li>
+  <li>Standardized unexpected earnings</li>
+  <li>
+    <p>(SUE) Unexpected earnings per share divided by the standard deviation of unexpected earnings per share over a specified prior time period.</p>
+  </li>
+  <li>Static trade-off theory of capital structure</li>
+  <li>
+    <p>A theory pertaining to a company’s optimal capital structure; the optimal level of debt is found at the point where additional debt would cause the costs of financial distress to increase by a greater amount than the benefit of the additional tax shield.</p>
+  </li>
+  <li>Statistical factor model</li>
+  <li>
+    <p>A multifactor model in which statistical methods are applied to a set of historical returns to determine portfolios that best explain either historical return covariances or variances.</p>
+  </li>
+  <li>Statistically significant</li>
+  <li>
+    <p>A result indicating that the null hypothesis can be rejected; with reference to an estimated regression coefficient, frequently understood to mean a result indicating that the corresponding population regression coefficient is different from 0.</p>
+  </li>
+  <li>Statutes</li>
+  <li>
+    <p>Laws enacted by legislative bodies.</p>
+  </li>
+  <li>Statutory merger</li>
+  <li>
+    <p>A merger in which one company ceases to exist as an identifiable entity and all its assets and liabilities become part of a purchasing company.</p>
+  </li>
+  <li>Steady state rate of growth</li>
+  <li>
+    <p>The constant growth rate of output (or output per capita) which can or will be sustained indefinitely once it is reached. Key ratios, such as the capital–output ratio, are constant on the steady-state growth path.</p>
+  </li>
+  <li>Steepness</li>
+  <li>
+    <p>One of the three factors (the other two are level and curvature) that empirically explain most of the changes in the shape of the yield curve. A shock to the steepness factor changes short-term yields more than long-term yields.</p>
+  </li>
+  <li>Sterilized intervention</li>
+  <li>
+    <p>A policy measure in which a monetary authority buys or sells its own currency to mitigate undesired exchange rate movements and simultaneously offsets the impact on the money supply with transactions in other financial instruments (usually money market instruments).</p>
+  </li>
+  <li>Stock purchase</li>
+  <li>
+    <p>An acquisition in which the acquirer gives the target company’s shareholders some combination of cash and securities in exchange for shares of the target company’s stock.</p>
+  </li>
+  <li>Stop-loss limit</li>
+  <li>
+    <p>Constraint used in risk management that requires a reduction in the size of a portfolio, or its complete liquidation, when a loss of a particular size occurs in a specified period.</p>
+  </li>
+  <li>Storage REITs</li>
+  <li>
+    <p>REITs that own and operate self-storage properties, sometimes referred to as mini-warehouse facilities.</p>
+  </li>
+  <li>Straddle</li>
+  <li>
+    <p>An option strategy involving the purchase of a put and a call on the same underlying with the same exercise price and expiration date. If the put and call are held long, it is a long straddle; if they are held short, it is a short straddle.</p>
+  </li>
+  <li>Straight bond</li>
+  <li>
+    <p>An underlying option-free bond with a specified issuer, issue date, maturity date, principal amount and repayment structure, coupon rate and payment structure, and currency denomination.</p>
+  </li>
+  <li>Straight-line rent</li>
+  <li>
+    <p>The average annual rent under a multi-year lease agreement that contains contractual increases in rent during the life of the lease. For example if the rent is $100,000 in Year 1, $105,000 in Year 2, and $110,000 in Year 3, the average rent to be recognized each year as revenue under straight-line rent accounting is ($100,000 + $105,000 + $110,000)/3 = $105,000.</p>
+  </li>
+  <li>Straight-line rent adjustment</li>
+  <li>
+    <p>See non-cash rent.</p>
+  </li>
+  <li>Strategic transaction</li>
+  <li>
+    <p>A purchase involving a buyer that would benefit from certain synergies associated with owning the target firm.</p>
+  </li>
+  <li>Stress tests</li>
+  <li>
+    <p>A risk management technique which assesses the portfolio’s response to extreme market movements.</p>
+  </li>
+  <li>Stripping</li>
+  <li>
+    <p>A dealer’s ability to separate a bond’s individual cash flows and trade them as zero-coupon securities.</p>
+  </li>
+  <li>Structural models</li>
+  <li>
+    <p>Structural models of credit analysis build on the insights of option pricing theory. They are based on the structure of a company’s balance sheet.</p>
+  </li>
+  <li>Subsidiary merger</li>
+  <li>
+    <p>A merger in which the company being purchased becomes a subsidiary of the purchaser.</p>
+  </li>
+  <li>Substantive law</li>
+  <li>
+    <p>The body of law that focuses on the rights and responsibilities of entities and relationships among entities.</p>
+  </li>
+  <li>Succession event</li>
+  <li>
+    <p>A change of corporate structure of the reference entity, such as through a merger, divestiture, spinoff, or any similar action, in which ultimate responsibility for the debt in question is unclear.</p>
+  </li>
+  <li>Sum-of-the-parts valuation</li>
+  <li>
+    <p>A valuation that sums the estimated values of each of a company’s businesses as if each business were an independent going concern.</p>
+  </li>
+  <li>Sunk cost</li>
+  <li>
+    <p>A cost that has already been incurred.</p>
+  </li>
+  <li>Supernormal growth</li>
+  <li>
+    <p>Above average or abnormally high growth rate in earnings per share.</p>
+  </li>
+  <li>Survivorship bias</li>
+  <li>
+    <p>Bias that may result when failed or defunct companies are excluded from membership in a group.</p>
+  </li>
+  <li>Sustainable growth rate</li>
+  <li>
+    <p>The rate of dividend (and earnings) growth that can be sustained over time for a given level of return on equity, keeping the capital structure constant and without issuing additional common stock.</p>
+  </li>
+  <li>Swap curve</li>
+  <li>
+    <p>The term structure of swap rates.</p>
+  </li>
+  <li>Swap rate</li>
+  <li>
+    <p>The interest rate for the fixed-rate leg of an interest rate swap.</p>
+  </li>
+  <li>Swap rate curve</li>
+  <li>
+    <p>The term structure of swap rates.</p>
+  </li>
+  <li>Swap spread</li>
+  <li>
+    <p>The difference between the fixed rate on an interest rate swap and the rate on a Treasury note with equivalent maturity; it reflects the general level of credit risk in the market.</p>
+  </li>
+  <li>Synthetic CDO</li>
+  <li>
+    <p>Created by combining a portfolio of default-free securities with a combination of credit default swaps undertaken as protection sellers.</p>
+  </li>
+  <li>Synthetic long position</li>
+  <li>
+    <p>A combination of options (buying a call and writing a put) having the same expiration date and the same exercise price, which is approximately equivalent to a long position in the stock.</p>
+  </li>
+  <li>Synthetic short position</li>
+  <li>
+    <p>A derivatives strategy that creates the same performance as a short position in the underlying.</p>
+  </li>
+  <li>Systematic risk</li>
+  <li>
+    <p>Risk that affects the entire market or economy; it cannot be avoided and is inherent in the overall market. Systematic risk is also known as non-diversifiable or market risk.</p>
+  </li>
+  <li>Systemic risk</li>
+  <li>The risk of failure of the financial system.</li>
+</ul>
+
+<h4 id="t"><strong>T</strong></h4>
+
+<ul>
+  <li>Tail risk</li>
+  <li>
+    <p>The risk that losses in extreme events could be greater than would be expected for a portfolio of assets with a normal distribution.</p>
+  </li>
+  <li>Takeover</li>
+  <li>
+    <p>A merger; the term may be applied to any transaction, but is often used in reference to hostile transactions.</p>
+  </li>
+  <li>Takeover premium</li>
+  <li>
+    <p>The amount by which the takeover price for each share of stock must exceed the current stock price in order to entice shareholders to relinquish control of the company to an acquirer.</p>
+  </li>
+  <li>Tangible book value per share</li>
+  <li>
+    <p>Common shareholders’ equity minus intangible assets reported on the balance sheet, divided by the number of shares outstanding.</p>
+  </li>
+  <li>Target</li>
+  <li>
+    <p>The company in a merger or acquisition that is being acquired.</p>
+  </li>
+  <li>Target capital structure</li>
+  <li>
+    <p>A company’s chosen proportions of debt and equity.</p>
+  </li>
+  <li>Target company</li>
+  <li>
+    <p>The company in a merger or acquisition that is being acquired.</p>
+  </li>
+  <li>Target payout ratio</li>
+  <li>
+    <p>A strategic corporate goal representing the long-term proportion of earnings that the company intends to distribute to shareholders as dividends.</p>
+  </li>
+  <li>Technical indicators</li>
+  <li>
+    <p>Momentum indicators based on price.</p>
+  </li>
+  <li>TED spread</li>
+  <li>
+    <p>A measure of perceived credit risk determined as the difference between Libor and the T-bill yield of matching maturity.</p>
+  </li>
+  <li>Temporal method</li>
+  <li>
+    <p>A variation of the monetary/non-monetary translation method that requires not only monetary assets and liabilities, but also non-monetary assets and liabilities that are measured at their current value on the balance sheet date to be translated at the current exchange rate. Assets and liabilities are translated at rates consistent with the timing of their measurement value. This method is typically used when the functional currency is other than the local currency.</p>
+  </li>
+  <li>Tender offer</li>
+  <li>
+    <p>A public offer whereby the acquirer invites target shareholders to submit (“tender”) their shares in return for the proposed payment.</p>
+  </li>
+  <li>Term premium</li>
+  <li>
+    <p>The additional return required by lenders to invest in a bond to maturity net of the expected return from continually reinvesting at the short-term rate over that same time horizon.</p>
+  </li>
+  <li>Terminal price multiples</li>
+  <li>
+    <p>The price multiple for a stock assumed to hold at a stated future time.</p>
+  </li>
+  <li>Terminal share price</li>
+  <li>
+    <p>The share price at a particular point in the future.</p>
+  </li>
+  <li>Terminal value of the stock</li>
+  <li>
+    <p>The analyst’s estimate of a stock’s value at a particular point in the future. Also called continuing value of the stock.</p>
+  </li>
+  <li>Termination date</li>
+  <li>
+    <p>The date of the final payment on a swap; also, the swap’s expiration date.</p>
+  </li>
+  <li>Theta</li>
+  <li>
+    <p>The change in a derivative instrument for a given small change in calendar time, holding everything else constant. Specifically, the theta calculation assumes nothing changes except calendar time. Theta also reflects the rate at which an option’s time value decays.</p>
+  </li>
+  <li>Time series</li>
+  <li>
+    <p>A set of observations on a variable’s outcomes in different time periods.</p>
+  </li>
+  <li>
+    <p>Tobin’s <strong>q</strong></p>
+  </li>
+  <li>
+    <p>The ratio of the market value of debt and equity to the replacement cost of total assets.</p>
+  </li>
+  <li>Top-down approach</li>
+  <li>
+    <p>With respect to forecasting, an approach that usually begins at the level of the overall economy. Forecasts are then made at more narrowly defined levels, such as sector, industry, and market for a specific product.</p>
+  </li>
+  <li>Top-down investing</li>
+  <li>
+    <p>An approach to investing that typically begins with macroeconomic forecasts.</p>
+  </li>
+  <li>Total factor productivity (TFP)</li>
+  <li>
+    <p>A multiplicative scale factor that reflects the general level of productivity or technology in the economy. Changes in total factor productivity generate proportional changes in output for any input combination.</p>
+  </li>
+  <li>Total invested capital</li>
+  <li>
+    <p>The sum of market value of common equity, book value of preferred equity, and face value of debt.</p>
+  </li>
+  <li>Tracking error</li>
+  <li>
+    <p>The standard deviation of the differences between a portfolio’s returns and its benchmark’s returns; a synonym of active risk. Also called tracking risk.</p>
+  </li>
+  <li>Tracking risk</li>
+  <li>
+    <p>The standard deviation of the differences between a portfolio’s returns and its benchmark’s returns; a synonym of active risk. Also called tracking error.</p>
+  </li>
+  <li>Trailing dividend yield</li>
+  <li>
+    <p>Current market price divided by the most recent annualized dividend.</p>
+  </li>
+  <li>
+    <p>Trailing P/<strong>E</strong></p>
+  </li>
+  <li>
+    <p>A stock’s current market price divided by the most recent four quarters of EPS (or the most recent two semi-annual periods for companies that report interim data semi-annually.) Also called current P/E.</p>
+  </li>
+  <li>Tranche CDS</li>
+  <li>
+    <p>A type of credit default swap that covers a combination of borrowers but only up to pre-specified levels of losses.</p>
+  </li>
+  <li>Transaction exposure</li>
+  <li>
+    <p>The risk of a change in value between the transaction date and the settlement date of an asset of liability denominated in a foreign currency.</p>
+  </li>
+  <li>Trend</li>
+  <li>
+    <p>A long-term pattern of movement in a particular direction.</p>
+  </li>
+  <li>Triangular arbitrage</li>
+  <li>An arbitrage transaction involving three currencies which attempts to exploit inconsistencies among pair wise exchange rates.</li>
+</ul>
+
+<h4 id="u"><strong>U</strong></h4>
+
+<ul>
+  <li>Unbiased expectations theory</li>
+  <li>
+    <p>A term structure theory that contends the forward rate is an unbiased predictor of the future spot rate. Also called the pure expectations theory.</p>
+  </li>
+  <li>Unconditional heteroskedasticity</li>
+  <li>
+    <p>Heteroskedasticity of the error term that is not correlated with the values of the independent variable(s) in the regression.</p>
+  </li>
+  <li>Uncovered interest rate parity</li>
+  <li>
+    <p>The proposition that the expected return on an uncovered (i.e., unhedged) foreign currency (risk-free) investment should equal the return on a comparable domestic currency investment.</p>
+  </li>
+  <li>Underlying earnings</li>
+  <li>
+    <p>Earnings excluding nonrecurring components. Also referred to as continuing earnings, core earnings, or persistent earnings.</p>
+  </li>
+  <li>Unexpected earnings</li>
+  <li>
+    <p>The difference between reported EPS and expected EPS. Also referred to as an earnings surprise.</p>
+  </li>
+  <li>Unit root</li>
+  <li>
+    <p>A time series that is not covariance stationary is said to have a unit root.</p>
+  </li>
+  <li>Uniting of interests method</li>
+  <li>
+    <p>A method of accounting in which combined companies were portrayed as if they had always operated as a single economic entity. Called pooling of interests under US GAAP and uniting of interests under IFRS. (No longer allowed under US GAAP or IFRS).</p>
+  </li>
+  <li>Unlimited funds</li>
+  <li>
+    <p>An unlimited funds environment assumes that the company can raise the funds it wants for all profitable projects simply by paying the required rate of return.</p>
+  </li>
+  <li>Unsterilized intervention</li>
+  <li>
+    <p>A policy measure in which a monetary authority buys or sells its own currency to mitigate undesired exchange rate movements and does not offset the impact on the money supply with transactions in other financial instruments.</p>
+  </li>
+  <li>Upfront payment</li>
+  <li>
+    <p>The difference between the credit spread and the standard rate paid by the protection if the standard rate is insufficient to compensate the protection seller. Also called upfront premium.</p>
+  </li>
+  <li>Upfront premium</li>
+  <li>
+    <p>See upfront payment.</p>
+  </li>
+  <li>UPREITs</li>
+  <li>
+    <p>An umbrella partnership REIT under which the REIT owns an operating partnership and serves as the general partner of the operating partnership. All or most of the properties are held in the operating partnership.</p>
+  </li>
+  <li>Upstream</li>
+  <li>
+    <p>A transaction between two related companies, an investor company (or a parent company) and an associate company (or a subsidiary company) such that the associate company records a profit on its income statement.</p>
+  </li>
+  <li>An example is a sale of inventory by the associate to the investor company or by a subsidiary to a parent company.</li>
+</ul>
+
+<h4 id="v"><strong>V</strong></h4>
+
+<ul>
+  <li>Valuation</li>
+  <li>
+    <p>The process of determining the value of an asset or service on the basis of variables perceived to be related to future investment returns, or on the basis of comparisons with closely similar assets.</p>
+  </li>
+  <li>Value additivity</li>
+  <li>
+    <p>An arbitrage opportunity when the value of the whole equals the sum of the values of the parts.</p>
+  </li>
+  <li>Value at risk (VaR)</li>
+  <li>
+    <p>The minimum loss that would be expected a certain percentage of the time over a certain period of time given the assumed market conditions.</p>
+  </li>
+  <li>Value of growth</li>
+  <li>
+    <p>The difference between the actual value per share and the no-growth value per share.</p>
+  </li>
+  <li>Variance</li>
+  <li>
+    <p>The expected value (the probability-weighted average) of squared deviations from a random variable’s expected value.</p>
+  </li>
+  <li>Vasicek model</li>
+  <li>
+    <p>A partial equilibrium term structure model that assumes interest rates are mean reverting and interest rate volatility is a constant.</p>
+  </li>
+  <li>Vega</li>
+  <li>
+    <p>The change in a given derivative instrument for a given small change in volatility, holding everything else constant. A sensitivity measure for options that reflects the effect of volatility.</p>
+  </li>
+  <li>Venture capital investors</li>
+  <li>
+    <p>Private equity investors in development-stage companies.</p>
+  </li>
+  <li>Vertical merger</li>
+  <li>
+    <p>A merger involving companies at different positions of the same production chain; for example, a supplier or a distributor.</p>
+  </li>
+  <li>Vested benefit obligation</li>
+  <li>
+    <p>The actuarial present value of vested benefits.</p>
+  </li>
+  <li>Vesting date</li>
+  <li>
+    <p>The date that employees can first exercise stock options.</p>
+  </li>
+  <li>Visibility</li>
+  <li>The extent to which a company’s operations are predictable with substantial confidence.</li>
+</ul>
+
+<h4 id="w"><strong>W</strong></h4>
+
+<ul>
+  <li>Weighted average cost of capital</li>
+  <li>
+    <p>(WACC) A weighted average of the after-tax required rates of return on a company’s common stock, preferred stock, and long-term debt, where the weights are the fraction of each source of financing in the company’s target capital structure.</p>
+  </li>
+  <li>Weighted harmonic mean</li>
+  <li>
+    <p>See harmonic mean.</p>
+  </li>
+  <li>White-corrected standard errors</li>
+  <li>
+    <p>A synonym for robust standard errors.</p>
+  </li>
+  <li>White knight</li>
+  <li>
+    <p>A third party that is sought out by the target company’s board to purchase the target in lieu of a hostile bidder.</p>
+  </li>
+  <li>White squire</li>
+  <li>
+    <p>A third party that is sought out by the target company’s board to purchase a substantial minority stake in the target—enough to block a hostile takeover without selling the entire company.</p>
+  </li>
+  <li>Winner’s curse</li>
+  <li>
+    <p>The tendency for the winner in certain competitive bidding situations to overpay, whether because of overestimation of intrinsic value, emotion, or information asymmetries.</p>
+  </li>
+  <li>Write-down</li>
+  <li>A reduction in the value of an asset as stated in the balance sheet.</li>
+</ul>
+
+<h4 id="y"><strong>Y</strong></h4>
+
+<ul>
+  <li>Yield curve factor model</li>
+  <li>A model or a description of yield curve movements that can be considered realistic when compared with historical data.</li>
+</ul>
+
+<h4 id="z"><strong>Z</strong></h4>
+
+<ul>
+  <li>Z-spread</li>
+  <li>
+    <p>The constant basis point spread that needs to be added to the implied spot yield curve such that the discounted cash flows of a bond are equal to its current market price.</p>
+  </li>
+  <li>Zero</li>
+  <li>
+    <p>A bond that does not pay a coupon but is priced at a discount and pays its full face value at maturity.</p>
+  </li>
+  <li>Zero-coupon bond</li>
+  <li>
+    <p>A bond that does not pay a coupon but is priced at a discount and pays its full face value at maturity.</p>
+  </li>
+  <li>(Institute G-1)</li>
+  <li>
+    <p>Institute, CFA. 2017 CFA Level II Volume 2 Financial Reporting and Analysis. CFA Institute, 07/2016.</p>
+  </li>
+  <li>VitalBook file.所提供的引文是一个指南。请在使用之前查看每个引文以确保准确性。</li>
+</ul>
+
+
+                <hr>
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/log/2016/11/11/game1/" data-toggle="tooltip" data-placement="top" title="tmp">
+                        Previous<br>
+                        <span>tmp</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/mladvance/2016/11/17/spark-ml-00/" data-toggle="tooltip" data-placement="top" title="Spark-ML-00">
+                        Next<br>
+                        <span>Spark-ML-00</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                    <div class="ds-share flat"
+                    <div class="ds-thread"
+                        data-thread-key="/cfa/2016/11/15/CFA_Glossory"
+                        data-title="Lev2 Glossary"
+                        data-url="http://machinelearningadvance.com/cfa/2016/11/15/CFA_Glossory/" >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+                        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+                        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                 </div>
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/cfa/2016/11/15/CFA_Glossory"
+                        data-title="Lev2 Glossary"
+                        data-url="http://machinelearningadvance.com/cfa/2016/11/15/CFA_Glossory/" >
+                    </div>
+
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="10">
+                                Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spark" title="Spark" rel="13">
+                                Spark
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ME" title="ME" rel="4">
+                                ME
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Other" title="Other" rel="4">
+                                Other
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                CFAL1
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#maths" title="maths" rel="2">
+                                maths
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                                Big Data
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#大数据" title="大数据" rel="20">
+                                大数据
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="4">
+                                IT
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Scala" title="Scala" rel="24">
+                                Scala
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+<script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"machinelearningadvance"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/2672280861">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/helloourworld">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Big Data Memo 2016
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-82819752-1';
+    var _gaDomain = 'machinelearningadvance.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '863b1f46c83a8e14e47782106aee7e7f';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/images/background.jpg" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
