@@ -8,6 +8,34 @@
 		
 			
 			<item>
+				<title>Spark-ML-0302-Naive Bayes</title>
+				
+					<description>&lt;h1 id=&quot;section&quot;&gt;朴素贝叶斯&lt;/h1&gt;
+
+</description>
+				
+				<pubDate>Mon, 05 Dec 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2016/12/05/nb/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/12/05/nb/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>推荐系统中的相似度计算方法总结</title>
+				
+					<description>&lt;h3 id=&quot;section&quot;&gt;1 相似度计算方法总结&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Sat, 19 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Spark-ML-04-collaborative-filtering</title>
 				
 					<description>&lt;h3 id=&quot;section&quot;&gt;1 推荐算法概述&lt;/h3&gt;
