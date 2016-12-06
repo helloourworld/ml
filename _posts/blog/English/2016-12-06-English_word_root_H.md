@@ -1,0 +1,116 @@
+---
+layout: post
+title: 词根H
+category: English
+catalog: yes
+description: Learning 词根
+tags:
+    - English
+---
+* hab 【词根】给，接受，有  habit(n.  习惯, 习性, 嗜好)
+* habit   / 5hAbit/  n. 习惯；习性【词根】居住；有 inhabitant(n.居民，住户)
+* haem    n. 血红素【词根】血液    haematology（n. 血液病学；血液学（等于hematology））
+* haemat  词根：血    haematic(adj. 血的，血液的)
+* hagi    词根：holy,saint神圣,圣徒  hagiarchy(n. 圣人政治；圣人之间的尊卑次序组织)
+* hal 【词根】呼吸  exhale（v.  呼气; 蒸发; 散发(ex+hale气=出气=呼气)）
+* hale    v.  强拉; 硬拖【词根】呼吸    exhale（v.  呼气; 蒸发; 散发(ex+hale气=出气=呼气)）
+* halit   词根：呼吸   halitosis(n.口臭)
+* hap / hAp /n.偶然, 机会, 运气;【词根】运气  happy(a.快乐的；幸福的)
+* har 词根：战争，军队；硬  harbor（n.  港湾, 海港; 避难所）
+* hara    词根：磨，擦，刮，涂  harass(vt. 使困扰；使烦恼；反复袭击)
+* harm    / ha:m/vt. 伤害；危害；损害【词根】适合   harmony（n. 协调；和睦；融洽；调和）
+* harmon  词根：concord,harmony和谐,和声 harmonic(adj. 和声的；谐和的；音乐般的)
+* harv    词根：采，摘，收获   harvest(n. 收获；产量；结果)
+* hast    v.  第二人称单数现在式【词根】抽水 exhaust(vt. 排出；耗尽；使筋疲力尽)
+* haught  词根：high  (高）    haughty（adj. 傲慢的；自大的）
+* haust   【词根】拖，拉 exhaust（v.  用尽; 抽完; 耗尽(ex出+haust=抽干=抽出)）
+* haut    词根：高    hauteur(n. 傲慢；自大)
+* hav 词根：抓，取，拥有   behave（v.  举止, 表现, 行为）
+* haws    词根：粗绳，拖，拉   hawse（n. 锚链孔；艏锚水平距离）
+* heal    v.  治愈【词根】完整，无损伤，健康 healthy(adj. 健康的，健全的)
+* heav    词根：抓，取  heavy(adj. 沉重的；繁重的，巨大的；阴沉的)
+* hec 词根：保持，抓，暂停  hectic(adj.  脸上发红的, 消耗热的, 发热的)
+* hecto   【电】 格克脱【前缀】百    hectogram(n.  一百公克((hecto+gram克)))
+* hedon   词根：愉快   hedonistic(adj. 快乐主义者的；快乐论的；快乐主义的)
+* hedr    词根：侧面   polyhedron(n. 多面体)
+* hedron  词根：...面体    trihedron(n. [数] 三面体)
+* hein    词根：odious  (可恨的）    heinous（adj. 可憎的；极凶恶的）
+* hel 词根：太阳，日 heliotropism(n.  向日性; 趋日性)
+* heli    前缀：太阳；直升机   helianthus(n. 向日葵；向日葵属植物)
+* helic   【词根】螺旋  helical(adj.  螺旋状的)
+* helio   【词根】太阳  heliotropism(n.  向日性; 趋日性(helio+trop转+ism=转向太阳))
+* hem / hem/ n. 边缘, 折边, 哼声【词根】血   hemoglobin(n.  血红素)
+* hema    词根：血    hemorrhage(n.  出血)
+* hemat   词根：血    hematal(adj.血液的，胸前的)
+* hemato  词根：血    hematochezia(n. 便血)
+* hemer   词根：day  (一天）    ephemeral（adj. 短暂的；朝生暮死的）
+* hemi    【前缀】半   hemisphere(n.半球；半球地图)
+* hemo    词根：血    hemorrhage(n.  出血)
+* hend    词根：抓，取，拿    apprehend(vt. 理解；逮捕；忧虑)
+* hendeca 前缀：十一   hendecagon(n. 十一角形；[数] 十一边形)
+* hens    词根：抓，取，拿    comprehension(n. 理解；包含)
+* hepat   前缀：肝脏   hepatic(adj. 肝的；肝脏色的；治肝病的)
+* hept    前缀：七    heptad(n. 七价原子；七个)
+* hepta   n.七【前缀】七    heptagon(n.  七角形; 七边形)
+* heptadeca   【前缀】十七  heptadecane（n. 十七烷）
+* her / hE:, hE/  她的【词根】粘住；继承人    inherent(a.固有的，生来的(in里面+her+ent=天生[与身体内]连着=天赋的))
+* herb    / hE:b/  n.草本植物；药草；香草【词根】草  herbal(adj.  草药的)
+* herd    / hE:d/  n. 兽群，畜群；放牧人【后缀】表示“人”  shepherd(n.牧羊人，羊倌)
+* here    / hiE/adv. 在这里；此时【词根】粘着 adhere(vi.粘附；追随；坚持)
+* hered   词根：继承   heredity(n.  遗传; 形质遗传)
+* herit   词根：继承   heritage(n. 遗产；传统；继承物；继承权)
+* hes 词根：粘着   hesitate(vi.含糊，支吾；口吃)
+* heter   【前缀】另一的；不同的 heterosexual(adj.  异性的; 异性爱的)
+* hetero  【前缀】另一的；不同的 heterosexual(adj.  异性的; 异性爱的)
+* heur    词根：发现   heuristic(adj. 启发式的；探索的)
+* hex n.  魔女; 十六进位【词根】六   hexagon(n.  六角形; 六边形)
+* hexa    【前缀】六   hexagon(n.  六角形; 六边形)
+* hib 词根：给，接受，有   exhibit(n.  展览品, 展览, 陈列品)
+* hibern  词根：冬天   hibernate(v.  过冬, 避寒, 冬眠)
+* hibit   词根：拿，持  prohibit(vt.禁止，阻止)
+* hid v.隐藏(hide的过去式 )【词根】盖，藏  hide(v.  遮掩掉, 掩蔽; 隐瞒)
+* hier    【前缀】骶骨，宗教,神圣的   hierarch(n. 教主；掌权者；高僧)
+* hilar   词根：快乐的  hilarious(adj. 欢闹的；非常滑稽的；喜不自禁的)
+* hing    词根：悬挂   unhinge(vt. 使分开；取下…的铰链)
+* hipp    词根：马    hippology(n. 马学)
+* hist    前缀：组织   histochemistry(n. [组织] 组织化学)
+* hoars   词根：热    hoarse(adj. 嘶哑的)
+* hod / hRd/ n. 木制容器, 煤斗, 装木炭容器【词根】路  hodoscope(n.描迹仪，宇宙射线描迹仪)
+* hol 词根：完整，无损伤，健康；遮盖，隐藏  holy(adj.  神圣的, 至善的, 圣洁的)
+* holo    【前缀】全   hologram(n.  全息图)
+* hom 【词根】人【前缀】相同 homogeneous(a.同类的；均匀的)
+* homo    n.  同性恋者【前缀】表示“同类的” homogenous(adj.  同质的)
+* hones   词根：尊敬，荣誉    honest(adj. 诚实的，实在的；可靠的)
+* hood    / hud/n. 头巾；覆盖；兜帽【后缀】表示抽象名词 neighbourhood(n.邻居关系；邻近)
+* hop / hRp/v.单脚跳。词根：跳    hope(n.  希望, 期待, 信心)
+* hor 词根：角，头  horn(n.  角, 喇叭, 角质)
+* horr    词根：发抖；怕 horror(n.  惊骇; 惨事; 恐怖)
+* hors    词根：跳    horse(n. 马；骑兵；脚架；海洛因)
+* hort    词根：表示“鼓励”   hortatory(adj.  劝告的, 忠告的; 勉励性的)
+* hos 词根：粗绳，拖，拉   hosiery（n. 针织品；袜类）
+* hosp    词根：客人   hospitable(adj.好客的, 招待周到的)
+* hospit  词根：客人   hospital(n.  医院(hospit客人+al,病人是医院的客人))
+* host    n.  主人【词根】客人    hostage(n.人质host+age表名词=把客人[留住]=人质))
+* hous    词根：盖，藏  house(n. 住宅；家庭；机构；议会)
+* hug / hQg/vt. 拥抱；紧抱；抱有，坚持。【词根】高 huge(adj.  巨大的; 无限的; 极大的)
+* hum / hQm/v. 作嗡嗡声；哼唱【词根】人；地面;土地 human(adj.  人类的, 有同情心的, 人性的)
+* human   adj.  人类的【词根】人；地面;土地    humane(adj. 仁慈的，人道的；高尚的)
+* hund    词根：百，百分之一   hundred(n. 一百；许多)
+* hur 词根：战争，军队；角，头    hurt(n. 伤害, 损害, 创伤)
+* hus 词根：盖，藏  husband(n.丈夫)
+* hut / hQt/n.小屋；棚屋。【词根】盖，藏   hutch(n. 贮藏箱; 柜, 棚, 笼)
+* hydr    词根：水    hydrous(adj.含水的)
+* hydra   n.  九头怪蛇【词根】水   hydrant(n. 消防栓；水龙头；给水栓)
+* hydro   / 'haidrEu/ n. 水疗医院【词根】水    hydrogen(n.氢)
+* hyet    前缀：雨,下雨     hyetal(adj. 雨量的；降雨的)
+* hyeto   前缀：雨,下雨     hyetology(n.降雨量学，降水学； 雨学)
+* hygi    词根：卫生   hygiene(n. 卫生；卫生学；保健法)
+* hygro   前缀：湿气   hygrograph(n. 自动湿度计)
+* hyl 前缀：物质   hylic(adj. 物质的；实质的)
+* hyp 前缀：低下   hypaesthesia(n.感觉减退，感觉迟钝)
+* hyper   【前缀】超出,过于   hyperactive(adj.  活动过度的; 活动亢进的; 极度活跃的)
+* hypn    词根：睡觉   hypnosis(n. 催眠；催眠状态（hypno+sis表示病状）)
+* hypno   【词根】睡觉  hypnology(n.  催眠学)
+* hypo    n.  海波; 定影剂【前缀】次,亚；在……之下    hypocrite(n.  伪君子; 伪善者((hypo在下面+crit+e评判=在背后评判别人=伪君子))
+* hypso   前缀：高度   hypsometry(n. [测] 测高法)
+* hyster  前缀：子宫   hysterectomy(n. [妇产] 子宫切除)

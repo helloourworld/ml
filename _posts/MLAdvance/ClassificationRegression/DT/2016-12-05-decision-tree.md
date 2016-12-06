@@ -1,3 +1,14 @@
+---
+layout: post
+title: Spark-ML-0301-Decision Tree
+category: MLAdvance
+catalog: yes
+description: Spark机器学习算法学习——Classificition and Regression——Decision Tree
+tags:
+    - Machine Learning
+    -  Spark
+---
+
 # 决策树
 
 ## 1 决策树理论
@@ -52,21 +63,21 @@
 ### 1.4 划分选择
 
 &emsp;&emsp;在决策树算法中，如何选择最优划分属性是最关键的一步。一般而言，随着划分过程的不断进行，我们希望决策树的分支节点所包含的样本尽可能属于同一类别，即节点的“纯度(purity)”越来越高。
-有几种度量样本集合纯度的指标。在`MLlib`中，信息熵和基尼指数用于决策树分类，方差用于决策树回归。
+有几种度量样本集合纯度的指标。在`MLlib`中，**信息熵和基尼指数用于决策树分类，方差用于决策树回归**。
 
-#### 1.4.1 信息熵
+#### 1.4.1 [信息熵](https://en.wikipedia.org/wiki/Entropy)
 
 &emsp;&emsp;信息熵是度量样本集合纯度最常用的一种指标，假设当前样本集合`D`中第`k`类样本所占的比例为`p_k`，则`D`的信息熵定义为：
 
-<div  align="center"><img src="imgs/1.1.png" width = "220" height = "75" alt="1.1" align="center" /></div>
+$$ Ent(D) = - \sum_{k=1}^{\left|y\right|}p_k log_{2}p_k$$
 
-&emsp;&emsp;`Ent(D)`的值越小，则`D`的纯度越高。
+&emsp;&emsp;`Ent(D)`的值越小，则数据集`D`的纯度越高。
 
-#### 1.4.2 基尼系数
+#### 1.4.2 [基尼系数](https://en.wikipedia.org/wiki/Gini_coefficient)
 
 &emsp;&emsp;采用和上式相同的符号，基尼系数可以用来度量数据集`D`的纯度。
 
-<div  align="center"><img src="imgs/1.2.png" width = "310" height = "90" alt="1.2" align="center" /></div>
+$$ Gini(D) = \sum_{k=1}^{\left|y\right|} \sum_{k' \neq k} p_k p_k' = 1 - \sum_{k=1}^{\left| y \right|} p_k^2$$
 
 &emsp;&emsp;直观来说，`Gini(D)`反映了从数据集`D`中随机取样两个样本，其类别标记不一致的概率。因此，`Gini(D)`越小，则数据集`D`的纯度越高。
 
@@ -74,13 +85,13 @@
 
 &emsp;&emsp;`MLlib`中使用方差来度量纯度。如下所示
 
-<div  align="center"><img src="imgs/1.3.png" width = "255" height = "70" alt="1.3" align="center" /></div>
+$$Var(D) = \frac {1}{N}\sum_{i=1}^{N}(y_i - \frac{1}{N}\sum_{i=1}^{N}y_i) $$
 
-#### 1.4.4 信息增益
+#### 1.4.4 [信息增益](https://en.wikipedia.org/wiki/Information_gain_in_decision_trees)
 
 &emsp;&emsp;假设切分大小为`N`的数据集`D`为两个数据集`D_left`和`D_right`，那么信息增益可以表示为如下的形式。
 
-<div  align="center"><img src="imgs/1.4.png" width = "600" height = "60" alt="1.4" align="center" /></div>
+$$ IG(D,s) = H(D) - H(D|a) = Impurity(D) - \frac{N_{left}}{N}Impurity(D_{left}) - \frac{N_{right}}{N}Impurity(D_{right})$$
 
 &emsp;&emsp;一般情况下，信息增益越大，则意味着使用属性`a`来进行划分所获得的纯度提升越大。因此我们可以用信息增益来进行决策树的划分属性选择。即流程中的第8步。
 
@@ -96,7 +107,7 @@
 
 **决策树的缺点：**
 
-- 1 对那些各类别数据量不一致的数据，在决策树种，信息增益的结果偏向那些具有更多数值的特征；
+- 1 对那些各类别数据量不一致的数据，在决策树种，**信息增益的结果偏向那些具有更多数值的特征**；
 - 2 容易过拟合；
 - 3 忽略了数据集中属性之间的相关性。
 

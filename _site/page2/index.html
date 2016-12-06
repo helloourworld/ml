@@ -179,6 +179,229 @@
             ">
     			
 <div class="post-preview">
+    <a href="/mladvance/2016/11/19/CF_KNN/">
+        <h2 class="post-title">
+            推荐系统中的相似度计算方法总结
+        </h2>
+        
+        <div class="post-content-preview">
+            1 相似度计算方法总结
+
+相似度的计算是推荐系统非常重要的环节，包括：用户与用户之间的相似度，物品与物品之间的相似度或者用户与物品的相关性。
+
+下面以在协同过滤中计算两个用户的相似度来介绍几种常用的相似度计算方法。其中有些方法只适用于协同过滤，有些适应于更多其他推荐方法。
+
+1）共同邻居。直接计算两个用户的交集
+
+
+
+2）Jaccard系数。基于共同邻居的一个显著问题是用户的物品集越大，越可...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 19, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/19/ALS/">
+        <h2 class="post-title">
+            Spark-ML-04-collaborative-filtering
+        </h2>
+        
+        <div class="post-content-preview">
+            1 推荐算法概述
+需求背景：
+
+
+上图所示为用户评分矩阵，其中用户评分为1-5，?所示为需要估算的用户评分。如果能够快速估算出用户的评分那么就可以对用户进行推荐了，估计的方法非常多，以下为常用的推荐算法概述。
+
+
+
+本章节主要介绍CF中ALS算法。
+
+2 什么是ALS
+
+ALS是交替最小二乘（alternating least squares）的简称。在机器学习中，ALS特指使用交替最小二乘...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 19, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/tratified-sampling/">
+        <h2 class="post-title">
+            Spark-ML-0203-Stratified sampling
+        </h2>
+        
+        <div class="post-content-preview">
+            分层取样
+
+  先将总体的单位按某种特征分为若干次级总体（层），然后再从每一层内进行单纯随机抽样，组成一个样本的统计学计算方法叫做分层抽样。在spark.mllib中，用key来分层。
+
+  与存在于spark.mllib中的其它统计函数不同，分层采样方法sampleByKey和sampleByKeyExact可以在key-value对的RDD上执行。在分层采样中，可以认为key是一个标签，...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/statistics/">
+        <h2 class="post-title">
+            Spark-ML-0201-Summary statistics
+        </h2>
+        
+        <div class="post-content-preview">
+            概括统计
+
+  MLlib支持RDD[Vector]列的概括统计，它通过调用Statistics的colStats方法实现。colStats返回一个MultivariateStatisticalSummary对象，这个对象包含列式的最大值、最小值、均值、方差等等。
+下面是一个应用例子：
+
+import org.apache.spark.mllib.linalg.Vector
+import o...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/random-data-generation/">
+        <h2 class="post-title">
+            Spark-ML-0205-Random data generation
+        </h2>
+        
+        <div class="post-content-preview">
+            随机数生成
+
+  随机数生成在随机算法、性能测试中非常有用，spark.mllib支持生成随机的RDD,RDD的独立同分布(iid)的值来自于给定的分布：均匀分布、标准正太分布、泊松分布。
+
+  RandomRDDs提供工厂方法生成随机的双精度RDD或者向量RDD。下面的例子生成了一个随机的双精度RDD，它的值来自于标准的正太分布N(0,1)。
+
+import org.apache.spar...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/kernel-density-estimation/">
+        <h2 class="post-title">
+            Spark-ML-0206-Kernel density estimation
+        </h2>
+        
+        <div class="post-content-preview">
+            核密度估计
+
+1 理论分析
+
+  核密度估计是在概率论中用来估计未知的密度函数，属于非参数检验方法之一。假设我们有n个数，要计算某个数X的概率密度有多大，
+可以通过下面的核密度估计方法估计。
+
+
+
+  在上面的式子中，K为核密度函数，h为窗宽。核密度函数的原理比较简单，在我们知道某一事物的概率分布的情况下，如果某一个数在观察中出现了，我们可以认为这个数的概率密度很大，和这个数比较近的数的概率...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/hypothesis-testing/">
+        <h2 class="post-title">
+            Spark-ML-0204-Hypothesis testing
+        </h2>
+        
+        <div class="post-content-preview">
+            假设检测
+
+  假设检测是统计中有力的工具，它用于判断一个结果是否在统计上是显著的、这个结果是否有机会发生。spark.mllib目前支持皮尔森卡方检测。输入属性的类型决定是作拟合优度(goodness of fit)检测还是作独立性检测。
+拟合优度检测需要输入数据的类型是vector，独立性检测需要输入数据的类型是Matrix。
+
+  spark.mllib也支持输入数据类型为RDD[La...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/correlations/">
+        <h2 class="post-title">
+            Spark-ML-0202-Correlations
+        </h2>
+        
+        <div class="post-content-preview">
+            相关性系数
+
+  计算两个数据集的相关性是统计中的常用操作。在MLlib中提供了计算多个数据集两两相关的方法。目前支持的相关性方法有皮尔森(Pearson)相关和斯皮尔曼(Spearman)相关。
+
+  Statistics提供方法计算数据集的相关性。根据输入的类型，两个RDD[Double]或者一个RDD[Vector]，输出将会是一个Double值或者相关性矩阵。下面是一个应用的例子。
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/spark-ml-00/">
+        <h2 class="post-title">
+            Spark-ML-00
+        </h2>
+        
+        <div class="post-content-preview">
+            spark机器学习算法研究和源码分析
+
+  本项目对spark ml包中各种算法的原理加以介绍并且对算法的代码实现进行详细分析，旨在加深自己对机器学习算法的理解，熟悉这些算法的分布式实现方式。
+
+本系列文章支持的spark版本
+
+
+  
+    
+      *spark 2.x * *
+    
+  
+
+
+本系列的目录结构
+
+  本系列目录如下：
+
+
+  
+    数据类型
+  
+  基本...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/cfa/2016/11/15/CFA_Glossory/">
         <h2 class="post-title">
             Lev2 Glossary
@@ -201,278 +424,6 @@
     </a>
     <p class="post-meta">
         Posted by Big Data Memo on November 15, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/log/2016/11/11/game1/">
-        <h2 class="post-title">
-            tmp
-        </h2>
-        
-        <div class="post-content-preview">
-            1 题1
-
-解：（1） 划线法求纯策略纳什均衡
-
-观察，乙的策略‘中’严格小于策略‘右’（），剔除。
-剔除后，甲的策略‘中‘和‘下’严格小于策略’上‘（; ），剔除。纯策略纳什均衡为（上，左)，如下所示：
-
-
-
-(2) 混合策略纳什均衡
-
-易见，博弈的混合策略纳什均衡为: ((1,0,0),(1,0,0))
-
-2 题2
-
-解：使用划线法求解。
-
-首先，针对参与 者甲，对三个矩阵中每列’上‘’...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on November 11, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/mladvance/2016/11/05/data-mining-tools/">
-        <h2 class="post-title">
-            DataMing Tools Collected
-        </h2>
-        
-        <div class="post-content-preview">
-            DataMing Tools Collected
-
-KNIME
-
-rapidminer
-
-8-open-source-big-data-mining-tools
-
-looking-for-data-mining-and-analytics-tools-check-out-these-open-source-options
-
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on November 5, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/10/19/python-kafka-sparkstreaming/">
-        <h2 class="post-title">
-            Python 2 Kafka 2 SparkStreaming
-        </h2>
-        
-        <div class="post-content-preview">
-            [SparkStreaming 原理综述与监测目录下文件]（http://blog.csdn.net/zfszhangyuan/article/details/52522974
-
-原理
-
-Spark Streaming 数据产生与导入相关的内存分析
-
-动态控制消费速率
-
-Spark Streaming Direct Approach (No Receivers) 分析
-## python a...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on October 19, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/language/2016/10/10/scala_featured/">
-        <h2 class="post-title">
-            Scala Featured
-        </h2>
-        
-        <div class="post-content-preview">
-            1 scala中”_“的用法总结
-
-参考链接：
-
-what-are-all-the-uses-of-an-underscore-in-scala
-
-http://www.slideshare.net/normation/scala-dreaded
-
-import scala._    // Wild card -- all of Scala is imported
-import scala....
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on October 10, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/blog/2016/10/01/travel-site/">
-        <h2 class="post-title">
-            travel site
-        </h2>
-        
-        <div class="post-content-preview">
-            10.2
-
-
-
-10.3
-
-
-
-10.4
-
-
-
-10.5
-
-
-
-10.6
-
-
-
-10.7
-
-
-
-10.8
-
-
-
-10.2–10.8
-
-
-
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on October 1, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/blog/2016/09/29/Vim_often_use/">
-        <h2 class="post-title">
-            Vim常用命令
-        </h2>
-        
-        <div class="post-content-preview">
-            1 切换输入模式
-
-命令模式下
-
-
-  
-    
-      a
-      (小写)光标之后进行插入
-    
-    
-      A
-      (大写)光标所在行尾进行插入
-    
-    
-      i
-      (小写)光标前开始进行插入
-    
-    
-      I
-      (大写)光标所在行首进行插入
-    
-    
-      o
-      (小写)...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 29, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/09/29/hadoop_startup/">
-        <h2 class="post-title">
-            Hadoop 开机自启动
-        </h2>
-        
-        <div class="post-content-preview">
-            1 把启动程序的命令添加到/etc/rc.d/rc.local
-
-加入后的文件如下：
-
-#!/bin/sh
-#
-# This script will be executed *after* all the other init scripts.
-# You can put your own initialization stuff in here if you don't
-# want to...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 29, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/09/26/hadoop_tutorial_7/">
-        <h2 class="post-title">
-            Zeppelin安装 快速指南
-        </h2>
-        
-        <div class="post-content-preview">
-            Zeppelin Installation
-
-Stable binary package, please visit Apache Zeppelin download Page.
-
-Start Apache Zeppelin with a service manager
-
-zeppelin.server and port modify:
-
- 22 &lt;property&gt;
- 23  ...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 26, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/09/20/hadoop_tutorial_6/">
-        <h2 class="post-title">
-            Spark安装 快速指南
-        </h2>
-        
-        <div class="post-content-preview">
-            Prerequisites
-
-3台虚拟机
-SSH免密登陆
-Java已安装
-tools工具已经下载
-
-Install Spark
-Step 1: Install Pip
-pip 是“A tool for installing and managing Python packages.”，也就是说pip是python的软件安装工具。使用root身份
-
-cd /usr/local/src
-wget...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 20, 2016
     </p>
 </div>
 <hr>
@@ -511,13 +462,13 @@ wget...
                     <div class="tags">
                         
                             
-                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="12">
+                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="13">
                                     Machine Learning
                                 </a>
                             
                         
                             
-                                <a href="/tags/#Spark" title="Spark" rel="14">
+                                <a href="/tags/#Spark" title="Spark" rel="15">
                                     Spark
                                 </a>
                             
@@ -592,6 +543,12 @@ wget...
                         
                             
                         
+                            
+                        
+                            
+                                <a href="/tags/#English" title="English" rel="8">
+                                    English
+                                </a>
                             
                         
                     </div>
