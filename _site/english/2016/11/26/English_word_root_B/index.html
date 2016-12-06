@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>推荐系统中的相似度计算方法总结 - Maching Learning | 机器学习笔记</title>
+    <title>词根B - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/">
+    <link rel="canonical" href="http://machinelearningadvance.com/english/2016/11/26/English_word_root_B/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,17 +168,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Machine Learning" title="Machine Learning">Machine Learning</a>
-                        
-                        <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        <a class="tag" href="/tags/#English" title="English">English</a>
                         
                     </div>
-                    <h1>推荐系统中的相似度计算方法总结</h1>
+                    <h1>词根B</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on November 19, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on November 26, 2016</span>
                 </div>
             </div>
         </div>
@@ -196,47 +194,123 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="section">1 相似度计算方法总结</h3>
-
-<p>相似度的计算是推荐系统非常重要的环节，包括：用户与用户之间的相似度，物品与物品之间的相似度或者用户与物品的相关性。</p>
-
-<p>下面以在协同过滤中计算两个用户的相似度来介绍几种常用的相似度计算方法。其中有些方法只适用于协同过滤，有些适应于更多其他推荐方法。</p>
-
-<p>1）共同邻居。直接计算两个用户的交集</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \Gamma(u)\cap\Gamma(v)</script>
-
-<p>2）Jaccard系数。基于共同邻居的一个显著问题是用户的物品集越大，越可能与其他用户相似。Jaccard系数消除了这一影响：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\Gamma(u)\cap\Gamma(v)}{\Gamma(u)\cup\Gamma(v)}</script>
-
-<p>3）皮尔逊相关系数。皮尔逊相关系数法是基于用户的协同过滤中最常使用的相似度计算方法。研究表明，在计算用户相似度方面，皮尔逊相关系数法比其他相似度计算方法要好一些。具体定义如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-\bar{r_u})*(r_{v,i}-\bar{r_v})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-\bar{r_u})^2 * \sum_{i \in I}(r_{v,i}-\bar{r_v})^2}}</script>
-
-<p>其中I表示用户u和v共同评价过的物品，表示u对i的评分，表示u所有评价的物品的平均分。</p>
-
-<p>4）约束的皮尔逊相关系数。与皮尔逊相关系数的唯一区别是将换成——系统评分值域的中间值。</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-r_{med})*(r_{v,i}-r_{med})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-r_{med})^2 * \sum_{i \in I}(r_{v,i}-r_{med})^2}}</script>
-
-<p>5）向量余弦法。向量余弦法最常被应用在基于物品的协同过滤和基于内容的推荐方法中。在基于内容的推荐中，物品用向量模型表示，计算两个物品的相似度相当于计算代表两个物品的向量的余弦值。向量余弦法的数学描述如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = cos(\vec{u},\vec{v}) = \frac{\vec{u} \ast \vec{v}} {\parallel{\vec{u}}\parallel \times \parallel{\vec{v}}\parallel}</script>
-
-<p>除了上面介绍的相似度计算方法外，常见的方法还包括斯皮尔曼相关系数法（SRC）以及其他改进算法，具体见文献[1,2]。</p>
-
-<p>这些方法的实现，大家可以参考crab(https://github.com/aturbofly/crab)。</p>
-
-<p>【参考文献】</p>
-
-<p><a href="https://www.zhihu.com/question/25566638">推荐系统有哪些比较好的论文？</a></p>
-
-<p>[1] Breese, D. Heckerman, C. Kadie. Empirical analysis of predictive algorithms for collaborative filtering. In:Proceedings of the Fourteenth Conference on Uncertainty in Artificial Intelligence. Madison: Morgan-Kaufmann,1998,43-52.</p>
-
-<p>[2] X. Su,T. M. Khoshgoftaar. A survey of collaborative filtering techniques. Advances in Articial Intelligence,2009,2009(4):1-19.</p>
+				<ul>
+  <li>bac n.用绳子拖的平底渡船【词根】后面   back(n. 后面；背部；靠背)</li>
+  <li>bacteri 词根：细菌   bacterial(adj. [微] 细菌的)</li>
+  <li>badin   词根：jest（说笑） badinage(n. 开玩笑；嘲弄，揶揄)</li>
+  <li>bak 词根：热    bake（v.  烘, 烤; 烧硬; 烘干）</li>
+  <li>bal 词根：胀满，包裹,球  bald (秃的，露出的)</li>
+  <li>balc    词根：门板，粱 balconied(有阳台的)</li>
+  <li>ball    n. 球；舞会【词根】表示”抛，舞，球”    ballet(n. 芭蕾舞剧；芭蕾舞乐曲)</li>
+  <li>ban vt. 禁止，取缔【词根】限制 banish(vt. 放逐；驱逐)</li>
+  <li>band    / bAnd/n.带子, 镶边, 波段, 队, 乐队【词根】捆绑    bandage（n.  绷带）</li>
+  <li>bapt    词根：浸，泡  baptism(n. 洗礼；严峻考验)</li>
+  <li>bar / ba:/n.条；棒【词根】重，压，棒子；障碍    barometer（n 气压针(baro+meter计量器)）</li>
+  <li>barb    / bB:d/ n. 倒钩vt. 装倒钩于【词根】胡须 barbar（n. （男）理发员）</li>
+  <li>barbar  n. （男）理发员【词根】野蛮的    barbarous(adj. 野蛮的；残暴的)</li>
+  <li>bard    / bB:d/ n. 吟游诗人, 诗人【词根】beard（胡子）    barber(n 理发师（兼修理胡子）)</li>
+  <li>barg    词根：船；乞讨;恳求  barge（n. 驳船；游艇）bargain(n. 交易；便宜货；契约)</li>
+  <li>baro    词根：重，压  barometer(n. [气象] 气压计；睛雨表；显示变化的事物)</li>
+  <li>barr    【词根】棒子；障碍   embarrass(vt.使窘迫，使为难)</li>
+  <li>bary    词根：重，压  baryta（n. 氧化钡；重土）</li>
+  <li>bas 【词根】去,底 basis（n.  基础, 主要成分）</li>
+  <li>bat / bAt/n.蝙蝠, 球棒【词根】打；去   combat（n.  争斗, 战斗）</li>
+  <li>bath    / ba:W/n. 沐浴；浴室；浴盆【词根】deep深,深海的 bathysphere(n.  深海球形潜水器)</li>
+  <li>bathy   词根：深    bathymeter（n. 测深计，水深测量器）</li>
+  <li>be  v. 是; 值【词根】居住【前缀】变换为及物动词    tribe(n.部落，宗族)</li>
+  <li>beac    词根：火，烤  beacon(n.灯塔，烽火:.照亮，照耀)</li>
+  <li>beat    / bi:t/vt. 打；打败【词根】blessed（有福的） beatific(adj. 幸福的；祝福的；快乐的)</li>
+  <li>bed / bed/  床。词根：范围 embed安置,嵌于(em+bed范围,床=进入范围=安置)</li>
+  <li>bel n. 贝尔（音量比率之单位）【词根】战争；美丽的    rebel(vi.造反)</li>
+  <li>bell    / bel/n. 铃，钟；钟声，铃声【词根】战争；美丽的    rebellion(n.造反；叛乱；反抗)</li>
+  <li>belli   词根：战斗,战争    bellicose(adj. 好战的；好斗的</li>
+  <li>ben n.内室，起居室【词根】好，做，偏爱，尊敬   benefit（n.  利益, 好处; 津贴, 救济金; 优势）</li>
+  <li>bene    n. 祈祷；祝福【前缀】很好；与mal(e)相反    benefit(n.利益；恩惠；津贴)</li>
+  <li>berg    / bE:g/ n. 冰山【后缀】山；村庄   iceberg(n. [地理] 冰山；显露部分)</li>
+  <li>bev abbr. 十亿电子伏特【词根】喝   bevvy（n. 饮料（尤指含酒精饮料））</li>
+  <li>bever   词根：drink（喝） beverage( n 饮料)</li>
+  <li>bey 词根：expect（期待）   abeyance( n 暂停，中止（a在+bey+ance—在期待中—观望，暂停）)</li>
+  <li>bi  【前缀】生命，二    biography传记(bio+graphy写=写生命=传记)</li>
+  <li>bib vi. 饮酒，不断地饮酒【词根】喝   imbibe(vt. 吸收，接受；喝；吸入)</li>
+  <li>bibl    【前缀】书   bible(n.基督教《圣经》)</li>
+  <li>bibli   词根：book bibliophile(n. 藏书家；爱书的人（biblio+phile爱→爱书的人）)</li>
+  <li>biblio  【词根】书   bibliophile（n 藏书家(biblio+phile爱=爱书的人)）</li>
+  <li>bid / bid/v.说（问候的话等）。词根：信任；命令   forbid（v.  禁止, 妨碍, 不准）</li>
+  <li>bil 词根：强壮的strong    debilitate（vt. 使衰弱；使虚弱）</li>
+  <li>bili    词根：表示“能力”   ability(n.  能力; 才能; 专门技能)</li>
+  <li>bin / bin/n. 箱子，容器；二进制【前缀】双；二   binary（n.  一双, 一对; 二进制数; 双体; 双子星）</li>
+  <li>bine    n. 蔓；蔓生植物【词根】捆  combine(vi. 联合，结合；化合((com+bine捆→捆在一起→结合))</li>
+  <li>bio n. 个人简历，小传【词根】生命    biology(n.生物学；生态学)</li>
+  <li>bir 词根：携带，带，拿   birth（n.  出生, 诞生; 血统, 出身）</li>
+  <li>bit / bit/n.一点儿。词根：撕，咬。 bite（n. 咬；被咬（或叮）的伤痕）</li>
+  <li>bl  准词根：吹风；颜色   blue(n.  蓝色)</li>
+  <li>bla 词根：光，亮，燃烧   blaze(n.  火焰; 熊熊燃烧; 火灾; 强烈的光)</li>
+  <li>blan    词根：空白的  blanch（adj. 漂白的；银白色的）</li>
+  <li>blanc   n. 白【词根】白色  blanch(v.  漂白, 使变白, 变白; 变白)</li>
+  <li>blas    词根：bamage（毁坏）   blasphemy(n. 亵渎神明（blas+phemy神的显示）)</li>
+  <li>blast   / bla:st/ n. 爆炸；冲击波【词根】胚    epiblast(n. 外胚层；上胚层)</li>
+  <li>blasto  词根：胚，芽  blastocyst（n. 囊胚；胚包）</li>
+  <li>blaz    词根：火焰   blazer(n. 燃烧体；宣布者；颜色鲜明的运动上衣)</li>
+  <li>ble 词根：光，亮，燃烧   bless(v.  祝福)</li>
+  <li>blea    词根：空白的  bleak（adj. 阴冷的；荒凉的，无遮蔽的）</li>
+  <li>blem    【词根】问题；投掷，扔掷    problem(n.问题；习题，问题)</li>
+  <li>bli 词根：光，亮，燃烧   blind(n.  盲人, 窗帘, 障蔽物)</li>
+  <li>blo 词根：光，亮，燃烧   blond(adj.  亚麻色的, 金黄色的)</li>
+  <li>blu 词根：光，亮，燃烧   blush(v.  脸红, 羞愧)</li>
+  <li>bod 词根：告知，使明白;预兆    bodement（n. 预兆）</li>
+  <li>boist   词根：爆发，突然迸发，热闹   boisterous（adj. 喧闹的；狂暴的；猛烈的）</li>
+  <li>bol 词根：抛,舞,球，投  symbol(n.  符号, 象征, 记号)</li>
+  <li>bon 【前缀】很好  bonus(n.  奖金; 红利)</li>
+  <li>bond    / bRnd/n.联结，联系；公债，债券【词根】捆绑  bondage(n.  奴役; 束缚)</li>
+  <li>bor 词根：藏，保护;割，刺，钻   bore(v.  钻; 凿; 挖; 在…上钻孔; 钻孔)</li>
+  <li>bord    词根：side（边）  transborde(adj. 交界的)</li>
+  <li>borough / ‘bE:rEu/ n. 自治的市镇, 区【词根】气管    bronchitis(n. [内科] 支气管炎)</li>
+  <li>bosc    词根：feed（喂）  proboscis( n. 鼻子；[昆] 喙；象鼻（pro前面+boscis，象用鼻子喂食）)</li>
+  <li>bot 词根：植物；短棍    botany(n. 植物学；地区植物总称)</li>
+  <li>botan   词根：erb（草）   botany(  n 植物学)</li>
+  <li>bouch   词根：mouth（嘴） debouch(vt. 使出来；使流注)</li>
+  <li>bound   vi. 限制；弹起【词根】限制 boundless(adj. 无限的；无边无际的)</li>
+  <li>bov 词根：ox（牛）    bovid(adj. 牛科的)</li>
+  <li>bow / bau/v.鞠躬；点头；弯腰。词根：弯，逃跑    elbow(vt.用肘挤，挤进)</li>
+  <li>br  准词根：破碎，分裂,产生    branch(n.  树枝, 支流, 支店)</li>
+  <li>brac    词根：短，手臂 embrace(vt.包括，包含；包围)</li>
+  <li>brace   n. 支柱【词根】两臂 embrace(拥抱(em+brace胳膊=进入怀抱))</li>
+  <li>brach   / brAtF/ n. 雌猎犬【词根】arm臂 brachial(adj. 臂的，臂状的)</li>
+  <li>brachy  词根：short短   brachylogy(简明)</li>
+  <li>brack   词根：vomit（呕） brackish(adj. 含盐的；令人不快的；难吃的)</li>
+  <li>brad    n. [建] 曲头钉【词根】摩擦;广阔的    abrade(vt. 擦伤；磨损)</li>
+  <li>brady   词根：slow缓慢   bradykinesia(n. 运动徐缓，动作迟缓)</li>
+  <li>bran    / brAn/ n. 糠, 麸【词根】燃烧；烙印    brand(n. 商标，牌子；烙印)</li>
+  <li>braz    词根：铜    brazen（adj. 厚颜无耻的；黄铜制的）</li>
+  <li>bre 词根：短的   brevity(n. 简洁，简短；短暂，短促)</li>
+  <li>brev    【词根】短的  abbreviate(v.  缩写, 缩短, 使…简略)</li>
+  <li>brevi   【词根】短的  abbreviation(n.节略，缩写，缩短)</li>
+  <li>bri 词根：短    brief(adj. 简短的，简洁的；短暂的，草率的)</li>
+  <li>bridg   词根：表示“短，缩短” abridgement(n.  删节; 删节本; 缩短)</li>
+  <li>brief   adj. 简短的，简洁的【词根】短   briefness(n. 简单；短促)</li>
+  <li>brig    n. 双桅横帆船【词根】战斗，打    brigand(n. 强盗；土匪；盗贼)</li>
+  <li>bris    词根：破裂，折，断   debris(n. 碎片，残骸)</li>
+  <li>broch   词根：pierce（刺，缝）  brochure ( n 手册（用线缝在一起的纸）)</li>
+  <li>bron    词根：铜    bronze（n. 青铜；古铜色；青铜制品）</li>
+  <li>bronch  前缀：支气管  bronchitis（n. [内科] 支气管炎)</li>
+  <li>brut    词根：兽    brutality（n. 无情；残忍；暴行（需用复数形式））</li>
+  <li>bry 词根：sprout（发芽）   embryo( n 胚胎，萌芽)</li>
+  <li>bryo    词根：膨胀的  embryo(adj. 胚胎的；初期的)</li>
+  <li>bu  词根：表示“牛”;存在，生长，居住   bull(n.  公牛; 彪形大汉, 壮汉)</li>
+  <li>buf 词根：牛    butter(n.  奶油, 黄油)</li>
+  <li>bul 词根：胀满，包裹，球  flashbulb（n. 闪光灯泡（等于flash bulb））</li>
+  <li>bulg    词根：袋；膨大 bulge(n. 胀；膨胀；凸出部分)</li>
+  <li>bull    / bul/ n. 公牛【词根】煮沸boil,seal ebullient(adj. 热情洋溢的；沸腾的)</li>
+  <li>bund    n. 堤岸；码头；同盟【词根】绑，捆  bundle(n. 束；捆)</li>
+  <li>bur n. 刺果【词根】火；藏，保护 burn(v.  烧毁; 烧坏; 烧伤; 烧焦)</li>
+  <li>burl    / bE:l/ n. 节, 树节, 树瘤【词根】mockery（嘲笑） burlesque(n. 作戏；滑稽戏)</li>
+  <li>burs    【词根】袋；囊 reimburse(v.  偿还; 补偿; 归还; 赔偿)</li>
+  <li>but / bQt/conj. 但是；而是；然而。词根：牛   butter(n.奶油, 黄油)</li>
+  <li>by  / bai/ 通过；经过【前缀】副,次要的；附近    bypass(n.  旁路, 支路 )</li>
+  <li>bys 词根：尽头end,bottom abysmal(adj. 深不可测的；糟透的；极度的)</li>
+  <li>byss    词根：borrom（底）    abyss(  n 深渊（a没有+byss—没有底）)
+*</li>
+</ul>
 
 
                 <hr>
@@ -245,26 +319,26 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/mladvance/2016/11/19/ALS/" data-toggle="tooltip" data-placement="top" title="Spark-ML-04-collaborative-filtering">
+                        <a href="/english/2016/11/26/English_word_root_A/" data-toggle="tooltip" data-placement="top" title="词根A">
                         Previous<br>
-                        <span>Spark-ML-04-collaborative-filtering</span>
+                        <span>词根A</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/english/2016/11/26/English_word_root_A/" data-toggle="tooltip" data-placement="top" title="词根A">
+                        <a href="/english/2016/11/26/English_word_root_C/" data-toggle="tooltip" data-placement="top" title="词根C">
                         Next<br>
-                        <span>词根A</span>
+                        <span>词根C</span>
                         </a>
                     </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_B"
+                        data-title="词根B"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_B/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -283,9 +357,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_B"
+                        data-title="词根B"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_B/" >
                     </div>
 
                 </div>

@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>推荐系统中的相似度计算方法总结 - Maching Learning | 机器学习笔记</title>
+    <title>词根Q - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/">
+    <link rel="canonical" href="http://machinelearningadvance.com/english/2016/11/26/English_word_root_Q/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,17 +168,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Machine Learning" title="Machine Learning">Machine Learning</a>
-                        
-                        <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        <a class="tag" href="/tags/#English" title="English">English</a>
                         
                     </div>
-                    <h1>推荐系统中的相似度计算方法总结</h1>
+                    <h1>词根Q</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on November 19, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on November 26, 2016</span>
                 </div>
             </div>
         </div>
@@ -196,47 +194,40 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="section">1 相似度计算方法总结</h3>
-
-<p>相似度的计算是推荐系统非常重要的环节，包括：用户与用户之间的相似度，物品与物品之间的相似度或者用户与物品的相关性。</p>
-
-<p>下面以在协同过滤中计算两个用户的相似度来介绍几种常用的相似度计算方法。其中有些方法只适用于协同过滤，有些适应于更多其他推荐方法。</p>
-
-<p>1）共同邻居。直接计算两个用户的交集</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \Gamma(u)\cap\Gamma(v)</script>
-
-<p>2）Jaccard系数。基于共同邻居的一个显著问题是用户的物品集越大，越可能与其他用户相似。Jaccard系数消除了这一影响：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\Gamma(u)\cap\Gamma(v)}{\Gamma(u)\cup\Gamma(v)}</script>
-
-<p>3）皮尔逊相关系数。皮尔逊相关系数法是基于用户的协同过滤中最常使用的相似度计算方法。研究表明，在计算用户相似度方面，皮尔逊相关系数法比其他相似度计算方法要好一些。具体定义如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-\bar{r_u})*(r_{v,i}-\bar{r_v})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-\bar{r_u})^2 * \sum_{i \in I}(r_{v,i}-\bar{r_v})^2}}</script>
-
-<p>其中I表示用户u和v共同评价过的物品，表示u对i的评分，表示u所有评价的物品的平均分。</p>
-
-<p>4）约束的皮尔逊相关系数。与皮尔逊相关系数的唯一区别是将换成——系统评分值域的中间值。</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-r_{med})*(r_{v,i}-r_{med})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-r_{med})^2 * \sum_{i \in I}(r_{v,i}-r_{med})^2}}</script>
-
-<p>5）向量余弦法。向量余弦法最常被应用在基于物品的协同过滤和基于内容的推荐方法中。在基于内容的推荐中，物品用向量模型表示，计算两个物品的相似度相当于计算代表两个物品的向量的余弦值。向量余弦法的数学描述如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = cos(\vec{u},\vec{v}) = \frac{\vec{u} \ast \vec{v}} {\parallel{\vec{u}}\parallel \times \parallel{\vec{v}}\parallel}</script>
-
-<p>除了上面介绍的相似度计算方法外，常见的方法还包括斯皮尔曼相关系数法（SRC）以及其他改进算法，具体见文献[1,2]。</p>
-
-<p>这些方法的实现，大家可以参考crab(https://github.com/aturbofly/crab)。</p>
-
-<p>【参考文献】</p>
-
-<p><a href="https://www.zhihu.com/question/25566638">推荐系统有哪些比较好的论文？</a></p>
-
-<p>[1] Breese, D. Heckerman, C. Kadie. Empirical analysis of predictive algorithms for collaborative filtering. In:Proceedings of the Fourteenth Conference on Uncertainty in Artificial Intelligence. Madison: Morgan-Kaufmann,1998,43-52.</p>
-
-<p>[2] X. Su,T. M. Khoshgoftaar. A survey of collaborative filtering techniques. Advances in Articial Intelligence,2009,2009(4):1-19.</p>
+				<ul>
+  <li>qua adv.  以…的资格; 作为…【词根】多少，什么   quality（n. 质量，[统计] 品质；特性；才能）</li>
+  <li>quad    词根：四    quadrangle（n. 四边形；方院）</li>
+  <li>quadr   【前缀】四   quadrangle（n. 四边形；方院）</li>
+  <li>quadri  【前缀】四   quadrilateral（n. 四边形）</li>
+  <li>quadru  【前缀】四   quadruped（n. [脊椎] 四足动物）</li>
+  <li>quaint  / kweint/  a.离奇的；有奇趣的【词根】知道 acquaint(vt. 使熟悉；使认识(acc使+quaint→使[人们]知道→告知）))</li>
+  <li>qual    【词根】质量  quality（n. 质量，[统计] 品质；特性；才能）</li>
+  <li>quant   n. 船桨；数量分析专家；【词根】数量 quantitative（adj. 定量的；量的，数量的）</li>
+  <li>quar    【词根】四   quarter（n. 四分之一；地区；季度；一刻钟；两角五分）</li>
+  <li>quarant 词根：forty（四十）    quarantine （vt. 检疫；隔离；使隔离）</li>
+  <li>quart   n.  夸脱【词根】四 quarter（n. 四分之一；地区；季度；一刻钟；两角五分）</li>
+  <li>quasi   / 5kwB:zi:/  a.半，准【前缀】类似,准  quasi-judicial（adj. 准司法性的）</li>
+  <li>quer    【词根】抱怨;问    quarrel(n.争吵，吵架，口角)</li>
+  <li>ques    词根：询问，寻求    question(n. 问题，疑问；询问)</li>
+  <li>quest   / kwest/n.寻求【词根】寻求;问    request(n.&amp;v.请求，要求)</li>
+  <li>queu    词根：尾，后边；跟随  queue(n. 队列；长队；辫子)</li>
+  <li>qui 【词根】冷静的；休息  quiet(a.寂静的；安静的)</li>
+  <li>quie    词根：静    quiescent(adj. 静止的；不活动的)</li>
+  <li>quiet   / 5kwaiEt/  文静的【词根】rest静    quietude(n.  平静, 寂静)</li>
+  <li>quil    【词根】冷静的；休息  tranquil(a.平静的；稳定的)</li>
+  <li>quin    【前缀】五   quinary（adj. 第五位的；五个一套的；五进制的）</li>
+  <li>quinqu  【前缀】五   quinquennial（adj. 每五年的；持续五年的）</li>
+  <li>quint   / kwint/ n. 五度音程, 五胞胎之一【前缀】五    quintet（n. 五重奏，五重唱；男子篮球队）</li>
+  <li>quinti  【前缀】五   quintile（n. 五分之一对座）</li>
+  <li>quip    n.  警句【词根】船 equip（vt. 装备，配备）</li>
+  <li>quir    【词根】问   inquire（vt. 询问；查究；问明）</li>
+  <li>quire   n. 纸的一刀【化】 刀【词根】寻求  requirement(n.需要；要求)</li>
+  <li>quis    【词根】问，寻求    exquisite（adj. 精致的；细腻的；优美的，高雅的（ex出+quis寻求+ite））</li>
+  <li>quisit  【词根】问，寻求    exquisite（adj. 精致的；细腻的；优美的，高雅的（ex出+quis寻求+ite））</li>
+  <li>quit    / kwit/vt.离开，退出；停止【词根】免除；释放 requisite(a.需要的 )</li>
+  <li>quo 词根：多少，什么    quote（vt. 报价；引述；举证）</li>
+  <li>quot    词根：说；引证，分配  quotable(adj. 可引用的；适于引用的)</li>
+</ul>
 
 
                 <hr>
@@ -245,26 +236,26 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/mladvance/2016/11/19/ALS/" data-toggle="tooltip" data-placement="top" title="Spark-ML-04-collaborative-filtering">
+                        <a href="/english/2016/11/26/English_word_root_P/" data-toggle="tooltip" data-placement="top" title="词根P">
                         Previous<br>
-                        <span>Spark-ML-04-collaborative-filtering</span>
+                        <span>词根P</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/english/2016/11/26/English_word_root_A/" data-toggle="tooltip" data-placement="top" title="词根A">
+                        <a href="/english/2016/11/26/English_word_root_R/" data-toggle="tooltip" data-placement="top" title="词根R">
                         Next<br>
-                        <span>词根A</span>
+                        <span>词根R</span>
                         </a>
                     </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_Q"
+                        data-title="词根Q"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_Q/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -283,9 +274,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_Q"
+                        data-title="词根Q"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_Q/" >
                     </div>
 
                 </div>

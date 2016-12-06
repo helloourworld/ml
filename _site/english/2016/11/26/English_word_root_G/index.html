@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>推荐系统中的相似度计算方法总结 - Maching Learning | 机器学习笔记</title>
+    <title>词根G - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/">
+    <link rel="canonical" href="http://machinelearningadvance.com/english/2016/11/26/English_word_root_G/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,17 +168,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Machine Learning" title="Machine Learning">Machine Learning</a>
-                        
-                        <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        <a class="tag" href="/tags/#English" title="English">English</a>
                         
                     </div>
-                    <h1>推荐系统中的相似度计算方法总结</h1>
+                    <h1>词根G</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on November 19, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on November 26, 2016</span>
                 </div>
             </div>
         </div>
@@ -196,47 +194,109 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="section">1 相似度计算方法总结</h3>
-
-<p>相似度的计算是推荐系统非常重要的环节，包括：用户与用户之间的相似度，物品与物品之间的相似度或者用户与物品的相关性。</p>
-
-<p>下面以在协同过滤中计算两个用户的相似度来介绍几种常用的相似度计算方法。其中有些方法只适用于协同过滤，有些适应于更多其他推荐方法。</p>
-
-<p>1）共同邻居。直接计算两个用户的交集</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \Gamma(u)\cap\Gamma(v)</script>
-
-<p>2）Jaccard系数。基于共同邻居的一个显著问题是用户的物品集越大，越可能与其他用户相似。Jaccard系数消除了这一影响：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\Gamma(u)\cap\Gamma(v)}{\Gamma(u)\cup\Gamma(v)}</script>
-
-<p>3）皮尔逊相关系数。皮尔逊相关系数法是基于用户的协同过滤中最常使用的相似度计算方法。研究表明，在计算用户相似度方面，皮尔逊相关系数法比其他相似度计算方法要好一些。具体定义如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-\bar{r_u})*(r_{v,i}-\bar{r_v})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-\bar{r_u})^2 * \sum_{i \in I}(r_{v,i}-\bar{r_v})^2}}</script>
-
-<p>其中I表示用户u和v共同评价过的物品，表示u对i的评分，表示u所有评价的物品的平均分。</p>
-
-<p>4）约束的皮尔逊相关系数。与皮尔逊相关系数的唯一区别是将换成——系统评分值域的中间值。</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-r_{med})*(r_{v,i}-r_{med})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-r_{med})^2 * \sum_{i \in I}(r_{v,i}-r_{med})^2}}</script>
-
-<p>5）向量余弦法。向量余弦法最常被应用在基于物品的协同过滤和基于内容的推荐方法中。在基于内容的推荐中，物品用向量模型表示，计算两个物品的相似度相当于计算代表两个物品的向量的余弦值。向量余弦法的数学描述如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = cos(\vec{u},\vec{v}) = \frac{\vec{u} \ast \vec{v}} {\parallel{\vec{u}}\parallel \times \parallel{\vec{v}}\parallel}</script>
-
-<p>除了上面介绍的相似度计算方法外，常见的方法还包括斯皮尔曼相关系数法（SRC）以及其他改进算法，具体见文献[1,2]。</p>
-
-<p>这些方法的实现，大家可以参考crab(https://github.com/aturbofly/crab)。</p>
-
-<p>【参考文献】</p>
-
-<p><a href="https://www.zhihu.com/question/25566638">推荐系统有哪些比较好的论文？</a></p>
-
-<p>[1] Breese, D. Heckerman, C. Kadie. Empirical analysis of predictive algorithms for collaborative filtering. In:Proceedings of the Fourteenth Conference on Uncertainty in Artificial Intelligence. Madison: Morgan-Kaufmann,1998,43-52.</p>
-
-<p>[2] X. Su,T. M. Khoshgoftaar. A survey of collaborative filtering techniques. Advances in Articial Intelligence,2009,2009(4):1-19.</p>
+				<ul>
+  <li>gain    / gein/n. 增加；利润；收获【词根】against（反对）   gainsay（vt. 反驳；否定）</li>
+  <li>gal n. 加仑（重力加速度单位）；姑娘【词根】呼啸；唱   gale（n. [气象] 大风，狂风；（突发的）一阵）</li>
+  <li>galact  词根：乳    galactin(n. 泌乳激素；促乳激素（等于prolactin）)</li>
+  <li>galax   词根：milk（乳）  galaxy （n. 银河；[天] 星系；银河系；一群显赫的人）</li>
+  <li>gam / gAm/ n. 鲸鱼群, 社交, 腿vt. 社交【词根】婚姻    bigamy(n. 重婚罪，重婚)</li>
+  <li>gamb    词根：腿;走;跳    gambade（n. 恶作剧；马的跳跃；乱跳（等于gambado））</li>
+  <li>gamos   词根：婚姻   monogamy（n. 一夫一妻制；[动] 单配偶，[动] 单配性）</li>
+  <li>gamy    / ‘geimi/ a. 勇敢的, 猎物多的【词根】婚姻    bigamy(n. 重婚罪，重婚)</li>
+  <li>gar 词根：装饰,注意，保护;叫，关心    garment(n.衣服；服装，衣着（gar+ment表名词→装饰的东西→衣服）)</li>
+  <li>gard    词根：抓,围,圈    garden(n. 花园；菜园)</li>
+  <li>garn    词根：表示“装饰，供应”    garnish(n.  装饰, 装饰品)</li>
+  <li>garr    词根：chatter（唠叨）  garrulous （adj. 唠叨的；喋喋不休的；多嘴的）</li>
+  <li>gas / gAs/  n.气体。词根：打呵欠，裂开  gasp(vi. 喘气；喘息；渴望)</li>
+  <li>gastr   【词根】胃；腹部    gastric(adj. 胃的；胃部的)</li>
+  <li>gastro  【词根】胃；腹部    gastropod(n. [无脊椎] 腹足类动物)</li>
+  <li>gath    词根：联合，加入，合适 gather(vi. 聚集；化脓；皱起)</li>
+  <li>ge  前缀：地球   geoanticline(n.【地质学】地背斜)</li>
+  <li>gemin   词根：成对    gemination（n. 成双；并生；重复）</li>
+  <li>gemm    词根：芽    gemma（n. [生物] 芽，[植] 胞芽）</li>
+  <li>gen / dVen/ n. 消息, 真相, 情报【词根】生产；种族  generate(vt.发生，产生；生成)</li>
+  <li>gener   【词根】生产；种族   generous(a.慷慨的；宽厚的（gener+ous→[不断]产生→丰富的，慷慨的）)</li>
+  <li>genit   词根：表示“出生，产生””   genitals(n.  生殖器)</li>
+  <li>gent    n. 绅士；假绅士；男子【词根】温和；生产；种族    gentle(adj. 温和的；文雅的)</li>
+  <li>genu    / ‘dVenju:/ n. 膝【医】 膝【词根】生产；种族  genuine(a.真的；真正的（genu+ine→产生→来源清楚→真正的）)</li>
+  <li>geo 【词根】土地，地球   geometrical(a.几何学的)</li>
+  <li>ger 【词根】携带；运送   exaggerate(vt.&amp;vi.夸大，夸张)</li>
+  <li>germ    n. 萌芽；细菌【词根】要害部位；出生,产生,种族   germane(adj. 有密切关系的；贴切的；恰当的</li>
+  <li>geronto 词根：老    gerontocracy（n. 老人政治；老人政府）</li>
+  <li>gest    / dVest/ n. 诗体小说, 昌险行为【词根】携带；运送 gesture(n.姿势，手势；姿态（gest+ure→带来信息的动作→手势）)</li>
+  <li>get / get/vt.到达。词根：抓，取，拿    forget(vt. 忘记；忽略)</li>
+  <li>geth    词根：联合，加入，合适 together(adv. 一起；同时；相互；连续地)</li>
+  <li>ghast   词根：惊恐   aghast(adj. 吓呆的，惊骇的；吃惊的)</li>
+  <li>ghbour  【词根】百姓  neighbour(n.邻居，邻国，邻人（nei(near) + ghbour百姓)）</li>
+  <li>giga    n.十亿，千兆【词根】十亿   gigabyte(n. 十亿字节；十亿位组)</li>
+  <li>gigant  词根：巨大   gigantic(adj. 巨大的，庞大的)</li>
+  <li>gin / dVin/n.陷阱, 起重装【词根】生产，产生，种类    original(a.最初的；新颖的（ori开始+gin产生+al)</li>
+  <li>gister  词根：表示“带来，产生””   register(v.  登记, 申报, 注册; 记录)</li>
+  <li>giv 词根：给，接受，有   give(vt. 给；产生；让步；举办；授予)</li>
+  <li>gl  词根：黄色，发光；粘，连，球，块，抓  glue(vt. 粘合；似胶般固着于)</li>
+  <li>gla 词根：黄色，发光    glass(n. 玻璃；玻璃制品；镜子)</li>
+  <li>glac    词根：表示“冰”    glacier(n.冰河)</li>
+  <li>glaci   词根：冰    glacier(n. 冰河，冰川)</li>
+  <li>gladi   词根：剑    gladiator(n. 斗剑者；古罗马公开表演的格斗者；争论者)</li>
+  <li>glo 词根：块, 团 conglomerate(vi. 凝聚成团)</li>
+  <li>glob    n.  水珠; 东西【词根】球 globe(n.地球，世界；地界仪)</li>
+  <li>glomer  【词根】聚集,球    glomerule(n. 团伞花序；丝球体（等于glomerulus）)</li>
+  <li>glor    词根：荣誉,光荣    glorious(adj. 光荣的；辉煌的；极好的)</li>
+  <li>gloss   n.  光泽, 色泽【词根】表示’舌头’，引申为’词语’    glossary(n. 术语（特殊用语）表；词汇表；专业词典</li>
+  <li>glot    词根：表示“舌头”，引申为“词语”   polyglot(n.  精通数国语言的人; 数种文字的对照本)</li>
+  <li>glu 词根：结块, 结合, 粘合   agglutinate(vi. 粘合；成胶状)</li>
+  <li>gluc    词根：甜、甜的 glucose(n. 葡萄糖；葡糖（等于dextrose）)</li>
+  <li>glyc    词根：甜、甜的 glycerine(n. 丙三醇，[有化] 甘油)</li>
+  <li>gn  【词根】出生,知道   ignorant（adj.  无知识的, 幼稚的, 不知道的）</li>
+  <li>gnant   词根：出生   pregnant(adj. 怀孕的；富有意义的)</li>
+  <li>gnath   词根：颌；下巴 gnathic(adj. 颚的；颌的（等于gnathal）)</li>
+  <li>gni 词根：知道   cognition（n. 认识；知识；认识能力）</li>
+  <li>gno 词根：知道   agnostic（n. 不可知论者）</li>
+  <li>gnor    词根：知道   ignore(v.  不顾, 不理会; 驳回; 忽视)</li>
+  <li>gnos    词根：知道   prognosis(n.  预知, 预后, 预测)</li>
+  <li>god / gRd/n.神。词根：召唤 goddam（adj.（受）诅咒的，讨厌的）</li>
+  <li>gog 词根：引导   pedagogy(n.教育学，教学法(ped儿童+agog引导+y名词后缀))</li>
+  <li>gol 词根：黄色，发光    golden（adj.  金的, 可贵的, 含金的）</li>
+  <li>gon 【词根】角   trigon（n.  三角形; 三宫之一组; 三角琴）</li>
+  <li>gor 词根：收集,集合    category(n. 种类，分类；[数] 范畴)</li>
+  <li>gorg    【词根】喉咙  gorge（n.  峡谷, 咽喉, 饱食）</li>
+  <li>gos 词根：召唤   gossip（n.  闲话, 聊天; 社会新闻）</li>
+  <li>gr  词根：生长，增加；草  grow(vi. 发展；生长；渐渐变得…)</li>
+  <li>gra 【词根】喜爱，感激，称赞；走  graceful(a.优美的，优雅的)</li>
+  <li>grac    词根：愉快,取悦    grace（n. 优雅；恩惠；魅力；慈悲）</li>
+  <li>grad    n.毕业生，校友【词根】步，走，级   gradual（adj.  逐渐的, 徐徐的, 渐增的）</li>
+  <li>graf    词根：写, 画 graph(n. 图表；曲线图)</li>
+  <li>gram    / grAm/n. 绿豆； 鹰嘴豆；【词根】写 telegram(n.电报)</li>
+  <li>gran    词根：表示“颗粒”   granule(n.  小粒, 颗粒, 细粒)</li>
+  <li>grand   / grAnd/a.豪华的；庄重的【词根】大,宏大,高 grandeur（n.  庄严; 伟大）</li>
+  <li>graph   / grAf/  n.(曲线)图，图表【词根】写，图  photography(n.摄影术)</li>
+  <li>grapher 后缀:表示“画(或写、记录、描述)的人(或专家)”   biographer(n. 传记作者)</li>
+  <li>graphy  后缀:’写法’,’书法’,’画法’,’记录法’,’图示法’   orthography(n. 正确拼字；正字法；正字学)</li>
+  <li>grat    greet的过去式【词根】使高兴    grateful(a.感激的；令人愉快的)</li>
+  <li>grav    【词根】重的  gravity(n.重力，引力；严重性)</li>
+  <li>gravat  词根：重，加重 aggravate(vt. 加重；使恶化；激怒)</li>
+  <li>graz    词根：生长，变绿    graze(vt. 放牧；擦伤)</li>
+  <li>gred    词根：走，步，行    ingredient(n.配料，成分)</li>
+  <li>gree    词根：表示“感激，高兴””   disagree(v.  不一致; 不适宜)</li>
+  <li>greg    【词根】聚焦；群    gregarious（adj.  社交的, 群居的(greg+arious爱…的=爱群体的)）</li>
+  <li>gress   【词根】走   progress（n.  进步, 前进, 发展（(pro+gress走=向前走)））</li>
+  <li>gret    词根：叫喊,哭 regret(n. 遗憾；抱歉；悲叹)</li>
+  <li>griev   词根：表示“重”    gravity(n.  地心引力; 重力)</li>
+  <li>groc    词根：厚，大，粗    grocer(n. 杂货店；食品商)</li>
+  <li>grop    词根：抓    grope(vi. 摸索；探索)</li>
+  <li>gross   / grEus/adj. 总共的；粗野的；恶劣的【词根】大   engross（vt. 使全神贯注；用大字体书写）</li>
+  <li>gru 词根：聚集， 联合, 合并   congruous（adj.  一致的, 符合的, 适合的）</li>
+  <li>guar    词根：注意，保护    guard(n. 守卫；警戒；护卫队；防护装置)</li>
+  <li>gubern  词根：管理   gubernatorial(adj. 州长的；统治者的；地方长官的；总督的)</li>
+  <li>guer    词根：战争，搞乱，混  guerrilla(n. 游击战；游击队)</li>
+  <li>gurg    【词根】喉咙  regurgitate（v.  涌回; 反胃; 流回; 反刍）</li>
+  <li>gymn    词根：裸露   gymnast(n. 体操运动员)</li>
+  <li>gyn 【词根】妇女  monogyny（n.  一妻制(mono一个+gyny=一个女人=一妻制)）</li>
+  <li>gynaeco 词根：woman,female妇女,雌 gynaecoid(adj.女性的，似女性的，具女性特点的)</li>
+  <li>gynec   词根：表示“妇女””  gynecology(n.  妇科医学)</li>
+  <li>gyr 【词根】转   gyroscope（n.  陀螺仪; 回转仪）</li>
+  <li>gyro    n. 陀螺仪, 回转仪, 陀螺【词根】whirl,ring旋转,环   gyroidal(adj. 螺旋形的)</li>
+</ul>
 
 
                 <hr>
@@ -245,26 +305,26 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/mladvance/2016/11/19/ALS/" data-toggle="tooltip" data-placement="top" title="Spark-ML-04-collaborative-filtering">
+                        <a href="/english/2016/11/26/English_word_root_F/" data-toggle="tooltip" data-placement="top" title="词根F">
                         Previous<br>
-                        <span>Spark-ML-04-collaborative-filtering</span>
+                        <span>词根F</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/english/2016/11/26/English_word_root_A/" data-toggle="tooltip" data-placement="top" title="词根A">
+                        <a href="/english/2016/11/26/English_word_root_H/" data-toggle="tooltip" data-placement="top" title="词根H">
                         Next<br>
-                        <span>词根A</span>
+                        <span>词根H</span>
                         </a>
                     </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_G"
+                        data-title="词根G"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_G/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -283,9 +343,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_G"
+                        data-title="词根G"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_G/" >
                     </div>
 
                 </div>

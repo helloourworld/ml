@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>推荐系统中的相似度计算方法总结 - Maching Learning | 机器学习笔记</title>
+    <title>词根H - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/">
+    <link rel="canonical" href="http://machinelearningadvance.com/english/2016/11/26/English_word_root_H/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,17 +168,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Machine Learning" title="Machine Learning">Machine Learning</a>
-                        
-                        <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        <a class="tag" href="/tags/#English" title="English">English</a>
                         
                     </div>
-                    <h1>推荐系统中的相似度计算方法总结</h1>
+                    <h1>词根H</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on November 19, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on November 26, 2016</span>
                 </div>
             </div>
         </div>
@@ -196,47 +194,115 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="section">1 相似度计算方法总结</h3>
-
-<p>相似度的计算是推荐系统非常重要的环节，包括：用户与用户之间的相似度，物品与物品之间的相似度或者用户与物品的相关性。</p>
-
-<p>下面以在协同过滤中计算两个用户的相似度来介绍几种常用的相似度计算方法。其中有些方法只适用于协同过滤，有些适应于更多其他推荐方法。</p>
-
-<p>1）共同邻居。直接计算两个用户的交集</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \Gamma(u)\cap\Gamma(v)</script>
-
-<p>2）Jaccard系数。基于共同邻居的一个显著问题是用户的物品集越大，越可能与其他用户相似。Jaccard系数消除了这一影响：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\Gamma(u)\cap\Gamma(v)}{\Gamma(u)\cup\Gamma(v)}</script>
-
-<p>3）皮尔逊相关系数。皮尔逊相关系数法是基于用户的协同过滤中最常使用的相似度计算方法。研究表明，在计算用户相似度方面，皮尔逊相关系数法比其他相似度计算方法要好一些。具体定义如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-\bar{r_u})*(r_{v,i}-\bar{r_v})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-\bar{r_u})^2 * \sum_{i \in I}(r_{v,i}-\bar{r_v})^2}}</script>
-
-<p>其中I表示用户u和v共同评价过的物品，表示u对i的评分，表示u所有评价的物品的平均分。</p>
-
-<p>4）约束的皮尔逊相关系数。与皮尔逊相关系数的唯一区别是将换成——系统评分值域的中间值。</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-r_{med})*(r_{v,i}-r_{med})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-r_{med})^2 * \sum_{i \in I}(r_{v,i}-r_{med})^2}}</script>
-
-<p>5）向量余弦法。向量余弦法最常被应用在基于物品的协同过滤和基于内容的推荐方法中。在基于内容的推荐中，物品用向量模型表示，计算两个物品的相似度相当于计算代表两个物品的向量的余弦值。向量余弦法的数学描述如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = cos(\vec{u},\vec{v}) = \frac{\vec{u} \ast \vec{v}} {\parallel{\vec{u}}\parallel \times \parallel{\vec{v}}\parallel}</script>
-
-<p>除了上面介绍的相似度计算方法外，常见的方法还包括斯皮尔曼相关系数法（SRC）以及其他改进算法，具体见文献[1,2]。</p>
-
-<p>这些方法的实现，大家可以参考crab(https://github.com/aturbofly/crab)。</p>
-
-<p>【参考文献】</p>
-
-<p><a href="https://www.zhihu.com/question/25566638">推荐系统有哪些比较好的论文？</a></p>
-
-<p>[1] Breese, D. Heckerman, C. Kadie. Empirical analysis of predictive algorithms for collaborative filtering. In:Proceedings of the Fourteenth Conference on Uncertainty in Artificial Intelligence. Madison: Morgan-Kaufmann,1998,43-52.</p>
-
-<p>[2] X. Su,T. M. Khoshgoftaar. A survey of collaborative filtering techniques. Advances in Articial Intelligence,2009,2009(4):1-19.</p>
+				<ul>
+  <li>hab 【词根】给，接受，有  habit(n.  习惯, 习性, 嗜好)</li>
+  <li>habit   / 5hAbit/  n. 习惯；习性【词根】居住；有 inhabitant(n.居民，住户)</li>
+  <li>haem    n. 血红素【词根】血液    haematology（n. 血液病学；血液学（等于hematology））</li>
+  <li>haemat  词根：血    haematic(adj. 血的，血液的)</li>
+  <li>hagi    词根：holy,saint神圣,圣徒  hagiarchy(n. 圣人政治；圣人之间的尊卑次序组织)</li>
+  <li>hal 【词根】呼吸  exhale（v.  呼气; 蒸发; 散发(ex+hale气=出气=呼气)）</li>
+  <li>hale    v.  强拉; 硬拖【词根】呼吸    exhale（v.  呼气; 蒸发; 散发(ex+hale气=出气=呼气)）</li>
+  <li>halit   词根：呼吸   halitosis(n.口臭)</li>
+  <li>hap / hAp /n.偶然, 机会, 运气;【词根】运气  happy(a.快乐的；幸福的)</li>
+  <li>har 词根：战争，军队；硬  harbor（n.  港湾, 海港; 避难所）</li>
+  <li>hara    词根：磨，擦，刮，涂  harass(vt. 使困扰；使烦恼；反复袭击)</li>
+  <li>harm    / ha:m/vt. 伤害；危害；损害【词根】适合   harmony（n. 协调；和睦；融洽；调和）</li>
+  <li>harmon  词根：concord,harmony和谐,和声 harmonic(adj. 和声的；谐和的；音乐般的)</li>
+  <li>harv    词根：采，摘，收获   harvest(n. 收获；产量；结果)</li>
+  <li>hast    v.  第二人称单数现在式【词根】抽水 exhaust(vt. 排出；耗尽；使筋疲力尽)</li>
+  <li>haught  词根：high  (高）    haughty（adj. 傲慢的；自大的）</li>
+  <li>haust   【词根】拖，拉 exhaust（v.  用尽; 抽完; 耗尽(ex出+haust=抽干=抽出)）</li>
+  <li>haut    词根：高    hauteur(n. 傲慢；自大)</li>
+  <li>hav 词根：抓，取，拥有   behave（v.  举止, 表现, 行为）</li>
+  <li>haws    词根：粗绳，拖，拉   hawse（n. 锚链孔；艏锚水平距离）</li>
+  <li>heal    v.  治愈【词根】完整，无损伤，健康 healthy(adj. 健康的，健全的)</li>
+  <li>heav    词根：抓，取  heavy(adj. 沉重的；繁重的，巨大的；阴沉的)</li>
+  <li>hec 词根：保持，抓，暂停  hectic(adj.  脸上发红的, 消耗热的, 发热的)</li>
+  <li>hecto   【电】 格克脱【前缀】百    hectogram(n.  一百公克((hecto+gram克)))</li>
+  <li>hedon   词根：愉快   hedonistic(adj. 快乐主义者的；快乐论的；快乐主义的)</li>
+  <li>hedr    词根：侧面   polyhedron(n. 多面体)</li>
+  <li>hedron  词根：…面体    trihedron(n. [数] 三面体)</li>
+  <li>hein    词根：odious  (可恨的）    heinous（adj. 可憎的；极凶恶的）</li>
+  <li>hel 词根：太阳，日 heliotropism(n.  向日性; 趋日性)</li>
+  <li>heli    前缀：太阳；直升机   helianthus(n. 向日葵；向日葵属植物)</li>
+  <li>helic   【词根】螺旋  helical(adj.  螺旋状的)</li>
+  <li>helio   【词根】太阳  heliotropism(n.  向日性; 趋日性(helio+trop转+ism=转向太阳))</li>
+  <li>hem / hem/ n. 边缘, 折边, 哼声【词根】血   hemoglobin(n.  血红素)</li>
+  <li>hema    词根：血    hemorrhage(n.  出血)</li>
+  <li>hemat   词根：血    hematal(adj.血液的，胸前的)</li>
+  <li>hemato  词根：血    hematochezia(n. 便血)</li>
+  <li>hemer   词根：day  (一天）    ephemeral（adj. 短暂的；朝生暮死的）</li>
+  <li>hemi    【前缀】半   hemisphere(n.半球；半球地图)</li>
+  <li>hemo    词根：血    hemorrhage(n.  出血)</li>
+  <li>hend    词根：抓，取，拿    apprehend(vt. 理解；逮捕；忧虑)</li>
+  <li>hendeca 前缀：十一   hendecagon(n. 十一角形；[数] 十一边形)</li>
+  <li>hens    词根：抓，取，拿    comprehension(n. 理解；包含)</li>
+  <li>hepat   前缀：肝脏   hepatic(adj. 肝的；肝脏色的；治肝病的)</li>
+  <li>hept    前缀：七    heptad(n. 七价原子；七个)</li>
+  <li>hepta   n.七【前缀】七    heptagon(n.  七角形; 七边形)</li>
+  <li>heptadeca   【前缀】十七  heptadecane（n. 十七烷）</li>
+  <li>her / hE:, hE/  她的【词根】粘住；继承人    inherent(a.固有的，生来的(in里面+her+ent=天生[与身体内]连着=天赋的))</li>
+  <li>herb    / hE:b/  n.草本植物；药草；香草【词根】草  herbal(adj.  草药的)</li>
+  <li>herd    / hE:d/  n. 兽群，畜群；放牧人【后缀】表示“人”  shepherd(n.牧羊人，羊倌)</li>
+  <li>here    / hiE/adv. 在这里；此时【词根】粘着 adhere(vi.粘附；追随；坚持)</li>
+  <li>hered   词根：继承   heredity(n.  遗传; 形质遗传)</li>
+  <li>herit   词根：继承   heritage(n. 遗产；传统；继承物；继承权)</li>
+  <li>hes 词根：粘着   hesitate(vi.含糊，支吾；口吃)</li>
+  <li>heter   【前缀】另一的；不同的 heterosexual(adj.  异性的; 异性爱的)</li>
+  <li>hetero  【前缀】另一的；不同的 heterosexual(adj.  异性的; 异性爱的)</li>
+  <li>heur    词根：发现   heuristic(adj. 启发式的；探索的)</li>
+  <li>hex n.  魔女; 十六进位【词根】六   hexagon(n.  六角形; 六边形)</li>
+  <li>hexa    【前缀】六   hexagon(n.  六角形; 六边形)</li>
+  <li>hib 词根：给，接受，有   exhibit(n.  展览品, 展览, 陈列品)</li>
+  <li>hibern  词根：冬天   hibernate(v.  过冬, 避寒, 冬眠)</li>
+  <li>hibit   词根：拿，持  prohibit(vt.禁止，阻止)</li>
+  <li>hid v.隐藏(hide的过去式 )【词根】盖，藏  hide(v.  遮掩掉, 掩蔽; 隐瞒)</li>
+  <li>hier    【前缀】骶骨，宗教,神圣的   hierarch(n. 教主；掌权者；高僧)</li>
+  <li>hilar   词根：快乐的  hilarious(adj. 欢闹的；非常滑稽的；喜不自禁的)</li>
+  <li>hing    词根：悬挂   unhinge(vt. 使分开；取下…的铰链)</li>
+  <li>hipp    词根：马    hippology(n. 马学)</li>
+  <li>hist    前缀：组织   histochemistry(n. [组织] 组织化学)</li>
+  <li>hoars   词根：热    hoarse(adj. 嘶哑的)</li>
+  <li>hod / hRd/ n. 木制容器, 煤斗, 装木炭容器【词根】路  hodoscope(n.描迹仪，宇宙射线描迹仪)</li>
+  <li>hol 词根：完整，无损伤，健康；遮盖，隐藏  holy(adj.  神圣的, 至善的, 圣洁的)</li>
+  <li>holo    【前缀】全   hologram(n.  全息图)</li>
+  <li>hom 【词根】人【前缀】相同 homogeneous(a.同类的；均匀的)</li>
+  <li>homo    n.  同性恋者【前缀】表示“同类的” homogenous(adj.  同质的)</li>
+  <li>hones   词根：尊敬，荣誉    honest(adj. 诚实的，实在的；可靠的)</li>
+  <li>hood    / hud/n. 头巾；覆盖；兜帽【后缀】表示抽象名词 neighbourhood(n.邻居关系；邻近)</li>
+  <li>hop / hRp/v.单脚跳。词根：跳    hope(n.  希望, 期待, 信心)</li>
+  <li>hor 词根：角，头  horn(n.  角, 喇叭, 角质)</li>
+  <li>horr    词根：发抖；怕 horror(n.  惊骇; 惨事; 恐怖)</li>
+  <li>hors    词根：跳    horse(n. 马；骑兵；脚架；海洛因)</li>
+  <li>hort    词根：表示“鼓励”   hortatory(adj.  劝告的, 忠告的; 勉励性的)</li>
+  <li>hos 词根：粗绳，拖，拉   hosiery（n. 针织品；袜类）</li>
+  <li>hosp    词根：客人   hospitable(adj.好客的, 招待周到的)</li>
+  <li>hospit  词根：客人   hospital(n.  医院(hospit客人+al,病人是医院的客人))</li>
+  <li>host    n.  主人【词根】客人    hostage(n.人质host+age表名词=把客人[留住]=人质))</li>
+  <li>hous    词根：盖，藏  house(n. 住宅；家庭；机构；议会)</li>
+  <li>hug / hQg/vt. 拥抱；紧抱；抱有，坚持。【词根】高 huge(adj.  巨大的; 无限的; 极大的)</li>
+  <li>hum / hQm/v. 作嗡嗡声；哼唱【词根】人；地面;土地 human(adj.  人类的, 有同情心的, 人性的)</li>
+  <li>human   adj.  人类的【词根】人；地面;土地    humane(adj. 仁慈的，人道的；高尚的)</li>
+  <li>hund    词根：百，百分之一   hundred(n. 一百；许多)</li>
+  <li>hur 词根：战争，军队；角，头    hurt(n. 伤害, 损害, 创伤)</li>
+  <li>hus 词根：盖，藏  husband(n.丈夫)</li>
+  <li>hut / hQt/n.小屋；棚屋。【词根】盖，藏   hutch(n. 贮藏箱; 柜, 棚, 笼)</li>
+  <li>hydr    词根：水    hydrous(adj.含水的)</li>
+  <li>hydra   n.  九头怪蛇【词根】水   hydrant(n. 消防栓；水龙头；给水栓)</li>
+  <li>hydro   / ‘haidrEu/ n. 水疗医院【词根】水    hydrogen(n.氢)</li>
+  <li>hyet    前缀：雨,下雨     hyetal(adj. 雨量的；降雨的)</li>
+  <li>hyeto   前缀：雨,下雨     hyetology(n.降雨量学，降水学； 雨学)</li>
+  <li>hygi    词根：卫生   hygiene(n. 卫生；卫生学；保健法)</li>
+  <li>hygro   前缀：湿气   hygrograph(n. 自动湿度计)</li>
+  <li>hyl 前缀：物质   hylic(adj. 物质的；实质的)</li>
+  <li>hyp 前缀：低下   hypaesthesia(n.感觉减退，感觉迟钝)</li>
+  <li>hyper   【前缀】超出,过于   hyperactive(adj.  活动过度的; 活动亢进的; 极度活跃的)</li>
+  <li>hypn    词根：睡觉   hypnosis(n. 催眠；催眠状态（hypno+sis表示病状）)</li>
+  <li>hypno   【词根】睡觉  hypnology(n.  催眠学)</li>
+  <li>hypo    n.  海波; 定影剂【前缀】次,亚；在……之下    hypocrite(n.  伪君子; 伪善者((hypo在下面+crit+e评判=在背后评判别人=伪君子))</li>
+  <li>hypso   前缀：高度   hypsometry(n. [测] 测高法)</li>
+  <li>hyster  前缀：子宫   hysterectomy(n. [妇产] 子宫切除)</li>
+</ul>
 
 
                 <hr>
@@ -245,26 +311,26 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/mladvance/2016/11/19/ALS/" data-toggle="tooltip" data-placement="top" title="Spark-ML-04-collaborative-filtering">
+                        <a href="/english/2016/11/26/English_word_root_G/" data-toggle="tooltip" data-placement="top" title="词根G">
                         Previous<br>
-                        <span>Spark-ML-04-collaborative-filtering</span>
+                        <span>词根G</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/english/2016/11/26/English_word_root_A/" data-toggle="tooltip" data-placement="top" title="词根A">
+                        <a href="/english/2016/11/26/English_word_root_I/" data-toggle="tooltip" data-placement="top" title="词根I">
                         Next<br>
-                        <span>词根A</span>
+                        <span>词根I</span>
                         </a>
                     </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_H"
+                        data-title="词根H"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_H/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -283,9 +349,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_H"
+                        data-title="词根H"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_H/" >
                     </div>
 
                 </div>

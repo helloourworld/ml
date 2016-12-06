@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>推荐系统中的相似度计算方法总结 - Maching Learning | 机器学习笔记</title>
+    <title>词根O - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/">
+    <link rel="canonical" href="http://machinelearningadvance.com/english/2016/11/26/English_word_root_O/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,17 +168,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Machine Learning" title="Machine Learning">Machine Learning</a>
-                        
-                        <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        <a class="tag" href="/tags/#English" title="English">English</a>
                         
                     </div>
-                    <h1>推荐系统中的相似度计算方法总结</h1>
+                    <h1>词根O</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on November 19, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on November 26, 2016</span>
                 </div>
             </div>
         </div>
@@ -196,47 +194,119 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="section">1 相似度计算方法总结</h3>
-
-<p>相似度的计算是推荐系统非常重要的环节，包括：用户与用户之间的相似度，物品与物品之间的相似度或者用户与物品的相关性。</p>
-
-<p>下面以在协同过滤中计算两个用户的相似度来介绍几种常用的相似度计算方法。其中有些方法只适用于协同过滤，有些适应于更多其他推荐方法。</p>
-
-<p>1）共同邻居。直接计算两个用户的交集</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \Gamma(u)\cap\Gamma(v)</script>
-
-<p>2）Jaccard系数。基于共同邻居的一个显著问题是用户的物品集越大，越可能与其他用户相似。Jaccard系数消除了这一影响：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\Gamma(u)\cap\Gamma(v)}{\Gamma(u)\cup\Gamma(v)}</script>
-
-<p>3）皮尔逊相关系数。皮尔逊相关系数法是基于用户的协同过滤中最常使用的相似度计算方法。研究表明，在计算用户相似度方面，皮尔逊相关系数法比其他相似度计算方法要好一些。具体定义如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-\bar{r_u})*(r_{v,i}-\bar{r_v})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-\bar{r_u})^2 * \sum_{i \in I}(r_{v,i}-\bar{r_v})^2}}</script>
-
-<p>其中I表示用户u和v共同评价过的物品，表示u对i的评分，表示u所有评价的物品的平均分。</p>
-
-<p>4）约束的皮尔逊相关系数。与皮尔逊相关系数的唯一区别是将换成——系统评分值域的中间值。</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-r_{med})*(r_{v,i}-r_{med})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-r_{med})^2 * \sum_{i \in I}(r_{v,i}-r_{med})^2}}</script>
-
-<p>5）向量余弦法。向量余弦法最常被应用在基于物品的协同过滤和基于内容的推荐方法中。在基于内容的推荐中，物品用向量模型表示，计算两个物品的相似度相当于计算代表两个物品的向量的余弦值。向量余弦法的数学描述如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = cos(\vec{u},\vec{v}) = \frac{\vec{u} \ast \vec{v}} {\parallel{\vec{u}}\parallel \times \parallel{\vec{v}}\parallel}</script>
-
-<p>除了上面介绍的相似度计算方法外，常见的方法还包括斯皮尔曼相关系数法（SRC）以及其他改进算法，具体见文献[1,2]。</p>
-
-<p>这些方法的实现，大家可以参考crab(https://github.com/aturbofly/crab)。</p>
-
-<p>【参考文献】</p>
-
-<p><a href="https://www.zhihu.com/question/25566638">推荐系统有哪些比较好的论文？</a></p>
-
-<p>[1] Breese, D. Heckerman, C. Kadie. Empirical analysis of predictive algorithms for collaborative filtering. In:Proceedings of the Fourteenth Conference on Uncertainty in Artificial Intelligence. Madison: Morgan-Kaufmann,1998,43-52.</p>
-
-<p>[2] X. Su,T. M. Khoshgoftaar. A survey of collaborative filtering techniques. Advances in Articial Intelligence,2009,2009(4):1-19.</p>
+				<ul>
+  <li>o   【前缀】对； 向； 相反； 反对    oval(a.卵形的 )</li>
+  <li>ob  【前缀】对； 向； 相反； 反对    obvious(a.明显的，显而易见的)</li>
+  <li>obed    词根：obey（服从） obedient（adj. 顺从的，服从的；孝顺的）</li>
+  <li>obes    词根：fat（肥）   obese（adj. 肥胖的，过胖的）</li>
+  <li>obliv   词根：forget（忘记）   oblivion（n. 遗忘；湮没；赦免）</li>
+  <li>obsol   词根：decay（腐烂）    obsolete（adj. 废弃的；老式的）</li>
+  <li>oc  【前缀】对； 向； 相反； 反对    occurrence(n.事故)</li>
+  <li>ock 【后缀】表小称或“缩小”    hillock（n. 小丘；小山似的一堆)</li>
+  <li>oct 【前缀】八   octagon(n. 八边形，八角形)</li>
+  <li>octa    【前缀】八   octagon(n. 八边形，八角形)</li>
+  <li>octav   【前缀】八   octavo（n. 八开本；八开纸）</li>
+  <li>octo    【前缀】八分  octopus(n. 章鱼,八爪鱼)</li>
+  <li>ocul    【词根】眼睛  ocular(adj. 眼睛的；视觉的；目击的)</li>
+  <li>oculo   词根：eye眼 oculomotor(adj. [解剖] 动眼神经的；眼球运动的)</li>
+  <li>od  n.自然力【词根】歌曲;路   melody(n. 旋律；歌曲；美妙的音乐)</li>
+  <li>ode / EJd/n.颂诗,赋【词根】歌曲；诗歌   episode(n. 插曲；一段情节；插话)</li>
+  <li>odi 词根：hate（恨）  odium（n. 憎恶；讨厌）</li>
+  <li>odont   词根：牙    odontic(adj. 牙的)</li>
+  <li>odor    / 5EudE/  n.气味【词根】气味；闻  odor(n.气味，香气；味道)</li>
+  <li>odyn    词根：pain（痛）  anodyne（ n. [药] 止痛剂；起安慰作用的事物（an没有+odyne痛））</li>
+  <li>of  / Rv, Ev/  prep…….的【前缀】向    offspring(n.儿女，子孙，后代)</li>
+  <li>oid 【后缀】表示“像…的”，“似…的”   negroid(nadj. 黑人的；黑人似的；黑人特性的)</li>
+  <li>oidal   后缀：形容词后缀，表示“…形状的”   asteroidal（adj. 星状的）</li>
+  <li>oint    词根：油    ointment（n. 药膏；[药] 油膏）</li>
+  <li>ol  【词根】滋养；气味，闻 petrol(n.(英)汽油)</li>
+  <li>ole 词根：oil（油）   petroleum （n. 石油）</li>
+  <li>olesc   词根：形成becoming,growing   adolescence(n. 青春期)</li>
+  <li>oleum   / ‘EuliEm/ n. 发烟硫酸【词根】油 petroleum(n.石油)</li>
+  <li>olfact  词根：scent（味） olfaction（n. 嗅觉）</li>
+  <li>olig    词根：少    oligemia(n. [内科] 血量减少)</li>
+  <li>oligo   词根：很少   oligotrophic(adj. （湖泊、池塘等）贫营养的，营养不足的)</li>
+  <li>oll 词根：neck（脖子） collar(n. 衣领；颈圈)</li>
+  <li>ology   词根：学科   zoology(n. 动物学；动物区系)</li>
+  <li>oma 后缀:表示“瘤”    fibroma(n. [肿瘤] 纤维瘤)</li>
+  <li>ombro   【前缀】雨   ombrograph（n. 雨量计；雨量记录仪）</li>
+  <li>omin    【词根】预兆  ominous(adj. 预兆的；不吉利的)</li>
+  <li>omni    【前缀】全部  omnipotent(adj. 无所不能的；全能的（omni全部+potent有力的）)</li>
+  <li>omphal  词根：脐    omphalitis(n. [兽医] 脐炎（常为幼小动物所患）)</li>
+  <li>on  / Rn/  在…上面【后缀】表示人、物；构成物理学名词    southron(n. 英格兰人；南部人)</li>
+  <li>one n.  一; 一个人【后缀】表示“酮” butanone(n. [有化] 丁酮)</li>
+  <li>oneir   词根：dream梦   oneiric(adj. 梦的)</li>
+  <li>oner    词根：负担   onerous(adj. 繁重的；麻烦的()oner负担+ous形容词字尾)</li>
+  <li>onom    词根：名字   onomastic(adj. 亲自签名的；名字的)</li>
+  <li>onto    / 5Rntu/prep.在…上面；到…上面【词根】个体    ontogenesis(n. 个体发育；个体发生)</li>
+  <li>onym    【医】 术语【词根】名字    synonym（n. 同义词；同义字）</li>
+  <li>oo  【词根】蛋；卵 oolite(n. 鲕粒岩；鱼卵石)</li>
+  <li>oon 后缀：表名词，“人或物”    buffoon(n.  小丑)</li>
+  <li>op  n.工作，操作【前缀】向;相对 oppress(vt.压迫，压制；压抑)</li>
+  <li>oper    【词根】工作；做    operator(n.操作人员，接线员)</li>
+  <li>ophi    词根：snake蛇   ophidian(adj. 蛇类的；蛇样的)</li>
+  <li>ophio   词根：蛇    ophiology(n.蛇学)</li>
+  <li>ophthalm    前缀：眼    ophthalmia(n. [眼科] 眼炎)</li>
+  <li>opi 词根：视，光；观点   opinion(n. 意见；主张)</li>
+  <li>opin    【词根】看   opinion（n. 意见；主张)</li>
+  <li>opl 词根：armor（盔甲）    panoply（n. 华丽服饰；全套甲胄，全副盔甲）</li>
+  <li>ops 词根：sight,light视,光   achromatopsia（n. [眼科] 全色盲）</li>
+  <li>opt / Rpt/  v.选择【词根】选择；希望；眼睛；视力 optional(a.可以任意选择的)</li>
+  <li>optim   词根：表示“最好”   optimum(adj.  最适宜的)</li>
+  <li>opto    【词根】眼睛；视力   optometer(n. 视力检定装置；视力计（opto+meter测量[计]）)</li>
+  <li>or  / R:, E/  conj.或者，还是【后缀】表示抽象名词  collector(n. 收藏家；集电极；收税员)</li>
+  <li>ora 【医】 缘, 口【词根】说；祷告    oratory(n.  讲演术;小礼拜堂; 祈祷室)</li>
+  <li>oram    词根：景    myriorama(n.万景画)</li>
+  <li>orama   词根：视力   panorama（n. 全景，全貌；全景画（pan+orama视力→视力所及→全景））</li>
+  <li>orat    词根：表示“嘴，说”” oratory(n.  讲演术;小礼拜堂; 祈祷室)</li>
+  <li>orb / R:b/ n. 球, 天体【词根】圆circle,track    orbital(adj. 轨道的；眼窝的)</li>
+  <li>orbit   n.  轨道, 眼眶【词根】圆     orbital(adj. 轨道的；眼窝的)</li>
+  <li>ord 【词根】秩序,拼凑，适合，连接，接合  order(n.次序；整齐)</li>
+  <li>order   / 5R:dE/  点菜【词根】秩序  order(n.次序；整齐)</li>
+  <li>ordin   【词根】秩序  subordinate(a.下级的，辅助的)</li>
+  <li>org 词根：做，工作，功,工具    organ(n. 器官；机构；风琴；管风琴)</li>
+  <li>organ   n. 器官；机构；风琴【词根】身体   organize(vt. 组织；使有系统化；给予生机)</li>
+  <li>ori 【词根】太阳升起；上升；开始；起源   originate(vi.发源 )</li>
+  <li>orig    词根：表示“升起，开始””   origin(n.  起源; 起因; 由来; 出身)</li>
+  <li>orium   后缀：名词后缀，表示“地方、器具、工具、手段” emporium（n. 商场，大百货商店；商业中心)</li>
+  <li>orn 【词根】装饰；使配备家具    ornament(n.装饰物 )</li>
+  <li>orna    【词根】装饰；使配备家具    ornament(n.装饰物；装饰)</li>
+  <li>ornith  词根：bird（鸟）  ornithology（n. 鸟类学；鸟学论文）</li>
+  <li>ornitho 词根：鸟    ornithology(n. 鸟类学；鸟学论文)</li>
+  <li>oro 词根：口    orolingual(口舌的)</li>
+  <li>orot    词根：洪亮的，圆润的  orotund（adj. 夸大的；做作的；朗朗的）</li>
+  <li>orph    词根：出去   orphan(n.孤儿(orph=出去+an 离开家庭的))</li>
+  <li>ort 【词根】升起  abortion(n.  小产, 流产)</li>
+  <li>orth    词根：直    orthodoxy（n. 正统；正教；正统说法）</li>
+  <li>ortho   【词根】直的；正确的；正    orthodox(adj. 正统的；传统的；惯常的（ortho正+dox→正的观点→正统思想）</li>
+  <li>ory 【后缀】表性质、大小状况、状貌 victory(n.胜利，战胜)</li>
+  <li>os  / Rs/ n. 骨, 孔, 穴裂口【词根】口, 嘴  oscular（adj. 出水孔的；接吻的；嘴巴的）</li>
+  <li>oscill  词根：swing摆动  oscillate(v.  摆动; 振荡; 游移不定)</li>
+  <li>oscul   词根：kiss（吻）  osculate（vt. 接吻；接触；与……有共同特性）</li>
+  <li>ose 后缀：表形容词，“多…的”   verbose(adj.  详细的, 冗长的)</li>
+  <li>osis    【后缀】构成名词    hypnosis(n. 催眠；催眠状态（hypno+sis表示病状）)</li>
+  <li>osity   后缀：表名词，ose+ity组成，表示“多…的状态”  curiosity(n.好奇，好奇心；珍品)</li>
+  <li>oss 【词根】骨头  fossil(n. 化石；僵化的事物；顽固不化的人)</li>
+  <li>ost 词根：骨    osteopath(n. 整骨疗法家)</li>
+  <li>oste    前缀：骨    osteitis(n. [外科] 骨炎)</li>
+  <li>ostens  词根：appear（出现）   ostensible（adj. 表面的；假装的）</li>
+  <li>osteo   【词根】骨头  osteoblast(n.造骨细胞)</li>
+  <li>ostrac  词根：tile（瓦片） ostracize （vt. 放逐；排斥；按贝壳流放法放逐）</li>
+  <li>ot  词根：表示“耳朵”   otitis(n.耳炎（ot+it is炎病）)</li>
+  <li>otic    后缀：形容词后缀，表示“状态的、作用的、过程的”等   hypnotic（adj. 催眠的，催眠术的；易于催眠的）</li>
+  <li>ound    词根:wave(波浪) abound(vi. 富于；充满)</li>
+  <li>our / 5auE/  我们的【后缀】表示抽象名词  vigour(n.活力，精力；元气)</li>
+  <li>ous 【后缀】表性质、大小状况、状貌 continuous(a.连续不断的，持续的)</li>
+  <li>ously   后缀:副词，具有…性质的等   meticulously（adv. 细致地；一丝不苟地；拘泥地)</li>
+  <li>out / aut/prep. 向；离去 【前缀】超过；外,向外    outwards(ad.向外，往海外)</li>
+  <li>ov  【词根】蛋；卵 oval(a.卵形的 )</li>
+  <li>ovari   词根：卵巢   ovaritis(n.  卵巢炎)</li>
+  <li>over    / 5EuvE/adv. 结束；越过【前缀】过度；在……上面  overwhelming(a.压倒的，势不可挡的)</li>
+  <li>ovo 【医】 卵, 蛋【词根】卵,蛋 ovoid(adj.  卵形的)</li>
+  <li>own / Eun/  自己的;词根：拥有   owner(n. 所有者；物主)</li>
+  <li>ox  【词根】氧   dioxide(n.     二氧化物)</li>
+  <li>oxy 【词根】氧   oxygen(n. 氧气，氧)</li>
+</ul>
 
 
                 <hr>
@@ -245,26 +315,26 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/mladvance/2016/11/19/ALS/" data-toggle="tooltip" data-placement="top" title="Spark-ML-04-collaborative-filtering">
+                        <a href="/english/2016/11/26/English_word_root_N/" data-toggle="tooltip" data-placement="top" title="词根N">
                         Previous<br>
-                        <span>Spark-ML-04-collaborative-filtering</span>
+                        <span>词根N</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/english/2016/11/26/English_word_root_A/" data-toggle="tooltip" data-placement="top" title="词根A">
+                        <a href="/english/2016/11/26/English_word_root_P/" data-toggle="tooltip" data-placement="top" title="词根P">
                         Next<br>
-                        <span>词根A</span>
+                        <span>词根P</span>
                         </a>
                     </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_O"
+                        data-title="词根O"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_O/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -283,9 +353,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_O"
+                        data-title="词根O"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_O/" >
                     </div>
 
                 </div>

@@ -8,6 +8,34 @@
 		
 			
 			<item>
+				<title>Spark-ML-0302-Naive Bayes</title>
+				
+					<description>&lt;h1 id=&quot;section&quot;&gt;朴素贝叶斯&lt;/h1&gt;
+
+</description>
+				
+				<pubDate>Mon, 05 Dec 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2016/12/05/nb/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/12/05/nb/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Spark-ML-0301-Decision Tree</title>
+				
+					<description>&lt;h1 id=&quot;section&quot;&gt;决策树&lt;/h1&gt;
+
+</description>
+				
+				<pubDate>Mon, 05 Dec 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2016/12/05/decision-tree/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/12/05/decision-tree/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>词根W-Z</title>
 				
 					<description>&lt;ul&gt;
@@ -73,9 +101,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_W2Z/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_W2Z/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_W2Z/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_W2Z/</guid>
 			</item>
 			
 		
@@ -200,9 +228,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_V/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_V/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_V/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_V/</guid>
 			</item>
 			
 		
@@ -254,9 +282,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_U/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_U/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_U/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_U/</guid>
 			</item>
 			
 		
@@ -430,9 +458,9 @@
 * typh    词根:fever(发烧)    typhoid(n. 伤寒)&lt;/p&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_T/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_T/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_T/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_T/</guid>
 			</item>
 			
 		
@@ -739,9 +767,9 @@
 * stylo   词根：尖(头)的,茎突 styloid（adj.  花柱的; 茎突的; 茎状的）&lt;/p&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_S/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_S/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_S/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_S/</guid>
 			</item>
 			
 		
@@ -840,9 +868,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_R/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_R/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_R/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_R/</guid>
 			</item>
 			
 		
@@ -886,9 +914,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_Q/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_Q/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_Q/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_Q/</guid>
 			</item>
 			
 		
@@ -1193,9 +1221,9 @@
 * pyro    / ‘pairEu/ n. 焦酚【词根】火   pyrotechnics(n. 烟火制造术；烟火使用；各种烟火)&lt;/p&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_P/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_P/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_P/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_P/</guid>
 			</item>
 			
 		
@@ -1318,9 +1346,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_O/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_O/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_O/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_O/</guid>
 			</item>
 			
 		
@@ -1427,9 +1455,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_N/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_N/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_N/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_N/</guid>
 			</item>
 			
 		
@@ -1614,9 +1642,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_M/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_M/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_M/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_M/</guid>
 			</item>
 			
 		
@@ -1780,9 +1808,9 @@
 * lyt 【词根】分解;放松   paralytic(adj. 麻痹的；瘫痪的；中风的)&lt;/p&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_L/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_L/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_L/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_L/</guid>
 			</item>
 			
 		
@@ -1803,9 +1831,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_K/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_K/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_K/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_K/</guid>
 			</item>
 			
 		
@@ -1850,9 +1878,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_J/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_J/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_J/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_J/</guid>
 			</item>
 			
 		
@@ -1972,9 +2000,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_I/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_I/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_I/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_I/</guid>
 			</item>
 			
 		
@@ -2093,9 +2121,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_H/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_H/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_H/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_H/</guid>
 			</item>
 			
 		
@@ -2208,9 +2236,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_G/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_G/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_G/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_G/</guid>
 			</item>
 			
 		
@@ -2387,9 +2415,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_F/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_F/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_F/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_F/</guid>
 			</item>
 			
 		
@@ -2514,9 +2542,9 @@
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_E/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_E/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_E/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_E/</guid>
 			</item>
 			
 		
@@ -2641,9 +2669,9 @@ dynam   【词根】力量  dynamic(adj. 动态的；动力的；动力学的)
 dys 【医】 不良, 困难, 障碍【前缀】不好的   dyslexia(n.阅读障碍（dys不良+lex+ia病→对词汇不良的病→阅读障碍）)&lt;/p&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_D/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_D/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_D/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_D/</guid>
 			</item>
 			
 		
@@ -2856,9 +2884,9 @@ dys 【医】 不良, 困难, 障碍【前缀】不好的   dyslexia(n.阅读障
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_C/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_C/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_C/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_C/</guid>
 			</item>
 			
 		
@@ -2985,9 +3013,9 @@ dys 【医】 不良, 困难, 障碍【前缀】不好的   dyslexia(n.阅读障
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_B/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_B/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_B/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_B/</guid>
 			</item>
 			
 		
@@ -3230,37 +3258,9 @@ dys 【医】 不良, 困难, 障碍【前缀】不好的   dyslexia(n.阅读障
 &lt;/ul&gt;
 </description>
 				
-				<pubDate>Tue, 06 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/english/2016/12/06/English_word_root_A/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/12/06/English_word_root_A/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>Spark-ML-0302-Naive Bayes</title>
-				
-					<description>&lt;h1 id=&quot;section&quot;&gt;朴素贝叶斯&lt;/h1&gt;
-
-</description>
-				
-				<pubDate>Mon, 05 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/12/05/nb/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/12/05/nb/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>Spark-ML-0301-Decision Tree</title>
-				
-					<description>&lt;h1 id=&quot;section&quot;&gt;决策树&lt;/h1&gt;
-
-</description>
-				
-				<pubDate>Mon, 05 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/12/05/decision-tree/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/12/05/decision-tree/</guid>
+				<pubDate>Sat, 26 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/english/2016/11/26/English_word_root_A/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/english/2016/11/26/English_word_root_A/</guid>
 			</item>
 			
 		

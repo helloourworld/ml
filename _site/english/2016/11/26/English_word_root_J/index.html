@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>推荐系统中的相似度计算方法总结 - Maching Learning | 机器学习笔记</title>
+    <title>词根J - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/">
+    <link rel="canonical" href="http://machinelearningadvance.com/english/2016/11/26/English_word_root_J/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,17 +168,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Machine Learning" title="Machine Learning">Machine Learning</a>
-                        
-                        <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        <a class="tag" href="/tags/#English" title="English">English</a>
                         
                     </div>
-                    <h1>推荐系统中的相似度计算方法总结</h1>
+                    <h1>词根J</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on November 19, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on November 26, 2016</span>
                 </div>
             </div>
         </div>
@@ -196,47 +194,41 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="section">1 相似度计算方法总结</h3>
-
-<p>相似度的计算是推荐系统非常重要的环节，包括：用户与用户之间的相似度，物品与物品之间的相似度或者用户与物品的相关性。</p>
-
-<p>下面以在协同过滤中计算两个用户的相似度来介绍几种常用的相似度计算方法。其中有些方法只适用于协同过滤，有些适应于更多其他推荐方法。</p>
-
-<p>1）共同邻居。直接计算两个用户的交集</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \Gamma(u)\cap\Gamma(v)</script>
-
-<p>2）Jaccard系数。基于共同邻居的一个显著问题是用户的物品集越大，越可能与其他用户相似。Jaccard系数消除了这一影响：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\Gamma(u)\cap\Gamma(v)}{\Gamma(u)\cup\Gamma(v)}</script>
-
-<p>3）皮尔逊相关系数。皮尔逊相关系数法是基于用户的协同过滤中最常使用的相似度计算方法。研究表明，在计算用户相似度方面，皮尔逊相关系数法比其他相似度计算方法要好一些。具体定义如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-\bar{r_u})*(r_{v,i}-\bar{r_v})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-\bar{r_u})^2 * \sum_{i \in I}(r_{v,i}-\bar{r_v})^2}}</script>
-
-<p>其中I表示用户u和v共同评价过的物品，表示u对i的评分，表示u所有评价的物品的平均分。</p>
-
-<p>4）约束的皮尔逊相关系数。与皮尔逊相关系数的唯一区别是将换成——系统评分值域的中间值。</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-r_{med})*(r_{v,i}-r_{med})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-r_{med})^2 * \sum_{i \in I}(r_{v,i}-r_{med})^2}}</script>
-
-<p>5）向量余弦法。向量余弦法最常被应用在基于物品的协同过滤和基于内容的推荐方法中。在基于内容的推荐中，物品用向量模型表示，计算两个物品的相似度相当于计算代表两个物品的向量的余弦值。向量余弦法的数学描述如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = cos(\vec{u},\vec{v}) = \frac{\vec{u} \ast \vec{v}} {\parallel{\vec{u}}\parallel \times \parallel{\vec{v}}\parallel}</script>
-
-<p>除了上面介绍的相似度计算方法外，常见的方法还包括斯皮尔曼相关系数法（SRC）以及其他改进算法，具体见文献[1,2]。</p>
-
-<p>这些方法的实现，大家可以参考crab(https://github.com/aturbofly/crab)。</p>
-
-<p>【参考文献】</p>
-
-<p><a href="https://www.zhihu.com/question/25566638">推荐系统有哪些比较好的论文？</a></p>
-
-<p>[1] Breese, D. Heckerman, C. Kadie. Empirical analysis of predictive algorithms for collaborative filtering. In:Proceedings of the Fourteenth Conference on Uncertainty in Artificial Intelligence. Madison: Morgan-Kaufmann,1998,43-52.</p>
-
-<p>[2] X. Su,T. M. Khoshgoftaar. A survey of collaborative filtering techniques. Advances in Articial Intelligence,2009,2009(4):1-19.</p>
+				<ul>
+  <li>jac 【词根】投掷，扔    ejaculate(vt. 突然说出；射出)</li>
+  <li>jacul   词根：javelin（标枪）  ejaculate （vt. 突然说出；射出）</li>
+  <li>jan 词根：门    janitor（n. 看门人；守卫；门警）</li>
+  <li>jeal    词根：热心，寻求,要求,想要  jealous（adj. 妒忌的；猜疑的；唯恐失去的；戒备的）</li>
+  <li>jec 词根：投掷；放 project（vi. 设计；计划；表达；投射）</li>
+  <li>ject    【词根】投掷，扔    eject(vt. 喷射；驱逐，逐出（e出+ject→扔出→喷出）)</li>
+  <li>jet v.  喷出, 射出【词根】投掷，扔  jettison（n. 投弃；投弃货物）</li>
+  <li>jew n.  犹太人【词根】说，说笑，玩   jewel(n. 宝石；珠宝)</li>
+  <li>joc 词根：表示“笑话”   jocular(adj. 爱开玩笑的；打趣的；滑稽的)</li>
+  <li>join    / dVRin/v.参加，加入【词根】加入,结合，连接 enjoin(vt. 命令；吩咐；嘱咐；禁止（en进入+join→进入连接→命令人[加入]）)</li>
+  <li>jok 词根：说，说笑，玩   joke(n. 玩笑，笑话；笑柄)</li>
+  <li>joll    词根：judge,law评判,法律；joke快活,喜悦 jollify(vt. 使高兴；使愉快)</li>
+  <li>jour    n. 杂志，学报；日记账 词根：日，一天    journal（n. 日报，杂志；日记；分类账）</li>
+  <li>journ   【词根】日期,日，发光 journey(n. 旅行；行程)</li>
+  <li>jov 词根：朱庇特主神；木星；欢乐、祥和   joviality（n. 愉悦；快活；高兴）</li>
+  <li>ju  词根：判断；审判    judgement(n.意见；审判；判断)</li>
+  <li>jubil   词根：shout of  joy（欢呼）    jubilation （n. 喜欢；庆祝；欢呼）</li>
+  <li>jud 词根：判断   prejudice(n.偏见，成见)</li>
+  <li>judg    词根：判断   prejudge(v.  对…预先判断; 对…作仓促决定)</li>
+  <li>judic   词根：判断   judiciary(n.  司法部, 法官, 司法制度)</li>
+  <li>judice  词根：判断   prejudice（n. 偏见；侵害）</li>
+  <li>jug n.  水壶【词根】说，说笑，玩    juggle(vi. 玩杂耍；欺骗；歪曲)</li>
+  <li>jun 词根：年少，年轻    junior(a.年少的)</li>
+  <li>junc    词根：加入;增加;联合 junction（n. 连接，接合；交叉点；接合点）</li>
+  <li>junct   【词根】加入；连接   junction(n.连接；接头；中继线)</li>
+  <li>jur 【词根】发誓；法津   jury(n.陪审团；评奖团)</li>
+  <li>jure    【词根】发誓；法津   abjure(vt. 发誓放弃；公开放弃；避免（ab离开+jure→发誓离开→放弃）)</li>
+  <li>juris   【法】 权力的, 法律的【词根】法律；正当的  jurisdiction(. 司法权，审判权，管辖权；权限，权力)</li>
+  <li>jus n.  法 【词根】法律，公正,判断  just(adj. 公正的，合理的；正直的)</li>
+  <li>just    adj.正义的, 公正的, 正确的【词根】法律；正当的 justify(vt.证明…是正当的)</li>
+  <li>juv 词根：年少，年轻    juvenile(adj. 青少年的；幼稚的)</li>
+  <li>juven   【词根】年轻的 juvenile(adj. 青少年的；幼稚的)</li>
+  <li>juxta   前缀：接近   juxtapose(vt. 并列；并置)</li>
+</ul>
 
 
                 <hr>
@@ -245,26 +237,26 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/mladvance/2016/11/19/ALS/" data-toggle="tooltip" data-placement="top" title="Spark-ML-04-collaborative-filtering">
+                        <a href="/english/2016/11/26/English_word_root_I/" data-toggle="tooltip" data-placement="top" title="词根I">
                         Previous<br>
-                        <span>Spark-ML-04-collaborative-filtering</span>
+                        <span>词根I</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/english/2016/11/26/English_word_root_A/" data-toggle="tooltip" data-placement="top" title="词根A">
+                        <a href="/english/2016/11/26/English_word_root_K/" data-toggle="tooltip" data-placement="top" title="词根K">
                         Next<br>
-                        <span>词根A</span>
+                        <span>词根K</span>
                         </a>
                     </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_J"
+                        data-title="词根J"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_J/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -283,9 +275,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_J"
+                        data-title="词根J"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_J/" >
                     </div>
 
                 </div>

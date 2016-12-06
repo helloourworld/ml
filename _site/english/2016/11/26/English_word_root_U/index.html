@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>推荐系统中的相似度计算方法总结 - Maching Learning | 机器学习笔记</title>
+    <title>词根U - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/">
+    <link rel="canonical" href="http://machinelearningadvance.com/english/2016/11/26/English_word_root_U/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,17 +168,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Machine Learning" title="Machine Learning">Machine Learning</a>
-                        
-                        <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        <a class="tag" href="/tags/#English" title="English">English</a>
                         
                     </div>
-                    <h1>推荐系统中的相似度计算方法总结</h1>
+                    <h1>词根U</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on November 19, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on November 26, 2016</span>
                 </div>
             </div>
         </div>
@@ -196,47 +194,48 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="section">1 相似度计算方法总结</h3>
-
-<p>相似度的计算是推荐系统非常重要的环节，包括：用户与用户之间的相似度，物品与物品之间的相似度或者用户与物品的相关性。</p>
-
-<p>下面以在协同过滤中计算两个用户的相似度来介绍几种常用的相似度计算方法。其中有些方法只适用于协同过滤，有些适应于更多其他推荐方法。</p>
-
-<p>1）共同邻居。直接计算两个用户的交集</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \Gamma(u)\cap\Gamma(v)</script>
-
-<p>2）Jaccard系数。基于共同邻居的一个显著问题是用户的物品集越大，越可能与其他用户相似。Jaccard系数消除了这一影响：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\Gamma(u)\cap\Gamma(v)}{\Gamma(u)\cup\Gamma(v)}</script>
-
-<p>3）皮尔逊相关系数。皮尔逊相关系数法是基于用户的协同过滤中最常使用的相似度计算方法。研究表明，在计算用户相似度方面，皮尔逊相关系数法比其他相似度计算方法要好一些。具体定义如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-\bar{r_u})*(r_{v,i}-\bar{r_v})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-\bar{r_u})^2 * \sum_{i \in I}(r_{v,i}-\bar{r_v})^2}}</script>
-
-<p>其中I表示用户u和v共同评价过的物品，表示u对i的评分，表示u所有评价的物品的平均分。</p>
-
-<p>4）约束的皮尔逊相关系数。与皮尔逊相关系数的唯一区别是将换成——系统评分值域的中间值。</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = \frac{\sum_{i \in I}(r_{u,i}-r_{med})*(r_{v,i}-r_{med})}
-{\sqrt{\sum_{i \in I}(r_{u,i}-r_{med})^2 * \sum_{i \in I}(r_{v,i}-r_{med})^2}}</script>
-
-<p>5）向量余弦法。向量余弦法最常被应用在基于物品的协同过滤和基于内容的推荐方法中。在基于内容的推荐中，物品用向量模型表示，计算两个物品的相似度相当于计算代表两个物品的向量的余弦值。向量余弦法的数学描述如下：</p>
-
-<script type="math/tex; mode=display">Similarity_{u,v} = cos(\vec{u},\vec{v}) = \frac{\vec{u} \ast \vec{v}} {\parallel{\vec{u}}\parallel \times \parallel{\vec{v}}\parallel}</script>
-
-<p>除了上面介绍的相似度计算方法外，常见的方法还包括斯皮尔曼相关系数法（SRC）以及其他改进算法，具体见文献[1,2]。</p>
-
-<p>这些方法的实现，大家可以参考crab(https://github.com/aturbofly/crab)。</p>
-
-<p>【参考文献】</p>
-
-<p><a href="https://www.zhihu.com/question/25566638">推荐系统有哪些比较好的论文？</a></p>
-
-<p>[1] Breese, D. Heckerman, C. Kadie. Empirical analysis of predictive algorithms for collaborative filtering. In:Proceedings of the Fourteenth Conference on Uncertainty in Artificial Intelligence. Madison: Morgan-Kaufmann,1998,43-52.</p>
-
-<p>[2] X. Su,T. M. Khoshgoftaar. A survey of collaborative filtering techniques. Advances in Articial Intelligence,2009,2009(4):1-19.</p>
+				<ul>
+  <li>ual 后缀：形容词后缀，表示“…的”，与-al同 textual（adj. 本文的；按原文的）</li>
+  <li>uber    n. 乳房词根：fruitful（果实）    exuberant（adj. 繁茂的；生气勃勃的，充溢的）</li>
+  <li>ubiqu   词根：到处   ubiquitous(adj. 普遍存在的；无所不在的)</li>
+  <li>ucor    词根：wife（老婆） uxoricide （n. 杀妻；杀妻者）</li>
+  <li>ul  【词根】成长，生长，滋养    adult(adj. 成年的；成熟的)</li>
+  <li>ular    后缀：表形容词，“有…形状或性质的”  globular（adj. 球状的；由小球形成的；闻名世界的）</li>
+  <li>ule 【后缀】表小称或“缩小”    spherule（n. 小球；小球体）</li>
+  <li>ulous   后缀：形容词后缀    acidulous（adj. 带酸味的；尖刻的；带讽刺意味的）</li>
+  <li>uls 词根：表示”收缩，撕开”    convulse(vt. 震撼；使剧烈震动；使抽搐（con一起+vuls+e→收缩到一起→抽搐）</li>
+  <li>ult 词根：表示”收缩，撕开”    moult(vi. 脱毛；换毛；蜕皮)</li>
+  <li>ultim   【词根】最后的 ultimate(adj. 最终的；极限的；根本的)</li>
+  <li>ultima  adj.  最后的; 最远的【词根】最后的   ultimate(adj. 最终的；极限的；根本的)</li>
+  <li>ultra   / 5QltrE/  a.超乎寻常的【前缀】极端；在……那边  ultraviolet(a.紫外的)</li>
+  <li>um  interj.嗯【后缀】表示地点    museum（n. 博物馆）</li>
+  <li>umb 词根：子宫   umbilic（adj. 脐带的）</li>
+  <li>umbr    【词根】阴影  umbrella(n.伞，雨伞)</li>
+  <li>ump / Qmp/ n. 裁判员vi. 当裁判【词根】隆起  lump(n. 块，块状；肿块；瘤)</li>
+  <li>un  联合国【词根】一【前缀】不,无；相反的动作   unlimited(a.无限的；不定的)</li>
+  <li>und 【词根】水，湿，水波  abundance(n.丰富，充裕)</li>
+  <li>undeca  【前缀】十一  undecyl（n. 十一基，[有化] 十一烷基）</li>
+  <li>under   / 5QndE/  在下面【前缀】在…下,不足,低劣  underling(n. 下属，部下；走卒（under+ling小人物→下属）)</li>
+  <li>uni 【前缀】一   unit(n.单位；单元；部件)</li>
+  <li>uous    后缀：表形容词，表示有…性质的，属于…的    sensuous（adj. 感觉上的，依感观的；诉诸美感的）</li>
+  <li>up  / Qp/  adv. 起来；上涨；向上【前缀】向上  uphold(vt.举起；支撑；赞成)</li>
+  <li>ur  词根：尿    anuric(adj. 无尿的；无尿症的)</li>
+  <li>uran    词根：铀,天  uranic(adj.  天的; 铀的; 天文的)</li>
+  <li>urb 【词根】城市  suburb(n.郊区，郊外，近郊)</li>
+  <li>ure 【后缀】构成抽象名词,表示行为、行为的结果、状态等   failure（n. 失败；故障；失败者；破产）</li>
+  <li>urg 【词根】推,驱使,追踪 urge(vt. 力劝，催促；驱策，推进)</li>
+  <li>urgy    词根：technology工艺 metallurgy(n.  冶金, 冶金术)</li>
+  <li>urin    词根：表示“尿”    urine (n 尿)</li>
+  <li>urs 词根：熊    ursine(adj. [脊椎] 熊的；似熊的)</li>
+  <li>us  / Qs, Es/  我们(宾格)【词根】使用 chorus(vt.&amp;vi. 合唱)</li>
+  <li>usu 【词根】使用  usual(a.通常的；平常的)</li>
+  <li>ut  【词根】用【前缀】向外；超越；胜过   utmost(a.最远的)</li>
+  <li>ute 【后缀】表性质、大小状况、状貌 salute(vt.迎接，欢迎)</li>
+  <li>uter    词根：子宫   uterine(adj. [解剖] 子宫的；同母异父的)</li>
+  <li>uti 【法】 使用, 为特定目的的而使用【词根】使用 utility(n. 实用；效用；公共设施)</li>
+  <li>util    词根：用    utile(adj. 有用的；有益的)</li>
+  <li>utop    词根：空想   utopian(adj. 乌托邦的；空想的；理想化的)</li>
+</ul>
 
 
                 <hr>
@@ -245,26 +244,26 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/mladvance/2016/11/19/ALS/" data-toggle="tooltip" data-placement="top" title="Spark-ML-04-collaborative-filtering">
+                        <a href="/english/2016/11/26/English_word_root_T/" data-toggle="tooltip" data-placement="top" title="词根T">
                         Previous<br>
-                        <span>Spark-ML-04-collaborative-filtering</span>
+                        <span>词根T</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/english/2016/11/26/English_word_root_A/" data-toggle="tooltip" data-placement="top" title="词根A">
+                        <a href="/english/2016/11/26/English_word_root_V/" data-toggle="tooltip" data-placement="top" title="词根V">
                         Next<br>
-                        <span>词根A</span>
+                        <span>词根V</span>
                         </a>
                     </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_U"
+                        data-title="词根U"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_U/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -283,9 +282,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/11/19/CF_KNN"
-                        data-title="推荐系统中的相似度计算方法总结"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/CF_KNN/" >
+                        data-thread-key="/english/2016/11/26/English_word_root_U"
+                        data-title="词根U"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_U/" >
                     </div>
 
                 </div>
