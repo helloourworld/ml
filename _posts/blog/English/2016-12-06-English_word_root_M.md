@@ -1,0 +1,182 @@
+---
+layout: post
+title: 词根M
+category: English
+catalog: yes
+description: Learning 词根
+tags:
+    - English
+---
+* mac n. 防水胶布, 雨衣, 老兄, 老弟【词根】薄的；瘦的    emaciate(vt. 使消瘦；使衰弱；使贫瘠)
+* mach    n.  机器; 计算机【词根】表示“机器”   machine(n.  机器; 计算机; 机械; 汽车)
+* machin  n. 长尾猕猴，食蟹猴【词根】engine机器,机械  machinable(adj. [机] 可加工的，可切削的；[计] 机器可用的)
+* maci    词根：lean   (瘦)   macilent  （adj.瘦的）
+* macr    词根：long,big长,大宏 macrobian(adj. 长寿的)
+* macro   n.宏,巨【前缀】大；长    macrocosm(n 宏观世界(macro宏大+cosm))
+* macul   词根：spot  (斑点)   maculate （vt. 使有污点；弄污）
+* mag 词根：能，力，大，强力 magic(n. 巫术；魔法；戏法)
+* magn    【词根】很大的 magnate(n. 巨头；大资本家；要人)
+* magnet  n.  磁铁【词根】磁 magnet(n. 磁铁；[电磁] 磁体；磁石)
+* maha    词根：伟大的  mahatma(n. 大圣；超人)
+* main    / mein/a.主要的【词根】停留；手    remain(vi. 保持；依然；留下；剩余；逗留)
+* maj 【词根】很大的 majestic(adj. 庄严的；宏伟的)
+* mak 词根：揉，制，造，适合 make(n. 制造；构造)
+* mal 【医】 [疾]病【前缀】不舒服；与bene相反【词根】坏    malice(n.恶意；蓄意犯罪)
+* male    a.男的，雄的 n.男子【前缀】恶、不良、失、不    malediction(n. 坏话，诅咒（male坏+dict+ion→说坏话）)
+* mall    / mR:l/n. 购物商场；林荫路【词根】hammer（锤子）    malleable （adj. 可锻的；可塑的；有延展性的；易适应的）
+* malle   词根：锤子   malleable(adj. 可锻的；可塑的；有延展性的；易适应的)
+* mamm    词根：乳房   mammal(n. [脊椎] 哺乳动物)
+* mammo   词根：乳房   mammogen(n. （垂体）激乳腺素；乳腺发育激素)
+* man n. 人；男人【词根】停留；手【后缀】表示“人”    manual(n.  手册; 指南)
+* mancer  词根：占卜者  necromancer(n. 巫师)
+* mancy   词根：占卜   necromancy(n. 巫术，妖术)
+* mand    【词根】命令；委托   demand(vt.要求；需要；询问)
+* mania   / 5meinjE/  n.狂热，癖好【词根】疯狂   maniac(n. 疯子，躁狂者)
+* manu    【词根】手   manuscript(n.手稿，底稿，原稿)
+* mar / mB:/vt. 损毁；损伤；糟蹋；玷污【词根】海  submarine(a.水下的)
+* marc    / mB:k/ n. 榨渣【词根】标志 demarcate(vt. 划分界线；区别（de加强+marc[=mark]+ate→加强标志→划界线）)
+* marg    词根：记号，标记，边界 margin(n. 边缘；利润，余裕；页边的空白)
+* mari    【词根】海   submarine(a.水下的)
+* marin   【词根】海   mariner(n. 水手；船员)
+* marit   词根：婚姻   antemarital(adj. 婚前的(ante+marit婚姻+al→婚前的))
+* mark    / ma:k/n.记号；痕迹【词根】做记号；边界    bookmark(n. 书签（等于bookmarker）；标记)
+* mas 词根：男    masculine(n. 男性；阳性，阳性词)
+* masc    【词根】男人  masculinity(n. 男性；男子气；刚毅)
+* mascul  词根：male（雄性） masculine  （adj. 男性的；阳性的；男子气概的）
+* mast    / mB:st/ n. 桅, 桅杆, 杆【词根】乳房  mastoid(n. 乳突；乳般突起)
+* mastic  / 'mAstik/ n. 乳香；乳香脂；胶泥【词根】嚼    masticate （vt. 咀嚼；粉碎；撕捏）
+* mat n.  地席【词根】动 automatic(a.自动的；机械的)
+* mater   n.  母亲; 妈妈【词根】母亲    maternal(adj.  母亲的, 母方的, 母系的)
+* matern  词根：母亲   maternal(adj.  母亲的, 母方的, 母系的)
+* matr    词根：母亲   matron(n. 主妇；保姆；妇女；女舍监)
+* matri   词根：母亲   matrimony(n. 结婚，婚礼；婚姻生活（matri+mony状态→有母亲状态→婚姻）)
+* matur   词根：成熟,早 maturity(n. 成熟；到期；完备)
+* maun    词根：表示“手”"   manual(n.  手册; 指南)
+* max n.  最大【词根】很大的   maximum(n.最大量)
+* may / mei/n.aux. 可能。词根：能，力，大，强力 dismay(n.惊慌，沮丧，灰心)
+* maz 词根：乳房；迷惑    amazon（n.亚马逊河（南美洲大河）； 蜂鸟； 无乳腺者）
+* me  / mi:, mi/  我(宾格)。【词根】走;模式;量度;医治;妈  permeate （vt. 渗透，透过；弥漫）
+* mea 词根：草;经过 meadow(n. 草地；牧场)
+* meal    n.  膳食【后缀】表示一次所取之量或部分   piecemeal(adv. 零碎地；逐个地)
+* meas    【词根】测量  measurement(n.衡量，测量；尺寸)
+* mech    词根：表示“机器”   mechanic(n.  机械工, 技工, 修理工)
+* mechan  【词根】机器  mechanism(n.机械装置；机制)
+* med 【词根】治疗【前缀】=mid中间    remedy(n.&vt.治疗；补救)
+* medi    【词根】中间的 Mediterranean(n.地中海)
+* medic   n. 医学工作者,医科学生【词根】heal医疗,治疗,康复   medical(adj. 医学的；药的；内科的)
+* medit   词根：ponder（思考）   meditate （vt. 考虑；计划；企图）
+* medl    词根：mic（混合）  medley（n. 混合；混杂；混合物）
+* meg 词根：大    megalith(n. 巨石)
+* mega    【计】 兆; 百万【词根】大【前缀】百万,兆  megalith(n. 巨石)
+* megal   词根：enormous特大   megalopolis(n. 特大都市；人口稠密地带)
+* megalo  词根：巨大   megalopolis（n. 特大都市；人口稠密地带）
+* mel 词根：磨，碾，软;坏，恶，不良，苹果  melt(vi. 熔化，溶解；渐混)
+* melan   【词根】黑色的 melancholy(n.&a.忧郁(的)，悲伤)
+* melior  词根：better（更好）   ameliorate （vt. 改善；减轻（痛苦等）；改良）
+* mell    词根：honey（蜜） mellifluous（adj. 流畅的；如蜜般的）
+* mem 【词根】记忆  memoir(n. 回忆录；研究报告；自传；实录)
+* memb    【词根】记忆  mnemonics(n. 记忆术(（mem+onic表形容词→记忆的)
+* member  / 5membE/  成员【词根】memnory记忆  disremember(vt. 忘记，忘却)
+* memor   【词根】记得  memory(n.记忆；回忆；存储)
+* men / men/  n. 男人，人类（man的复数）【词根】月;引导    menstrual(adj. 月经的；每月的；一月一次的)
+* mend    / mend/v.修理，修补【词根】改错;命令；委托  emendvt. (修订；改进（e出+mend→改正出错误→改正）)
+* mendic  词根：beg（乞讨）  mendicant（adj. 行乞的；托钵修道会的）
+* mens    【医】 精神, 意志【词根】月；测量  dimension(n. [数] 维；尺寸；次元；容积)
+* ment    【词根】思考；心智;记忆【后缀】表示抽象名词  mention(vt.&n.提及，说起（ment+ion→有思考→想到，提到)
+* mer 词根：闪现，光线；海，水池   mermaid（n. 美人鱼（传说中的）；女子游泳健将）
+* merc    【词根】贸易；报酬   mercantile(n. 商品)
+* merch   【词根】贸易；报酬   merchant(n.商人；零售商)
+* merg    【词根】沉，没 emerge(vi.浮现，出现；显露)
+* merge   / mE:dV/v.合并，结合，融合【词根】沉浸；浸泡 emergency(n.紧急情况，突然事件)
+* meri    词根：中间   meridian（adj. 子午线的；最高点的〔 meri 中间, di 日,-an 名词后缀 〕）
+* merit   / 'merit/ n. 优点, 功绩, 价值【词根】应得;获得    meritorious(adj. 有功绩的；有价值的；值得称赞的)
+* mers    【词根】沉浸；浸泡   immerse(vt.沉浸；给…施洗礼（in进+merse→沉进去→沉浸）)
+* merse   词根：海；沉，浸    immerse（vt. 沉浸；使陷入）
+* mes 词根：中间   mesial(adj. 近中的；中间的；中央的)
+* meso    词根：中间   mesosphere(n. [气象] 中间层；[气象] 中圈)
+* mess    / mes/ n. 食堂, 伙食, 用膳【词根】：送；投；掷  message(n. 消息；差使；启示；预言)
+* met / met/（meet得过去式）遇见【前缀】中间，中位，转   mettle(n.内在的气质； 精神，勇气； 气概)
+* meta    【计】 元的【前缀】超；在…之中    metaphysical(adj. 形而上学的；超自然的)
+* meter   / 5mi:tE/n.米, 公尺, 计, 表, 【词根】测量  thermometer(n.温度计，寒暑表)
+* metr    【词根】测量  centimetre(n.公分，厘米)
+* metro   n.地下铁道 【前缀】表示“测量，度量”之义  metrology（n. 度量衡；度量衡学）
+* metry   后缀：表示“测量(学)”，“度量(学)”，“测量法”  audiometry（n. [耳鼻喉] 听力测定；[耳鼻喉] 听力测验法）
+* mezz    词根：一半   mezzo（adv. （意）一半；中央）
+* micro   【计】 表示"小","微"【前缀】小,微量,百万分之一 microwave(n.微波)
+* mid / mid/prep.在…中间，a.中央的【前缀】中间 midnight(n.午夜，子夜，夜半)
+* mids    【前缀】正中的 midst(n.中部，中间，当中)
+* migr    【词根】移动；流浪   migrate(vi. 移动；随季节而移居；移往)
+* migra   【词根】移动；流浪   migrate(vi. 移动；随季节而移居；移往)
+* mil n.  密耳; 毫升【词根】磨，碾，软 mill(n. 工厂；磨坊；磨粉机)
+* milit   【词根】军人；打仗   military(a.军事的；军人的)
+* mill    n.  磨坊; 磨臼【词根】千 millennium(n. 千年期，千禧年；一千年，千年纪念；太平盛世)
+* milli   【计】 毫【前缀】千分之一   millisecond(n. 毫秒)
+* mim 词根：模仿imitate    mimic(vt. 模仿，摹拟)
+* min 【词根】突出；小的;伸 prominent(a.实起的；突出的)
+* mind    n. 理智，精神；；记忆力【词根】记忆 remind(vt. 提醒；使想起)
+* ming    【词根】混合  commingle(vi. 混合)
+* mini    adj. 微型的；袖珍的
+* 【词根】小的  miniature(adj. 微型的，小规模的（mini+ature东西→小东西）)
+* minis   词根：serve,manage服务,管理    administer(vt. 管理；执行；给予)
+* mir 【词根】惊奇，惊异   admire(（ad一再＋mire→一再让人惊喜→羡慕）)
+* mis 【词根】送；释放【前缀】坏，错误，否定 misconduct(n. 不端行为；处理不当)
+* misc    【计】 杂类新闻组【词根】混合，混杂  promiscuous(adj. 混杂的；杂乱的)
+* misce   【词根】混合，混杂   miscellaneous(adj. 混杂的，各种各样的；多方面的，多才多艺的
+* miser   n.  守财奴【词根】表示“可怜的”  misery(n.  悲惨, 穷困, 不幸)
+* miso    【前缀】讨厌，厌恶   misogyny(n. 厌恶女人（miso+gyny女人）)
+* miss    n.过错, 避免, 失败, 小姐, 姑娘【词根】送；释放    mission(n. 使命，任务；代表团（miss+ion,送出→派遣）)
+* mit 【词根】送；释放    emit(vt. 发出，放射；发行；发表(e出＋mit→送出［气味］等）)
+* mix / miks/n.混合【词根】混合   mixture(n.混合；混合物)
+* mne 词根：记得remember   amnesty(n. 大赦，特赦)
+* mnem    词根：表示“记忆”   mnemonic(adj.有助于记忆的; 记忆的)
+* mnemon  【计】 记忆单元【词根】memnory记忆   mnemonics(n. 记忆术)
+* mnes    词根：表示“记忆”   amnesia(n.记忆缺失, 健忘症)
+* mo  词根：妈，母亲 mother(n. 母亲；大娘)
+* mob / mRb/n.一伙人；一群暴徒【词根】移动  automobile(n.汽车，机动车)
+* moc 词根：扮鬼脸；遮掩，作假    mocker（n. 嘲弄者；模仿者）
+* mod a. 现代派的, 时髦的【词根】方式，模式，风度    modify(（mod+ify→规范化→修改）)
+* mol / mEul/ n. 摩尔, 克分子【词根】饭；堆   immolate （vt. 献祭；牺牲；为供神而宰杀）；demolish （ vt. 拆除；破坏；毁坏（de去掉+mol+ish，把堆起来的东西毁掉)）
+* moll    / mRl/ n. 情妇, 妓女【词根】软   mollify(v.抚慰；变软（moll+ify化→软化→抚慰）)
+* mom n.  妈妈【词根】动 momentum(n. 势头；[物] 动量；动力)
+* mon 等于Monday星期一【词根】劝告；吃【前缀】单一   monument(n. 纪念碑（monu警告，提醒+ment→提醒的东西→纪念碑）)
+* mong    n. 杂种狗【词根】混合    mongrel(n. 杂种；混血儿；杂种动物)
+* monger  n.  商人, 贩子【后缀】商人，常用以构成复合词   ironmonger(n. 五金商；金属器具商)
+* moni    词根：提醒；监视    monition（n. 忠告；法庭传票；宗教法庭的诫谕）
+* monit   词根：表示“警告”"  monition(n.  忠告; 法庭传票; 警告)
+* mono    a. 单声道的【前缀】表示单一的意思  monopoly(（mono+poly→独家卖→垄断）)
+* monstr  【词根】表示“显示”  demonstrable(adj. 可论证的；显而易见的)
+* mont    词根：山hill,rise   promontory(n. 岬，海角；隆起，隆突)
+* mony    【后缀】构成名词,表示“结果”，“情况”，“状态”   harmony(n.调合，协调，和谐)
+* mor / mR:/ n. 粗腐殖质【词根】风俗，习俗 morality(n.道德，美德，品行)
+* morb    词根：disease（病）   morbid（adj. 病态的；由病引起的；恐怖的）
+* mord    词根：表示”咬“    mordant(adj.  尖酸的, 有腐蚀性的, 辛辣的)
+* morph   【计】 形态, 词态【词根】形状；形态 amorphous(adj. 无定形的；无组织的（a无+morph+ous→无形状的→不定形的）)
+* mors    词根：表示”咬“    morsel(n. 一口；（食物）少量（mors-vel表示小东西→咬一小口）)
+* mort    / mR:t/ n. 通知猎物已死的号角声, 很多【词根】死亡 immortal(n. 神仙；不朽人物(（im不+mortal→不死的）)
+* most    / mEust/adj.最多的, 多数的【后缀】形容词后缀   utmost(a.最远的)
+* mot / mEu]/n.警句【词根】移动   locomotive(n.火车头，机车（loco地方+mot动…从一地动到另一地）)
+* mount   / maunt/n.乘用马, 衬纸, 山, 装配【词根】山；上升    mountain(n. 山；山脉)
+* mous    词根：鼠    mouse(n. 鼠标；老鼠；胆小羞怯的人)
+* mov 【词根】移动  remove(vt.移动，搬开；脱掉)
+* muc 词根：粘,粘液 mucigen([生化] 粘蛋白原)
+* mucil   词根：粘,粘液 mucilage(n. [植] 粘液，粘质物；胶水)
+* mud / mQd/n. 泥；烂泥；泥浆。词根：混乱的,粘液的，湿   muddy(adj. 泥泞的；模糊的；混乱的)
+* mug / mQg/n. 杯子；脸；苦读者。词根：粘液的，湿，滑的   smuggle(vt. 走私；偷运)
+* mult    【前缀】多的  multitude(n. 群众；多数)
+* multi   多【前缀】许多 multiply(adj. 多层的；多样的)
+* mun 【词根】公共的;服务；吃    community(n. 社区；[生态] 群落；共同体)
+* mund    词根：world世界  mundane(adj. 世俗的，平凡的；世界的，宇宙的)
+* mune    词根：手；公共，服务  commune（n. 公社）
+* muni    词根：公共的  municipal(adj. 市政的，市的；地方自治的)
+* mur 【词根】墙壁  mural(adj. 墙壁的)
+* murd    词根：死,伤害,咬,擦 murder(vt. 谋杀，凶杀)
+* mus 词根：鼠；想；粘液的，湿，滑的；娱乐  muscle(n. 肌肉；力量)
+* muscl   词根：肌    muscle(n. 肌肉；力量)
+* muscul  词根：肌    musculature(n. 肌肉组织；[解剖] 肌肉系统)
+* mut 【词根】改变  mutable(adj. 易变的，不定的；性情不定的)
+* my  / mai/  我的【词根】muscle肌   myalgia(n. [外科] 肌痛)
+* myc 词根：真菌   mycology(n. 真菌学)
+* myel    【医】 脊髓【词根】髓 myelin(n. [生化] 髓磷脂（等于myeline）)
+* myri    词根：一万,无数    myriad(adj. 无数的；种种的)
+* myria   【前缀】万,无数    myriad(adj. 无数的；种种的)
+* myst    【词根】神秘  mystery(n.神秘；神秘的事物)

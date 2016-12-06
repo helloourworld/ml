@@ -179,248 +179,243 @@
             ">
     			
 <div class="post-preview">
-    <a href="/language/2016/08/31/scala-maps/">
+    <a href="/hadoop/2016/09/08/Streaming_lesson1/">
         <h2 class="post-title">
-            Scala Map
+            Spark Streaming Lesson 1
         </h2>
         
         <div class="post-content-preview">
-            Scala Map(映射)
+            1 Overview
 
-
-  Map(映射)是一种可迭代的键值对（key/value）结构。
-  所有的值都可以通过键来获取。
-  Map 中的键都是唯一的。
-  Map 也叫哈希表（Hash tables）。
-  Map 有两种类型，可变与不可变，区别在于可变对象可以修改它，而不可变对象不可以。
-  默认情况下 Scala 使用不可变 Map。如果你需要使用可变集合，你需要显式的引入...
+Spark Streaming is an extension of the core Spark API that enables scalable, high-throughput(高吞吐), fault-tolerant(容错机制) stream processing of live data streams(实时流处理). Data can be ingest...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
+        Posted by Big Data Memo on September 8, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/language/2016/08/31/scala-lists/">
+    <a href="/blog/2016/09/05/travel-map/">
         <h2 class="post-title">
-            Scala List
+            travel Map
         </h2>
         
         <div class="post-content-preview">
-            Scala List(列表)
+            
 
 
-  Scala 列表类似于数组，它们所有元素的类型都相同，但是它们也有所不同：列表是不可变的，值一旦被定义了就不能改变，其次列表 具有递归的结构（也就是链接表结构）而数组不是。。
-  列表的元素类型 T 可以写成 List[T]。例如，以下列出了多种类型的列表：
-
-
-// 字符串列表
-val site: List[String] = List("Runoob...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
+        Posted by Big Data Memo on September 5, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/language/2016/08/31/scala-iterators/">
+    <a href="/language/2016/09/05/Scala-Lesson16/">
         <h2 class="post-title">
-            scala Iterators
+            Scala Lesson 16
         </h2>
         
         <div class="post-content-preview">
-            Scala Iterator（迭代器）
+            链接：https://segmentfault.com/a/1190000005043288#articleHeader56
 
+Databricks Scala 编程风格指南
 
-  Scala Iterator（迭代器）不是一个集合，它是一种用于访问集合的方法。
-  迭代器 it 的两个基本操作是 next 和 hasNext。
-  调用 it.next() 会返回迭代器的下一个元素，并且更新迭代器的状态。
-  调用 it.hasNext() 用于检测集合中是否还有元素。
-  让迭代器 it 逐个返回所有元素最简单的方法是...
+声明 (Disclaimer)
+
+The Chinese version of the Databricks Scala Guide is contributed and maintained by communit...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
+        Posted by Big Data Memo on September 5, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/language/2016/08/31/Scala-Lesson7/">
+    <a href="/language/2016/09/05/Scala-Lesson15/">
         <h2 class="post-title">
-            scala Lesson 7
+            Scala Lesson 15
         </h2>
         
         <div class="post-content-preview">
-            Scala Collection
+            #
+Resilient Distributed Datasets
 
+https://people.eecs.berkeley.edu/~jegonzal/pyspark/_modules/pyspark/rdd.html
 
-  Scala提供了一套很好的集合实现，提供了一些集合类型的抽象。
-  Scala 集合分为可变的和不可变的集合。
-  可变集合可以在适当的地方被更新或扩展。这意味着你可以修改，添加，移除一个集合的元素。
-  而不可变集合类，相比之下，永远不会改变。不过，你仍然可以模拟添加，移除或更新操作。但是这些操作将在每一种情况下都返回一个新的集合，同时使原来的集合...
+spark-sreaming-practice
+
+Spark Shuffle初探
+
+Hadoop家族学习路线图
+
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
+        Posted by Big Data Memo on September 5, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/language/2016/08/31/Scala-Lesson6/">
+    <a href="/language/2016/09/02/Scala-Lesson14/">
         <h2 class="post-title">
-            scala Lesson 6
+            Scala Lesson 14
         </h2>
         
         <div class="post-content-preview">
-            Scala 数组
+            Scala 提取器(Extractor)
 
-Scala 语言中提供的数组是用来存储固定大小的同类型元素，数组对于每一门编辑应语言来说都是重要的数据结构之一。
-声明数组变量并不是声明 number0、number1、…、number99 一个个单独的变量，而是声明一个就像 numbers 这样的变量，然后使用 numbers[0]、numbers[1]、…、numbers[99] 来表示一个个单独的变量。数组中某个指...
+
+  提取器是从传递给它的对象中提取出构造该对象的参数。
+  Scala 标准库包含了一些预定义的提取器，我们会大致的了解一下它们。
+  Scala 提取器是一个带有unapply方法的对象。unapply方法算是apply方法的反向操作：unapply接受一个对象，然后从对象中提取值，提取的值通常是用来构造该对象的值。
+
+
+以下实例演示了邮件地址...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
+        Posted by Big Data Memo on September 2, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/language/2016/08/31/Scala-Lesson5/">
+    <a href="/language/2016/09/02/Scala-Lesson13/">
         <h2 class="post-title">
-            scala Lesson 5
+            Scala Lesson 13
         </h2>
         
         <div class="post-content-preview">
-            Scala 字符串
-
-object Strings{
-    def main(args: Array[String]){
-        println(greeting)
-    }
-
-    val greeting: String = "Hello, World!"
-}
+            Scala 异常处理
 
 
+  Scala 的异常处理和其它语言比如 Java 类似。
+  Scala 的方法可以通过抛出异常的方法的方式来终止相关代码的运行，不必通过返回值。
 
 
-  以上实例定义了变量 greeting，为字符串常量，它的类型为 String (java.lang.S...
+抛出异常
+
+Scala 抛出异常的方法和 Java一样，使用 throw 方法，例如，抛出一个新的参数异常：
+
+throw new IllegalArgumentException
+
+捕获异常
+
+异常捕捉的机制与其...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
+        Posted by Big Data Memo on September 2, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/language/2016/08/31/Scala-Lesson4/">
+    <a href="/language/2016/09/02/Scala-Lesson12/">
         <h2 class="post-title">
-            scala Lesson 4
+            Scala Lesson 12
         </h2>
         
         <div class="post-content-preview">
-            函数
+            Scala 正则表达式
 
-函数是一组一起执行一个任务的语句。 您可以把代码划分到不同的函数中。如何划分代码到不同的函数中是由您来决定的，但在逻辑上，划分通常是根据每个函数执行一个特定的任务来进行的。
-Scala 有函数和方法，二者在语义上的区别很小。Scala 方法是类的一部分，而函数是一个对象可以赋值给一个变量。换句话来说在类中定义的函数即是方法。
-我们可以在任何地方定义函数，甚至可以在函数内定义函数（内嵌...
+Scala 通过 scala.util.matching 包种的 Regex 类来支持正则表达式。以下实例演示了使用正则表达式查找单词 Scala :
+
+import scala.util.matching.Regex
+
+object RegExp1 {
+    def main(args: Array[String]) {
+        val pattern ...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
+        Posted by Big Data Memo on September 2, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/language/2016/08/30/Scala-Lesson3/">
+    <a href="/language/2016/09/02/Scala-Lesson11/">
         <h2 class="post-title">
-            scala Lesson 3
+            Scala Lesson 11
         </h2>
         
         <div class="post-content-preview">
-            Scala IF…ELSE 语句
+            Scala 模式匹配
 
-1 if语句
 
-语法格式：
+  Scala 提供了强大的模式匹配机制，应用也非常广泛。
+  一个模式匹配包含了一系列备选项，每个都开始于关键字 case。每个备选项都包含了一个模式及一到多个表达式。箭头符号 =&gt; 隔开了模式和表达式。
+  以下是一个简单的整型值模式匹配实例：
 
-if (boole express)
-{
-    // 如果布尔表达式为true则执行该语句块；否则跳过大括号内的语句块，执行大括号之后的语句块。
-}
 
-# ex
-object Ifs {
-    def main(args: Array[String]){
-        var x = 10;
-        if (x ...
+object PatternMatching1 {
+    def main (args: Array[St...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 30, 2016
+        Posted by Big Data Memo on September 2, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/language/2016/08/30/Scala-Lesson2/">
+    <a href="/2016/09/02/hadoop_kafka/">
         <h2 class="post-title">
-            scala Lesson 2
+            Hadoop_kafka
         </h2>
         
         <div class="post-content-preview">
-            Scala 访问修饰符
-Scala 访问修饰符基本和Java的一样，分别有：private，protected，public。
-如果没有指定访问修饰符符，默认情况下，Scala对象的访问级别都是 public。
-Scala 中的 private 限定符，比 Java 更严格，在嵌套类情况下，外层类甚至不能访问被嵌套类的私有成员。
+            ﻿—
+layout: post
+title:kafka组件深度解析
+category: Hadoop
+catalog: yes
+description:  kafka组件深度解析
+tags:
+    - Big Data
+    - 大数据
+—
 
-1 私有(Private)成员
-用private关键字修饰，...
+
+kafka组件深度解析kafka1,kafka介绍关于kafka入门的文章最好的就莫过于kafka的官方文档了，这上面对kafka的定义是：Ka...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 30, 2016
+        Posted by Big Data Memo on September 2, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/hadoop/2016/08/28/hadoop_tutorial_4/">
+    <a href="/language/2016/09/01/Scala-Lesson9/">
         <h2 class="post-title">
-            Hadoop Tutorial ---- 学习安排
+            Scala Lesson 9
         </h2>
         
         <div class="post-content-preview">
-            Hive专题
+            Scala 文件 I/O
 
-第一节 Hive（9月11日）(陈东辉讲)
+1 文件写操作
 
-任务式学习
-参照考试列表（计划3-4节*40分钟/每节）
+Scala 进行文件写操作，直接用的都是 java中 的 I/O 类 （java.io.File)：
 
-参考书: 下载
+import java.io._
 
-Spark专题
-
-第二节 Scala（9月25日）（陈东辉讲）
-
-
-  1cala语法编程基础（计划3-4节*40分钟/每节）
-
-
-第三节 Streaming&amp;Spark SQL&amp;GraphX（10月16日）（第1、2主题于利君讲，第3主...
+object IOs1 {
+   def main(args: Array[String]) {
+      val writer = new PrintWriter(new File("test.txt" ...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 28, 2016
+        Posted by Big Data Memo on September 1, 2016
     </p>
 </div>
 <hr>
@@ -543,7 +538,7 @@ Spark专题
                             
                         
                             
-                                <a href="/tags/#English" title="English" rel="8">
+                                <a href="/tags/#English" title="English" rel="23">
                                     English
                                 </a>
                             

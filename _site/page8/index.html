@@ -179,255 +179,247 @@
             ">
     			
 <div class="post-preview">
-    <a href="/hadoop/2016/08/06/hadoop_family_site/">
+    <a href="/language/2016/08/31/Scala-Lesson5/">
         <h2 class="post-title">
-            Hadoop Resource
+            scala Lesson 5
         </h2>
         
         <div class="post-content-preview">
-            Apache
+            Scala 字符串
 
-Apache docs
+object Strings{
+    def main(args: Array[String]){
+        println(greeting)
+    }
 
-Cloudera
+    val greeting: String = "Hello, World!"
+}
 
-Cloudera Engineering Blog
 
-Storm
 
-分布式计算 / 实时流计算 / NoSQL存储 (Email: ypf412@163.com, GitHub: https://github.com/ypf412)
-## hortonworks
 
-hortonworks公司中文网
-
-THE HDPCD EXAM
-...
+  以上实例定义了变量 greeting，为字符串常量，它的类型为 String (java.lang.S...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 6, 2016
+        Posted by Big Data Memo on August 31, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/hadoop/2016/08/04/hadoop_map_reduce/">
+    <a href="/language/2016/08/31/Scala-Lesson4/">
         <h2 class="post-title">
-            HadoopMapReduce
+            scala Lesson 4
         </h2>
         
         <div class="post-content-preview">
-            
+            函数
 
-MapReduce
-
-MapReduce: Simplified Data Processing on Large Clusters
-
-Jeffrey Dean and Sanjay Ghemawat
-
-research.google.com/archive/mapreduce.html
-
-Download: mapreduce-osdi04.pdf
-
+函数是一组一起执行一个任务的语句。 您可以把代码划分到不同的函数中。如何划分代码到不同的函数中是由您来决定的，但在逻辑上，划分通常是根据每个函数执行一个特定的任务来进行的。
+Scala 有函数和方法，二者在语义上的区别很小。Scala 方法是类的一部分，而函数是一个对象可以赋值给一个变量。换句话来说在类中定义的函数即是方法。
+我们可以在任何地方定义函数，甚至可以在函数内定义函数（内嵌...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 4, 2016
+        Posted by Big Data Memo on August 31, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/hadoop/2016/08/04/hadoop_mahout/">
+    <a href="/language/2016/08/30/Scala-Lesson3/">
         <h2 class="post-title">
-            Hadoop Mahout
+            scala Lesson 3
         </h2>
         
         <div class="post-content-preview">
-            开始 Mahout
+            Scala IF…ELSE 语句
 
-Mahout has prepared a bunch of examples and tutorials for users to quickly learn how to use its machine learning algorithms.
+1 if语句
+
+语法格式：
+
+if (boole express)
+{
+    // 如果布尔表达式为true则执行该语句块；否则跳过大括号内的语句块，执行大括号之后的语句块。
+}
+
+# ex
+object Ifs {
+    def main(args: Array[String]){
+        var x = 10;
+        if (x ...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 30, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/08/30/Scala-Lesson2/">
+        <h2 class="post-title">
+            scala Lesson 2
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala 访问修饰符
+Scala 访问修饰符基本和Java的一样，分别有：private，protected，public。
+如果没有指定访问修饰符符，默认情况下，Scala对象的访问级别都是 public。
+Scala 中的 private 限定符，比 Java 更严格，在嵌套类情况下，外层类甚至不能访问被嵌套类的私有成员。
+
+1 私有(Private)成员
+用private关键字修饰，...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 30, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/08/28/hadoop_tutorial_4/">
+        <h2 class="post-title">
+            Hadoop Tutorial ---- 学习安排
+        </h2>
+        
+        <div class="post-content-preview">
+            Hive专题
+
+第一节 Hive（9月11日）(陈东辉讲)
+
+任务式学习
+参照考试列表（计划3-4节*40分钟/每节）
+
+参考书: 下载
+
+Spark专题
+
+第二节 Scala（9月25日）（陈东辉讲）
 
 
+  1cala语法编程基础（计划3-4节*40分钟/每节）
 
-Mahout 支持的算法
+
+第三节 Streaming&amp;Spark SQL&amp;GraphX（10月16日）（第1、2主题于利君讲，第3主...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 28, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/08/25/IT-Memo-consistent-hashing/">
+        <h2 class="post-title">
+            consistent hashing
+        </h2>
+        
+        <div class="post-content-preview">
+            前言
+
+一致性哈希算法在1997年由麻省理工学院提出的一种分布式哈希（DHT）实现算法，设计目标是为了解决因特网中的热点(Hot spot)问题，初衷和CARP十分类似。一致性哈希修正了CARP使用的简 单哈希算法带来的问题，使得分布式哈希（DHT）可以在P2P环境中真正得到应用。
+
+一致性hash算法提出了在动态变化的Cache环境中，判定哈希算法好坏的四个定义：
+
+
+  1、平衡性(Ba...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 25, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/08/24/Scala-Lesson1/">
+        <h2 class="post-title">
+            scala Lesson 1
+        </h2>
+        
+        <div class="post-content-preview">
+            变量函数
+
+1 变量：var，val—-immutable
 
 
   
-    
-      Mahout 0.12.0 Features by Eng...
+    Scala的变量分两种，var和val。var，即variable，类似于我们在Java等其他语言中接触到的变量，而val，是value，类似于我们在其他语言中用到的不可重新赋值的常量，或者final变量。Scala非常强调不可变（immutable）的概念。
+    Scala编译器通过类型推断（Type Inf...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 4, 2016
+        Posted by Big Data Memo on August 24, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/hadoop/2016/08/04/hadoop_glossary/">
+    <a href="/blog/2016/08/21/googletrends/">
         <h2 class="post-title">
-            大数据名词速览
-        </h2>
-        
-        <div class="post-content-preview">
-            Hadoop产品名词速览（不断补充中…）
-
-Apache Hadoop: 是Apache开源组织的一个分布式计算开源框架，提供了一个分布式文件系统子项目(HDFS)和支持MapReduce分布式计算的软件架构。
-
-Apache Hive: 是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，通过类SQL语句快速实现简单的MapReduce统计，不必开发专门的Map...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 4, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/08/04/hadoop_family_zhihu/">
-        <h2 class="post-title">
-            Hadoop生态圈
-        </h2>
-        
-        <div class="post-content-preview">
-            如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？
-
-请参照知乎原文，链接
-
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 4, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/08/04/hadoop_family/">
-        <h2 class="post-title">
-            Hadoop Family Integration
-        </h2>
-        
-        <div class="post-content-preview">
-            Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka, Fli...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 4, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/08/04/hadoop_10_years/">
-        <h2 class="post-title">
-            Hadoop Ecosystem Evolves-10 Cool Big Data Projects
-        </h2>
-        
-        <div class="post-content-preview">
-            10 Cool Big Data Projects
-
-请参照原文，链接
-
-
-  0
-
-
-
-
-
-  1
-
-
-
-
-Hadoop
-
-Hadoop is really the flagship technology for open source big data. It grew out of a side project at Yahoo when developers needed a way...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 4, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/08/04/Hadoop_Ecosystem_Table/">
-        <h2 class="post-title">
-            Hadoop Ecosystem Table
+            google trends
         </h2>
         
         <div class="post-content-preview">
             
 
-    
-    
 
 
 
 
-
-
-
-
-
-
-Distributed Filesystem 
-
-
-	
-	Apache HDFS
-	
-		The Hadoop Distributed File System (HDFS) offers a way to store large files across
-		multiple machines. Hadoop and HDFS was derive...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 4, 2016
+        Posted by some on August 21, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/hadoop/2016/08/03/hadoop_vs_spark/">
+    <a href="/language/2016/08/20/sublime-and-scala/">
         <h2 class="post-title">
-            Hadoop or Spark
+            scala with sublime
         </h2>
         
         <div class="post-content-preview">
-            THis page is mainly from Forbes by Bernard Marr, CONTRIBUTOR
+            Scala特点：
 
-Introduction
 
-Hadoop and Spark are both Big Data frameworks–they provide some of the most popular tools used to carry out common Big Da...
+  
+    Scala是一种纯面向对象的语言，一切都是对象：将原始类型和类统一起来，同时也将函数和操作符统一起来。
+    Scala又是函数式语言，这体现在，函数在Scala中也是一种对象，并且能非常自然的使用高阶函数。
+    Scala是静态类型的语言，但是由于它强大的类型推断，实际需要指定类型的地方并不多。在拥有静态语言和编译型语言的安全高效的优势的同时，Sc...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on August 3, 2016
+        Posted by Big Data Memo on August 20, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/cfa/2016/07/25/CFALevel1_AI/">
+    <a href="/hadoop/2016/08/17/hadoop_tutorial_3/">
         <h2 class="post-title">
-            Lev1_AI_basic_concept
+            Hadoop Tutorial ---- Spark入门实战系列--1.Spark及其生态圈简介
         </h2>
         
         <div class="post-content-preview">
-            73 Alternative Investment
+            Site
 
-  [x] 1 什么是开放型基金（Open-End Fund）；什么是关闭型基金（Closed-End Fund）
-  [x] 2 Open-End Fund中的Load和Un-Load的基金有什么不同
-  [x] 3 什么是Net Asset Value（NAV）
-  [x] 4 比较Equity Fund主要有哪些策略
-  [x] 5...
+Spark入门实战系列–1.Spark及其生态圈简介
+
+start SparkFrames
+spark-shell –packages graphframes:graphframes:0.2.0-spark2.0-s_2.11
+
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on July 25, 2016
+        Posted by Big Data Memo on August 17, 2016
     </p>
 </div>
 <hr>
@@ -550,7 +542,7 @@ Hadoop and Spark are both Big Data frameworks–they provide some of the most po
                             
                         
                             
-                                <a href="/tags/#English" title="English" rel="8">
+                                <a href="/tags/#English" title="English" rel="23">
                                     English
                                 </a>
                             

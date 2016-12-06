@@ -179,236 +179,288 @@
             ">
     			
 <div class="post-preview">
-    <a href="/hadoop/2016/09/19/SPSS-For-Hadoop-Modeling/">
+    <a href="/mladvance/2016/11/17/kernel-density-estimation/">
         <h2 class="post-title">
-            SPSS for BigData Modeling
+            Spark-ML-0206-Kernel density estimation
         </h2>
         
         <div class="post-content-preview">
-            SPSS for BigData Modeling
+            核密度估计
 
-1 Featured IBM Analytics products
+1 理论分析
+
+  核密度估计是在概率论中用来估计未知的密度函数，属于非参数检验方法之一。假设我们有n个数，要计算某个数X的概率密度有多大，
+可以通过下面的核密度估计方法估计。
+
+
+
+  在上面的式子中，K为核密度函数，h为窗宽。核密度函数的原理比较简单，在我们知道某一事物的概率分布的情况下，如果某一个数在观察中出现了，我们可以认为这个数的概率密度很大，和这个数比较近的数的概率...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/hypothesis-testing/">
+        <h2 class="post-title">
+            Spark-ML-0204-Hypothesis testing
+        </h2>
+        
+        <div class="post-content-preview">
+            假设检测
+
+  假设检测是统计中有力的工具，它用于判断一个结果是否在统计上是显著的、这个结果是否有机会发生。spark.mllib目前支持皮尔森卡方检测。输入属性的类型决定是作拟合优度(goodness of fit)检测还是作独立性检测。
+拟合优度检测需要输入数据的类型是vector，独立性检测需要输入数据的类型是Matrix。
+
+  spark.mllib也支持输入数据类型为RDD[La...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/correlations/">
+        <h2 class="post-title">
+            Spark-ML-0202-Correlations
+        </h2>
+        
+        <div class="post-content-preview">
+            相关性系数
+
+  计算两个数据集的相关性是统计中的常用操作。在MLlib中提供了计算多个数据集两两相关的方法。目前支持的相关性方法有皮尔森(Pearson)相关和斯皮尔曼(Spearman)相关。
+
+  Statistics提供方法计算数据集的相关性。根据输入的类型，两个RDD[Double]或者一个RDD[Vector]，输出将会是一个Double值或者相关性矩阵。下面是一个应用的例子。
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/spark-ml-00/">
+        <h2 class="post-title">
+            Spark-ML-00
+        </h2>
+        
+        <div class="post-content-preview">
+            spark机器学习算法研究和源码分析
+
+  本项目对spark ml包中各种算法的原理加以介绍并且对算法的代码实现进行详细分析，旨在加深自己对机器学习算法的理解，熟悉这些算法的分布式实现方式。
+
+本系列文章支持的spark版本
 
 
   
     
-      SPSS|Predictive analytics
-      IBM SPSS predictive analytics software offers advanced techniques in an easy-to-use pack...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 19, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/mladvance/2016/09/15/neural-network-zoo/">
-        <h2 class="post-title">
-            THE NEURAL NETWORK ZOO
-        </h2>
-        
-        <div class="post-content-preview">
-            THE NEURAL NETWORK ZOO
+      *spark 2.x * *
+    
+  
 
 
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 15, 2016
-    </p>
-</div>
-<hr>
+本系列的目录结构
 
-<div class="post-preview">
-    <a href="/cfa/2016/09/15/CFALevel2_Qunat_1/">
-        <h2 class="post-title">
-            Lev2 Quant 1
-        </h2>
-        
-        <div class="post-content-preview">
-            Framework
-
-
-  R9 Correlation and regression
-  R10 Multiple regression and issues in regression analysis
-  R11 Time-series analysis
-  R12 Excerpt from “Probabilistic Approaches: Scenario Analysis, D...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 15, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/09/14/hadoop_tutorial_5/">
-        <h2 class="post-title">
-            Hadoop 集群安装 快速指南
-        </h2>
-        
-        <div class="post-content-preview">
-            Prerequisites
-
-3台虚拟机
-SSH免密登陆
-Java已安装
-Hadoop安装包已经下载
-tools工具已经下载
-
-配置
-
-配置分配目录：
+  本系列目录如下：
 
 
   
-    
-      目录
-      说明
-    
-    
-      hdfs
-      存放hdfs相关文件，一般存放namenode、datanode、logs信息文件
-    
-    
-      logs
-   ...
+    数据类型
+  
+  基本...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on September 14, 2016
+        Posted by Big Data Memo on November 17, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/blog/2016/09/13/Setup-passphraseless-ssh/">
+    <a href="/cfa/2016/11/15/CFA_Glossory/">
         <h2 class="post-title">
-            Setup passphraseless ssh
+            Lev2 Glossary
         </h2>
         
         <div class="post-content-preview">
-            配置免密码登陆：
+            A
 
-1、生成公钥
 
-[hadoop@NN01 ~]$ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
-Generating public/private rsa key pair.
-Your identification has been saved in /home/hadoop/.ssh/id_rsa.
-Your public key h...
+  Abandonment option
+  
+    The ability to terminate a project at some future time if the financial results are disappointing.
+  
+  Abnormal earnings
+  
+    See residual income.
+  
+  Abnormal r...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on September 13, 2016
+        Posted by Big Data Memo on November 15, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/hadoop/2016/09/08/Streaming_lesson1/">
+    <a href="/log/2016/11/11/game1/">
         <h2 class="post-title">
-            Spark Streaming Lesson 1
+            tmp
         </h2>
         
         <div class="post-content-preview">
-            1 Overview
+            1 题1
 
-Spark Streaming is an extension of the core Spark API that enables scalable, high-throughput(高吞吐), fault-tolerant(容错机制) stream processing of live data streams(实时流处理). Data can be ingest...
+解：（1） 划线法求纯策略纳什均衡
+
+观察，乙的策略‘中’严格小于策略‘右’（），剔除。
+剔除后，甲的策略‘中‘和‘下’严格小于策略’上‘（; ），剔除。纯策略纳什均衡为（上，左)，如下所示：
+
+
+
+(2) 混合策略纳什均衡
+
+易见，博弈的混合策略纳什均衡为: ((1,0,0),(1,0,0))
+
+2 题2
+
+解：使用划线法求解。
+
+首先，针对参与 者甲，对三个矩阵中每列’上‘’...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on September 8, 2016
+        Posted by Big Data Memo on November 11, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/blog/2016/09/05/travel-map/">
+    <a href="/mladvance/2016/11/05/data-mining-tools/">
         <h2 class="post-title">
-            travel Map
+            DataMing Tools Collected
         </h2>
         
         <div class="post-content-preview">
-            
+            DataMing Tools Collected
 
+KNIME
+
+rapidminer
+
+8-open-source-big-data-mining-tools
+
+looking-for-data-mining-and-analytics-tools-check-out-these-open-source-options
 
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on September 5, 2016
+        Posted by Big Data Memo on November 5, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/language/2016/09/05/Scala-Lesson16/">
+    <a href="/hadoop/2016/10/19/python-kafka-sparkstreaming/">
         <h2 class="post-title">
-            Scala Lesson 16
+            Python 2 Kafka 2 SparkStreaming
         </h2>
         
         <div class="post-content-preview">
-            链接：https://segmentfault.com/a/1190000005043288#articleHeader56
+            [SparkStreaming 原理综述与监测目录下文件]（http://blog.csdn.net/zfszhangyuan/article/details/52522974
 
-Databricks Scala 编程风格指南
+原理
 
-声明 (Disclaimer)
+Spark Streaming 数据产生与导入相关的内存分析
 
-The Chinese version of the Databricks Scala Guide is contributed and maintained by communit...
+动态控制消费速率
+
+Spark Streaming Direct Approach (No Receivers) 分析
+## python a...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on September 5, 2016
+        Posted by Big Data Memo on October 19, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/language/2016/09/05/Scala-Lesson15/">
+    <a href="/language/2016/10/10/scala_featured/">
         <h2 class="post-title">
-            Scala Lesson 15
+            Scala Featured
         </h2>
         
         <div class="post-content-preview">
-            #
-Resilient Distributed Datasets
+            1 scala中”_“的用法总结
 
-https://people.eecs.berkeley.edu/~jegonzal/pyspark/_modules/pyspark/rdd.html
+参考链接：
 
-spark-sreaming-practice
+what-are-all-the-uses-of-an-underscore-in-scala
 
-Spark Shuffle初探
+http://www.slideshare.net/normation/scala-dreaded
 
-Hadoop家族学习路线图
-
+import scala._    // Wild card -- all of Scala is imported
+import scala....
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on September 5, 2016
+        Posted by Big Data Memo on October 10, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/language/2016/09/02/Scala-Lesson14/">
+    <a href="/blog/2016/10/01/travel-site/">
         <h2 class="post-title">
-            Scala Lesson 14
+            travel site
         </h2>
         
         <div class="post-content-preview">
-            Scala 提取器(Extractor)
+            10.2
 
 
-  提取器是从传递给它的对象中提取出构造该对象的参数。
-  Scala 标准库包含了一些预定义的提取器，我们会大致的了解一下它们。
-  Scala 提取器是一个带有unapply方法的对象。unapply方法算是apply方法的反向操作：unapply接受一个对象，然后从对象中提取值，提取的值通常是用来构造该对象的值。
+
+10.3
 
 
-以下实例演示了邮件地址...
+
+10.4
+
+
+
+10.5
+
+
+
+10.6
+
+
+
+10.7
+
+
+
+10.8
+
+
+
+10.2–10.8
+
+
+
         </div>
     </a>
     <p class="post-meta">
-        Posted by Big Data Memo on September 2, 2016
+        Posted by Big Data Memo on October 1, 2016
     </p>
 </div>
 <hr>
@@ -531,7 +583,7 @@ Hadoop家族学习路线图
                             
                         
                             
-                                <a href="/tags/#English" title="English" rel="8">
+                                <a href="/tags/#English" title="English" rel="23">
                                     English
                                 </a>
                             

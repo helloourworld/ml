@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="g89MuzujW3" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+    <title>词根L - Maching Learning | 机器学习笔记</title>
+
+    <link rel="canonical" href="http://machinelearningadvance.com/english/2016/12/06/English_word_root_L/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- ga & ba script hoook -->
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Big Data Memo</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/">Category</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/images/background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/images/background.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#English" title="English">English</a>
+                        
+                    </div>
+                    <h1>词根L</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by Big Data Memo on December 6, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<p>*
+* la  词根：人；人类 laity(n. 俗人；外行人；门外汉)
+* lab / lAb/n.实验室。词根：抓；松，滑    label(vt. 标注；贴标签于)
+* labi    词根：唇    labial(adj. 唇的；唇音的)
+* labo    【词根】工作  labourer(n. 劳动者；劳工)
+* labor   / 5leibE/  n.&amp;v.(=labour)工作【词根】工作   laboratory(n.实验室，研究室（labor+atory地方→劳动之地→实验室）)
+* labour  vi. 劳动；分娩【词根】做  labourer(n. 劳动者；劳工)
+* lac / lAk/ n. 紫胶, 十万, 许多【词根】牛奶  lactation(n. 哺乳；哺乳期)
+* lacer   n. 胶带接合机词根：torn（撕开） lacerate（adj. 受折磨的；撕碎的）
+* lact    【词根】牛奶；乳汁   lacteal(adj. 乳状的)
+* lacto   词根：milk乳    lactometer(n. 检乳器)
+* lag n.  落后【词根】湖 lagoon(n.泻湖；环礁湖；咸水湖)
+* lak 词根：湖    lake(n. 湖；深红色颜料)
+* lamell  词根：薄片,层 lamella(n. 薄板；薄片；薄层)
+* lamin   词根：薄片,层 lamina(n. 叶片；薄层；薄板)
+* lanc    词根：瘦长的；矛，枪；投掷，抛 lanciform（adj. 矛状的）
+* land    n. 国土；陆地【词根】土地  landowner(n. 地主，土地所有者)
+* lang    【词根】舌头；语言   language(n.语言，语言课程)
+* langu   【词根】舌头；语言   language(n.语言，语言课程)
+* lap / lAp/n.腰以下到膝部分：大腿。词根：松，滑   collapse(vi. 倒塌；瓦解；暴跌)
+* lapi    词根：石头   lapicide(n.石工，石匠，碑文雕刻工)
+* lapid   词根：石头   lapidify(v.  使变成石头)
+* lapil   词根：石头   lapillus(n. 火山砾)
+* laps    【词根】滑；滑行    elapse(vi. (时间)过去，消逝)
+* lapse   n. 失效；流逝【词根】滑落  elapse(vi. 消逝；时间过去)
+* larg    词根：大,丰富 large(adj. 大的；多数的；广博的)
+* laryng  词根：咽喉   laryngitis(n. [耳鼻喉] 喉炎)
+* las 词根：轨迹,跑道    atlas(n. 地图集；寰椎)
+* lass    / lAs/n. 小女孩，少女； 情人【词根】倦    lassitude（n. 疲乏；懒散；厌倦）
+* lat 【词根】拿出,带出   collate(vt. 核对，校对；校勘（col共同+late→[把两者]放在一起→校对）)
+* late    / leit/adv. 晚；迟；最近  【词根】拿出,带出   collate(vt. 核对，校对；校勘（col共同+late→[把两者]放在一起→校对）)
+* later   / 5leItE/a. 更迟的,后面的;【词根】边；侧面    lateral(adj. 侧面的，横向的adj. 侧面的，横向的)
+* latr    词根：崇拜   autolatry(n.自我崇拜)
+* latry   词根：崇拜   bibliolatry(n. 圣经崇拜；书籍崇拜)
+* lau 【词根】洗   laundry(n.洗衣房，洗衣店)
+* launc   词根：投；抛；掷    launch(vt. 发射（导弹、火箭等）；发起)
+* laund   【词根】洗   laundry(n.洗衣房，洗衣店)
+* lav n. 盥洗室, 厕所, 洗手间, 洗脸盆【词根】洗   lavatory(n.盥洗室，厕所)
+* law n. 法律；规律【词根】法律,放    lawyer(n. 律师；法学家)
+* lax adj.松的, 松懈的, 不严格的【词根】放松；松开  relax(vt.使松弛)
+* lay vt. 躺下；产卵；搁放【词根】放   delay(vi. 延期；耽搁)
+* laz 词根：拖，拖延 lazy（adj. 懒惰的；懒洋洋的）
+* le  【后缀】动词后缀;名词后缀   joggle(vt. 啮合；摇动，摇曳；轻摇)
+* leag    【词根】绑，捆，束   league(n. 联盟；社团；范畴
+* lear    词根：轨迹,跑道    learn(vt. 学习；得知；认识到)
+* leas    词根：松    release(vt. 释放；发射；让与；允许发表)
+* leav    词根：爱，关心 believe(vi. 信任；料想；笃信宗教)
+* lec 词根：诱使entice delectable(adj. 美味的；令人愉快的)
+* lect    【词根】选择；聚集；读；说   neglect(vt.忽视，忽略；疏忽（neg没有+lect→没有选→疏忽）)
+* leg / leg/  腿【词根】选择；聚集；读；指定；送；法律    privilege(n.特权，优惠（privi+lege法律→有个人法律→特权）)
+* lega    词根：指定；任命；送  legation（n. 公使馆；使者的派遣）
+* legis   词根：法律   legislate(vi. 立法；制定法律（legis+late放→放出法律→立法）)
+* leis    词根：合法   leisure(n. 闲暇；空闲；安逸)
+* lem 词根：抓    dilemma(n. 困境；进退两难；两刀论法)
+* len 词根：离开   lend(vt. 贷；增添，提供；把……借给)
+* lence   后缀：名词后缀，表示“性质”，“状态”，“程度”    corpulence（n. 臃肿，肥胖）
+* lency   后缀：名词后缀，表示“性质”，“状态”，“程度”    corpulency（n. 庞大；肥胖）
+* leng    词根：长    length(n. 长度，长；时间的长短)
+* lent    后缀:充满着      corpulent(adj. 肥胖的)
+* leon    词根：狮子   leonine(adj. 狮子的，狮子般的)
+* lep 词根：鳞状物  leprous（adj. 不洁的；麻疯病的；患麻疯病的；鳞状的）
+* lepsy   【后缀】发作  epilepsy（n. [内科] 癫痫，癫痫症）
+* less    adj.(little的比较级)较小的【后缀】起功能转换作用  worthless(a.无价值的，无用的)
+* let vi.出租【后缀】表小称或“缩小”【词根】诱使 houselet（n. 小房子）
+* leth    词根：oblivion（遗忘） lethargy （ n. 昏睡；死气沉沉；嗜眠（症））
+* leuc    词根：白    leucocyte(n. [解剖][细胞] 白细胞)
+* leuk    词根：白    leukaemia(n. 白血病)
+* lev 【词根】提高;轻的；升 elevate（vt. 提升；举起；振奋情绪等(e出＋lev+ate→举出→升高））
+* levi    【词根】提高；轻的   levitate（vi. 轻轻浮起；飘浮空中）
+* levo    词根：left左    levodopa(n. [药] 左旋多巴)
+* lex n.  法; 法律体系【词根】表示“词汇”   lexicon（n. 词典，辞典）
+* lg  词根：痛    otalgia（n. [耳鼻喉] 耳痛）
+* li  词根：bind,tie捆,绑,束,结  alliance(n. 联盟，联合；联姻)
+* lib 【词根】书   library（n. 图书馆，藏书室；文库)
+* liber   n.书籍，登记册【词根】自由的 liberty(n. 自由；许可；冒失)
+* libert  词根：自由   liberty(n. 自由；许可；冒失)
+* libr    词根：表示“书”    library(n.  图书馆, 藏书室)
+* lic 【词根】被允许；诱使  license(n. 执照，许可证；特许)
+* licen   词根：表示“允许”   license(n.  许可; 执照)
+* lict    【词根】离开；遗留   derelict(adj. 玩忽职守的；无主的；被抛弃了的)
+* lid / lid/ n. 盖子, 限制, 眼睑【词根】击,击打    collide（vi. 碰撞；抵触，冲突）
+* lide    词根：打    collide(vi. 碰撞；抵触，冲突)
+* lief    / li:f/ ad. 欣喜, 宁愿a. 乐意的【词根】提高；轻的   relief(n.减轻；救济；援救)
+* liev    【词根】轻，上升，提起 relieve(vt.解除； 缓解； 换班)
+* lif 词根：剥落，折断，除去；生命，生存   life(n. 生活，生存；寿命)
+* lig 【词根】选择，收集,绑；诱使  eligible(n. 合格者；适任者；有资格者(（e 出+lig+ibe→选出来的→合格的）)
+* lign    词根：线    align(vt. 使结盟；使成一行)
+* like    vt.喜欢, 希望, 愿意【后缀】表形容词,“像…一样”    dreamlike(adj. 梦一般的；朦胧的
+* lim 词根：表示”门槛，限制””   limit(n. 限制；限度；界线)
+* limin   【词根】门槛；界限   preliminary(a.预备的，初步的（pre预先+limin+ary→入门以前→初步的）)
+* lin 词根：线    line(n. 路线，航线；排；绳)
+* ling    / liN/ n. 鳕鱼【后缀】名词后缀,表示“小”等 catling（n. 肠线；小猫；两刃切断刀）
+* lingu   【词根】舌头；语言   linguistics（n. 语言学)
+* linq    词根：离开   delinquency(n. 行为不良，违法犯罪；失职)
+* linqu   【词根】离开；遗留   relinquish(vt. 放弃；放手；让渡(re+linqu离开+ish→离开不再要→放弃))
+* lip / lip/ n. 唇, 口缘【词根】离开leave  eclipse(vt. 使黯然失色；形成蚀)
+* lips    词根：离开   eclipse(n.  日蚀, 衰落, 月蚀)
+* liqu    【词根】液体  liquor(n.酒；溶液，液剂)
+* lis 【法】 诉讼事件, 争执, 起诉【词根】击,击打    collision（n. 碰撞；冲突；（意见，看法）的抵触；（政党等的）倾轧）
+* lite    adj. 清淡的 词根：岩石  neolithic（adj. [古] 新石器时代的；早先的）
+* liter   / 5li:tE/  n.(容量单位)升【词根】字母；文字   literature(n.文学；文献)
+* lith    【词根】石头  lithic(adj. 石的；膀胱结石的)
+* litig   词根：法律   litigable（adj. 可诉讼的；可在法庭相争的）
+* liv 词根：活；生命，生存  lively(adj. 活泼的；生动的；真实的)
+* live    / liv5 laiv/adj.活的, 生动的【词根】提高   deliver(vi. 实现；传送；履行；投递)
+* liver   n.  肝脏【词根】自由    deliverance(n. 释放，解救；救助；判决)
+* loc 【词根】地方  location(n. 位置；地点)
+* lock    n.  锁; 抱, 夹【后缀】由动词构成名词  wedlock(n. 婚姻；已婚状况)
+* loco    / 5lEJkEJ/n. 火车头；疯子；疯草病【词根】地方   locomotion(n. 运动；移动；旅行)
+* locu    词根：说话   interlocution(n.  交谈; 问答; 对话)
+* locut   词根：说话   interlocution(n. 对话，交谈（inter在…之间+locu+tion→二者之间说→对话）
+* lof 词根：升起，举起；放松 loft(n. 阁楼；顶楼；鸽房)
+* loft    / lRft/  n. 阁楼；顶楼；鸽房【词根】sky（天空） aloft（adv. 在空中；在高处；在上面）
+* log / lRg/n.原木，圆木【词根】说,读，学  catalog(n.目录，目录册（cata向下＋log说→在下面要说的话→目录）)
+* logical 后缀：形容词后缀，表示“…学的”    zoological（adj. 动物学的；关于动物的）
+* logist  后缀:表示“…学家”  anthologist(n. 选集的编者；文选编者)
+* logu    词根：说话   apologue(n.  寓言; 教训)
+* logue   词根：说话   dialogue(vi. 对话（dia对着+logue→对着说）)
+* logy    / ‘lEugi/ a. 迟缓的, 呆呆的【词根】~学；~论  technology(n.工艺学，工艺，技术)
+* long    adj. 长的；过长的【词根】长的【后缀】表示方向   prolong（vt. 延长；拖延（pro向前+long→向前长→延长））
+* loos    词根：松，分开 loose(adj. 宽松的；散漫的；不牢固的；不精确的)
+* lop v.  砍【词根】跳  gallop（n. 疾驰；飞奔）
+* loqu    词根：说话   eloquence(n.雄辩；口才，修辞)
+* los 词根：松，分开，分离  loss（n. 减少；亏损；失败；遗失）
+* lot n. 命运；一块地；一堆；抽签；份额。词根：洗 lotion（n. 洗液；洗涤剂）
+* loung   词根：长    lounge(n. 休息室；闲逛；躺椅)
+* lov 词根：爱，关心 lover（n. 爱人，恋人；爱好者）
+* low / lEu/adj.低的;词根：放   lower（vi. 降低；减弱；跌落）
+* lu  【词根】洗，流 ablution（n. 洗礼；洗澡（常用复数）；斋戒沐浴)
+* lubr    词根：滑    lubricity（n. 润滑能力；不稳定（性）；狡猾；难以捉摸）
+* lubric  词根：slip（滑）  lubricant（n. 润滑剂；润滑油）
+* luc 【词根】明亮的 translucent(adj. 透明的；半透明的（trans透过+luc+ent→光透过→半透明的）)
+* lucr    词根：钱财   lucre（n. 收益；钱财；利润）
+* luct    【词根】斗争, 挣扎  reluctant(a.不愿的，勉强的)
+* lud 【词根】扮演；游戏   prelude(n. 前奏；序幕；前奏曲(（ pre+lude玩，演奏→先演奏→序曲）)
+* lude    【词根】扮演；游戏   prelude(n. 前奏；序幕；前奏曲(（ pre+lude玩，演奏→先演奏→序曲）)
+* lug / lQg/vt.用力拖拉 n. 支托；接线片【词根】悲伤   lugubrious （adj. 悲哀的，悲惨的）
+* lum 【词根】光   luminary(n. 发光体；杰出人物)
+* lumb    词根：柔弱的，边缘，木材，沉重的坠落声 lumber（n. 木材；废物，无用的杂物）
+* lumin   【词根】光   luminous(a.发光的；光明的)
+* lun 【词根】月亮  lunar(adj. 月亮的，月球的；阴历的；银的；微亮的)
+* lup 词根：wolf（狼）  lupine（adj. 狼的；凶残的；贪婪的）
+* lus 【词根】光；演戏    illusion(n.幻想；错觉；假象)
+* lust    n. 贪欲,欲望,色欲 【词根】明亮的 luster(vi. 有光泽；发亮)
+* lustr   【词根】光   illustrate(vt. 阐明，举例说明；图解(（il不断+lustr+ate→不断给光明→说明）)
+* lut 词根：洗；松，分开，分离    ablution（n. 洗礼；洗澡（常用复数）；斋戒沐浴)
+* luv 【词根】洗,冲洗,流  diluvial(adj. 洪积的；大洪水的（di分开+luv+ial→冲开→水很大→大洪水的）)
+* lux 词根：光,弯，转，缠绕 luxury(n. 奢侈，奢华；奢侈品)
+* ly  【后缀】形容词后缀;副词后缀  hourly(adv. 每小时地；频繁地)
+* lyr 词根：lute（笛子） lyric（adj. 抒情的；吟唱的）
+* lys 【词根】分解  analysis(n. 分析；分解；验定(（ana再次+lys+is表名词→再次分解→分析）)
+* lyse    vt.vi. 溶解, 溶化【词根】放松；松开  paralyse(vt. 使……无力；使……麻痹)
+* lyst    【词根】裂开，分解   analyst(n. 分析者；精神分析医师；分解者)
+* lyt 【词根】分解;放松   paralytic(adj. 麻痹的；瘫痪的；中风的)</p>
+
+
+                <hr>
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/english/2016/12/06/English_word_root_K/" data-toggle="tooltip" data-placement="top" title="词根K">
+                        Previous<br>
+                        <span>词根K</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/english/2016/12/06/English_word_root_M/" data-toggle="tooltip" data-placement="top" title="词根M">
+                        Next<br>
+                        <span>词根M</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                    <div class="ds-share flat"
+                    <div class="ds-thread"
+                        data-thread-key="/english/2016/12/06/English_word_root_L"
+                        data-title="词根L"
+                        data-url="http://machinelearningadvance.com/english/2016/12/06/English_word_root_L/" >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+                        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+                        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                 </div>
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/english/2016/12/06/English_word_root_L"
+                        data-title="词根L"
+                        data-url="http://machinelearningadvance.com/english/2016/12/06/English_word_root_L/" >
+                    </div>
+
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="13">
+                                Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spark" title="Spark" rel="15">
+                                Spark
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ME" title="ME" rel="4">
+                                ME
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Other" title="Other" rel="4">
+                                Other
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                CFAL1
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Python" title="Python" rel="2">
+                                Python
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#maths" title="maths" rel="2">
+                                maths
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                                Big Data
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#大数据" title="大数据" rel="20">
+                                大数据
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="4">
+                                IT
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Scala" title="Scala" rel="24">
+                                Scala
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#English" title="English" rel="23">
+                                English
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://wepiaofei.github.io/blog/">前端神盾局</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+<script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"machinelearningadvance"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/2672280861">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/helloourworld">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Big Data Memo 2016
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-82819752-1';
+    var _gaDomain = 'machinelearningadvance.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '863b1f46c83a8e14e47782106aee7e7f';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/images/background.jpg" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
