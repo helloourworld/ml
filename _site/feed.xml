@@ -3266,6 +3266,20 @@ dys 【医】 不良, 困难, 障碍【前缀】不好的   dyslexia(n.阅读障
 		
 			
 			<item>
+				<title>推荐系统中的评测指标</title>
+				
+					<description>&lt;script type=&quot;math/tex; mode=display&quot;&gt;\textrm{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}&lt;/script&gt;
+
+</description>
+				
+				<pubDate>Sat, 19 Nov 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2016/11/19/CF_evaluate/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/11/19/CF_evaluate/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>推荐系统中的相似度计算方法总结</title>
 				
 					<description>&lt;h3 id=&quot;section&quot;&gt;1 相似度计算方法总结&lt;/h3&gt;
