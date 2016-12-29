@@ -179,6 +179,32 @@
             ">
     			
 <div class="post-preview">
+    <a href="/mladvance/2016/11/19/CF_KNN/">
+        <h2 class="post-title">
+            推荐系统中的相似度计算方法总结
+        </h2>
+        
+        <div class="post-content-preview">
+            1 相似度计算方法总结
+
+相似度的计算是推荐系统非常重要的环节，包括：用户与用户之间的相似度，物品与物品之间的相似度或者用户与物品的相关性。
+
+下面以在协同过滤中计算两个用户的相似度来介绍几种常用的相似度计算方法。其中有些方法只适用于协同过滤，有些适应于更多其他推荐方法。
+
+1）共同邻居。直接计算两个用户的交集
+
+
+
+2）Jaccard系数。基于共同邻居的一个显著问题是用户的物品集越大，越可...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 19, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/mladvance/2016/11/19/ALS/">
         <h2 class="post-title">
             Spark-ML-04-collaborative-filtering
@@ -402,39 +428,6 @@ import org.apache.spar...
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/log/2016/11/11/game1/">
-        <h2 class="post-title">
-            tmp
-        </h2>
-        
-        <div class="post-content-preview">
-            1 题1
-
-解：（1） 划线法求纯策略纳什均衡
-
-观察，乙的策略‘中’严格小于策略‘右’（），剔除。
-剔除后，甲的策略‘中‘和‘下’严格小于策略’上‘（; ），剔除。纯策略纳什均衡为（上，左)，如下所示：
-
-
-
-(2) 混合策略纳什均衡
-
-易见，博弈的混合策略纳什均衡为: ((1,0,0),(1,0,0))
-
-2 题2
-
-解：使用划线法求解。
-
-首先，针对参与 者甲，对三个矩阵中每列’上‘’...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on November 11, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -475,7 +468,7 @@ import org.apache.spar...
                             
                         
                             
-                                <a href="/tags/#Spark" title="Spark" rel="15">
+                                <a href="/tags/#Spark" title="Spark" rel="16">
                                     Spark
                                 </a>
                             
@@ -499,7 +492,7 @@ import org.apache.spar...
                             
                         
                             
-                                <a href="/tags/#Python" title="Python" rel="5">
+                                <a href="/tags/#Python" title="Python" rel="6">
                                     Python
                                 </a>
                             
