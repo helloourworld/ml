@@ -56,6 +56,14 @@ object Hello {
 }
 ~~~
 
+## R 示例
+
+~~~ R
+{"cmd": ["Rscript.exe", "$file"],
+"path": "C:\\Program Files\\R\\R-3.3.0\\bin\\x64\\",
+"selector": "source.r"}
+~~~
+
 ## Decode error解决
 
 出现：[Decode error - output not utf-8]
@@ -68,4 +76,39 @@ object Hello {
 {
      "encoding": "cp936"
 }
+~~~
+
+## Sublime text 2/3 [Decode error - output not utf-8] 完美解决方法
+
+1.在sublime text的安装目录下的Packages\目录下找到Default.sublime-package,将这个复制出来,将后缀改名为zip.
+
+2.打开exec.py.找到类ExecCommand的append_data函数,在以下位置添加代码
+
+~~~
+    def append_data(self, proc, data):
+         if proc != self.proc:
+             # a second call to exec has been made before the first one
+             # finished, ignore it instead of intermingling the output.
+             if proc:
+                 proc.kill()
+             return
+
+         #add start
+         is_decode_ok = True;
+         try:
+             str = data.decode(self.encoding)
+         except:
+             is_decode_ok = False
+         if is_decode_ok==False:
+             try:
+                 str = data.decode("gbk")
+             except:
+                 str = "[Decode error - output not " + self.encoding + " and gbk]\n"
+                 proc = None
+
+         # Normalize newlines, Sublime Text always uses a single \n separator
+         # in memory.
+         str = str.replace('\r\n', '\n').replace('\r', '\n')
+
+         self.output_view.run_command('append', {'characters': str, 'force': True, 'scroll_to_end': True})
 ~~~

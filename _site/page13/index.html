@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>Scala Featured - Maching Learning | 机器学习笔记</title>
+    <title>Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/language/2016/10/10/scala_featured/">
+    <link rel="canonical" href="http://machinelearningadvance.com/page13/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -148,319 +148,261 @@
 </script>
 
 
-    <!-- Image to hack wechat -->
-<!-- <img src="/images/background.jpg" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/images/background.jpg')
-    }
-
-    
-</style>
-<header class="intro-header" >
-    <div class="header-mask"></div>
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/images/background.jpg')">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                        <a class="tag" href="/tags/#Scala" title="Scala">Scala</a>
-                        
-                    </div>
-                    <h1>Scala Featured</h1>
-                    
-                    
-                    <h2 class="subheading"></h2>
-                    
-                    <span class="meta">Posted by Big Data Memo on October 10, 2016</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>Big Data Memo</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">天行健，君子以自强不息；地势坤，君子以厚德载物。</span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
 
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+<div class="post-preview">
+    <a href="/mladvance/2011/11/17/data-type/">
+        <h2 class="post-title">
+            Spark-ML-01
+        </h2>
+        
+        <div class="post-content-preview">
+            数据类型
 
-				<h3 id="scala">1 scala中”_“的用法总结</h3>
+  MLlib既支持保存在单台机器上的本地向量和矩阵，也支持备份在一个或多个RDD中的分布式矩阵。本地向量和本地矩阵是简单的数据模型，作为公共接口提供。底层的线性代数操作通过Breeze和jblas提供。
+在MLlib中，用于有监督学习的训练样本称为标注点(labeled point)。
 
-<p>参考链接：</p>
+1 本地向量(Local vector)
 
-<p><a href="http://stackoverflow.com/questions/8000903/what-are-all-the-uses-of-an-underscore-in-scala">what-are-all-the-uses-of-an-underscore-in-scala</a></p>
-
-<p><a href="http://www.slideshare.net/normation/scala-dreaded">http://www.slideshare.net/normation/scala-dreaded</a></p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>import scala._    // Wild card -- all of Scala is imported
-import scala.{ Predef =&gt; _, _ } // Exception, everything except Predef
-def f[M[_]]       // Higher kinded type parameter
-def f(m: M[_])    // Existential type
-_ + _             // Anonymous function placeholder parameter
-m _               // Eta expansion of method into method value
-m(_)              // Partial function application
-_ =&gt; 5            // Discarded parameter
-case _ =&gt;         // Wild card pattern -- matches anything
-val (a, _) = (1, 2) // same thing
-for (_ &lt;- 1 to 10)  // same thing
-f(xs: _*)         // Sequence xs is passed as multiple parameters to f(ys: T*)
-case Seq(xs @ _*) // Identifier xs is bound to the whole matched sequence
-var i: Int = _    // Initialization to the default value
-def abc_&lt;&gt;!       // An underscore must separate alphanumerics from symbols on identifiers
-t._2              // Part of a method name, such as tuple getters
-</code></pre>
+  一个本地向量拥有从0开始的integer类...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2011
+    </p>
 </div>
-
-<p><strong>Existential types</strong><br />
-<code class="highlighter-rouge">def foo(l: List[Option[_]]) = ...</code></p>
-
-<p><strong>Higher kinded type parameters</strong><br />
-<code class="highlighter-rouge">case class A[K[_],T](a: K[T])</code></p>
-
-<p><strong>Ignored variables</strong><br />
-<code class="highlighter-rouge">val _ = 5</code></p>
-
-<p><strong>Ignored parameters</strong><br />
-<code class="highlighter-rouge">List(1, 2, 3) foreach { _ =&gt; println("Hi") }</code></p>
-
-<p><strong>Ignored names of self types</strong><br />
-<code class="highlighter-rouge">trait MySeq { _: Seq[_] =&gt; }</code></p>
-
-<p><strong>Wildcard patterns</strong><br />
-<code class="highlighter-rouge">Some(5) match { case Some(_) =&gt; println("Yes") }</code></p>
-
-<p><strong>Wildcard imports</strong><br />
-<code class="highlighter-rouge">import java.util._</code></p>
-
-<p><strong>Hiding imports</strong><br />
-<code class="highlighter-rouge">import java.util.{ArrayList =&gt; _, _}</code></p>
-
-<p><strong>Joining letters to punctuation</strong><br />
-<code class="highlighter-rouge">def bang_!(x: Int) = 5</code></p>
-
-<p><strong>Assignment operators</strong><br />
-<code class="highlighter-rouge">def foo_=(x: Int) { ... }</code></p>
-
-<p><strong>Placeholder syntax</strong><br />
-<code class="highlighter-rouge">List(1, 2, 3) map (_ + 2)</code></p>
-
-<p><strong>Partially applied functions</strong><br />
-<code class="highlighter-rouge">List(1, 2, 3) foreach println _</code></p>
-
-<p><strong>Converting call-by-name parameters to functions</strong><br />
-<code class="highlighter-rouge">def toFunction(callByName: =&gt; Int): () =&gt; Int = callByName _</code></p>
+<hr>
 
 
+<!-- Pager -->
 
-                <hr>
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page12">&larr; Newer Posts</a>
+    </li>
+    
+    
+</ul>
 
 
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/blog/2016/10/01/travel-site/" data-toggle="tooltip" data-placement="top" title="travel site">
-                        Previous<br>
-                        <span>travel site</span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/hadoop/2016/10/19/python-kafka-sparkstreaming/" data-toggle="tooltip" data-placement="top" title="Python 2 Kafka 2 SparkStreaming">
-                        Next<br>
-                        <span>Python 2 Kafka 2 SparkStreaming</span>
-                        </a>
-                    </li>
-                    
-                </ul>
-                    <div class="ds-share flat"
-                    <div class="ds-thread"
-                        data-thread-key="/language/2016/10/10/scala_featured"
-                        data-title="Scala Featured"
-                        data-url="http://machinelearningadvance.com/language/2016/10/10/scala_featured/" >
-                    <div class="ds-share-inline">
-                      <ul  class="ds-share-icons-16">
-
-                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-                        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-                        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-                        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-                        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-                      </ul>
-                      <div class="ds-share-icons-more">
-                      </div>
-                    </div>
-                 </div>
-                
-                <!-- 多说评论框 start -->
-                <div class="comment">
-                    <div class="ds-thread"
-                        data-thread-key="/language/2016/10/10/scala_featured"
-                        data-title="Scala Featured"
-                        data-url="http://machinelearningadvance.com/language/2016/10/10/scala_featured/" >
-                    </div>
-
-                </div>
-                <!-- 多说评论框 end -->
-                
-
-                
-                <!-- disqus 评论框 start -->
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
-                </div>
-                <!-- disqus 评论框 end -->
-                
-
-            </div>
-
-    <!-- Side Catalog Container -->
-        
-            <div class="
-                col-lg-2 col-lg-offset-0
-                visible-lg-block
-                sidebar-container
-                catalog-container">
-                <div class="side-catalog">
-                    <hr class="hidden-sm hidden-xs">
-                    <h5>
-                        <a class="catalog-toggle" href="#">CATALOG</a>
-                    </h5>
-                    <ul class="catalog-body"></ul>
-                </div>
-            </div>
-        
-
+    		</div>
     <!-- Sidebar Container -->
             <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
                 <!-- Featured Tags -->
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-        				
+                        
                             
-                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="14">
-                                Machine Learning
+                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="14">
+                                    Machine Learning
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#Spark" title="Spark" rel="16">
-                                Spark
+                                <a href="/tags/#Spark" title="Spark" rel="16">
+                                    Spark
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#ME" title="ME" rel="4">
-                                ME
+                                <a href="/tags/#ME" title="ME" rel="4">
+                                    ME
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#Other" title="Other" rel="4">
-                                Other
+                                <a href="/tags/#Other" title="Other" rel="4">
+                                    Other
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#CFAL1" title="CFAL1" rel="9">
-                                CFAL1
+                                <a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                    CFAL1
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#Python" title="Python" rel="6">
-                                Python
+                                <a href="/tags/#Python" title="Python" rel="6">
+                                    Python
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#maths" title="maths" rel="2">
-                                maths
+                                <a href="/tags/#maths" title="maths" rel="2">
+                                    maths
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#Baby" title="Baby" rel="2">
-                                Baby
+                                <a href="/tags/#Baby" title="Baby" rel="2">
+                                    Baby
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
-                                Big Data
+                                <a href="/tags/#Big Data" title="Big Data" rel="22">
+                                    Big Data
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
-                                大数据
+                                <a href="/tags/#大数据" title="大数据" rel="20">
+                                    大数据
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#IT" title="IT" rel="4">
-                                IT
+                                <a href="/tags/#IT" title="IT" rel="4">
+                                    IT
                                 </a>
                             
-        				
+                        
                             
-        				
+                        
                             
-                				<a href="/tags/#Scala" title="Scala" rel="25">
-                                Scala
+                                <a href="/tags/#Scala" title="Scala" rel="25">
+                                    Scala
                                 </a>
                             
-        				
+                        
                             
-        				
+                        
                             
-        				
+                        
                             
-        				
+                        
                             
-        				
+                        
                             
-        				
+                        
                             
-        				
+                        
                             
-        				
+                        
                             
-                				<a href="/tags/#English" title="English" rel="23">
-                                English
+                                <a href="/tags/#English" title="English" rel="23">
+                                    English
                                 </a>
                             
-        				
+                        
                             
-                				<a href="/tags/#wordcloud" title="wordcloud" rel="2">
-                                wordcloud
+                                <a href="/tags/#wordcloud" title="wordcloud" rel="2">
+                                    wordcloud
                                 </a>
                             
-        				
+                        
                             
-        				
-        			</div>
+                        
+                    </div>
                 </section>
                 
 
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <div class="short-about">
+                        
+                            <img src="/images/MyLove.jpg" />
+                        
+                        
+                            <p>写写代码，做做金融，写写代码。世界那么大，我们去看看。</p>
+                        
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                            <li>
+                                <a href="/feed.xml">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            
+                            
+                            <li>
+                                <a target="_blank" href="http://weibo.com/u/2672280861">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://www.facebook.com/davidyjun">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://github.com/helloourworld">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </section>
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -471,67 +413,10 @@ t._2              // Part of a method name, such as tuple getters
                     
                 </ul>
                 
-            </div>
-        </div>
-    </div>
-</article>
-<script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"machinelearningadvance"};
-    (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0]
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-    </script>
-<!-- 多说公共JS代码 end -->
-<!-- 多说公共JS代码 end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
+    		</div>
+        
+	</div>
+</div>
 
 
     <!-- Footer -->
@@ -709,50 +594,6 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
 
 
 <!-- Side Catalog -->
-
-<script type="text/javascript">
-    function generateCatalog (selector) {
-        var P = $('div.post-container'),a,n,t,l,i,c;
-        a = P.find('h1,h2,h3,h4,h5,h6');
-        a.each(function () {
-            n = $(this).prop('tagName').toLowerCase();
-            i = "#"+$(this).prop('id');
-            t = $(this).text();
-            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
-            l = $('<li class="'+n+'_nav"></li>').append(c);
-            $(selector).append(l);
-        });
-        return true;
-    }
-
-    generateCatalog(".catalog-body");
-
-    // toggle side catalog
-    $(".catalog-toggle").click((function(e){
-        e.preventDefault();
-        $('.side-catalog').toggleClass("fold")
-    }))
-
-    /*
-     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
-     * Fork by Hux to support padding
-     */
-    async("/js/jquery.nav.js", function () {
-        $('.catalog-body').onePageNav({
-            currentClass: "active",
-            changeHash: !1,
-            easing: "swing",
-            filter: "",
-            scrollSpeed: 700,
-            scrollOffset: 0,
-            scrollThreshold: .2,
-            begin: null,
-            end: null,
-            scrollChange: null,
-            padding: 80
-        });
-    });
-</script>
 
 
 

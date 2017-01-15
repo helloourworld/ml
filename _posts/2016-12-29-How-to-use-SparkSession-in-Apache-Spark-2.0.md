@@ -59,9 +59,23 @@ spark = SparkSession \
     .getOrCreate()
 ~~~
 
-~~~r
+~~~R
+Sys.setenv(SPARK_HOME="/home/hadoop/spark")
+.libPaths(c(file.path(Sys.getenv("SPARK_HOME"), "R", "lib"), .libPaths()))
+library("SparkR")
+sparkR.session()
 sparkR.session(appName = "MyApp", sparkConfig = list(spark.some.config.option = "some-value"))
+SparkR::sparkR.session()
+# close connection
+sparkR.session.stop()
 ~~~
+
+**Another sloution**
+
+My solution is:
+
+* 1. Create a soft link of the SparkR directory in the the directory where other R packages are installed (ln -s /home/hadoop/spark/R/lib/SparkR /home/hadoop/R/x86_64-pc-linux-gnu-library/3.2)
+* 2. Add only one line (Sys.setenv(SPARK_HOME=”/home/hadoop/spark”)) to the .Rprofile file.
 
 At this point you can use the spark variable as your instance object to access its public methods and instances for the duration of your Spark job.
 
@@ -111,7 +125,7 @@ lpDF.orderBy(desc("percent")).show(false)
 
 ~~~shell
 scala> numDS.orderBy(desc("id")).show(5)
-+---+                                                                           
++---+
 | id|
 +---+
 | 95|
@@ -124,7 +138,7 @@ only showing top 5 rows
 
 
 scala> numDS.describe().show()
-+-------+------------------+                                                    
++-------+------------------+
 |summary|                id|
 +-------+------------------+
 |  count|                19|
@@ -144,7 +158,7 @@ lpDF: org.apache.spark.sql.DataFrame = [language: string, percent: int]
 scala> //order the DataFrame in descending order of percentage
 
 scala> lpDF.orderBy(desc("percent")).show(false)
-+--------+-------+                                                              
++--------+-------+
 |language|percent|
 +--------+-------+
 |Scala   |35     |
@@ -216,7 +230,7 @@ Next, we are going to create a Hive table and issue queries against it using Spa
 spark.sql("DROP TABLE IF EXISTS zips_hive_table")
 //save as a hive table
 spark.table("zips_table").write.saveAsTable("zips_hive_table")
-//make a similar query against the hive table 
+//make a similar query against the hive table
 val resultsHiveDF = spark.sql("SELECT city, pop, state, zip FROM zips_hive_table WHERE pop > 40000")
 resultsHiveDF.show(10)
 ~~~
@@ -234,13 +248,13 @@ scala> spark
 res0: org.apache.spark.sql.SparkSession = org.apache.spark.sql.SparkSession@e06ec83
 
 scala> spark.
-baseRelationToDataFrame   conf              createDataset    emptyDataset   implicits         newSession   read         sparkContext   sqlContext   streams   udf       
-catalog                   createDataFrame   emptyDataFrame   experimental   listenerManager   range        readStream   sql            stop         table     version   
+baseRelationToDataFrame   conf              createDataset    emptyDataset   implicits         newSession   read         sparkContext   sqlContext   streams   udf
+catalog                   createDataFrame   emptyDataFrame   experimental   listenerManager   range        readStream   sql            stop         table     version
 
 scala> spark.
-!=   ->             baseRelationToDataFrame   createDataFrame   emptyDataset   equals         getClass    isInstanceOf      newSession   range        sparkContext   stop           table      version   
-##   ==             catalog                   createDataset     ensuring       experimental   hashCode    listenerManager   notify       read         sql            streams        toString   wait      
-+    asInstanceOf   conf                      emptyDataFrame    eq             formatted      implicits   ne                notifyAll    readStream   sqlContext     synchronized   udf        →         
+!=   ->             baseRelationToDataFrame   createDataFrame   emptyDataset   equals         getClass    isInstanceOf      newSession   range        sparkContext   stop           table      version
+##   ==             catalog                   createDataset     ensuring       experimental   hashCode    listenerManager   notify       read         sql            streams        toString   wait
++    asInstanceOf   conf                      emptyDataFrame    eq             formatted      implicits   ne                notifyAll    readStream   sqlContext     synchronized   udf        →
 ~~~
 
 ## SparkSession Encapsulates SparkContext

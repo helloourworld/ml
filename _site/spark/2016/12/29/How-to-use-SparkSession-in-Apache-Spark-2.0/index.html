@@ -247,9 +247,33 @@ val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 </code></pre>
 </div>
 
-<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">sparkR.session</span><span class="p">(</span><span class="n">appName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"MyApp"</span><span class="p">,</span><span class="w"> </span><span class="n">sparkConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">spark.some.config.option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"some-value"</span><span class="p">))</span><span class="w">
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="n">Sys.setenv</span><span class="p">(</span><span class="n">SPARK_HOME</span><span class="o">=</span><span class="s2">"/home/hadoop/spark"</span><span class="p">)</span><span class="w">
+</span><span class="n">.libPaths</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">file.path</span><span class="p">(</span><span class="n">Sys.getenv</span><span class="p">(</span><span class="s2">"SPARK_HOME"</span><span class="p">),</span><span class="w"> </span><span class="s2">"R"</span><span class="p">,</span><span class="w"> </span><span class="s2">"lib"</span><span class="p">),</span><span class="w"> </span><span class="n">.libPaths</span><span class="p">()))</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="s2">"SparkR"</span><span class="p">)</span><span class="w">
+</span><span class="n">sparkR.session</span><span class="p">()</span><span class="w">
+</span><span class="n">sparkR.session</span><span class="p">(</span><span class="n">appName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"MyApp"</span><span class="p">,</span><span class="w"> </span><span class="n">sparkConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">spark.some.config.option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"some-value"</span><span class="p">))</span><span class="w">
+</span><span class="n">SparkR</span><span class="o">::</span><span class="n">sparkR.session</span><span class="p">()</span><span class="w">
+</span><span class="c1"># close connection
+</span><span class="n">sparkR.session.stop</span><span class="p">()</span><span class="w">
 </span></code></pre>
 </div>
+
+<p><strong>Another sloution</strong></p>
+
+<p>My solution is:</p>
+
+<ul>
+  <li>
+    <ol>
+      <li>Create a soft link of the SparkR directory in the the directory where other R packages are installed (ln -s /home/hadoop/spark/R/lib/SparkR /home/hadoop/R/x86_64-pc-linux-gnu-library/3.2)</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>Add only one line (Sys.setenv(SPARK_HOME=”/home/hadoop/spark”)) to the .Rprofile file.</li>
+    </ol>
+  </li>
+</ul>
 
 <p>At this point you can use the spark variable as your instance object to access its public methods and instances for the duration of your Spark job.</p>
 
@@ -298,7 +322,7 @@ One quick way to generate a Dataset is by using the spark.range method. When lea
 </div>
 
 <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">scala&gt; </span>numDS.orderBy<span class="o">(</span>desc<span class="o">(</span><span class="s2">"id"</span><span class="o">))</span>.show<span class="o">(</span>5<span class="o">)</span>
-+---+                                                                           
++---+
 | id|
 +---+
 | 95|
@@ -311,7 +335,7 @@ only showing top 5 rows
 
 
 <span class="gp">scala&gt; </span>numDS.describe<span class="o">()</span>.show<span class="o">()</span>
-+-------+------------------+                                                    
++-------+------------------+
 |summary|                id|
 +-------+------------------+
 |  count|                19|
@@ -331,7 +355,7 @@ lpDF: org.apache.spark.sql.DataFrame <span class="o">=</span> <span class="o">[<
 <span class="gp">scala&gt; </span>//order the DataFrame <span class="k">in </span>descending order of percentage
 
 <span class="gp">scala&gt; </span>lpDF.orderBy<span class="o">(</span>desc<span class="o">(</span><span class="s2">"percent"</span><span class="o">))</span>.show<span class="o">(</span><span class="nb">false</span><span class="o">)</span>
-+--------+-------+                                                              
++--------+-------+
 |language|percent|
 +--------+-------+
 |Scala   |35     |
@@ -403,7 +427,7 @@ resultDF: org.apache.spark.sql.DataFrame <span class="o">=</span> <span class="o
 </span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">(</span><span class="s">"DROP TABLE IF EXISTS zips_hive_table"</span><span class="o">)</span>
 <span class="c1">//save as a hive table
 </span><span class="n">spark</span><span class="o">.</span><span class="n">table</span><span class="o">(</span><span class="s">"zips_table"</span><span class="o">).</span><span class="n">write</span><span class="o">.</span><span class="n">saveAsTable</span><span class="o">(</span><span class="s">"zips_hive_table"</span><span class="o">)</span>
-<span class="c1">//make a similar query against the hive table 
+<span class="c1">//make a similar query against the hive table
 </span><span class="k">val</span> <span class="n">resultsHiveDF</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">(</span><span class="s">"SELECT city, pop, state, zip FROM zips_hive_table WHERE pop &gt; 40000"</span><span class="o">)</span>
 <span class="n">resultsHiveDF</span><span class="o">.</span><span class="n">show</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
 </code></pre>
@@ -421,13 +445,13 @@ Second, let’s turn our attention to two Spark developer environments where the
 res0: org.apache.spark.sql.SparkSession <span class="o">=</span> org.apache.spark.sql.SparkSession@e06ec83
 
 <span class="gp">scala&gt; </span>spark.
-baseRelationToDataFrame   conf              createDataset    emptyDataset   implicits         newSession   <span class="nb">read         </span>sparkContext   sqlContext   streams   udf       
-catalog                   createDataFrame   emptyDataFrame   experimental   listenerManager   range        readStream   sql            stop         table     version   
+baseRelationToDataFrame   conf              createDataset    emptyDataset   implicits         newSession   <span class="nb">read         </span>sparkContext   sqlContext   streams   udf
+catalog                   createDataFrame   emptyDataFrame   experimental   listenerManager   range        readStream   sql            stop         table     version
 
 <span class="gp">scala&gt; </span>spark.
-!<span class="o">=</span>   -&gt;             baseRelationToDataFrame   createDataFrame   emptyDataset   equals         getClass    isInstanceOf      newSession   range        sparkContext   stop           table      version   
-<span class="c">##   ==             catalog                   createDataset     ensuring       experimental   hashCode    listenerManager   notify       read         sql            streams        toString   wait      </span>
-+    asInstanceOf   conf                      emptyDataFrame    eq             formatted      implicits   ne                notifyAll    readStream   sqlContext     synchronized   udf        →         
+!<span class="o">=</span>   -&gt;             baseRelationToDataFrame   createDataFrame   emptyDataset   equals         getClass    isInstanceOf      newSession   range        sparkContext   stop           table      version
+<span class="c">##   ==             catalog                   createDataset     ensuring       experimental   hashCode    listenerManager   notify       read         sql            streams        toString   wait</span>
++    asInstanceOf   conf                      emptyDataFrame    eq             formatted      implicits   ne                notifyAll    readStream   sqlContext     synchronized   udf        →
 </code></pre>
 </div>
 
@@ -601,7 +625,7 @@ SparkContext as it relates to Driver and Cluster Manager</p>
                             
         				
                             
-                				<a href="/tags/#Scala" title="Scala" rel="24">
+                				<a href="/tags/#Scala" title="Scala" rel="25">
                                 Scala
                                 </a>
                             
@@ -630,6 +654,8 @@ SparkContext as it relates to Driver and Cluster Manager</p>
                 				<a href="/tags/#wordcloud" title="wordcloud" rel="2">
                                 wordcloud
                                 </a>
+                            
+        				
                             
         				
         			</div>
@@ -773,7 +799,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2016
+                    Copyright &copy; Big Data Memo 2017
                 </p>
             </div>
         </div>
