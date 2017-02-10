@@ -8,6 +8,64 @@
 		
 			
 			<item>
+				<title>远程访问jupyter notebook</title>
+				
+					<description>&lt;ol&gt;
+  &lt;li&gt;登陆远程服务器&lt;/li&gt;
+  &lt;li&gt;生成配置文件&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+				
+				<pubDate>Fri, 10 Feb 2017 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2017/02/10/JupyterNotebook/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2017/02/10/JupyterNotebook/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Zipline量化平台</title>
+				
+					<description>&lt;h2 id=&quot;section&quot;&gt;什么是量化策略？&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Tue, 07 Feb 2017 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/quant/2017/02/07/quant-zipline/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/quant/2017/02/07/quant-zipline/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>yh模型开发技术选型</title>
+				
+					<description>
+</description>
+				
+				<pubDate>Fri, 20 Jan 2017 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/quant/2017/01/20/model-optimize-option/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/quant/2017/01/20/model-optimize-option/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>量化平台ABC</title>
+				
+					<description>&lt;p&gt;zipline + pyfolio 搭建的量化策略研究平台，解决了策略回测和评价的大部分问题，为quantopian的开源点赞！&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Wed, 18 Jan 2017 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/quant/2017/01/18/quant-plat/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/quant/2017/01/18/quant-plat/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>How to use SparkSession in Apache Spark 2.0</title>
 				
 					<description>&lt;h2 id=&quot;pre&quot;&gt;pre&lt;/h2&gt;
@@ -5660,7 +5718,8 @@ catalog: yes&gt;
 			<item>
 				<title>This is a test!</title>
 				
-					<description>&lt;p&gt;This is a test, some picture.&lt;/p&gt;
+					<description>&lt;p&gt;感觉在大城市，技术差点问题不大，但是一定要有经济头脑
+比如什么时候买房，买哪里，用多少杠杆，否则，辛辛苦苦几年，全白搭&lt;/p&gt;
 
 </description>
 				
