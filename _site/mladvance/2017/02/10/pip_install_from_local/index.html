@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>scala with sublime - Maching Learning | 机器学习笔记</title>
+    <title>断网环境下利用pip安装Python离线安装包 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/language/2016/08/20/sublime-and-scala/">
+    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2017/02/10/pip_install_from_local/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,15 +168,17 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Scala" title="Scala">Scala</a>
+                        <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                        <a class="tag" href="/tags/#IT" title="IT">IT</a>
                         
                     </div>
-                    <h1>scala with sublime</h1>
+                    <h1>断网环境下利用pip安装Python离线安装包</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on August 20, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on February 10, 2017</span>
                 </div>
             </div>
         </div>
@@ -194,114 +196,55 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="scala">Scala特点：</h2>
+				<ul>
+  <li>1.在可以联网的开发机器上安装好需要的包</li>
+  <li>例如：</li>
+</ul>
 
-<blockquote>
-  <ul>
-    <li>Scala是一种纯面向对象的语言，一切都是对象：将原始类型和类统一起来，同时也将函数和操作符统一起来。</li>
-    <li>Scala又是函数式语言，这体现在，函数在Scala中也是一种对象，并且能非常自然的使用高阶函数。</li>
-    <li>Scala是静态类型的语言，但是由于它强大的类型推断，实际需要指定类型的地方并不多。在拥有静态语言和编译型语言的安全高效的优势的同时，Scala使用起来像Ruby，Python等静态语言一样方便，灵活，简洁。</li>
-  </ul>
-</blockquote>
-
-<h2 id="sublime-ide-">sublime IDE 配置</h2>
-<p>【Tools】-&gt;【Build System】-&gt;【New Build System】
-输入如下内容：</p>
-
-<pre><code class="language-sublime">{
-    "cmd": ["scalac", "-d", "%tmp%", "$file", "&amp;", "scala", "-cp", "%tmp%", "$file_base_name"],
-    "selector": ["source.scala"],
-    "shell": "true"
-    "encoding": "cp936"
-}
-</code></pre>
-
-<p>保存。然后就可以使用ctrl + b 编译与执行scala脚本了。</p>
-
-<p>ps: 使用同样的配置也能够执行java的编译与执行。方法：</p>
-
-<blockquote>
-  <p>将cmdjava替换为如下bat脚本，并放置于javac路径</p>
-</blockquote>
-
-<pre><code class="language-bat">    @ECHO OFF
-cd %~dp1
-ECHO Compiling %~nx1......
-IF EXIST %~n1.class (
-    DEL %~n1.class
-    )
-javac %~nx1
-IF EXIST %~n1.class (
-    ECHO ----------------------OUTPUT--------------
-    java %~n1
-    )
-</code></pre>
-
-<h2 id="scala-1">scala示例</h2>
-
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Hello</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">println</span><span class="o">(</span><span class="s">"Hello, world!"</span><span class="o">)</span>
-  <span class="o">}</span>
-<span class="o">}</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>pip install numpy
+pip install pandas
 </code></pre>
 </div>
 
-<h2 id="r-">R 示例</h2>
+<ul>
+  <li>2.打包已安装的包</li>
+  <li>在python目录下新建packages文件夹用来存储下载下来的所需安装包。</li>
+</ul>
 
-<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="s2">"cmd"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Rscript.exe"</span><span class="p">,</span><span class="w"> </span><span class="s2">"$file"</span><span class="p">],</span><span class="w">
-</span><span class="s2">"path"</span><span class="o">:</span><span class="w"> </span><span class="s2">"C:\\Program Files\\R\\R-3.3.0\\bin\\x64\\"</span><span class="p">,</span><span class="w">
-</span><span class="s2">"selector"</span><span class="o">:</span><span class="w"> </span><span class="s2">"source.r"</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h2 id="decode-error">Decode error解决</h2>
-
-<p>出现：[Decode error - output not utf-8]</p>
-
-<p>解决：
-发现是print不支持中文字符的输出， 需要修改build的setting， 打开.sublime-build,
-添加：</p>
-
-<pre><code class="language-sublime">{
-     "encoding": "cp936"
-}
-</code></pre>
-
-<h2 id="sublime-text-23-decode-error---output-not-utf-8-">Sublime text 2/3 [Decode error - output not utf-8] 完美解决方法</h2>
-
-<p>1.在sublime text的安装目录下的Packages\目录下找到Default.sublime-package,将这个复制出来,将后缀改名为zip.</p>
-
-<p>2.打开exec.py.找到类ExecCommand的append_data函数,在以下位置添加代码</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>    def append_data(self, proc, data):
-         if proc != self.proc:
-             # a second call to exec has been made before the first one
-             # finished, ignore it instead of intermingling the output.
-             if proc:
-                 proc.kill()
-             return
-
-         #add start
-         is_decode_ok = True;
-         try:
-             str = data.decode(self.encoding)
-         except:
-             is_decode_ok = False
-         if is_decode_ok==False:
-             try:
-                 str = data.decode("gbk")
-             except:
-                 str = "[Decode error - output not " + self.encoding + " and gbk]\n"
-                 proc = None
-
-         # Normalize newlines, Sublime Text always uses a single \n separator
-         # in memory.
-         str = str.replace('\r\n', '\n').replace('\r', '\n')
-
-         self.output_view.run_command('append', {'characters': str, 'force': True, 'scroll_to_end': True})
+<div class="highlighter-rouge"><pre class="highlight"><code>pip list #查看安装的包
+pip freeze &gt;requirements.txt
+pip install --download packages -r requirements.txt
 </code></pre>
 </div>
+
+<ul>
+  <li>3.离线情况安装打包好的包</li>
+  <li>将packages文件夹和requirement.txt拷贝至离线机器上目录下，packages文件夹放在Python目录下，requirement.txt放在Scripts目录下。</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>pip install --no-index --find-index=d:\python27\packages -r requirements.txt
+</code></pre>
+</div>
+
+<p>补充</p>
+
+<p>1.下载指定的包到指定文件夹</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>pip install --download d:\python27\packs pandas（-r requirements.txt）
+</code></pre>
+</div>
+
+<p>2.安装指定的离线包</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>pip install --no-index --find-links=d:\python27\packs\ pandas （-r requirements.txt）
+</code></pre>
+</div>
+
+<ol>
+  <li><a href="https://taizilongxu.gitbooks.io/stackoverflow-about-python/content/8/README.html">stackoverflow-about-python</a></li>
+</ol>
+
+<p>找不到vcvarsall.bat</p>
 
 
                 <hr>
@@ -310,26 +253,19 @@ IF EXIST %~n1.class (
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/hadoop/2016/08/17/hadoop_tutorial_3/" data-toggle="tooltip" data-placement="top" title="Hadoop Tutorial ---- Spark入门实战系列--1.Spark及其生态圈简介">
+                        <a href="/mladvance/2017/02/10/JupyterNotebook/" data-toggle="tooltip" data-placement="top" title="远程访问jupyter notebook">
                         Previous<br>
-                        <span>Hadoop Tutorial ---- Spark入门实战系列--1.Spark及其生态圈简介</span>
+                        <span>远程访问jupyter notebook</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/blog/2016/08/21/googletrends/" data-toggle="tooltip" data-placement="top" title="google trends">
-                        Next<br>
-                        <span>google trends</span>
-                        </a>
-                    </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/language/2016/08/20/sublime and scala"
-                        data-title="scala with sublime"
-                        data-url="http://machinelearningadvance.com/language/2016/08/20/sublime-and-scala/" >
+                        data-thread-key="/mladvance/2017/02/10/pip_install_from_local"
+                        data-title="断网环境下利用pip安装Python离线安装包"
+                        data-url="http://machinelearningadvance.com/mladvance/2017/02/10/pip_install_from_local/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -348,9 +284,9 @@ IF EXIST %~n1.class (
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/language/2016/08/20/sublime and scala"
-                        data-title="scala with sublime"
-                        data-url="http://machinelearningadvance.com/language/2016/08/20/sublime-and-scala/" >
+                        data-thread-key="/mladvance/2017/02/10/pip_install_from_local"
+                        data-title="断网环境下利用pip安装Python离线安装包"
+                        data-url="http://machinelearningadvance.com/mladvance/2017/02/10/pip_install_from_local/" >
                     </div>
 
                 </div>

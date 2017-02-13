@@ -179,6 +179,29 @@
             ">
     			
 <div class="post-preview">
+    <a href="/blog/2016/09/13/Setup-passphraseless-ssh/">
+        <h2 class="post-title">
+            Setup passphraseless ssh
+        </h2>
+        
+        <div class="post-content-preview">
+            配置免密码登陆：
+
+1、生成公钥
+
+[hadoop@NN01 ~]$ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+Generating public/private rsa key pair.
+Your identification has been saved in /home/hadoop/.ssh/id_rsa.
+Your public key h...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 13, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/hadoop/2016/09/08/Streaming_lesson1/">
         <h2 class="post-title">
             Spark Streaming Lesson 1
@@ -394,32 +417,6 @@ kafka组件深度解析kafka1,kafka介绍关于kafka入门的文章最好的就�
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/language/2016/09/01/Scala-Lesson9/">
-        <h2 class="post-title">
-            Scala Lesson 9
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala 文件 I/O
-
-1 文件写操作
-
-Scala 进行文件写操作，直接用的都是 java中 的 I/O 类 （java.io.File)：
-
-import java.io._
-
-object IOs1 {
-   def main(args: Array[String]) {
-      val writer = new PrintWriter(new File("test.txt" ...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 1, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -484,7 +481,7 @@ object IOs1 {
                             
                         
                             
-                                <a href="/tags/#Python" title="Python" rel="8">
+                                <a href="/tags/#Python" title="Python" rel="9">
                                     Python
                                 </a>
                             
@@ -514,7 +511,7 @@ object IOs1 {
                             
                         
                             
-                                <a href="/tags/#IT" title="IT" rel="5">
+                                <a href="/tags/#IT" title="IT" rel="6">
                                     IT
                                 </a>
                             

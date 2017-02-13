@@ -179,6 +179,39 @@
             ">
     			
 <div class="post-preview">
+    <a href="/mladvance/2017/02/10/pip_install_from_local/">
+        <h2 class="post-title">
+            断网环境下利用pip安装Python离线安装包
+        </h2>
+        
+        <div class="post-content-preview">
+            
+  1.在可以联网的开发机器上安装好需要的包
+  例如：
+
+
+pip install numpy
+pip install pandas
+
+
+
+
+  2.打包已安装的包
+  在python目录下新建packages文件夹用来存储下载下来的所需安装包。
+
+
+pip list #查看安装的包
+pip freeze &gt;requirements.txt
+pip install --downlo...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on February 10, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/mladvance/2017/02/10/JupyterNotebook/">
         <h2 class="post-title">
             远程访问jupyter notebook
@@ -408,27 +441,6 @@ First we will build a word cloud using TF-IDF weights on a relatively small corp
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/mladvance/2016/12/05/nb/">
-        <h2 class="post-title">
-            Spark-ML-0302-Naive Bayes
-        </h2>
-        
-        <div class="post-content-preview">
-            朴素贝叶斯
-
-1 介绍
-
-  朴素贝叶斯是一种构建分类器的简单方法。该分类器模型会给问题实例分配用特征值表示的类标签，类标签取自有限集合。它不是训练这种分类器的单一算法，而是一系列基于相同原理的算法：所有朴素贝叶斯分类器都假定样本每个特征与其他特征都不相关。
-举个例子，如果一种水果其具有红，圆，直径大概3英寸等特征，该水果可以被判定为是苹果。尽管这些特征相互依赖或者有些特征由其他特征决定，然...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on December 5, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -489,7 +501,7 @@ First we will build a word cloud using TF-IDF weights on a relatively small corp
                             
                         
                             
-                                <a href="/tags/#Python" title="Python" rel="8">
+                                <a href="/tags/#Python" title="Python" rel="9">
                                     Python
                                 </a>
                             
@@ -519,7 +531,7 @@ First we will build a word cloud using TF-IDF weights on a relatively small corp
                             
                         
                             
-                                <a href="/tags/#IT" title="IT" rel="5">
+                                <a href="/tags/#IT" title="IT" rel="6">
                                     IT
                                 </a>
                             

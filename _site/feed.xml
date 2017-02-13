@@ -8,6 +8,23 @@
 		
 			
 			<item>
+				<title>断网环境下利用pip安装Python离线安装包</title>
+				
+					<description>&lt;ul&gt;
+  &lt;li&gt;1.在可以联网的开发机器上安装好需要的包&lt;/li&gt;
+  &lt;li&gt;例如：&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+				
+				<pubDate>Fri, 10 Feb 2017 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2017/02/10/pip_install_from_local/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2017/02/10/pip_install_from_local/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>远程访问jupyter notebook</title>
 				
 					<description>&lt;ol&gt;
