@@ -3,11 +3,12 @@ layout: post
 title: 新三板聚类项目
 category: MLAdvance
 catalog: yes
-description: 新三板公司聚类项目说明
+description: 新三板聚类Demo
 tags:
-    - Scala
-    - clustering
+    - Python
+    - wordcloud
 ---
+
 
 ## 目录
 

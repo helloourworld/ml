@@ -30,7 +30,7 @@ pip install --download packages -r requirements.txt
 * 将packages文件夹和requirement.txt拷贝至离线机器上目录下，packages文件夹放在Python目录下，requirement.txt放在Scripts目录下。
 
 ~~~
-pip install --no-index --find-index=d:\python27\packages -r requirements.txt
+pip install --no-index --find-links=d:\python27\packages -r requirements.txt
 ~~~
 
 补充
