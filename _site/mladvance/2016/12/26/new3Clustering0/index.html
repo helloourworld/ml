@@ -17,7 +17,7 @@
 
     <title>新三板聚类项目 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/12/26/new3Clustering/">
+    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/12/26/new3Clustering0/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -198,55 +198,37 @@
 
 				<h2 id="section">目录</h2>
 
-<ul>
-  <li>1 聚类类别确定demo</li>
-  <li>2 聚类demo</li>
-  <li>3 spark MySQL 读取数据</li>
-  <li>4 其它</li>
-</ul>
+<p>1 聚类类别确定demo
+2 聚类demo
+3 spark MySQL 读取数据
+4 其它</p>
 
 <h2 id="demo">1 聚类类别确定demo</h2>
 
 <h3 id="k-means-">1.1 K-means 聚类算法原理</h3>
 
-<ul>
-  <li>聚类分析是一个无监督学习 (Unsupervised Learning) 过程, 一般是用来对数据对象按照其特征属性进行分组，经常被应用在客户分群，欺诈检测，图像分析等领域。K-means 应该是最有名并且最经常使用的聚类算法了，其原理比较容易理解，并且聚类效果良好，有着广泛的使用。</li>
-  <li>和诸多机器学习算法一样，K-means 算法也是一个迭代式的算法，其主要步骤如下:</li>
-</ul>
+<p>聚类分析是一个无监督学习 (Unsupervised Learning) 过程, 一般是用来对数据对象按照其特征属性进行分组，经常被应用在客户分群，欺诈检测，图像分析等领域。K-means 应该是最有名并且最经常使用的聚类算法了，其原理比较容易理解，并且聚类效果良好，有着广泛的使用。
+和诸多机器学习算法一样，K-means 算法也是一个迭代式的算法，其主要步骤如下:</p>
 
-<blockquote>
-  <ul>
-    <li>第一步，选择 K 个点作为初始聚类中心。</li>
-    <li>第二步，计算其余所有点到聚类中心的距离，并把每个点划分到离它最近的聚类中心所在的聚类中去。在这里，衡量距离一般有多个函数可以选择，最常用的是欧几里得距离 (Euclidean Distance), 也叫欧式距离。公式如下：</li>
-    <li>
-      <script type="math/tex; mode=display">D(C, X) = \sqrt{\sum_{i=1}^{n}(c_i - x_i)^2}</script>
-    </li>
-    <li>其中 C 代表中心点，X 代表任意一个非中心点。</li>
-    <li>第三步，重新计算每个聚类中所有点的平均值，并将其作为新的聚类中心点。</li>
-    <li>最后，重复 (二)，(三) 步的过程，直至聚类中心不再发生改变，或者算法达到预定的迭代次数，又或聚类中心的改变小于预先设定的阀值。</li>
-  </ul>
-</blockquote>
+<p>第一步，选择 K 个点作为初始聚类中心。
+第二步，计算其余所有点到聚类中心的距离，并把每个点划分到离它最近的聚类中心所在的聚类中去。在这里，衡量距离一般有多个函数可以选择，最常用的是欧几里得距离 (Euclidean Distance), 也叫欧式距离。公式如下：
+<script type="math/tex">D(C, X) = \sqrt{\sum_{i=1}^{n}(c_i - x_i)^2}</script>
+其中 C 代表中心点，X 代表任意一个非中心点。
+第三步，重新计算每个聚类中所有点的平均值，并将其作为新的聚类中心点。
+最后，重复 (二)，(三) 步的过程，直至聚类中心不再发生改变，或者算法达到预定的迭代次数，又或聚类中心的改变小于预先设定的阀值。</p>
 
-<ul>
-  <li>在实际应用中，K-means 算法有两个不得不面对并且克服的问题。</li>
-  <li>1聚类个数 K 的选择。K 的选择是一个比较有学问和讲究的步骤，我们会在本部分描述如何使用 Spark 提供的工具选择 K。</li>
-  <li>2 初始聚类中心点的选择。选择不同的聚类中心可能导致聚类结果的差异。</li>
-</ul>
+<p>在实际应用中，K-means 算法有两个不得不面对并且克服的问题。
+1聚类个数 K 的选择。K 的选择是一个比较有学问和讲究的步骤，我们会在本部分描述如何使用 Spark 提供的工具选择 K。
+2 初始聚类中心点的选择。选择不同的聚类中心可能导致聚类结果的差异。</p>
 
 <p>Spark MLlib K-means 算法的实现在初始聚类点的选择上，借鉴了一个叫 K-means||的类 K-means++ 实现。K-means++ 算法在初始点选择上遵循一个基本原则: 初始聚类中心点相互之间的距离应该尽可能的远。基本步骤如下:</p>
 
-<blockquote>
-  <ul>
-    <li>第一步，从数据集 X 中随机选择一个点作为第一个初始点。</li>
-    <li>第二步，计算数据集中所有点与最新选择的中心点的距离 D(x)。</li>
-    <li>第三步，选择下一个中心点，使得</li>
-    <li>
-      <script type="math/tex; mode=display">P(x) = \frac{D(x)^2}{\sum_{x \in X D(x)^2}}</script>
-    </li>
-    <li>最大。</li>
-    <li>第四步，重复 (二),(三) 步过程，直到 K 个初始点选择完成。</li>
-  </ul>
-</blockquote>
+<p>第一步，从数据集 X 中随机选择一个点作为第一个初始点。
+第二步，计算数据集中所有点与最新选择的中心点的距离 D(x)。
+第三步，选择下一个中心点，使得
+<script type="math/tex">P(x) = \frac{D(x)^2}{\sum_{x \in X D(x)^2}}</script>
+最大。
+第四步，重复 (二),(三) 步过程，直到 K 个初始点选择完成。</p>
 
 <h3 id="k">1.2 如何选择 K</h3>
 
@@ -314,28 +296,28 @@
     <span class="k">val</span> <span class="n">sc</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkContext</span><span class="o">(</span><span class="n">conf</span><span class="o">)</span>
 
     <span class="cm">/**
-      * Channel Region Fresh   Milk Grocery Frozen Detergents_Paper Delicassen
-      * 2       3    12669 9656 7561   214     2674                1338
-      * 2       3    7057 9810 9568    1762    3293                1776
-      * 2       3    6353 8808 7684    2405    3516                7844
+      Channel Region Fresh   Milk Grocery Frozen Detergents_Paper Delicassen
+      2       3    12669 9656 7561   214     2674                1338
+      2       3    7057 9810 9568    1762    3293                1776
+      2       3    6353 8808 7684    2405    3516                7844
       */</span>
 
     <span class="k">val</span> <span class="n">rawTrainingData</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="s">"data/mllib/UCI/Wholesale_customers_data.csv"</span><span class="o">)</span>
     <span class="k">val</span> <span class="n">rawData</span> <span class="k">=</span>
-      <span class="n">rawTrainingData</span><span class="o">.</span><span class="n">filter</span><span class="o">(!</span><span class="n">isColumnNameLine</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="n">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="o">{</span>
+      <span class="n">rawTrainingData</span><span class="o">.</span><span class="n">filter</span><span class="o">(!</span><span class="n">isColumnNameLine</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="n">map</span><span class="o">(</span><span class="n">line</span> <span class="o">={</span>
 
         <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="s">","</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">trim</span><span class="o">).</span><span class="n">filter</span><span class="o">(!</span><span class="s">""</span><span class="o">.</span><span class="n">equals</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">toDouble</span><span class="o">))</span>
       <span class="o">}).</span><span class="n">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.8</span><span class="o">,</span><span class="mf">0.2</span><span class="o">))</span>
 
     <span class="c1">// Cluster the data into two classes using KMeans
 </span>    <span class="k">val</span> <span class="n">parsedTrainingData</span> <span class="k">=</span> <span class="n">rawData</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">cache</span><span class="o">()</span>
-    <span class="n">println</span><span class="o">(</span><span class="s">"rawTrainingData is: "</span> <span class="o">+</span> <span class="n">rawTrainingData</span><span class="o">.</span><span class="n">count</span><span class="o">()</span> <span class="o">+</span> <span class="s">" ******* and parsedTrainingData is: "</span> <span class="o">+</span> <span class="n">parsedTrainingData</span><span class="o">.</span><span class="n">count</span><span class="o">())</span>
+    <span class="n">println</span><span class="o">(</span><span class="s">"rawTrainingData is: "</span> <span class="o">+</span> <span class="n">rawTrainingData</span><span class="o">.</span><span class="n">count</span><span class="o">()</span> <span class="o">+</span> <span class="s">" ******and parsedTrainingData is: "</span> <span class="o">+</span> <span class="n">parsedTrainingData</span><span class="o">.</span><span class="n">count</span><span class="o">())</span>
     <span class="k">var</span> <span class="n">clusterIndex</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">val</span> <span class="n">ks</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">11</span><span class="o">,</span> <span class="mi">12</span><span class="o">,</span> <span class="mi">13</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">15</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="mi">17</span><span class="o">,</span> <span class="mi">18</span><span class="o">,</span> <span class="mi">19</span><span class="o">,</span> <span class="mi">20</span><span class="o">)</span>
-    <span class="n">ks</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">cluster</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="n">ks</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">cluster</span> <span class="o">={</span>
       <span class="k">val</span> <span class="n">model</span><span class="k">:</span> <span class="kt">KMeansModel</span> <span class="o">=</span> <span class="nc">KMeans</span><span class="o">.</span><span class="n">train</span><span class="o">(</span><span class="n">parsedTrainingData</span><span class="o">,</span> <span class="n">cluster</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
       <span class="k">val</span> <span class="n">ssd</span> <span class="k">=</span> <span class="n">model</span><span class="o">.</span><span class="n">computeCost</span><span class="o">(</span><span class="n">parsedTrainingData</span><span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"sum of squared distances of points to their nearest center when k="</span> <span class="o">+</span> <span class="n">cluster</span> <span class="o">+</span> <span class="s">" -&gt; "</span> <span class="o">+</span> <span class="n">ssd</span><span class="o">)</span>
+      <span class="n">println</span><span class="o">(</span><span class="s">"sum of squared distances of points to their nearest center when k="</span> <span class="o">+</span> <span class="n">cluster</span> <span class="o">+</span> <span class="s">" -"</span> <span class="o">+</span> <span class="n">ssd</span><span class="o">)</span>
     <span class="o">})</span>
   <span class="o">}</span>
   <span class="k">private</span> <span class="k">def</span>
@@ -350,25 +332,25 @@
 
 <p>结果如下：</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>rawTrainingData is: 441 <span class="k">*******</span> and parsedTrainingData is: 356
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>3 -&gt; 7.140043596954352E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>4 -&gt; 5.828120398877622E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>5 -&gt; 4.877187386940861E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>6 -&gt; 4.159989838378546E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>7 -&gt; 3.668188571522888E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>8 -&gt; <span class="k">**</span>3.583448066234746E10<span class="k">**</span>
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>9 -&gt; 2.8447515194141922E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>10 -&gt; 2.6456968510064972E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>11 -&gt; 2.4973296946980904E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>12 -&gt; 2.284145771589616E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>13 -&gt; 2.214691923763228E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>14 -&gt; 2.087706648769969E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>15 -&gt; 1.948901455097017E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>16 -&gt; 1.9436597320674072E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>17 -&gt; 1.56625179067911E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>18 -&gt; 1.579405375095717E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>19 -&gt; 1.3642911747596188E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>20 -&gt; 1.3876552141098682E10
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>rawTrainingData is: 441 <span class="k">******</span>and parsedTrainingData is: 356
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>3 -7.140043596954352E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>4 -5.828120398877622E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>5 -4.877187386940861E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>6 -4.159989838378546E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>7 -3.668188571522888E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>8 -<span class="k">**</span>3.583448066234746E10<span class="k">**</span>
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>9 -2.8447515194141922E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>10 -2.6456968510064972E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>11 -2.4973296946980904E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>12 -2.284145771589616E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>13 -2.214691923763228E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>14 -2.087706648769969E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>15 -1.948901455097017E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>16 -1.9436597320674072E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>17 -1.56625179067911E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>18 -1.579405375095717E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>19 -1.3642911747596188E10
+sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>20 -1.3876552141098682E10
 </code></pre>
 </div>
 
@@ -394,15 +376,15 @@ sum of squared distances of points to their nearest center when <span class="nv"
     <span class="k">val</span> <span class="n">sc</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkContext</span><span class="o">(</span><span class="n">conf</span><span class="o">)</span>
 
     <span class="cm">/**
-      * Channel Region Fresh   Milk Grocery Frozen Detergents_Paper Delicassen
-      * 2       3    12669 9656 7561   214     2674                1338
-      * 2       3    7057 9810 9568    1762    3293                1776
-      * 2       3    6353 8808 7684    2405    3516                7844
+      Channel Region Fresh   Milk Grocery Frozen Detergents_Paper Delicassen
+      2       3    12669 9656 7561   214     2674                1338
+      2       3    7057 9810 9568    1762    3293                1776
+      2       3    6353 8808 7684    2405    3516                7844
       */</span>
 
     <span class="k">val</span> <span class="n">rawTrainingData</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="n">args</span><span class="o">(</span><span class="mi">0</span><span class="o">))</span>
     <span class="k">val</span> <span class="n">rawData</span> <span class="k">=</span>
-      <span class="n">rawTrainingData</span><span class="o">.</span><span class="n">filter</span><span class="o">(!</span><span class="n">isColumnNameLine</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="n">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="o">{</span>
+      <span class="n">rawTrainingData</span><span class="o">.</span><span class="n">filter</span><span class="o">(!</span><span class="n">isColumnNameLine</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="n">map</span><span class="o">(</span><span class="n">line</span> <span class="o">={</span>
 
         <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="s">","</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">trim</span><span class="o">).</span><span class="n">filter</span><span class="o">(!</span><span class="s">""</span><span class="o">.</span><span class="n">equals</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">toDouble</span><span class="o">))</span>
       <span class="o">}).</span><span class="n">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.7</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">))</span>
@@ -418,14 +400,14 @@ sum of squared distances of points to their nearest center when <span class="nv"
     <span class="n">println</span><span class="o">(</span><span class="s">"Cluster Number:"</span> <span class="o">+</span> <span class="n">clusters</span><span class="o">.</span><span class="n">clusterCenters</span><span class="o">.</span><span class="n">length</span><span class="o">)</span>
     <span class="n">println</span><span class="o">(</span><span class="s">"Cluster Centers Information Overview:"</span><span class="o">)</span>
     <span class="n">clusters</span><span class="o">.</span><span class="n">clusterCenters</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span>
-      <span class="n">x</span> <span class="k">=&gt;</span> <span class="o">{</span>
+      <span class="n">x</span> <span class="o">={</span>
         <span class="n">println</span><span class="o">(</span><span class="s">"Center Point of Cluster "</span> <span class="o">+</span> <span class="n">clusterIndex</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="n">x</span><span class="o">)</span>
         <span class="n">clusterIndex</span> <span class="o">+=</span> <span class="mi">1</span>
       <span class="o">})</span>
 
     <span class="c1">//begin to check which cluster each test data belongs to based on the clustering result
 </span>    <span class="k">val</span> <span class="n">parsedTestData</span> <span class="k">=</span> <span class="n">rawData</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
-    <span class="n">parsedTestData</span><span class="o">.</span><span class="n">collect</span><span class="o">().</span><span class="n">foreach</span><span class="o">(</span><span class="n">testDataLine</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="n">parsedTestData</span><span class="o">.</span><span class="n">collect</span><span class="o">().</span><span class="n">foreach</span><span class="o">(</span><span class="n">testDataLine</span> <span class="o">={</span>
       <span class="k">val</span> <span class="n">predictedClusterIndex</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">clusters</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">testDataLine</span><span class="o">)</span>
       <span class="n">println</span><span class="o">(</span><span class="s">"The data "</span> <span class="o">+</span> <span class="n">testDataLine</span><span class="o">.</span><span class="n">toString</span> <span class="o">+</span> <span class="s">" belongs to cluster "</span> <span class="o">+</span> <span class="n">predictedClusterIndex</span><span class="o">)</span>
     <span class="o">})</span>
@@ -443,15 +425,13 @@ sum of squared distances of points to their nearest center when <span class="nv"
 </code></pre>
 </div>
 
-<ul>
-  <li>该示例程序接受五个入参，分别是</li>
-  <li>数据集文件路径</li>
-  <li>聚类的个数</li>
-  <li>K-means 算法的迭代次数</li>
-  <li>K-means 算法 run 的次数</li>
-</ul>
+<p>该示例程序接受五个入参，分别是
+数据集文件路径
+聚类的个数
+K-means 算法的迭代次数
+K-means 算法 run 的次数</p>
 
-<p>** K-means 聚类示例程序运行结果**</p>
+<p>*K-means 聚类示例程序运行结果**</p>
 
 <div class="language-shell highlighter-rouge"><pre class="highlight"><code>Cluster Number:8
 Cluster Centers Information Overview:
@@ -526,26 +506,26 @@ object KMeansDF {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/mladvance/2016/12/25/worcloud/" data-toggle="tooltip" data-placement="top" title="wordcloud">
+                        <a href="/mladvance/2016/12/26/new3Clustering/" data-toggle="tooltip" data-placement="top" title="新三板聚类项目">
                         Previous<br>
-                        <span>wordcloud</span>
+                        <span>新三板聚类项目</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/mladvance/2016/12/26/new3Clustering0/" data-toggle="tooltip" data-placement="top" title="新三板聚类项目">
+                        <a href="/mladvance/2016/12/26/new3Text/" data-toggle="tooltip" data-placement="top" title="新三板文本项目">
                         Next<br>
-                        <span>新三板聚类项目</span>
+                        <span>新三板文本项目</span>
                         </a>
                     </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/12/26/new3Clustering"
+                        data-thread-key="/mladvance/2016/12/26/new3Clustering0"
                         data-title="新三板聚类项目"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/12/26/new3Clustering/" >
+                        data-url="http://machinelearningadvance.com/mladvance/2016/12/26/new3Clustering0/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -564,9 +544,9 @@ object KMeansDF {
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/mladvance/2016/12/26/new3Clustering"
+                        data-thread-key="/mladvance/2016/12/26/new3Clustering0"
                         data-title="新三板聚类项目"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/12/26/new3Clustering/" >
+                        data-url="http://machinelearningadvance.com/mladvance/2016/12/26/new3Clustering0/" >
                     </div>
 
                 </div>

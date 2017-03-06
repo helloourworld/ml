@@ -6,6 +6,7 @@ category: Language
 catalog: yes
 tags:
     - Scala
+    - IT
 ---
 ## Scala特点：
 
