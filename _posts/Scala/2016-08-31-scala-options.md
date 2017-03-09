@@ -7,6 +7,11 @@ catalog: yes
 tags:
     - Scala
 ---
+* 为了让所有东西都是对象的目标更加一致，也为了遵循函数式编程的习惯，Scala 鼓励你在变量和函数返回值可能不会引用任何值的时候使用Option 类型。在没有值的时候，使用None，这是Option 的一个子类。如果有值可以引用，就使用Some 来包含这个值。
+* Some 也是Option 的子类。
+* **注意**
+* None 被声明为一个对象，而不是一个类，因为我们只需要它的一个实例。这样，它多少有点像null 关键字，但它却是一个实实在在的，有方法的对象。
+
 ### Scala Option(选项)
 
 * Scala Option(选项)类型用来表示一个值是可选的（有值或无值)。
@@ -14,9 +19,6 @@ tags:
 * 接下来我们来看一段代码：
 
 ~~~scala
-// 虽然 Scala 可以不定义变量的类型，不过为了清楚些，我还是
-// 把他显示的定义上了
-
 val myMap: Map[String, String] = Map("key1" -> "value")
 val value1: Option[String] = myMap.get("key1")
 val value2: Option[String] = myMap.get("key2")

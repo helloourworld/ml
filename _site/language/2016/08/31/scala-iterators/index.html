@@ -206,7 +206,7 @@
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Iterators</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">it</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="s">"Baidu"</span><span class="o">,</span> <span class="s">"Google"</span><span class="o">,</span> <span class="s">"Runoob"</span><span class="o">,</span> <span class="s">"Taobao"</span><span class="o">)</span>
+      <span class="k">val</span> <span class="n">it</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="s">"Baidu"</span><span class="o">,</span> <span class="s">"Google"</span><span class="o">)</span>
 
       <span class="k">while</span> <span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="n">hasNext</span><span class="o">){</span>
          <span class="n">println</span><span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="n">next</span><span class="o">())</span>
@@ -224,8 +224,8 @@
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">ita</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
       <span class="k">val</span> <span class="n">itb</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
-
-      <span class="n">println</span><span class="o">(</span><span class="s">"最大元素是："</span> <span class="o">+</span> <span class="n">ita</span><span class="o">.</span><span class="n">max</span> <span class="o">)</span>
+<span class="c1">// Warn: 在执行完ita.max后，ita为空
+</span>      <span class="n">println</span><span class="o">(</span><span class="s">"最大元素是："</span> <span class="o">+</span> <span class="n">ita</span><span class="o">.</span><span class="n">max</span> <span class="o">)</span>
       <span class="n">println</span><span class="o">(</span><span class="s">"最小元素是："</span> <span class="o">+</span> <span class="n">itb</span><span class="o">.</span><span class="n">min</span> <span class="o">)</span>
 
    <span class="o">}</span>
@@ -241,8 +241,8 @@
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">ita</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
       <span class="k">val</span> <span class="n">itb</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
-
-      <span class="n">println</span><span class="o">(</span><span class="s">"ita.size 的值: "</span> <span class="o">+</span> <span class="n">ita</span><span class="o">.</span><span class="n">size</span> <span class="o">)</span>
+<span class="c1">// Warn: 在执行完ita.size后，ita为空
+</span>      <span class="n">println</span><span class="o">(</span><span class="s">"ita.size 的值: "</span> <span class="o">+</span> <span class="n">ita</span><span class="o">.</span><span class="n">size</span> <span class="o">)</span>
       <span class="n">println</span><span class="o">(</span><span class="s">"itb.length 的值: "</span> <span class="o">+</span> <span class="n">itb</span><span class="o">.</span><span class="n">length</span> <span class="o">)</span>
 
    <span class="o">}</span>
@@ -738,7 +738,7 @@
                             
         				
                             
-                				<a href="/tags/#Python" title="Python" rel="11">
+                				<a href="/tags/#Python" title="Python" rel="10">
                                 Python
                                 </a>
                             
@@ -802,7 +802,7 @@
                             
         				
                             
-                				<a href="/tags/#wordcloud" title="wordcloud" rel="4">
+                				<a href="/tags/#wordcloud" title="wordcloud" rel="3">
                                 wordcloud
                                 </a>
                             

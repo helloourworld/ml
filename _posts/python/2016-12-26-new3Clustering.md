@@ -205,7 +205,7 @@ object KMeansClustering {
 * K-means 算法的迭代次数
 * K-means 算法 run 的次数
 
-** K-means 聚类示例程序运行结果**
+**K-means 聚类示例程序运行结果**
 
 ~~~shell
 Cluster Number:8

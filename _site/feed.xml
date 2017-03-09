@@ -118,20 +118,6 @@
 </description>
 				
 				<pubDate>Mon, 26 Dec 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/mladvance/2016/12/26/new3Clustering0/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/12/26/new3Clustering0/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>新三板聚类项目</title>
-				
-					<description>&lt;h2 id=&quot;section&quot;&gt;目录&lt;/h2&gt;
-
-</description>
-				
-				<pubDate>Mon, 26 Dec 2016 00:00:00 +0800</pubDate>
 				<link>http://machinelearningadvance.com/mladvance/2016/12/26/new3Clustering/</link>
 				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2016/12/26/new3Clustering/</guid>
 			</item>
@@ -3997,7 +3983,12 @@ tags:
 			<item>
 				<title>Scala Option</title>
 				
-					<description>&lt;h3 id=&quot;scala-option&quot;&gt;Scala Option(选项)&lt;/h3&gt;
+					<description>&lt;ul&gt;
+  &lt;li&gt;为了让所有东西都是对象的目标更加一致，也为了遵循函数式编程的习惯，Scala 鼓励你在变量和函数返回值可能不会引用任何值的时候使用Option 类型。在没有值的时候，使用None，这是Option 的一个子类。如果有值可以引用，就使用Some 来包含这个值。&lt;/li&gt;
+  &lt;li&gt;Some 也是Option 的子类。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;None 被声明为一个对象，而不是一个类，因为我们只需要它的一个实例。这样，它多少有点像null 关键字，但它却是一个实实在在的，有方法的对象。&lt;/li&gt;
+&lt;/ul&gt;
 
 </description>
 				
