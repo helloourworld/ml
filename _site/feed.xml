@@ -3809,9 +3809,9 @@ dys 【医】 不良, 困难, 障碍【前缀】不好的   dyslexia(n.阅读障
 
 </description>
 				
-				<pubDate>Mon, 05 Sep 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/language/2016/09/05/Scala-Lesson16/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/09/05/Scala-Lesson16/</guid>
+				<pubDate>Fri, 02 Sep 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/09/02/Scala-Lesson16/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/09/02/Scala-Lesson16/</guid>
 			</item>
 			
 		
@@ -3824,9 +3824,9 @@ dys 【医】 不良, 困难, 障碍【前缀】不好的   dyslexia(n.阅读障
 
 </description>
 				
-				<pubDate>Mon, 05 Sep 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/language/2016/09/05/Scala-Lesson15/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/09/05/Scala-Lesson15/</guid>
+				<pubDate>Fri, 02 Sep 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/09/02/Scala-Lesson15/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/09/02/Scala-Lesson15/</guid>
 			</item>
 			
 		
@@ -4129,6 +4129,20 @@ Scala 中的 private 限定符，比 Java 更严格，在嵌套类情况下，�
 		
 			
 			<item>
+				<title>scala Lesson 1</title>
+				
+					<description>&lt;h2 id=&quot;section&quot;&gt;变量函数&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Tue, 30 Aug 2016 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/language/2016/08/30/Scala-Lesson1/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/30/Scala-Lesson1/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Hadoop Tutorial ---- 学习安排</title>
 				
 					<description>&lt;h2 id=&quot;hive&quot;&gt;Hive专题&lt;/h2&gt;
@@ -4152,20 +4166,6 @@ Scala 中的 private 限定符，比 Java 更严格，在嵌套类情况下，�
 				<pubDate>Thu, 25 Aug 2016 00:00:00 +0800</pubDate>
 				<link>http://machinelearningadvance.com/hadoop/2016/08/25/IT-Memo-consistent-hashing/</link>
 				<guid isPermaLink="true">http://machinelearningadvance.com/hadoop/2016/08/25/IT-Memo-consistent-hashing/</guid>
-			</item>
-			
-		
-			
-			<item>
-				<title>scala Lesson 1</title>
-				
-					<description>&lt;h2 id=&quot;section&quot;&gt;变量函数&lt;/h2&gt;
-
-</description>
-				
-				<pubDate>Wed, 24 Aug 2016 00:00:00 +0800</pubDate>
-				<link>http://machinelearningadvance.com/language/2016/08/24/Scala-Lesson1/</link>
-				<guid isPermaLink="true">http://machinelearningadvance.com/language/2016/08/24/Scala-Lesson1/</guid>
 			</item>
 			
 		

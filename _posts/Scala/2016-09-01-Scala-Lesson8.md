@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Scala Lesson 8
-description: Scala 类和对象, Scala 继承
+description: Scala 类和对象  Scala 继承
 category: Language
 catalog: yes
 tags:
@@ -57,6 +57,38 @@ object Objects1{
 # output
 x 的坐标点: 20
 y 的坐标点: 30
+~~~
+
+~~~
+class User {
+
+  var name = "anonymous"
+
+  var age:Int = _
+
+  val country = "china"
+
+  def email = name + "@mail"
+
+}
+
+val u = new User
+
+// var定义的属性可读可写
+
+u.name = "lj"; u.age = 30
+
+println(u.name + ", " + u.age) // "lj, 30"
+
+// val 定义的属性只读不可写
+
+u.country = "usa" // 报错
+
+println(u.country) // "china"
+
+// def 定义的是方法, 每次调用时重新计算
+
+u.email // "lj@mail"
 ~~~
 
 ### Scala 继承
@@ -141,7 +173,7 @@ object Objects2{
 }
 ~~~
 
-Scala重写一个非抽象方法，必须用override修饰符。
+**Scala重写一个非抽象方法，必须用override修饰符。**
 
 ~~~scala
 class Person {

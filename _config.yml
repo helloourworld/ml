@@ -4,7 +4,7 @@ SEOTitle: Maching Learning | 机器学习笔记
 header-img: images/background.jpg
 email: davidyjun@gmail.com
 description: "关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu"
-keyword: "LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning, Big Data"
+keyword: "LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning(Deep Learning), Big Data, Spark"
 url: "http://machinelearningadvance.com"
 #url: "http://helloourworld.github.io"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
@@ -87,10 +87,39 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 
 # Friends
 friends: [
-{
-        title: "前端神盾局",
-        href: "http://wepiaofei.github.io/blog/"
+    {
+        title: "Your Home for Data Science",
+        href: "https://www.kaggle.com/"
+    },
+        {
+        title: "Analytics Vidhya", # In Sanskrit, Vidya means knowledge or learning.
+        href: "https://www.analyticsvidhya.com/"
+    },
+        {
+        title: "CFA",
+        href: "https://www.cfainstitute.org/pages/index.aspx"
+    },
+        {
+        title: "GARP",
+        href: "http://www.garp.org/#!/home"
+    },
+        {
+        title: "Investopedia",
+        href: "http://www.investopedia.com/"
+    },
+        {
+        title: "Quant Start",
+        href: "https://www.quantstart.com/"
+    },
+        {
+        title: "muchong",
+        href: "http://muchong.com/bbs/"
+    },
+        {
+        title: "Coursera",
+        href: "https://www.coursera.org/learn/machine-learning"
     }
+
 ]
 
 feed: /atom.xml

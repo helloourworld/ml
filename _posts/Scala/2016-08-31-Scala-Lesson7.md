@@ -23,7 +23,7 @@ tags:
 <tr>
 <td>1</td>
 <td><a target="_blank" href="/language/2016/08/31/scala-lists/">Scala List(列表)</a>
-<p>List的特征是其元素以线性方式存储，集合中可以存放重复对象。 </p>
+<p>**List的特征是其元素以线性方式存储，集合中可以存放重复对象。** </p>
 <p>参考 <a rel="nofollow" href="http://www.scala-lang.org/api/current/scala/collection/immutable/List.html" >API文档</a></p>
 </td>
 </tr>

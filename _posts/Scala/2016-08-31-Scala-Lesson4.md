@@ -293,7 +293,7 @@ mul现在可作为一个函数，使用方法如下：
 println(mul(3,4))
 ~~~
 
-我们也可以不给匿名函数设置参数，如下所示：
+我们也可以**不给匿名函数设置参数**，如下所示：
 
 ~~~scala
 var userDir = () => { System.getProperty("user.dir") }
@@ -365,7 +365,7 @@ object PartiallyAppliedFunction{
 
 #### 13 Scala 函数柯里化(Currying)
 
-类似python中，参考[]()。
+类似python中，参考[Currying](https://en.wikipedia.org/wiki/Currying); [https://docs.python.org/2.7/howto/functional.html](https://docs.python.org/2.7/howto/functional.html)。
 
 柯里化(Currying)指的是将原来接受两个参数的函数变成新的接受一个参数的函数的过程。新的函数返回一个以原有第二个参数为参数的函数。
 

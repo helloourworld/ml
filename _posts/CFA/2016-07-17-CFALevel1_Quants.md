@@ -44,7 +44,7 @@ tags:
 
 ## 08 Probability Concepts
 
-  - [x] 1  两个事件的联合概率（P(AB ），条件概率（P(A|B ）
+  - [x] 1  两个事件的联合概率（P(AB ），条件概率（P(A\|B ）
   - [x] 2  概率加法法则和乘法法则
 
 ## 09 Common Probability Distribution

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Scala Lesson 11
-description: Scala 模式匹配, scala-pattern-matching
+description: Scala 模式匹配 scala-pattern-matching
 category: Language
 catalog: yes
 tags:
