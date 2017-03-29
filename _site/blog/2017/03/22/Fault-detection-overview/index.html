@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>Scala Option - Maching Learning | 机器学习笔记</title>
+    <title>Fault detection and diagnosis Approaches - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/language/2016/08/31/scala-options/">
+    <link rel="canonical" href="http://machinelearningadvance.com/blog/2017/03/22/Fault-detection-overview/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,15 +168,17 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Scala" title="Scala">Scala</a>
+                        <a class="tag" href="/tags/#Machine Learning" title="Machine Learning">Machine Learning</a>
+                        
+                        <a class="tag" href="/tags/#故障预测" title="故障预测">故障预测</a>
                         
                     </div>
-                    <h1>Scala Option</h1>
+                    <h1>Fault detection and diagnosis Approaches</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on August 31, 2016</span>
+                    <span class="meta">Posted by Big Data Memo on March 22, 2017</span>
                 </div>
             </div>
         </div>
@@ -194,226 +196,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<ul>
-  <li>为了让所有东西都是对象的目标更加一致，也为了遵循函数式编程的习惯，Scala 鼓励你在变量和函数返回值可能不会引用任何值的时候使用Option 类型。在没有值的时候，使用None，这是Option 的一个子类。如果有值可以引用，就使用Some 来包含这个值。</li>
-  <li>Some 也是Option 的子类。</li>
-  <li><strong>注意</strong></li>
-  <li>None 被声明为一个对象，而不是一个类，因为我们只需要它的一个实例。这样，它多少有点像null 关键字，但它却是一个实实在在的，有方法的对象。</li>
-</ul>
+				<h2 id="section">故障预测与故障诊断</h2>
 
-<h3 id="scala-option">Scala Option(选项)</h3>
-
-<ul>
-  <li>Scala Option(选项)类型用来表示一个值是可选的（有值或无值)。</li>
-  <li>Option[T] 是一个类型为 T 的可选值的容器： 如果值存在， Option[T] 就是一个 Some[T] ，如果不存在， Option[T] 就是对象 None 。</li>
-  <li>接下来我们来看一段代码：</li>
-</ul>
-
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">myMap</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"key1"</span> <span class="o">-&gt;</span> <span class="s">"value"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">value1</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">myMap</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"key1"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">value2</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">myMap</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"key2"</span><span class="o">)</span>
-
-<span class="n">println</span><span class="o">(</span><span class="n">value1</span><span class="o">)</span> <span class="c1">// Some("value1")
-</span><span class="n">println</span><span class="o">(</span><span class="n">value2</span><span class="o">)</span> <span class="c1">// None
-</span></code></pre>
-</div>
-
-<ul>
-  <li>在上面的代码中，myMap 是一个 Key 的类型是 String，Value 的类型是 String 的 hash map，但不一样的是他的 get() 返回的是一个叫 Option[String] 的类别。</li>
-  <li>Scala 使用 Option[String] 来告诉你：「我会想办法回传一个 String，但也可能没有 String 给你」。</li>
-  <li>myMap 里并没有 key2 这笔数据，get() 方法返回 None。</li>
-  <li><u>Option 有两个子类别，一个是 **Some**，一个是 **None**</u>，当他回传 Some 的时候，代表这个函式成功地给了你一个 String，而你可以透过 get() 这个函式拿到那个 String，如果他返回的是 None，则代表没有字符串可以给你。</li>
-  <li>另一个实例：</li>
-</ul>
-
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options1</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">sites</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"runoob"</span> <span class="o">-&gt;</span> <span class="s">"www.runoob.com"</span><span class="o">,</span> <span class="s">"google"</span> <span class="o">-&gt;</span> <span class="s">"www.google.com"</span><span class="o">)</span>
-
-      <span class="n">println</span><span class="o">(</span><span class="s">"sites.get( \"runoob\" ) : "</span> <span class="o">+</span>  <span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"runoob"</span> <span class="o">))</span> <span class="c1">// Some(www.runoob.com)
-</span>      <span class="n">println</span><span class="o">(</span><span class="s">"sites.get( \"baidu\" ) : "</span> <span class="o">+</span>  <span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"baidu"</span> <span class="o">))</span>  <span class="c1">//  None
-</span>   <span class="o">}</span>
-<span class="o">}</span>
-<span class="k">#</span> <span class="n">result</span><span class="k">:</span>
-<span class="kt">sites.get</span><span class="o">(</span> <span class="err">"</span><span class="kt">runoob</span><span class="err">"</span> <span class="o">)</span> <span class="kt">:</span> <span class="kt">Some</span><span class="o">(</span><span class="kt">www.runoob.com</span><span class="o">)</span>
-<span class="kt">sites.get</span><span class="o">(</span> <span class="err">"</span><span class="kt">baidu</span><span class="err">"</span> <span class="o">)</span> <span class="kt">:</span> <span class="kt">None</span>
-</code></pre>
-</div>
-
-<h4 id="section">1 模式匹配</h4>
-
-<p>你也可以通过模式匹配来输出匹配值。实例如下：</p>
-
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options2</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">sites</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"runoob"</span> <span class="o">-&gt;</span> <span class="s">"www.runoob.com"</span><span class="o">,</span> <span class="s">"google"</span> <span class="o">-&gt;</span> <span class="s">"www.google.com"</span><span class="o">)</span>
-
-      <span class="n">println</span><span class="o">(</span><span class="s">"show(sites.get( \"runoob\")) : "</span> <span class="o">+</span>
-                                          <span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"runoob"</span><span class="o">))</span> <span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"show(sites.get( \"baidu\")) : "</span> <span class="o">+</span>
-                                          <span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"baidu"</span><span class="o">))</span> <span class="o">)</span>
-   <span class="o">}</span>
-
-   <span class="k">def</span> <span class="n">show</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="k">=</span> <span class="n">x</span> <span class="k">match</span> <span class="o">{</span>
-      <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">s</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">s</span>
-      <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="s">"?"</span>
-   <span class="o">}</span>
-<span class="o">}</span>
-<span class="k">#</span> <span class="n">result</span>
-<span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"runoob"</span><span class="o">))</span> <span class="k">:</span> <span class="kt">www.runoob.com</span>
-<span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"baidu"</span><span class="o">))</span> <span class="k">:</span> <span class="kt">?</span>
-</code></pre>
-</div>
-
-<h4 id="getorelse-">2 getOrElse() 方法</h4>
-
-<p>你可以使用 getOrElse() 方法来获取元组中存在的元素或者使用其默认的值，实例如下：</p>
-
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options3</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-
-      <span class="k">val</span> <span class="n">a</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
-      <span class="k">val</span> <span class="n">b</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span>
-
-      <span class="n">println</span><span class="o">(</span><span class="s">"a.getOrElse(0): "</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="n">getOrElse</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"b.getOrElse(10): "</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">getOrElse</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span> <span class="o">)</span>
-   <span class="o">}</span>
-<span class="o">}</span>
-</code></pre>
-</div>
-
-<h4 id="isempty-">3 isEmpty() 方法</h4>
-
-<p>你可以使用 isEmpty() 方法来检测元组中的元素是否为 None，实例如下：</p>
-
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options4</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-
-      <span class="k">val</span> <span class="n">a</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
-      <span class="k">val</span> <span class="n">b</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span>
-
-      <span class="n">println</span><span class="o">(</span><span class="s">"a.isEmpty: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="n">isEmpty</span> <span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"b.isEmpty: "</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">isEmpty</span> <span class="o">)</span>
-   <span class="o">}</span>
-<span class="o">}</span>
-</code></pre>
-</div>
-
-<h4 id="scala-option-">4 Scala Option 常用方法</h4>
-
-<p>下表列出了 Scala Option 常用的方法：</p>
-
-<table>
-<tbody><tr>
-<th style="width:5%">序号</th>
-<th style="width:95%">方法及描述</th>
-</tr>
-<tr>
-<td>1</td>
-<td>
-<p><b>def get: A</b></p>
-<p>获取可选值</p>
-</td>
-</tr>
-<tr>
-<td>2</td>
-<td>
-<p><b>def isEmpty: Boolean</b></p>
-<p>检测可选类型值是否为 None，是的话返回 true，否则返回 false</p>
-</td>
-</tr>
-<tr>
-<td>3</td>
-<td>
-<p><b>def productArity: Int</b></p>
-<p>返回元素个数， A(x_1, ..., x_k), 返回 k</p>
-</td>
-</tr>
-<tr>
-<td>4</td>
-<td>
-<p><b>def productElement(n: Int): Any</b></p>
-<p>获取指定的可选项，以 0 为起始。即 A(x_1, ..., x_k), 返回 x_(n+1) ， 0 &lt; n &lt; k.</p>
-</td>
-</tr>
-<tr>
-<td>5</td>
-<td>
-<p><b>def exists(p: (A) =&gt; Boolean): Boolean</b></p>
-<p>如果可选项中指定条件的元素是否存在且不为 None 返回 true，否则返回 false。</p>
-</td>
-</tr>
-<tr>
-<td>6</td>
-<td>
-<p><b>def filter(p: (A) =&gt; Boolean): Option[A]</b></p>
-<p>如果选项包含有值，而且传递给 filter 的条件函数返回 true， filter 会返回 Some 实例。 否则，返回值为 None 。</p>
-</td>
-</tr>
-<tr>
-<td>7</td>
-<td>
-<p><b>def filterNot(p: (A) =&gt; Boolean): Option[A]</b></p>
-<p>如果选项包含有值，而且传递给 filter 的条件函数返回 false， filter 会返回 Some 实例。 否则，返回值为 None 。</p>
-</td>
-</tr>
-<tr>
-<td>8</td>
-<td>
-<p><b>def flatMap[B](f: (A) =&gt; Option[B]): Option[B]</b></p>
-<p>如果选项包含有值，则传递给函数 f 处理后返回，否则返回 None</p>
-</td>
-</tr>
-<tr>
-<td>9</td>
-<td>
-<p><b>def foreach[U](f: (A) =&gt; U): Unit</b></p>
-<p>如果选项包含有值，则将每个值传递给函数 f， 否则不处理。 </p>
-</td>
-</tr>
-<tr>
-<td>10</td>
-<td>
-<p><b>def getOrElse[B &gt;: A](default: =&gt; B): B</b></p>
-<p>如果选项包含有值，返回选项值，否则返回设定的默认值。</p>
-</td>
-</tr>
-<tr>
-<td>11</td>
-<td>
-<p><b>def isDefined: Boolean</b></p>
-<p>如果可选值是 Some 的实例返回 true，否则返回 false。 </p>
-</td>
-</tr>
-<tr>
-<td>12</td>
-<td>
-<p><b>def iterator: Iterator[A]</b></p>
-<p>如果选项包含有值，迭代出可选值。如果可选值为空则返回空迭代器。 </p>
-</td>
-</tr>
-<tr>
-<td>13</td>
-<td>
-<p><b>def map[B](f: (A) =&gt; B): Option[B]</b></p>
-<p>如果选项包含有值， 返回由函数 f 处理后的 Some，否则返回 None</p>
-</td>
-</tr>
-<tr>
-<td>14</td>
-<td>
-<p><b>def orElse[B &gt;: A](alternative: =&gt; Option[B]): Option[B]</b></p>
-<p>如果一个 Option 是 None ， orElse 方法会返回传名参数的值，否则，就直接返回这个 Option。</p>
-</td>
-</tr>
-<tr>
-<td>15</td>
-<td>
-<p><b>def orNull</b></p>
-<p>如果选项包含有值返回选项值，否则返回 null。</p>
-</td>
-</tr>
-</tbody></table>
+<p><a href="http://gregstanleyandassociates.com/whitepapers/FaultDiagnosis/faultdiagnosis.htm">A Guide to Fault Detection and Diagnosis</a></p>
 
 
                 <hr>
@@ -422,26 +207,19 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/language/2016/08/31/scala-maps/" data-toggle="tooltip" data-placement="top" title="Scala Map">
+                        <a href="/mladvance/2017/02/10/pip_install_from_local/" data-toggle="tooltip" data-placement="top" title="断网环境下利用pip安装Python离线安装包">
                         Previous<br>
-                        <span>Scala Map</span>
+                        <span>断网环境下利用pip安装Python离线安装包</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/language/2016/08/31/scala-sets/" data-toggle="tooltip" data-placement="top" title="Scala Set">
-                        Next<br>
-                        <span>Scala Set</span>
-                        </a>
-                    </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/language/2016/08/31/scala-options"
-                        data-title="Scala Option"
-                        data-url="http://machinelearningadvance.com/language/2016/08/31/scala-options/" >
+                        data-thread-key="/blog/2017/03/22/Fault-detection-overview"
+                        data-title="Fault detection and diagnosis Approaches"
+                        data-url="http://machinelearningadvance.com/blog/2017/03/22/Fault-detection-overview/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -460,9 +238,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/language/2016/08/31/scala-options"
-                        data-title="Scala Option"
-                        data-url="http://machinelearningadvance.com/language/2016/08/31/scala-options/" >
+                        data-thread-key="/blog/2017/03/22/Fault-detection-overview"
+                        data-title="Fault detection and diagnosis Approaches"
+                        data-url="http://machinelearningadvance.com/blog/2017/03/22/Fault-detection-overview/" >
                     </div>
 
                 </div>

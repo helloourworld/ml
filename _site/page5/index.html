@@ -179,6 +179,28 @@
             ">
     			
 <div class="post-preview">
+    <a href="/mladvance/2016/11/17/statistics/">
+        <h2 class="post-title">
+            Spark-ML-0201-Summary statistics
+        </h2>
+        
+        <div class="post-content-preview">
+            概括统计
+
+  MLlib支持RDD[Vector]列的概括统计，它通过调用Statistics的colStats方法实现。colStats返回一个MultivariateStatisticalSummary对象，这个对象包含列式的最大值、最小值、均值、方差等等。
+下面是一个应用例子：
+
+import org.apache.spark.mllib.linalg.Vector
+import o...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/mladvance/2016/11/17/random-data-generation/">
         <h2 class="post-title">
             Spark-ML-0205-Random data generation
@@ -415,31 +437,6 @@ Spark Streaming Direct Approach (No Receivers) 分析
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/language/2016/10/10/scala_featured/">
-        <h2 class="post-title">
-            Scala Featured
-        </h2>
-        
-        <div class="post-content-preview">
-            1 scala中”_“的用法总结
-
-参考链接：
-
-what-are-all-the-uses-of-an-underscore-in-scala
-
-http://www.slideshare.net/normation/scala-dreaded
-
-import scala._    // Wild card -- all of Scala is imported
-import scala....
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on October 10, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -491,7 +488,7 @@ import scala....
                     <div class="tags">
                         
                             
-                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="14">
+                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="15">
                                     Machine Learning
                                 </a>
                             
@@ -600,6 +597,8 @@ import scala....
                                 <a href="/tags/#python" title="python" rel="2">
                                     python
                                 </a>
+                            
+                        
                             
                         
                             
