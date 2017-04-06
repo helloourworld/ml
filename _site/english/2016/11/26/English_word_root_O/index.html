@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="g89MuzujW3" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning(Deep Learning), Big Data, Spark">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+    <title>词根O - Maching Learning | 机器学习笔记</title>
+
+    <link rel="canonical" href="http://machinelearningadvance.com/english/2016/11/26/English_word_root_O/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- ga & ba script hoook -->
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Big Data Memo</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/">Category</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/images/background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/images/background.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#English" title="English">English</a>
+                        
+                    </div>
+                    <h1>词根O</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by Big Data Memo on November 26, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<ul>
+  <li>o   【前缀】对； 向； 相反； 反对    oval(a.卵形的 )</li>
+  <li>ob  【前缀】对； 向； 相反； 反对    obvious(a.明显的，显而易见的)</li>
+  <li>obed    词根：obey（服从） obedient（adj. 顺从的，服从的；孝顺的）</li>
+  <li>obes    词根：fat（肥）   obese（adj. 肥胖的，过胖的）</li>
+  <li>obliv   词根：forget（忘记）   oblivion（n. 遗忘；湮没；赦免）</li>
+  <li>obsol   词根：decay（腐烂）    obsolete（adj. 废弃的；老式的）</li>
+  <li>oc  【前缀】对； 向； 相反； 反对    occurrence(n.事故)</li>
+  <li>ock 【后缀】表小称或“缩小”    hillock（n. 小丘；小山似的一堆)</li>
+  <li>oct 【前缀】八   octagon(n. 八边形，八角形)</li>
+  <li>octa    【前缀】八   octagon(n. 八边形，八角形)</li>
+  <li>octav   【前缀】八   octavo（n. 八开本；八开纸）</li>
+  <li>octo    【前缀】八分  octopus(n. 章鱼,八爪鱼)</li>
+  <li>ocul    【词根】眼睛  ocular(adj. 眼睛的；视觉的；目击的)</li>
+  <li>oculo   词根：eye眼 oculomotor(adj. [解剖] 动眼神经的；眼球运动的)</li>
+  <li>od  n.自然力【词根】歌曲;路   melody(n. 旋律；歌曲；美妙的音乐)</li>
+  <li>ode / EJd/n.颂诗,赋【词根】歌曲；诗歌   episode(n. 插曲；一段情节；插话)</li>
+  <li>odi 词根：hate（恨）  odium（n. 憎恶；讨厌）</li>
+  <li>odont   词根：牙    odontic(adj. 牙的)</li>
+  <li>odor    / 5EudE/  n.气味【词根】气味；闻  odor(n.气味，香气；味道)</li>
+  <li>odyn    词根：pain（痛）  anodyne（ n. [药] 止痛剂；起安慰作用的事物（an没有+odyne痛））</li>
+  <li>of  / Rv, Ev/  prep…….的【前缀】向    offspring(n.儿女，子孙，后代)</li>
+  <li>oid 【后缀】表示“像…的”，“似…的”   negroid(nadj. 黑人的；黑人似的；黑人特性的)</li>
+  <li>oidal   后缀：形容词后缀，表示“…形状的”   asteroidal（adj. 星状的）</li>
+  <li>oint    词根：油    ointment（n. 药膏；[药] 油膏）</li>
+  <li>ol  【词根】滋养；气味，闻 petrol(n.(英)汽油)</li>
+  <li>ole 词根：oil（油）   petroleum （n. 石油）</li>
+  <li>olesc   词根：形成becoming,growing   adolescence(n. 青春期)</li>
+  <li>oleum   / ‘EuliEm/ n. 发烟硫酸【词根】油 petroleum(n.石油)</li>
+  <li>olfact  词根：scent（味） olfaction（n. 嗅觉）</li>
+  <li>olig    词根：少    oligemia(n. [内科] 血量减少)</li>
+  <li>oligo   词根：很少   oligotrophic(adj. （湖泊、池塘等）贫营养的，营养不足的)</li>
+  <li>oll 词根：neck（脖子） collar(n. 衣领；颈圈)</li>
+  <li>ology   词根：学科   zoology(n. 动物学；动物区系)</li>
+  <li>oma 后缀:表示“瘤”    fibroma(n. [肿瘤] 纤维瘤)</li>
+  <li>ombro   【前缀】雨   ombrograph（n. 雨量计；雨量记录仪）</li>
+  <li>omin    【词根】预兆  ominous(adj. 预兆的；不吉利的)</li>
+  <li>omni    【前缀】全部  omnipotent(adj. 无所不能的；全能的（omni全部+potent有力的）)</li>
+  <li>omphal  词根：脐    omphalitis(n. [兽医] 脐炎（常为幼小动物所患）)</li>
+  <li>on  / Rn/  在…上面【后缀】表示人、物；构成物理学名词    southron(n. 英格兰人；南部人)</li>
+  <li>one n.  一; 一个人【后缀】表示“酮” butanone(n. [有化] 丁酮)</li>
+  <li>oneir   词根：dream梦   oneiric(adj. 梦的)</li>
+  <li>oner    词根：负担   onerous(adj. 繁重的；麻烦的()oner负担+ous形容词字尾)</li>
+  <li>onom    词根：名字   onomastic(adj. 亲自签名的；名字的)</li>
+  <li>onto    / 5Rntu/prep.在…上面；到…上面【词根】个体    ontogenesis(n. 个体发育；个体发生)</li>
+  <li>onym    【医】 术语【词根】名字    synonym（n. 同义词；同义字）</li>
+  <li>oo  【词根】蛋；卵 oolite(n. 鲕粒岩；鱼卵石)</li>
+  <li>oon 后缀：表名词，“人或物”    buffoon(n.  小丑)</li>
+  <li>op  n.工作，操作【前缀】向;相对 oppress(vt.压迫，压制；压抑)</li>
+  <li>oper    【词根】工作；做    operator(n.操作人员，接线员)</li>
+  <li>ophi    词根：snake蛇   ophidian(adj. 蛇类的；蛇样的)</li>
+  <li>ophio   词根：蛇    ophiology(n.蛇学)</li>
+  <li>ophthalm    前缀：眼    ophthalmia(n. [眼科] 眼炎)</li>
+  <li>opi 词根：视，光；观点   opinion(n. 意见；主张)</li>
+  <li>opin    【词根】看   opinion（n. 意见；主张)</li>
+  <li>opl 词根：armor（盔甲）    panoply（n. 华丽服饰；全套甲胄，全副盔甲）</li>
+  <li>ops 词根：sight,light视,光   achromatopsia（n. [眼科] 全色盲）</li>
+  <li>opt / Rpt/  v.选择【词根】选择；希望；眼睛；视力 optional(a.可以任意选择的)</li>
+  <li>optim   词根：表示“最好”   optimum(adj.  最适宜的)</li>
+  <li>opto    【词根】眼睛；视力   optometer(n. 视力检定装置；视力计（opto+meter测量[计]）)</li>
+  <li>or  / R:, E/  conj.或者，还是【后缀】表示抽象名词  collector(n. 收藏家；集电极；收税员)</li>
+  <li>ora 【医】 缘, 口【词根】说；祷告    oratory(n.  讲演术;小礼拜堂; 祈祷室)</li>
+  <li>oram    词根：景    myriorama(n.万景画)</li>
+  <li>orama   词根：视力   panorama（n. 全景，全貌；全景画（pan+orama视力→视力所及→全景））</li>
+  <li>orat    词根：表示“嘴，说”” oratory(n.  讲演术;小礼拜堂; 祈祷室)</li>
+  <li>orb / R:b/ n. 球, 天体【词根】圆circle,track    orbital(adj. 轨道的；眼窝的)</li>
+  <li>orbit   n.  轨道, 眼眶【词根】圆     orbital(adj. 轨道的；眼窝的)</li>
+  <li>ord 【词根】秩序,拼凑，适合，连接，接合  order(n.次序；整齐)</li>
+  <li>order   / 5R:dE/  点菜【词根】秩序  order(n.次序；整齐)</li>
+  <li>ordin   【词根】秩序  subordinate(a.下级的，辅助的)</li>
+  <li>org 词根：做，工作，功,工具    organ(n. 器官；机构；风琴；管风琴)</li>
+  <li>organ   n. 器官；机构；风琴【词根】身体   organize(vt. 组织；使有系统化；给予生机)</li>
+  <li>ori 【词根】太阳升起；上升；开始；起源   originate(vi.发源 )</li>
+  <li>orig    词根：表示“升起，开始””   origin(n.  起源; 起因; 由来; 出身)</li>
+  <li>orium   后缀：名词后缀，表示“地方、器具、工具、手段” emporium（n. 商场，大百货商店；商业中心)</li>
+  <li>orn 【词根】装饰；使配备家具    ornament(n.装饰物 )</li>
+  <li>orna    【词根】装饰；使配备家具    ornament(n.装饰物；装饰)</li>
+  <li>ornith  词根：bird（鸟）  ornithology（n. 鸟类学；鸟学论文）</li>
+  <li>ornitho 词根：鸟    ornithology(n. 鸟类学；鸟学论文)</li>
+  <li>oro 词根：口    orolingual(口舌的)</li>
+  <li>orot    词根：洪亮的，圆润的  orotund（adj. 夸大的；做作的；朗朗的）</li>
+  <li>orph    词根：出去   orphan(n.孤儿(orph=出去+an 离开家庭的))</li>
+  <li>ort 【词根】升起  abortion(n.  小产, 流产)</li>
+  <li>orth    词根：直    orthodoxy（n. 正统；正教；正统说法）</li>
+  <li>ortho   【词根】直的；正确的；正    orthodox(adj. 正统的；传统的；惯常的（ortho正+dox→正的观点→正统思想）</li>
+  <li>ory 【后缀】表性质、大小状况、状貌 victory(n.胜利，战胜)</li>
+  <li>os  / Rs/ n. 骨, 孔, 穴裂口【词根】口, 嘴  oscular（adj. 出水孔的；接吻的；嘴巴的）</li>
+  <li>oscill  词根：swing摆动  oscillate(v.  摆动; 振荡; 游移不定)</li>
+  <li>oscul   词根：kiss（吻）  osculate（vt. 接吻；接触；与……有共同特性）</li>
+  <li>ose 后缀：表形容词，“多…的”   verbose(adj.  详细的, 冗长的)</li>
+  <li>osis    【后缀】构成名词    hypnosis(n. 催眠；催眠状态（hypno+sis表示病状）)</li>
+  <li>osity   后缀：表名词，ose+ity组成，表示“多…的状态”  curiosity(n.好奇，好奇心；珍品)</li>
+  <li>oss 【词根】骨头  fossil(n. 化石；僵化的事物；顽固不化的人)</li>
+  <li>ost 词根：骨    osteopath(n. 整骨疗法家)</li>
+  <li>oste    前缀：骨    osteitis(n. [外科] 骨炎)</li>
+  <li>ostens  词根：appear（出现）   ostensible（adj. 表面的；假装的）</li>
+  <li>osteo   【词根】骨头  osteoblast(n.造骨细胞)</li>
+  <li>ostrac  词根：tile（瓦片） ostracize （vt. 放逐；排斥；按贝壳流放法放逐）</li>
+  <li>ot  词根：表示“耳朵”   otitis(n.耳炎（ot+it is炎病）)</li>
+  <li>otic    后缀：形容词后缀，表示“状态的、作用的、过程的”等   hypnotic（adj. 催眠的，催眠术的；易于催眠的）</li>
+  <li>ound    词根:wave(波浪) abound(vi. 富于；充满)</li>
+  <li>our / 5auE/  我们的【后缀】表示抽象名词  vigour(n.活力，精力；元气)</li>
+  <li>ous 【后缀】表性质、大小状况、状貌 continuous(a.连续不断的，持续的)</li>
+  <li>ously   后缀:副词，具有…性质的等   meticulously（adv. 细致地；一丝不苟地；拘泥地)</li>
+  <li>out / aut/prep. 向；离去 【前缀】超过；外,向外    outwards(ad.向外，往海外)</li>
+  <li>ov  【词根】蛋；卵 oval(a.卵形的 )</li>
+  <li>ovari   词根：卵巢   ovaritis(n.  卵巢炎)</li>
+  <li>over    / 5EuvE/adv. 结束；越过【前缀】过度；在……上面  overwhelming(a.压倒的，势不可挡的)</li>
+  <li>ovo 【医】 卵, 蛋【词根】卵,蛋 ovoid(adj.  卵形的)</li>
+  <li>own / Eun/  自己的;词根：拥有   owner(n. 所有者；物主)</li>
+  <li>ox  【词根】氧   dioxide(n.     二氧化物)</li>
+  <li>oxy 【词根】氧   oxygen(n. 氧气，氧)</li>
+</ul>
+
+
+                <hr>
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/english/2016/11/26/English_word_root_N/" data-toggle="tooltip" data-placement="top" title="词根N">
+                        Previous<br>
+                        <span>词根N</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/english/2016/11/26/English_word_root_P/" data-toggle="tooltip" data-placement="top" title="词根P">
+                        Next<br>
+                        <span>词根P</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                    <div class="ds-share flat"
+                    <div class="ds-thread"
+                        data-thread-key="/english/2016/11/26/English_word_root_O"
+                        data-title="词根O"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_O/" >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+                        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+                        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                 </div>
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/english/2016/11/26/English_word_root_O"
+                        data-title="词根O"
+                        data-url="http://machinelearningadvance.com/english/2016/11/26/English_word_root_O/" >
+                    </div>
+
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="24">
+                                Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spark" title="Spark" rel="16">
+                                Spark
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ME" title="ME" rel="4">
+                                ME
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Other" title="Other" rel="4">
+                                Other
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                CFAL1
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Python" title="Python" rel="19">
+                                Python
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#maths" title="maths" rel="2">
+                                maths
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Baby" title="Baby" rel="2">
+                                Baby
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                                Big Data
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#大数据" title="大数据" rel="20">
+                                大数据
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="7">
+                                IT
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Scala" title="Scala" rel="24">
+                                Scala
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#English" title="English" rel="23">
+                                English
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#wordcloud" title="wordcloud" rel="3">
+                                wordcloud
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#quant" title="quant" rel="2">
+                                quant
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#python" title="python" rel="2">
+                                python
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://www.kaggle.com/">Your Home for Data Science</a></li>
+                    
+                        <li><a href="https://www.analyticsvidhya.com/">Analytics Vidhya</a></li>
+                    
+                        <li><a href="https://www.cfainstitute.org/pages/index.aspx">CFA</a></li>
+                    
+                        <li><a href="http://www.garp.org/#!/home">GARP</a></li>
+                    
+                        <li><a href="http://www.investopedia.com/">Investopedia</a></li>
+                    
+                        <li><a href="https://www.quantstart.com/">Quant Start</a></li>
+                    
+                        <li><a href="http://muchong.com/bbs/">muchong</a></li>
+                    
+                        <li><a href="https://www.coursera.org/learn/machine-learning">Coursera</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+<script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"machinelearningadvance"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/2672280861">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/helloourworld">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Big Data Memo 2017
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-82819752-1';
+    var _gaDomain = 'machinelearningadvance.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '863b1f46c83a8e14e47782106aee7e7f';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/images/background.jpg" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

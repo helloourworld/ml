@@ -1,0 +1,2365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="g89MuzujW3" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning(Deep Learning), Big Data, Spark">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+    <title>Hadoop Family Integration - Maching Learning | 机器学习笔记</title>
+
+    <link rel="canonical" href="http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_family/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- ga & ba script hoook -->
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Big Data Memo</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/">Category</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/images/background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/images/background.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Big Data" title="Big Data">Big Data</a>
+                        
+                        <a class="tag" href="/tags/#大数据" title="大数据">大数据</a>
+                        
+                    </div>
+                    <h1>Hadoop Family Integration</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by Big Data Memo on August 4, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<p>Hadoop家族产品，很多。常用的项目包括Hadoop, Hive, Pig, HBase, Sqoop, Mahout, Zookeeper, Avro, Ambari, Chukwa，YARN, Hcatalog, Oozie, Cassandra, Hama, Whirr, Flume, Bigtop, Crunch, Hue, Spark, Streaming, Kafka, Flink等。对照<a href="/hadoop/2016/08/04/Hadoop_Ecosystem_Table/">Hadoop_Ecosystem_Table</a>,我们将其分类为：</p>
+
+<p>三大类：</p>
+
+<ul>
+  <li>大类1：存储</li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>1分布式文件存储系统</li>
+    <li>3 数据库[列存储、文档存储、流存储、KV存储、图数存储]</li>
+    <li>4 新型数据库</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>大类2：计算</li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>2 分布式编程</li>
+    <li>5 SQL on Hadoop</li>
+    <li>6 数据处理</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>大类3：算法</li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>9 机器学习</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>大类4：其它</li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>7 服务系统</li>
+    <li>8 调度系统</li>
+    <li>10 其它[标杆及问答、安全、元数据、系统部署、应用、部署架构等等]</li>
+  </ul>
+</blockquote>
+
+<p>本文的介绍是一个概览，会对以上重要组分别说明与介绍。</p>
+
+<h2 id="back-to-ecosystemtablehadoop20160804hadoopecosystemtable">Back to <a href="/hadoop/2016/08/04/Hadoop_Ecosystem_Table/">Ecosystem_Table</a></h2>
+
+<h2 id="introduction">0 Introduction</h2>
+
+<p>以下图片为广泛传阅的生态图，较早为2015年，出处不详。</p>
+
+<p><img src="/images/Hadoop-Ecosystem-Map_2015.gif" alt="" /></p>
+
+<p>以下图片为最新且常用的生态图，图片源自<a href="https://www.safaribooksonline.com/library/view/hadoop-essentials/9781784396688/ch02s05.html">Safari</a>
+<img src="/images/Hadoop-Ecosystem-Map_2016.jpg" alt="" />，是本文主要介绍的部分。</p>
+
+<h2 id="hadoop-core">1 Hadoop Core</h2>
+
+<p>主要包括HDFS，MapReduce，YARN，HBase.</p>
+
+<h3 id="hdfs">1.1 HDFS</h3>
+
+<p>Hadoop Distributed File System (HDFS™): A distributed file system that provides high-throughput access to application data. HDFS 是一个能够面向大规模数据使用的，可进行扩展的文件存储与传递系统，是一种允许文件通过网络在多台主机上分享的文件系统，可让多机器上的多用户分享文件和存储空间。实际上，通过网络来访问文件的动作，在程序与用户看来，就像是访问本地的磁盘一般。即使系统中有某些节点脱机，整体来说系统仍然可以持续运作而不会有数据损失。</p>
+
+<h4 id="hdfshdfs-architecturehttphadoopapacheorgdocscurrenthadoop-project-disthadoop-hdfshdfsdesignhtmlintroduction">1.1.1 HDFS体系结构（<a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html#Introduction">HDFS Architecture</a>）</h4>
+
+<p><img src="/images/hdfs_architecture.jpg" alt="" />
+The NameNode and DataNode are pieces of software designed to run on commodity machines. These machines typically run a GNU/Linux operating system (OS). <strong>HDFS is built using the Java language</strong>; any machine that supports Java can run the NameNode or the DataNode software.</p>
+
+<h5 id="namenode">1.1.1.1 Namenode</h5>
+
+<p>Namenode是整个文件系统的管理节点。它维护着整个文件系统的文件目录树，文件/目录的元信息和每个文件对应的数据块列表, 接收用户的操作请求。</p>
+
+<p>文件目录查看：</p>
+
+<p><img src="/images/hadoop/hdfs_dir.png" alt="" /></p>
+
+<p>文件包括：</p>
+
+<ul>
+  <li>①fsimage:元数据镜像文件。存储某一时段NameNode内存元数据信息。</li>
+  <li>②edits:操作日志文件。</li>
+  <li>③fstime:保存最近一次checkpoint的时间</li>
+</ul>
+
+<p>以上这些文件是保存在linux的文件系统中。通过hdfs-site.xml的dfs.namenode.name.dir属性进行设置。</p>
+
+<h5 id="datanode">1.1.1.2 Datanode</h5>
+
+<ul>
+  <li>提供真实文件数据的存储服务。</li>
+  <li>文件块（ block）： 最基本的存储单位。</li>
+  <li>对于文件内容而言，一个文件的长度大小是size，那么从文件的０偏移开始，按照固定的大小，顺序对文件进行划分并编号，划分好的每一个块称一个Block。 HDFS默认Block大小是128MB， 因此，一个256MB文件，共有256/128=2个Block.*</li>
+  <li>与普通文件系统不同的是，在 HDFS中，如果一个文件小于一个数据块的大小，并不占用整个数据块存储空间。</li>
+  <li>Replication：多复本。默认是三个。通过hdfs-site.xml的dfs.replication属性进行设置。</li>
+</ul>
+
+<p>文件Block查看：</p>
+
+<p><img src="/images/hadoop/hdfs_block.png" alt="" /></p>
+
+<p>物理存储位置：</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 subdir2]<span class="nv">$ </span><span class="nb">pwd</span>
+/home/hadoop/hadoop2.6/hdfs/data/current/BP-1413666402-192.168.71.128-1470385990339/current/finalized/subdir0/subdir2
+<span class="o">[</span>hadoop@NN01 subdir2]<span class="nv">$ </span>find . -name <span class="s2">"*1073742529*"</span>
+./blk_1073742529_1778.meta
+./blk_1073742529
+</code></pre>
+</div>
+
+<h5 id="staging">1.1.1.3 数据存储： staging</h5>
+
+<p>HDFS client上传数据到HDFS时，首先，在本地缓存数据，当数据达到一个block大小时，请求NameNode分配一个block。 NameNode会把block所在的DataNode的地址告诉HDFS client。 HDFS client会直接和DataNode通信，把数据写到DataNode节点一个block文件中。</p>
+
+<h5 id="section">1.1.1.4 数据存储：读文件操作</h5>
+
+<p><img src="/images/hdfs_read.jpg" alt="" /></p>
+
+<ul>
+  <li>1.首先调用FileSystem对象的open方法，其实是一个DistributedFileSystem的实例。</li>
+  <li>2.DistributedFileSystem通过rpc获得文件的第一批block的locations，同一个block按照重复数会返回多个locations，这些locations按照hadoop拓扑结构排序，距离客户端近的排在前面。</li>
+  <li>3.前两步会返回一个FSDataInputStream对象，该对象会被封装DFSInputStream对象，DFSInputStream可以方便的管理datanode和namenode数据流。客户端调用read方法，DFSInputStream最会找出离客户端最近的datanode并连接。</li>
+  <li>4.数据从datanode源源不断的流向客户端。</li>
+  <li>5.如果第一块的数据读完了，就会关闭指向第一块的datanode连接，接着读取下一块。这些操作对客户端来说是透明的，客户端的角度看来只是读一个持续不断的流。</li>
+  <li>6.如果第一批block都读完了， DFSInputStream就会去namenode拿下一批block的locations，然后继续读，如果所有的块都读完，这时就会关闭掉所有的流。</li>
+</ul>
+
+<blockquote>
+  <p>[Alert!]如果在读数据的时候， DFSInputStream和datanode的通讯发生异常，就会尝试正在读的block的排序第二近的datanode,并且会记录哪个datanode发生错误，剩余的blocks读的时候就会直接跳过该datanode。 DFSInputStream也会检查block数据校验和，如果发现一个坏的block,就会先报告到namenode节点，然后DFSInputStream在其他的datanode上读该block的镜像。</p>
+</blockquote>
+
+<blockquote>
+  <p>该设计就是客户端直接连接datanode来检索数据并且namenode来负责为每一个block提供最优的datanode， namenode仅仅处理block location的请求，这些信息都加载在namenode的内存中，hdfs通过datanode集群可以承受大量客户端的并发访问。</p>
+</blockquote>
+
+<h5 id="section-1">1.1.1.5 数据存储：写文件操作</h5>
+
+<p><img src="/images/hdfs_write.jpg" alt="" /></p>
+
+<ul>
+  <li>1.客户端通过调用DistributedFileSystem的create方法创建新文件。</li>
+  <li>2.DistributedFileSystem通过RPC调用namenode去创建一个没有blocks关联的新文件，创建前， namenode会做各种校验，比如文件是否存在，客户端有无权限去创建等。如果校验通过， namenode就会记录下新文件，否则就会抛出IO异常。</li>
+  <li>3.前两步结束后，会返回FSDataOutputStream的对象，与读文件的时候相似， FSDataOutputStream被封装成DFSOutputStream。DFSOutputStream可以协调namenode和datanode。客户端开始写数据到DFSOutputStream，DFSOutputStream会把数据切成一个个小的packet，然后排成队列data quene。</li>
+  <li>4.DataStreamer会去处理接受data quene，它先询问namenode这个新的block最适合存储的在哪几个datanode里（比如重复数是3，那么就找到3个最适合的datanode），把他们排成一个pipeline。DataStreamer把packet按队列输出到管道的第一个datanode中，第一个datanode又把packet输出到第二个datanode中，以此类推。</li>
+  <li>5.DFSOutputStream还有一个对列叫ack quene，也是由packet组成，等待datanode的收到响应，当pipeline中的所有datanode都表示已经收到的时候，这时akc quene才会把对应的packet包移除掉。</li>
+</ul>
+
+<p>如果在写的过程中某个datanode发生错误，会采取以下几步：</p>
+
+<ul>
+  <li>1) pipeline被关闭掉</li>
+  <li>2)为了防止防止丢包ack quene里的packet会同步到data quene里</li>
+  <li>3)把产生错误的datanode上当前在写但未完成的block删掉</li>
+  <li>4)block剩下的部分被写到剩下的两个正常的datanode中</li>
+  <li>
+    <p>5)namenode找到另外的datanode去创建这个块的复制。当然，这些操作对客户端来说是无感知的</p>
+  </li>
+  <li>6.客户端完成写数据后调用close方法关闭写入流</li>
+  <li>7.DataStreamer把剩余得包都刷到pipeline里，然后等待ack信息，收到最后一个ack后，通知datanode把文件标视为已完成。</li>
+</ul>
+
+<blockquote>
+  <p>注意：客户端执行write操作后，写完的block才是可见的，正在写的block对客户端是不可见的，只有调用sync方法，客户端才确保该文件的写操作已经全部完成，当客户端调用close方法时，会默认调用sync方法。是否需要手动调用取决你根据程序需要在数据健壮性和吞吐率之间的权衡。</p>
+</blockquote>
+
+<h4 id="hdfs-1">1.1.2 HDFS常用命令</h4>
+
+<p><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html">HDFS 常用命令: 官网</a></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>类型</td>
+      <td>[任务]</td>
+    </tr>
+    <tr>
+      <td>数据获取</td>
+      <td><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html#put">通过Hadoop Shell把本地文件上传到HDFS</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html#mkdir">使用Hadoop Shell在HDFS上创建一个新的目录</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_literal_sqoop_import_literal">从一个关系型数据库中导入数据到HDFS</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_free_form_query_imports">导入关系型数据的查询结果到HDFS</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_importing_data_into_hive">从一个关系型数据库中导入数据到一个新的或者已经存在的Hive表里</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html#_literal_sqoop_export_literal">从 HDFS里面插入和更新数据到关系型数据库里面</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="https://flume.apache.org/FlumeUserGuide.html#starting-an-agent"> 给你一个Flume配置文件，启动一个 Flume agent</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><a href="https://flume.apache.org/FlumeUserGuide.html#memory-channel">给你一个配置好的 sink 和source, 配置一个 Flume 固定容量的内存 channel</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="hdfs-2">1.1.3 HDFS问题</h4>
+
+<p><strong>文件存储与分发</strong></p>
+
+<ul>
+  <li>问：存储文件数与位置？</li>
+  <li>答：存储文件数按完整文件个数来讲，是根据dfs.replication来设置的，默认为3份。按照Block来讲，根据文件原始大小来决定Block数（默认Block大小是128MB）。存储位置分配：<strong>存储：不同BlockID被随机分配在各个节点上</strong>，<strong>分发：相同的BlockID会在不同于自身节点上进行复制备份</strong>。参看<a href="/hadoop/2016/08/04/hadoop_family/#datanode">DataNode</a>部分的介绍，图中所示的文件soc-LiveJournal.txt大小为1个G，被拆分为8个Block。同一BlockID被随机地分配在2个DataNode上（注：本集群设置dfs.replication为2）。文件读取时采取就近原则（本地&gt;同网段&gt;跨网段）读取。</li>
+</ul>
+
+<h3 id="mapreduce">1.2 MapReduce</h3>
+
+<h4 id="explain-mapreduce-in-5-minutes">1.2.1  Explain Map/Reduce in 5 minutes</h4>
+
+<p>原文链接: <a href="http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce">http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce</a> by Aurelien.</p>
+
+<p><strong>1 Map/Reduce 有3个阶段 : Map/Shuffle/Reduce</strong></p>
+
+<p>Shuffle部分由Hadoop的自动完成，我们只需要实现Map和Reduce部分。</p>
+
+<p><strong>2 Map部分的输入</strong></p>
+
+<p><img src="/images/mapred_mapinput.jpg" alt="" /></p>
+
+<p>图上的城市名称作为key值，所属州以及城市均温为key的value值。ps: 请自动脑补python的dict, jason.</p>
+
+<p><strong>3 Map部分的输出</strong></p>
+
+<p><img src="/images/mapred_mapoutput.jpg" alt="" /></p>
+
+<p>图上显示的Map部分的输出是根据最终我们想要的结果来实现的。我们要得到每个州的平均值，所以根据每个州来进行新的key/value设计。</p>
+
+<p><strong>4 Shuffle部分</strong></p>
+
+<p><img src="/images/mapred_shuffle.jpg" alt="" /></p>
+
+<p>Now, the shuffle task will run on the output of the Map task. It is going to group all the values by Key, and you’ll get a List<Value>.</Value></p>
+
+<p><strong>5 Rduce部分</strong></p>
+
+<p>Reduce部分的输入为以上Shuffle部分的输出。</p>
+
+<p>Reduce任务是数据逻辑的最终完成者，in our case当然就是计算各州的平均温度。最终结果如下：</p>
+
+<p><img src="/images/mapred_reduce.jpg" alt="" /></p>
+
+<p><strong>6 总结</strong></p>
+
+<p>Map/Reduce的并行执行过程：</p>
+
+<p>Mapper&lt;K1，V1&gt; ==》 &lt;K2，V2&gt;</p>
+
+<p>Reducer&lt;K2，List<V2> &gt;==》&lt;K3，V3&gt;</V2></p>
+
+<p>PS: You can find the java code for this example here:</p>
+
+<p><a href="https://github.com/jsoftbiz/mapreduce_1">https://github.com/jsoftbiz/mapreduce_1</a></p>
+
+<h4 id="section-2">1.2.2 实例演示</h4>
+
+<h5 id="wordcount">1.2.2.1 演示WordCount</h5>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">file1</span><span class="o">.</span><span class="n">txt</span>
+<span class="nc">Hello</span> <span class="nc">World</span>
+<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">file2</span><span class="o">.</span><span class="n">txt</span>
+<span class="nc">Hello</span> <span class="nc">Hadoop</span>
+<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">duplicate</span><span class="o">.</span><span class="n">txt</span>
+<span class="mi">2</span>
+<span class="mi">8</span>
+<span class="mi">8</span>
+<span class="mi">3</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">5</span>
+<span class="mi">3</span>
+<span class="mi">0</span>
+<span class="mi">2</span>
+<span class="mi">7</span>
+<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">output2</span><span class="o">/</span><span class="n">part</span><span class="o">-</span><span class="n">r</span><span class="o">-</span><span class="mi">00000</span>
+<span class="mi">0</span>	<span class="mi">1</span>
+<span class="mi">2</span>	<span class="mi">3</span>
+<span class="mi">3</span>	<span class="mi">3</span>
+<span class="mi">5</span>	<span class="mi">1</span>
+<span class="mi">7</span>	<span class="mi">1</span>
+<span class="mi">8</span>	<span class="mi">2</span>
+<span class="nc">Hadoop</span>	<span class="mi">1</span>
+<span class="nc">Hello</span>	<span class="mi">2</span>
+<span class="nc">World</span>	<span class="mi">1</span>
+<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">words</span><span class="o">]</span><span class="n">$</span> <span class="n">hadoop</span> <span class="n">jar</span> <span class="n">wc</span><span class="o">.</span><span class="n">jar</span> <span class="nc">WordCount</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">output2</span>
+<span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">11</span> <span class="mi">21</span><span class="k">:</span><span class="err">48</span><span class="kt">:</span><span class="err">27</span> <span class="kt">INFO</span> <span class="kt">client.RMProxy:</span> <span class="kt">Connecting</span> <span class="kt">to</span> <span class="kt">ResourceManager</span> <span class="kt">at</span> <span class="kt">NN01.HadoopVM/</span><span class="err">192</span><span class="kt">.</span><span class="err">168</span><span class="kt">.</span><span class="err">71</span><span class="kt">.</span><span class="err">128</span><span class="kt">:</span><span class="err">8032</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">29</span> <span class="kt">WARN</span> <span class="kt">mapreduce.JobResourceUploader:</span> <span class="kt">Hadoop</span> <span class="kt">command-line</span> <span class="kt">option</span> <span class="kt">parsing</span> <span class="kt">not</span> <span class="kt">performed.</span> <span class="kt">Implement</span> <span class="kt">the</span> <span class="kt">Tool</span> <span class="kt">interface</span> <span class="kt">and</span> <span class="kt">execute</span> <span class="kt">your</span> <span class="kt">application</span> <span class="kt">with</span> <span class="kt">ToolRunner</span> <span class="kt">to</span> <span class="kt">remedy</span> <span class="kt">this.</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">31</span> <span class="kt">INFO</span> <span class="kt">input.FileInputFormat:</span> <span class="kt">Total</span> <span class="kt">input</span> <span class="kt">paths</span> <span class="kt">to</span> <span class="kt">process</span> <span class="kt">:</span> <span class="err">3</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">32</span> <span class="kt">INFO</span> <span class="kt">mapreduce.JobSubmitter:</span> <span class="kt">number</span> <span class="kt">of</span> <span class="kt">splits:</span><span class="err">3</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">32</span> <span class="kt">INFO</span> <span class="kt">mapreduce.JobSubmitter:</span> <span class="kt">Submitting</span> <span class="kt">tokens</span> <span class="kt">for</span> <span class="kt">job:</span> <span class="kt">job_1473644272824_0001</span>
+<span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">11</span> <span class="mi">21</span><span class="k">:</span><span class="err">48</span><span class="kt">:</span><span class="err">33</span> <span class="kt">INFO</span> <span class="kt">impl.YarnClientImpl:</span> <span class="kt">Submitted</span> <span class="kt">application</span> <span class="kt">application_1473644272824_0001</span>
+<span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">11</span> <span class="mi">21</span><span class="k">:</span><span class="err">48</span><span class="kt">:</span><span class="err">34</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span> <span class="kt">The</span> <span class="kt">url</span> <span class="kt">to</span> <span class="kt">track</span> <span class="kt">the</span> <span class="kt">job:</span> <span class="kt">http://NN01.HadoopVM:</span><span class="err">8088</span><span class="kt">/proxy/application_1473644272824_0001/</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">34</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span> <span class="kt">Running</span> <span class="kt">job:</span> <span class="kt">job_1473644272824_0001</span>
+<span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">11</span> <span class="mi">21</span><span class="k">:</span><span class="err">48</span><span class="kt">:</span><span class="err">46</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span> <span class="kt">Job</span> <span class="kt">job_1473644272824_0001</span> <span class="kt">running</span> <span class="kt">in</span> <span class="kt">uber</span> <span class="kt">mode</span> <span class="kt">:</span> <span class="kt">false</span>
+<span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">11</span> <span class="mi">21</span><span class="k">:</span><span class="err">48</span><span class="kt">:</span><span class="err">46</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span>  <span class="kt">map</span> <span class="err">0</span><span class="kt">%</span> <span class="kt">reduce</span> <span class="err">0</span><span class="kt">%</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">56</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span>  <span class="kt">map</span> <span class="err">100</span><span class="kt">%</span> <span class="kt">reduce</span> <span class="err">0</span><span class="kt">%</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">49</span><span class="kt">:</span><span class="err">27</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span>  <span class="kt">map</span> <span class="err">100</span><span class="kt">%</span> <span class="kt">reduce</span> <span class="err">100</span><span class="kt">%</span>
+<span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">49</span><span class="kt">:</span><span class="err">29</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span> <span class="kt">Job</span> <span class="kt">job_1473644272824_0001</span> <span class="kt">completed</span> <span class="kt">successfully</span>
+<span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">11</span> <span class="mi">21</span><span class="k">:</span><span class="err">49</span><span class="kt">:</span><span class="err">29</span> <span class="kt">INFO</span> <span class="kt">mapreduce.Job:</span> <span class="kt">Counters:</span> <span class="err">49</span>
+	<span class="kt">File</span> <span class="kt">System</span> <span class="kt">Counters</span>
+		<span class="nc">FILE</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">bytes</span> <span class="kt">read</span><span class="o">=</span><span class="mi">103</span>
+		<span class="nc">FILE</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">bytes</span> <span class="kt">written</span><span class="o">=</span><span class="mi">427675</span>
+		<span class="nc">FILE</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">read</span> <span class="kt">operations</span><span class="o">=</span><span class="mi">0</span>
+		<span class="nc">FILE</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">large</span> <span class="kt">read</span> <span class="kt">operations</span><span class="o">=</span><span class="mi">0</span>
+		<span class="nc">FILE</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">write</span> <span class="kt">operations</span><span class="o">=</span><span class="mi">0</span>
+		<span class="nc">HDFS</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">bytes</span> <span class="kt">read</span><span class="o">=</span><span class="mi">387</span>
+		<span class="nc">HDFS</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">bytes</span> <span class="kt">written</span><span class="o">=</span><span class="mi">49</span>
+		<span class="nc">HDFS</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">read</span> <span class="kt">operations</span><span class="o">=</span><span class="mi">12</span>
+		<span class="nc">HDFS</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">large</span> <span class="kt">read</span> <span class="kt">operations</span><span class="o">=</span><span class="mi">0</span>
+		<span class="nc">HDFS</span><span class="k">:</span> <span class="kt">Number</span> <span class="kt">of</span> <span class="kt">write</span> <span class="kt">operations</span><span class="o">=</span><span class="mi">2</span>
+	<span class="nc">Job</span> <span class="nc">Counters</span>
+		<span class="nc">Launched</span> <span class="n">map</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">3</span>
+		<span class="nc">Launched</span> <span class="n">reduce</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">1</span>
+		<span class="nc">Data</span><span class="o">-</span><span class="n">local</span> <span class="n">map</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">3</span>
+		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">maps</span> <span class="n">in</span> <span class="n">occupied</span> <span class="n">slots</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">24633</span>
+		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">reduces</span> <span class="n">in</span> <span class="n">occupied</span> <span class="n">slots</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">27722</span>
+		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">map</span> <span class="n">tasks</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">24633</span>
+		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">reduce</span> <span class="n">tasks</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">27722</span>
+		<span class="nc">Total</span> <span class="n">vcore</span><span class="o">-</span><span class="n">milliseconds</span> <span class="n">taken</span> <span class="n">by</span> <span class="n">all</span> <span class="n">map</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">24633</span>
+		<span class="nc">Total</span> <span class="n">vcore</span><span class="o">-</span><span class="n">milliseconds</span> <span class="n">taken</span> <span class="n">by</span> <span class="n">all</span> <span class="n">reduce</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">27722</span>
+		<span class="nc">Total</span> <span class="n">megabyte</span><span class="o">-</span><span class="n">milliseconds</span> <span class="n">taken</span> <span class="n">by</span> <span class="n">all</span> <span class="n">map</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">25224192</span>
+		<span class="nc">Total</span> <span class="n">megabyte</span><span class="o">-</span><span class="n">milliseconds</span> <span class="n">taken</span> <span class="n">by</span> <span class="n">all</span> <span class="n">reduce</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">28387328</span>
+	<span class="nc">Map</span><span class="o">-</span><span class="nc">Reduce</span> <span class="nc">Framework</span>
+		<span class="nc">Map</span> <span class="n">input</span> <span class="n">records</span><span class="k">=</span><span class="mi">13</span>
+		<span class="nc">Map</span> <span class="n">output</span> <span class="n">records</span><span class="k">=</span><span class="mi">15</span>
+		<span class="nc">Map</span> <span class="n">output</span> <span class="n">bytes</span><span class="k">=</span><span class="mi">107</span>
+		<span class="nc">Map</span> <span class="n">output</span> <span class="n">materialized</span> <span class="n">bytes</span><span class="k">=</span><span class="mi">115</span>
+		<span class="nc">Input</span> <span class="n">split</span> <span class="n">bytes</span><span class="k">=</span><span class="mi">340</span>
+		<span class="nc">Combine</span> <span class="n">input</span> <span class="n">records</span><span class="k">=</span><span class="mi">15</span>
+		<span class="nc">Combine</span> <span class="n">output</span> <span class="n">records</span><span class="k">=</span><span class="mi">10</span>
+		<span class="nc">Reduce</span> <span class="n">input</span> <span class="n">groups</span><span class="k">=</span><span class="mi">9</span>
+		<span class="nc">Reduce</span> <span class="n">shuffle</span> <span class="n">bytes</span><span class="k">=</span><span class="mi">115</span>
+		<span class="nc">Reduce</span> <span class="n">input</span> <span class="n">records</span><span class="k">=</span><span class="mi">10</span>
+		<span class="nc">Reduce</span> <span class="n">output</span> <span class="n">records</span><span class="k">=</span><span class="mi">9</span>
+		<span class="nc">Spilled</span> <span class="nc">Records</span><span class="k">=</span><span class="mi">20</span>
+		<span class="nc">Shuffled</span> <span class="nc">Maps</span> <span class="k">=</span><span class="mi">3</span>
+		<span class="nc">Failed</span> <span class="nc">Shuffles</span><span class="k">=</span><span class="mi">0</span>
+		<span class="nc">Merged</span> <span class="nc">Map</span> <span class="n">outputs</span><span class="k">=</span><span class="mi">3</span>
+		<span class="nc">GC</span> <span class="n">time</span> <span class="n">elapsed</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">684</span>
+		<span class="nc">CPU</span> <span class="n">time</span> <span class="n">spent</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">3040</span>
+		<span class="nc">Physical</span> <span class="n">memory</span> <span class="o">(</span><span class="n">bytes</span><span class="o">)</span> <span class="n">snapshot</span><span class="k">=</span><span class="mi">869154816</span>
+		<span class="nc">Virtual</span> <span class="n">memory</span> <span class="o">(</span><span class="n">bytes</span><span class="o">)</span> <span class="n">snapshot</span><span class="k">=</span><span class="mi">8342061056</span>
+		<span class="nc">Total</span> <span class="n">committed</span> <span class="n">heap</span> <span class="n">usage</span> <span class="o">(</span><span class="n">bytes</span><span class="o">)</span><span class="k">=</span><span class="mi">639631360</span>
+	<span class="nc">Shuffle</span> <span class="nc">Errors</span>
+		<span class="nc">BAD_ID</span><span class="k">=</span><span class="mi">0</span>
+		<span class="nc">CONNECTION</span><span class="k">=</span><span class="mi">0</span>
+		<span class="nc">IO_ERROR</span><span class="k">=</span><span class="mi">0</span>
+		<span class="nc">WRONG_LENGTH</span><span class="k">=</span><span class="mi">0</span>
+		<span class="nc">WRONG_MAP</span><span class="k">=</span><span class="mi">0</span>
+		<span class="nc">WRONG_REDUCE</span><span class="k">=</span><span class="mi">0</span>
+	<span class="nc">File</span> <span class="nc">Input</span> <span class="nc">Format</span> <span class="nc">Counters</span>
+		<span class="nc">Bytes</span> <span class="nc">Read</span><span class="k">=</span><span class="mi">47</span>
+	<span class="nc">File</span> <span class="nc">Output</span> <span class="nc">Format</span> <span class="nc">Counters</span>
+		<span class="nc">Bytes</span> <span class="nc">Written</span><span class="k">=</span><span class="mi">49</span>
+</code></pre>
+</div>
+
+<h5 id="section-3">1.2.2.2 演示上述平均温度统计</h5>
+
+<p>资源链接：<a href="https://github.com/jsoftbiz/mapreduce_1">https://github.com/jsoftbiz/mapreduce_1</a></p>
+
+<p>需要使用到<a href="http://hadoop.apache.org/docs/r2.6.4/hadoop-mapreduce-client/hadoop-mapreduce-client-core/HadoopStreaming.html">streaming</a></p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 temperature]<span class="nv">$ </span>hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/<span class="k">*</span>streaming<span class="k">*</span>.jar -input /temperature/input/<span class="k">*</span> -output /temperature/py-output -file mapper.py -mapper mapper.py -file reducer.py -reducer reducer.py
+16/08/09 22:26:30 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
+packageJobJar: <span class="o">[</span>mapper.py, reducer.py, /tmp/hadoop-unjar8704173289988394156/] <span class="o">[]</span> /tmp/streamjob6992547910816721479.jar <span class="nv">tmpDir</span><span class="o">=</span>null
+16/08/09 22:26:32 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
+16/08/09 22:26:32 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
+16/08/09 22:26:33 INFO mapred.FileInputFormat: Total input paths to process : 1
+16/08/09 22:26:33 INFO mapreduce.JobSubmitter: number of splits:2
+16/08/09 22:26:33 INFO mapreduce.JobSubmitter: Submitting tokens <span class="k">for </span>job: job_1470792183416_0002
+16/08/09 22:26:34 INFO impl.YarnClientImpl: Submitted application application_1470792183416_0002
+16/08/09 22:26:34 INFO mapreduce.Job: The url to track the job: http://NN01.HadoopVM:8088/proxy/application_1470792183416_0002/
+16/08/09 22:26:34 INFO mapreduce.Job: Running job: job_1470792183416_0002
+16/08/09 22:26:47 INFO mapreduce.Job: Job job_1470792183416_0002 running <span class="k">in </span>uber mode : <span class="nb">false
+</span>16/08/09 22:26:47 INFO mapreduce.Job:  map 0% reduce 0%
+16/08/09 22:26:57 INFO mapreduce.Job:  map 50% reduce 0%
+16/08/09 22:26:58 INFO mapreduce.Job:  map 100% reduce 0%
+16/08/09 22:27:06 INFO mapreduce.Job:  map 100% reduce 100%
+16/08/09 22:27:06 INFO mapreduce.Job: Job job_1470792183416_0002 completed successfully
+16/08/09 22:27:06 INFO mapreduce.Job: Counters: 49
+	File System Counters
+		FILE: Number of bytes <span class="nb">read</span><span class="o">=</span>78
+		FILE: Number of bytes <span class="nv">written</span><span class="o">=</span>330581
+		FILE: Number of <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>0
+		FILE: Number of large <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>0
+		FILE: Number of write <span class="nv">operations</span><span class="o">=</span>0
+		HDFS: Number of bytes <span class="nb">read</span><span class="o">=</span>407
+		HDFS: Number of bytes <span class="nv">written</span><span class="o">=</span>18
+		HDFS: Number of <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>9
+		HDFS: Number of large <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>0
+		HDFS: Number of write <span class="nv">operations</span><span class="o">=</span>2
+	Job Counters
+		Launched map <span class="nv">tasks</span><span class="o">=</span>2
+		Launched reduce <span class="nv">tasks</span><span class="o">=</span>1
+		Data-local map <span class="nv">tasks</span><span class="o">=</span>2
+		Total <span class="nb">time </span>spent by all maps <span class="k">in </span>occupied slots <span class="o">(</span>ms<span class="o">)=</span>16690
+		Total <span class="nb">time </span>spent by all reduces <span class="k">in </span>occupied slots <span class="o">(</span>ms<span class="o">)=</span>6278
+		Total <span class="nb">time </span>spent by all map tasks <span class="o">(</span>ms<span class="o">)=</span>16690
+		Total <span class="nb">time </span>spent by all reduce tasks <span class="o">(</span>ms<span class="o">)=</span>6278
+		Total vcore-milliseconds taken by all map <span class="nv">tasks</span><span class="o">=</span>16690
+		Total vcore-milliseconds taken by all reduce <span class="nv">tasks</span><span class="o">=</span>6278
+		Total megabyte-milliseconds taken by all map <span class="nv">tasks</span><span class="o">=</span>17090560
+		Total megabyte-milliseconds taken by all reduce <span class="nv">tasks</span><span class="o">=</span>6428672
+	Map-Reduce Framework
+		Map input <span class="nv">records</span><span class="o">=</span>9
+		Map output <span class="nv">records</span><span class="o">=</span>9
+		Map output <span class="nv">bytes</span><span class="o">=</span>54
+		Map output materialized <span class="nv">bytes</span><span class="o">=</span>84
+		Input split <span class="nv">bytes</span><span class="o">=</span>222
+		Combine input <span class="nv">records</span><span class="o">=</span>0
+		Combine output <span class="nv">records</span><span class="o">=</span>0
+		Reduce input <span class="nv">groups</span><span class="o">=</span>3
+		Reduce shuffle <span class="nv">bytes</span><span class="o">=</span>84
+		Reduce input <span class="nv">records</span><span class="o">=</span>9
+		Reduce output <span class="nv">records</span><span class="o">=</span>3
+		Spilled <span class="nv">Records</span><span class="o">=</span>18
+		Shuffled Maps <span class="o">=</span>2
+		Failed <span class="nv">Shuffles</span><span class="o">=</span>0
+		Merged Map <span class="nv">outputs</span><span class="o">=</span>2
+		GC <span class="nb">time </span>elapsed <span class="o">(</span>ms<span class="o">)=</span>2002
+		CPU <span class="nb">time </span>spent <span class="o">(</span>ms<span class="o">)=</span>5260
+		Physical memory <span class="o">(</span>bytes<span class="o">)</span> <span class="nv">snapshot</span><span class="o">=</span>685187072
+		Virtual memory <span class="o">(</span>bytes<span class="o">)</span> <span class="nv">snapshot</span><span class="o">=</span>6260936704
+		Total committed heap usage <span class="o">(</span>bytes<span class="o">)=</span>498597888
+	Shuffle Errors
+		<span class="nv">BAD_ID</span><span class="o">=</span>0
+		<span class="nv">CONNECTION</span><span class="o">=</span>0
+		<span class="nv">IO_ERROR</span><span class="o">=</span>0
+		<span class="nv">WRONG_LENGTH</span><span class="o">=</span>0
+		<span class="nv">WRONG_MAP</span><span class="o">=</span>0
+		<span class="nv">WRONG_REDUCE</span><span class="o">=</span>0
+	File Input Format Counters
+		Bytes <span class="nv">Read</span><span class="o">=</span>185
+	File Output Format Counters
+		Bytes <span class="nv">Written</span><span class="o">=</span>18
+16/08/09 22:27:06 INFO streaming.StreamJob: Output directory: /temperature/py-output
+</code></pre>
+</div>
+
+<h5 id="writing-an-hadoop-mapreduce-program-in-python">1.2.2.3 Writing an Hadoop MapReduce Program in Python</h5>
+
+<p>原文请参照：</p>
+
+<p><a href="http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/">Writing an Hadoop MapReduce Program in Python</a></p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 hadoop]<span class="nv">$ </span>hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/<span class="k">*</span>streaming<span class="k">*</span>.jar -file /home/hadoop/words/mapper.py -mapper /home/hadoop/words/mapper.py -file /home/hadoop/words/reducer.py -reducer /home/hadoop/words/reducer.py -input /words/input/<span class="k">*</span> -output /words/py-output
+16/08/09 20:10:28 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
+packageJobJar: <span class="o">[</span>/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tmp/hadoop-unjar5100483106189698643/] <span class="o">[]</span> /tmp/streamjob6336434171947928949.jar <span class="nv">tmpDir</span><span class="o">=</span>null
+16/08/09 20:10:29 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
+16/08/09 20:10:29 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
+16/08/09 20:10:30 INFO mapred.FileInputFormat: Total input paths to process : 2
+16/08/09 20:10:30 INFO mapreduce.JobSubmitter: number of splits:2
+16/08/09 20:10:31 INFO mapreduce.JobSubmitter: Submitting tokens <span class="k">for </span>job: job_1470792183416_0001
+16/08/09 20:10:32 INFO impl.YarnClientImpl: Submitted application application_1470792183416_0001
+16/08/09 20:10:32 INFO mapreduce.Job: The url to track the job: http://NN01.HadoopVM:8088/proxy/application_1470792183416_0001/
+16/08/09 20:10:32 INFO mapreduce.Job: Running job: job_1470792183416_0001
+16/08/09 20:10:45 INFO mapreduce.Job: Job job_1470792183416_0001 running <span class="k">in </span>uber mode : <span class="nb">false
+</span>16/08/09 20:10:45 INFO mapreduce.Job:  map 0% reduce 0%
+16/08/09 20:10:59 INFO mapreduce.Job:  map 50% reduce 0%
+16/08/09 20:11:03 INFO mapreduce.Job:  map 100% reduce 0%
+16/08/09 20:11:05 INFO mapreduce.Job:  map 100% reduce 100%
+16/08/09 20:11:06 INFO mapreduce.Job: Job job_1470792183416_0001 completed successfully
+16/08/09 20:11:06 INFO mapreduce.Job: Counters: 49
+	File System Counters
+		FILE: Number of bytes <span class="nb">read</span><span class="o">=</span>47
+		FILE: Number of bytes <span class="nv">written</span><span class="o">=</span>330444
+		FILE: Number of <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>0
+		FILE: Number of large <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>0
+		FILE: Number of write <span class="nv">operations</span><span class="o">=</span>0
+		HDFS: Number of bytes <span class="nb">read</span><span class="o">=</span>223
+		HDFS: Number of bytes <span class="nv">written</span><span class="o">=</span>25
+		HDFS: Number of <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>9
+		HDFS: Number of large <span class="nb">read </span><span class="nv">operations</span><span class="o">=</span>0
+		HDFS: Number of write <span class="nv">operations</span><span class="o">=</span>2
+	Job Counters
+		Launched map <span class="nv">tasks</span><span class="o">=</span>2
+		Launched reduce <span class="nv">tasks</span><span class="o">=</span>1
+		Data-local map <span class="nv">tasks</span><span class="o">=</span>2
+		Total <span class="nb">time </span>spent by all maps <span class="k">in </span>occupied slots <span class="o">(</span>ms<span class="o">)=</span>24400
+		Total <span class="nb">time </span>spent by all reduces <span class="k">in </span>occupied slots <span class="o">(</span>ms<span class="o">)=</span>3381
+		Total <span class="nb">time </span>spent by all map tasks <span class="o">(</span>ms<span class="o">)=</span>24400
+		Total <span class="nb">time </span>spent by all reduce tasks <span class="o">(</span>ms<span class="o">)=</span>3381
+		Total vcore-milliseconds taken by all map <span class="nv">tasks</span><span class="o">=</span>24400
+		Total vcore-milliseconds taken by all reduce <span class="nv">tasks</span><span class="o">=</span>3381
+		Total megabyte-milliseconds taken by all map <span class="nv">tasks</span><span class="o">=</span>24985600
+		Total megabyte-milliseconds taken by all reduce <span class="nv">tasks</span><span class="o">=</span>3462144
+	Map-Reduce Framework
+		Map input <span class="nv">records</span><span class="o">=</span>2
+		Map output <span class="nv">records</span><span class="o">=</span>4
+		Map output <span class="nv">bytes</span><span class="o">=</span>33
+		Map output materialized <span class="nv">bytes</span><span class="o">=</span>53
+		Input split <span class="nv">bytes</span><span class="o">=</span>198
+		Combine input <span class="nv">records</span><span class="o">=</span>0
+		Combine output <span class="nv">records</span><span class="o">=</span>0
+		Reduce input <span class="nv">groups</span><span class="o">=</span>3
+		Reduce shuffle <span class="nv">bytes</span><span class="o">=</span>53
+		Reduce input <span class="nv">records</span><span class="o">=</span>4
+		Reduce output <span class="nv">records</span><span class="o">=</span>3
+		Spilled <span class="nv">Records</span><span class="o">=</span>8
+		Shuffled Maps <span class="o">=</span>2
+		Failed <span class="nv">Shuffles</span><span class="o">=</span>0
+		Merged Map <span class="nv">outputs</span><span class="o">=</span>2
+		GC <span class="nb">time </span>elapsed <span class="o">(</span>ms<span class="o">)=</span>1505
+		CPU <span class="nb">time </span>spent <span class="o">(</span>ms<span class="o">)=</span>6830
+		Physical memory <span class="o">(</span>bytes<span class="o">)</span> <span class="nv">snapshot</span><span class="o">=</span>677711872
+		Virtual memory <span class="o">(</span>bytes<span class="o">)</span> <span class="nv">snapshot</span><span class="o">=</span>6261100544
+		Total committed heap usage <span class="o">(</span>bytes<span class="o">)=</span>482869248
+	Shuffle Errors
+		<span class="nv">BAD_ID</span><span class="o">=</span>0
+		<span class="nv">CONNECTION</span><span class="o">=</span>0
+		<span class="nv">IO_ERROR</span><span class="o">=</span>0
+		<span class="nv">WRONG_LENGTH</span><span class="o">=</span>0
+		<span class="nv">WRONG_MAP</span><span class="o">=</span>0
+		<span class="nv">WRONG_REDUCE</span><span class="o">=</span>0
+	File Input Format Counters
+		Bytes <span class="nv">Read</span><span class="o">=</span>25
+	File Output Format Counters
+		Bytes <span class="nv">Written</span><span class="o">=</span>25
+16/08/09 20:11:06 INFO streaming.StreamJob: Output directory: /words/py-output
+</code></pre>
+</div>
+
+<h4 id="mapr">1.2.3 MapR问题</h4>
+
+<p><strong>NameNode JobTracker</strong></p>
+
+<ul>
+  <li>问题：是否配置在同一节点？</li>
+  <li>答：JobTracker与TaskTracker 是Hadoop1.x的概念，Hadoop2.x之后被Yarn的RM与NM替代。通常情况是配置在同一节点。官方解释：</li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li><strong>Typically the compute nodes and the storage nodes are the same</strong>, that is, the MapReduce framework and the Hadoop Distributed File System (see HDFS Architecture Guide) are running on the same set of nodes. This configuration allows the framework to effectively schedule tasks on the nodes where data is already present, resulting in very high aggregate bandwidth across the cluster.</li>
+    <li>The MapReduce framework consists of a single master JobTracker and one slave TaskTracker per cluster-node. The master is responsible for scheduling the jobs’ component tasks on the slaves, monitoring them and re-executing the failed tasks. The slaves execute the tasks as directed by the master.</li>
+    <li>Minimally, applications specify the input/output locations and supply map and reduce functions via implementations of appropriate interfaces and/or abstract-classes. These, and other job parameters, comprise the job configuration. The Hadoop job client then submits the job (jar/executable etc.) and configuration to the JobTracker which then assumes the responsibility of distributing the software/configuration to the slaves, scheduling tasks and monitoring them, providing status and diagnostic information to the job-client.</li>
+  </ul>
+</blockquote>
+
+<p><strong>RM与AM和NameNode与DataNode的关系</strong></p>
+
+<ul>
+  <li>问题：以上是否可以指定分配？</li>
+  <li>答：可以。需要改动yarn-site.xml文件并指明ResorceManager并在需要启动ResorceManager的节点上修改相应slave及master文件配置。RM与AM的关系参见<a href="/hadoop/2016/08/04/hadoop_family/#apache-hadoop-yarn">YARN</a>.</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@DN01 sbin]<span class="nv">$ </span>jps
+6980 NodeManager
+4870 DataNode
+6873 ResourceManager
+<span class="o">[</span>hadoop@NN01 words]<span class="nv">$ </span>jps
+7819 DataNode
+7997 SecondaryNameNode
+7709 NameNode
+8910 NodeManager
+<span class="o">[</span>hadoop@DN02 ~]<span class="nv">$ </span>jps
+4587 DataNode
+5549 NodeManager
+</code></pre>
+</div>
+
+<p>NameNode与DataNode的关系：NameNode可以看作是分布式文件系统中的管理者，主要负责管理文件系统的命名空间、集群配置信息和存储块的复制等。NameNode会将文件系统的Meta-data存储在内存中，这些信息主要包括了文件信息、每一个文件对应的文件块的信息和每一个文件块在DataNode的信息等。DataNode是文件存储的基本单元，它将Block存储在本地文件系统中，保存了Block的Meta-data，同时周期性地将所有存在的Block信息发送给NameNode。</p>
+
+<p><strong>Map过程读数据位置</strong></p>
+
+<ul>
+  <li>问题：读取文件位置</li>
+  <li>
+    <p>答：同Read过程。</p>
+  </li>
+  <li><a href="http://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Reducer">How Many Maps?</a></li>
+  <li><u>The number of maps is usually driven by the total size of the inputs, that is, the total number of blocks of the input files.</u></li>
+  <li>默认为2</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;property&gt;</span>
+<span class="nt">&lt;name&gt;</span>mapreduce.job.maps<span class="nt">&lt;/name&gt;</span>
+<span class="nt">&lt;value&gt;</span>2<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;source&gt;</span>mapred-default.xml<span class="nt">&lt;/source&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+</code></pre>
+</div>
+
+<p>参考：</p>
+
+<p>hadooop提供了一个设置map个数的参数mapred.map.tasks，我们可以通过这个参数来控制map的个数。但是通过这种方式设置map的个数，并不是每次都有效的。原因是mapred.map.tasks只是一个hadoop的参考数值，最终map的个数，还取决于其他的因素。</p>
+
+<ul>
+  <li>为了方便介绍，先来看几个名词：</li>
+  <li>block_size : hdfs的文件块大小，默认为64M，可以通过参数dfs.block.size设置</li>
+  <li>total_size : 输入文件整体的大小</li>
+  <li>input_file_num : 输入文件的个数</li>
+</ul>
+
+<p>（1）默认map个数
+     如果不进行任何设置，默认的map个数是和blcok_size相关的。
+     default_num = total_size / block_size;</p>
+
+<p>（2）期望大小
+     可以通过参数mapred.map.tasks来设置程序员期望的map个数，但是这个个数只有在大于default_num的时候，才会生效。
+     goal_num = mapred.map.tasks;</p>
+
+<p>（3）设置处理的文件大小
+     可以通过mapred.min.split.size 设置每个task处理的文件大小，但是这个大小只有在大于block_size的时候才会生效。
+     split_size = max(mapred.min.split.size, block_size);
+     split_num = total_size / split_size;</p>
+
+<p>（4）计算的map个数
+compute_map_num = min(split_num,  max(default_num, goal_num))</p>
+
+<p>除了这些配置以外，mapreduce还要遵循一些原则。 mapreduce的每一个map处理的数据是不能跨越文件的，也就是说min_map_num &gt;= input_file_num。 所以，最终的map个数应该为：</p>
+
+<p>final_map_num = max(compute_map_num, input_file_num)</p>
+
+<p>经过以上的分析，在设置map个数的时候，可以简单的总结为以下几点：</p>
+
+<ul>
+  <li>（1）如果想增加map个数，则设置mapred.map.tasks 为一个较大的值。</li>
+  <li>（2）如果想减小map个数，则设置mapred.min.split.size 为一个较大的值。</li>
+  <li>
+    <p>（3）如果输入中有很多小文件，依然想减少map个数，则需要将小文件merger为大文件，然后使用准则2。</p>
+  </li>
+  <li><a href="http://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Reducer">How Many Reduces?</a></li>
+  <li><strong>The right number of reduces seems to be 0.95 or 1.75 multiplied by (&lt;no. of nodes&gt; * &lt;no. of maximum containers per node&gt;).</strong></li>
+  <li>With 0.95 all of the reduces can launch immediately and start transferring map outputs as the maps finish. With 1.75 the faster nodes will finish their first round of reduces and launch a second wave of reduces doing a much better job of load balancing.</li>
+  <li>Increasing the number of reduces increases the framework overhead, but increases load balancing and lowers the cost of failures.</li>
+  <li>The scaling factors above are slightly less than whole numbers to reserve a few reduce slots in the framework for speculative-tasks and failed tasks.</li>
+  <li>默认为1：</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;property&gt;</span>
+<span class="nt">&lt;name&gt;</span>mapreduce.job.reduces<span class="nt">&lt;/name&gt;</span>
+<span class="nt">&lt;value&gt;</span>1<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;source&gt;</span>mapred-default.xml<span class="nt">&lt;/source&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+</code></pre>
+</div>
+<ul>
+  <li><a href="http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/Partitioner.html">Partitioner</a></li>
+  <li>Partitioner partitions the key space.</li>
+  <li>Partitioner controls the partitioning of the keys of the intermediate map-outputs. The key (or a subset of the key) is used to derive the partition, typically by a hash function. The total number of partitions is the same as the number of reduce tasks for the job. Hence this controls which of the m reduce tasks the intermediate key (and hence the record) is sent to for reduction.</li>
+  <li>
+    <p><a href="http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/lib/partition/HashPartitioner.html">HashPartitioner</a> is the default Partitioner.</p>
+  </li>
+  <li>Counter</li>
+  <li>Counter is a facility for MapReduce applications to report its statistics.</li>
+  <li>Mapper and Reducer implementations can use the Counter to report statistics.</li>
+</ul>
+
+<h3 id="apache-hadoop-yarn">1.3 Apache Hadoop YARN</h3>
+
+<h4 id="introduction-1">1.3.1 Introduction</h4>
+
+<p>The fundamental idea of YARN is to split up the functionalities of resource management and job scheduling/monitoring into separate daemons. The idea is to have a global ResourceManager (RM) and per-application ApplicationMaster (AM). An application is either a single job or a DAG of jobs.</p>
+
+<p>The ResourceManager and the NodeManager form the data-computation framework. The <strong>ResourceManager</strong> is the ultimate authority that arbitrates resources among all the applications in the system. The <strong>NodeManager</strong> is the per-machine framework agent who is responsible for containers, monitoring their resource usage (cpu, memory, disk, network) and reporting the same to the ResourceManager/Scheduler.</p>
+
+<p>The <strong>per-application</strong> <u>ApplicationMaster is, in effect, a framework specific library and is tasked with negotiating resources from the ResourceManager and working with the NodeManager(s) to execute and monitor the tasks**.</u>
+<img src="/images/hadoop/yarn_architecture.gif" alt="" /></p>
+
+<p>The ResourceManager has two main components: <strong>Scheduler</strong> and <strong>ApplicationsManager</strong>.</p>
+
+<p>The Scheduler is responsible for allocating resources to the various running applications subject to familiar constraints of capacities, queues etc. The Scheduler is pure scheduler in the sense that it performs no monitoring or tracking of status for the application. Also, it offers no guarantees about restarting failed tasks either due to application failure or hardware failures. The Scheduler performs its scheduling function based the resource requirements of the applications; it does so based on the abstract notion of a resource Container which incorporates elements such as memory, cpu, disk, network etc.</p>
+
+<p>The Scheduler has a pluggable policy which is responsible for partitioning the cluster resources among the various queues, applications etc. The current schedulers such as the <a href="http://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/CapacityScheduler.html">CapacityScheduler</a> and the <a href="http://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/FairScheduler.html">FairScheduler</a> would be some examples of plug-ins.</p>
+
+<p>The ApplicationsManager is responsible for accepting job-submissions, negotiating the first container for executing the application specific ApplicationMaster and provides the service for restarting the ApplicationMaster container on failure. The per-application ApplicationMaster has the responsibility of negotiating appropriate resource containers from the Scheduler, tracking their status and monitoring for progress.</p>
+
+<h4 id="section-4">1.3.2 应用程序运行过程</h4>
+
+<ul>
+  <li>步骤1：用户将应用程序提交到ResourceManager上；</li>
+  <li>步骤2：ResourceManager为应用程序ApplicationMaster申请资源，并与某个NodeManager通信，以启动ApplicationMaster；</li>
+  <li>步骤3：ApplicationMaster与ResourceManager通信，为内部要执行的任务申请资源，一旦得到资源后，将于NodeManager通信，以启动对应的任务。</li>
+  <li>步骤4：所有任务运行完成后，ApplicationMaster向ResourceManager注销，整个应用程序运行结束。</li>
+</ul>
+
+<p><img src="/images/hadoop/yarn_am.png" alt="" /></p>
+
+<h4 id="resourcemanagerapplicationmasternodemanager">1.3.3 ResourceManager与ApplicationMaster与NodeManager</h4>
+
+<p><img src="/images/hadoop/yarn_client2rm.png" alt="" />
+<img src="/images/hadoop/yarn_rm_am_nm.png" alt="" />
+参看：<a href="http://blog.csdn.net/s646575997/article/details/51802567">YARN的设计思想和功能组件简介</a></p>
+
+<h3 id="hbase">1.4 HBase</h3>
+
+<h4 id="introduction-2">1.4.1 Introduction</h4>
+
+<p><a href="http://hbase.apache.org/book.html#quickstart">Apache Hbase</a>安装及测试</p>
+
+<p>提供海量数据存储功能，是一种构建在HDFS之上的分布式、面向列的存储系统。</p>
+
+<blockquote>
+  <blockquote>
+    <p>Browse to the Web UI</p>
+  </blockquote>
+</blockquote>
+
+<ul>
+  <li>connect to the UI for the Master<a href="H1:16010">H1:16010</a> or <a href="H2:16010">H2:16010</a></li>
+</ul>
+
+<h4 id="the-apache-hbase-shell">1.4.2 The Apache HBase Shell演示</h4>
+
+<ul>
+  <li>1 <a href="http://hbase.apache.org/book.html#scripting">Scripting with Ruby</a></li>
+  <li>2 <a href="http://hbase.apache.org/book.html#_running_the_shell_in_non_interactive_mode">Running the Shell in Non-Interactive Mode</a></li>
+  <li>3 <a href="http://hbase.apache.org/book.html#hbase.shell.noninteractive">HBase Shell in OS Scripts</a></li>
+  <li>4 <a href="http://hbase.apache.org/book.html#_read_hbase_shell_commands_from_a_command_file">Read HBase Shell Commands from a Command File</a></li>
+</ul>
+
+<h4 id="data-modelhttphbaseapacheorgbookhtmldatamodel">1.4.3 <a href="http://hbase.apache.org/book.html#datamodel">Data Model</a></h4>
+
+<ul>
+  <li>1 时间戳（Timestamp）：每次数据操作对应的时间戳，可以看作是数据的版本号</li>
+  <li>2 列族（Column Family）：表在水平方向有一个或者多个列族组成，一个列族中可以由任意多个列组成，列族支持动态扩展，无需预先定义列的数量以及类型，所有列均以二进制格式存储，用户需要自行进行类型转换。所有的列族成员的前缀是相同的，例如“abc:a1”和“abc:a2”两个列都属于abc这个列族。</li>
+  <li>3 表和区域（Table&amp;Region）：当表随着记录数不断增加而变大后，会逐渐分裂成多份，成为区域，一个区域是对表的水平划分，不同的区域会被Master分配给相应的RegionServer进行管理</li>
+  <li>4 单元格（Cell）：表存储数据的单元。由{行健，列（列族:标签），时间戳}唯一确定，其中的数据是没有类型的，以二进制的形式存储。</li>
+</ul>
+
+<h2 id="service-programming">2 Service Programming</h2>
+
+<h3 id="zookeeper">2.1 Zookeeper</h3>
+
+<p><img src="/images/zookeeper_small.gif" alt="" /></p>
+
+<p><a href="https://zookeeper.apache.org/">Apache Zookeeper</a></p>
+
+<p>ZooKeeper是Hadoop Ecosystem中非常重要的组件，它的主要功能是为分布式系统提供一致性协调(Coordination)服务，与之对应的Google的类似服务叫Chubby。</p>
+
+<h4 id="zookeeper-1">2.1.1 Zookeeper的基本概念</h4>
+
+<ul>
+  <li>1 Role</li>
+</ul>
+
+<p>Zookeeper中的角色主要有以下三类，如下表所示：</p>
+
+<p><img src="/images/hadoop/zookeeper_role.jpg" alt="" />
+系统模型如图所示：</p>
+
+<p><img src="/images/hadoop/zookeeper_sysmodel.jpg" alt="" /></p>
+
+<ul>
+  <li>
+    <p>2 Target</p>
+  </li>
+  <li>1 最终一致性：client不论连接到哪个Server，展示给它都是同一个视图，这是zookeeper最重要的性能。</li>
+  <li>2 可靠性：具有简单、健壮、良好的性能，如果消息m被到一台服务器接受，那么它将被所有的服务器接受。</li>
+  <li>3 实时性：Zookeeper保证客户端将在一个时间间隔范围内获得服务器的更新信息，或者服务器失效的信息。但由于网络延时等原因，Zookeeper不能保证两个客户端能同时得到刚更新的数据，如果需要最新数据，应该在读数据之前调用sync()接口。*</li>
+  <li>4 等待无关（wait-free）：慢的或者失效的client不得干预快速的client的请求，使得每个client都能有效的等待。</li>
+  <li>5 原子性：更新只能成功或者失败，没有中间状态。</li>
+  <li>6 顺序性：包括全局有序和偏序两种：全局有序是指如果在一台服务器上消息a在消息b前发布，则在所有Server上消息a都将在消息b前被发布；偏序是指如果一个消息b在消息a后被同一个发送者发布，a必将排在b前面。</li>
+</ul>
+
+<h4 id="zookeeper-2">2.1.2 ZooKeeper的工作原理</h4>
+
+<p>Zookeeper的核心是原子广播，这个机制保证了各个Server之间的同步。实现这个机制的协议叫做Zab协议。Zab协议有两种模式，它们分别是恢复模式（选主）和广播模式（同步）。当服务启动或者在领导者崩溃后，Zab就进入了恢复模式，当领导者被选举出来，且大多数Server完成了和leader的状态同步以后，恢复模式就结束了。状态同步保证了leader和Server具有相同的系统状态。</p>
+
+<p>为了保证事务的顺序一致性，zookeeper采用了递增的事务id号（zxid）来标识事务。所有的提议（proposal）都在被提出的时候加上了zxid。实现中zxid是一个64位的数字，它高32位是epoch用来标识leader关系是否改变，每次一个leader被选出来，它都会有一个新的epoch，标识当前属于那个leader的统治时期。低32位用于递增计数。</p>
+
+<p>每个Server在工作过程中有三种状态：</p>
+
+<ul>
+  <li>1 LOOKING：当前Server不知道leader是谁，正在搜寻</li>
+  <li>2 LEADING：当前Server即为选举出来的leader</li>
+  <li>3 FOLLOWING：leader已经选举出来，当前Server与之同步</li>
+</ul>
+
+<p>可以参照此博客<a href="http://cailin.iteye.com/blog/2014486/">详细过程</a></p>
+
+<h3 id="kafka">2.2 kafka</h3>
+
+<p>一个分布式的、分区的、多副本的实时消息发布和订阅系统。提供可扩展、高吞吐、低延迟、高可靠的消息分发服务。</p>
+
+<p><a href="http://kafka.apache.org/documentation.html#quickstart">quickstart</a></p>
+
+<p>视频教程<a href="http://www.jikexueyuan.com/course/kafka/">http://www.jikexueyuan.com/course/kafka/</a></p>
+
+<h4 id="introductionhttpwwwcnblogscomlikehuap3999538html">2.2.1 <a href="http://www.cnblogs.com/likehua/p/3999538.html">Introduction</a></h4>
+
+<p><a href="http://kafka.apache.org/documentation.html#introduction">Introduction</a></p>
+
+<p><img src="/images/hadoop/producer_consumer.png" alt="" /></p>
+
+<p>Kafka is a distributed,partitioned,replicated commit logservice。它提供了类似于JMS的特性，但是在设计实现上完全不同，此外它并不是JMS规范的实现。kafka对消息保存时根据Topic进行归类，发送消息者成为Producer,消息接受者成为Consumer,此外kafka集群有多个kafka实例组成，每个实例(server)成为broker。无论是kafka集群，还是producer和consumer都依赖于zookeeper来保证系统可用性集群保存一些meta信息。</p>
+
+<p><img src="/images/hadoop/consumer-groups.png" alt="" /></p>
+
+<h4 id="section-5">2.2.2 集群实现与演示</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 ~]$ ~/tools/runRemoteCmd.sh "/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;" all
+
+[hadoop@DN02 bin]$ $KAFKA_HOME/bin/kafka-console-producer.sh --broker-list NN01.HadoopVM:9092 --sync --topic test
+
+[hadoop@DN01 bin]$ $KAFKA_HOME/bin/kafka-console-consumer.sh --zookeeper NN01.HadoopVM:2181 --topic test --from-beginning
+</code></pre>
+</div>
+
+<h2 id="distributed-programming">3 Distributed Programming</h2>
+
+<h3 id="pig">3.1 Pig</h3>
+
+<p>pig是hadoop上层的衍生架构，与hive类似。对比hive（hive类似sql，是一种声明式的语言），pig是一种过程语言，类似于存储过程一步一步得进行数据转化。</p>
+
+<h4 id="pig-1">3.1.1 pig数据类型</h4>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>double</td>
+          <td>float</td>
+          <td>long</td>
+          <td>int</td>
+          <td>bytearray</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>tuple</td>
+          <td>bag</td>
+          <td>map</td>
+          <td>chararray</td>
+          <td>bytearray</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>double float long int chararray bytearray都相当于pig的基本类型</li>
+    <li>tuple相当于数组 ，但是可以类型不一，举例(‘dirkzhang’,’dallas’,41)</li>
+    <li>Bag相当于tuple的一个集合，举例{(‘dirk’,41),(‘kedde’,2),(‘terre’,31)}，在group的时候会生成bag</li>
+    <li>Map相当于哈希表，key为chararray，value为任意类型，例如[‘name’#dirk,’age’#36,’num’#41</li>
+    <li>nulls 表示的不只是数据不存在，他更表示数据是unkown</li>
+  </ul>
+</blockquote>
+
+<h4 id="pig-2">3.1.2 pig基本语法</h4>
+
+<p>TODO</p>
+
+<h3 id="hive">3.2 Hive</h3>
+
+<h4 id="hive-introduction">3.2.1 Hive introduction</h4>
+
+<p><a href="https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-InstallationandConfiguration">Hive Install</a></p>
+
+<p><a href="http://blog.csdn.net/reesun/article/details/8556078">Hive metastore三种配置方式</a></p>
+
+<p>建立在Hadoop基础上的开源的数据仓库，提供类似SQL的Hive QL语言操作结构化数据存储服务和基本的数据分析服务。</p>
+
+<p><strong>hive修改默认元数据存储数据库derby改为mysql</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo yum install mysql
+mysql -uroot -p //[密码修改](http://blog.csdn.net/leili0806/article/details/8573636)
+CREATE USER 'hive' IDENTIFIED BY '*******';
+# SET PASSWORD FOR 'username'@'host' = PASSWORD('newpassword');
+update user set password=password('*******') where user='root';
+flush privileges;
+GRANT ALL PRIVILEGES ON *.* TO 'hive'@'%' WITH GRANT OPTION;
+mysql -uhive -pmysql//以hive用户进入mysql
+create database hive;
+# 将mysql的jdbc驱动放置到hive的lib目录下
+
+wget http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz/from/http://mysql.he.net/
+tar -xvzf mysql-connector-java-5.1.39.tar.gz
+cp mysql-connector-java-5.1.39/*.jar $HIVE_HOME/lib
+</code></pre>
+</div>
+
+<p>配置hive-site.xml</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;hive.metastore.local&lt;/name&gt;
+        &lt;value&gt;true&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;
+        &lt;value&gt;jdbc:mysql://192.168.11.157:3306/hive?characterEncoding=UTF-8&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;
+        &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;
+        &lt;value&gt;hive&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;
+        &lt;value&gt;******&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+</div>
+
+<ul>
+  <li>1.hive允许远程客户端使用哪些编程语言？</li>
+  <li>2.已经存在HiveServer为什么还需要HiveServer2？</li>
+  <li>3.HiveServer2有哪些优点？</li>
+  <li>4.hive.server2.thrift.min.worker.threads-最小工作线程数，默认为多少？</li>
+  <li>5.启动Hiveserver2有哪两种方式？</li>
+</ul>
+
+<p>之前的学习和实践Hive中，使用的都是CLI或者hive –e的方式，该方式仅允许使用HiveQL执行查询、更新等操作，并且该方式比较笨拙单一。幸好Hive提供了轻客户端的实现，通过HiveServer或者HiveServer2，客户端可以在不启动CLI的情况下对Hive中的数据进行操作，两者都允许远程客户端使用多种编程语言如Java、Python向Hive提交请求，取回结果。HiveServer或者HiveServer2都是基于Thrift的，但HiveSever有时被称为Thrift server，而HiveServer2却不会。既然已经存在HiveServer为什么还需要HiveServer2呢？这是因为HiveServer不能处理多于一个客户端的并发请求，这是由于HiveServer使用的Thrift接口所导致的限制，不能通过修改HiveServer的代码修正。因此在Hive-0.11.0版本中重写了HiveServer代码得到了HiveServer2，进而解决了该问题。HiveServer2支持多客户端的并发和认证，为开放API客户端如JDBC、ODBC提供了更好的支持。</p>
+
+<p>既然HiveServer2提供了更强大的功能，将会对其进行着重学习，但也会简单了解一下HiveServer的使用方法。在命令中输入hive –service help，结果如下。从结果可以了解到，可以使用hive <parameters> --service serviceName <serviceparameters>启动特定的服务，如cli、hiverserver、hiveserver2等。</serviceparameters></parameters></p>
+
+<p>配置hiveserver2，修改hive-site.xml</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Configuration Properties in the hive-site.xml File
+hive.server2.thrift.min.worker.threads – Minimum number of worker threads, default 5.
+hive.server2.thrift.max.worker.threads – Maximum number of worker threads, default 500.
+hive.server2.thrift.port – TCP port number to listen on, default 10000.
+hive.server2.thrift.bind.host – TCP interface to bind to.
+</code></pre>
+</div>
+
+<p>关于 HIVE Beeline 问题</p>
+
+<p>1  启动 hiveserver2 服务，启动 beeline -u jdbc:hive2:// 正常 ，启动 beeline -u jdbc:hive2://127.0.0.1:10000 包如下错误</p>
+
+<p>Error: Failed to open new session: java.lang.RuntimeException: org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.security.authorize.AuthorizationException): User: root is not allowed to impersonate anonymous (state=,code=0)
+Beeline version 2.1.0 by Apache Hive</p>
+
+<p>分析 ： 访问权限问题</p>
+
+<p>解决 ：在hdfs 的配置文件core-site.xml中加入如下配置，root 为位置填入  User:*  ，etc   hadoop.proxyuser.eamon.hosts</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;property&gt;
+  &lt;name&gt;hadoop.proxyuser.root.hosts&lt;/name&gt;
+  &lt;value&gt;*&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+  &lt;name&gt;hadoop.proxyuser.root.groups&lt;/name&gt;
+  &lt;value&gt;*&lt;/value&gt;
+&lt;/property&gt;
+</code></pre>
+</div>
+
+<p>重新启动HDFS 。</p>
+
+<p>2  执行 beeline -u jdbc:hive2://127.0.0.1:10000 ，报如下错误</p>
+
+<p>Error: Failed to open new session: java.lang.RuntimeException: org.apache.hadoop.security.AccessControlException: Permission denied: user=anonymous, access=EXECUTE, inode=”/tmp/hive”:root:supergroup:drwx——</p>
+
+<p>分析 ： HDFS 文件系统权限问题</p>
+
+<p>解决 ： 临时解决</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>bin/hdfs dfs -chmod -R 777  /tmp/
+</code></pre>
+</div>
+
+<h4 id="running-hive">3.2.2 Running Hive</h4>
+
+<p><a href="https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive">Running Hive</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	# Starting from Hive 2.1, we need to run the schematool command below as an initialization step. For example, we can use "derby" as db type.
+	$HIVE_HOME/bin/schematool -dbType &lt;db type&gt; -initSchema
+</code></pre>
+</div>
+
+<p>1 hive 连接测试</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>hive&gt; CREATE TABLE bank(
+    &gt; age int,
+    &gt; job string,
+    &gt; marital string,
+    &gt; education string,
+    &gt; default string,
+    &gt; balance int,
+    &gt; housing string,
+    &gt; loan string,
+    &gt; contact string,
+    &gt; day int,
+    &gt; month string,
+    &gt; duration int,
+    &gt; campaign int,
+    &gt; pdays int,
+    &gt; previous int,
+    &gt; poutcome string,
+    &gt; y string)
+    &gt; ROW FORMAT delimited fields terminated by ',';
+OK
+Time taken: 2.648 seconds
+hive&gt; show tables;
+OK
+bank
+Time taken: 0.074 seconds, Fetched: 1 row(s)
+hive&gt; desc bank;
+OK
+age                 	int
+job                 	string
+marital             	string
+education           	string
+default             	string
+balance             	int
+housing             	string
+loan                	string
+contact             	string
+day                 	int
+month               	string
+duration            	int
+campaign            	int
+pdays               	int
+previous            	int
+poutcome            	string
+y                   	string
+Time taken: 0.324 seconds, Fetched: 17 row(s)
+hive&gt; load data local inpath "/home/hadoop/bank-full.csv" overwrite into table bank;
+Loading data to table default.bank
+OK
+Time taken: 2.019 seconds
+</code></pre>
+</div>
+
+<p>2 beeline 连接测试</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>beeline&gt; !connect jdbc:hive2://localhost:10000 hive ******
+Connecting to jdbc:hive2://localhost:10000
+Connected to: Apache Hive (version 2.1.0)
+Driver: Hive JDBC (version 2.1.0)
+16/09/22 19:32:52 [main]: WARN jdbc.HiveConnection: Request to set autoCommit to false; Hive does not support autoCommit=false.
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+0: jdbc:hive2://localhost:10000&gt; show databases;
++----------------+--+
+| database_name  |
++----------------+--+
+| default        |
++----------------+--+
+1 row selected (5.569 seconds)
+0: jdbc:hive2://localhost:10000&gt; show tables;
++-----------+--+
+| tab_name  |
++-----------+--+
+| bank      |
+| test      |
++-----------+--+
+2 rows selected (0.32 seconds)
+0: jdbc:hive2://localhost:10000&gt; select count(*) from test;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++--------+--+
+|   c0   |
++--------+--+
+| 45211  |
++--------+--+
+1 row selected (203.928 seconds)
+0: jdbc:hive2://localhost:10000&gt;
+</code></pre>
+</div>
+
+<p>3 python 连接hive</p>
+
+<p><a href="http://hxl2009.blog.51cto.com/779549/1334664">安装Pip</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget --no-check-certificate https://pypi.python.org/packages/source/p/pip/pip-1.4.1.tar.gz
+tar zxvf pip-1.4.1.tar.gz
+cd pip-1.4.1
+python setup.py install
+</code></pre>
+</div>
+
+<p>安装依赖包</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo yum install gcc-c++ python-devel.x86_64 cyrus-sasl-devel.x86_64
+sudo pip install pyhs2
+</code></pre>
+</div>
+
+<p>python 连接测试</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@DN02 ~]$ python
+
+&gt;&gt;&gt; import pyhs2
+&gt;&gt;&gt; conn = pyhs2.connect(host="NN01.HadoopVM",user='hive',password='hive',authMechanism='PLAIN')
+&gt;&gt;&gt; cur = conn.cursor()
+&gt;&gt;&gt; # Show databases
+&gt;&gt;&gt; cur.getDatabases()
+[['default', '']]
+&gt;&gt;&gt; # Execute query
+&gt;&gt;&gt; cur.execute("select * from bank limit 10")
+&gt;&gt;&gt; # Return column info from query
+&gt;&gt;&gt; print cur.getSchema()
+[{'comment': None, 'columnName': 'bank.age', 'type': 'INT_TYPE'},... {'comment': None, 'columnName': 'bank.y', 'type': 'STRING_TYPE'}]
+&gt;&gt;&gt; # Fetch table results
+&gt;&gt;&gt; for i in cur.fetch():
+...     print i
+...
+[58, 'management', 'married', 'tertiary', 'no', 2143, 'yes', 'no', 'unknown', 5, 'may', 261, 1, -1, 0, 'unknown', 'no']
+...
+</code></pre>
+</div>
+
+<p>windows连接报错</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> conn = pyhs2.connect(host="192.168.71.128", user='hive', password='hive', authMechanism='PLAIN')
+Traceback (most recent call last):
+  File "C:\Anaconda2\lib\site-packages\IPython\core\interactiveshell.py", line 2885, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File "&lt;ipython-input-5-04457594e509&gt;", line 1, in &lt;module&gt;
+    conn = pyhs2.connect(host="192.168.71.128", user='hive', password='hive', authMechanism='PLAIN')
+  File "C:\Anaconda2\lib\site-packages\pyhs2\__init__.py", line 7, in connect
+    return Connection(*args, **kwargs)
+  File "C:\Anaconda2\lib\site-packages\pyhs2\connections.py", line 46, in __init__
+    transport.open()
+  File "C:\Anaconda2\lib\site-packages\pyhs2\cloudera\thrift_sasl.py", line 66, in open
+    message=("Could not start SASL: %s" % self.sasl.getError()))
+</code></pre>
+</div>
+
+<p>1 In hive-site.xml, set configuration as below:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;property&gt;
+   &lt;name&gt;hive.server2.authentication&lt;/name&gt;
+   &lt;value&gt;NOSASL&lt;/value&gt;
+&lt;/property&gt;
+</code></pre>
+</div>
+
+<p>2 Test again</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>In[6]: import pyhs2
+In[7]: conn = pyhs2.connect(host="192.168.71.128", user='hive', password='hive', authMechanism='NOSASL')
+In[8]: cur= conn.cursor()
+In[9]: cur.execute("show databases")
+In[10]: cur.fetch()
+Out[10]: [['default']]
+In[11]: cur.execute("show tables")
+In[12]: cur.fetch()
+Out[12]: [['bank'], ['david_test'], ['test']]
+</code></pre>
+</div>
+
+<p>4 连接客户端查看：</p>
+
+<p><img src="/images/hadoop/hiveserver2client.png" alt="" /></p>
+
+<p>5 hive 命令的调用方式</p>
+
+<p>1) script</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hivetest]$ cat hive_script3.sql
+select * from bank limit 10;
+select count(*) from bank;
+[hadoop@NN01 hivetest]$ hive -S -f hive_script3.sql
+...
+58	management	married	tertiary	n2143	yes	no	unknown	5	may	261	1	-1	0	unknown	no
+......
+43	technician	single	secondary	n593	yes	no	unknown	5	may	5-1	0	unknown	no
+45211
+
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># create table
+&gt;&gt;&gt; conn = pyhs2.connect(host="NN01.HadoopVM", user="hive",password = 'hive', authMechanism='PLAIN')&gt;&gt;&gt; cur = conn.cursor()
+&gt;&gt;&gt; cur.execute("create table david_test(id int, name string)")
+&gt;&gt;&gt; cur.execute("desc david_test")
+&gt;&gt;&gt; ll = cur.fetch()
+&gt;&gt;&gt; ll
+[['id', 'int', ''], ['name', 'string', '']]
+&gt;&gt;&gt; cur.execute("insert into david_test(id,name) values (1,'David'),(2, 'Alice')")
+&gt;&gt;&gt; cur.execute("select * from david_test")
+&gt;&gt;&gt; fetch = cur.fetch()
+&gt;&gt;&gt; fetch
+[[1, 'David'], [2, 'Alice']]
+
+# shell fetch
+[hadoop@NN01 hivetest]$ ./start_hql.sh 2
+2	Alice
+[hadoop@NN01 hivetest]$ cat start_hql.sh
+hive\
+	-hivevar id=$1\
+	-hivevar name=$2\
+	-S -f hql.sql
+[hadoop@NN01 hivetest]$ cat hql.sql
+--databases
+use default;
+--tables
+select * from david_test
+where id='${hivevar:id}' ;
+</code></pre>
+</div>
+
+<p>2) 命令行模式</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hivetest]$ hive -e "select count(*) from bank"
+......
+OK
+45211
+Time taken: 36.675 seconds, Fetched: 1 row(s)
+</code></pre>
+</div>
+
+<h4 id="hive-">3.3.3 Hive 相关问题</h4>
+
+<ul>
+  <li>问题：HIve只是对MapR的一个翻译？</li>
+  <li>
+    <p>答：是的。参看<a href="http://blog.csdn.net/lw_ghy/article/details/51469753">Hive原理及查询优化</a></p>
+  </li>
+  <li>问题：HIve有没有图形化界面客户端</li>
+  <li>答：Hive目前有以下客户端：</li>
+  <li>Command Line</li>
+  <li>JDBC</li>
+  <li>Python</li>
+  <li>PHP</li>
+  <li>ODBC</li>
+  <li>Thrift</li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>Thrift Java Client</li>
+    <li>Thrift C++ Client</li>
+    <li>Thrift Node Clients</li>
+    <li>Thrift Ruby Client</li>
+  </ul>
+</blockquote>
+
+<h3 id="spark">3.3 Spark</h3>
+
+<p>基于内存进行计算的分布式计算框架。</p>
+
+<h4 id="spark-overview">3.3.1 Spark Overview</h4>
+
+<p>Apache Spark is a fast and general-purpose cluster computing system. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs. It also supports a rich set of higher-level tools including <a href="http://spark.apache.org/docs/latest/sql-programming-guide.html">Spark SQL</a> for SQL and structured data processing, <a href="http://spark.apache.org/docs/latest/ml-guide.html">MLlib</a> for machine learning, <a href="http://spark.apache.org/docs/latest/graphx-programming-guide.html">GraphX</a> for graph processing, and <a href="http://spark.apache.org/docs/latest/streaming-programming-guide.html">Spark Streaming</a>.</p>
+
+<p>Spark的适用场景</p>
+
+<p>Spark是基于内存的迭代计算框架，适用于需要多次操作特定数据集的应用场合。需要反复操作的次数越多，所需读取的数据量越大，受益越大，数据量小但是计算密集度较大的场合，受益就相对较小
+由于RDD的特性，Spark不适用那种异步细粒度更新状态的应用，例如web服务的存储或者是增量的web爬虫和索引。就是对于那种增量修改的应用模型不适合。
+总的来说Spark的适用面比较广泛且比较通用。</p>
+
+<p><strong>Key terms used in Apache Spark:</strong></p>
+
+<p><img src="https://spark.apache.org/docs/2.0.0/img/cluster-overview.png" alt="" />
+Image source:https://spark.apache.org/docs/2.0.0/img/cluster-overview.png</p>
+
+<p><strong>Spark Context</strong>: It holds a connection with Spark cluster manager. All Spark applications run as independent set of processes, coordinated by a SparkContext in a program.</p>
+
+<p><strong>Driver and Worker</strong>: A driver is incharge of the process of running the main() function of an application and creating the SparkContext. A worker, on the other hand, is any node that can run program in the cluster. If a process is launched for an application, then this application acquires executors at worker node.</p>
+
+<p><strong>Cluster Manager</strong>: Cluster manager allocates resources to each application in driver program. There are three types of cluster managers supported by Apache Spark – Standalone, Mesos and YARN. Apache Spark is agnostic to the underlying cluster manager, so we can install any cluster manager, each has its own unique advantages depending upon the goal. They all are different in terms of scheduling, security and monitoring. Once SparkContext connects to the cluster manager, it acquires executors on a cluster node, these executors are worker nodes on cluster which work independently on each tasks and interact with each other.</p>
+
+<p><strong>Cluster Manager Types</strong></p>
+
+<p>The system currently supports three cluster managers:</p>
+
+<ul>
+  <li>*1 Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.</li>
+  <li>*2 Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.</li>
+  <li>*3 Hadoop YARN – the resource manager in Hadoop 2.</li>
+</ul>
+
+<p><strong>How Apache Spark is better than traditional big data framework?</strong></p>
+
+<p><strong>Language Support</strong>: Apache Spark has API support for popular data science languages like Python, R, Scala and Java.</p>
+
+<p><strong>Supports Real time and Batch processing</strong>: Apache Spark supports “Batch data” processing where a group of transactions is collected over a period of time. It also supports real time data processing, where data is continuously flowing from the source. For example, weather information coming in from sensors can be processed by Apache Spark directly.</p>
+
+<p><strong>Lazy operation</strong>: Lazy operations are used to optimize solutions in Apache Spark. I will discuss about lazy evaluation in later part of this article. For now, we can think that there are some operations which do not execute until we require results.</p>
+
+<p><strong>Support for multiple transformations and actions</strong>: Another advantage of Apache Spark over Hadoop is that Hadoop supports only MapReduce but Apache Spark support many transformations and actions including MapReduce.</p>
+
+<p>There are further advantages of Apache Spark in comparison to Hadoop. For example, Apache Spark is much faster while doing Map side shuffling and Reduce side shuffling. However, shuffling is a complex topic in itself and requires an entire article in itself. Hence, I am not talking about it in more details here.</p>
+
+<p><strong>一句话实现MapReduce</strong></p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s">"README.md"</span><span class="p">)</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">.</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">word</span><span class="p">:</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="n">textFile</span><span class="o">.</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span><span class="o">.</span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="k">else</span> <span class="n">b</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">textFile</span><span class="o">.</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span><span class="o">.</span><span class="nb">reduce</span><span class="p">(</span><span class="nb">max</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<pre><code class="language-spark">sc.textFile("README.md").flatMap(line =&gt; line.split(" ")).map(word =&gt; (word,1)).reduceByKey(_ + _).collect()
+textFile.map(line =&gt; line.split(" ").size).reduce((a, b) =&gt; if (a &gt; b) a else b)
+import java.lang.Math
+textFile.map(line =&gt; line.split(" ").length).reduce((a,b) =&gt; Math.max(a,b))
+</code></pre>
+
+<p><strong><a href="http://spark.apache.org/docs/latest/quick-start.html#self-contained-applications">Self-Contained Applications</a></strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 sparkapp]$ spark-submit --master spark://NN01.HadoopVm:7077 SimpleApp.py
+/home/hadoop/spark/python/lib/pyspark.zip/pyspark/sql/context.py:477: DeprecationWarning: HiveContext is deprecated in Spark 2.0.0. Please use SparkSession.builder.enableHiveSupport().getOrCreate() instead.
+/home/hadoop/spark/python/lib/pyspark.zip/pyspark/sql/context.py:477: DeprecationWarning: HiveContext is deprecated in Spark 2.0.0. Please use SparkSession.builder.enableHiveSupport().getOrCreate() instead.
+Lines with a: 4, lines with b: 2
+
+[hadoop@NN01 sparkapp]$ spark-submit --class "SimpleApp" ~/sparkapp/target/scala-2.11/simple-project_2.11-1.0.jar 2&gt;&amp;1|grep "Line"
+Lines with a: 4, Lines with b: 2
+</code></pre>
+</div>
+<p><strong>Spark 计算 Pi</strong></p>
+
+<p>using a <a href="http://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo method to estimate the value of Pi</a></p>
+
+<p>在终端中执行如下命令创建一个文件夹 pi  作为应用程序根目录</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span><span class="nb">cd</span> ~
+<span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>mkdir ./pi
+<span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>mkdir -p ./pi/src/main/scala
+</code></pre>
+</div>
+
+<p>Scala脚本</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">#</span> <span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">vim</span> <span class="n">pi</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">scala</span><span class="o">/</span><span class="nc">Pi</span><span class="o">.</span><span class="n">scala</span>
+<span class="k">import</span> <span class="nn">scala.math.random</span>
+<span class="k">import</span> <span class="nn">org.apache.spark._</span>
+
+<span class="cm">/** Computes an approximation to Pi */</span>
+
+<span class="k">object</span> <span class="nc">SparkPi</span><span class="o">{</span>
+    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="n">conf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="o">().</span><span class="n">setAppName</span><span class="o">(</span><span class="s">"Spark Pi"</span><span class="o">)</span>
+        <span class="k">val</span> <span class="n">spark</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkContext</span><span class="o">(</span><span class="n">conf</span><span class="o">)</span>
+
+        <span class="k">val</span> <span class="n">slices</span> <span class="k">=</span> <span class="k">if</span><span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span><span class="mi">0</span><span class="o">)</span> <span class="n">args</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">toInt</span> <span class="k">else</span> <span class="mi">2</span>
+        <span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="mi">100000</span> <span class="o">*</span> <span class="n">slices</span>
+
+        <span class="k">val</span> <span class="n">count</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">parallelize</span><span class="o">(</span><span class="mi">1</span> <span class="n">to</span> <span class="n">n</span><span class="o">,</span> <span class="n">slices</span><span class="o">).</span><span class="n">map</span><span class="o">{</span><span class="n">i</span> <span class="k">=&gt;</span>
+            <span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="n">random</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">val</span> <span class="n">y</span> <span class="k">=</span> <span class="n">random</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="o">}.</span><span class="n">reduce</span><span class="o">(</span><span class="k">_</span> <span class="o">+</span> <span class="k">_</span><span class="o">)</span>
+
+        <span class="n">println</span><span class="o">(</span><span class="s">"Pi is roughly: "</span> <span class="o">+</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">count</span> <span class="o">/</span> <span class="n">n</span><span class="o">)</span>
+        <span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="o">()</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Link sbt with spark</p>
+
+<pre><code class="language-sbt"># [hadoop@NN01 ~]$ vim pi/pi.sbt
+name := "Spark Pi"
+
+version := "1.0"
+
+scalaVersion := "2.11.8"
+
+libraryDependencies += "org.apache.spark" %% "spark-core" % "2.0.0"
+</code></pre>
+
+<p>查看目录并打包</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>sbt sbt-version
+Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM warning: ignoring option <span class="nv">MaxPermSize</span><span class="o">=</span>256M; support was removed <span class="k">in </span>8.0
+<span class="o">[</span>info] Set current project to hadoop <span class="o">(</span><span class="k">in </span>build file:/home/hadoop/<span class="o">)</span>
+<span class="o">[</span>info] 0.13.12
+<span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span><span class="nb">cd </span>pi
+<span class="o">[</span>hadoop@NN01 pi]<span class="nv">$ </span>find .
+.
+./pi.sbt
+./src
+./src/main
+./src/main/scala
+./src/main/scala/Pi.scala
+<span class="o">[</span>hadoop@NN01 pi]<span class="nv">$ </span>sbt package
+Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM warning: ignoring option <span class="nv">MaxPermSize</span><span class="o">=</span>256M; support was removed <span class="k">in </span>8.0
+<span class="o">[</span>info] Set current project to Spark Pi <span class="o">(</span><span class="k">in </span>build file:/home/hadoop/pi/<span class="o">)</span>
+<span class="o">[</span>info] Updating <span class="o">{</span>file:/home/hadoop/pi/<span class="o">}</span>pi...
+<span class="o">[</span>info] Resolving jline#jline;2.12.1 ...
+<span class="o">[</span>info] Done updating.
+<span class="o">[</span>info] Compiling 1 Scala <span class="nb">source </span>to /home/hadoop/pi/target/scala-2.11/classes...
+<span class="o">[</span>info] Packaging /home/hadoop/pi/target/scala-2.11/spark-pi_2.11-1.0.jar ...
+<span class="o">[</span>info] Done packaging.
+<span class="o">[</span>success] Total <span class="nb">time</span>: 19 s, completed Sep 10, 2016 1:50:51 AM
+<span class="o">[</span>hadoop@NN01 pi]<span class="nv">$ </span>ls
+pi.sbt  project  src  target
+</code></pre>
+</div>
+
+<p>提交,我们就可以将生成的 jar 包通过 spark-submit 提交到 Spark 中运行了，命令如下：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">pi</span><span class="o">]</span><span class="n">$</span> <span class="n">spark</span><span class="o">-</span><span class="n">submit</span> <span class="o">--</span><span class="k">class</span> <span class="err">"</span><span class="nc">SparkPi</span><span class="err">"</span> <span class="o">~/</span><span class="n">pi</span><span class="o">/</span><span class="n">target</span><span class="o">/</span><span class="n">scala</span><span class="o">-</span><span class="mf">2.11</span><span class="o">/</span><span class="n">spark</span><span class="o">-</span><span class="n">pi_2</span><span class="o">.</span><span class="mi">11</span><span class="o">-</span><span class="mf">1.0</span><span class="o">.</span><span class="n">jar</span>
+<span class="nc">Pi</span> <span class="n">is</span> <span class="n">roughly</span><span class="k">:</span> <span class="err">3</span><span class="kt">.</span><span class="err">13858</span>
+</code></pre>
+</div>
+
+<p><img src="/images/hadoop/sparkpi.jpg" alt="" /></p>
+
+<p><strong>Caching</strong></p>
+
+<p>Spark also supports pulling data sets into a cluster-wide in-memory cache. This is very useful when data is accessed repeatedly, such as when querying a small “hot” dataset or when running an iterative algorithm like PageRank. As a simple example, let’s mark our linesWithSpark dataset to be cached:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>linesWithSpark.cache()
+</code></pre>
+</div>
+
+<p><strong>Apache Spark data representations: RDD / Dataframe / Dataset</strong></p>
+
+<p>Spark has three data representations viz RDD, Dataframe, Dataset. For each data representation, Spark has a different API. For example, later in this article I am going to use ml (a library), which currently supports only Dataframe API. Dataframe is much faster than RDD because it has metadata (some information about data) associated with it, which allows Spark to optimize query plan. Refer to this <a href="https://databricks.com/blog/2015/02/17/introducing-dataframes-in-spark-for-large-scale-data-science.html">link</a> to know more about optimization. The Dataframe feature in Apache Spark was added in Spark 1.3. If you want to know more in depth about when to use RDD, Dataframe and Dataset you can refer this <a href="https://databricks.com/blog/2016/07/14/a-tale-of-three-apache-spark-apis-rdds-dataframes-and-datasets.html">link</a>.</p>
+
+<p>In this article, I will first spend some time on RDD, to get you started with Apache Spark. Later, I will spend some time on Dataframes. Dataframes share some common characteristics with RDD (transformations and actions). In this article, I am not going to talk about Dataset as this functionality is not included in PySpark.?</p>
+
+<p><strong>RDD:</strong></p>
+
+<p>After installing and configuring PySpark, we can start programming using Spark in Python. But to use Spark functionality, we must use RDD. RDD (Resilient Distributed Database) is a collection of elements, that can be divided across multiple nodes in a cluster to run parallel processing. It is also fault tolerant collection of elements, which means it can automatically recover from failures. RDD is immutable, we can create RDD once but can’t change it. We can apply any number of operation on it and can create another RDD by applying some transformations. Here are a few things to keep in mind about RDD:</p>
+
+<ul>
+  <li><strong>Transformation</strong>: Transformation refers to the operation applied on a RDD to create new RDD.</li>
+  <li><strong>Action</strong>: Actions refer to an operation which also apply on RDD that perform computation and send the result back to driver.</li>
+</ul>
+
+<p>RDDs use Shared Variable:</p>
+
+<p>The parallel operations in Apache Spark use shared variable. It means that whenever a task is sent by a driver to executors program in a cluster, a copy of shared variable is sent to each node in a cluster, so that they can use this variable while performing task. Accumulator and Broadcast are the two types of shared variables supported by Apache Spark.</p>
+
+<ul>
+  <li><strong>Broadcast</strong>: We can use the Broadcast variable to save the copy of data across all node.</li>
+  <li><strong>Accumulator</strong>: In Accumulator variables are used for aggregating the information.</li>
+</ul>
+
+<p>How to Create RDD in Apache Spark</p>
+
+<p>Existing storage: When we want to create a RDD though existing storage in driver program (which we would like to be parallelized). For example, converting a list to RDD, which is already created in a driver program.</p>
+
+<p>External sources: When we want to create a RDD though external sources such as a shared file system, HDFS, HBase, or any data source offering a Hadoop Input Format.</p>
+
+<p>Writing first program in Apache Spark</p>
+
+<p>I have already discussed that RDD supports two type of operations, which are transformation and action. Let us get down to writing our first program:</p>
+
+<p><strong>Step1: Create SparkContext</strong></p>
+
+<p>First step in any Apache programming is to create a SparkContext. SparkContext is needed when we want to execute operations in a cluster. SparkContext tells Spark how and where to access a cluster. It is first step to connect with Apache Cluster. If you are using Spark Shell, we will find that this is already created. Otherwise, we can create the Spark Context by importing, initializing and providing the configuration settings. For example:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code> <span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">SparkContext</span>
+ <span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>Step2: Create a RDD</p>
+
+<p>I have already discussed that we can create RDD in two ways: Either from an existing storage or from an external storage. Let’s create our first RDD. SparkContext has parallelize method, which is used for creating the Spark RDD from an iterable (like list, tuple..) already present in driver program.</p>
+
+<p>We can also provide the number of partitions as a parameter to parallelize method. If we do not give number of partition parameter, then Spark will automatically set the number of partition in a cluster. The number of partition can be set manually by passing second parameter to parallelize method. For example, sc.parallelize(data, 10)), where data is an existing data in driver program and 10 is the number of partitions.
+Lets create the first Spark RDD called rdd.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>data = range(1,1000)
+rdd = sc.parallelize(data)
+</code></pre>
+</div>
+
+<p>We have a collect method to see the content of RDD.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>rdd.collect()
+</code></pre>
+</div>
+
+<p>To see the first n element of a RDD we have a method take:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>rdd.take(2) # It will print first 2 elements of rdd
+</code></pre>
+</div>
+
+<p>Step 3: Map transformation.</p>
+
+<p>Map transformation returns a Mapped RDD by applying function to each element of the base RDD. Let’s repeat the first step of creating a RDD from existing source, For example,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>data = ['Hello' , 'I' , 'AM', 'Ankit ', 'Gupta']
+Rdd = sc.parallelize(data)
+</code></pre>
+</div>
+
+<p>Now a RDD (name is ‘Rdd’) is created from the existing source, which is a list of string in a driver program. We will now apply lambda function to each element of Rdd and return the mapped (transformed) RDD (word,1) pair in the Rdd1.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Rdd1 = Rdd.map(lambda x: (x,1))
+</code></pre>
+</div>
+
+<p>Let’s see the out of this map operation.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Rdd1.collect()
+output: [('Hello', 1), ('I', 1), ('AM', 1), ('Ankit ', 1), ('Gupta', 1)]
+</code></pre>
+</div>
+
+<p>If you noticed, nothing happened after applying the lambda function on Rdd1 (we won’t see any computation happening in a cluster). This is called the lazy operation. All transformation operations in Spark are lazy, which means that we will not see any computations on RDD, until we need them for further action.</p>
+
+<p>Spark remembers which transformation is applied to which RDD with the help of DAG (Directed a Cyclic Graph). The lazy evaluation helps Spark to optimize the solution because Spark will get time to see the DAG before actually executing the operations on RDD. This enables Spark to run operations more efficiently.</p>
+
+<p>In the code above, collect() and take() are the examples of an action.</p>
+
+<p>ref: <a href="http://dblab.xmu.edu.cn/blog/spark-quick-start-guide/">Spark快速入门指南 – Spark安装与基础使用</a></p>
+
+<h4 id="spark-sql-dataframes-and-datasets-guidereferhttpsparkapacheorgdocslatestsql-programming-guidehtml">3.3.2 Spark SQL, DataFrames and Datasets Guide<a href="http://spark.apache.org/docs/latest/sql-programming-guide.html">refer</a></h4>
+
+<p>TODO</p>
+
+<h4 id="spark-streaming-programming-guidereferhttpsparkapacheorgdocslateststreaming-programming-guidehtml">3.3.3 Spark Streaming Programming Guide<a href="http://spark.apache.org/docs/latest/streaming-programming-guide.html">refer</a></h4>
+
+<p>TODO</p>
+
+<h4 id="machine-learning-library-mllib-guidereferhttpsparkapacheorgdocslatestml-guidehtml">3.3.4 Machine Learning Library (MLlib) Guide<a href="http://spark.apache.org/docs/latest/ml-guide.html">refer</a></h4>
+
+<p>TODO</p>
+
+<h4 id="graphx-programming-guidereferhttpsparkapacheorgdocslatestgraphx-programming-guidehtml">3.3.5 GraphX Programming Guide<a href="http://spark.apache.org/docs/latest/graphx-programming-guide.html">refer</a></h4>
+
+<p>TODO</p>
+
+<h2 id="machine-learning">4 Machine Learning</h2>
+
+<h3 id="mahout">4.1 Mahout</h3>
+
+<h2 id="data-ingestion">5 Data Ingestion</h2>
+
+<h3 id="storm">5.1 Storm</h3>
+
+<p><img src="/images/storm-flow.png" alt="" /></p>
+
+<h4 id="setting-up-a-storm-clusterhttpstormapacheorgreleases101setting-up-a-storm-clusterhtml">5.1.1 <a href="http://storm.apache.org/releases/1.0.1/Setting-up-a-Storm-cluster.html">Setting up a Storm Cluster</a></h4>
+
+<p><a href="http://storm.apache.org/releases/1.0.1/Setting-up-a-Storm-cluster.html">Setting up a Storm Cluster</a></p>
+
+<h4 id="storm-indexhttpstormapacheorgreleases101indexhtml">5.1.2 <a href="http://storm.apache.org/releases/1.0.1/index.html">Storm Index</a></h4>
+
+<p><a href="http://storm.apache.org/releases/1.0.1/index.html">Storm Index</a></p>
+
+<h4 id="storm-resources-for-reference">5.1.3 Storm Resources for reference</h4>
+
+<p><a href="http://storm.apache.org/talksAndVideos.html">Talks and Slideshows</a> __ <a href="http://www.oschina.net/translate/history-of-apache-storm-and-lessons-learned?cmp&amp;p=4#">Apache Storm 的历史及经验教训</a></p>
+
+<h4 id="storm-1">5.1.4 Storm命名方式</h4>
+
+<blockquote>
+  <ul>
+    <li>Storm暴风雨：其组件大多也以气象名词命名</li>
+    <li>spout龙卷：形象的理解是把原始数据卷进Storm流式计算中</li>
+    <li>bolt雷电：从spout或者其他bolt中接收数据进行处理或者输出</li>
+    <li>nimbus雨云：主控节点，存在单点问题，不过可以用watchdog来保证其可用性，fast-fail后马上就启动</li>
+    <li>topology拓扑：Storm的任务单元，形象的理解拓扑的点是spout或者bolt，之间的数据流是线，整个构成一个拓扑</li>
+  </ul>
+</blockquote>
+
+<h3 id="sqoop">5.2 Sqoop</h3>
+
+<p>TODO</p>
+
+<h2 id="databases">6 Databases</h2>
+
+<h3 id="redis">6.1 Redis</h3>
+
+<h4 id="section-6">6.1.1 集群安装</h4>
+
+<p><a href="http://zhoushouby.blog.51cto.com/9150272/1560346">redis 3.0 cluster 集群 学习之路篇 [1]</a></p>
+
+<p><a href="http://www.ithao123.cn/content-2994768.html">Redis分布式部署，一致性hash;分布式与缓存队列</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@DN01 init.d]$ sudo cp ~/redis-3.2.3/utils/redis_init_script redis
+[hadoop@DN01 init.d]$ sudo chmod +x redis
+[hadoop@DN01 init.d]$ cd ..
+[hadoop@DN01 etc]$ sudo mkdir redis
+[hadoop@DN01 etc]$ sudo cp ~/redis-3.2.3/redis.conf redis/6379.conf
+</code></pre>
+</div>
+
+<p>官方：</p>
+
+<p><a href="http://redis.io/topics/cluster-tutorial">Redis cluster tutorial</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>start:
+$ ./src/redis-server redis.conf
+close:
+$ ./src/redis-cli -n 6379 shutdown
+</code></pre>
+</div>
+
+<p>安装python的redis模块</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget --no-check-certificate https://pypi.python.org/packages/source/r/redis/redis-2.8.0.tar.gz
+tar -zvxf redis-2.8.0.tar.gz
+mv redis-2.8.0 python-redis-2.8.0
+cd python-redis-2.8.0
+python setup.py install
+</code></pre>
+</div>
+<p>部署成功，写段代码验证一下</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import redis
+client =  redis.StrictRedis(host='localhost', port=6379)
+print client.ping()
+True
+</code></pre>
+</div>
+
+<h2 id="system-deployment">7 System Deployment</h2>
+
+<h3 id="ambari">7.1 Ambari</h3>
+
+<p>TODO</p>
+
+
+
+                <hr>
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/hadoop/2016/08/04/hadoop_10_years/" data-toggle="tooltip" data-placement="top" title="Hadoop Ecosystem Evolves-10 Cool Big Data Projects">
+                        Previous<br>
+                        <span>Hadoop Ecosystem Evolves-10 Cool Big Data Projects</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/hadoop/2016/08/04/hadoop_family_zhihu/" data-toggle="tooltip" data-placement="top" title="Hadoop生态圈">
+                        Next<br>
+                        <span>Hadoop生态圈</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                    <div class="ds-share flat"
+                    <div class="ds-thread"
+                        data-thread-key="/hadoop/2016/08/04/hadoop_family"
+                        data-title="Hadoop Family Integration"
+                        data-url="http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_family/" >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+                        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+                        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                 </div>
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/hadoop/2016/08/04/hadoop_family"
+                        data-title="Hadoop Family Integration"
+                        data-url="http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_family/" >
+                    </div>
+
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="24">
+                                Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spark" title="Spark" rel="16">
+                                Spark
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ME" title="ME" rel="4">
+                                ME
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Other" title="Other" rel="4">
+                                Other
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                CFAL1
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Python" title="Python" rel="19">
+                                Python
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#maths" title="maths" rel="2">
+                                maths
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Baby" title="Baby" rel="2">
+                                Baby
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                                Big Data
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#大数据" title="大数据" rel="20">
+                                大数据
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="7">
+                                IT
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Scala" title="Scala" rel="24">
+                                Scala
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#English" title="English" rel="23">
+                                English
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#wordcloud" title="wordcloud" rel="3">
+                                wordcloud
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#quant" title="quant" rel="2">
+                                quant
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#python" title="python" rel="2">
+                                python
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://www.kaggle.com/">Your Home for Data Science</a></li>
+                    
+                        <li><a href="https://www.analyticsvidhya.com/">Analytics Vidhya</a></li>
+                    
+                        <li><a href="https://www.cfainstitute.org/pages/index.aspx">CFA</a></li>
+                    
+                        <li><a href="http://www.garp.org/#!/home">GARP</a></li>
+                    
+                        <li><a href="http://www.investopedia.com/">Investopedia</a></li>
+                    
+                        <li><a href="https://www.quantstart.com/">Quant Start</a></li>
+                    
+                        <li><a href="http://muchong.com/bbs/">muchong</a></li>
+                    
+                        <li><a href="https://www.coursera.org/learn/machine-learning">Coursera</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+<script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"machinelearningadvance"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/2672280861">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/helloourworld">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Big Data Memo 2017
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-82819752-1';
+    var _gaDomain = 'machinelearningadvance.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '863b1f46c83a8e14e47782106aee7e7f';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/images/background.jpg" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

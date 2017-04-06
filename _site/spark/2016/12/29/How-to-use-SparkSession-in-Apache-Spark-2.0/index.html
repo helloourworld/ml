@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="g89MuzujW3" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning(Deep Learning), Big Data, Spark">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+    <title>How to use SparkSession in Apache Spark 2.0 - Maching Learning | 机器学习笔记</title>
+
+    <link rel="canonical" href="http://machinelearningadvance.com/spark/2016/12/29/How-to-use-SparkSession-in-Apache-Spark-2.0/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- ga & ba script hoook -->
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Big Data Memo</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/">Category</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/images/background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/images/background.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Spark" title="Spark">Spark</a>
+                        
+                        <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                    </div>
+                    <h1>How to use SparkSession in Apache Spark 2.0</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by Big Data Memo on December 29, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h2 id="pre">pre</h2>
+
+<p>This blog is from here. https://databricks.com/blog/2016/08/15/how-to-use-sparksession-in-apache-spark-2-0.html</p>
+
+<p>Generally, a session is an interaction between two or more entities. In computer parlance, its usage is prominent in the realm of networked computers on the internet. First with TCP session, then with login session, followed by HTTP and user session, so no surprise that we now have SparkSession, introduced in Apache Spark 2.0.</p>
+
+<p>Beyond a time-bounded interaction, SparkSession provides a single point of entry to interact with underlying Spark functionality and allows programming Spark with DataFrame and Dataset APIs. Most importantly, it curbs the number of concepts and constructs a developer has to juggle while interacting with Spark.</p>
+
+<p>In this blog and its accompanying Databricks notebook, we will explore SparkSession functionality in Spark 2.0.</p>
+
+<h2 id="exploring-sparksessions-unified-functionality">Exploring SparkSession’s Unified Functionality</h2>
+
+<p>First, we will examine a Spark application, SparkSessionZipsExample, that reads zip codes from a JSON file and do some analytics using DataFrames APIs, followed by issuing Spark SQL queries, without accessing SparkContext, SQLContext or HiveContext.</p>
+
+<h2 id="creating-a-sparksession">Creating a SparkSession</h2>
+
+<p>In previous versions of Spark, you had to create a SparkConf and SparkContext to interact with Spark, as shown here:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//set up the spark configuration and create contexts
+val sparkConf = new SparkConf().setAppName("SparkSessionZipsExample").setMaster("local")
+// your handle to SparkContext to access other context like SQLContext
+val sc = new SparkContext(sparkConf).set("spark.some.config.option", "some-value")
+val sqlContext = new org.apache.spark.sql.SQLContext(sc)
+</code></pre>
+</div>
+
+<p>Whereas in Spark 2.0 the same effects can be achieved through SparkSession, without expliciting creating SparkConf, SparkContext or SQLContext, as they’re <strong>encapsulated within the SparkSession</strong>. Using a builder design pattern, it instantiates a SparkSession object if one does not already exist, along with its associated underlying contexts.</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.sql.SparkSession</span>
+<span class="c1">// Create a SparkSession. No need to create SparkContext
+// You automatically get it as part of the SparkSession
+</span><span class="k">val</span> <span class="n">warehouseLocation</span> <span class="k">=</span> <span class="s">"file:${system:user.dir}/spark-warehouse"</span>
+<span class="k">val</span> <span class="n">spark</span> <span class="k">=</span> <span class="nc">SparkSession</span>
+   <span class="o">.</span><span class="n">builder</span><span class="o">()</span>
+   <span class="o">.</span><span class="n">appName</span><span class="o">(</span><span class="s">"SparkSessionZipsExample"</span><span class="o">)</span>
+   <span class="o">.</span><span class="n">config</span><span class="o">(</span><span class="s">"spark.sql.warehouse.dir"</span><span class="o">,</span> <span class="n">warehouseLocation</span><span class="o">)</span>
+   <span class="o">.</span><span class="n">enableHiveSupport</span><span class="o">()</span>
+   <span class="o">.</span><span class="n">getOrCreate</span><span class="o">()</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span> \
+    <span class="o">.</span><span class="n">builder</span> \
+    <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s">"Python Spark SQL basic example"</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s">"spark.some.config.option"</span><span class="p">,</span> <span class="s">"some-value"</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="n">Sys.setenv</span><span class="p">(</span><span class="n">SPARK_HOME</span><span class="o">=</span><span class="s2">"/home/hadoop/spark"</span><span class="p">)</span><span class="w">
+</span><span class="n">.libPaths</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">file.path</span><span class="p">(</span><span class="n">Sys.getenv</span><span class="p">(</span><span class="s2">"SPARK_HOME"</span><span class="p">),</span><span class="w"> </span><span class="s2">"R"</span><span class="p">,</span><span class="w"> </span><span class="s2">"lib"</span><span class="p">),</span><span class="w"> </span><span class="n">.libPaths</span><span class="p">()))</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="s2">"SparkR"</span><span class="p">)</span><span class="w">
+</span><span class="n">sparkR.session</span><span class="p">()</span><span class="w">
+</span><span class="n">sparkR.session</span><span class="p">(</span><span class="n">appName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"MyApp"</span><span class="p">,</span><span class="w"> </span><span class="n">sparkConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">spark.some.config.option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"some-value"</span><span class="p">))</span><span class="w">
+</span><span class="n">SparkR</span><span class="o">::</span><span class="n">sparkR.session</span><span class="p">()</span><span class="w">
+</span><span class="c1"># close connection
+</span><span class="n">sparkR.session.stop</span><span class="p">()</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><strong>Another sloution</strong></p>
+
+<p>My solution is:</p>
+
+<ul>
+  <li>
+    <ol>
+      <li>Create a soft link of the SparkR directory in the the directory where other R packages are installed (ln -s /home/hadoop/spark/R/lib/SparkR /home/hadoop/R/x86_64-pc-linux-gnu-library/3.2)</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>Add only one line (Sys.setenv(SPARK_HOME=”/home/hadoop/spark”)) to the .Rprofile file.</li>
+    </ol>
+  </li>
+</ul>
+
+<p>At this point you can use the spark variable as your instance object to access its public methods and instances for the duration of your Spark job.</p>
+
+<h2 id="configuring-sparks-runtime-properties">Configuring Spark’s Runtime Properties</h2>
+
+<p>Once the SparkSession is instantiated, you can configure Spark’s runtime config properties. For example, in this code snippet, we can alter the existing runtime config options. Since configMap is a collection, you can use all of Scala’s iterable methods to access the data.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//set new runtime options
+spark.conf.set("spark.sql.shuffle.partitions", 6)
+spark.conf.set("spark.executor.memory", "2g")
+//get all settings
+val configMap:Map[String, String] = spark.conf.getAll()
+</code></pre>
+</div>
+
+<h2 id="accessing-catalog-metadata">Accessing Catalog Metadata</h2>
+
+<p>Often, you may want to access and peruse the underlying catalog metadata. SparkSession exposes “catalog” as a public instance that contains methods that work with the metastore (i.e data catalog). Since these methods return a Dataset, you can use Dataset API to access or view data. In this snippet, we access table names and list of databases.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//fetch metadata data from the catalog
+spark.catalog.listDatabases.show(false)
+spark.catalog.listTables.show(false)
+</code></pre>
+</div>
+
+<p><img src="/images/spark/sparksession1.png" alt="Fig 1. Datasets returned from catalog" /></p>
+
+<h2 id="creating-datasets-and-dataframes">Creating Datasets and Dataframes</h2>
+
+<p>There are a number of ways to create DataFrames and Datasets using <a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.SparkSession">SparkSession APIs</a>
+One quick way to generate a Dataset is by using the spark.range method. When learning to manipulate <a href="http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.Dataset">Dataset</a> with its API, this quick method proves useful. For example,</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//create a Dataset using spark.range starting from 5 to 100, with increments of 5
+</span><span class="k">val</span> <span class="n">numDS</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">5</span><span class="o">)</span>
+<span class="c1">// reverse the order and display first 5 items
+</span><span class="n">numDS</span><span class="o">.</span><span class="n">orderBy</span><span class="o">(</span><span class="n">desc</span><span class="o">(</span><span class="s">"id"</span><span class="o">)).</span><span class="n">show</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
+<span class="c1">//compute descriptive stats and display them
+</span><span class="n">numDs</span><span class="o">.</span><span class="n">describe</span><span class="o">().</span><span class="n">show</span><span class="o">()</span>
+<span class="c1">// create a DataFrame using spark.createDataFrame from a List or Seq
+</span><span class="k">val</span> <span class="n">langPercentDF</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="o">(</span><span class="nc">List</span><span class="o">((</span><span class="s">"Scala"</span><span class="o">,</span> <span class="mi">35</span><span class="o">),</span> <span class="o">(</span><span class="s">"Python"</span><span class="o">,</span> <span class="mi">30</span><span class="o">),</span> <span class="o">(</span><span class="s">"R"</span><span class="o">,</span> <span class="mi">15</span><span class="o">),</span> <span class="o">(</span><span class="s">"Java"</span><span class="o">,</span> <span class="mi">20</span><span class="o">)))</span>
+<span class="c1">//rename the columns
+</span><span class="k">val</span> <span class="n">lpDF</span> <span class="k">=</span> <span class="n">langPercentDF</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="o">(</span><span class="s">"_1"</span><span class="o">,</span> <span class="s">"language"</span><span class="o">).</span><span class="n">withColumnRenamed</span><span class="o">(</span><span class="s">"_2"</span><span class="o">,</span> <span class="s">"percent"</span><span class="o">)</span>
+<span class="c1">//order the DataFrame in descending order of percentage
+</span><span class="n">lpDF</span><span class="o">.</span><span class="n">orderBy</span><span class="o">(</span><span class="n">desc</span><span class="o">(</span><span class="s">"percent"</span><span class="o">)).</span><span class="n">show</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">scala&gt; </span>numDS.orderBy<span class="o">(</span>desc<span class="o">(</span><span class="s2">"id"</span><span class="o">))</span>.show<span class="o">(</span>5<span class="o">)</span>
++---+
+| id|
++---+
+| 95|
+| 90|
+| 85|
+| 80|
+| 75|
++---+
+only showing top 5 rows
+
+
+<span class="gp">scala&gt; </span>numDS.describe<span class="o">()</span>.show<span class="o">()</span>
++-------+------------------+
+|summary|                id|
++-------+------------------+
+|  count|                19|
+|   mean|              50.0|
+| stddev|28.136571693556885|
+|    min|                 5|
+|    max|                95|
++-------+------------------+
+
+
+<span class="gp">scala&gt; </span>val langPercentDF <span class="o">=</span> spark.createDataFrame<span class="o">(</span>List<span class="o">((</span><span class="s2">"Scala"</span>, 35<span class="o">)</span>, <span class="o">(</span><span class="s2">"Python"</span>, 30<span class="o">)</span>, <span class="o">(</span><span class="s2">"R"</span>, 15<span class="o">)</span>, <span class="o">(</span><span class="s2">"Java"</span>, 20<span class="o">)))</span>
+langPercentDF: org.apache.spark.sql.DataFrame <span class="o">=</span> <span class="o">[</span>_1: string, _2: int]
+
+<span class="gp">scala&gt; </span>val lpDF <span class="o">=</span> langPercentDF.withColumnRenamed<span class="o">(</span><span class="s2">"_1"</span>, <span class="s2">"language"</span><span class="o">)</span>.withColumnRenamed<span class="o">(</span><span class="s2">"_2"</span>, <span class="s2">"percent"</span><span class="o">)</span>
+lpDF: org.apache.spark.sql.DataFrame <span class="o">=</span> <span class="o">[</span>language: string, percent: int]
+
+<span class="gp">scala&gt; </span>//order the DataFrame <span class="k">in </span>descending order of percentage
+
+<span class="gp">scala&gt; </span>lpDF.orderBy<span class="o">(</span>desc<span class="o">(</span><span class="s2">"percent"</span><span class="o">))</span>.show<span class="o">(</span><span class="nb">false</span><span class="o">)</span>
++--------+-------+
+|language|percent|
++--------+-------+
+|Scala   |35     |
+|Python  |30     |
+|Java    |20     |
+|R       |15     |
++--------+-------+
+</code></pre>
+</div>
+
+<h1 id="reading-json-data-with-sparksession-api">Reading JSON Data with SparkSession API</h1>
+
+<p>Like any Scala object you can use spark, the SparkSession object, to access its public methods and instance fields. I can read JSON or CVS or TXT file, or I can read a parquet table. For example, in this code snippet, we will read a JSON file of zip codes, which returns a DataFrame, a collection of generic Rows.</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// read the json file and create the dataframe
+</span><span class="k">val</span> <span class="n">jsonFile</span> <span class="k">=</span> <span class="n">args</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">zipsDF</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="o">(</span><span class="n">jsonFile</span><span class="o">)</span>
+<span class="c1">//filter all cities whose population &gt; 40K
+</span><span class="n">zipsDF</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">zipsDF</span><span class="o">.</span><span class="n">col</span><span class="o">(</span><span class="s">"pop"</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">40000</span><span class="o">).</span><span class="n">show</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<h1 id="using-spark-sql-with-sparksession">Using Spark SQL with SparkSession</h1>
+
+<p>Through SparkSession, you can access all of the Spark SQL functionality as you would through SQLContext. In the code sample below, we create a table against which we issue SQL queries.</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// Now create an SQL table and issue SQL queries against it without
+// using the sqlContext but through the SparkSession object.
+// Creates a temporary view of the DataFrame
+</span><span class="n">zipsDF</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="o">(</span><span class="s">"zips_table"</span><span class="o">)</span>
+<span class="n">zipsDF</span><span class="o">.</span><span class="n">cache</span><span class="o">()</span>
+<span class="k">val</span> <span class="n">resultsDF</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">(</span><span class="s">"SELECT city, pop, state, zip FROM zips_table"</span><span class="o">)</span>
+<span class="n">resultsDF</span><span class="o">.</span><span class="n">show</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">scala&gt; </span>df2.filter<span class="o">(</span>df2.col<span class="o">(</span><span class="s2">"age"</span><span class="o">)</span> &gt;10 <span class="o">)</span>.show<span class="o">(</span>10<span class="o">)</span>
++---+------+
+|age|  name|
++---+------+
+| 30|  Andy|
+| 19|Justin|
++---+------+
+
+
+<span class="gp">scala&gt; </span>df2.createOrReplaceTempView<span class="o">(</span><span class="s2">"people"</span><span class="o">)</span>
+
+<span class="gp">scala&gt; </span>df2.cache<span class="o">()</span>
+res9: df2.type <span class="o">=</span> <span class="o">[</span>age: bigint, name: string]
+
+<span class="gp">scala&gt; </span>val resultDF <span class="o">=</span> spark.sql<span class="o">(</span><span class="s2">"select name,age from people where age &gt;10"</span><span class="o">)</span>
+resultDF: org.apache.spark.sql.DataFrame <span class="o">=</span> <span class="o">[</span>name: string, age: bigint]
+
+<span class="gp">scala&gt; </span>resultDF.show<span class="o">()</span>
++------+---+
+|  name|age|
++------+---+
+|  Andy| 30|
+|Justin| 19|
++------+---+
+</code></pre>
+</div>
+
+<h2 id="saving-and-reading-from-hive-table-with-sparksession">Saving and Reading from Hive table with SparkSession</h2>
+
+<p>Next, we are going to create a Hive table and issue queries against it using SparkSession object as you would with a HiveContext.</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//drop the table if exists to get around existing table error
+</span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">(</span><span class="s">"DROP TABLE IF EXISTS zips_hive_table"</span><span class="o">)</span>
+<span class="c1">//save as a hive table
+</span><span class="n">spark</span><span class="o">.</span><span class="n">table</span><span class="o">(</span><span class="s">"zips_table"</span><span class="o">).</span><span class="n">write</span><span class="o">.</span><span class="n">saveAsTable</span><span class="o">(</span><span class="s">"zips_hive_table"</span><span class="o">)</span>
+<span class="c1">//make a similar query against the hive table
+</span><span class="k">val</span> <span class="n">resultsHiveDF</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">(</span><span class="s">"SELECT city, pop, state, zip FROM zips_hive_table WHERE pop &gt; 40000"</span><span class="o">)</span>
+<span class="n">resultsHiveDF</span><span class="o">.</span><span class="n">show</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+</code></pre>
+</div>
+<p><img src="/images/spark/sparksession3.png" alt="Output from the Hive Table" /></p>
+
+<p>As you can observe, the results in the output runs from using the DataFrame API, Spark SQL and Hive queries are identical. You can access all sources and data, and how to run this example, from my github repo.
+Second, let’s turn our attention to two Spark developer environments where the SparkSession is automatically created for you.</p>
+
+<h2 id="sparksession-in-spark-repl-and-databricks-notebook">SparkSession in Spark REPL and Databricks Notebook</h2>
+
+<p>First, as in previous versions of Spark, the spark-shell created a SparkContext (sc), so in Spark 2.0, the spark-shell creates a SparkSession (spark). In this spark-shell, you can see spark already exists, and you can view all its attributes.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">scala&gt; </span>spark
+res0: org.apache.spark.sql.SparkSession <span class="o">=</span> org.apache.spark.sql.SparkSession@e06ec83
+
+<span class="gp">scala&gt; </span>spark.
+baseRelationToDataFrame   conf              createDataset    emptyDataset   implicits         newSession   <span class="nb">read         </span>sparkContext   sqlContext   streams   udf
+catalog                   createDataFrame   emptyDataFrame   experimental   listenerManager   range        readStream   sql            stop         table     version
+
+<span class="gp">scala&gt; </span>spark.
+!<span class="o">=</span>   -&gt;             baseRelationToDataFrame   createDataFrame   emptyDataset   equals         getClass    isInstanceOf      newSession   range        sparkContext   stop           table      version
+<span class="c">##   ==             catalog                   createDataset     ensuring       experimental   hashCode    listenerManager   notify       read         sql            streams        toString   wait</span>
++    asInstanceOf   conf                      emptyDataFrame    eq             formatted      implicits   ne                notifyAll    readStream   sqlContext     synchronized   udf        →
+</code></pre>
+</div>
+
+<h2 id="sparksession-encapsulates-sparkcontext">SparkSession Encapsulates SparkContext</h2>
+
+<p>Lastly, for historical context, let’s briefly understand the SparkContext’s underlying functionality.</p>
+
+<p><img src="/images/spark/sparkcontext.png" alt="" />
+SparkContext as it relates to Driver and Cluster Manager</p>
+
+<p>As shown in the diagram, a SparkContext is a conduit to access all Spark functionality; only a single SparkContext exists per JVM. The Spark driver program uses it to connect to the cluster manager to communicate, submit Spark jobs and knows what resource manager (YARN, Mesos or Standalone) to communicate to. It allows you to configure Spark configuration parameters. And through SparkContext, the driver can access other contexts such as SQLContext, HiveContext, and StreamingContext to program Spark.</p>
+
+<p>However, with Spark 2.0, SparkSession can access all aforementioned Spark’s functionality through a single-unified point of entry. As well as making it simpler to access DataFrame and Dataset APIs, it also subsumes the underlying contexts to manipulate data.</p>
+
+<p>In summation, what I demonstrated in this blog is that all functionality previously available through SparkContext, SQLContext or HiveContext in early versions of Spark are now available via SparkSession. In essence, SparkSession is a single-unified entry point to manipulate data with Spark, minimizing number of concepts to remember or construct. Hence, if you have fewer programming constructs to juggle, you’re more likely to make fewer mistakes and your code is likely to be less cluttered.</p>
+
+
+
+                <hr>
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/mladvance/2016/12/26/new3Text/" data-toggle="tooltip" data-placement="top" title="新三板文本项目">
+                        Previous<br>
+                        <span>新三板文本项目</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/quant/2017/01/18/quant-plat/" data-toggle="tooltip" data-placement="top" title="量化平台ABC">
+                        Next<br>
+                        <span>量化平台ABC</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                    <div class="ds-share flat"
+                    <div class="ds-thread"
+                        data-thread-key="/spark/2016/12/29/How-to-use-SparkSession-in-Apache-Spark-2.0"
+                        data-title="How to use SparkSession in Apache Spark 2.0"
+                        data-url="http://machinelearningadvance.com/spark/2016/12/29/How-to-use-SparkSession-in-Apache-Spark-2.0/" >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+                        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+                        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                 </div>
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/spark/2016/12/29/How-to-use-SparkSession-in-Apache-Spark-2.0"
+                        data-title="How to use SparkSession in Apache Spark 2.0"
+                        data-url="http://machinelearningadvance.com/spark/2016/12/29/How-to-use-SparkSession-in-Apache-Spark-2.0/" >
+                    </div>
+
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="24">
+                                Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spark" title="Spark" rel="16">
+                                Spark
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ME" title="ME" rel="4">
+                                ME
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Other" title="Other" rel="4">
+                                Other
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                CFAL1
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Python" title="Python" rel="19">
+                                Python
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#maths" title="maths" rel="2">
+                                maths
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Baby" title="Baby" rel="2">
+                                Baby
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                                Big Data
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#大数据" title="大数据" rel="20">
+                                大数据
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="7">
+                                IT
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Scala" title="Scala" rel="24">
+                                Scala
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#English" title="English" rel="23">
+                                English
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#wordcloud" title="wordcloud" rel="3">
+                                wordcloud
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#quant" title="quant" rel="2">
+                                quant
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#python" title="python" rel="2">
+                                python
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://www.kaggle.com/">Your Home for Data Science</a></li>
+                    
+                        <li><a href="https://www.analyticsvidhya.com/">Analytics Vidhya</a></li>
+                    
+                        <li><a href="https://www.cfainstitute.org/pages/index.aspx">CFA</a></li>
+                    
+                        <li><a href="http://www.garp.org/#!/home">GARP</a></li>
+                    
+                        <li><a href="http://www.investopedia.com/">Investopedia</a></li>
+                    
+                        <li><a href="https://www.quantstart.com/">Quant Start</a></li>
+                    
+                        <li><a href="http://muchong.com/bbs/">muchong</a></li>
+                    
+                        <li><a href="https://www.coursera.org/learn/machine-learning">Coursera</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+<script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"machinelearningadvance"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/2672280861">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/helloourworld">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Big Data Memo 2017
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-82819752-1';
+    var _gaDomain = 'machinelearningadvance.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '863b1f46c83a8e14e47782106aee7e7f';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/images/background.jpg" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

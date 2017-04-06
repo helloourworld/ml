@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="g89MuzujW3" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning(Deep Learning), Big Data, Spark">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+    <title>Maching Learning | 机器学习笔记</title>
+
+    <link rel="canonical" href="http://machinelearningadvance.com/page11/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- ga & ba script hoook -->
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Big Data Memo</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/">Category</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/images/background.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>Big Data Memo</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">天行健，君子以自强不息；地势坤，君子以厚德载物。</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+<div class="post-preview">
+    <a href="/hadoop/2016/08/17/hadoop_tutorial_3/">
+        <h2 class="post-title">
+            Hadoop Tutorial ---- Spark入门实战系列--1.Spark及其生态圈简介
+        </h2>
+        
+        <div class="post-content-preview">
+            Site
+
+Spark入门实战系列–1.Spark及其生态圈简介
+
+start SparkFrames
+spark-shell –packages graphframes:graphframes:0.2.0-spark2.0-s_2.11
+
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/08/17/hadoop_tutorial_2/">
+        <h2 class="post-title">
+            培训虚拟机使用指南
+        </h2>
+        
+        <div class="post-content-preview">
+            开启虚拟机
+
+确保安装了VMware软件。打开虚拟机后查看IP并更改hosts。注意：请根据本地的IP来更改，查看本地ip方法：ifconfig命令查看。默认NN01为~128；DN01为129；DN02为130。
+
+Last login: Tue Aug 23 18:47:50 2016 from 192.168.71.1
+[hadoop@NN01 ~]$ sudo vim /etc/ho...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/08/17/hadoop_tutorial_1/">
+        <h2 class="post-title">
+            Hadoop Tutorial ---- Components Required
+        </h2>
+        
+        <div class="post-content-preview">
+            大数据培训
+
+对象：大数据工程师、数据挖掘工程师、数据分析师、程序员…
+
+学习内容
+
+
+  1 开源框架学习
+
+
+
+
+
+  
+    
+      类别
+      组件名称
+      学习等级
+      掌握程度
+      组件概述
+    
+    
+      文件系统
+      HDFS
+      一级
+      熟练
+      Hadoop分布式文件系统（Hadoop...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/blog/2016/08/12/LDA/">
+        <h2 class="post-title">
+            LDA
+        </h2>
+        
+        <div class="post-content-preview">
+            LDA
+
+What-is-a-good-explanation-of-Latent-Dirichlet-Allocation
+
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 12, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/08/12/hadoop_family_mesos/">
+        <h2 class="post-title">
+            Hadoop Mesos
+        </h2>
+        
+        <div class="post-content-preview">
+            mesos和yarn区别
+
+mesos和yarn区别
+
+Mesos Getting Started
+
+
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 12, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/08/09/hadoop_family_guide/">
+        <h2 class="post-title">
+            Hadoop Learn Guide
+        </h2>
+        
+        <div class="post-content-preview">
+            前言
+
+大数据越来越火，客户要求越来越高。No废话，开始你的大数据之旅，请在不断的旅途当中为自己画饼！本培训主要针对的是有一定编程基础和有一定数据分析基础的同学，感觉有难度的地方请及时提出。
+
+学习路径图
+
+
+  
+    1 了解大数据生态圈及准备你的能力
+  
+  
+    2 开始你的装机之艰难旅程
+  
+  
+    3 组件针对性加强训练
+  
+  
+    4 组件定位与深挖
+ ...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 9, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/08/06/hadoop_family_site/">
+        <h2 class="post-title">
+            Hadoop Resource
+        </h2>
+        
+        <div class="post-content-preview">
+            Apache
+
+Apache docs
+
+Cloudera
+
+Cloudera Engineering Blog
+
+Storm
+
+分布式计算 / 实时流计算 / NoSQL存储 (Email: ypf412@163.com, GitHub: https://github.com/ypf412)
+## hortonworks
+
+hortonworks公司中文网
+
+THE HDPCD EXAM
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 6, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/08/04/hadoop_map_reduce/">
+        <h2 class="post-title">
+            HadoopMapReduce
+        </h2>
+        
+        <div class="post-content-preview">
+            
+
+MapReduce
+
+MapReduce: Simplified Data Processing on Large Clusters
+
+Jeffrey Dean and Sanjay Ghemawat
+
+research.google.com/archive/mapreduce.html
+
+Download: mapreduce-osdi04.pdf
+
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 4, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/08/04/hadoop_mahout/">
+        <h2 class="post-title">
+            Hadoop Mahout
+        </h2>
+        
+        <div class="post-content-preview">
+            开始 Mahout
+
+Mahout has prepared a bunch of examples and tutorials for users to quickly learn how to use its machine learning algorithms.
+
+
+
+Mahout 支持的算法
+
+
+  
+    
+      Mahout 0.12.0 Features by Eng...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 4, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/hadoop/2016/08/04/hadoop_glossary/">
+        <h2 class="post-title">
+            大数据名词速览
+        </h2>
+        
+        <div class="post-content-preview">
+            Hadoop产品名词速览（不断补充中…）
+
+Apache Hadoop: 是Apache开源组织的一个分布式计算开源框架，提供了一个分布式文件系统子项目(HDFS)和支持MapReduce分布式计算的软件架构。
+
+Apache Hive: 是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，通过类SQL语句快速实现简单的MapReduce统计，不必开发专门的Map...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on August 4, 2016
+    </p>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page10">&larr; Newer Posts</a>
+    </li>
+    
+    
+    <li class="next">
+        <a href="/page12">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
+
+
+
+    		</div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+            <!-- Search Engine -->
+            <div>
+                    <script>
+                      (function() {
+                        var cx = '017159882487427542470:fn3pz4jghfq';
+                        var gcse = document.createElement('script');
+                        gcse.type = 'text/javascript';
+                        gcse.async = true;
+                        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                        var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(gcse, s);
+                      })();
+                    </script>
+                    <gcse:search></gcse:search>
+            </div>
+            <!-- Search Engine -->
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                            
+                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="24">
+                                    Machine Learning
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Spark" title="Spark" rel="16">
+                                    Spark
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#ME" title="ME" rel="4">
+                                    ME
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Other" title="Other" rel="4">
+                                    Other
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                    CFAL1
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Python" title="Python" rel="19">
+                                    Python
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#maths" title="maths" rel="2">
+                                    maths
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Baby" title="Baby" rel="2">
+                                    Baby
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Big Data" title="Big Data" rel="22">
+                                    Big Data
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#大数据" title="大数据" rel="20">
+                                    大数据
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#IT" title="IT" rel="7">
+                                    IT
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Scala" title="Scala" rel="24">
+                                    Scala
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#English" title="English" rel="23">
+                                    English
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#wordcloud" title="wordcloud" rel="3">
+                                    wordcloud
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#quant" title="quant" rel="2">
+                                    quant
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#python" title="python" rel="2">
+                                    python
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <div class="short-about">
+                        
+                            <img src="/images/MyLove.jpg" />
+                        
+                        
+                            <p>写写代码，做做金融，写写代码。世界那么大，我们去看看。</p>
+                        
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                            <li>
+                                <a href="/feed.xml">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            
+                            
+                            <li>
+                                <a target="_blank" href="http://weibo.com/u/2672280861">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://www.facebook.com/davidyjun">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://github.com/helloourworld">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </section>
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://www.kaggle.com/">Your Home for Data Science</a></li>
+                    
+                        <li><a href="https://www.analyticsvidhya.com/">Analytics Vidhya</a></li>
+                    
+                        <li><a href="https://www.cfainstitute.org/pages/index.aspx">CFA</a></li>
+                    
+                        <li><a href="http://www.garp.org/#!/home">GARP</a></li>
+                    
+                        <li><a href="http://www.investopedia.com/">Investopedia</a></li>
+                    
+                        <li><a href="https://www.quantstart.com/">Quant Start</a></li>
+                    
+                        <li><a href="http://muchong.com/bbs/">muchong</a></li>
+                    
+                        <li><a href="https://www.coursera.org/learn/machine-learning">Coursera</a></li>
+                    
+                </ul>
+                
+    		</div>
+        
+	</div>
+</div>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/2672280861">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/helloourworld">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Big Data Memo 2017
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-82819752-1';
+    var _gaDomain = 'machinelearningadvance.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '863b1f46c83a8e14e47782106aee7e7f';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/images/background.jpg" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

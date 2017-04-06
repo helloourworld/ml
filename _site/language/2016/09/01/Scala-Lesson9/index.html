@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="g89MuzujW3" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning(Deep Learning), Big Data, Spark">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+    <title>Scala Lesson 9 - Maching Learning | 机器学习笔记</title>
+
+    <link rel="canonical" href="http://machinelearningadvance.com/language/2016/09/01/Scala-Lesson9/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- ga & ba script hoook -->
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Big Data Memo</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/">Category</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/images/background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/images/background.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Scala" title="Scala">Scala</a>
+                        
+                    </div>
+                    <h1>Scala Lesson 9</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by Big Data Memo on September 1, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h3 id="scala--io">Scala 文件 I/O</h3>
+
+<h4 id="section">1 文件写操作</h4>
+
+<p>Scala 进行文件写操作，直接用的都是 java中 的 I/O 类 （java.io.File)：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.io._</span>
+
+<span class="k">object</span> <span class="nc">IOs1</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="n">writer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PrintWriter</span><span class="o">(</span><span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"test.txt"</span> <span class="o">))</span>
+
+      <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="o">(</span><span class="s">"ML Big Data 教程"</span><span class="o">)</span>
+      <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="o">()</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="section-1">2 从屏幕上读取用户输入</h4>
+
+<p>有时候我们需要接收用户在屏幕输入的指令来处理程序。实例如下：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.io.StdIn</span>
+
+<span class="k">object</span> <span class="nc">IOs2</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="n">print</span><span class="o">(</span><span class="s">"请输入任意字符 : "</span> <span class="o">)</span>
+      <span class="k">val</span> <span class="n">line</span> <span class="k">=</span> <span class="nc">StdIn</span><span class="o">.</span><span class="n">readLine</span><span class="o">()</span>
+
+      <span class="n">println</span><span class="o">(</span><span class="s">"谢谢，你输入的是: "</span> <span class="o">+</span> <span class="n">line</span><span class="o">)</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p><strong>warning</strong>: method readLine in class DeprecatedConsole is deprecated (since 2.11.0): use the method in scala.io.StdIn</p>
+
+<p><a href="https://github.com/scala/scala/blob/v2.11.8/src/library/scala/io/StdIn.scala#L1">源码</a>：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">package</span> <span class="nn">scala</span>
+<span class="k">package</span> <span class="nn">io</span>
+
+<span class="k">import</span> <span class="nn">java.text.MessageFormat</span>
+
+<span class="cm">/** private[scala] because this is not functionality we should be providing
+ *  in the standard library, at least not in this idiosyncratic form.
+ *  Factored into trait because it is better code structure regardless.
+ */</span>
+<span class="k">private</span><span class="o">[</span><span class="kt">scala</span><span class="o">]</span> <span class="k">trait</span> <span class="nc">StdIn</span> <span class="o">{</span>
+  <span class="k">import</span> <span class="nn">scala.Console._</span>
+
+  <span class="cm">/** Read a full line from the default input.  Returns `null` if the end of the
+   * input stream has been reached.
+   *
+   * @return the string read from the terminal or null if the end of stream was reached.
+   */</span>
+  <span class="k">def</span> <span class="n">readLine</span><span class="o">()</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="n">readLine</span><span class="o">()</span>
+
+  <span class="cm">/** Print and flush formatted text to the default output, and read a full line from the default input.
+   *  Returns `null` if the end of the input stream has been reached.
+   *
+   *  @param text the format of the text to print out, as in `printf`.
+   *  @param args the parameters used to instantiate the format, as in `printf`.
+   *  @return the string read from the default input
+   */</span>
+  <span class="k">def</span> <span class="n">readLine</span><span class="o">(</span><span class="n">text</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">args</span><span class="k">:</span> <span class="kt">Any*</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">printf</span><span class="o">(</span><span class="n">text</span><span class="o">,</span> <span class="n">args</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">flush</span><span class="o">()</span>
+    <span class="n">readLine</span><span class="o">()</span>
+  <span class="o">}</span>
+
+  <span class="cm">/** Reads a boolean value from an entire line of the default input.
+   *  Has a fairly liberal interpretation of the input.
+   *
+   *  @return the boolean value read, or false if it couldn't be converted to a boolean
+   *  @throws java.io.EOFException if the end of the input stream has been reached.
+   */</span>
+  <span class="k">def</span> <span class="n">readBoolean</span><span class="o">()</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+    <span class="k">else</span>
+      <span class="n">s</span><span class="o">.</span><span class="n">toLowerCase</span><span class="o">()</span> <span class="k">match</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="s">"true"</span> <span class="k">=&gt;</span> <span class="kc">true</span>
+        <span class="k">case</span> <span class="s">"t"</span> <span class="k">=&gt;</span> <span class="kc">true</span>
+        <span class="k">case</span> <span class="s">"yes"</span> <span class="k">=&gt;</span> <span class="kc">true</span>
+        <span class="k">case</span> <span class="s">"y"</span> <span class="k">=&gt;</span> <span class="kc">true</span>
+        <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="kc">false</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="cm">/** Reads a byte value from an entire line of the default input.
+   *
+   *  @return the Byte that was read
+   *  @throws java.io.EOFException if the end of the
+   *  input stream has been reached.
+   *  @throws java.lang.NumberFormatException if the value couldn't be converted to a Byte
+   */</span>
+  <span class="k">def</span> <span class="n">readByte</span><span class="o">()</span><span class="k">:</span> <span class="kt">Byte</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+    <span class="k">else</span>
+      <span class="n">s</span><span class="o">.</span><span class="n">toByte</span>
+  <span class="o">}</span>
+
+  <span class="cm">/** Reads a short value from an entire line of the default input.
+   *
+   *  @return the short that was read
+   *  @throws java.io.EOFException if the end of the
+   *  input stream has been reached.
+   *  @throws java.lang.NumberFormatException if the value couldn't be converted to a Short
+   */</span>
+  <span class="k">def</span> <span class="n">readShort</span><span class="o">()</span><span class="k">:</span> <span class="kt">Short</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+    <span class="k">else</span>
+      <span class="n">s</span><span class="o">.</span><span class="n">toShort</span>
+  <span class="o">}</span>
+
+  <span class="cm">/** Reads a char value from an entire line of the default input.
+   *
+   *  @return the Char that was read
+   *  @throws java.io.EOFException if the end of the
+   *  input stream has been reached.
+   *  @throws java.lang.StringIndexOutOfBoundsException if the line read from default input was empty
+   */</span>
+  <span class="k">def</span> <span class="n">readChar</span><span class="o">()</span><span class="k">:</span> <span class="kt">Char</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+    <span class="k">else</span>
+      <span class="n">s</span> <span class="n">charAt</span> <span class="mi">0</span>
+  <span class="o">}</span>
+
+  <span class="cm">/** Reads an int value from an entire line of the default input.
+   *
+   *  @return the Int that was read
+   *  @throws java.io.EOFException if the end of the
+   *  input stream has been reached.
+   *  @throws java.lang.NumberFormatException if the value couldn't be converted to an Int
+   */</span>
+  <span class="k">def</span> <span class="n">readInt</span><span class="o">()</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+    <span class="k">else</span>
+      <span class="n">s</span><span class="o">.</span><span class="n">toInt</span>
+  <span class="o">}</span>
+
+  <span class="cm">/** Reads an long value from an entire line of the default input.
+   *
+   *  @return the Long that was read
+   *  @throws java.io.EOFException if the end of the
+   *  input stream has been reached.
+   *  @throws java.lang.NumberFormatException if the value couldn't be converted to a Long
+   */</span>
+  <span class="k">def</span> <span class="n">readLong</span><span class="o">()</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+    <span class="k">else</span>
+      <span class="n">s</span><span class="o">.</span><span class="n">toLong</span>
+  <span class="o">}</span>
+
+  <span class="cm">/** Reads a float value from an entire line of the default input.
+   *  @return the Float that was read.
+   *  @throws java.io.EOFException if the end of the
+   *  input stream has been reached.
+   *  @throws java.lang.NumberFormatException if the value couldn't be converted to a Float
+   *
+   */</span>
+  <span class="k">def</span> <span class="n">readFloat</span><span class="o">()</span><span class="k">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+    <span class="k">else</span>
+      <span class="n">s</span><span class="o">.</span><span class="n">toFloat</span>
+  <span class="o">}</span>
+
+  <span class="cm">/** Reads a double value from an entire line of the default input.
+   *
+   *  @return the Double that was read.
+   *  @throws java.io.EOFException if the end of the
+   *  input stream has been reached.
+   *  @throws java.lang.NumberFormatException if the value couldn't be converted to a Float
+   */</span>
+  <span class="k">def</span> <span class="n">readDouble</span><span class="o">()</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+    <span class="k">else</span>
+      <span class="n">s</span><span class="o">.</span><span class="n">toDouble</span>
+  <span class="o">}</span>
+
+  <span class="cm">/** Reads in some structured input (from the default input), specified by
+   *  a format specifier. See class `java.text.MessageFormat` for details of
+   *  the format specification.
+   *
+   *  @param format the format of the input.
+   *  @return a list of all extracted values.
+   *  @throws java.io.EOFException if the end of the input stream has been
+   *          reached.
+   */</span>
+  <span class="k">def</span> <span class="n">readf</span><span class="o">(</span><span class="n">format</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+    <span class="k">else</span>
+      <span class="n">textComponents</span><span class="o">(</span><span class="k">new</span> <span class="nc">MessageFormat</span><span class="o">(</span><span class="n">format</span><span class="o">).</span><span class="n">parse</span><span class="o">(</span><span class="n">s</span><span class="o">))</span>
+  <span class="o">}</span>
+
+  <span class="cm">/** Reads in some structured input (from the default input), specified by
+   *  a format specifier, returning only the first value extracted, according
+   *  to the format specification.
+   *
+   *  @param format format string, as accepted by `readf`.
+   *  @return The first value that was extracted from the input
+   */</span>
+  <span class="k">def</span> <span class="n">readf1</span><span class="o">(</span><span class="n">format</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="n">readf</span><span class="o">(</span><span class="n">format</span><span class="o">).</span><span class="n">head</span>
+
+  <span class="cm">/** Reads in some structured input (from the default input), specified
+   *  by a format specifier, returning only the first two values extracted,
+   *  according to the format specification.
+   *
+   *  @param format format string, as accepted by `readf`.
+   *  @return A [[scala.Tuple2]] containing the first two values extracted
+   */</span>
+  <span class="k">def</span> <span class="n">readf2</span><span class="o">(</span><span class="n">format</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Any</span><span class="o">,</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">res</span> <span class="k">=</span> <span class="n">readf</span><span class="o">(</span><span class="n">format</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="n">head</span><span class="o">,</span> <span class="n">res</span><span class="o">.</span><span class="n">tail</span><span class="o">.</span><span class="n">head</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="cm">/** Reads in some structured input (from the default input), specified
+   *  by a format specifier, returning only the first three values extracted,
+   *  according to the format specification.
+   *
+   *  @param format format string, as accepted by `readf`.
+   *  @return A [[scala.Tuple3]] containing the first three values extracted
+   */</span>
+  <span class="k">def</span> <span class="n">readf3</span><span class="o">(</span><span class="n">format</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Any</span><span class="o">,</span> <span class="kt">Any</span><span class="o">,</span> <span class="nc">Any</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">res</span> <span class="k">=</span> <span class="n">readf</span><span class="o">(</span><span class="n">format</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="n">head</span><span class="o">,</span> <span class="n">res</span><span class="o">.</span><span class="n">tail</span><span class="o">.</span><span class="n">head</span><span class="o">,</span> <span class="n">res</span><span class="o">.</span><span class="n">tail</span><span class="o">.</span><span class="n">tail</span><span class="o">.</span><span class="n">head</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="k">private</span> <span class="k">def</span> <span class="n">textComponents</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">AnyRef</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">var</span> <span class="n">i</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">var</span> <span class="n">res</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Nil</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">res</span> <span class="k">=</span> <span class="o">(</span><span class="n">a</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Boolean</span>   <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">booleanValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Byte</span>      <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">byteValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Short</span>     <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">shortValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Character</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">charValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Integer</span>   <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">intValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Long</span>      <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">longValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Float</span>     <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">floatValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Double</span>    <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">doubleValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span>
+      <span class="o">})</span> <span class="o">::</span> <span class="n">res</span>
+      <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="o">}</span>
+    <span class="n">res</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">StdIn</span> <span class="k">extends</span> <span class="nc">StdIn</span>
+</code></pre>
+</div>
+
+<h4 id="section-2">3 从文件上读取内容</h4>
+
+<p>从文件读取内容非常简单。我们可以使用 Scala 的 Source 类及伴生对象来读取文件。以下实例演示了从 “test.txt”(之前已创建过) 文件中读取内容:</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.io.Source</span>
+
+<span class="k">object</span> <span class="nc">IOs3</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="n">println</span><span class="o">(</span><span class="s">"文件内容为:"</span> <span class="o">)</span>
+
+      <span class="nc">Source</span><span class="o">.</span><span class="n">fromFile</span><span class="o">(</span><span class="s">"test.txt"</span> <span class="o">).</span><span class="n">foreach</span><span class="o">{</span>
+         <span class="n">print</span>
+      <span class="o">}</span>
+     <span class="n">println</span><span class="o">()</span>
+
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+
+
+                <hr>
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/language/2016/09/01/Scala-Lesson8/" data-toggle="tooltip" data-placement="top" title="Scala Lesson 8">
+                        Previous<br>
+                        <span>Scala Lesson 8</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/09/02/hadoop_kafka/" data-toggle="tooltip" data-placement="top" title="Hadoop_kafka">
+                        Next<br>
+                        <span>Hadoop_kafka</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                    <div class="ds-share flat"
+                    <div class="ds-thread"
+                        data-thread-key="/language/2016/09/01/Scala-Lesson9"
+                        data-title="Scala Lesson 9"
+                        data-url="http://machinelearningadvance.com/language/2016/09/01/Scala-Lesson9/" >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+                        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+                        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                 </div>
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/language/2016/09/01/Scala-Lesson9"
+                        data-title="Scala Lesson 9"
+                        data-url="http://machinelearningadvance.com/language/2016/09/01/Scala-Lesson9/" >
+                    </div>
+
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="24">
+                                Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spark" title="Spark" rel="16">
+                                Spark
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ME" title="ME" rel="4">
+                                ME
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Other" title="Other" rel="4">
+                                Other
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                CFAL1
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Python" title="Python" rel="19">
+                                Python
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#maths" title="maths" rel="2">
+                                maths
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Baby" title="Baby" rel="2">
+                                Baby
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                                Big Data
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#大数据" title="大数据" rel="20">
+                                大数据
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="7">
+                                IT
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Scala" title="Scala" rel="24">
+                                Scala
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#English" title="English" rel="23">
+                                English
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#wordcloud" title="wordcloud" rel="3">
+                                wordcloud
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#quant" title="quant" rel="2">
+                                quant
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#python" title="python" rel="2">
+                                python
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://www.kaggle.com/">Your Home for Data Science</a></li>
+                    
+                        <li><a href="https://www.analyticsvidhya.com/">Analytics Vidhya</a></li>
+                    
+                        <li><a href="https://www.cfainstitute.org/pages/index.aspx">CFA</a></li>
+                    
+                        <li><a href="http://www.garp.org/#!/home">GARP</a></li>
+                    
+                        <li><a href="http://www.investopedia.com/">Investopedia</a></li>
+                    
+                        <li><a href="https://www.quantstart.com/">Quant Start</a></li>
+                    
+                        <li><a href="http://muchong.com/bbs/">muchong</a></li>
+                    
+                        <li><a href="https://www.coursera.org/learn/machine-learning">Coursera</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+<script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"machinelearningadvance"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/2672280861">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/helloourworld">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Big Data Memo 2017
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-82819752-1';
+    var _gaDomain = 'machinelearningadvance.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '863b1f46c83a8e14e47782106aee7e7f';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/images/background.jpg" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
