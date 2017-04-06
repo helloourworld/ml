@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>Fault detection and diagnosis Approaches - Maching Learning | 机器学习笔记</title>
+    <title>Spark-ML-030101-Linear Model-LSVM - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/blog/2017/03/22/Fault-detection-overview/">
+    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2017/04/06/lsvm/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -170,15 +170,15 @@
                         
                         <a class="tag" href="/tags/#Machine Learning" title="Machine Learning">Machine Learning</a>
                         
-                        <a class="tag" href="/tags/#故障预测" title="故障预测">故障预测</a>
+                        <a class="tag" href="/tags/#Python" title="Python">Python</a>
                         
                     </div>
-                    <h1>Fault detection and diagnosis Approaches</h1>
+                    <h1>Spark-ML-030101-Linear Model-LSVM</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on March 22, 2017</span>
+                    <span class="meta">Posted by Big Data Memo on April 6, 2017</span>
                 </div>
             </div>
         </div>
@@ -196,9 +196,142 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="section">故障预测与故障诊断</h2>
+				<h3 id="section">线性支持向量机</h3>
 
-<p><a href="http://gregstanleyandassociates.com/whitepapers/FaultDiagnosis/faultdiagnosis.htm">A Guide to Fault Detection and Diagnosis</a></p>
+<h4 id="section-1">1 介绍</h4>
+
+<p>  线性支持向量机是一个用于大规模分类任务的标准方法。它的目标函数<a href="/mladvance/2017/04/06/linear-model/">线性模型</a>中的公式（1）。它的损失函数是海格损失，如下所示</p>
+
+<p><img src="/images/spark/ml/linearmodel/lsvm/1.1.png" alt="" /></p>
+
+<p>  默认情况下，线性支持向量机训练时使用<code class="highlighter-rouge">L2</code>正则化。线性支持向量机输出一个<code class="highlighter-rouge">SVM</code>模型。给定一个新的数据点<code class="highlighter-rouge">x</code>，模型通过<code class="highlighter-rouge">w^Tx</code>的值预测，当这个值大于0时，输出为正，否则输出为负。</p>
+
+<p>  线性支持向量机并不需要核函数，要详细了解支持向量机，请参考文献【1】。</p>
+
+<h2 id="section-2">2 源码分析</h2>
+
+<h3 id="section-3">2.1 实例</h3>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.classification.</span><span class="o">{</span><span class="nc">SVMModel</span><span class="o">,</span> <span class="nc">SVMWithSGD</span><span class="o">}</span>
+<span class="k">import</span> <span class="nn">org.apache.spark.mllib.evaluation.BinaryClassificationMetrics</span>
+<span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
+<span class="c1">// Load training data in LIBSVM format.
+</span><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="nc">MLUtils</span><span class="o">.</span><span class="n">loadLibSVMFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/mllib/sample_libsvm_data.txt"</span><span class="o">)</span>
+<span class="c1">// Split data into training (60%) and test (40%).
+</span><span class="k">val</span> <span class="n">splits</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.6</span><span class="o">,</span> <span class="mf">0.4</span><span class="o">),</span> <span class="n">seed</span> <span class="k">=</span> <span class="mi">11L</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">training</span> <span class="k">=</span> <span class="n">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">cache</span><span class="o">()</span>
+<span class="k">val</span> <span class="n">test</span> <span class="k">=</span> <span class="n">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="c1">// Run training algorithm to build the model
+</span><span class="k">val</span> <span class="n">numIterations</span> <span class="k">=</span> <span class="mi">100</span>
+<span class="k">val</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">SVMWithSGD</span><span class="o">.</span><span class="n">train</span><span class="o">(</span><span class="n">training</span><span class="o">,</span> <span class="n">numIterations</span><span class="o">)</span>
+<span class="c1">// Clear the default threshold.
+</span><span class="n">model</span><span class="o">.</span><span class="n">clearThreshold</span><span class="o">()</span>
+<span class="c1">// Compute raw scores on the test set.
+</span><span class="k">val</span> <span class="n">scoreAndLabels</span> <span class="k">=</span> <span class="n">test</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">point</span> <span class="k">=&gt;</span>
+  <span class="k">val</span> <span class="n">score</span> <span class="k">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">point</span><span class="o">.</span><span class="n">features</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">score</span><span class="o">,</span> <span class="n">point</span><span class="o">.</span><span class="n">label</span><span class="o">)</span>
+<span class="o">}</span>
+<span class="c1">// Get evaluation metrics.
+</span><span class="k">val</span> <span class="n">metrics</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">BinaryClassificationMetrics</span><span class="o">(</span><span class="n">scoreAndLabels</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">auROC</span> <span class="k">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">areaUnderROC</span><span class="o">()</span>
+<span class="n">println</span><span class="o">(</span><span class="s">"Area under ROC = "</span> <span class="o">+</span> <span class="n">auROC</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<h3 id="section-4">2.2 训练</h3>
+
+<p>  和逻辑回归一样，训练过程均使用<code class="highlighter-rouge">GeneralizedLinearModel</code>中的<code class="highlighter-rouge">run</code>训练，只是训练使用的<code class="highlighter-rouge">Gradient</code>和<code class="highlighter-rouge">Updater</code>不同。在线性支持向量机中，使用<code class="highlighter-rouge">HingeGradient</code>计算梯度，使用<code class="highlighter-rouge">SquaredL2Updater</code>进行更新。
+它的实现过程分为4步。参加<a href="../逻辑回归/logic-regression.md">逻辑回归</a>了解这五步的详细情况。我们只需要了解<code class="highlighter-rouge">HingeGradient</code>和<code class="highlighter-rouge">SquaredL2Updater</code>的实现。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">HingeGradient</span> <span class="k">extends</span> <span class="nc">Gradient</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">weights</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Vector</span><span class="o">,</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">dotProduct</span> <span class="k">=</span> <span class="n">dot</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">weights</span><span class="o">)</span>
+    <span class="c1">// 我们的损失函数是 max(0, 1 - (2y - 1) (f_w(x)))
+</span>    <span class="c1">// 所以梯度是 -(2y - 1)*x
+</span>    <span class="k">val</span> <span class="n">labelScaled</span> <span class="k">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">label</span> <span class="o">-</span> <span class="mf">1.0</span>
+    <span class="k">if</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">&gt;</span> <span class="n">labelScaled</span> <span class="o">*</span> <span class="n">dotProduct</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="n">gradient</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span>
+      <span class="n">scal</span><span class="o">(-</span><span class="n">labelScaled</span><span class="o">,</span> <span class="n">gradient</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">gradient</span><span class="o">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">labelScaled</span> <span class="o">*</span> <span class="n">dotProduct</span><span class="o">)</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+      <span class="o">(</span><span class="nc">Vectors</span><span class="o">.</span><span class="n">sparse</span><span class="o">(</span><span class="n">weights</span><span class="o">.</span><span class="n">size</span><span class="o">,</span> <span class="nc">Array</span><span class="o">.</span><span class="n">empty</span><span class="o">,</span> <span class="nc">Array</span><span class="o">.</span><span class="n">empty</span><span class="o">),</span> <span class="mf">0.0</span><span class="o">)</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span>
+      <span class="n">data</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
+      <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
+      <span class="n">weights</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
+      <span class="n">cumGradient</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">dotProduct</span> <span class="k">=</span> <span class="n">dot</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">weights</span><span class="o">)</span>
+    <span class="c1">// 我们的损失函数是 max(0, 1 - (2y - 1) (f_w(x)))
+</span>    <span class="c1">// 所以梯度是 -(2y - 1)*x
+</span>    <span class="k">val</span> <span class="n">labelScaled</span> <span class="k">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">label</span> <span class="o">-</span> <span class="mf">1.0</span>
+    <span class="k">if</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">&gt;</span> <span class="n">labelScaled</span> <span class="o">*</span> <span class="n">dotProduct</span><span class="o">)</span> <span class="o">{</span>
+      <span class="c1">//cumGradient -= labelScaled * data
+</span>      <span class="n">axpy</span><span class="o">(-</span><span class="n">labelScaled</span><span class="o">,</span> <span class="n">data</span><span class="o">,</span> <span class="n">cumGradient</span><span class="o">)</span>
+      <span class="c1">//损失值
+</span>      <span class="mf">1.0</span> <span class="o">-</span> <span class="n">labelScaled</span> <span class="o">*</span> <span class="n">dotProduct</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+      <span class="mf">0.0</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>  线性支持向量机的训练使用<code class="highlighter-rouge">L2</code>正则化方法。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SquaredL2Updater</span> <span class="k">extends</span> <span class="nc">Updater</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span>
+      <span class="n">weightsOld</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
+      <span class="n">gradient</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
+      <span class="n">stepSize</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
+      <span class="n">iter</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
+      <span class="n">regParam</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Vector</span><span class="o">,</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="c1">// w' = w - thisIterStepSize * (gradient + regParam * w)
+</span>    <span class="c1">// w' = (1 - thisIterStepSize * regParam) * w - thisIterStepSize * gradient
+</span>    <span class="c1">//表示步长，即负梯度方向的大小
+</span>    <span class="k">val</span> <span class="n">thisIterStepSize</span> <span class="k">=</span> <span class="n">stepSize</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="o">(</span><span class="n">iter</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">brzWeights</span><span class="k">:</span> <span class="kt">BV</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="n">weightsOld</span><span class="o">.</span><span class="n">toBreeze</span><span class="o">.</span><span class="n">toDenseVector</span>
+    <span class="c1">//正则化，brzWeights每行数据均乘以(1.0 - thisIterStepSize * regParam)
+</span>    <span class="n">brzWeights</span> <span class="o">:*=</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="n">regParam</span><span class="o">)</span>
+    <span class="c1">//y += x * a，即brzWeights -= gradient * thisInterStepSize
+</span>    <span class="n">brzAxpy</span><span class="o">(-</span><span class="n">thisIterStepSize</span><span class="o">,</span> <span class="n">gradient</span><span class="o">.</span><span class="n">toBreeze</span><span class="o">,</span> <span class="n">brzWeights</span><span class="o">)</span>
+    <span class="c1">//正则化||w||_2
+</span>    <span class="k">val</span> <span class="n">norm</span> <span class="k">=</span> <span class="n">brzNorm</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">)</span>
+    <span class="o">(</span><span class="nc">Vectors</span><span class="o">.</span><span class="n">fromBreeze</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">),</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">norm</span> <span class="o">*</span> <span class="n">norm</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+<p>  该函数的实现规则是：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">w</span><span class="o">'</span> <span class="k">=</span> <span class="n">w</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="o">(</span><span class="n">gradient</span> <span class="o">+</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">w</span><span class="o">)</span>
+<span class="n">w</span><span class="o">'</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="n">regParam</span><span class="o">)</span> <span class="o">*</span> <span class="n">w</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="n">gradient</span>
+</code></pre>
+</div>
+<p>  这里<code class="highlighter-rouge">thisIterStepSize</code>表示参数沿负梯度方向改变的速率，它随着迭代次数的增多而减小。</p>
+
+<h3 id="section-5">2.3 预测</h3>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="n">predictPoint</span><span class="o">(</span>
+      <span class="n">dataMatrix</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
+      <span class="n">weightMatrix</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
+      <span class="n">intercept</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="c1">//w^Tx
+</span>    <span class="k">val</span> <span class="n">margin</span> <span class="k">=</span> <span class="n">weightMatrix</span><span class="o">.</span><span class="n">toBreeze</span><span class="o">.</span><span class="n">dot</span><span class="o">(</span><span class="n">dataMatrix</span><span class="o">.</span><span class="n">toBreeze</span><span class="o">)</span> <span class="o">+</span> <span class="n">intercept</span>
+    <span class="n">threshold</span> <span class="k">match</span> <span class="o">{</span>
+      <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">t</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="k">if</span> <span class="o">(</span><span class="n">margin</span> <span class="o">&gt;</span> <span class="n">t</span><span class="o">)</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="mf">0.0</span>
+      <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="n">margin</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
+
+<h1 id="section-6">参考文献</h1>
+
+<p>【1】<a href="http://blog.csdn.net/macyang/article/details/38782399">支持向量机通俗导论（理解SVM的三层境界）</a></p>
 
 
 
@@ -207,20 +340,27 @@
 
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/mladvance/2017/04/06/logic-regression/" data-toggle="tooltip" data-placement="top" title="Spark-ML-030102-Linear Model-LR">
+                        Previous<br>
+                        <span>Spark-ML-030102-Linear Model-LR</span>
+                        </a>
+                    </li>
+                    
                     
                     <li class="next">
-                        <a href="/mladvance/2017/04/06/classification-regression/" data-toggle="tooltip" data-placement="top" title="Spark-ML-03-Classification-Regression">
+                        <a href="/mladvance/2017/04/06/regression/" data-toggle="tooltip" data-placement="top" title="Spark-ML-030103-Linear Model-Regression">
                         Next<br>
-                        <span>Spark-ML-03-Classification-Regression</span>
+                        <span>Spark-ML-030103-Linear Model-Regression</span>
                         </a>
                     </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/blog/2017/03/22/Fault-detection-overview"
-                        data-title="Fault detection and diagnosis Approaches"
-                        data-url="http://machinelearningadvance.com/blog/2017/03/22/Fault-detection-overview/" >
+                        data-thread-key="/mladvance/2017/04/06/lsvm"
+                        data-title="Spark-ML-030101-Linear Model-LSVM"
+                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/lsvm/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -239,9 +379,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/blog/2017/03/22/Fault-detection-overview"
-                        data-title="Fault detection and diagnosis Approaches"
-                        data-url="http://machinelearningadvance.com/blog/2017/03/22/Fault-detection-overview/" >
+                        data-thread-key="/mladvance/2017/04/06/lsvm"
+                        data-title="Spark-ML-030101-Linear Model-LSVM"
+                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/lsvm/" >
                     </div>
 
                 </div>

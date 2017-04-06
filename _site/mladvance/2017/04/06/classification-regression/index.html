@@ -15,9 +15,9 @@
     <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
     <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
-    <title>Fault detection and diagnosis Approaches - Maching Learning | 机器学习笔记</title>
+    <title>Spark-ML-03-Classification-Regression - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/blog/2017/03/22/Fault-detection-overview/">
+    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2017/04/06/classification-regression/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -170,15 +170,15 @@
                         
                         <a class="tag" href="/tags/#Machine Learning" title="Machine Learning">Machine Learning</a>
                         
-                        <a class="tag" href="/tags/#故障预测" title="故障预测">故障预测</a>
+                        <a class="tag" href="/tags/#Python" title="Python">Python</a>
                         
                     </div>
-                    <h1>Fault detection and diagnosis Approaches</h1>
+                    <h1>Spark-ML-03-Classification-Regression</h1>
                     
                     
                     <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Big Data Memo on March 22, 2017</span>
+                    <span class="meta">Posted by Big Data Memo on April 6, 2017</span>
                 </div>
             </div>
         </div>
@@ -196,10 +196,58 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="section">故障预测与故障诊断</h2>
+				<h1 id="section">分类与回归</h1>
 
-<p><a href="http://gregstanleyandassociates.com/whitepapers/FaultDiagnosis/faultdiagnosis.htm">A Guide to Fault Detection and Diagnosis</a></p>
+<p>  <code class="highlighter-rouge">spark.mllib</code>提供了多种方法用于用于<a href="http://en.wikipedia.org/wiki/Binary_classification">二分类</a>、<a href="http://en.wikipedia.org/wiki/Multiclass_classification">多分类</a>以及<a href="http://en.wikipedia.org/wiki/Regression_analysis">回归分析</a>。
+下表介绍了每种问题类型支持的算法。</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>问题类型</th>
+      <th style="text-align: center">支持的方法</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>二分类</td>
+      <td style="text-align: center">线性SVMs、逻辑回归、决策树、随机森林、梯度增强树、朴素贝叶斯</td>
+    </tr>
+    <tr>
+      <td>多分类</td>
+      <td style="text-align: center">逻辑回归、决策树、随机森林、朴素贝叶斯</td>
+    </tr>
+    <tr>
+      <td>回归</td>
+      <td style="text-align: center">线性最小二乘、决策树、随机森林、梯度增强树、保序回归</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>  点击链接，了解具体的算法实现。</p>
+
+<ul>
+  <li>分类和回归
+    <ul>
+      <li><a href="/mladvance/2017/04/06/linear-model/">线性模型</a>
+        <ul>
+          <li><a href="/mladvance/2017/04/06/lsvm/">SVMs(支持向量机)</a></li>
+          <li><a href="/mladvance/2017/04/06/logic-regression/">逻辑回归</a></li>
+          <li><a href="/mladvance/2017/04/06/regression/">线性回归</a></li>
+        </ul>
+      </li>
+      <li><a href="/mladvance/2016/12/05/nb/">朴素贝叶斯</a></li>
+      <li><a href="/mladvance/2016/12/05/decision-tree/">决策树</a></li>
+      <li><a href="组合树/readme.md">组合树</a>
+        <ul>
+          <li><a href="/mladvance/2017/04/06/random-forests/">随机森林</a></li>
+          <li><a href="/mladvance/2017/04/06/gbts/">梯度提升树</a></li>
+        </ul>
+      </li>
+      <li><a href="保序回归/isotonic-regression.md">保序回归</a></li>
+    </ul>
+  </li>
+</ul>
 
 
                 <hr>
@@ -207,20 +255,27 @@
 
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/blog/2017/03/22/Fault-detection-overview/" data-toggle="tooltip" data-placement="top" title="Fault detection and diagnosis Approaches">
+                        Previous<br>
+                        <span>Fault detection and diagnosis Approaches</span>
+                        </a>
+                    </li>
+                    
                     
                     <li class="next">
-                        <a href="/mladvance/2017/04/06/classification-regression/" data-toggle="tooltip" data-placement="top" title="Spark-ML-03-Classification-Regression">
+                        <a href="/mladvance/2017/04/06/ensembles/" data-toggle="tooltip" data-placement="top" title="Spark-ML-0304-Ensembles">
                         Next<br>
-                        <span>Spark-ML-03-Classification-Regression</span>
+                        <span>Spark-ML-0304-Ensembles</span>
                         </a>
                     </li>
                     
                 </ul>
                     <div class="ds-share flat"
                     <div class="ds-thread"
-                        data-thread-key="/blog/2017/03/22/Fault-detection-overview"
-                        data-title="Fault detection and diagnosis Approaches"
-                        data-url="http://machinelearningadvance.com/blog/2017/03/22/Fault-detection-overview/" >
+                        data-thread-key="/mladvance/2017/04/06/classification-regression"
+                        data-title="Spark-ML-03-Classification-Regression"
+                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/classification-regression/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -239,9 +294,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/blog/2017/03/22/Fault-detection-overview"
-                        data-title="Fault detection and diagnosis Approaches"
-                        data-url="http://machinelearningadvance.com/blog/2017/03/22/Fault-detection-overview/" >
+                        data-thread-key="/mladvance/2017/04/06/classification-regression"
+                        data-title="Spark-ML-03-Classification-Regression"
+                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/classification-regression/" >
                     </div>
 
                 </div>

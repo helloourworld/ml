@@ -12,3 +12,4 @@ tags:
 ## 故障预测与故障诊断
 
 [A Guide to Fault Detection and Diagnosis](http://gregstanleyandassociates.com/whitepapers/FaultDiagnosis/faultdiagnosis.htm)
+
