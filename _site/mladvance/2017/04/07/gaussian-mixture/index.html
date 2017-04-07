@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="g89MuzujW3" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning(Deep Learning), Big Data, Spark">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+    <title>Spark-ML-0502-Clustering-Gaussian mixture - Maching Learning | 机器学习笔记</title>
+
+    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2017/04/07/gaussian-mixture/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- ga & ba script hoook -->
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Big Data Memo</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/">Category</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/images/background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/images/background.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Machine Learning" title="Machine Learning">Machine Learning</a>
+                        
+                        <a class="tag" href="/tags/#Spark" title="Spark">Spark</a>
+                        
+                        <a class="tag" href="/tags/#Clustering" title="Clustering">Clustering</a>
+                        
+                    </div>
+                    <h1>Spark-ML-0502-Clustering-Gaussian mixture</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by Big Data Memo on April 7, 2017</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h1 id="section">高斯混合模型</h1>
+
+<blockquote>
+  <p>  现有的高斯模型有单高斯模型（<code class="highlighter-rouge">SGM</code>）和高斯混合模型（<code class="highlighter-rouge">GMM</code>）两种。从几何上讲，单高斯分布模型在二维空间上近似于椭圆，在三维空间上近似于椭球。
+在很多情况下，属于同一类别的样本点并不满足“椭圆”分布的特性，所以我们需要引入混合高斯模型来解决这种情况。</p>
+</blockquote>
+
+<h1 id="section-1">1 单高斯模型</h1>
+
+<p>  多维变量<code class="highlighter-rouge">X</code>服从高斯分布时，它的概率密度函数<code class="highlighter-rouge">PDF</code>定义如下：</p>
+
+<div align="center"><img src="/images/spark/ml/gaussian-mixture/1.1.png" width="390" height="50" alt="1.1" align="center" /></div>
+<p><br /></p>
+
+<p>  在上述定义中,<code class="highlighter-rouge">x</code>是维数为<code class="highlighter-rouge">D</code>的样本向量，<code class="highlighter-rouge">mu</code>是模型期望，<code class="highlighter-rouge">sigma</code>是模型协方差。对于单高斯模型，可以明确训练样本是否属于该高斯模型，所以我们经常将<code class="highlighter-rouge">mu</code>用训练样本的均值代替，将<code class="highlighter-rouge">sigma</code>用训练样本的协方差代替。
+假设训练样本属于类别<code class="highlighter-rouge">C</code>，那么上面的定义可以修改为下面的形式：</p>
+
+<div align="center"><img src="/images/spark/ml/gaussian-mixture/1.2.png" width="380" height="50" alt="1.2" align="center" /></div>
+<p><br /></p>
+
+<p>  这个公式表示样本属于类别<code class="highlighter-rouge">C</code>的概率。我们可以根据定义的概率阈值来判断样本是否属于某个类别。</p>
+
+<h1 id="section-2">2 高斯混合模型</h1>
+
+<p>  高斯混合模型，顾名思义，就是数据可以看作是从多个高斯分布中生成出来的。从<a href="https://en.wikipedia.org/wiki/Central_limit_theorem">中心极限定理</a>可以看出，高斯分布这个假设其实是比较合理的。
+为什么我们要假设数据是由若干个高斯分布组合而成的，而不假设是其他分布呢？实际上不管是什么分布，只<code class="highlighter-rouge">K</code>取得足够大，这个<code class="highlighter-rouge">XX Mixture Model</code>就会变得足够复杂，就可以用来逼近任意连续的概率密度分布。只是因为高斯函数具有良好的计算性能，所<code class="highlighter-rouge">GMM</code>被广泛地应用。</p>
+
+<p>  每个<code class="highlighter-rouge">GMM</code>由<code class="highlighter-rouge">K</code>个高斯分布组成，每个高斯分布称为一个组件（<code class="highlighter-rouge">Component</code>），这些组件线性加成在一起就组成了<code class="highlighter-rouge">GMM</code>的概率密度函数<strong>（1）</strong>：</p>
+
+<div align="center"><img src="/images/spark/ml/gaussian-mixture/1.3.png" width="360" height="75" alt="1.3" align="center" /></div>
+<p><br /></p>
+
+<p>  根据上面的式子，如果我们要从<code class="highlighter-rouge">GMM</code>分布中随机地取一个点，需要两步：</p>
+
+<ul>
+  <li>
+    <p>随机地在这<code class="highlighter-rouge">K</code>个组件之中选一个，每个组件被选中的概率实际上就是它的系数<code class="highlighter-rouge">pi_k</code>；</p>
+  </li>
+  <li>
+    <p>选中了组件之后，再单独地考虑从这个组件的分布中选取一个点。</p>
+  </li>
+</ul>
+
+<p>  怎样用<code class="highlighter-rouge">GMM</code>来做聚类呢？其实很简单，现在我们有了数据，假定它们是由<code class="highlighter-rouge">GMM</code>生成出来的，那么我们只要根据数据推出<code class="highlighter-rouge">GMM</code>的概率分布来就可以了，然后<code class="highlighter-rouge">GMM</code>的<code class="highlighter-rouge">K</code>个组件实际上就对应了<code class="highlighter-rouge">K</code>个聚类了。
+在已知概率密度函数的情况下，要估计其中的参数的过程被称作“参数估计”。</p>
+
+<p>  我们可以利用最大似然估计来确定这些参数，<code class="highlighter-rouge">GMM</code>的似然函数<strong>（2）</strong>如下：</p>
+
+<div align="center"><img src="/images/spark/ml/gaussian-mixture/1.4.png" width="250" height="75" alt="1.4" align="center" /></div>
+<p><br /></p>
+
+<p>  可以用<code class="highlighter-rouge">EM</code>算法来求解这些参数。<code class="highlighter-rouge">EM</code>算法求解的过程如下：</p>
+
+<ul>
+  <li>1 <strong>E-步</strong>。求数据点由各个组件生成的概率（并不是每个组件被选中的概率）。对于每个数据<script type="math/tex">{x}_{i}</script>来说，它由第<code class="highlighter-rouge">k</code>个组件生成的概率为公式<strong>（3）</strong>：</li>
+</ul>
+
+<div align="center"><img src="/images/spark/ml/gaussian-mixture/1.5.png" width="250" height="60" alt="1.5" align="center" /></div>
+<p><br /></p>
+
+<p>  在上面的概率公式中，我们假定<code class="highlighter-rouge">mu</code>和<code class="highlighter-rouge">sigma</code>均是已知的，它们的值来自于初始化值或者上一次迭代。</p>
+
+<ul>
+  <li>2 <strong>M-步</strong>。估计每个组件的参数。由于每个组件都是一个标准的高斯分布，可以很容易分布求出最大似然所对应的参数值，分别如下公式<strong>（4）</strong>,<strong>（5）</strong>,<strong>（6）</strong>,<strong>（7）</strong>：</li>
+</ul>
+
+<div align="center"><img src="/images/spark/ml/gaussian-mixture/1.6.png" width="160" height="70" alt="1.6" align="center" /></div>
+<p><br /></p>
+
+<div align="center"><img src="/images/spark/ml/gaussian-mixture/1.7.png" width="100" height="50" alt="1.7" align="center" /></div>
+<p><br /></p>
+
+<div align="center"><img src="/images/spark/ml/gaussian-mixture/1.8.png" width="180" height="70" alt="1.8" align="center" /></div>
+<p><br /></p>
+
+<div align="center"><img src="/images/spark/ml/gaussian-mixture/1.9.png" width="310" height="70" alt="1.9" align="center" /></div>
+<p><br /></p>
+
+<h1 id="section-3">3 源码分析</h1>
+
+<h2 id="section-4">3.1 实例</h2>
+
+<p>  在分析源码前，我们还是先看看高斯混合模型如何使用。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.clustering.GaussianMixture</span>
+<span class="k">import</span> <span class="nn">org.apache.spark.mllib.clustering.GaussianMixtureModel</span>
+<span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vectors</span>
+<span class="c1">// 加载数据
+</span><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="s">"data/mllib/gmm_data.txt"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">parsedData</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">s</span> <span class="k">=&gt;</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="n">trim</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="sc">' '</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">toDouble</span><span class="o">))).</span><span class="n">cache</span><span class="o">()</span>
+<span class="c1">// 使用高斯混合模型聚类
+</span><span class="k">val</span> <span class="n">gmm</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">GaussianMixture</span><span class="o">().</span><span class="n">setK</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="n">run</span><span class="o">(</span><span class="n">parsedData</span><span class="o">)</span>
+<span class="c1">// 保存和加载模型
+</span><span class="n">gmm</span><span class="o">.</span><span class="n">save</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"myGMMModel"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">sameModel</span> <span class="k">=</span> <span class="nc">GaussianMixtureModel</span><span class="o">.</span><span class="n">load</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"myGMMModel"</span><span class="o">)</span>
+<span class="c1">// 打印参数
+</span><span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">gmm</span><span class="o">.</span><span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">println</span><span class="o">(</span><span class="s">"weight=%f\nmu=%s\nsigma=\n%s\n"</span> <span class="n">format</span>
+    <span class="o">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">weights</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">gmm</span><span class="o">.</span><span class="n">gaussians</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="n">mu</span><span class="o">,</span> <span class="n">gmm</span><span class="o">.</span><span class="n">gaussians</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="n">sigma</span><span class="o">))</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+<p>  由上面的代码我们可以知道，使用高斯混合模型聚类使用到了<code class="highlighter-rouge">GaussianMixture</code>类中的<code class="highlighter-rouge">run</code>方法。下面我们直接进入<code class="highlighter-rouge">run</code>方法，分析它的实现。</p>
+
+<h2 id="section-5">3.2 高斯混合模型的实现</h2>
+
+<h3 id="section-6">3.2.1 初始化</h3>
+
+<p>  在<code class="highlighter-rouge">run</code>方法中，程序所做的第一步就是初始化权重（上文中介绍的<code class="highlighter-rouge">pi</code>）及其相对应的高斯分布。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="o">(</span><span class="n">weights</span><span class="o">,</span> <span class="n">gaussians</span><span class="o">)</span> <span class="k">=</span> <span class="n">initialModel</span> <span class="k">match</span> <span class="o">{</span>
+      <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">gmm</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">weights</span><span class="o">,</span> <span class="n">gmm</span><span class="o">.</span><span class="n">gaussians</span><span class="o">)</span>
+      <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="n">samples</span> <span class="k">=</span> <span class="n">breezeData</span><span class="o">.</span><span class="n">takeSample</span><span class="o">(</span><span class="n">withReplacement</span> <span class="k">=</span> <span class="kc">true</span><span class="o">,</span> <span class="n">k</span> <span class="o">*</span> <span class="n">nSamples</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
+        <span class="o">(</span><span class="nc">Array</span><span class="o">.</span><span class="n">fill</span><span class="o">(</span><span class="n">k</span><span class="o">)(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">k</span><span class="o">),</span> <span class="nc">Array</span><span class="o">.</span><span class="n">tabulate</span><span class="o">(</span><span class="n">k</span><span class="o">)</span> <span class="o">{</span> <span class="n">i</span> <span class="k">=&gt;</span>
+          <span class="k">val</span> <span class="n">slice</span> <span class="k">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">view</span><span class="o">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">nSamples</span><span class="o">,</span> <span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">nSamples</span><span class="o">)</span>
+          <span class="k">new</span> <span class="nc">MultivariateGaussian</span><span class="o">(</span><span class="n">vectorMean</span><span class="o">(</span><span class="n">slice</span><span class="o">),</span> <span class="n">initCovariance</span><span class="o">(</span><span class="n">slice</span><span class="o">))</span>
+        <span class="o">})</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+<p>  在上面的代码中，当<code class="highlighter-rouge">initialModel</code>为空时，用所有值均为<code class="highlighter-rouge">1.0/k</code>的数组初始化权重，用值为<code class="highlighter-rouge">MultivariateGaussian</code>对象的数组初始化所有的高斯分布（即上文中提到的组件）。
+每一个<code class="highlighter-rouge">MultivariateGaussian</code>对象都由从数据集中抽样的子集计算而来。这里用样本数据的均值和方差初始化<code class="highlighter-rouge">MultivariateGaussian</code>的<code class="highlighter-rouge">mu</code>和<code class="highlighter-rouge">sigma</code>。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//计算均值
+</span><span class="k">private</span> <span class="k">def</span> <span class="n">vectorMean</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">IndexedSeq</span><span class="o">[</span><span class="kt">BV</span><span class="o">[</span><span class="kt">Double</span><span class="o">]])</span><span class="k">:</span> <span class="kt">BDV</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">v</span> <span class="k">=</span> <span class="nc">BDV</span><span class="o">.</span><span class="n">zeros</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">x</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">length</span><span class="o">)</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">xi</span> <span class="k">=&gt;</span> <span class="n">v</span> <span class="o">+=</span> <span class="n">xi</span><span class="o">)</span>
+    <span class="n">v</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">toDouble</span>
+  <span class="o">}</span>
+<span class="c1">//计算方差
+</span><span class="k">private</span> <span class="k">def</span> <span class="n">initCovariance</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">IndexedSeq</span><span class="o">[</span><span class="kt">BV</span><span class="o">[</span><span class="kt">Double</span><span class="o">]])</span><span class="k">:</span> <span class="kt">BreezeMatrix</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">mu</span> <span class="k">=</span> <span class="n">vectorMean</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">ss</span> <span class="k">=</span> <span class="nc">BDV</span><span class="o">.</span><span class="n">zeros</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">x</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">length</span><span class="o">)</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">xi</span> <span class="k">=&gt;</span> <span class="n">ss</span> <span class="o">+=</span> <span class="o">(</span><span class="n">xi</span> <span class="o">-</span> <span class="n">mu</span><span class="o">)</span> <span class="o">:^</span> <span class="mf">2.0</span><span class="o">)</span>
+    <span class="n">diag</span><span class="o">(</span><span class="n">ss</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">toDouble</span><span class="o">)</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
+
+<h3 id="em">3.2.2 EM算法求参数</h3>
+
+<p>  初始化后，就可以使用<code class="highlighter-rouge">EM</code>算法迭代求似然函数中的参数。迭代结束的条件是迭代次数达到了我们设置的次数或者两次迭代计算的对数似然值之差小于阈值。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code> <span class="k">while</span> <span class="o">(</span><span class="n">iter</span> <span class="o">&lt;</span> <span class="n">maxIterations</span> <span class="o">&amp;&amp;</span> <span class="n">math</span><span class="o">.</span><span class="n">abs</span><span class="o">(</span><span class="n">llh</span><span class="o">-</span><span class="n">llhp</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">convergenceTol</span><span class="o">)</span>
+</code></pre>
+</div>
+<p>  在迭代内部，就可以按照<code class="highlighter-rouge">E-步</code>和<code class="highlighter-rouge">M-步</code>来更新参数了。</p>
+
+<ul>
+  <li><strong>E-步</strong>：更新参数<code class="highlighter-rouge">gamma</code></li>
+</ul>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code> <span class="k">val</span> <span class="n">compute</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">broadcast</span><span class="o">(</span><span class="nc">ExpectationSum</span><span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="n">weights</span><span class="o">,</span> <span class="n">gaussians</span><span class="o">)</span><span class="k">_</span><span class="o">)</span>
+ <span class="k">val</span> <span class="n">sums</span> <span class="k">=</span> <span class="n">breezeData</span><span class="o">.</span><span class="n">aggregate</span><span class="o">(</span><span class="nc">ExpectationSum</span><span class="o">.</span><span class="n">zero</span><span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">d</span><span class="o">))(</span><span class="n">compute</span><span class="o">.</span><span class="n">value</span><span class="o">,</span> <span class="k">_</span> <span class="o">+=</span> <span class="k">_</span><span class="o">)</span>
+</code></pre>
+</div>
+<p>  我们先要了解<code class="highlighter-rouge">ExpectationSum</code>以及<code class="highlighter-rouge">add</code>方法的实现。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">private</span> <span class="k">class</span> <span class="nc">ExpectationSum</span><span class="o">(</span>
+    <span class="k">var</span> <span class="n">logLikelihood</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
+    <span class="k">val</span> <span class="n">weights</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">],</span>
+    <span class="k">val</span> <span class="n">means</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">BDV</span><span class="o">[</span><span class="kt">Double</span><span class="o">]],</span>
+    <span class="k">val</span> <span class="n">sigmas</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">BreezeMatrix</span><span class="o">[</span><span class="kt">Double</span><span class="o">]])</span> <span class="k">extends</span> <span class="nc">Serializable</span>
+</code></pre>
+</div>
+<p>  <code class="highlighter-rouge">ExpectationSum</code>是一个聚合类，它表示部分期望结果：主要包含对数似然值，权重值（第二章中介绍的<code class="highlighter-rouge">pi</code>），均值，方差。<code class="highlighter-rouge">add</code>方法的实现如下：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">add</span><span class="o">(</span> <span class="n">weights</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">],</span><span class="n">dists</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">MultivariateGaussian</span><span class="o">])</span>
+      <span class="o">(</span><span class="n">sums</span><span class="k">:</span> <span class="kt">ExpectationSum</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">BV</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">ExpectationSum</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">p</span> <span class="k">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">zip</span><span class="o">(</span><span class="n">dists</span><span class="o">).</span><span class="n">map</span> <span class="o">{</span>
+      <span class="c1">//计算pi_i * N(x)
+</span>      <span class="k">case</span> <span class="o">(</span><span class="n">weight</span><span class="o">,</span> <span class="n">dist</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">MLUtils</span><span class="o">.</span><span class="nc">EPSILON</span> <span class="o">+</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+    <span class="o">}</span>
+    <span class="k">val</span> <span class="n">pSum</span> <span class="k">=</span> <span class="n">p</span><span class="o">.</span><span class="n">sum</span>
+    <span class="n">sums</span><span class="o">.</span><span class="n">logLikelihood</span> <span class="o">+=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="n">pSum</span><span class="o">)</span>
+    <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">sums</span><span class="o">.</span><span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">p</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">/=</span> <span class="n">pSum</span>
+      <span class="n">sums</span><span class="o">.</span><span class="n">weights</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+=</span> <span class="n">p</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+      <span class="n">sums</span><span class="o">.</span><span class="n">means</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">p</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+      <span class="c1">//A := alpha * x * x^T^ + A
+</span>      <span class="nc">BLAS</span><span class="o">.</span><span class="n">syr</span><span class="o">(</span><span class="n">p</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">fromBreeze</span><span class="o">(</span><span class="n">x</span><span class="o">),</span>
+        <span class="nc">Matrices</span><span class="o">.</span><span class="n">fromBreeze</span><span class="o">(</span><span class="n">sums</span><span class="o">.</span><span class="n">sigmas</span><span class="o">(</span><span class="n">i</span><span class="o">)).</span><span class="n">asInstanceOf</span><span class="o">[</span><span class="kt">DenseMatrix</span><span class="o">])</span>
+      <span class="n">i</span> <span class="k">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="o">}</span>
+    <span class="n">sums</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
+<p>  从上面的实现我们可以看出，最终，<code class="highlighter-rouge">logLikelihood</code>表示公式<strong>(2)</strong>中的对数似然。<code class="highlighter-rouge">p</code>和<code class="highlighter-rouge">weights</code>分别表示公式<strong>(3)</strong>中的<code class="highlighter-rouge">gamma</code>和<code class="highlighter-rouge">pi</code>，<code class="highlighter-rouge">means</code>表示公式<strong>(6)</strong>中的求和部分，<code class="highlighter-rouge">sigmas</code>表示公式<strong>(7)</strong>中的求和部分。</p>
+
+<p>  调用<code class="highlighter-rouge">RDD</code>的<code class="highlighter-rouge">aggregate</code>方法，我们可以基于所有给定数据计算上面的值。利用计算的这些新值，我们可以在<code class="highlighter-rouge">M-步</code>中更新<code class="highlighter-rouge">mu</code>和<code class="highlighter-rouge">sigma</code>。</p>
+
+<ul>
+  <li><strong>M-步</strong>：更新参数<code class="highlighter-rouge">mu</code>和<code class="highlighter-rouge">sigma</code></li>
+</ul>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code> <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
+ <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="o">(</span><span class="n">weight</span><span class="o">,</span> <span class="n">gaussian</span><span class="o">)</span> <span class="k">=</span>
+       <span class="n">updateWeightsAndGaussians</span><span class="o">(</span><span class="n">sums</span><span class="o">.</span><span class="n">means</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">sums</span><span class="o">.</span><span class="n">sigmas</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">sums</span><span class="o">.</span><span class="n">weights</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">sumWeights</span><span class="o">)</span>
+    <span class="n">weights</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="n">weight</span>
+    <span class="n">gaussians</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="n">gaussian</span>
+    <span class="n">i</span> <span class="k">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+ <span class="o">}</span>
+ <span class="k">private</span> <span class="k">def</span> <span class="n">updateWeightsAndGaussians</span><span class="o">(</span>
+      <span class="n">mean</span><span class="k">:</span> <span class="kt">BDV</span><span class="o">[</span><span class="kt">Double</span><span class="o">],</span>
+      <span class="n">sigma</span><span class="k">:</span> <span class="kt">BreezeMatrix</span><span class="o">[</span><span class="kt">Double</span><span class="o">],</span>
+      <span class="n">weight</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
+      <span class="n">sumWeights</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Double</span><span class="o">,</span> <span class="kt">MultivariateGaussian</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="c1">//  mean/weight
+</span>    <span class="k">val</span> <span class="n">mu</span> <span class="k">=</span> <span class="o">(</span><span class="n">mean</span> <span class="o">/=</span> <span class="n">weight</span><span class="o">)</span>
+    <span class="c1">// -weight * mu * mut +sigma
+</span>    <span class="nc">BLAS</span><span class="o">.</span><span class="n">syr</span><span class="o">(-</span><span class="n">weight</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">fromBreeze</span><span class="o">(</span><span class="n">mu</span><span class="o">),</span>
+      <span class="nc">Matrices</span><span class="o">.</span><span class="n">fromBreeze</span><span class="o">(</span><span class="n">sigma</span><span class="o">).</span><span class="n">asInstanceOf</span><span class="o">[</span><span class="kt">DenseMatrix</span><span class="o">])</span>
+    <span class="k">val</span> <span class="n">newWeight</span> <span class="k">=</span> <span class="n">weight</span> <span class="o">/</span> <span class="n">sumWeights</span>
+    <span class="k">val</span> <span class="n">newGaussian</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">MultivariateGaussian</span><span class="o">(</span><span class="n">mu</span><span class="o">,</span> <span class="n">sigma</span> <span class="o">/</span> <span class="n">weight</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">newWeight</span><span class="o">,</span> <span class="n">newGaussian</span><span class="o">)</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
+<p>  基于<strong>E-步</strong>计算出来的值，根据公式<strong>(6)</strong>，我们可以通过<code class="highlighter-rouge">(mean /= weight)</code>来更新<code class="highlighter-rouge">mu</code>；根据公式<strong>(7)</strong>，我们可以通过<code class="highlighter-rouge">BLAS.syr()</code>来更新<code class="highlighter-rouge">sigma</code>；同时，根据公式<strong>(5)</strong>，
+我们可以通过<code class="highlighter-rouge">weight / sumWeights</code>来计算<code class="highlighter-rouge">pi</code>。</p>
+
+<p>  迭代执行以上的<strong>E-步</strong>和<strong>M-步</strong>，到达一定的迭代数或者对数似然值变化较小后，我们停止迭代。这时就可以获得聚类后的参数了。</p>
+
+<h2 id="section-7">3.3 多元高斯模型中相关方法介绍</h2>
+
+<p>  在上面的求参代码中，我们用到了<code class="highlighter-rouge">MultivariateGaussian</code>以及<code class="highlighter-rouge">MultivariateGaussian</code>中的部分方法，如<code class="highlighter-rouge">pdf</code>。<code class="highlighter-rouge">MultivariateGaussian</code>定义如下：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MultivariateGaussian</span> <span class="nd">@Since</span><span class="o">(</span><span class="s">"1.3.0"</span><span class="o">)</span> <span class="o">(</span>
+    <span class="nd">@Since</span><span class="o">(</span><span class="s">"1.3.0"</span><span class="o">)</span> <span class="k">val</span> <span class="n">mu</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
+    <span class="nd">@Since</span><span class="o">(</span><span class="s">"1.3.0"</span><span class="o">)</span> <span class="k">val</span> <span class="n">sigma</span><span class="k">:</span> <span class="kt">Matrix</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Serializable</span>
+</code></pre>
+</div>
+<p>  <code class="highlighter-rouge">MultivariateGaussian</code>包含一个向量<code class="highlighter-rouge">mu</code>和一个矩阵<code class="highlighter-rouge">sigma</code>，分别表示期望和协方差。<code class="highlighter-rouge">MultivariateGaussian</code>最重要的方法是<code class="highlighter-rouge">pdf</code>，顾名思义就是计算给定数据的概率密度函数。它的实现如下：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">private</span><span class="o">[</span><span class="kt">mllib</span><span class="o">]</span> <span class="k">def</span> <span class="n">pdf</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">BV</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(</span><span class="n">logpdf</span><span class="o">(</span><span class="n">x</span><span class="o">))</span>
+<span class="o">}</span>
+<span class="k">private</span><span class="o">[</span><span class="kt">mllib</span><span class="o">]</span> <span class="k">def</span> <span class="n">logpdf</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">BV</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">delta</span> <span class="k">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">breezeMu</span>
+    <span class="k">val</span> <span class="n">v</span> <span class="k">=</span> <span class="n">rootSigmaInv</span> <span class="o">*</span> <span class="n">delta</span>
+    <span class="n">u</span> <span class="o">+</span> <span class="n">v</span><span class="o">.</span><span class="n">t</span> <span class="o">*</span> <span class="n">v</span> <span class="o">*</span> <span class="o">-</span><span class="mf">0.5</span>
+ <span class="o">}</span>
+</code></pre>
+</div>
+<p>  上面的<code class="highlighter-rouge">rootSigmaInv</code>和<code class="highlighter-rouge">u</code>通过方法<code class="highlighter-rouge">calculateCovarianceConstants</code>计算。根据公式<strong>(1)</strong>，这个概率密度函数的计算需要计算<code class="highlighter-rouge">sigma</code>的行列式以及逆。</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">sigma</span> <span class="k">=</span> <span class="n">U</span> <span class="o">*</span> <span class="n">D</span> <span class="o">*</span> <span class="n">U</span><span class="o">.</span><span class="n">t</span>
+<span class="n">inv</span><span class="o">(</span><span class="nc">Sigma</span><span class="o">)</span> <span class="k">=</span> <span class="n">U</span> <span class="o">*</span> <span class="n">inv</span><span class="o">(</span><span class="n">D</span><span class="o">)</span> <span class="o">*</span> <span class="n">U</span><span class="o">.</span><span class="n">t</span> <span class="k">=</span> <span class="o">(</span><span class="n">D</span><span class="o">^{-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">}^</span> <span class="o">*</span> <span class="n">U</span><span class="o">.</span><span class="n">t</span><span class="o">).</span><span class="n">t</span> <span class="o">*</span> <span class="o">(</span><span class="n">D</span><span class="o">^{-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">}^</span> <span class="o">*</span> <span class="n">U</span><span class="o">.</span><span class="n">t</span><span class="o">)</span>
+<span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="o">(</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="o">).</span><span class="n">t</span> <span class="o">*</span> <span class="n">inv</span><span class="o">(</span><span class="nc">Sigma</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="o">)</span> <span class="k">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">norm</span><span class="o">(</span><span class="n">D</span><span class="o">^{-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">}^</span> <span class="o">*</span> <span class="n">U</span><span class="o">.</span><span class="n">t</span>  <span class="o">*</span> <span class="o">(</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="o">))^</span><span class="mi">2</span><span class="o">^</span>
+</code></pre>
+</div>
+<p>  这里，<code class="highlighter-rouge">U</code>和<code class="highlighter-rouge">D</code>是奇异值分解得到的子矩阵。<code class="highlighter-rouge">calculateCovarianceConstants</code>具体的实现代码如下：</p>
+
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">calculateCovarianceConstants</span><span class="k">:</span> <span class="o">(</span><span class="kt">DBM</span><span class="o">[</span><span class="kt">Double</span><span class="o">],</span> <span class="nc">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">eigSym</span><span class="o">.</span><span class="nc">EigSym</span><span class="o">(</span><span class="n">d</span><span class="o">,</span> <span class="n">u</span><span class="o">)</span> <span class="k">=</span> <span class="n">eigSym</span><span class="o">(</span><span class="n">sigma</span><span class="o">.</span><span class="n">toBreeze</span><span class="o">.</span><span class="n">toDenseMatrix</span><span class="o">)</span> <span class="c1">// sigma = u * diag(d) * u.t
+</span>    <span class="k">val</span> <span class="n">tol</span> <span class="k">=</span> <span class="nc">MLUtils</span><span class="o">.</span><span class="nc">EPSILON</span> <span class="o">*</span> <span class="n">max</span><span class="o">(</span><span class="n">d</span><span class="o">)</span> <span class="o">*</span> <span class="n">d</span><span class="o">.</span><span class="n">length</span>
+    <span class="k">try</span> <span class="o">{</span>
+      <span class="c1">//所有非0奇异值的对数和
+</span>      <span class="k">val</span> <span class="n">logPseudoDetSigma</span> <span class="k">=</span> <span class="n">d</span><span class="o">.</span><span class="n">activeValuesIterator</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="k">_</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">).</span><span class="n">sum</span>
+      <span class="c1">//通过求非负值的倒数平方根，计算奇异值对角矩阵的根伪逆矩阵
+</span>      <span class="k">val</span> <span class="n">pinvS</span> <span class="k">=</span> <span class="n">diag</span><span class="o">(</span><span class="k">new</span> <span class="nc">DBV</span><span class="o">(</span><span class="n">d</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">v</span> <span class="k">=&gt;</span> <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="o">)</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="o">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">v</span><span class="o">)</span> <span class="k">else</span> <span class="mf">0.0</span><span class="o">).</span><span class="n">toArray</span><span class="o">))</span>
+      <span class="o">(</span><span class="n">pinvS</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">t</span><span class="o">,</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="o">(</span><span class="n">mu</span><span class="o">.</span><span class="n">size</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="nc">Pi</span><span class="o">)</span> <span class="o">+</span> <span class="n">logPseudoDetSigma</span><span class="o">))</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
+      <span class="k">case</span> <span class="n">uex</span><span class="k">:</span> <span class="kt">UnsupportedOperationException</span> <span class="o">=&gt;</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nc">IllegalArgumentException</span><span class="o">(</span><span class="s">"Covariance matrix has no non-zero singular values"</span><span class="o">)</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
+<p>  上面的代码中，<code class="highlighter-rouge">eigSym</code>用于分解<code class="highlighter-rouge">sigma</code>矩阵。</p>
+
+<h1 id="section-8">4 参考文献</h1>
+
+<p>【1】<a href="http://blog.pluskid.org/?p=39">漫谈 Clustering (3): Gaussian Mixture Model</a></p>
+
+
+                <hr>
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/mladvance/2017/04/07/clustering/" data-toggle="tooltip" data-placement="top" title="Spark-ML-05-Clustering">
+                        Previous<br>
+                        <span>Spark-ML-05-Clustering</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/mladvance/2017/04/07/k-means/" data-toggle="tooltip" data-placement="top" title="Spark-ML-0501-Clustering-KMeans">
+                        Next<br>
+                        <span>Spark-ML-0501-Clustering-KMeans</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                    <div class="ds-share flat"
+                    <div class="ds-thread"
+                        data-thread-key="/mladvance/2017/04/07/gaussian-mixture"
+                        data-title="Spark-ML-0502-Clustering-Gaussian mixture"
+                        data-url="http://machinelearningadvance.com/mladvance/2017/04/07/gaussian-mixture/" >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+                        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+                        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                 </div>
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/mladvance/2017/04/07/gaussian-mixture"
+                        data-title="Spark-ML-0502-Clustering-Gaussian mixture"
+                        data-url="http://machinelearningadvance.com/mladvance/2017/04/07/gaussian-mixture/" >
+                    </div>
+
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="27">
+                                Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spark" title="Spark" rel="20">
+                                Spark
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ME" title="ME" rel="4">
+                                ME
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Other" title="Other" rel="4">
+                                Other
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                CFAL1
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Python" title="Python" rel="20">
+                                Python
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#maths" title="maths" rel="2">
+                                maths
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Baby" title="Baby" rel="2">
+                                Baby
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                                Big Data
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#大数据" title="大数据" rel="20">
+                                大数据
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="7">
+                                IT
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Scala" title="Scala" rel="24">
+                                Scala
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#English" title="English" rel="23">
+                                English
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#wordcloud" title="wordcloud" rel="3">
+                                wordcloud
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#quant" title="quant" rel="2">
+                                quant
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#python" title="python" rel="2">
+                                python
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Clustering" title="Clustering" rel="3">
+                                Clustering
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://www.kaggle.com/">Your Home for Data Science</a></li>
+                    
+                        <li><a href="https://www.analyticsvidhya.com/">Analytics Vidhya</a></li>
+                    
+                        <li><a href="https://www.cfainstitute.org/pages/index.aspx">CFA</a></li>
+                    
+                        <li><a href="http://www.garp.org/#!/home">GARP</a></li>
+                    
+                        <li><a href="http://www.investopedia.com/">Investopedia</a></li>
+                    
+                        <li><a href="https://www.quantstart.com/">Quant Start</a></li>
+                    
+                        <li><a href="http://muchong.com/bbs/">muchong</a></li>
+                    
+                        <li><a href="https://www.coursera.org/learn/machine-learning">Coursera</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+<script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"machinelearningadvance"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/2672280861">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/helloourworld">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Big Data Memo 2017
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-82819752-1';
+    var _gaDomain = 'machinelearningadvance.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '863b1f46c83a8e14e47782106aee7e7f';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/images/background.jpg" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

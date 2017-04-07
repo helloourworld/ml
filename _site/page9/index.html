@@ -179,6 +179,114 @@
             ">
     			
 <div class="post-preview">
+    <a href="/language/2016/09/02/Scala-Lesson13/">
+        <h2 class="post-title">
+            Scala Lesson 13
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala 异常处理
+
+
+  Scala 的异常处理和其它语言比如 Java 类似。
+  Scala 的方法可以通过抛出异常的方法的方式来终止相关代码的运行，不必通过返回值。
+
+
+抛出异常
+
+Scala 抛出异常的方法和 Java一样，使用 throw 方法，例如，抛出一个新的参数异常：
+
+throw new IllegalArgumentException
+
+捕获异常
+
+异常捕捉的机制与其...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 2, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/09/02/Scala-Lesson12/">
+        <h2 class="post-title">
+            Scala Lesson 12
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala 正则表达式
+
+Scala 通过 scala.util.matching 包种的 Regex 类来支持正则表达式。以下实例演示了使用正则表达式查找单词 Scala :
+
+import scala.util.matching.Regex
+
+object RegExp1 {
+    def main(args: Array[String]) {
+        val pattern ...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 2, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/language/2016/09/02/Scala-Lesson11/">
+        <h2 class="post-title">
+            Scala Lesson 11
+        </h2>
+        
+        <div class="post-content-preview">
+            Scala 模式匹配
+
+
+  Scala 提供了强大的模式匹配机制，应用也非常广泛。
+  一个模式匹配包含了一系列备选项，每个都开始于关键字 case。每个备选项都包含了一个模式及一到多个表达式。箭头符号 =&gt; 隔开了模式和表达式。
+  以下是一个简单的整型值模式匹配实例：
+
+
+object PatternMatching1 {
+    def main (args: Array[St...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 2, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/09/02/hadoop_kafka/">
+        <h2 class="post-title">
+            Hadoop_kafka
+        </h2>
+        
+        <div class="post-content-preview">
+            ﻿—
+layout: post
+title:kafka组件深度解析
+category: Hadoop
+catalog: yes
+description:  kafka组件深度解析
+tags:
+    - Big Data
+    - 大数据
+—
+
+
+kafka组件深度解析kafka1,kafka介绍关于kafka入门的文章最好的就莫过于kafka的官方文档了，这上面对kafka的定义是：Ka...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on September 2, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/language/2016/09/01/Scala-Lesson9/">
         <h2 class="post-title">
             Scala Lesson 9
@@ -319,99 +427,6 @@ val t = new Tupl...
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/language/2016/08/31/scala-maps/">
-        <h2 class="post-title">
-            Scala Map
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala Map(映射)
-
-
-  Map(映射)是一种可迭代的键值对（key/value）结构。
-  所有的值都可以通过键来获取。
-  Map 中的键都是唯一的。
-  Map 也叫哈希表（Hash tables）。
-  Map 有两种类型，可变与不可变，区别在于可变对象可以修改它，而不可变对象不可以。
-  默认情况下 Scala 使用不可变 Map。如果你需要使用可变集合，你需要显式的引入...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/language/2016/08/31/scala-lists/">
-        <h2 class="post-title">
-            Scala List
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala List(列表)
-
-
-  Scala 列表类似于数组，它们所有元素的类型都相同，但是它们也有所不同：列表是不可变的，值一旦被定义了就不能改变，其次列表 具有递归的结构（也就是链接表结构）而数组不是。。
-  列表的元素类型 T 可以写成 List[T]。例如，以下列出了多种类型的列表：
-
-
-// 字符串列表
-val site: List[String] = List("Runoob...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/language/2016/08/31/scala-iterators/">
-        <h2 class="post-title">
-            scala Iterators
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala Iterator（迭代器）
-
-
-  Scala Iterator（迭代器）不是一个集合，它是一种用于访问集合的方法。
-  迭代器 it 的两个基本操作是 next 和 hasNext。
-  调用 it.next() 会返回迭代器的下一个元素，并且更新迭代器的状态。
-  调用 it.hasNext() 用于检测集合中是否还有元素。
-  让迭代器 it 逐个返回所有元素最简单的方法是...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/language/2016/08/31/Scala-Lesson7/">
-        <h2 class="post-title">
-            scala Lesson 7
-        </h2>
-        
-        <div class="post-content-preview">
-            Scala Collection
-
-
-  Scala提供了一套很好的集合实现，提供了一些集合类型的抽象。
-  Scala 集合分为可变的和不可变的集合。
-  可变集合可以在适当的地方被更新或扩展。这意味着你可以修改，添加，移除一个集合的元素。
-  而不可变集合类，相比之下，永远不会改变。不过，你仍然可以模拟添加，移除或更新操作。但是这些操作将在每一种情况下都返回一个新的集合，同时使原来的集合...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on August 31, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -463,13 +478,13 @@ val site: List[String] = List("Runoob...
                     <div class="tags">
                         
                             
-                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="24">
+                                <a href="/tags/#Machine Learning" title="Machine Learning" rel="27">
                                     Machine Learning
                                 </a>
                             
                         
                             
-                                <a href="/tags/#Spark" title="Spark" rel="16">
+                                <a href="/tags/#Spark" title="Spark" rel="20">
                                     Spark
                                 </a>
                             
@@ -493,7 +508,7 @@ val site: List[String] = List("Runoob...
                             
                         
                             
-                                <a href="/tags/#Python" title="Python" rel="19">
+                                <a href="/tags/#Python" title="Python" rel="20">
                                     Python
                                 </a>
                             
@@ -580,6 +595,12 @@ val site: List[String] = List("Runoob...
                         
                             
                         
+                            
+                        
+                            
+                                <a href="/tags/#Clustering" title="Clustering" rel="3">
+                                    Clustering
+                                </a>
                             
                         
                     </div>

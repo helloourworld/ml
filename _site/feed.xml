@@ -8,6 +8,62 @@
 		
 			
 			<item>
+				<title>Secondary Sort</title>
+				
+					<description>&lt;h2 id=&quot;secondarysort&quot;&gt;secondarysort&lt;/h2&gt;
+
+</description>
+				
+				<pubDate>Fri, 07 Apr 2017 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/spark/2017/04/07/secondarysort/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/spark/2017/04/07/secondarysort/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Spark-ML-0501-Clustering-KMeans</title>
+				
+					<description>&lt;h3 id=&quot;k-meansk-meansk-means&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;k-means&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;k-means++&lt;/code&gt;以及&lt;code class=&quot;highlighter-rouge&quot;&gt;k-means||&lt;/code&gt;算法分析&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Fri, 07 Apr 2017 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2017/04/07/k-means/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2017/04/07/k-means/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Spark-ML-0502-Clustering-Gaussian mixture</title>
+				
+					<description>&lt;h1 id=&quot;section&quot;&gt;高斯混合模型&lt;/h1&gt;
+
+</description>
+				
+				<pubDate>Fri, 07 Apr 2017 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2017/04/07/gaussian-mixture/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2017/04/07/gaussian-mixture/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Spark-ML-05-Clustering</title>
+				
+					<description>&lt;h3 id=&quot;section&quot;&gt;聚类&lt;/h3&gt;
+
+</description>
+				
+				<pubDate>Fri, 07 Apr 2017 00:00:00 +0800</pubDate>
+				<link>http://machinelearningadvance.com/mladvance/2017/04/07/clustering/</link>
+				<guid isPermaLink="true">http://machinelearningadvance.com/mladvance/2017/04/07/clustering/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>Spark-ML-030103-Linear Model-Regression</title>
 				
 					<description>&lt;h1 id=&quot;section&quot;&gt;线性回归&lt;/h1&gt;

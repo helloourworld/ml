@@ -1,3 +1,14 @@
+---
+layout: post
+title: Spark-ML-0502-Clustering-Gaussian mixture
+category: MLAdvance
+catalog: yes
+description: 高斯混合模型
+tags:
+    - Machine Learning
+    - Spark
+    - Clustering
+---
 # 高斯混合模型
 
 >&emsp;&emsp;现有的高斯模型有单高斯模型（`SGM`）和高斯混合模型（`GMM`）两种。从几何上讲，单高斯分布模型在二维空间上近似于椭圆，在三维空间上近似于椭球。
@@ -7,12 +18,12 @@
 
 &emsp;&emsp;多维变量`X`服从高斯分布时，它的概率密度函数`PDF`定义如下：
 
-<div  align="center"><img src="imgs/1.1.png" width = "390" height = "50" alt="1.1" align="center" /></div><br />
+<div  align="center"><img src="/images/spark/ml/gaussian-mixture/1.1.png" width = "390" height = "50" alt="1.1" align="center" /></div><br />
 
 &emsp;&emsp;在上述定义中,`x`是维数为`D`的样本向量，`mu`是模型期望，`sigma`是模型协方差。对于单高斯模型，可以明确训练样本是否属于该高斯模型，所以我们经常将`mu`用训练样本的均值代替，将`sigma`用训练样本的协方差代替。
 假设训练样本属于类别`C`，那么上面的定义可以修改为下面的形式：
 
-<div  align="center"><img src="imgs/1.2.png" width = "380" height = "50" alt="1.2" align="center" /></div><br />
+<div  align="center"><img src="/images/spark/ml/gaussian-mixture/1.2.png" width = "380" height = "50" alt="1.2" align="center" /></div><br />
 
 &emsp;&emsp;这个公式表示样本属于类别`C`的概率。我们可以根据定义的概率阈值来判断样本是否属于某个类别。
 
@@ -23,7 +34,7 @@
 
 &emsp;&emsp;每个`GMM`由`K`个高斯分布组成，每个高斯分布称为一个组件（`Component`），这些组件线性加成在一起就组成了`GMM`的概率密度函数**（1）**：
 
-<div  align="center"><img src="imgs/1.3.png" width = "360" height = "75" alt="1.3" align="center" /></div><br />
+<div  align="center"><img src="/images/spark/ml/gaussian-mixture/1.3.png" width = "360" height = "75" alt="1.3" align="center" /></div><br />
 
 &emsp;&emsp;根据上面的式子，如果我们要从`GMM`分布中随机地取一个点，需要两步：
 
@@ -36,25 +47,25 @@
 
 &emsp;&emsp;我们可以利用最大似然估计来确定这些参数，`GMM`的似然函数**（2）**如下：
 
-<div  align="center"><img src="imgs/1.4.png" width = "250" height = "75" alt="1.4" align="center" /></div><br />
+<div  align="center"><img src="/images/spark/ml/gaussian-mixture/1.4.png" width = "250" height = "75" alt="1.4" align="center" /></div><br />
 
 &emsp;&emsp;可以用`EM`算法来求解这些参数。`EM`算法求解的过程如下：
 
-- 1 **E-步**。求数据点由各个组件生成的概率（并不是每个组件被选中的概率）。对于每个数据<img src="http://www.forkosh.com/mathtex.cgi?{x}_{i}">来说，它由第`k`个组件生成的概率为公式**（3）**：
+- 1 **E-步**。求数据点由各个组件生成的概率（并不是每个组件被选中的概率）。对于每个数据$${x}_{i}$$来说，它由第`k`个组件生成的概率为公式**（3）**：
 
-<div  align="center"><img src="imgs/1.5.png" width = "250" height = "60" alt="1.5" align="center" /></div><br />
+<div  align="center"><img src="/images/spark/ml/gaussian-mixture/1.5.png" width = "250" height = "60" alt="1.5" align="center" /></div><br />
 
 &emsp;&emsp;在上面的概率公式中，我们假定`mu`和`sigma`均是已知的，它们的值来自于初始化值或者上一次迭代。
 
 - 2 **M-步**。估计每个组件的参数。由于每个组件都是一个标准的高斯分布，可以很容易分布求出最大似然所对应的参数值，分别如下公式**（4）**,**（5）**,**（6）**,**（7）**：
 
-<div  align="center"><img src="imgs/1.6.png" width = "160" height = "70" alt="1.6" align="center" /></div><br />
+<div  align="center"><img src="/images/spark/ml/gaussian-mixture/1.6.png" width = "160" height = "70" alt="1.6" align="center" /></div><br />
 
-<div  align="center"><img src="imgs/1.7.png" width = "100" height = "50" alt="1.7" align="center" /></div><br />
+<div  align="center"><img src="/images/spark/ml/gaussian-mixture/1.7.png" width = "100" height = "50" alt="1.7" align="center" /></div><br />
 
-<div  align="center"><img src="imgs/1.8.png" width = "180" height = "70" alt="1.8" align="center" /></div><br />
+<div  align="center"><img src="/images/spark/ml/gaussian-mixture/1.8.png" width = "180" height = "70" alt="1.8" align="center" /></div><br />
 
-<div  align="center"><img src="imgs/1.9.png" width = "310" height = "70" alt="1.9" align="center" /></div><br />
+<div  align="center"><img src="/images/spark/ml/gaussian-mixture/1.9.png" width = "310" height = "70" alt="1.9" align="center" /></div><br />
 
 # 3 源码分析
 
@@ -156,9 +167,9 @@ def add( weights: Array[Double],dists: Array[MultivariateGaussian])
     sums.logLikelihood += math.log(pSum)
     var i = 0
     while (i < sums.k) {
-      p(i) /= pSum  
-      sums.weights(i) += p(i)  
-      sums.means(i) += x * p(i)  
+      p(i) /= pSum
+      sums.weights(i) += p(i)
+      sums.means(i) += x * p(i)
       //A := alpha * x * x^T^ + A
       BLAS.syr(p(i), Vectors.fromBreeze(x),
         Matrices.fromBreeze(sums.sigmas(i)).asInstanceOf[DenseMatrix])
@@ -195,7 +206,7 @@ def add( weights: Array[Double],dists: Array[MultivariateGaussian])
     val newWeight = weight / sumWeights
     val newGaussian = new MultivariateGaussian(mu, sigma / weight)
     (newWeight, newGaussian)
-  } 
+  }
 ```
 &emsp;&emsp;基于**E-步**计算出来的值，根据公式**(6)**，我们可以通过`(mean /= weight)`来更新`mu`；根据公式**(7)**，我们可以通过`BLAS.syr()`来更新`sigma`；同时，根据公式**(5)**，
 我们可以通过`weight / sumWeights`来计算`pi`。
