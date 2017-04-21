@@ -2,7 +2,7 @@
 layout: page
 title: "About"
 description: "Hey, this is Lijun Yu."
-header-img: "images/head.jpg"
+header-img: "images/IMG_0006.JPG"
 ---
 
 <!-- Language Selector -->
@@ -15,8 +15,8 @@ header-img: "images/head.jpg"
 <div class="zh post-container">
 
     <!--copied from markdown -->
-    <blockquote><p>写写代码，做做金融，写写代码。<br>
-    世界那么大，我们去看看。</p></blockquote>
+    <blockquote><p>写写代码，做做金融，诗与文章。<br>
+    世界那么大，仗剑走天涯。</p></blockquote>
 
     <p>Hey，我是<strong>于利军</strong>，程序员 &amp; 数据分析师，目前任职于中软国际，负责大数据项目方面的技术方案，欢迎交流合作。</p>
 
@@ -31,18 +31,17 @@ header-img: "images/head.jpg"
     <h5>Resumes</h5>
 
     <ul>
-    <li><a href="/attach/CV_YULIJUN_EN.pdf">CV_YULIJUN_EN</a></li>
-    <li><a href="/attach/CV_YULIJUN_CN.pdf">CV_YULIJUN_CN</a></li>
+    <li><a href="https://github.com/helloourworld/CV/blob/master/CV_Analyst_LijunYu_cn.pdf">CV_YULIJUN_CN</a></li>
     </ul>
 
 </div>
 
 <!-- English Version -->
 <div class="en post-container">
-    <blockquote><p>Yet another Frontend Engineer. <br>
-    Yet another Lifelong Designer.</p></blockquote>
+    <blockquote><p>Yet another Financial Analyst. <br>
+    Yet another BigData Engineer.</p></blockquote>
 
-Hi, Here is <strong>Lijun Yu(于利军)</strong>，you can call me<strong>Davidyjun</strong>. I'm engineer &amp; programer who is loving Machine Learning and Big Data.
+Hi, Here is <strong>Lijun Yu(于利军)</strong>，you can call me <strong>David</strong> or <strong>Davidyjun</strong>. I'm financial analyst &amp; programer who is loving Machine Learning and Big Data.
 
     <h5>Talks</h5>
 
@@ -54,8 +53,7 @@ Hi, Here is <strong>Lijun Yu(于利军)</strong>，you can call me<strong>Davidy
     <h5>Resumes</h5>
 
     <ul>
-    <li><a href="/attach/CV_YULIJUN_EN.pdf">CV_YULIJUN_EN</a></li>
-    <li><a href="/attach/CV_YULIJUN_EN.pdf">CV_YULIJUN_CN</a></li>
+    <li><a href="https://github.com/helloourworld/CV/blob/master/CV_Analyst_LijunYu_en.pdf">CV_YULIJUN_EN</a></li>
     </ul>
 </div>
 

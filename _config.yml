@@ -74,7 +74,7 @@ ga_domain: machinelearningadvance.com
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，做做金融，写写代码。世界那么大，我们去看看。"
+sidebar-about-description: "写写代码，做做金融，诗与文章。世界那么大，仗剑走天涯。"
 sidebar-avatar: /images/MyLove.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 

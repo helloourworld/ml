@@ -51,13 +51,13 @@ header-img: "images/machinelearning.png"
                  <div class="post-preview">
                     <a href="{{ post.url | prepend: site.baseurl }}">
                         <h2 class="post-title">
-                            {{ post.title }}
+                            <strong>{{ post.title }}</strong>
                             <div class="index-content.title-desc">{{ post.description }}</div>
                         </h2>
                         {% if post.subtitle %}
                         <h3 class="post-subtitle">
                             {{ post.subtitle }}
-                            <div class="title-desc">{{ post.description }}</div>
+                            <div class="title-desc"><font size=5> {{ post.description }}</font></div>
                         </h3>
                         {% endif %}
                     </a>
