@@ -27,7 +27,7 @@ tags:
 * > ![](/images/fintec/investment_advice_value_chain.png)
 * > As used here, digital investment advice tools (also referred to as digital advice tools) support one or more of the following core activities in managing an investor’s portfolio: customer profiling, asset allocation, portfolio selection, trade execution, portfolio rebalancing, tax-loss harvesting3 and portfolio analysis. These investment advice tools can be broken down into two groups: tools that financial professionals use, referred to here as “financial professional-facing” tools, and tools that clients use, referred to here as “client-facing” tools. Client-facing tools that incorporate the first six activities—customer profiling through tax-loss harvesting—are frequently referred to as “robo advisors” or “robos.”
 
-* 智能投顾三大优势
+* 智能投顾三优势
 * > 低成本、高效率、多资产
 
 * 智能投顾发展背景<sup>3</sup>
@@ -117,6 +117,10 @@ tags:
 * 一是完全模仿Wealthfront、 Betterment等投资于ETF组合的公司，如弥财、财鲸等，受限于国内ETF的种类及数量，这两家公司均直接给客户匹配国外发达市场的ETF，以达到资本配置的目的；
 * 二是以基金作为构建投资组合的标的，实现对客户风险偏好的匹配，代表公司有理财魔方及钱景私人理财；
 * 三是以对量化策略、投资名人的股票组合进行跟投，同时兼具论坛性质的在线投资交流平台，目前在国内投研圈的知名度及认可度较高，代表公司有雪球及金贝塔。
+
+摩羯智投: 人+数据+机器
+
+摩羯智投团队表示：基金选择不单纯依赖机器或人，而是通过“人+数据+机器”的结合：“人”是指招商银行作为业内最领先的公募基金销售机构、在业内最早打造“五星之选基金”体系、在业内最早破题基金售后服务等经验，将招商银行在公募基金研究方面的 “多人、多年的优势和经验”融入模型体系；“数据”是指招商银行从十年前就开始积累的业内独家的“基金经理行为研究”数据库，是他们与业内差异化的基金数据基础；“机器”是指，摩羯智投构建的“行为动量基金分析决策树模型”，可以从基金历史净值、基金持仓数据、多维度的剥离和识别真实的alpha、基金公司维度、基金经理维度、基金产品维度等总计71个因子来判断和分析基金未来创造超额收益的动能，进而来判断和筛选基金产品。
 
 参考：
 
