@@ -179,6 +179,79 @@
             ">
     			
 <div class="post-preview">
+    <a href="/mladvance/2017/04/06/logic-regression/">
+        <h2 class="post-title">
+            Spark-ML-030102-Linear Model-LR
+        </h2>
+        
+        <div class="post-content-preview">
+            逻辑回归
+
+1 二元逻辑回归
+
+  回归是一种很容易理解的模型，就相当于y=f(x)，表明自变量x与因变量y的关系。最常见问题如医生治病时的望、闻、问、切，之后判定病人是否生病或生了什么病，
+其中的望、闻、问、切就是获取的自变量x，即特征数据，判断是否生病就相当于获取因变量y，即预测分类。最简单的回归是线性回归，但是线性回归的鲁棒性很差。
+
+  逻辑回归是一种减小预测范围，将预测值限定为[0...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on April 6, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2017/04/06/linear-model/">
+        <h2 class="post-title">
+            Spark-ML-0301-Linear Model
+        </h2>
+        
+        <div class="post-content-preview">
+            线性模型
+
+1 数学描述
+
+  许多标准的机器学习算法可以归结为凸优化问题。例如，找到凸函数f的一个极小值的任务，这个凸函数依赖于可变向量w（在spark源码中，一般表示为weights）。
+形式上，我们可以将其当作一个凸优化问题。它的目标函数可以表示为如下公式(1)：
+
+
+
+  在上式中，向量x表示训练数据集，y表示它相应的标签，也是我们想预测的值。如果L(w;x,y)可以表示为和y的函数...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on April 6, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2017/04/06/isotonic-regression/">
+        <h2 class="post-title">
+            Spark-ML-0305-Isotonic regression
+        </h2>
+        
+        <div class="post-content-preview">
+            保序回归
+
+1 保序回归
+
+  保序回归解决了下面的问题：给定包含n个数据点的序列 y_1,y_2,...,y_n , 怎样通过一个单调的序列 beta_1,beta_2,...,beta_n 来归纳这个问题。形式上，这个问题就是为了找到
+
+
+
+
+  大部分时候，我们会在括号前加上权重w_i。解决这个问题的一个方法就是 pool adjacent violators algorithm(PA...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on April 6, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/mladvance/2017/04/06/random-forests/">
         <h2 class="post-title">
             Spark-ML-0304-Ensembles-RF
@@ -368,72 +441,6 @@ Out[2]: 'sha1:...
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/quant/2017/02/07/quant-zipline/">
-        <h2 class="post-title">
-            Zipline量化平台
-        </h2>
-        
-        <div class="post-content-preview">
-            什么是量化策略？
-
-*一个完整的策略需要包含输入、策略处理逻辑、输出；策略处理逻辑需要考虑选股、择时、仓位管理和止盈止损等因素。
-
-
-
-&lt;–https://uqer.io/community/share/567ba9c3228e5b344568822c–&gt;
-
-&lt;–https://uqer.io/community/share/56749fca228e5bab38c977d1...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on February 7, 2017
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/quant/2017/01/20/model-optimize-option/">
-        <h2 class="post-title">
-            yh模型开发技术选型
-        </h2>
-        
-        <div class="post-content-preview">
-            
-
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on January 20, 2017
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/quant/2017/01/18/quant-plat/">
-        <h2 class="post-title">
-            量化平台ABC
-        </h2>
-        
-        <div class="post-content-preview">
-            zipline + pyfolio 搭建的量化策略研究平台，解决了策略回测和评价的大部分问题，为quantopian的开源点赞！
-
-国内量化平台
-
-作者：匿名用户
-链接：https://www.zhihu.com/question/35097533/answer/91017820
-来源：知乎
-著作权归作者所有，转载请联系作者获得授权。
-
-这个话题我喜欢，摆事实讲道理是我强项。待我放下了手中的...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on January 18, 2017
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -515,7 +522,7 @@ Out[2]: 'sha1:...
                             
                         
                             
-                                <a href="/tags/#Python" title="Python" rel="20">
+                                <a href="/tags/#Python" title="Python" rel="22">
                                     Python
                                 </a>
                             
@@ -545,7 +552,7 @@ Out[2]: 'sha1:...
                             
                         
                             
-                                <a href="/tags/#IT" title="IT" rel="7">
+                                <a href="/tags/#IT" title="IT" rel="9">
                                     IT
                                 </a>
                             
@@ -608,6 +615,10 @@ Out[2]: 'sha1:...
                                 <a href="/tags/#Clustering" title="Clustering" rel="3">
                                     Clustering
                                 </a>
+                            
+                        
+                            
+                        
                             
                         
                             
