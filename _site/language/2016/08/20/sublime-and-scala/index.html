@@ -257,6 +257,17 @@ IF EXIST %~n1.class (
 </span></code></pre>
 </div>
 
+<h2 id="javascript-">JavaScript 示例</h2>
+<pre><code class="language-JavaScript">{
+  "cmd": ["taskkill","/F", "/IM", "node.exe","&amp;","node", "$file"],
+  "cmd": ["node", "$file"],
+  "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+  "selector": "source.js",
+  "shell":true,
+  "encoding": "cp936"
+}
+</code></pre>
+
 <h2 id="decode-error">Decode error解决</h2>
 
 <p>出现：[Decode error - output not utf-8]</p>

@@ -65,6 +65,19 @@ object Hello {
 "selector": "source.r"}
 ~~~
 
+## JavaScript 示例
+~~~ JavaScript
+{
+  "cmd": ["taskkill","/F", "/IM", "node.exe","&","node", "$file"],
+  "cmd": ["node", "$file"],
+  "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+  "selector": "source.js",
+  "shell":true,
+  "encoding": "cp936"
+}
+~~~
+
+
 ## Decode error解决
 
 出现：[Decode error - output not utf-8]
