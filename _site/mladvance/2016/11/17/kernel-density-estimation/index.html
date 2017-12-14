@@ -17,7 +17,7 @@
 
     <title>Spark-ML-0206-Kernel density estimation - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/17/kernel-density-estimation/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2016/11/17/kernel-density-estimation/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,9 +196,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="section">核密度估计</h1>
+				<h1 id="核密度估计">核密度估计</h1>
 
-<h2 id="section-1">1 理论分析</h2>
+<h2 id="1-理论分析">1 理论分析</h2>
 
 <p>  核密度估计是在概率论中用来估计未知的密度函数，属于非参数检验方法之一。假设我们有<code class="highlighter-rouge">n</code>个数<script type="math/tex">X_{1},X_{2},...,X_{n}</script>，要计算某个数<code class="highlighter-rouge">X</code>的概率密度有多大，
 可以通过下面的核密度估计方法估计。</p>
@@ -213,7 +213,7 @@
 
 <script type="math/tex; mode=display">P_n(x) = \frac{1}{\sqrt{2\pi}nh_n}\sum_{j=1}^n e^{-\frac{(x - x_j)^2}{2h_n^2}}</script>
 
-<h2 id="section-2">2 例子</h2>
+<h2 id="2-例子">2 例子</h2>
 
 <p>  <code class="highlighter-rouge">KernelDensity</code>提供了方法通过样本<code class="highlighter-rouge">RDD</code>计算核密度估计。下面的例子给出了使用方法。</p>
 
@@ -234,7 +234,7 @@
 </code></pre>
 </div>
 
-<h2 id="section-3">3 代码实现</h2>
+<h2 id="3-代码实现">3 代码实现</h2>
 
 <p>  通过调用<code class="highlighter-rouge">KernelDensity.estimate</code>方法来实现核密度函数估计。看下面的代码。</p>
 
@@ -288,7 +288,7 @@
 <p><script type="math/tex">% <![CDATA[
 A=U{A}^{T},k <= m,n %]]></script></p>
 
-<h2 id="section-4">参考文献</h2>
+<h2 id="参考文献">参考文献</h2>
 
 <p>【1】<a href="http://blog.163.com/zhuandi_h/blog/static/1802702882012111092743556/">核密度估计</a></p>
 
@@ -320,7 +320,7 @@ A=U{A}^{T},k <= m,n %]]></script></p>
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/11/17/kernel-density-estimation"
                         data-title="Spark-ML-0206-Kernel density estimation"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/17/kernel-density-estimation/" >
+                        data-url="http://localhost:4000/mladvance/2016/11/17/kernel-density-estimation/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -341,7 +341,7 @@ A=U{A}^{T},k <= m,n %]]></script></p>
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/11/17/kernel-density-estimation"
                         data-title="Spark-ML-0206-Kernel density estimation"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/17/kernel-density-estimation/" >
+                        data-url="http://localhost:4000/mladvance/2016/11/17/kernel-density-estimation/" >
                     </div>
 
                 </div>

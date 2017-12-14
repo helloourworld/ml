@@ -17,7 +17,7 @@
 
     <title>培训虚拟机使用指南 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/hadoop/2016/08/17/hadoop_tutorial_2/">
+    <link rel="canonical" href="http://localhost:4000/hadoop/2016/08/17/hadoop_tutorial_2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,7 +196,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="section">开启虚拟机</h2>
+				<h2 id="开启虚拟机">开启虚拟机</h2>
 
 <p>确保安装了VMware软件。打开虚拟机后查看IP并更改hosts。注意：请根据本地的IP来更改，查看本地ip方法：ifconfig命令查看。默认NN01为~128；DN01为129；DN02为130。</p>
 
@@ -213,7 +213,7 @@ hosts                                 100%  293     0.3KB/s   00:00
 </code></pre>
 </div>
 
-<h2 id="section-1">开启服务</h2>
+<h2 id="开启服务">开启服务</h2>
 
 <p>你可以执行以下脚本来启动，也可以一个个单独启动。</p>
 
@@ -250,7 +250,7 @@ $HADOOP_HOME/sbin/mr-jobhistory-daemon.sh start historyserver --config $HADOOP_C
 
 <p>spark启动后可在8080端口查看__<img src="/images/hadoop/spark_ui.png" alt="" /></p>
 
-<h1 id="section-2">关闭服务</h1>
+<h1 id="关闭服务">关闭服务</h1>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 spark]$ ./sbin/stop-all.sh
 hadoop@DN02.HadoopVM: stopping org.apache.spark.deploy.worker.Worker
@@ -261,7 +261,7 @@ stopping org.apache.spark.deploy.master.Master
 </code></pre>
 </div>
 
-<h1 id="section-3">关机</h1>
+<h1 id="关机">关机</h1>
 
 <p>可以使用如下命令关机：
 ·[hadoop@NN01 ~]$ ./stop_down.sh·</p>
@@ -294,7 +294,7 @@ stopping org.apache.spark.deploy.master.Master
                     <div class="ds-thread"
                         data-thread-key="/hadoop/2016/08/17/hadoop_tutorial_2"
                         data-title="培训虚拟机使用指南"
-                        data-url="http://machinelearningadvance.com/hadoop/2016/08/17/hadoop_tutorial_2/" >
+                        data-url="http://localhost:4000/hadoop/2016/08/17/hadoop_tutorial_2/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -315,7 +315,7 @@ stopping org.apache.spark.deploy.master.Master
                     <div class="ds-thread"
                         data-thread-key="/hadoop/2016/08/17/hadoop_tutorial_2"
                         data-title="培训虚拟机使用指南"
-                        data-url="http://machinelearningadvance.com/hadoop/2016/08/17/hadoop_tutorial_2/" >
+                        data-url="http://localhost:4000/hadoop/2016/08/17/hadoop_tutorial_2/" >
                     </div>
 
                 </div>

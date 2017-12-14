@@ -17,7 +17,7 @@
 
     <title>Spark-ML-0302-Naive Bayes - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/12/05/nb/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2016/12/05/nb/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,9 +196,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="section">朴素贝叶斯</h1>
+				<h1 id="朴素贝叶斯">朴素贝叶斯</h1>
 
-<h2 id="section-1">1 介绍</h2>
+<h2 id="1-介绍">1 介绍</h2>
 
 <p>  朴素贝叶斯是一种构建分类器的简单方法。该分类器模型会给问题实例分配用特征值表示的类标签，类标签取自有限集合。它不是训练这种分类器的单一算法，而是一系列基于相同原理的算法：<strong>所有朴素贝叶斯分类器都假定样本每个特征与其他特征都不相关</strong>。
 举个例子，如果一种水果其具有红，圆，直径大概3英寸等特征，该水果可以被判定为是苹果。尽管这些特征相互依赖或者有些特征由其他特征决定，然而朴素贝叶斯分类器认为这些属性在判定该水果是否为苹果的概率分布上独立的。</p>
@@ -209,7 +209,7 @@
 
 <p>  朴素贝叶斯分类器的一个优势在于只需要根据少量的训练数据估计出必要的参数（变量的均值和方差）。由于变量独立假设，只需要估计各个变量，而不需要确定整个协方差矩阵。</p>
 
-<h3 id="section-2">1.1 朴素贝叶斯的优缺点</h3>
+<h3 id="11-朴素贝叶斯的优缺点">1.1 朴素贝叶斯的优缺点</h3>
 
 <ul>
   <li>
@@ -220,7 +220,7 @@
   </li>
 </ul>
 
-<h2 id="section-3">2 朴素贝叶斯概率模型</h2>
+<h2 id="2-朴素贝叶斯概率模型">2 朴素贝叶斯概率模型</h2>
 
 <p>  理论上，概率模型分类器是一个条件概率模型。</p>
 
@@ -249,13 +249,13 @@
 
 <p>  其中<code class="highlighter-rouge">Z</code>是一个只依赖与<code class="highlighter-rouge">F_1,...,F_n</code>等的缩放因子，当特征变量的值已知时是一个常数。</p>
 
-<h3 id="section-4">2.1 从概率模型中构造分类器</h3>
+<h3 id="21-从概率模型中构造分类器">2.1 从概率模型中构造分类器</h3>
 
 <p>  讨论至此为止我们导出了独立分布特征模型，也就是朴素贝叶斯概率模型。朴素贝叶斯分类器包括了这种模型和相应的决策规则。一个普通的规则就是选出最有可能的那个：这就是大家熟知的最大后验概率（<code class="highlighter-rouge">MAP</code>）决策准则。相应的分类器便是如下定义的公式：</p>
 
 <div align="center"><img src="/images/spark/ml/nb/1.7.png" width="500" height="55" alt="1.7" align="center" /></div>
 
-<h2 id="section-5">3 参数估计</h2>
+<h2 id="3-参数估计">3 参数估计</h2>
 
 <p>  所有的模型参数都可以通过训练集的相关频率来估计。常用方法是概率的最大似然估计。类的先验概率<code class="highlighter-rouge">P(C)</code>可以通过假设各类等概率来计算<code class="highlighter-rouge">（先验概率 = 1 / (类的数量)）</code>，或者通过训练集的各类样本出现的次数来估计<code class="highlighter-rouge">（A类先验概率=（A类样本的数量）/(样本总数)）</code>。</p>
 
@@ -264,7 +264,7 @@
 
 <p>  这种假设称为朴素贝叶斯分类器的事件模型（<code class="highlighter-rouge">event model</code>）。对于离散的特征数据（例如文本分类中使用的特征），多元分布和伯努利分布比较流行。</p>
 
-<h3 id="section-6">3.1 高斯朴素贝叶斯</h3>
+<h3 id="31-高斯朴素贝叶斯">3.1 高斯朴素贝叶斯</h3>
 
 <p>  如果要处理的是连续数据，一种通常的假设是这些连续数值服从高斯分布。例如，假设训练集中有一个连续属性<code class="highlighter-rouge">x</code>。我们首先对数据根据类别分类，然后计算每个类别中<code class="highlighter-rouge">x</code>的均值和方差。令<code class="highlighter-rouge">mu_c</code>表示为<code class="highlighter-rouge">x</code>在<code class="highlighter-rouge">c</code>类上的均值，令<code class="highlighter-rouge">sigma^2_c</code>为<code class="highlighter-rouge">x</code>在<code class="highlighter-rouge">c</code>类上的方差。在给定类中某个值的概率
 <code class="highlighter-rouge">P(x=v|c)</code>，可以通过将<code class="highlighter-rouge">v</code>表示为均值为<code class="highlighter-rouge">mu_c</code>，方差为<code class="highlighter-rouge">sigma^2_c</code>的正态分布计算出来。</p>
@@ -274,7 +274,7 @@
 <p>  处理连续数值问题的另一种常用的技术是通过离散化连续数值的方法。通常，当训练样本数量较少或者是精确的分布已知时，通过概率分布的方法是一种更好的选择。
 在大量样本的情形下离散化的方法表现更优，因为大量的样本可以学习到数据的分布。由于朴素贝叶斯是一种典型的用到大量样本的方法（越大计算量的模型可以产生越高的分类精确度），所以朴素贝叶斯方法都用到离散化方法，而不是概率分布估计的方法。</p>
 
-<h3 id="section-7">3.2 多元朴素贝叶斯</h3>
+<h3 id="32-多元朴素贝叶斯">3.2 多元朴素贝叶斯</h3>
 
 <p>  在多元事件模型中，样本（特征向量）表示特定事件发生的次数。用<code class="highlighter-rouge">p_i</code>表示事件<code class="highlighter-rouge">i</code>发生的概率。特征向量<code class="highlighter-rouge">X=(x_1,x_2,...,x_n)</code>是一个<code class="highlighter-rouge">histogram</code>，其中<code class="highlighter-rouge">x_i</code>表示事件<code class="highlighter-rouge">i</code>在特定的对象中被观察到的次数。事件模型通常用于文本分类。相应的<code class="highlighter-rouge">x_i</code>表示词<code class="highlighter-rouge">i</code>在单个文档中出现的次数。
 <code class="highlighter-rouge">X</code>的似然函数如下所示：</p>
@@ -293,7 +293,7 @@
 
 <p>  这里的<code class="highlighter-rouge">CondProb[t][c]</code>即上文中的<code class="highlighter-rouge">P(x|C)</code>。<code class="highlighter-rouge">T_ct</code>表示类别为<code class="highlighter-rouge">c</code>的文档中<code class="highlighter-rouge">t</code>出现的次数。<code class="highlighter-rouge">+1</code>就是平滑手段。</p>
 
-<h3 id="section-8">3.3 伯努利朴素贝叶斯</h3>
+<h3 id="33-伯努利朴素贝叶斯">3.3 伯努利朴素贝叶斯</h3>
 
 <p>  在多变量伯努利事件模型中，特征是独立的二值变量。和多元模型一样，这个模型在文本分类中也非常流行。它的似然函数如下所示。</p>
 
@@ -305,11 +305,11 @@
 
 <div align="center"><img src="/images/spark/ml/nb/3.2.png" width="555" height="450" alt="3.2" align="center" /></div>
 
-<h2 id="section-9">4 源码分析</h2>
+<h2 id="4-源码分析">4 源码分析</h2>
 
 <p>  <code class="highlighter-rouge">MLlib</code>中实现了多元朴素贝叶斯和伯努利朴素贝叶斯。下面先看看朴素贝叶斯的使用实例。</p>
 
-<h3 id="section-10">4.1 实例</h3>
+<h3 id="41-实例">4.1 实例</h3>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.classification.</span><span class="o">{</span><span class="nc">NaiveBayes</span><span class="o">,</span> <span class="nc">NaiveBayesModel</span><span class="o">}</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vectors</span>
@@ -332,7 +332,7 @@
 </code></pre>
 </div>
 
-<h3 id="section-11">4.2 训练模型</h3>
+<h3 id="42-训练模型">4.2 训练模型</h3>
 
 <p>  从上文的原理分析我们可以知道，朴素贝叶斯模型的训练过程就是获取概率<code class="highlighter-rouge">p(C)</code>和<code class="highlighter-rouge">p(F|C)</code>的过程。根据<code class="highlighter-rouge">MLlib</code>的源码，我们可以将训练过程分为两步。
 第一步是聚合计算每个标签对应的<code class="highlighter-rouge">term</code>的频率，第二步是迭代计算<code class="highlighter-rouge">p(C)</code>和<code class="highlighter-rouge">p(F|C)</code>。</p>
@@ -443,7 +443,7 @@
 
 <p>  需要注意的是，代码中的所有计算都是取对数计算的。</p>
 
-<h2 id="section-12">4.3 预测数据</h2>
+<h2 id="43-预测数据">4.3 预测数据</h2>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">override</span> <span class="k">def</span> <span class="n">predict</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
     <span class="n">modelType</span> <span class="k">match</span> <span class="o">{</span>
@@ -505,7 +505,7 @@
 
 <p>  这里<code class="highlighter-rouge">math.exp(value)</code>将对数概率恢复成真实的概率。</p>
 
-<h1 id="section-13">参考文献</h1>
+<h1 id="参考文献">参考文献</h1>
 
 <p>【1】<a href="https://zh.wikipedia.org/wiki/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E5%99%A8">朴素贝叶斯分类器</a></p>
 
@@ -539,7 +539,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/12/05/nb"
                         data-title="Spark-ML-0302-Naive Bayes"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/12/05/nb/" >
+                        data-url="http://localhost:4000/mladvance/2016/12/05/nb/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -560,7 +560,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/12/05/nb"
                         data-title="Spark-ML-0302-Naive Bayes"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/12/05/nb/" >
+                        data-url="http://localhost:4000/mladvance/2016/12/05/nb/" >
                     </div>
 
                 </div>

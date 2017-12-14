@@ -17,7 +17,7 @@
 
     <title>Spark-ML-04-collaborative-filtering - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/19/ALS/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2016/11/19/ALS/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,7 +196,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="section">1 推荐算法概述</h3>
+				<h3 id="1-推荐算法概述">1 推荐算法概述</h3>
 <p>需求背景：
 <img src="/images/spark/ml/CollaborativeFiltering/UserItemRating.png" alt="" /></p>
 
@@ -206,7 +206,7 @@
 
 <p>本章节主要介绍CF中ALS算法。</p>
 
-<h3 id="als">2 什么是ALS</h3>
+<h3 id="2-什么是als">2 什么是ALS</h3>
 
 <p><code class="highlighter-rouge">ALS</code>是交替最小二乘（<code class="highlighter-rouge">alternating least squares</code>）的简称。在机器学习中，<code class="highlighter-rouge">ALS</code>特指使用交替最小二乘求解的一个协同推荐算法。它通过观察到的所有用户给商品的打分，通过提取主要因素来对上图中”?”进行打分，进而推断每个用户的喜好并向用户推荐适合的商品。<br />
 <code class="highlighter-rouge">ALS</code>的核心就是这样一个假设：打分矩阵是近似低秩的。换句话说，就是一个<code class="highlighter-rouge">m*n</code>的打分矩阵可以由分解的两个小矩阵<code class="highlighter-rouge">U（m*k）</code>和<code class="highlighter-rouge">V（k*n）</code>的乘积来近似，即<script type="math/tex">A=U{V}^{T},k \le m,n</script>。这就是<code class="highlighter-rouge">ALS</code>的矩阵分解方法。这样我们把系统的自由度从<code class="highlighter-rouge">O(mn)</code>降到了<code class="highlighter-rouge">O((m+n)k)</code>。<br />
@@ -216,12 +216,12 @@
 
 <p>我们把一个协同推荐的问题通过低秩假设成功转变成了一个优化问题。下面要讨论的内容很显然：这个优化问题怎么解？其实答案已经在 ALS 的名字里给出——交替最小二乘。ALS 的目标函数不是凸的，而且变量互相耦合在一起，所以它并不算好解。但如果我们把用户特征矩阵U和产品特征矩阵V固定其一，这个问题立刻变成了一个凸的而且可拆分的问题。比如我们固定U，那么目标函数就可以写成<script type="math/tex">\sum_j\sum_{i,(i,j)\in R}(a_{ij}-u_i^Tv_j)^2</script>。其中关于每个产品特征<script type="math/tex">v_j</script>的部分是独立的，也就是说固定U求<script type="math/tex">v_j</script>，我们只需要最小化<script type="math/tex">\sum_{i,(i,j)\in R}(a_{ij}-u_i^Tv_j)^2</script>就好了，这个问题就是经典的最小二乘问题。所谓“交替”，就是指我们先随机生成<script type="math/tex">U^{(0)}</script>，然后固定它求解<script type="math/tex">V^{(0)}</script>，再固定<script type="math/tex">V^{(0)}</script>求解<script type="math/tex">U^{(1)}</script>，这样交替进行下去。因为每步迭代都会降低重构误差，并且误差是有下界的，所以 ALS 一定会收敛。但由于问题是非凸的，ALS 并不保证会收敛到全局最优解。但在实际应用中，ALS 对初始点不是很敏感，是不是全局最优解造成的影响并不大。</p>
 
-<h3 id="sparkals">3 spark中ALS的实现原理</h3>
+<h3 id="3-spark中als的实现原理">3 spark中ALS的实现原理</h3>
 
 <p><code class="highlighter-rouge">Spark</code>利用交换最小二乘解决矩阵分解问题分两种情况：数据集是显式反馈和数据集是隐式反馈。由于隐式反馈算法的原理是在显示反馈算法原理的基础上作的修改，所以我们在此只会具体讲解数据集为隐式反馈的算法。
 算法实现所依据的文献见参考文献【1】。</p>
 
-<h4 id="section-1">3.1 介绍</h4>
+<h4 id="31-介绍">3.1 介绍</h4>
 
 <p>从广义上讲，推荐系统基于两种不同的策略：基于内容的方法和基于协同过滤的方法。<code class="highlighter-rouge">Spark</code>中使用协同过滤的方式。协同过滤分析用户以及用户相关的产品的相关性，用以识别新的用户-产品相关性。协同过滤系统需要的唯一信息是用户过去的行为信息，比如对产品的评价信息。协同过滤是领域无关的，所以它可以方便解决基于内容方法难以解决的许多问题。</p>
 
@@ -248,7 +248,7 @@
   </li>
 </ul>
 
-<h4 id="section-2">3.2 显式反馈模型</h4>
+<h4 id="32-显式反馈模型">3.2 显式反馈模型</h4>
 
 <p>潜在因素模型由一个针对协同过滤的交替方法组成，它以一个更加全面的方式发现潜在特征来解释观察的<code class="highlighter-rouge">ratings</code>数据。我们关注的模型由奇异值分解（<code class="highlighter-rouge">SVD</code>）推演而来。一个典型的模型将每个用户<code class="highlighter-rouge">u</code>（包含一个用户-因素向量<script type="math/tex">u_i</script>）和每个商品<code class="highlighter-rouge">v</code>（包含一个用户-因素向量<script type="math/tex">v_j</script>）联系起来。
 预测通过内积<script type="math/tex">r_{ij}=u_i^{T}{v}_{j}</script>来实现。另一个需要关注的地方是参数估计。许多当前的工作都应用到了显式反馈数据集中，这些模型仅仅基于观察到的<code class="highlighter-rouge">rating</code>数据直接建模，同时通过一个适当的正则化来避免过拟合。公式如下：</p>
@@ -257,7 +257,7 @@
 
 <p>在上述公式中，<code class="highlighter-rouge">lambda</code>是正则化的参数。正规化是为了防止过拟合的情况发生，具体参见文献【3】。这样，我们用最小化重构误差来解决协同推荐问题。我们也成功将推荐问题转换为了最优化问题。</p>
 
-<h4 id="section-3">3.3 隐式反馈模型</h4>
+<h4 id="33-隐式反馈模型">3.3 隐式反馈模型</h4>
 
 <p>在显式反馈的基础上，我们需要做一些改动得到我们的隐式反馈模型。首先，我们需要形式化由<script type="math/tex">{r}_{ij}</script>变量衡量的信任度的概念。我们引入了一组二元变量<script type="math/tex">{p}_{ij}</script>，它表示用户<code class="highlighter-rouge">u</code>对商品<code class="highlighter-rouge">v</code>的偏好。<script type="math/tex">{p}_{ij}</script>的公式如下：</p>
 
@@ -281,7 +281,7 @@ p_{ij} =
 
 <script type="math/tex; mode=display">min_{u,v}\sum_{i,j}c_{ij}(p_{ij} - u_i^Tv_j)^2 + \lambda(\sum_u\Arrowvert u_i \Arrowvert^2 + \sum_i\Arrowvert v_j \Arrowvert^2)</script>
 
-<h4 id="section-4">3.4 求解最小化损失函数</h4>
+<h4 id="34-求解最小化损失函数">3.4 求解最小化损失函数</h4>
 
 <p>考虑到损失函数包含<code class="highlighter-rouge">m*n</code>个元素，<code class="highlighter-rouge">m</code>是用户的数量，<code class="highlighter-rouge">n</code>是商品的数量。一般情况下，<code class="highlighter-rouge">m*n</code>可以到达几百亿。这么多的元素应该避免使用随机梯度下降法来求解，因此，spark选择使用交替最优化方式求解。</p>
 
@@ -290,7 +290,7 @@ p_{ij} =
 
 <p><img src="/images/spark/ml/CollaborativeFiltering/ALS.2.1.png" alt="" /></p>
 
-<h3 id="alsspark">4 ALS在spark中的实现</h3>
+<h3 id="4-als在spark中的实现">4 ALS在spark中的实现</h3>
 
 <p>在<code class="highlighter-rouge">spark</code>的源代码中，<code class="highlighter-rouge">ALS</code>算法实现于<code class="highlighter-rouge">org.apache.spark.ml.recommendation.ALS.scala</code>文件中。我们以官方文档中的例子为起点，来分析<code class="highlighter-rouge">ALS</code>算法的分布式实现。下面是官方的例子：</p>
 
@@ -700,7 +700,7 @@ p_{ij} =
 
 <p>后面的问题就如何求解最小二乘了。我们会在最优化章节介绍<code class="highlighter-rouge">spark</code>版本的<a href="../最优化算法/非负最小二乘/NNLS.md">NNLS</a>。</p>
 
-<h3 id="section-5">参考文献</h3>
+<h3 id="参考文献">参考文献</h3>
 
 <p><a href="/attach/SVD/Collaborative Filtering for Implicit Feedback Datasets.pdf">【1】 Yifan Hu，Yehuda Koren∗，Chris Volinsky. Collaborative Filtering for Implicit Feedback Datasets</a></p>
 
@@ -736,7 +736,7 @@ p_{ij} =
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/11/19/ALS"
                         data-title="Spark-ML-04-collaborative-filtering"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/ALS/" >
+                        data-url="http://localhost:4000/mladvance/2016/11/19/ALS/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -757,7 +757,7 @@ p_{ij} =
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/11/19/ALS"
                         data-title="Spark-ML-04-collaborative-filtering"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/19/ALS/" >
+                        data-url="http://localhost:4000/mladvance/2016/11/19/ALS/" >
                     </div>
 
                 </div>

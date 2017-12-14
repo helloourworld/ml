@@ -17,7 +17,7 @@
 
     <title>Scala Lesson 16 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/language/2016/09/02/Scala-Lesson16/">
+    <link rel="canonical" href="http://localhost:4000/language/2016/09/02/Scala-Lesson16/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,15 +196,15 @@
 
 				<p>链接：https://segmentfault.com/a/1190000005043288#articleHeader56</p>
 
-<h1 id="databricks-scala-">Databricks Scala 编程风格指南</h1>
+<h1 id="databricks-scala-编程风格指南">Databricks Scala 编程风格指南</h1>
 
-<h2 id="disclaimer">声明 (Disclaimer)</h2>
+<h2 id="声明-disclaimer">声明 (Disclaimer)</h2>
 
 <p>The Chinese version of the <a href="https://github.com/databricks/scala-style-guide">Databricks Scala Guide</a> is contributed and maintained by community member <a href="https://github.com/Hawstein">Hawstein</a>. We do not guarantee that it will always be kept up-to-date.</p>
 
 <p>本文档翻译自 <a href="https://github.com/databricks/scala-style-guide">Databricks Scala Guide</a>，目前由 <a href="https://github.com/Hawstein">Hawstein</a> 进行维护。由于是利用业余时间进行翻译并维护，因此该中文文档并不保证总是与<a href="https://github.com/databricks/scala-style-guide">原文档</a>一样处于最新版本，不过我会尽可能及时地去更新它。</p>
 
-<h2 id="section">前言</h2>
+<h2 id="前言">前言</h2>
 
 <p>Spark 有超过 800 位贡献者，就我们所知，应该是目前大数据领域里最大的开源项目且是最活跃的 Scala 项目。这份指南是在我们指导，或是与 Spark 贡献者及 <a href="http://databricks.com/">Databricks</a> 工程团队一起工作时总结出来的。</p>
 
@@ -212,7 +212,7 @@
 
 <p>Scala 是一种强大到令人难以置信的多范式编程语言。我们总结出了以下指南，它可以很好地应用在一个高速发展的项目。当然，这个指南并非绝对，根据团队需求的不同，可以有不同的标准。</p>
 
-<h2 id="a-nametoca"><a name="TOC">目录</a></h2>
+<h2 id="目录"><a name="TOC">目录</a></h2>
 
 <ol>
   <li><a href="#history">文档历史</a></li>
@@ -271,7 +271,7 @@
     - <a href="#misc_uri_url">优先使用 URI 而非 URL</a></li>
 </ol>
 
-<h2 id="a-namehistorya"><a name="history">文档历史</a></h2>
+<h2 id="文档历史"><a name="history">文档历史</a></h2>
 <ul>
   <li>2015-03-16: 最初版本。</li>
   <li>2015-05-25: 增加 <a href="#override_modifier">override 修饰符</a> 一节。</li>
@@ -282,9 +282,9 @@
   <li>2016-06-15: 增加 <a href="#anonymous">匿名方法</a> 一节。</li>
 </ul>
 
-<h2 id="a-namesyntactica"><a name="syntactic">语法风格</a></h2>
+<h2 id="语法风格"><a name="syntactic">语法风格</a></h2>
 
-<h3 id="a-namenaminga"><a name="naming">命名约定</a></h3>
+<h3 id="命名约定"><a name="naming">命名约定</a></h3>
 
 <p>我们主要遵循 Java 和 Scala 的标准命名约定。</p>
 
@@ -329,14 +329,14 @@
   </li>
 </ul>
 
-<h3 id="a-namelinelengtha"><a name="linelength">一行长度</a></h3>
+<h3 id="一行长度"><a name="linelength">一行长度</a></h3>
 
 <ul>
   <li>一行长度的上限是 100 个字符。</li>
   <li>唯一的例外是 import 语句和 URL (即便如此，也尽量将它们保持在 100 个字符以下)。</li>
 </ul>
 
-<h3 id="a-nameruleof3030-a"><a name="rule_of_30">30 法则</a></h3>
+<h3 id="30-法则"><a name="rule_of_30">30 法则</a></h3>
 
 <p>「如果一个元素包含的子元素超过 30 个，那么极有可能出现了严重的问题」 - <a href="http://www.amazon.com/Refactoring-Large-Software-Projects-Restructurings/dp/0470858923">Refactoring in Large Software Projects</a>。</p>
 
@@ -347,7 +347,7 @@
   <li>一个类包含的方法数量不宜超过 30 个。</li>
 </ul>
 
-<h3 id="a-nameindenta"><a name="indent">空格与缩进</a></h3>
+<h3 id="空格与缩进"><a name="indent">空格与缩进</a></h3>
 
 <ul>
   <li>
@@ -415,7 +415,7 @@
   </li>
 </ul>
 
-<h3 id="a-nameblanklinesa"><a name="blanklines">空行</a></h3>
+<h3 id="空行"><a name="blanklines">空行</a></h3>
 
 <ul>
   <li>一个空行可以出现在：
@@ -433,7 +433,7 @@
   <li>不鼓励使用过多的空行。</li>
 </ul>
 
-<h3 id="a-nameparenthesesa"><a name="parentheses">括号</a></h3>
+<h3 id="括号"><a name="parentheses">括号</a></h3>
 
 <ul>
   <li>
@@ -467,7 +467,7 @@
   </li>
 </ul>
 
-<h3 id="a-namecurlya"><a name="curly">大括号</a></h3>
+<h3 id="大括号"><a name="curly">大括号</a></h3>
 
 <p>即使条件语句或循环语句只有一行时，也请使用大括号。唯一的例外是，当你把 if/else 作为一个单行的三元操作符来使用并且没有副作用时，这时你可以不加大括号。</p>
 
@@ -497,7 +497,7 @@
 </code></pre>
 </div>
 
-<h3 id="a-namelongliterala"><a name="long_literal">长整型字面量</a></h3>
+<h3 id="长整型字面量"><a name="long_literal">长整型字面量</a></h3>
 
 <p>长整型字面量使用大写的 <code class="highlighter-rouge">L</code> 作为后缀，不要使用小写，因为它和数字 <code class="highlighter-rouge">1</code> 长得很像，常常难以区分。</p>
 
@@ -507,7 +507,7 @@
 </span></code></pre>
 </div>
 
-<h3 id="a-namedoca"><a name="doc">文档风格</a></h3>
+<h3 id="文档风格"><a name="doc">文档风格</a></h3>
 
 <p>使用 Java Doc 风格，而非 Scala Doc 风格。</p>
 
@@ -525,7 +525,7 @@
 </code></pre>
 </div>
 
-<h3 id="a-nameorderingclassa"><a name="ordering_class">类内秩序</a></h3>
+<h3 id="类内秩序"><a name="ordering_class">类内秩序</a></h3>
 
 <p>如果一个类很长，包含许多的方法，那么在逻辑上把它们分成不同的部分并加上注释头，以此组织它们。</p>
 
@@ -548,7 +548,7 @@
 
 <p>当然，强烈不建议把一个类写得这么长，一般只有在构建某些公共 API 时才允许这么做。</p>
 
-<h3 id="a-nameimportsimportsa"><a name="imports">Imports</a></h3>
+<h3 id="imports"><a name="imports">Imports</a></h3>
 
 <ul>
   <li><strong>导入时避免使用通配符</strong>, 除非你需要导入超过 6 个实体或者隐式方法。通配符导入会使代码在面对外部变化时不够健壮。</li>
@@ -578,7 +578,7 @@ com.databricks  // or org.apache.spark if you are working on spark
   </li>
 </ul>
 
-<h3 id="a-namepattern-matchinga"><a name="pattern-matching">模式匹配</a></h3>
+<h3 id="模式匹配"><a name="pattern-matching">模式匹配</a></h3>
 
 <ul>
   <li>
@@ -609,7 +609,7 @@ com.databricks  // or org.apache.spark if you are working on spark
   </li>
 </ul>
 
-<h3 id="a-nameinfixa"><a name="infix">中缀方法</a></h3>
+<h3 id="中缀方法"><a name="infix">中缀方法</a></h3>
 
 <p><strong>避免中缀表示法</strong>，除非是符号方法（即运算符重载）。</p>
 
@@ -626,7 +626,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h3 id="a-nameanonymousa"><a name="anonymous">匿名方法</a></h3>
+<h3 id="匿名方法"><a name="anonymous">匿名方法</a></h3>
 
 <p>对于匿名方法，<strong>避免使用过多的小括号和花括号</strong>。</p>
 
@@ -653,9 +653,9 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h2 id="a-namelangscala-a"><a name="lang">Scala 语言特性</a></h2>
+<h2 id="scala-语言特性"><a name="lang">Scala 语言特性</a></h2>
 
-<h3 id="a-nameapplymethodapply-a"><a name="apply_method">apply 方法</a></h3>
+<h3 id="apply-方法"><a name="apply_method">apply 方法</a></h3>
 
 <p>避免在类里定义 apply 方法。这些方法往往会使代码的可读性变差，尤其是对于不熟悉 Scala 的人。它也难以被 IDE（或 grep）所跟踪。在最坏的情况下，它还可能影响代码的正确性，正如你在<a href="#parentheses">括号</a>一节中看到的。</p>
 
@@ -671,7 +671,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h3 id="a-nameoverridemodifieroverride-a"><a name="override_modifier">override 修饰符</a></h3>
+<h3 id="override-修饰符"><a name="override_modifier">override 修饰符</a></h3>
 
 <p>无论是覆盖具体的方法还是实现抽象的方法，始终都为方法加上 override 修饰符。实现抽象方法时，不加 override 修饰符，Scala 编译器也不会报错。即便如此，我们也应该始终把 override 修饰符加上，以此显式地表示覆盖行为。以此避免由于方法签名不同（而你也难以发现）而导致没有覆盖到本应覆盖的方法。</p>
 
@@ -694,7 +694,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h3 id="a-namedestructbinda"><a name="destruct_bind">解构绑定</a></h3>
+<h3 id="解构绑定"><a name="destruct_bind">解构绑定</a></h3>
 
 <p>解构绑定（有时也叫元组提取）是一种在一个表达式中为两个变量赋值的便捷方式。</p>
 
@@ -711,7 +711,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h3 id="a-namecallbynamea"><a name="call_by_name">按名称传参</a></h3>
+<h3 id="按名称传参"><a name="call_by_name">按名称传参</a></h3>
 
 <p><strong>避免使用按名传参</strong>. 显式地使用 <code class="highlighter-rouge">() =&gt; T</code> 。</p>
 
@@ -734,7 +734,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 
 <p>在上面的代码中，<code class="highlighter-rouge">inc()</code> 以闭包的形式传递给 <code class="highlighter-rouge">print</code> 函数，并且在 <code class="highlighter-rouge">print</code> 函数中被执行了两次，而不是以数值 <code class="highlighter-rouge">1</code> 传入。按名传参的一个主要问题是在方法调用处，我们无法区分是按名传参还是按值传参。因此无法确切地知道这个表达式是否会被执行（更糟糕的是它可能会被执行多次）。对于带有副作用的表达式来说，这一点是非常危险的。</p>
 
-<h3 id="a-namemulti-param-lista"><a name="multi-param-list">多参数列表</a></h3>
+<h3 id="多参数列表"><a name="multi-param-list">多参数列表</a></h3>
 
 <p><strong>避免使用多参数列表</strong>。它们使运算符重载变得复杂，并且会使不熟悉 Scala 的程序员感到困惑。例如：</p>
 
@@ -745,7 +745,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 
 <p>一个值得注意的例外是，当在定义底层库时，可以使用第二个参数列表来存放隐式（implicit）参数。尽管如此，<a href="#implicits">我们应该避免使用 implicits</a>！</p>
 
-<h3 id="a-namesymbolicmethodsa"><a name="symbolic_methods">符号方法（运算符重载）</a></h3>
+<h3 id="符号方法运算符重载"><a name="symbolic_methods">符号方法（运算符重载）</a></h3>
 
 <p><strong>不要使用符号作为方法名</strong>，除非你是在定义算术运算的方法（如：<code class="highlighter-rouge">+</code>, <code class="highlighter-rouge">-</code>, <code class="highlighter-rouge">*</code>, <code class="highlighter-rouge">/</code>），否则在任何其它情况下，都不要使用。符号化的方法名让人难以理解方法的意图是什么，来看下面两个例子：</p>
 
@@ -759,7 +759,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h3 id="a-nametypeinferencea"><a name="type_inference">类型推导</a></h3>
+<h3 id="类型推导"><a name="type_inference">类型推导</a></h3>
 
 <p>Scala 的类型推导，尤其是左侧类型推导以及闭包推导，可以使代码变得更加简洁。尽管如此，也有一些情况我们是需要显式地声明类型的：</p>
 
@@ -769,19 +769,19 @@ com.databricks  // or org.apache.spark if you are working on spark
   <li><strong>如果变量或闭包的类型并非显而易见，请显式声明类型</strong>。一个不错的判断准则是，如果评审代码的人无法在 3 秒内确定相应实体的类型，那么你就应该显式地声明类型。</li>
 </ul>
 
-<h3 id="a-namereturnreturn-a"><a name="return">Return 语句</a></h3>
+<h3 id="return-语句"><a name="return">Return 语句</a></h3>
 
 <p><strong>闭包中避免使用 return</strong>。<code class="highlighter-rouge">return</code> 会被编译器转成 <code class="highlighter-rouge">scala.runtime.NonLocalReturnControl</code> 异常的 <code class="highlighter-rouge">try/catch</code> 语句，这可能会导致意外行为。请看下面的例子：</p>
 
-<p><code class="highlighter-rouge">scala
-  def receive(rpc: WebSocketRPC): Option[Response] = {
-    tableFut.onComplete { table =&gt;
-      if (table.isFailure) {
-        return None // Do not do that!
-      } else { ... }
-    }
-  }
- </code></p>
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code>  <span class="k">def</span> <span class="n">receive</span><span class="o">(</span><span class="n">rpc</span><span class="k">:</span> <span class="kt">WebSocketRPC</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Response</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="n">tableFut</span><span class="o">.</span><span class="n">onComplete</span> <span class="o">{</span> <span class="n">table</span> <span class="k">=&gt;</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">table</span><span class="o">.</span><span class="n">isFailure</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">None</span> <span class="c1">// Do not do that!
+</span>      <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
 
 <p><code class="highlighter-rouge">.onComplete</code> 方法接收一个匿名闭包并把它传递到一个不同的线程中。这个闭包最终会抛出一个 <code class="highlighter-rouge">NonLocalReturnControl</code> 异常，并在 __一个不同的线程中__被捕获，而这里执行的方法却没有任何影响。</p>
 
@@ -813,7 +813,7 @@ com.databricks  // or org.apache.spark if you are working on spark
   </li>
 </ul>
 
-<h3 id="a-namerecursiona"><a name="recursion">递归及尾递归</a></h3>
+<h3 id="递归及尾递归"><a name="recursion">递归及尾递归</a></h3>
 
 <p><strong>避免使用递归</strong>，除非问题可以非常自然地用递归来描述（比如，图和树的遍历）。</p>
 
@@ -847,7 +847,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h3 id="a-nameimplicitsimplicitsa"><a name="implicits">Implicits</a></h3>
+<h3 id="implicits"><a name="implicits">Implicits</a></h3>
 
 <p><strong>避免使用 implicit</strong>，除非：</p>
 
@@ -875,7 +875,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h2 id="a-nameexceptiontry--trya"><a name="exception">异常处理，Try 还是 try</a></h2>
+<h2 id="异常处理try-还是-try"><a name="exception">异常处理，Try 还是 try</a></h2>
 
 <ul>
   <li>
@@ -923,7 +923,7 @@ com.databricks  // or org.apache.spark if you are working on spark
   </li>
 </ul>
 
-<h3 id="a-nameoptionoptionsa"><a name="option">Options</a></h3>
+<h3 id="options"><a name="option">Options</a></h3>
 
 <ul>
   <li>如果一个值可能为空，那么请使用 <code class="highlighter-rouge">Option</code>。相对于 <code class="highlighter-rouge">null</code>，<code class="highlighter-rouge">Option</code> 显式地表明了一个 API 的返回值可能为空。</li>
@@ -942,7 +942,7 @@ com.databricks  // or org.apache.spark if you are working on spark
   <li>不要在一个 <code class="highlighter-rouge">Option</code> 值上直接调用 <code class="highlighter-rouge">get</code> 方法，除非你百分百确定那个 <code class="highlighter-rouge">Option</code> 值不是 <code class="highlighter-rouge">None</code>。</li>
 </ul>
 
-<h3 id="a-namechaininga"><a name="chaining">单子链接</a></h3>
+<h3 id="单子链接"><a name="chaining">单子链接</a></h3>
 
 <p>单子链接是 Scala 的一个强大特性。Scala 中几乎一切都是单子（如：集合，Option，Future，Try 等），对它们的操作可以链接在一起。这是一个非常强大的概念，但你应该谨慎使用，尤其是：</p>
 
@@ -982,13 +982,13 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h2 id="a-nameconcurrencya"><a name="concurrency">并发</a></h2>
+<h2 id="并发"><a name="concurrency">并发</a></h2>
 
-<h3 id="a-nameconcurrency-scala-collectionscala-concurrentmapa"><a name="concurrency-scala-collection">Scala concurrent.Map</a></h3>
+<h3 id="scala-concurrentmap"><a name="concurrency-scala-collection">Scala concurrent.Map</a></h3>
 
 <p><strong>优先考虑使用 <code class="highlighter-rouge">java.util.concurrent.ConcurrentHashMap</code> 而非 <code class="highlighter-rouge">scala.collection.concurrent.Map</code></strong>。尤其是 <code class="highlighter-rouge">scala.collection.concurrent.Map</code> 中的 <code class="highlighter-rouge">getOrElseUpdate</code> 方法要慎用，它并非原子操作（这个问题在 Scala 2.11.16 中 fix 了：<a href="https://issues.scala-lang.org/browse/SI-7943">SI-7943</a>）。由于我们做的所有项目都需要在 Scala 2.10 和 Scala 2.11 上使用，因此要避免使用 <code class="highlighter-rouge">scala.collection.concurrent.Map</code>。</p>
 
-<h3 id="a-nameconcurrency-sync-vs-map-vs-a"><a name="concurrency-sync-vs-map">显式同步 vs 并发集合</a></h3>
+<h3 id="显式同步-vs-并发集合"><a name="concurrency-sync-vs-map">显式同步 vs 并发集合</a></h3>
 
 <p>有 3 种推荐的方法来安全地并发访问共享状态。<strong>不要混用它们</strong>，因为这会使程序变得难以推理，并且可能导致死锁。</p>
 
@@ -1026,17 +1026,17 @@ com.databricks  // or org.apache.spark if you are working on spark
 
 <p>注意，对于 case 1 和 case 2，不要让集合的视图或迭代器从保护区域逃逸。这可能会以一种不明显的方式发生，比如：返回了 <code class="highlighter-rouge">Map.keySet</code> 或 <code class="highlighter-rouge">Map.values</code>。如果需要传递集合的视图或值，生成一份数据拷贝再传递。</p>
 
-<p>```scala
-  val map = java.util.Collections.synchronizedMap(new java.util.HashMap[String, String])</p>
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code>  <span class="k">val</span> <span class="n">map</span> <span class="k">=</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="nc">Collections</span><span class="o">.</span><span class="n">synchronizedMap</span><span class="o">(</span><span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="nc">HashMap</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">])</span>
 
-<p>// This is broken!
-  def values: Iterable[String] = map.values</p>
+  <span class="c1">// This is broken!
+</span>  <span class="k">def</span> <span class="n">values</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">map</span><span class="o">.</span><span class="n">values</span>
 
-<p>// Instead, copy the elements
-  def values: Iterable[String] = map.synchronized { Seq(map.values: _*) }
-  ```</p>
+  <span class="c1">// Instead, copy the elements
+</span>  <span class="k">def</span> <span class="n">values</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">map</span><span class="o">.</span><span class="n">synchronized</span> <span class="o">{</span> <span class="nc">Seq</span><span class="o">(</span><span class="n">map</span><span class="o">.</span><span class="n">values</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">)</span> <span class="o">}</span>
+</code></pre>
+</div>
 
-<h3 id="a-nameconcurrency-sync-vs-atomic-vs--vs-volatilea"><a name="concurrency-sync-vs-atomic">显式同步 vs 原子变量 vs @volatile</a></h3>
+<h3 id="显式同步-vs-原子变量-vs-volatile"><a name="concurrency-sync-vs-atomic">显式同步 vs 原子变量 vs @volatile</a></h3>
 
 <p><code class="highlighter-rouge">java.util.concurrent.atomic</code> 包提供了对基本类型的无锁访问，比如：<code class="highlighter-rouge">AtomicBoolean</code>, <code class="highlighter-rouge">AtomicInteger</code> 和 <code class="highlighter-rouge">AtomicReference</code>。</p>
 
@@ -1044,28 +1044,28 @@ com.databricks  // or org.apache.spark if you are working on spark
 
 <p>优先考虑使用原子变量而非显式同步的情况：（1）一个对象的所有临界区更新都被限制在单个变量里并且预期会有竞争情况出现。原子变量是无锁的并且允许更为有效的竞争。（2）同步被明确地表示为 <code class="highlighter-rouge">getAndSet</code> 操作。例如：</p>
 
-<p>```scala
-  // good: 明确又有效地表达了下面的并发代码只执行一次
-  val initialized = new AtomicBoolean(false)
-  …
-  if (!initialized.getAndSet(true)) {
-    …
-  }</p>
+<div class="language-scala highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// good: 明确又有效地表达了下面的并发代码只执行一次
+</span>  <span class="k">val</span> <span class="n">initialized</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">AtomicBoolean</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
+  <span class="o">...</span>
+  <span class="k">if</span> <span class="o">(!</span><span class="n">initialized</span><span class="o">.</span><span class="n">getAndSet</span><span class="o">(</span><span class="kc">true</span><span class="o">))</span> <span class="o">{</span>
+    <span class="o">...</span>
+  <span class="o">}</span>
 
-<p>// poor: 下面的同步就没那么明晰，而且会出现不必要的同步
-  val initialized = false
-  …
-  var wasInitialized = false
-  synchronized {
-    wasInitialized = initialized
-    initialized = true
-  }
-  if (!wasInitialized) {
-    …
-  }
-  ```</p>
+  <span class="c1">// poor: 下面的同步就没那么明晰，而且会出现不必要的同步
+</span>  <span class="k">val</span> <span class="n">initialized</span> <span class="k">=</span> <span class="kc">false</span>
+  <span class="o">...</span>
+  <span class="k">var</span> <span class="n">wasInitialized</span> <span class="k">=</span> <span class="kc">false</span>
+  <span class="n">synchronized</span> <span class="o">{</span>
+    <span class="n">wasInitialized</span> <span class="k">=</span> <span class="n">initialized</span>
+    <span class="n">initialized</span> <span class="k">=</span> <span class="kc">true</span>
+  <span class="o">}</span>
+  <span class="k">if</span> <span class="o">(!</span><span class="n">wasInitialized</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">...</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
 
-<h3 id="a-nameconcurrency-private-thisa"><a name="concurrency-private-this">私有字段</a></h3>
+<h3 id="私有字段"><a name="concurrency-private-this">私有字段</a></h3>
 
 <p>注意，<code class="highlighter-rouge">private</code> 字段仍然可以被相同类的其它实例所访问，所以仅仅通过 <code class="highlighter-rouge">this.synchronized</code>（或 <code class="highlighter-rouge">synchronized</code>）来保护它从技术上来说是不够的，不过你可以通过 <code class="highlighter-rouge">private[this]</code> 修饰私有字段来达到目的。</p>
 
@@ -1083,7 +1083,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h3 id="a-nameconcurrency-isolationa"><a name="concurrency-isolation">隔离</a></h3>
+<h3 id="隔离"><a name="concurrency-isolation">隔离</a></h3>
 
 <p>一般来说，并发和同步逻辑应该尽可能地被隔离和包含起来。这实际上意味着：</p>
 
@@ -1092,17 +1092,17 @@ com.databricks  // or org.apache.spark if you are working on spark
   <li>对于复杂模块，创建一个小的内部模块来包含并发原语。</li>
 </ul>
 
-<h2 id="a-nameperfa"><a name="perf">性能</a></h2>
+<h2 id="性能"><a name="perf">性能</a></h2>
 
 <p>对于你写的绝大多数代码，性能都不应该成为一个问题。然而，对于一些性能敏感的代码，以下有一些小建议：</p>
 
-<h3 id="a-nameperf-microbenchmarksmicrobenchmarksa"><a name="perf-microbenchmarks">Microbenchmarks</a></h3>
+<h3 id="microbenchmarks"><a name="perf-microbenchmarks">Microbenchmarks</a></h3>
 
 <p>由于 Scala 编译器和 JVM JIT 编译器会对你的代码做许多神奇的事情，因此要写出一个好的微基准程序（microbenchmark）是极其困难的。更多的情况往往是你的微基准程序并没有测量你想要测量的东西。</p>
 
 <p>如果你要写一个微基准程序，请使用 <a href="http://openjdk.java.net/projects/code-tools/jmh/">jmh</a>。请确保你阅读了<a href="http://hg.openjdk.java.net/code-tools/jmh/file/tip/jmh-samples/src/main/java/org/openjdk/jmh/samples/">所有的样例</a>，这样你才理解微基准程序中「死代码」移除、常量折叠以及循环展开的效果。</p>
 
-<h3 id="a-nameperf-whileloopstraversal--zipwithindexa"><a name="perf-whileloops">Traversal 与 zipWithIndex</a></h3>
+<h3 id="traversal-与-zipwithindex"><a name="perf-whileloops">Traversal 与 zipWithIndex</a></h3>
 
 <p>使用 <code class="highlighter-rouge">while</code> 循环而非 <code class="highlighter-rouge">for</code> 循环或函数变换（如：<code class="highlighter-rouge">map</code>、<code class="highlighter-rouge">foreach</code>），for 循环和函数变换非常慢（由于虚函数调用和装箱的缘故）。</p>
 
@@ -1124,7 +1124,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h3 id="a-nameperf-optionoption--nulla"><a name="perf-option">Option 与 null</a></h3>
+<h3 id="option-与-null"><a name="perf-option">Option 与 null</a></h3>
 
 <p>对于性能有要求的代码，优先考虑使用 <code class="highlighter-rouge">null</code> 而不是 <code class="highlighter-rouge">Option</code>，以此避免虚函数调用以及装箱操作。用 Nullable 注解明确标示出可能为 <code class="highlighter-rouge">null</code> 的值。</p>
 
@@ -1135,11 +1135,11 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h3 id="a-nameperf-collectionscala-a"><a name="perf-collection">Scala 集合库</a></h3>
+<h3 id="scala-集合库"><a name="perf-collection">Scala 集合库</a></h3>
 
 <p>对于性能有要求的代码，优先考虑使用 Java 集合库而非 Scala 集合库，因为一般来说，Scala 集合库要比 Java 的集合库慢。</p>
 
-<h3 id="a-nameperf-privateprivatethisa"><a name="perf-private">private[this]</a></h3>
+<h3 id="privatethis"><a name="perf-private">private[this]</a></h3>
 
 <p>对于性能有要求的代码，优先考虑使用 <code class="highlighter-rouge">private[this]</code> 而非 <code class="highlighter-rouge">private</code>。<code class="highlighter-rouge">private[this]</code> 生成一个字段而非生成一个访问方法。根据我们的经验，JVM JIT 编译器并不总是会内联 <code class="highlighter-rouge">private</code> 字段的访问方法，因此通过使用
 <code class="highlighter-rouge">private[this]</code> 来确保没有虚函数调用会更保险。</p>
@@ -1160,11 +1160,11 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h2 id="a-namejava-java-a"><a name="java">与 Java 的互操作性</a></h2>
+<h2 id="与-java-的互操作性"><a name="java">与 Java 的互操作性</a></h2>
 
 <p>本节内容介绍的是构建 Java 兼容 API 的准则。如果你构建的组件并不需要与 Java 有交互，那么请无视这一节。这一节的内容主要是从我们开发 Spark 的 Java API 的经历中得出的。</p>
 
-<h3 id="a-namejava-missing-featuresscala--java-a"><a name="java-missing-features">Scala 中缺失的 Java 特性</a></h3>
+<h3 id="scala-中缺失的-java-特性"><a name="java-missing-features">Scala 中缺失的 Java 特性</a></h3>
 
 <p>以下的 Java 特性在 Scala 中是没有的，如果你需要使用以下特性，请在 Java 中定义它们。然而，需要提醒一点的是，你无法为 Java 源文件生成 ScalaDoc。</p>
 
@@ -1175,7 +1175,7 @@ com.databricks  // or org.apache.spark if you are working on spark
   <li>注解</li>
 </ul>
 
-<h3 id="a-namejava-traitstraits-a"><a name="java-traits">Traits 与抽象类</a></h3>
+<h3 id="traits-与抽象类"><a name="java-traits">Traits 与抽象类</a></h3>
 
 <p>对于允许从外部实现的接口，请记住以下几点：</p>
 
@@ -1196,11 +1196,11 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h3 id="a-namejava-type-aliasa"><a name="java-type-alias">类型别名</a></h3>
+<h3 id="类型别名"><a name="java-type-alias">类型别名</a></h3>
 
 <p>不要使用类型别名，它们在字节码和 Java 中是不可见的。</p>
 
-<h3 id="a-namejava-default-param-valuesa"><a name="java-default-param-values">默认参数值</a></h3>
+<h3 id="默认参数值"><a name="java-default-param-values">默认参数值</a></h3>
 
 <p>不要使用默认参数值，通过重载方法来代替。</p>
 
@@ -1213,11 +1213,11 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h3 id="a-namejava-multi-param-lista"><a name="java-multi-param-list">多参数列表</a></h3>
+<h3 id="多参数列表-1"><a name="java-multi-param-list">多参数列表</a></h3>
 
 <p>不要使用多参数列表。</p>
 
-<h3 id="a-namejava-varargsa"><a name="java-varargs">可变参数</a></h3>
+<h3 id="可变参数"><a name="java-varargs">可变参数</a></h3>
 
 <ul>
   <li>
@@ -1262,7 +1262,7 @@ com.databricks  // or org.apache.spark if you are working on spark
   </li>
 </ul>
 
-<h3 id="a-namejava-implicitsimplicitsa"><a name="java-implicits">Implicits</a></h3>
+<h3 id="implicits-1"><a name="java-implicits">Implicits</a></h3>
 
 <p>不要为类或方法使用 implicit，包括了不要使用 <code class="highlighter-rouge">ClassTag</code> 和 <code class="highlighter-rouge">TypeTag</code>。</p>
 
@@ -1273,7 +1273,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 </code></pre>
 </div>
 
-<h3 id="a-namejava-companion-objecta"><a name="java-companion-object">伴生对象，静态方法与字段</a></h3>
+<h3 id="伴生对象静态方法与字段"><a name="java-companion-object">伴生对象，静态方法与字段</a></h3>
 
 <p>当涉及到伴生对象和静态方法/字段时，有几件事情是需要注意的：</p>
 
@@ -1334,9 +1334,9 @@ com.databricks  // or org.apache.spark if you are working on spark
   </li>
 </ul>
 
-<h2 id="a-namemisca"><a name="misc">其它</a></h2>
+<h2 id="其它"><a name="misc">其它</a></h2>
 
-<h3 id="a-namemisccurrenttimemillisvsnanotime-nanotime--currenttimemillisa"><a name="misc_currentTimeMillis_vs_nanoTime">优先使用 nanoTime 而非 currentTimeMillis</a></h3>
+<h3 id="优先使用-nanotime-而非-currenttimemillis"><a name="misc_currentTimeMillis_vs_nanoTime">优先使用 nanoTime 而非 currentTimeMillis</a></h3>
 
 <p>当要计算<em>持续时间</em>或者检查<em>超时</em>的时候，避免使用 <code class="highlighter-rouge">System.currentTimeMillis()</code>。请使用 <code class="highlighter-rouge">System.nanoTime()</code>，即使你对亚毫秒级的精度并不感兴趣。</p>
 
@@ -1350,7 +1350,7 @@ com.databricks  // or org.apache.spark if you are working on spark
   <li><code class="highlighter-rouge">nanoTime()</code> 每 292 年就会重新计算起。所以，如果你的 Spark 任务需要花非常非常非常长的时间，你可能需要别的东西来处理了：）</li>
 </ul>
 
-<h3 id="a-namemiscuriurl-uri--urla"><a name="misc_uri_url">优先使用 URI 而非 URL</a></h3>
+<h3 id="优先使用-uri-而非-url"><a name="misc_uri_url">优先使用 URI 而非 URL</a></h3>
 
 <p>当存储服务的 URL 时，你应当使用 <code class="highlighter-rouge">URI</code> 来表示。</p>
 
@@ -1384,7 +1384,7 @@ com.databricks  // or org.apache.spark if you are working on spark
                     <div class="ds-thread"
                         data-thread-key="/language/2016/09/02/Scala-Lesson16"
                         data-title="Scala Lesson 16"
-                        data-url="http://machinelearningadvance.com/language/2016/09/02/Scala-Lesson16/" >
+                        data-url="http://localhost:4000/language/2016/09/02/Scala-Lesson16/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -1405,7 +1405,7 @@ com.databricks  // or org.apache.spark if you are working on spark
                     <div class="ds-thread"
                         data-thread-key="/language/2016/09/02/Scala-Lesson16"
                         data-title="Scala Lesson 16"
-                        data-url="http://machinelearningadvance.com/language/2016/09/02/Scala-Lesson16/" >
+                        data-url="http://localhost:4000/language/2016/09/02/Scala-Lesson16/" >
                     </div>
 
                 </div>

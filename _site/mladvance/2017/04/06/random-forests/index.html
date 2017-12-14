@@ -17,7 +17,7 @@
 
     <title>Spark-ML-0304-Ensembles-RF - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2017/04/06/random-forests/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2017/04/06/random-forests/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,9 +196,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="section">随机森林</h1>
+				<h1 id="随机森林">随机森林</h1>
 
-<h2 id="bagging">1 Bagging</h2>
+<h2 id="1-bagging">1 Bagging</h2>
 
 <p>  <code class="highlighter-rouge">Bagging</code>采用自助采样法(<code class="highlighter-rouge">bootstrap sampling</code>)采样数据。给定包含<code class="highlighter-rouge">m</code>个样本的数据集，我们先随机取出一个样本放入采样集中，再把该样本放回初始数据集，使得下次采样时，样本仍可能被选中，
 这样，经过<code class="highlighter-rouge">m</code>次随机采样操作，我们得到包含<code class="highlighter-rouge">m</code>个样本的采样集。</p>
@@ -210,7 +210,7 @@
 
 <div align="center"><img src="/images/spark/ml/RF/1.1.png" width="400" height="220" alt="1.1" align="center" /></div>
 
-<h2 id="section-1">2 随机森林</h2>
+<h2 id="2-随机森林">2 随机森林</h2>
 
 <p>  随机森林是<code class="highlighter-rouge">Bagging</code>的一个扩展变体。随机森林在以决策树为基学习器构建<code class="highlighter-rouge">Bagging</code>集成的基础上，进一步在决策树的训练过程中引入了随机属性选择。具体来讲，传统决策树在选择划分属性时，
 在当前节点的属性集合（假设有<code class="highlighter-rouge">d</code>个属性）中选择一个最优属性；而在随机森林中，对基决策树的每个节点，先从该节点的属性集合中随机选择一个包含<code class="highlighter-rouge">k</code>个属性的子集，然后再从这个子集中选择一个最优属性用于划分。
@@ -220,7 +220,7 @@
 <p>  可以看出，随机森林对<code class="highlighter-rouge">Bagging</code>只做了小改动，但是与<code class="highlighter-rouge">Bagging</code>中基学习器的“多样性”仅仅通过样本扰动（通过对初始训练集采样）而来不同，随机森林中基学习器的多样性不仅来自样本扰动，还来自属性扰动。
 这使得最终集成的泛化性能可通过个体学习器之间差异度的增加而进一步提升。</p>
 
-<h2 id="section-2">3 随机森林在分布式环境下的优化策略</h2>
+<h2 id="3-随机森林在分布式环境下的优化策略">3 随机森林在分布式环境下的优化策略</h2>
 
 <p>  随机森林算法在单机环境下很容易实现，但在分布式环境下特别是在<code class="highlighter-rouge">Spark</code>平台上，传统单机形式的迭代方式必须要进行相应改进才能适用于分布式环境
 ，这是因为在分布式环境下，数据也是分布式的，算法设计不得当会生成大量的<code class="highlighter-rouge">IO</code>操作，例如频繁的网络数据传输，从而影响算法效率。
@@ -250,7 +250,7 @@
 
 <div align="center"><img src="/images/spark/ml/RF/1.4.png" width="600" height="350" alt="1.4" align="center" /></div>
 
-<h2 id="section-3">4 使用实例</h2>
+<h2 id="4-使用实例">4 使用实例</h2>
 
 <p>  下面的例子用于分类。</p>
 
@@ -316,13 +316,13 @@
 </code></pre>
 </div>
 
-<h2 id="section-4">5 源码分析</h2>
+<h2 id="5-源码分析">5 源码分析</h2>
 
-<h3 id="section-5">5.1 训练分析</h3>
+<h3 id="51-训练分析">5.1 训练分析</h3>
 
 <p>  训练过程简单可以分为两步，第一步是初始化，第二步是迭代构建随机森林。这两大步还分为若干小步，下面会分别介绍这些内容。</p>
 
-<h4 id="section-6">5.1.1 初始化</h4>
+<h4 id="511-初始化">5.1.1 初始化</h4>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">retaggedInput</span> <span class="k">=</span> <span class="n">input</span><span class="o">.</span><span class="n">retag</span><span class="o">(</span><span class="n">classOf</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span>
 <span class="c1">//建立决策树的元数据信息（分裂点位置、箱子数及各箱子包含特征属性的值等）
@@ -654,7 +654,7 @@
 </code></pre>
 </div>
 
-<h4 id="section-7">5.1.2 迭代构建随机森林</h4>
+<h4 id="512-迭代构建随机森林">5.1.2 迭代构建随机森林</h4>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//节点是否使用缓存，节点 ID 从 1 开始，1 即为这颗树的根节点，左节点为 2，右节点为 3，依次递增下去
 </span><span class="k">val</span> <span class="n">nodeIdCache</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">strategy</span><span class="o">.</span><span class="n">useNodeIdCache</span><span class="o">)</span> <span class="o">{</span>
@@ -957,7 +957,7 @@
 </code></pre>
 </div>
 
-<h3 id="section-8">5.2 预测分析</h3>
+<h3 id="52-预测分析">5.2 预测分析</h3>
 
 <p>  在利用随机森林进行预测时，调用的<code class="highlighter-rouge">predict</code>方法扩展自<code class="highlighter-rouge">TreeEnsembleModel</code>，它是树结构组合模型的表示，其核心代码如下所示：</p>
 
@@ -995,7 +995,7 @@
 </code></pre>
 </div>
 
-<h1 id="section-9">参考文献</h1>
+<h1 id="参考文献">参考文献</h1>
 
 <p>【1】机器学习.周志华</p>
 
@@ -1029,7 +1029,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/random-forests"
                         data-title="Spark-ML-0304-Ensembles-RF"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/random-forests/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/random-forests/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -1050,7 +1050,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/random-forests"
                         data-title="Spark-ML-0304-Ensembles-RF"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/random-forests/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/random-forests/" >
                     </div>
 
                 </div>

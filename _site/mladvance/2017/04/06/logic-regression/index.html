@@ -17,7 +17,7 @@
 
     <title>Spark-ML-030102-Linear Model-LR - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2017/04/06/logic-regression/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2017/04/06/logic-regression/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,9 +196,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="section">逻辑回归</h1>
+				<h1 id="逻辑回归">逻辑回归</h1>
 
-<h2 id="section-1">1 二元逻辑回归</h2>
+<h2 id="1-二元逻辑回归">1 二元逻辑回归</h2>
 
 <p>  回归是一种很容易理解的模型，就相当于<code class="highlighter-rouge">y=f(x)</code>，表明自变量<code class="highlighter-rouge">x</code>与因变量<code class="highlighter-rouge">y</code>的关系。最常见问题如医生治病时的望、闻、问、切，之后判定病人是否生病或生了什么病，
 其中的望、闻、问、切就是获取的自变量<code class="highlighter-rouge">x</code>，即特征数据，判断是否生病就相当于获取因变量<code class="highlighter-rouge">y</code>，即预测分类。最简单的回归是线性回归，但是线性回归的鲁棒性很差。</p>
@@ -240,7 +240,7 @@
 
 <p>  最大似然估计就是求使<code class="highlighter-rouge">l</code>取最大值时的<code class="highlighter-rouge">theta</code>。<code class="highlighter-rouge">MLlib</code>中提供了两种方法来求这个参数，分别是<a href="../../../最优化算法/梯度下降/gradient-descent.md">梯度下降法</a>和<a href="../../../最优化算法/L-BFGS/lbfgs.md">L-BFGS</a>。</p>
 
-<h2 id="section-2">2 多元逻辑回归</h2>
+<h2 id="2-多元逻辑回归">2 多元逻辑回归</h2>
 
 <p>  二元逻辑回归可以一般化为<a href="http://en.wikipedia.org/wiki/Multinomial_logistic_regression">多元逻辑回归</a>用来训练和预测多分类问题。对于多分类问题，算法将会训练出一个多元逻辑回归模型，
 它包含<code class="highlighter-rouge">K-1</code>个二元回归模型。给定一个数据点，<code class="highlighter-rouge">K-1</code>个模型都会运行，概率最大的类别将会被选为预测类别。</p>
@@ -271,14 +271,14 @@
 <div align="center"><img src="/images/spark/ml/linearmodel/logic-regression/2.5.png" width="500" height="160" alt="2.5" align="center" /></div>
 <p><br /></p>
 
-<h2 id="section-3">3 逻辑回归的优缺点</h2>
+<h2 id="3-逻辑回归的优缺点">3 逻辑回归的优缺点</h2>
 
 <ul>
   <li>优点：计算代价低，速度快，容易理解和实现。</li>
   <li>缺点：<strong>容易欠拟合，分类和回归的精度不高。</strong></li>
 </ul>
 
-<h2 id="section-4">4 实例</h2>
+<h2 id="4-实例">4 实例</h2>
 
 <p>  下面的例子展示了如何使用逻辑回归。</p>
 
@@ -313,9 +313,9 @@
 </code></pre>
 </div>
 
-<h2 id="section-5">5 源码分析</h2>
+<h2 id="5-源码分析">5 源码分析</h2>
 
-<h3 id="section-6">5.1 训练模型</h3>
+<h3 id="51-训练模型">5.1 训练模型</h3>
 
 <p>  如上所述，在<code class="highlighter-rouge">MLlib</code>中，分别使用了梯度下降法和<code class="highlighter-rouge">L-BFGS</code>实现逻辑回归参数的计算。这两个算法的实现我们会在最优化章节介绍，这里我们介绍公共的部分。</p>
 
@@ -342,7 +342,7 @@
 <p>  上面的代码初始化权重向量，向量的值均初始化为0。需要注意的是，<code class="highlighter-rouge">addIntercept</code>表示是否添加截距(<code class="highlighter-rouge">Intercept</code>，指函数图形与坐标的交点到原点的距离)，默认是不添加的。<code class="highlighter-rouge">numOfLinearPredictor</code>表示二元逻辑回归模型的个数。
 我们重点看<code class="highlighter-rouge">run(input, initialWeights)</code>的实现。它的实现分四步。</p>
 
-<h4 id="section-7">5.1.1 根据提供的参数缩放特征并添加截距</h4>
+<h4 id="511-根据提供的参数缩放特征并添加截距">5.1.1 根据提供的参数缩放特征并添加截距</h4>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">scaler</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">useFeatureScaling</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">new</span> <span class="nc">StandardScaler</span><span class="o">(</span><span class="n">withStd</span> <span class="k">=</span> <span class="kc">true</span><span class="o">,</span> <span class="n">withMean</span> <span class="k">=</span> <span class="kc">false</span><span class="o">).</span><span class="n">fit</span><span class="o">(</span><span class="n">input</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">features</span><span class="o">))</span>
@@ -401,7 +401,7 @@
 </code></pre>
 </div>
 
-<h4 id="section-8">5.1.2 使用最优化算法计算最终的权重值</h4>
+<h4 id="512-使用最优化算法计算最终的权重值">5.1.2 使用最优化算法计算最终的权重值</h4>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">weightsWithIntercept</span> <span class="k">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">optimize</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">initialWeightsWithIntercept</span><span class="o">)</span>
 </code></pre>
@@ -543,7 +543,7 @@
 </div>
 <p>  这里<code class="highlighter-rouge">thisIterStepSize</code>表示参数沿负梯度方向改变的速率，它随着迭代次数的增多而减小。</p>
 
-<h4 id="section-9">5.1.3 对最终的权重值进行后处理</h4>
+<h4 id="513-对最终的权重值进行后处理">5.1.3 对最终的权重值进行后处理</h4>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">intercept</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">addIntercept</span> <span class="o">&amp;&amp;</span> <span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">weightsWithIntercept</span><span class="o">(</span><span class="n">weightsWithIntercept</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
@@ -582,13 +582,13 @@
 </code></pre>
 </div>
 
-<h4 id="section-10">5.1.4 创建模型</h4>
+<h4 id="514-创建模型">5.1.4 创建模型</h4>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">createModel</span><span class="o">(</span><span class="n">weights</span><span class="o">,</span> <span class="n">intercept</span><span class="o">)</span>
 </code></pre>
 </div>
 
-<h3 id="section-11">5.2 预测</h3>
+<h3 id="52-预测">5.2 预测</h3>
 
 <p>  训练完模型之后，我们就可以通过训练的模型计算得到测试数据的分类信息。<code class="highlighter-rouge">predictPoint</code>用来预测分类信息。它针对二分类和多分类，分别进行处理。</p>
 
@@ -632,7 +632,7 @@
 </div>
 <p>  该段代码计算并找到最大的<code class="highlighter-rouge">margin</code>。如果<code class="highlighter-rouge">maxMargin</code>为负，那么第一类是该数据的类别。</p>
 
-<h1 id="section-12">参考文献</h1>
+<h1 id="参考文献">参考文献</h1>
 
 <p>【1】<a href="http://www.cnblogs.com/sparkwen/p/3441197.html?utm_source=tuicool&amp;utm_medium=referral">逻辑回归模型(Logistic Regression, LR)基础</a></p>
 
@@ -665,7 +665,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/logic-regression"
                         data-title="Spark-ML-030102-Linear Model-LR"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/logic-regression/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/logic-regression/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -686,7 +686,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/logic-regression"
                         data-title="Spark-ML-030102-Linear Model-LR"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/logic-regression/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/logic-regression/" >
                     </div>
 
                 </div>

@@ -17,7 +17,7 @@
 
     <title>Spark-ML-0301-Linear Model - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2017/04/06/linear-model/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2017/04/06/linear-model/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,9 +196,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="section">线性模型</h1>
+				<h1 id="线性模型">线性模型</h1>
 
-<h1 id="section-1">1 数学描述</h1>
+<h1 id="1-数学描述">1 数学描述</h1>
 
 <p>  许多标准的机器学习算法可以归结为凸优化问题。例如，找到凸函数<code class="highlighter-rouge">f</code>的一个极小值的任务，这个凸函数依赖于可变向量<code class="highlighter-rouge">w</code>（在<code class="highlighter-rouge">spark</code>源码中，一般表示为<code class="highlighter-rouge">weights</code>）。
 形式上，我们可以将其当作一个凸优化问题<script type="math/tex">\min_{w \in R^d} \; f(w)</script>。它的目标函数可以表示为如下公式<strong>(1)</strong>：</p>
@@ -216,7 +216,7 @@
 <p>  目标函数<code class="highlighter-rouge">f</code>包含两部分：正则化(<code class="highlighter-rouge">regularizer </code>)，用于控制模型的复杂度；损失函数，用于度量模型的误差。损失函数<code class="highlighter-rouge">L(w;.)</code>是一个典型的基于<code class="highlighter-rouge">w</code>的凸函数。固定的正则化参数<script type="math/tex">\lambda \geq 0</script>定义了两种目标的权衡（<code class="highlighter-rouge">trade-off</code>）,
 这两个目标分别是最小化损失(训练误差)以及最小化模型复杂度(为了避免过拟合)。</p>
 
-<h2 id="section-2">1.1 损失函数</h2>
+<h2 id="11-损失函数">1.1 损失函数</h2>
 
 <p>  下面介绍<code class="highlighter-rouge">spark.mllib</code>中提供的几种损失函数以及它们的梯度或子梯度(<code class="highlighter-rouge">sub-gradient</code>)。
 The following table summarizes the loss functions and their gradients or sub-gradients for the methods spark.mllib supports:</p>
@@ -242,7 +242,7 @@ The following table summarizes the loss functions and their gradients or sub-gra
   </tbody>
 </table>
 
-<h2 id="section-3">1.2 正则化</h2>
+<h2 id="12-正则化">1.2 正则化</h2>
 
 <p>  正则化的目的是为了简化模型及防止过拟合。<code class="highlighter-rouge">spark.mllib</code>中提供了下面的正则化方法。</p>
 
@@ -281,7 +281,7 @@ The following table summarizes the loss functions and their gradients or sub-gra
 <p>  在上面的表格中，<code class="highlighter-rouge">sign(w)</code>是一个向量，它由<code class="highlighter-rouge">w</code>中的所有实体的信号量<code class="highlighter-rouge">(+1,-1)</code>组成。<code class="highlighter-rouge">L2</code>问题往往比<code class="highlighter-rouge">L1</code>问题更容易解决，那是因为<code class="highlighter-rouge">L2</code>是平滑的。然而，<code class="highlighter-rouge">L1</code>可以使权重矩阵更稀疏，
 从而构建更小以及更可判断的模型，模型的可判断性在特征选择中很有用。</p>
 
-<h1 id="section-4">2 分类</h1>
+<h1 id="2-分类">2 分类</h1>
 
 <p>  分类的目的就是将数据切分为不同的类别。最一般的分类类型是二分类，即有两个类别，通常称为正和负。如果类别数超过两个，我们称之为多分类。<code class="highlighter-rouge">spark.ml</code>提供了两种线性方法用于分类：线性支持向量机以及逻辑回归。
 线性支持向量机仅仅支持二分类，逻辑回归既支持二分类也支持多分类。对所有的方法，<code class="highlighter-rouge">spark.ml</code>支持<code class="highlighter-rouge">L1</code>和<code class="highlighter-rouge">L2</code>正则化。分类算法的详细介绍见下面的链接。</p>
@@ -319,7 +319,7 @@ The following table summarizes the loss functions and their gradients or sub-gra
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/linear-model"
                         data-title="Spark-ML-0301-Linear Model"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/linear-model/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/linear-model/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -340,7 +340,7 @@ The following table summarizes the loss functions and their gradients or sub-gra
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/linear-model"
                         data-title="Spark-ML-0301-Linear Model"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/linear-model/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/linear-model/" >
                     </div>
 
                 </div>

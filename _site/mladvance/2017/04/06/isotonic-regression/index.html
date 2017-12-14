@@ -17,7 +17,7 @@
 
     <title>Spark-ML-0305-Isotonic regression - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2017/04/06/isotonic-regression/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2017/04/06/isotonic-regression/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,9 +196,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="section">保序回归</h1>
+				<h1 id="保序回归">保序回归</h1>
 
-<h2 id="section-1">1 保序回归</h2>
+<h2 id="1-保序回归">1 保序回归</h2>
 
 <p>  保序回归解决了下面的问题：给定包含<code class="highlighter-rouge">n</code>个数据点的序列 <code class="highlighter-rouge">y_1,y_2,...,y_n</code> , 怎样通过一个单调的序列 <code class="highlighter-rouge">beta_1,beta_2,...,beta_n</code> 来归纳这个问题。形式上，这个问题就是为了找到</p>
 
@@ -209,7 +209,7 @@
 
 <p>  我们从左边的<code class="highlighter-rouge">y_1</code>开始，右移<code class="highlighter-rouge">y_1</code>直到我们遇到第一个违例(<code class="highlighter-rouge">violation</code>)即<code class="highlighter-rouge">y_i &lt; y_i+1</code>，然后，我们用违例之前的所有<code class="highlighter-rouge">y</code>的平方替换这些<code class="highlighter-rouge">y</code>，以满足单调性。我们继续这个过程，直到我们最后到达<code class="highlighter-rouge">y_n</code>。</p>
 
-<h2 id="section-2">2 近似保序</h2>
+<h2 id="2-近似保序">2 近似保序</h2>
 
 <p>  给定一个序列<code class="highlighter-rouge">y_1,y_2,...,y_n</code>，我们寻找一个近似单调估计，考虑下面的问题</p>
 
@@ -225,7 +225,7 @@
 
 <p>  <code class="highlighter-rouge">x_i</code>表示<code class="highlighter-rouge">y_i</code>测量得到的值。</p>
 
-<h2 id="section-3">3 近似保序算法流程</h2>
+<h2 id="3-近似保序算法流程">3 近似保序算法流程</h2>
 
 <p>  这个算法是标准<code class="highlighter-rouge">PAVA</code>算法的修改版本，它并不从数据的左端开始，而是在需要时连接相邻的点，以产生近似保序最优的顺序。相比一下，<code class="highlighter-rouge">PAVA</code>对中间的序列并不特别感兴趣，只关心最后的序列。</p>
 
@@ -297,11 +297,11 @@
 
 <p>  对于每个<code class="highlighter-rouge">i</code>，根据公式（8）合并合适的组别（所以<code class="highlighter-rouge">K_lambda^star = K_lambda - 1</code>），并设置<code class="highlighter-rouge">lambda = lambda^star</code>。</p>
 
-<h2 id="section-4">4 源码分析</h2>
+<h2 id="4-源码分析">4 源码分析</h2>
 
 <p>  在<code class="highlighter-rouge">1.6.x</code>版本中，并没有实现近似保序回归，后续会实现。现在我们只介绍一般的保序回归算法实现。</p>
 
-<h3 id="section-5">4.1 实例</h3>
+<h3 id="41-实例">4.1 实例</h3>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.</span><span class="o">{</span><span class="nc">IsotonicRegression</span><span class="o">,</span> <span class="nc">IsotonicRegressionModel</span><span class="o">}</span>
 <span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="s">"data/mllib/sample_isotonic_regression_data.txt"</span><span class="o">)</span>
@@ -328,7 +328,7 @@
 </code></pre>
 </div>
 
-<h3 id="section-6">4.2 训练过程分析</h3>
+<h3 id="42-训练过程分析">4.2 训练过程分析</h3>
 
 <p>  <code class="highlighter-rouge">parallelPoolAdjacentViolators</code>方法用于实现保序回归的训练。<code class="highlighter-rouge">parallelPoolAdjacentViolators</code>方法的代码如下：</p>
 
@@ -431,7 +431,7 @@
 </code></pre>
 </div>
 
-<h3 id="section-7">4.3 预测过程分析</h3>
+<h3 id="43-预测过程分析">4.3 预测过程分析</h3>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">predict</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">linearInterpolation</span><span class="o">(</span><span class="n">x1</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">y1</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x2</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">y2</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
@@ -462,7 +462,7 @@
 <p>  当测试数据精确匹配一个边界，那么返回相应的特征。如果测试数据比所有边界都大或者小，那么分别返回第一个和最后一个特征。当测试数据位于两个边界之间，使用<code class="highlighter-rouge">linearInterpolation</code>方法计算特征。
 这个方法是线性内插法。</p>
 
-<h1 id="section-8">5 实例理解</h1>
+<h1 id="5-实例理解">5 实例理解</h1>
 
 <ul>
   <li>问题描述：给定一个无序数字序列y，通过修改每个元素的值得到一个非递减序列 y‘ ，问如何使y和 y’ 误差（该处取平方差）最小？</li>
@@ -506,7 +506,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/isotonic-regression"
                         data-title="Spark-ML-0305-Isotonic regression"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/isotonic-regression/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/isotonic-regression/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -527,7 +527,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/isotonic-regression"
                         data-title="Spark-ML-0305-Isotonic regression"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/isotonic-regression/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/isotonic-regression/" >
                     </div>
 
                 </div>

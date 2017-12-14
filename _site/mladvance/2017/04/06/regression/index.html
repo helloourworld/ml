@@ -17,7 +17,7 @@
 
     <title>Spark-ML-030103-Linear Model-Regression - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2017/04/06/regression/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2017/04/06/regression/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,13 +196,15 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="section">线性回归</h1>
+				<h1 id="线性回归">线性回归</h1>
 
-<p>  回归问题的条件或者说前提是
-- 1） 收集的数据
-- 2） 假设的模型，即一个函数，这个函数里含有未知的参数，通过学习，可以估计出参数。然后利用这个模型去预测/分类新的数据。</p>
+<p>  回归问题的条件或者说前提是</p>
+<ul>
+  <li>1） 收集的数据</li>
+  <li>2） 假设的模型，即一个函数，这个函数里含有未知的参数，通过学习，可以估计出参数。然后利用这个模型去预测/分类新的数据。</li>
+</ul>
 
-<h2 id="section-1">1 线性回归的概念</h2>
+<h2 id="1-线性回归的概念">1 线性回归的概念</h2>
 
 <p>  线性回归假设特征和结果都满足线性。即不大于一次方。收集的数据中，每一个分量，就可以看做一个特征数据。每个特征至少对应一个未知的参数。这样就形成了一个线性模型函数，向量表示形式：</p>
 
@@ -218,9 +220,9 @@
 
 <p>  根据使用的正则化类型的不同，回归算法也会有不同。普通最小二乘和线性最小二乘回归不使用正则化方法。<code class="highlighter-rouge">ridge</code>回归使用<code class="highlighter-rouge">L2</code>正则化，<code class="highlighter-rouge">lasso</code>回归使用<code class="highlighter-rouge">L1</code>正则化。</p>
 
-<h2 id="section-2">2 线性回归源码分析</h2>
+<h2 id="2-线性回归源码分析">2 线性回归源码分析</h2>
 
-<h3 id="section-3">2.1 实例</h3>
+<h3 id="21-实例">2.1 实例</h3>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LabeledPoint</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LinearRegressionModel</span>
@@ -246,7 +248,7 @@
 </code></pre>
 </div>
 
-<h3 id="section-4">2.2 代码实现</h3>
+<h3 id="22-代码实现">2.2 代码实现</h3>
 
 <p>  和逻辑回归一样，训练过程均使用<code class="highlighter-rouge">GeneralizedLinearModel</code>中的<code class="highlighter-rouge">run</code>训练，只是训练使用的<code class="highlighter-rouge">Gradient</code>和<code class="highlighter-rouge">Updater</code>不同。在一般的线性回归中，使用<code class="highlighter-rouge">LeastSquaresGradient</code>计算梯度，使用<code class="highlighter-rouge">SimpleUpdater</code>进行更新。
 它的实现过程分为4步。参加<a href="/mladvance/2017/04/06/logic-regression/">逻辑回归</a>了解这五步的详细情况。我们只需要了解<code class="highlighter-rouge">LeastSquaresGradient</code>和<code class="highlighter-rouge">SimpleUpdater</code>的实现。</p>
@@ -299,7 +301,7 @@
 </div>
 <p>  这里<code class="highlighter-rouge">thisIterStepSize</code>表示参数沿负梯度方向改变的速率，它随着迭代次数的增多而减小。</p>
 
-<h2 id="lasso">3 Lasso回归源码分析</h2>
+<h2 id="3-lasso回归源码分析">3 Lasso回归源码分析</h2>
 
 <p>  <code class="highlighter-rouge">lasso</code>回归和普通线性回归不同的地方是，它使用<code class="highlighter-rouge">L1</code>正则化方法。即使用<code class="highlighter-rouge">L1Updater</code>。</p>
 
@@ -346,7 +348,7 @@
 
 <p>  <code class="highlighter-rouge">signum</code>函数是子梯度函数，当<code class="highlighter-rouge">w&lt;0</code>时，返回-1，当<code class="highlighter-rouge">w&gt;0</code>时，返回1，当<code class="highlighter-rouge">w=0</code>时，返回0。</p>
 
-<h2 id="ridge">4 ridge回归源码分析</h2>
+<h2 id="4-ridge回归源码分析">4 ridge回归源码分析</h2>
 
 <p>  <code class="highlighter-rouge">ridge</code>回归的训练过程也是一样，它使用<code class="highlighter-rouge">L2</code>正则化方法。</p>
 
@@ -407,7 +409,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/regression"
                         data-title="Spark-ML-030103-Linear Model-Regression"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/regression/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/regression/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -428,7 +430,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/regression"
                         data-title="Spark-ML-030103-Linear Model-Regression"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/regression/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/regression/" >
                     </div>
 
                 </div>

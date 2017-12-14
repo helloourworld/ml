@@ -17,7 +17,7 @@
 
     <title>Hadoop 开机自启动 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/hadoop/2016/09/29/hadoop_startup/">
+    <link rel="canonical" href="http://localhost:4000/hadoop/2016/09/29/hadoop_startup/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,7 +196,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="etcrcdrclocal">1 把启动程序的命令添加到/etc/rc.d/rc.local</h2>
+				<h2 id="1-把启动程序的命令添加到etcrcdrclocal">1 把启动程序的命令添加到/etc/rc.d/rc.local</h2>
 
 <p>加入后的文件如下：</p>
 
@@ -220,7 +220,7 @@ hiveserver2
 </code></pre>
 </div>
 
-<h2 id="chkconfighttpswwwcentosbz2011077-linux-chkconfig-command-examples">2 <a href="https://www.centos.bz/2011/07/7-linux-chkconfig-command-examples/">chkconfig</a>设置开机启动。</h2>
+<h2 id="2-chkconfig设置开机启动">2 <a href="https://www.centos.bz/2011/07/7-linux-chkconfig-command-examples/">chkconfig</a>设置开机启动。</h2>
 
 <p><a href="http://man.linuxde.net/chkconfig">chkconfig</a> 功能说明：检查，设置系统和各种服务。</p>
 
@@ -266,7 +266,7 @@ mysqld          0:off   1:off   2:off   3:on    4:off   5:off   6:off
 </code></pre>
 </div>
 
-<h2 id="etcrcdrcsysint">3 把启动程序的命令添加到/etc/rc.d/rc.sysint文件中</h2>
+<h2 id="3-把启动程序的命令添加到etcrcdrcsysint文件中">3 把启动程序的命令添加到/etc/rc.d/rc.sysint文件中</h2>
 
 <p>脚本/etc/rc.d/rc.sysint，完成系统服务程序启动，如系统环境变量设置、设置系统时钟、加载字体、检查加载文件系统、生成系统启动信息日志文件等。</p>
 
@@ -276,7 +276,7 @@ mysqld          0:off   1:off   2:off   3:on    4:off   5:off   6:off
 </code></pre>
 </div>
 
-<h2 id="test">4 Test</h2>
+<h2 id="4-test">4 Test</h2>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 init.d]$ sudo vim hadoop
 [hadoop@NN01 init.d]$ cat hadoop
@@ -353,7 +353,7 @@ hadoop          0:off   1:off   2:on    3:on    4:on    5:on    6:off
                     <div class="ds-thread"
                         data-thread-key="/hadoop/2016/09/29/hadoop_startup"
                         data-title="Hadoop 开机自启动"
-                        data-url="http://machinelearningadvance.com/hadoop/2016/09/29/hadoop_startup/" >
+                        data-url="http://localhost:4000/hadoop/2016/09/29/hadoop_startup/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -374,7 +374,7 @@ hadoop          0:off   1:off   2:on    3:on    4:on    5:on    6:off
                     <div class="ds-thread"
                         data-thread-key="/hadoop/2016/09/29/hadoop_startup"
                         data-title="Hadoop 开机自启动"
-                        data-url="http://machinelearningadvance.com/hadoop/2016/09/29/hadoop_startup/" >
+                        data-url="http://localhost:4000/hadoop/2016/09/29/hadoop_startup/" >
                     </div>
 
                 </div>

@@ -17,7 +17,7 @@
 
     <title>新三板聚类项目 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/12/26/new3Clustering/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2016/12/26/new3Clustering/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,7 +196,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="section">目录</h2>
+				<h2 id="目录">目录</h2>
 
 <ul>
   <li>1 聚类类别确定demo</li>
@@ -205,9 +205,9 @@
   <li>4 其它</li>
 </ul>
 
-<h2 id="demo">1 聚类类别确定demo</h2>
+<h2 id="1-聚类类别确定demo">1 聚类类别确定demo</h2>
 
-<h3 id="k-means-">1.1 K-means 聚类算法原理</h3>
+<h3 id="11-k-means-聚类算法原理">1.1 K-means 聚类算法原理</h3>
 
 <ul>
   <li>聚类分析是一个无监督学习 (Unsupervised Learning) 过程, 一般是用来对数据对象按照其特征属性进行分组，经常被应用在客户分群，欺诈检测，图像分析等领域。K-means 应该是最有名并且最经常使用的聚类算法了，其原理比较容易理解，并且聚类效果良好，有着广泛的使用。</li>
@@ -248,7 +248,7 @@
   </ul>
 </blockquote>
 
-<h3 id="k">1.2 如何选择 K</h3>
+<h3 id="12-如何选择-k">1.2 如何选择 K</h3>
 
 <p>本部分数据来自UCI Machine Learning Repository 的 <a href="http://archive.ics.uci.edu/ml/datasets/Wholesale+customers">Wholesale customer Data Set</a>。UCI 是一个关于机器学习测试数据的下载中心站点，里面包含了适用于做聚类，分群，回归等各种机器学习问题的数据集。</p>
 
@@ -374,7 +374,7 @@ sum of squared distances of points to their nearest center when <span class="nv"
 
 <p>从上图的运行结果可以看到，当 K=9 时，cost 值有波动，但是后面又逐渐减小了，所以我们选择 8 这个临界点作为 K 的个数。当然可以多跑几次，找一个稳定的 K 值。理论上 K 的值越大，聚类的 cost 越小，极限情况下，每个点都是一个聚类，这时候 cost 是 0，但是显然这不是一个具有实际意义的聚类结果。</p>
 
-<h2 id="demo-1">2 聚类demo</h2>
+<h2 id="2-聚类demo">2 聚类demo</h2>
 
 <p><strong>案例分析和编码实现</strong></p>
 
@@ -475,7 +475,7 @@ Spark MLlib K-means clustering <span class="nb">test </span>finished.
 </code></pre>
 </div>
 
-<h2 id="spark-mysql-">3 spark MySQL 读取数据</h2>
+<h2 id="3-spark-mysql-读取数据">3 spark MySQL 读取数据</h2>
 
 <p>上述例子已经完整地描述了如何用K-means进行聚类分析。测试数据集很小。通常情况下我们会从数据库中直接读取数据。以下为使用spark读取MySQL数据示例。</p>
 
@@ -517,7 +517,7 @@ object KMeansDF {
 </code></pre>
 </div>
 
-<h2 id="section-1">4 其它</h2>
+<h2 id="4-其它">4 其它</h2>
 
 
                 <hr>
@@ -545,7 +545,7 @@ object KMeansDF {
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/12/26/new3Clustering"
                         data-title="新三板聚类项目"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/12/26/new3Clustering/" >
+                        data-url="http://localhost:4000/mladvance/2016/12/26/new3Clustering/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -566,7 +566,7 @@ object KMeansDF {
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/12/26/new3Clustering"
                         data-title="新三板聚类项目"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/12/26/new3Clustering/" >
+                        data-url="http://localhost:4000/mladvance/2016/12/26/new3Clustering/" >
                     </div>
 
                 </div>

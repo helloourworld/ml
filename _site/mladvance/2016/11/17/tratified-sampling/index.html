@@ -17,7 +17,7 @@
 
     <title>Spark-ML-0203-Stratified sampling - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/11/17/tratified-sampling/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2016/11/17/tratified-sampling/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,7 +196,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="section">分层取样</h1>
+				<h1 id="分层取样">分层取样</h1>
 
 <p>  先将总体的单位按某种特征分为若干次级总体（层），然后再从每一层内进行单纯随机抽样，组成一个样本的统计学计算方法叫做分层抽样。在<code class="highlighter-rouge">spark.mllib</code>中，用<code class="highlighter-rouge">key</code>来分层。</p>
 
@@ -246,11 +246,11 @@
 </div>
 <p>  下面我们分别来看<code class="highlighter-rouge">sampleByKey</code>和<code class="highlighter-rouge">sampleByKeyExact</code>的实现。</p>
 
-<h2 id="samplebykey">1 <code class="highlighter-rouge">sampleByKey</code>的实现</h2>
+<h2 id="1-samplebykey的实现">1 <code class="highlighter-rouge">sampleByKey</code>的实现</h2>
 
 <p>  当我们需要不重复抽样时，我们需要用泊松抽样器来抽样。当需要重复抽样时，用伯努利抽样器抽样。<code class="highlighter-rouge">sampleByKey</code>的实现比较简单，它就是统一的随机抽样。</p>
 
-<h3 id="section-1">1.1 泊松抽样器</h3>
+<h3 id="11-泊松抽样器">1.1 泊松抽样器</h3>
 
 <p>  我们首先看泊松抽样器的实现。</p>
 
@@ -277,7 +277,7 @@
 </div>
 <p>  <code class="highlighter-rouge">getPoissonSamplingFunction</code>返回的是一个函数，传递给<code class="highlighter-rouge">mapPartitionsWithIndex</code>处理每个分区的数据。这里<code class="highlighter-rouge">RandomDataGenerator</code>是一个随机生成器，它用于同时生成均匀值(<code class="highlighter-rouge">uniform values</code>)和泊松值(<code class="highlighter-rouge">Poisson values</code>)。</p>
 
-<h3 id="section-2">1.2 伯努利抽样器</h3>
+<h3 id="12-伯努利抽样器">1.2 伯努利抽样器</h3>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">getBernoulliSamplingFunction</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
       <span class="n">fractions</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">Double</span><span class="o">],</span>
@@ -296,11 +296,11 @@
 </code></pre>
 </div>
 
-<h2 id="samplebykeyexact">2 <code class="highlighter-rouge">sampleByKeyExact</code>的实现</h2>
+<h2 id="2-samplebykeyexact的实现">2 <code class="highlighter-rouge">sampleByKeyExact</code>的实现</h2>
 
 <p>  <code class="highlighter-rouge">sampleByKeyExact</code>获取更准确的抽样结果，它的实现也分为两种情况，重复抽样和不重复抽样。前者使用泊松抽样器，后者使用伯努利抽样器。</p>
 
-<h3 id="section-3">2.1 泊松抽样器</h3>
+<h3 id="21-泊松抽样器">2.1 泊松抽样器</h3>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">counts</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="n">rdd</span><span class="o">.</span><span class="n">countByKey</span><span class="o">())</span>
 <span class="c1">//计算立即接受的样本数量，并且为每层生成候选名单
@@ -330,7 +330,7 @@
 </code></pre>
 </div>
 
-<h3 id="section-4">2.2 伯努利抽样</h3>
+<h3 id="22-伯努利抽样">2.2 伯努利抽样</h3>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">getBernoulliSamplingFunction</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
       <span class="n">fractions</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">Double</span><span class="o">],</span>
@@ -378,7 +378,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/11/17/tratified-sampling"
                         data-title="Spark-ML-0203-Stratified sampling"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/17/tratified-sampling/" >
+                        data-url="http://localhost:4000/mladvance/2016/11/17/tratified-sampling/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -399,7 +399,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/11/17/tratified-sampling"
                         data-title="Spark-ML-0203-Stratified sampling"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/11/17/tratified-sampling/" >
+                        data-url="http://localhost:4000/mladvance/2016/11/17/tratified-sampling/" >
                     </div>
 
                 </div>

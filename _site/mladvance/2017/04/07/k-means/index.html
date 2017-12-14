@@ -17,7 +17,7 @@
 
     <title>Spark-ML-0501-Clustering-KMeans - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2017/04/07/k-means/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2017/04/07/k-means/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -198,12 +198,12 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="k-meansk-meansk-means"><code class="highlighter-rouge">k-means</code>、<code class="highlighter-rouge">k-means++</code>以及<code class="highlighter-rouge">k-means||</code>算法分析</h3>
+				<h3 id="k-meansk-means以及k-means算法分析"><code class="highlighter-rouge">k-means</code>、<code class="highlighter-rouge">k-means++</code>以及<code class="highlighter-rouge">k-means||</code>算法分析</h3>
 
 <p>  本文会介绍一般的<code class="highlighter-rouge">k-means</code>算法、<code class="highlighter-rouge">k-means++</code>算法以及基于<code class="highlighter-rouge">k-means++</code>算法的<code class="highlighter-rouge">k-means||</code>算法。在<code class="highlighter-rouge">spark ml</code>，已经实现了<code class="highlighter-rouge">k-means</code>算法以及<code class="highlighter-rouge">k-means||</code>算法。
 本文首先会介绍这三个算法的原理，然后在了解原理的基础上分析<code class="highlighter-rouge">spark</code>中的实现代码。</p>
 
-<h4 id="k-means">1 <code class="highlighter-rouge">k-means</code>算法原理分析</h4>
+<h4 id="1-k-means算法原理分析">1 <code class="highlighter-rouge">k-means</code>算法原理分析</h4>
 
 <p>  <code class="highlighter-rouge">k-means</code>算法是聚类分析中使用最广泛的算法之一。它把<code class="highlighter-rouge">n</code>个对象根据它们的属性分为<code class="highlighter-rouge">k</code>个聚类以便使得所获得的聚类满足：同一聚类中的对象相似度较高；而不同聚类中的对象相似度较小。</p>
 
@@ -227,7 +227,7 @@
   </li>
 </ul>
 
-<h5 id="k-means-1">1.1 <code class="highlighter-rouge">k-means</code>算法的缺点</h5>
+<h5 id="11-k-means算法的缺点">1.1 <code class="highlighter-rouge">k-means</code>算法的缺点</h5>
 
 <p>  <code class="highlighter-rouge">k-means</code>算法虽然简单快速，但是存在下面的缺点：</p>
 
@@ -242,7 +242,7 @@
 
 <p>  第一个缺陷我们很难在<code class="highlighter-rouge">k-means</code>算法以及其改进算法中解决，但是我们可以通过<code class="highlighter-rouge">k-means++</code>算法来解决第二个缺陷。</p>
 
-<h4 id="k-means-2">2 <code class="highlighter-rouge">k-means++</code>算法原理分析</h4>
+<h4 id="2-k-means算法原理分析">2 <code class="highlighter-rouge">k-means++</code>算法原理分析</h4>
 
 <p>  <code class="highlighter-rouge">k-means++</code>算法选择初始聚类中心的基本原则是：初始的聚类中心之间的相互距离要尽可能的远。它选择初始聚类中心的步骤是：</p>
 
@@ -273,12 +273,12 @@
 <p>  为什么用这样的方式呢？我们换一种比较好理解的方式来说明。把集合<code class="highlighter-rouge">D</code>中的每个元素<code class="highlighter-rouge">D(x)</code>想象为一根线<code class="highlighter-rouge">L(x)</code>，线的长度就是元素的值。将这些线依次按照<code class="highlighter-rouge">L(1)、L(2)、...、L(n)</code>的顺序连接起来，组成长线<code class="highlighter-rouge">L</code>。<code class="highlighter-rouge">L(1)、L(2)、…、L(n)</code>称为<code class="highlighter-rouge">L</code>的子线。
 根据概率的相关知识，如果我们在<code class="highlighter-rouge">L</code>上随机选择一个点，那么这个点所在的子线很有可能是比较长的子线，而这个子线对应的数据点就可以作为种子点。</p>
 
-<h5 id="k-means-3">2.1 <code class="highlighter-rouge">k-means++</code>算法的缺点</h5>
+<h5 id="21-k-means算法的缺点">2.1 <code class="highlighter-rouge">k-means++</code>算法的缺点</h5>
 
 <p>  虽然<code class="highlighter-rouge">k-means++</code>算法可以确定地初始化聚类中心，但是从可扩展性来看，它存在一个缺点，那就是它内在的有序性特性：下一个中心点的选择依赖于已经选择的中心点。
 针对这种缺陷，<code class="highlighter-rouge">k-means||</code>算法提供了解决方法。</p>
 
-<h4 id="k-means-4">3 <code class="highlighter-rouge">k-means||</code>算法原理分析</h4>
+<h4 id="3-k-means算法原理分析">3 <code class="highlighter-rouge">k-means||</code>算法原理分析</h4>
 
 <p>  <code class="highlighter-rouge">k-means||</code>算法是在<code class="highlighter-rouge">k-means++</code>算法的基础上做的改进，和<code class="highlighter-rouge">k-means++</code>算法不同的是，它采用了一个采样因子<code class="highlighter-rouge">l</code>，并且<code class="highlighter-rouge">l=A(k)</code>，在<code class="highlighter-rouge">spark</code>的实现中<code class="highlighter-rouge">l=2k</code>，。这个算法首先如<code class="highlighter-rouge">k-means++</code>算法一样，随机选择一个初始中心，
 然后计算选定初始中心确定之后的初始花费<code class="highlighter-rouge">phi</code>(指与最近中心点的距离)。之后处理<code class="highlighter-rouge">log(phi)</code>次迭代，在每次迭代中，给定当前中心集，通过概率<script type="math/tex">l{d}^{2}(x,C)/{phi}_{X}(C)</script>来
@@ -295,7 +295,7 @@
 
 <p>  下面我们详细分析上述三个算法的代码实现。</p>
 
-<h4 id="section">4 源代码分析</h4>
+<h4 id="4-源代码分析">4 源代码分析</h4>
 
 <p>  在<code class="highlighter-rouge">spark</code>中，<code class="highlighter-rouge">org.apache.spark.mllib.clustering.KMeans</code>文件实现了<code class="highlighter-rouge">k-means</code>算法以及<code class="highlighter-rouge">k-means||</code>算法，<code class="highlighter-rouge">org.apache.spark.mllib.clustering.LocalKMeans</code>文件实现了<code class="highlighter-rouge">k-means++</code>算法。
 在分步骤分析<code class="highlighter-rouge">spark</code>中的源码之前我们先来了解<code class="highlighter-rouge">KMeans</code>类中参数的含义。</p>
@@ -317,7 +317,7 @@
 
 <p>  下面将分步骤分析<code class="highlighter-rouge">k-means</code>算法、<code class="highlighter-rouge">k-means||</code>算法的实现过程。</p>
 
-<h5 id="vectorwithnorm">4.1 处理数据，转换为<code class="highlighter-rouge">VectorWithNorm</code>集。</h5>
+<h5 id="41-处理数据转换为vectorwithnorm集">4.1 处理数据，转换为<code class="highlighter-rouge">VectorWithNorm</code>集。</h5>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//求向量的二范式，返回double值
 </span><span class="k">val</span> <span class="n">norms</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="nc">Vectors</span><span class="o">.</span><span class="n">norm</span><span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">))</span>
@@ -328,7 +328,7 @@
 </code></pre>
 </div>
 
-<h5 id="section-1">4.2 初始化中心点。</h5>
+<h5 id="42-初始化中心点">4.2 初始化中心点。</h5>
 
 <p>  初始化中心点根据<code class="highlighter-rouge">initializationMode</code>的值来判断，如果<code class="highlighter-rouge">initializationMode</code>等于<code class="highlighter-rouge">KMeans.RANDOM</code>，那么随机初始化<code class="highlighter-rouge">k</code>个中心点，否则使用<code class="highlighter-rouge">k-means||</code>初始化<code class="highlighter-rouge">k</code>个中心点。</p>
 
@@ -508,7 +508,7 @@
 <p>  上述代码中，<code class="highlighter-rouge">points</code>指的是候选的中心点，<code class="highlighter-rouge">weights</code>指这些点相应地权重。寻找概率最大的点的方式就是第二章提到的方式。初始化<code class="highlighter-rouge">k</code>个中心点后，
 就可以通过一般的<code class="highlighter-rouge">k-means</code>流程来求最终的<code class="highlighter-rouge">k</code>个中心点了。具体的过程4.3会讲到。</p>
 
-<h5 id="section-2">4.3 确定数据点所属类别</h5>
+<h5 id="43-确定数据点所属类别">4.3 确定数据点所属类别</h5>
 
 <p>  找到中心点后，我们就需要根据距离确定数据点的聚类，即数据点和哪个中心点最近。具体代码如下：</p>
 
@@ -544,7 +544,7 @@
 </code></pre>
 </div>
 
-<h5 id="section-3">4.4 重新确定中心点</h5>
+<h5 id="44-重新确定中心点">4.4 重新确定中心点</h5>
 
 <p>  找到类别中包含的数据点以及它们距离中心点的距离，我们可以重新计算中心点。代码如下：</p>
 
@@ -577,7 +577,7 @@
 </code></pre>
 </div>
 
-<h4 id="section-4">5 参考文献</h4>
+<h4 id="5-参考文献">5 参考文献</h4>
 
 <ul>
   <li>
@@ -615,7 +615,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/07/k-means"
                         data-title="Spark-ML-0501-Clustering-KMeans"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/07/k-means/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/07/k-means/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -636,7 +636,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/07/k-means"
                         data-title="Spark-ML-0501-Clustering-KMeans"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/07/k-means/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/07/k-means/" >
                     </div>
 
                 </div>

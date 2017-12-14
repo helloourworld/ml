@@ -17,7 +17,7 @@
 
     <title>Hadoop Family Integration - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_family/">
+    <link rel="canonical" href="http://localhost:4000/hadoop/2016/08/04/hadoop_family/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -248,9 +248,9 @@
 
 <p>本文的介绍是一个概览，会对以上重要组分别说明与介绍。</p>
 
-<h2 id="back-to-ecosystemtablehadoop20160804hadoopecosystemtable">Back to <a href="/hadoop/2016/08/04/Hadoop_Ecosystem_Table/">Ecosystem_Table</a></h2>
+<h2 id="back-to-ecosystem_table">Back to <a href="/hadoop/2016/08/04/Hadoop_Ecosystem_Table/">Ecosystem_Table</a></h2>
 
-<h2 id="introduction">0 Introduction</h2>
+<h2 id="0-introduction">0 Introduction</h2>
 
 <p>以下图片为广泛传阅的生态图，较早为2015年，出处不详。</p>
 
@@ -259,20 +259,20 @@
 <p>以下图片为最新且常用的生态图，图片源自<a href="https://www.safaribooksonline.com/library/view/hadoop-essentials/9781784396688/ch02s05.html">Safari</a>
 <img src="/images/Hadoop-Ecosystem-Map_2016.jpg" alt="" />，是本文主要介绍的部分。</p>
 
-<h2 id="hadoop-core">1 Hadoop Core</h2>
+<h2 id="1-hadoop-core">1 Hadoop Core</h2>
 
 <p>主要包括HDFS，MapReduce，YARN，HBase.</p>
 
-<h3 id="hdfs">1.1 HDFS</h3>
+<h3 id="11-hdfs">1.1 HDFS</h3>
 
 <p>Hadoop Distributed File System (HDFS™): A distributed file system that provides high-throughput access to application data. HDFS 是一个能够面向大规模数据使用的，可进行扩展的文件存储与传递系统，是一种允许文件通过网络在多台主机上分享的文件系统，可让多机器上的多用户分享文件和存储空间。实际上，通过网络来访问文件的动作，在程序与用户看来，就像是访问本地的磁盘一般。即使系统中有某些节点脱机，整体来说系统仍然可以持续运作而不会有数据损失。</p>
 
-<h4 id="hdfshdfs-architecturehttphadoopapacheorgdocscurrenthadoop-project-disthadoop-hdfshdfsdesignhtmlintroduction">1.1.1 HDFS体系结构（<a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html#Introduction">HDFS Architecture</a>）</h4>
+<h4 id="111-hdfs体系结构hdfs-architecture">1.1.1 HDFS体系结构（<a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html#Introduction">HDFS Architecture</a>）</h4>
 
 <p><img src="/images/hdfs_architecture.jpg" alt="" />
 The NameNode and DataNode are pieces of software designed to run on commodity machines. These machines typically run a GNU/Linux operating system (OS). <strong>HDFS is built using the Java language</strong>; any machine that supports Java can run the NameNode or the DataNode software.</p>
 
-<h5 id="namenode">1.1.1.1 Namenode</h5>
+<h5 id="1111-namenode">1.1.1.1 Namenode</h5>
 
 <p>Namenode是整个文件系统的管理节点。它维护着整个文件系统的文件目录树，文件/目录的元信息和每个文件对应的数据块列表, 接收用户的操作请求。</p>
 
@@ -290,7 +290,7 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
 
 <p>以上这些文件是保存在linux的文件系统中。通过hdfs-site.xml的dfs.namenode.name.dir属性进行设置。</p>
 
-<h5 id="datanode">1.1.1.2 Datanode</h5>
+<h5 id="1112-datanode">1.1.1.2 Datanode</h5>
 
 <ul>
   <li>提供真实文件数据的存储服务。</li>
@@ -314,11 +314,11 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
 </code></pre>
 </div>
 
-<h5 id="staging">1.1.1.3 数据存储： staging</h5>
+<h5 id="1113-数据存储-staging">1.1.1.3 数据存储： staging</h5>
 
 <p>HDFS client上传数据到HDFS时，首先，在本地缓存数据，当数据达到一个block大小时，请求NameNode分配一个block。 NameNode会把block所在的DataNode的地址告诉HDFS client。 HDFS client会直接和DataNode通信，把数据写到DataNode节点一个block文件中。</p>
 
-<h5 id="section">1.1.1.4 数据存储：读文件操作</h5>
+<h5 id="1114-数据存储读文件操作">1.1.1.4 数据存储：读文件操作</h5>
 
 <p><img src="/images/hdfs_read.jpg" alt="" /></p>
 
@@ -339,7 +339,7 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
   <p>该设计就是客户端直接连接datanode来检索数据并且namenode来负责为每一个block提供最优的datanode， namenode仅仅处理block location的请求，这些信息都加载在namenode的内存中，hdfs通过datanode集群可以承受大量客户端的并发访问。</p>
 </blockquote>
 
-<h5 id="section-1">1.1.1.5 数据存储：写文件操作</h5>
+<h5 id="1115-数据存储写文件操作">1.1.1.5 数据存储：写文件操作</h5>
 
 <p><img src="/images/hdfs_write.jpg" alt="" /></p>
 
@@ -369,7 +369,7 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
   <p>注意：客户端执行write操作后，写完的block才是可见的，正在写的block对客户端是不可见的，只有调用sync方法，客户端才确保该文件的写操作已经全部完成，当客户端调用close方法时，会默认调用sync方法。是否需要手动调用取决你根据程序需要在数据健壮性和吞吐率之间的权衡。</p>
 </blockquote>
 
-<h4 id="hdfs-1">1.1.2 HDFS常用命令</h4>
+<h4 id="112-hdfs常用命令">1.1.2 HDFS常用命令</h4>
 
 <p><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html">HDFS 常用命令: 官网</a></p>
 
@@ -414,7 +414,7 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
   </tbody>
 </table>
 
-<h4 id="hdfs-2">1.1.3 HDFS问题</h4>
+<h4 id="113-hdfs问题">1.1.3 HDFS问题</h4>
 
 <p><strong>文件存储与分发</strong></p>
 
@@ -423,9 +423,9 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
   <li>答：存储文件数按完整文件个数来讲，是根据dfs.replication来设置的，默认为3份。按照Block来讲，根据文件原始大小来决定Block数（默认Block大小是128MB）。存储位置分配：<strong>存储：不同BlockID被随机分配在各个节点上</strong>，<strong>分发：相同的BlockID会在不同于自身节点上进行复制备份</strong>。参看<a href="/hadoop/2016/08/04/hadoop_family/#datanode">DataNode</a>部分的介绍，图中所示的文件soc-LiveJournal.txt大小为1个G，被拆分为8个Block。同一BlockID被随机地分配在2个DataNode上（注：本集群设置dfs.replication为2）。文件读取时采取就近原则（本地&gt;同网段&gt;跨网段）读取。</li>
 </ul>
 
-<h3 id="mapreduce">1.2 MapReduce</h3>
+<h3 id="12-mapreduce">1.2 MapReduce</h3>
 
-<h4 id="explain-mapreduce-in-5-minutes">1.2.1  Explain Map/Reduce in 5 minutes</h4>
+<h4 id="121--explain-mapreduce-in-5-minutes">1.2.1  Explain Map/Reduce in 5 minutes</h4>
 
 <p>原文链接: <a href="http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce">http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce</a> by Aurelien.</p>
 
@@ -471,9 +471,9 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
 
 <p><a href="https://github.com/jsoftbiz/mapreduce_1">https://github.com/jsoftbiz/mapreduce_1</a></p>
 
-<h4 id="section-2">1.2.2 实例演示</h4>
+<h4 id="122-实例演示">1.2.2 实例演示</h4>
 
-<h5 id="wordcount">1.2.2.1 演示WordCount</h5>
+<h5 id="1221-演示wordcount">1.2.2.1 演示WordCount</h5>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">file1</span><span class="o">.</span><span class="n">txt</span>
 <span class="nc">Hello</span> <span class="nc">World</span>
@@ -574,7 +574,7 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
 </code></pre>
 </div>
 
-<h5 id="section-3">1.2.2.2 演示上述平均温度统计</h5>
+<h5 id="1222-演示上述平均温度统计">1.2.2.2 演示上述平均温度统计</h5>
 
 <p>资源链接：<a href="https://github.com/jsoftbiz/mapreduce_1">https://github.com/jsoftbiz/mapreduce_1</a></p>
 
@@ -657,7 +657,7 @@ packageJobJar: <span class="o">[</span>mapper.py, reducer.py, /tmp/hadoop-unjar8
 </code></pre>
 </div>
 
-<h5 id="writing-an-hadoop-mapreduce-program-in-python">1.2.2.3 Writing an Hadoop MapReduce Program in Python</h5>
+<h5 id="1223-writing-an-hadoop-mapreduce-program-in-python">1.2.2.3 Writing an Hadoop MapReduce Program in Python</h5>
 
 <p>原文请参照：</p>
 
@@ -740,7 +740,7 @@ packageJobJar: <span class="o">[</span>/home/hadoop/words/mapper.py, /home/hadoo
 </code></pre>
 </div>
 
-<h4 id="mapr">1.2.3 MapR问题</h4>
+<h4 id="123-mapr问题">1.2.3 MapR问题</h4>
 
 <p><strong>NameNode JobTracker</strong></p>
 
@@ -867,9 +867,9 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
   <li>Mapper and Reducer implementations can use the Counter to report statistics.</li>
 </ul>
 
-<h3 id="apache-hadoop-yarn">1.3 Apache Hadoop YARN</h3>
+<h3 id="13-apache-hadoop-yarn">1.3 Apache Hadoop YARN</h3>
 
-<h4 id="introduction-1">1.3.1 Introduction</h4>
+<h4 id="131-introduction">1.3.1 Introduction</h4>
 
 <p>The fundamental idea of YARN is to split up the functionalities of resource management and job scheduling/monitoring into separate daemons. The idea is to have a global ResourceManager (RM) and per-application ApplicationMaster (AM). An application is either a single job or a DAG of jobs.</p>
 
@@ -886,7 +886,7 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
 
 <p>The ApplicationsManager is responsible for accepting job-submissions, negotiating the first container for executing the application specific ApplicationMaster and provides the service for restarting the ApplicationMaster container on failure. The per-application ApplicationMaster has the responsibility of negotiating appropriate resource containers from the Scheduler, tracking their status and monitoring for progress.</p>
 
-<h4 id="section-4">1.3.2 应用程序运行过程</h4>
+<h4 id="132-应用程序运行过程">1.3.2 应用程序运行过程</h4>
 
 <ul>
   <li>步骤1：用户将应用程序提交到ResourceManager上；</li>
@@ -897,15 +897,15 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
 
 <p><img src="/images/hadoop/yarn_am.png" alt="" /></p>
 
-<h4 id="resourcemanagerapplicationmasternodemanager">1.3.3 ResourceManager与ApplicationMaster与NodeManager</h4>
+<h4 id="133-resourcemanager与applicationmaster与nodemanager">1.3.3 ResourceManager与ApplicationMaster与NodeManager</h4>
 
 <p><img src="/images/hadoop/yarn_client2rm.png" alt="" />
 <img src="/images/hadoop/yarn_rm_am_nm.png" alt="" />
 参看：<a href="http://blog.csdn.net/s646575997/article/details/51802567">YARN的设计思想和功能组件简介</a></p>
 
-<h3 id="hbase">1.4 HBase</h3>
+<h3 id="14-hbase">1.4 HBase</h3>
 
-<h4 id="introduction-2">1.4.1 Introduction</h4>
+<h4 id="141-introduction">1.4.1 Introduction</h4>
 
 <p><a href="http://hbase.apache.org/book.html#quickstart">Apache Hbase</a>安装及测试</p>
 
@@ -921,7 +921,7 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
   <li>connect to the UI for the Master<a href="H1:16010">H1:16010</a> or <a href="H2:16010">H2:16010</a></li>
 </ul>
 
-<h4 id="the-apache-hbase-shell">1.4.2 The Apache HBase Shell演示</h4>
+<h4 id="142-the-apache-hbase-shell演示">1.4.2 The Apache HBase Shell演示</h4>
 
 <ul>
   <li>1 <a href="http://hbase.apache.org/book.html#scripting">Scripting with Ruby</a></li>
@@ -930,7 +930,7 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
   <li>4 <a href="http://hbase.apache.org/book.html#_read_hbase_shell_commands_from_a_command_file">Read HBase Shell Commands from a Command File</a></li>
 </ul>
 
-<h4 id="data-modelhttphbaseapacheorgbookhtmldatamodel">1.4.3 <a href="http://hbase.apache.org/book.html#datamodel">Data Model</a></h4>
+<h4 id="143-data-model">1.4.3 <a href="http://hbase.apache.org/book.html#datamodel">Data Model</a></h4>
 
 <ul>
   <li>1 时间戳（Timestamp）：每次数据操作对应的时间戳，可以看作是数据的版本号</li>
@@ -939,9 +939,9 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
   <li>4 单元格（Cell）：表存储数据的单元。由{行健，列（列族:标签），时间戳}唯一确定，其中的数据是没有类型的，以二进制的形式存储。</li>
 </ul>
 
-<h2 id="service-programming">2 Service Programming</h2>
+<h2 id="2-service-programming">2 Service Programming</h2>
 
-<h3 id="zookeeper">2.1 Zookeeper</h3>
+<h3 id="21-zookeeper">2.1 Zookeeper</h3>
 
 <p><img src="/images/zookeeper_small.gif" alt="" /></p>
 
@@ -949,7 +949,7 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
 
 <p>ZooKeeper是Hadoop Ecosystem中非常重要的组件，它的主要功能是为分布式系统提供一致性协调(Coordination)服务，与之对应的Google的类似服务叫Chubby。</p>
 
-<h4 id="zookeeper-1">2.1.1 Zookeeper的基本概念</h4>
+<h4 id="211-zookeeper的基本概念">2.1.1 Zookeeper的基本概念</h4>
 
 <ul>
   <li>1 Role</li>
@@ -974,7 +974,7 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
   <li>6 顺序性：包括全局有序和偏序两种：全局有序是指如果在一台服务器上消息a在消息b前发布，则在所有Server上消息a都将在消息b前被发布；偏序是指如果一个消息b在消息a后被同一个发送者发布，a必将排在b前面。</li>
 </ul>
 
-<h4 id="zookeeper-2">2.1.2 ZooKeeper的工作原理</h4>
+<h4 id="212-zookeeper的工作原理">2.1.2 ZooKeeper的工作原理</h4>
 
 <p>Zookeeper的核心是原子广播，这个机制保证了各个Server之间的同步。实现这个机制的协议叫做Zab协议。Zab协议有两种模式，它们分别是恢复模式（选主）和广播模式（同步）。当服务启动或者在领导者崩溃后，Zab就进入了恢复模式，当领导者被选举出来，且大多数Server完成了和leader的状态同步以后，恢复模式就结束了。状态同步保证了leader和Server具有相同的系统状态。</p>
 
@@ -990,7 +990,7 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
 
 <p>可以参照此博客<a href="http://cailin.iteye.com/blog/2014486/">详细过程</a></p>
 
-<h3 id="kafka">2.2 kafka</h3>
+<h3 id="22-kafka">2.2 kafka</h3>
 
 <p>一个分布式的、分区的、多副本的实时消息发布和订阅系统。提供可扩展、高吞吐、低延迟、高可靠的消息分发服务。</p>
 
@@ -998,7 +998,7 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
 
 <p>视频教程<a href="http://www.jikexueyuan.com/course/kafka/">http://www.jikexueyuan.com/course/kafka/</a></p>
 
-<h4 id="introductionhttpwwwcnblogscomlikehuap3999538html">2.2.1 <a href="http://www.cnblogs.com/likehua/p/3999538.html">Introduction</a></h4>
+<h4 id="221-introduction">2.2.1 <a href="http://www.cnblogs.com/likehua/p/3999538.html">Introduction</a></h4>
 
 <p><a href="http://kafka.apache.org/documentation.html#introduction">Introduction</a></p>
 
@@ -1008,7 +1008,7 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
 
 <p><img src="/images/hadoop/consumer-groups.png" alt="" /></p>
 
-<h4 id="section-5">2.2.2 集群实现与演示</h4>
+<h4 id="222-集群实现与演示">2.2.2 集群实现与演示</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 ~]$ ~/tools/runRemoteCmd.sh "/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;" all
 
@@ -1018,13 +1018,13 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
 </code></pre>
 </div>
 
-<h2 id="distributed-programming">3 Distributed Programming</h2>
+<h2 id="3-distributed-programming">3 Distributed Programming</h2>
 
-<h3 id="pig">3.1 Pig</h3>
+<h3 id="31-pig">3.1 Pig</h3>
 
 <p>pig是hadoop上层的衍生架构，与hive类似。对比hive（hive类似sql，是一种声明式的语言），pig是一种过程语言，类似于存储过程一步一步得进行数据转化。</p>
 
-<h4 id="pig-1">3.1.1 pig数据类型</h4>
+<h4 id="311-pig数据类型">3.1.1 pig数据类型</h4>
 
 <ul>
   <li>
@@ -1065,13 +1065,13 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
   </ul>
 </blockquote>
 
-<h4 id="pig-2">3.1.2 pig基本语法</h4>
+<h4 id="312-pig基本语法">3.1.2 pig基本语法</h4>
 
 <p>TODO</p>
 
-<h3 id="hive">3.2 Hive</h3>
+<h3 id="32-hive">3.2 Hive</h3>
 
-<h4 id="hive-introduction">3.2.1 Hive introduction</h4>
+<h4 id="321-hive-introduction">3.2.1 Hive introduction</h4>
 
 <p><a href="https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-InstallationandConfiguration">Hive Install</a></p>
 
@@ -1183,7 +1183,7 @@ Beeline version 2.1.0 by Apache Hive</p>
 </code></pre>
 </div>
 
-<h4 id="running-hive">3.2.2 Running Hive</h4>
+<h4 id="322-running-hive">3.2.2 Running Hive</h4>
 
 <p><a href="https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive">Running Hive</a></p>
 
@@ -1424,7 +1424,7 @@ Time taken: 36.675 seconds, Fetched: 1 row(s)
 </code></pre>
 </div>
 
-<h4 id="hive-">3.3.3 Hive 相关问题</h4>
+<h4 id="333-hive-相关问题">3.3.3 Hive 相关问题</h4>
 
 <ul>
   <li>问题：HIve只是对MapR的一个翻译？</li>
@@ -1450,11 +1450,11 @@ Time taken: 36.675 seconds, Fetched: 1 row(s)
   </ul>
 </blockquote>
 
-<h3 id="spark">3.3 Spark</h3>
+<h3 id="33-spark">3.3 Spark</h3>
 
 <p>基于内存进行计算的分布式计算框架。</p>
 
-<h4 id="spark-overview">3.3.1 Spark Overview</h4>
+<h4 id="331-spark-overview">3.3.1 Spark Overview</h4>
 
 <p>Apache Spark is a fast and general-purpose cluster computing system. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs. It also supports a rich set of higher-level tools including <a href="http://spark.apache.org/docs/latest/sql-programming-guide.html">Spark SQL</a> for SQL and structured data processing, <a href="http://spark.apache.org/docs/latest/ml-guide.html">MLlib</a> for machine learning, <a href="http://spark.apache.org/docs/latest/graphx-programming-guide.html">GraphX</a> for graph processing, and <a href="http://spark.apache.org/docs/latest/streaming-programming-guide.html">Spark Streaming</a>.</p>
 
@@ -1719,45 +1719,45 @@ output: [('Hello', 1), ('I', 1), ('AM', 1), ('Ankit ', 1), ('Gupta', 1)]
 
 <p>ref: <a href="http://dblab.xmu.edu.cn/blog/spark-quick-start-guide/">Spark快速入门指南 – Spark安装与基础使用</a></p>
 
-<h4 id="spark-sql-dataframes-and-datasets-guidereferhttpsparkapacheorgdocslatestsql-programming-guidehtml">3.3.2 Spark SQL, DataFrames and Datasets Guide<a href="http://spark.apache.org/docs/latest/sql-programming-guide.html">refer</a></h4>
+<h4 id="332-spark-sql-dataframes-and-datasets-guiderefer">3.3.2 Spark SQL, DataFrames and Datasets Guide<a href="http://spark.apache.org/docs/latest/sql-programming-guide.html">refer</a></h4>
 
 <p>TODO</p>
 
-<h4 id="spark-streaming-programming-guidereferhttpsparkapacheorgdocslateststreaming-programming-guidehtml">3.3.3 Spark Streaming Programming Guide<a href="http://spark.apache.org/docs/latest/streaming-programming-guide.html">refer</a></h4>
+<h4 id="333-spark-streaming-programming-guiderefer">3.3.3 Spark Streaming Programming Guide<a href="http://spark.apache.org/docs/latest/streaming-programming-guide.html">refer</a></h4>
 
 <p>TODO</p>
 
-<h4 id="machine-learning-library-mllib-guidereferhttpsparkapacheorgdocslatestml-guidehtml">3.3.4 Machine Learning Library (MLlib) Guide<a href="http://spark.apache.org/docs/latest/ml-guide.html">refer</a></h4>
+<h4 id="334-machine-learning-library-mllib-guiderefer">3.3.4 Machine Learning Library (MLlib) Guide<a href="http://spark.apache.org/docs/latest/ml-guide.html">refer</a></h4>
 
 <p>TODO</p>
 
-<h4 id="graphx-programming-guidereferhttpsparkapacheorgdocslatestgraphx-programming-guidehtml">3.3.5 GraphX Programming Guide<a href="http://spark.apache.org/docs/latest/graphx-programming-guide.html">refer</a></h4>
+<h4 id="335-graphx-programming-guiderefer">3.3.5 GraphX Programming Guide<a href="http://spark.apache.org/docs/latest/graphx-programming-guide.html">refer</a></h4>
 
 <p>TODO</p>
 
-<h2 id="machine-learning">4 Machine Learning</h2>
+<h2 id="4-machine-learning">4 Machine Learning</h2>
 
-<h3 id="mahout">4.1 Mahout</h3>
+<h3 id="41-mahout">4.1 Mahout</h3>
 
-<h2 id="data-ingestion">5 Data Ingestion</h2>
+<h2 id="5-data-ingestion">5 Data Ingestion</h2>
 
-<h3 id="storm">5.1 Storm</h3>
+<h3 id="51-storm">5.1 Storm</h3>
 
 <p><img src="/images/storm-flow.png" alt="" /></p>
 
-<h4 id="setting-up-a-storm-clusterhttpstormapacheorgreleases101setting-up-a-storm-clusterhtml">5.1.1 <a href="http://storm.apache.org/releases/1.0.1/Setting-up-a-Storm-cluster.html">Setting up a Storm Cluster</a></h4>
+<h4 id="511-setting-up-a-storm-cluster">5.1.1 <a href="http://storm.apache.org/releases/1.0.1/Setting-up-a-Storm-cluster.html">Setting up a Storm Cluster</a></h4>
 
 <p><a href="http://storm.apache.org/releases/1.0.1/Setting-up-a-Storm-cluster.html">Setting up a Storm Cluster</a></p>
 
-<h4 id="storm-indexhttpstormapacheorgreleases101indexhtml">5.1.2 <a href="http://storm.apache.org/releases/1.0.1/index.html">Storm Index</a></h4>
+<h4 id="512-storm-index">5.1.2 <a href="http://storm.apache.org/releases/1.0.1/index.html">Storm Index</a></h4>
 
 <p><a href="http://storm.apache.org/releases/1.0.1/index.html">Storm Index</a></p>
 
-<h4 id="storm-resources-for-reference">5.1.3 Storm Resources for reference</h4>
+<h4 id="513-storm-resources-for-reference">5.1.3 Storm Resources for reference</h4>
 
 <p><a href="http://storm.apache.org/talksAndVideos.html">Talks and Slideshows</a> __ <a href="http://www.oschina.net/translate/history-of-apache-storm-and-lessons-learned?cmp&amp;p=4#">Apache Storm 的历史及经验教训</a></p>
 
-<h4 id="storm-1">5.1.4 Storm命名方式</h4>
+<h4 id="514-storm命名方式">5.1.4 Storm命名方式</h4>
 
 <blockquote>
   <ul>
@@ -1769,15 +1769,15 @@ output: [('Hello', 1), ('I', 1), ('AM', 1), ('Ankit ', 1), ('Gupta', 1)]
   </ul>
 </blockquote>
 
-<h3 id="sqoop">5.2 Sqoop</h3>
+<h3 id="52-sqoop">5.2 Sqoop</h3>
 
 <p>TODO</p>
 
-<h2 id="databases">6 Databases</h2>
+<h2 id="6-databases">6 Databases</h2>
 
-<h3 id="redis">6.1 Redis</h3>
+<h3 id="61-redis">6.1 Redis</h3>
 
-<h4 id="section-6">6.1.1 集群安装</h4>
+<h4 id="611-集群安装">6.1.1 集群安装</h4>
 
 <p><a href="http://zhoushouby.blog.51cto.com/9150272/1560346">redis 3.0 cluster 集群 学习之路篇 [1]</a></p>
 
@@ -1820,9 +1820,9 @@ True
 </code></pre>
 </div>
 
-<h2 id="system-deployment">7 System Deployment</h2>
+<h2 id="7-system-deployment">7 System Deployment</h2>
 
-<h3 id="ambari">7.1 Ambari</h3>
+<h3 id="71-ambari">7.1 Ambari</h3>
 
 <p>TODO</p>
 
@@ -1853,7 +1853,7 @@ True
                     <div class="ds-thread"
                         data-thread-key="/hadoop/2016/08/04/hadoop_family"
                         data-title="Hadoop Family Integration"
-                        data-url="http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_family/" >
+                        data-url="http://localhost:4000/hadoop/2016/08/04/hadoop_family/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -1874,7 +1874,7 @@ True
                     <div class="ds-thread"
                         data-thread-key="/hadoop/2016/08/04/hadoop_family"
                         data-title="Hadoop Family Integration"
-                        data-url="http://machinelearningadvance.com/hadoop/2016/08/04/hadoop_family/" >
+                        data-url="http://localhost:4000/hadoop/2016/08/04/hadoop_family/" >
                     </div>
 
                 </div>

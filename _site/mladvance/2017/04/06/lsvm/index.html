@@ -17,7 +17,7 @@
 
     <title>Spark-ML-030101-Linear Model-LSVM - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2017/04/06/lsvm/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2017/04/06/lsvm/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,9 +196,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="section">线性支持向量机</h3>
+				<h3 id="线性支持向量机">线性支持向量机</h3>
 
-<h4 id="section-1">1 介绍</h4>
+<h4 id="1-介绍">1 介绍</h4>
 
 <p>  线性支持向量机是一个用于大规模分类任务的标准方法。它的目标函数<a href="/mladvance/2017/04/06/linear-model/">线性模型</a>中的公式（1）。它的损失函数是海格损失，如下所示</p>
 
@@ -208,9 +208,9 @@
 
 <p>  线性支持向量机并不需要核函数，要详细了解支持向量机，请参考文献【1】。</p>
 
-<h2 id="section-2">2 源码分析</h2>
+<h2 id="2-源码分析">2 源码分析</h2>
 
-<h3 id="section-3">2.1 实例</h3>
+<h3 id="21-实例">2.1 实例</h3>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.classification.</span><span class="o">{</span><span class="nc">SVMModel</span><span class="o">,</span> <span class="nc">SVMWithSGD</span><span class="o">}</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.evaluation.BinaryClassificationMetrics</span>
@@ -238,7 +238,7 @@
 </code></pre>
 </div>
 
-<h3 id="section-4">2.2 训练</h3>
+<h3 id="22-训练">2.2 训练</h3>
 
 <p>  和逻辑回归一样，训练过程均使用<code class="highlighter-rouge">GeneralizedLinearModel</code>中的<code class="highlighter-rouge">run</code>训练，只是训练使用的<code class="highlighter-rouge">Gradient</code>和<code class="highlighter-rouge">Updater</code>不同。在线性支持向量机中，使用<code class="highlighter-rouge">HingeGradient</code>计算梯度，使用<code class="highlighter-rouge">SquaredL2Updater</code>进行更新。
 它的实现过程分为4步。参加<a href="../逻辑回归/logic-regression.md">逻辑回归</a>了解这五步的详细情况。我们只需要了解<code class="highlighter-rouge">HingeGradient</code>和<code class="highlighter-rouge">SquaredL2Updater</code>的实现。</p>
@@ -313,7 +313,7 @@
 </div>
 <p>  这里<code class="highlighter-rouge">thisIterStepSize</code>表示参数沿负梯度方向改变的速率，它随着迭代次数的增多而减小。</p>
 
-<h3 id="section-5">2.3 预测</h3>
+<h3 id="23-预测">2.3 预测</h3>
 
 <div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="n">predictPoint</span><span class="o">(</span>
       <span class="n">dataMatrix</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
@@ -329,7 +329,7 @@
 </code></pre>
 </div>
 
-<h1 id="section-6">参考文献</h1>
+<h1 id="参考文献">参考文献</h1>
 
 <p>【1】<a href="http://blog.csdn.net/macyang/article/details/38782399">支持向量机通俗导论（理解SVM的三层境界）</a></p>
 
@@ -360,7 +360,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/lsvm"
                         data-title="Spark-ML-030101-Linear Model-LSVM"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/lsvm/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/lsvm/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -381,7 +381,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/lsvm"
                         data-title="Spark-ML-030101-Linear Model-LSVM"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/lsvm/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/lsvm/" >
                     </div>
 
                 </div>

@@ -17,7 +17,7 @@
 
     <title>新三板文本项目 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2016/12/26/new3Text/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2016/12/26/new3Text/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,7 +196,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="section">目录</h2>
+				<h2 id="目录">目录</h2>
 
 <ul>
   <li>1 文本数据采集</li>
@@ -206,7 +206,7 @@
   <li>5 文本数据分类与其它</li>
 </ul>
 
-<h2 id="section-1">1 文本数据采集</h2>
+<h2 id="1-文本数据采集">1 文本数据采集</h2>
 
 <ul>
   <li>采集数据源：<a href="http://data.eastmoney.com/Report/ReportSBMarket.html">三板市场研报</a></li>
@@ -270,9 +270,9 @@ scrapy crawl sbyb -o sbyb.json
 </code></pre>
 </div>
 
-<h2 id="section-2">2 文本数据解析</h2>
+<h2 id="2-文本数据解析">2 文本数据解析</h2>
 
-<h3 id="section-3">2.1 词库准备</h3>
+<h3 id="21-词库准备">2.1 词库准备</h3>
 
 <p>Jieba 是一个用于中文分词的Python 项目，主要实现了以下功能：</p>
 
@@ -349,7 +349,7 @@ jieba.load_userdict(file_name) # file_name 为自定义词典的路径。
 </code></pre>
 </div>
 
-<h3 id="section-4">2.2 读取文件</h3>
+<h3 id="22-读取文件">2.2 读取文件</h3>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>def loadjsonFile(jsonFile):
     df_raw = pd.read_json(jsonFile)
@@ -368,7 +368,7 @@ dfcontent = loadjsonFile(u"D:\python_workspace\crawler\\new3\\new3.json")
 </code></pre>
 </div>
 
-<h3 id="section-5">2.3 按时间分片</h3>
+<h3 id="23-按时间分片">2.3 按时间分片</h3>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>def slice_df(exp1_y, exp1_m, exp1_d, exp2_y, exp2_m, exp2_d):
     return dfcontent[(dfcontent.index &gt; datetime.date(exp1_y, exp1_m, exp1_d, )) &amp; (
@@ -387,7 +387,7 @@ df_2017Q1 = slice_df(2016, 12, 31, 2017, 3, 31)
 </code></pre>
 </div>
 
-<h3 id="jieba-tf-idf">2.4 转换为词向量及进行jieba TF-IDF抽取关键词</h3>
+<h3 id="24-转换为词向量及进行jieba-tf-idf抽取关键词">2.4 转换为词向量及进行jieba TF-IDF抽取关键词</h3>
 
 <div class="highlighter-rouge"><pre class="highlight"><code># 分词
 def convert_doc_to_wordlist(dataFrameIn, method=None):
@@ -406,9 +406,9 @@ def convert_doc_to_wordlist(dataFrameIn, method=None):
 </code></pre>
 </div>
 
-<h2 id="section-6">3 文本数据分析</h2>
+<h2 id="3-文本数据分析">3 文本数据分析</h2>
 
-<h3 id="jiebatf-idf">3.1 对jieba抽取语料进行TF-IDF抽取关键词</h3>
+<h3 id="31-对jieba抽取语料进行tf-idf抽取关键词">3.1 对jieba抽取语料进行TF-IDF抽取关键词</h3>
 
 <div class="highlighter-rouge"><pre class="highlight"><code># 对jieba抽取语料进行TF-IDF抽取关键词
 def word_tfidf_vec(corpus):
@@ -429,7 +429,7 @@ def word_tfidf_vec(corpus):
 </code></pre>
 </div>
 
-<h3 id="section-7">3.2 展示重要词及权重</h3>
+<h3 id="32-展示重要词及权重">3.2 展示重要词及权重</h3>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>r = word_tfidf_vec(corpuses)
 for i in range(corpuses.__len__()):
@@ -437,7 +437,7 @@ for i in range(corpuses.__len__()):
 </code></pre>
 </div>
 
-<h2 id="section-8">4 文本数据词云</h2>
+<h2 id="4-文本数据词云">4 文本数据词云</h2>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>def plot_cloudMap(nWord=100):
     # backgroud_Image = plt.imread("../../images/stock.jpg")
@@ -467,7 +467,7 @@ for i in range(corpuses.__len__()):
 </code></pre>
 </div>
 
-<h2 id="section-9">5 新三板市场研报文本词云展示</h2>
+<h2 id="5-新三板市场研报文本词云展示">5 新三板市场研报文本词云展示</h2>
 
 <p><img src="/images/new3/2014Q4.png" alt="" />
 <img src="/images/new3/2015Q2.png" alt="" />
@@ -479,7 +479,7 @@ for i in range(corpuses.__len__()):
 <img src="/images/new3/2016Q4.png" alt="" />
 <img src="/images/new3/2017Q1.png" alt="" /></p>
 
-<h2 id="section-10">6 季度词云分析</h2>
+<h2 id="6-季度词云分析">6 季度词云分析</h2>
 
 <p>如上所示词云，每个季节的关键词差异非常大，反映了市场的不同行情与阶段，同时反映了这一季度受到市场关注的一些公司、监管动向等内容。</p>
 
@@ -517,7 +517,7 @@ for i in range(corpuses.__len__()):
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/12/26/new3Text"
                         data-title="新三板文本项目"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/12/26/new3Text/" >
+                        data-url="http://localhost:4000/mladvance/2016/12/26/new3Text/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -538,7 +538,7 @@ for i in range(corpuses.__len__()):
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2016/12/26/new3Text"
                         data-title="新三板文本项目"
-                        data-url="http://machinelearningadvance.com/mladvance/2016/12/26/new3Text/" >
+                        data-url="http://localhost:4000/mladvance/2016/12/26/new3Text/" >
                     </div>
 
                 </div>

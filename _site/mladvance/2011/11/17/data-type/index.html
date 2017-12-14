@@ -17,7 +17,7 @@
 
     <title>Spark-ML-01 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2011/11/17/data-type/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2011/11/17/data-type/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,12 +196,12 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="section">数据类型</h1>
+				<h1 id="数据类型">数据类型</h1>
 
 <p>  <code class="highlighter-rouge">MLlib</code>既支持保存在单台机器上的本地向量和矩阵，也支持备份在一个或多个<code class="highlighter-rouge">RDD</code>中的分布式矩阵。本地向量和本地矩阵是简单的数据模型，作为公共接口提供。底层的线性代数操作通过<a href="http://www.scalanlp.org/">Breeze</a>和<a href="http://jblas.org/">jblas</a>提供。
 在<code class="highlighter-rouge">MLlib</code>中，用于有监督学习的训练样本称为标注点(<code class="highlighter-rouge">labeled point</code>)。</p>
 
-<h1 id="local-vector">1 本地向量(Local vector)</h1>
+<h1 id="1-本地向量local-vector">1 本地向量(Local vector)</h1>
 
 <p>  一个本地向量拥有从0开始的<code class="highlighter-rouge">integer</code>类型的索引以及<code class="highlighter-rouge">double</code>类型的值，它保存在单台机器上面。<code class="highlighter-rouge">MLlib</code>支持两种类型的本地向量：稠密(<code class="highlighter-rouge">dense</code>)向量和稀疏(<code class="highlighter-rouge">sparse</code>)向量。
 一个稠密向量通过一个<code class="highlighter-rouge">double</code>类型的数组保存数据，这个数组表示向量的条目值(<code class="highlighter-rouge">entry values</code>)；一个稀疏向量通过两个并行的数组（<code class="highlighter-rouge">indices和values</code>）保存数据。例如，一个向量
@@ -243,7 +243,7 @@
 </code></pre>
 </div>
 
-<h1 id="labeled-point">2 标注点(Labeled point)</h1>
+<h1 id="2-标注点labeled-point">2 标注点(Labeled point)</h1>
 
 <p>  一个标注点就是一个本地向量（或者是稠密的或者是稀疏的），这个向量和一个标签或者响应相关联。在<code class="highlighter-rouge">MLlib</code>中，标注点用于有监督学习算法。我们用一个<code class="highlighter-rouge">double</code>存储标签，这样我们就可以在回归和分类中使用标注点。
 对于二分类，一个标签可能是0或者是1；对于多分类，一个标签可能代表从0开始的类别索引。</p>
@@ -279,7 +279,7 @@
 </code></pre>
 </div>
 
-<h1 id="local-matrix">3 本地矩阵（Local matrix）</h1>
+<h1 id="3-本地矩阵local-matrix">3 本地矩阵（Local matrix）</h1>
 
 <p>  一个本地矩阵拥有<code class="highlighter-rouge">Integer</code>类型的行和列索引以及<code class="highlighter-rouge">Double</code>类型的值。<code class="highlighter-rouge">MLlib</code>支持稠密矩阵和稀疏矩阵两种。稠密矩阵将条目(<code class="highlighter-rouge">entry</code>)值保存为单个<code class="highlighter-rouge">double</code>数组，这个数组根据列的顺序存储。
 稀疏矩阵的非零条目值保存为压缩稀疏列（<code class="highlighter-rouge">Compressed Sparse Column ，CSC</code>）格式，这种格式也是以列顺序存储。例如下面的稠密矩阵：</p>
@@ -305,7 +305,7 @@
 </div>
 <p>  稠密矩阵的存储很简单，不赘述。稀疏矩阵的存储使用<code class="highlighter-rouge">CSC</code>。关于压缩矩阵的介绍，请参看文献【1】。</p>
 
-<h1 id="distributed-matrix">4 分布式矩阵(Distributed matrix)</h1>
+<h1 id="4-分布式矩阵distributed-matrix">4 分布式矩阵(Distributed matrix)</h1>
 
 <p>  一个分布式矩阵拥有<code class="highlighter-rouge">long</code>类型的行和列索引，以及<code class="highlighter-rouge">double</code>类型的值，分布式的存储在一个或多个<code class="highlighter-rouge">RDD</code>中。选择正确的格式存储大型分布式矩阵是非常重要的。将一个分布式矩阵转换为另外一个格式可能需要一个全局的<code class="highlighter-rouge">shuffle</code>，这是非常昂贵的。
 到目前为止，已经实现了三种类型的分布式矩阵。</p>
@@ -313,7 +313,7 @@
 <p>  基本的类型是<code class="highlighter-rouge">RowMatrix</code>，<code class="highlighter-rouge">RowMatrix</code>是一个面向行的分布式矩阵，它没有有意义的行索引。它的行保存为一个<code class="highlighter-rouge">RDD</code>,每一行都是一个本地向量。我们假设一个<code class="highlighter-rouge">RowMatrix</code>的列的数量不是很巨大，这样单个本地向量可以方便的和<code class="highlighter-rouge">driver</code>通信，也可以被单个节点保存和操作。
 <code class="highlighter-rouge">IndexedRowMatrix</code>和<code class="highlighter-rouge">RowMatrix</code>很像，但是它拥有行索引，行索引可以用于识别行和进行<code class="highlighter-rouge">join</code>操作。<code class="highlighter-rouge">CoordinateMatrix</code>是一个分布式矩阵，它使用<code class="highlighter-rouge">COO</code>格式存储。请参看文献【1】了解<code class="highlighter-rouge">COO</code>格式。</p>
 
-<h2 id="rowmatrix">4.1 RowMatrix</h2>
+<h2 id="41-rowmatrix">4.1 RowMatrix</h2>
 
 <p>  <code class="highlighter-rouge">RowMatrix</code>是一个面向行的分布式矩阵，它没有有意义的行索引。它的行保存为一个<code class="highlighter-rouge">RDD</code>,每一行都是一个本地向量。因为每一行保存为一个本地向量，所以列数限制在了整数范围。</p>
 
@@ -333,7 +333,7 @@
 </code></pre>
 </div>
 
-<h2 id="indexedrowmatrix">4.2 IndexedRowMatrix</h2>
+<h2 id="42-indexedrowmatrix">4.2 IndexedRowMatrix</h2>
 
 <p>  <code class="highlighter-rouge">IndexedRowMatrix</code>和<code class="highlighter-rouge">RowMatrix</code>很像，但是它拥有行索引。索引的行保存为一个<code class="highlighter-rouge">RDD[IndexedRow]</code>，其中<code class="highlighter-rouge">IndexedRow</code>是一个参数为<code class="highlighter-rouge">(Long, Vector)</code>的样本类，所以每一行通过它的索引以及一个本地向量表示。</p>
 
@@ -356,7 +356,7 @@
 </code></pre>
 </div>
 
-<h2 id="coordinatematrix">4.3 CoordinateMatrix</h2>
+<h2 id="43-coordinatematrix">4.3 CoordinateMatrix</h2>
 
 <p>  <code class="highlighter-rouge">CoordinateMatrix</code>是一个分布式矩阵，它的条目保存为一个<code class="highlighter-rouge">RDD</code>。每一个条目是一个<code class="highlighter-rouge">(i: Long, j: Long, value: Double)</code>格式的元组，其中<code class="highlighter-rouge">i</code>表示行索引，<code class="highlighter-rouge">j</code>表示列索引，<code class="highlighter-rouge">value</code>表示条目值。
 <code class="highlighter-rouge">CoordinateMatrix</code>应该仅仅在矩阵维度很大并且矩阵非常稀疏的情况下使用。</p>
@@ -380,7 +380,7 @@
 </code></pre>
 </div>
 
-<h2 id="blockmatrix">4.4 BlockMatrix</h2>
+<h2 id="44-blockmatrix">4.4 BlockMatrix</h2>
 
 <p>  <code class="highlighter-rouge">BlockMatrix</code>是一个分布式矩阵，它的保存为一个<code class="highlighter-rouge">MatrixBlocks</code>的<code class="highlighter-rouge">RDD</code>。<code class="highlighter-rouge">MatrixBlock</code>是一个<code class="highlighter-rouge">((Int, Int), Matrix)</code>类型的元组，其中<code class="highlighter-rouge">(Int, Int)</code>代表块的索引，<code class="highlighter-rouge">Matrix</code>代表子矩阵。
 <code class="highlighter-rouge">BlockMatrix</code>支持诸如<code class="highlighter-rouge">add</code>和<code class="highlighter-rouge">multiply</code>等方法。<code class="highlighter-rouge">BlockMatrix</code>还有一个帮助方法<code class="highlighter-rouge">validate</code>，用来判断一个<code class="highlighter-rouge">BlockMatrix</code>是否正确的创建。</p>
@@ -402,7 +402,7 @@
 </code></pre>
 </div>
 
-<h1 id="section-1">5 参考文献</h1>
+<h1 id="5-参考文献">5 参考文献</h1>
 
 <p>【1】<a href="http://www.cnblogs.com/xbinworld/p/4273506.html?utm_source=tuicool&amp;utm_medium=referral">稀疏矩阵存储格式总结+存储效率对比:COO,CSR,DIA,ELL,HYB</a></p>
 
@@ -426,7 +426,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2011/11/17/data-type"
                         data-title="Spark-ML-01"
-                        data-url="http://machinelearningadvance.com/mladvance/2011/11/17/data-type/" >
+                        data-url="http://localhost:4000/mladvance/2011/11/17/data-type/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -447,7 +447,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2011/11/17/data-type"
                         data-title="Spark-ML-01"
-                        data-url="http://machinelearningadvance.com/mladvance/2011/11/17/data-type/" >
+                        data-url="http://localhost:4000/mladvance/2011/11/17/data-type/" >
                     </div>
 
                 </div>

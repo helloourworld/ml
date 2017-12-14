@@ -17,7 +17,7 @@
 
     <title>Scala Lesson 13 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/language/2016/09/02/Scala-Lesson13/">
+    <link rel="canonical" href="http://localhost:4000/language/2016/09/02/Scala-Lesson13/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -194,20 +194,20 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="scala-">Scala 异常处理</h3>
+				<h3 id="scala-异常处理">Scala 异常处理</h3>
 
 <ul>
   <li>Scala 的异常处理和其它语言比如 Java 类似。</li>
   <li>Scala 的方法可以通过抛出异常的方法的方式来终止相关代码的运行，不必通过返回值。</li>
 </ul>
 
-<h3 id="section">抛出异常</h3>
+<h3 id="抛出异常">抛出异常</h3>
 
 <p>Scala 抛出异常的方法和 Java一样，使用 throw 方法，例如，抛出一个新的参数异常：</p>
 
 <p><code class="highlighter-rouge">throw new IllegalArgumentException</code></p>
 
-<h3 id="section-1">捕获异常</h3>
+<h3 id="捕获异常">捕获异常</h3>
 
 <p>异常捕捉的机制与其他语言中一样，如果有异常发生，catch字句是按次序捕捉的。因此，在catch字句中，越具体的异常越要靠前，越普遍的异常越靠后。 如果抛出的异常不在catch字句中，该异常则无法处理，会被升级到调用者处。</p>
 
@@ -239,7 +239,7 @@
 
 <p>catch字句里的内容跟match里的case是完全一样的。由于异常捕捉是按次序，如果最普遍的异常，Throwable，写在最前面，则在它后面的case都捕捉不到，因此需要将它写在最后面。</p>
 
-<h3 id="finally-">finally 语句</h3>
+<h3 id="finally-语句">finally 语句</h3>
 
 <p>finally 语句用于执行不管是正常处理还是有异常发生时都需要执行的步骤，实例如下：</p>
 
@@ -292,7 +292,7 @@
                     <div class="ds-thread"
                         data-thread-key="/language/2016/09/02/Scala-Lesson13"
                         data-title="Scala Lesson 13"
-                        data-url="http://machinelearningadvance.com/language/2016/09/02/Scala-Lesson13/" >
+                        data-url="http://localhost:4000/language/2016/09/02/Scala-Lesson13/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -313,7 +313,7 @@
                     <div class="ds-thread"
                         data-thread-key="/language/2016/09/02/Scala-Lesson13"
                         data-title="Scala Lesson 13"
-                        data-url="http://machinelearningadvance.com/language/2016/09/02/Scala-Lesson13/" >
+                        data-url="http://localhost:4000/language/2016/09/02/Scala-Lesson13/" >
                     </div>
 
                 </div>

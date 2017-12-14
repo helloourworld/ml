@@ -17,7 +17,7 @@
 
     <title>Hadoop 集群安装 快速指南 - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/hadoop/2016/09/14/hadoop_tutorial_5/">
+    <link rel="canonical" href="http://localhost:4000/hadoop/2016/09/14/hadoop_tutorial_5/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -204,7 +204,7 @@ Java已安装
 Hadoop安装包已经下载
 tools工具已经下载</p>
 
-<h2 id="section">配置</h2>
+<h2 id="配置">配置</h2>
 
 <p>配置分配目录：</p>
 
@@ -243,7 +243,7 @@ tools工具已经下载</p>
 
 <p>使用hadoop用户身份，以安装2.7.3为例：</p>
 
-<h3 id="section-1">1 建立以上目录</h3>
+<h3 id="1-建立以上目录">1 建立以上目录</h3>
 
 <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 hadoop]<span class="nv">$ </span><span class="nb">cd</span> ~/hadoop-2.7.3/
 <span class="o">[</span>hadoop@NN01 hadoop-2.7.3]<span class="nv">$ </span>ls
@@ -263,7 +263,7 @@ data  logs  name
 </code></pre>
 </div>
 
-<h3 id="section-2">2 修改配置文件</h3>
+<h3 id="2-修改配置文件">2 修改配置文件</h3>
 
 <p>Hadoop’s Java configuration is driven by two types of important configuration files:</p>
 
@@ -285,7 +285,7 @@ data  logs  name
 </code></pre>
 </div>
 
-<h4 id="etchadoopcore-sitexml">2.1 修改etc/hadoop/core-site.xml</h4>
+<h4 id="21-修改etchadoopcore-sitexml">2.1 修改etc/hadoop/core-site.xml</h4>
 
 <table>
   <tbody>
@@ -334,7 +334,7 @@ data  logs  name
 </code></pre>
 </div>
 
-<h4 id="etchadoophdfs-sitexml">2.2 修改etc/hadoop/hdfs-site.xml</h4>
+<h4 id="22-修改etchadoophdfs-sitexml">2.2 修改etc/hadoop/hdfs-site.xml</h4>
 
 <p><strong>Configurations for NameNode:</strong></p>
 
@@ -407,7 +407,7 @@ data  logs  name
 </code></pre>
 </div>
 
-<h4 id="etchadoopyarn-sitexml">2.3 修改etc/hadoop/yarn-site.xml</h4>
+<h4 id="23-修改etchadoopyarn-sitexml">2.3 修改etc/hadoop/yarn-site.xml</h4>
 
 <p><strong>Configurations for ResourceManager and NodeManager:</strong></p>
 
@@ -590,7 +590,7 @@ data  logs  name
 </code></pre>
 </div>
 
-<h4 id="etchadoopmapred-sitexml">2.4 修改etc/hadoop/mapred-site.xml</h4>
+<h4 id="24-修改etchadoopmapred-sitexml">2.4 修改etc/hadoop/mapred-site.xml</h4>
 
 <p><strong>Configurations for MapReduce Applications:</strong></p>
 
@@ -695,7 +695,7 @@ data  logs  name
 </code></pre>
 </div>
 
-<h4 id="masters-slaves">2.5 修改masters slaves</h4>
+<h4 id="25-修改masters-slaves">2.5 修改masters slaves</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hadoop]$ cat masters
 NN01.HadoopVM
@@ -707,13 +707,13 @@ DN02.HadoopVM
 </code></pre>
 </div>
 
-<h4 id="section-3">2.6 增加执行权限</h4>
+<h4 id="26-增加执行权限">2.6 增加执行权限</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hadoop]$ chmod +x *.sh
 </code></pre>
 </div>
 
-<h4 id="section-4">2.7 环境配置</h4>
+<h4 id="27-环境配置">2.7 环境配置</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>export JAVA_HOME=/opt/tool/jdk1.8
 export PATH=$JAVA_HOME/bin:$PATH
@@ -729,13 +729,13 @@ export HADOOP_CLASSPATH=$JAVA_HOME/lib/tools.jar
 </code></pre>
 </div>
 
-<h4 id="yarn-envsh">2.8 修改yarn-env.sh</h4>
+<h4 id="28-修改yarn-envsh">2.8 修改yarn-env.sh</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>export JAVA_HOME=/opt/tool/jdk1.8
 </code></pre>
 </div>
 
-<h3 id="hadoop-startup">3 Hadoop Startup</h3>
+<h3 id="3-hadoop-startup">3 Hadoop Startup</h3>
 
 <p>The first time you bring up HDFS, it must be formatted. Format a new distributed filesystem as hdfs:</p>
 
@@ -798,7 +798,7 @@ starting historyserver, logging to /home/hadoop/hadoop/logs/mapred-hadoop-histor
   </tbody>
 </table>
 
-<h3 id="hadoop-shutdown">4 Hadoop Shutdown</h3>
+<h3 id="4-hadoop-shutdown">4 Hadoop Shutdown</h3>
 
 <p>Stop HDFS AND YARN</p>
 
@@ -826,7 +826,7 @@ stopping historyserver
 </code></pre>
 </div>
 
-<h3 id="hadoop">5 Hadoop版本切换</h3>
+<h3 id="5-hadoop版本切换">5 Hadoop版本切换</h3>
 
 <p>按照上述配置，配置另一套Hadoop环境于相同节点上。</p>
 
@@ -853,7 +853,7 @@ stopping historyserver
 
 <p><img src="/images/hadoop/hadoop2.6.4.png" alt="" /></p>
 
-<h3 id="other">6 Other</h3>
+<h3 id="6-other">6 Other</h3>
 
 <p>配置SecondaryNameNode</p>
 
@@ -927,7 +927,7 @@ NN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-had
                     <div class="ds-thread"
                         data-thread-key="/hadoop/2016/09/14/hadoop_tutorial_5"
                         data-title="Hadoop 集群安装 快速指南"
-                        data-url="http://machinelearningadvance.com/hadoop/2016/09/14/hadoop_tutorial_5/" >
+                        data-url="http://localhost:4000/hadoop/2016/09/14/hadoop_tutorial_5/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -948,7 +948,7 @@ NN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-had
                     <div class="ds-thread"
                         data-thread-key="/hadoop/2016/09/14/hadoop_tutorial_5"
                         data-title="Hadoop 集群安装 快速指南"
-                        data-url="http://machinelearningadvance.com/hadoop/2016/09/14/hadoop_tutorial_5/" >
+                        data-url="http://localhost:4000/hadoop/2016/09/14/hadoop_tutorial_5/" >
                     </div>
 
                 </div>

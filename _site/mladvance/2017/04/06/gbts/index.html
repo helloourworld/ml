@@ -17,7 +17,7 @@
 
     <title>Spark-ML-0304-Ensembles-Gradient-Boosted Trees (GBTs) - Maching Learning | 机器学习笔记</title>
 
-    <link rel="canonical" href="http://machinelearningadvance.com/mladvance/2017/04/06/gbts/">
+    <link rel="canonical" href="http://localhost:4000/mladvance/2017/04/06/gbts/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -196,9 +196,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h1 id="section">梯度提升树</h1>
+				<h1 id="梯度提升树">梯度提升树</h1>
 
-<h2 id="boosting">1 Boosting</h2>
+<h2 id="1-boosting">1 Boosting</h2>
 
 <p>  <code class="highlighter-rouge">Boosting</code>是一类将弱学习器提升为强学习器的算法。这类算法的工作机制类似：先从初始训练集中训练出一个基学习器，再根据基学习器的表现对训练样本分布进行调整，使得先前基学习器做错的训练样本在后续受到更多关注。
 然后基于调整后的样本分布来训练下一个基学习器；如此重复进行，直至基学习器的数目达到事先指定的值<code class="highlighter-rouge">T</code>，最终将这<code class="highlighter-rouge">T</code>个基学习器进行加权结合。</p>
@@ -212,7 +212,7 @@
 
 <p>  梯度提升算法的核心在于，每棵树是从先前所有树的残差中来学习。<strong>利用的是当前模型中损失函数的负梯度值作为提升树算法中的残差的近似值</strong>，进而拟合一棵回归（分类）树。</p>
 
-<h2 id="section-1">2 梯度提升</h2>
+<h2 id="2-梯度提升">2 梯度提升</h2>
 
 <p>  根据参考文献【1】的介绍，梯度提升算法的算法流程如下所示：</p>
 
@@ -226,14 +226,14 @@
 
 <p>  第一个对数损失用于分类，后两个平方误差和绝对误差用于回归。</p>
 
-<h2 id="section-2">3 随机梯度提升</h2>
+<h2 id="3-随机梯度提升">3 随机梯度提升</h2>
 
 <p>  有文献证明，注入随机性到上述的过程中可以提高函数估计的性能。受到<code class="highlighter-rouge">Breiman</code>的影响，将随机性作为一个考虑的因素。在每次迭代中，随机的在训练集中抽取一个子样本集，然后在后续的操作中用这个子样本集代替全体样本。
 这就形成了随机梯度提升算法。它的流程如下所示：</p>
 
 <div align="center"><img src="/images/spark/ml/gbts/1.2.png" width="700" height="300" alt="1.2" align="center" /></div>
 
-<h2 id="section-3">4 实例</h2>
+<h2 id="4-实例">4 实例</h2>
 
 <p>  下面的代码是分类的例子。</p>
 
@@ -295,9 +295,9 @@
 </code></pre>
 </div>
 
-<h2 id="section-4">5 源码分析</h2>
+<h2 id="5-源码分析">5 源码分析</h2>
 
-<h3 id="section-5">5.1 训练分析</h3>
+<h3 id="51-训练分析">5.1 训练分析</h3>
 
 <p>  梯度提升树的训练从<code class="highlighter-rouge">run</code>方法开始。</p>
 
@@ -475,7 +475,7 @@
 </code></pre>
 </div>
 
-<h3 id="section-6">5.2 测试</h3>
+<h3 id="52-测试">5.2 测试</h3>
 
 <p>  利用梯度提升树进行预测时，调用的<code class="highlighter-rouge">predict</code>方法扩展自<code class="highlighter-rouge">TreeEnsembleModel</code>，它是树结构组合模型的表示，其核心代码如下所示：</p>
 
@@ -505,7 +505,7 @@
 </code></pre>
 </div>
 
-<h1 id="section-7">参考文献</h1>
+<h1 id="参考文献">参考文献</h1>
 
 <p>【1】<a href="https://statweb.stanford.edu/~jhf/ftp/stobst.pdf">Stochastic Gradient Boost</a></p>
 
@@ -537,7 +537,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/gbts"
                         data-title="Spark-ML-0304-Ensembles-Gradient-Boosted Trees (GBTs)"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/gbts/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/gbts/" >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
 
@@ -558,7 +558,7 @@
                     <div class="ds-thread"
                         data-thread-key="/mladvance/2017/04/06/gbts"
                         data-title="Spark-ML-0304-Ensembles-Gradient-Boosted Trees (GBTs)"
-                        data-url="http://machinelearningadvance.com/mladvance/2017/04/06/gbts/" >
+                        data-url="http://localhost:4000/mladvance/2017/04/06/gbts/" >
                     </div>
 
                 </div>
