@@ -179,6 +179,74 @@
             ">
     			
 <div class="post-preview">
+    <a href="/mladvance/2017/02/10/pip_install_from_local/">
+        <h2 class="post-title">
+            断网环境下利用pip安装Python离线安装包
+        </h2>
+        
+        <div class="post-content-preview">
+            
+  1.在可以联网的开发机器上安装好需要的包
+  例如：
+
+
+pip install numpy
+pip install pandas
+
+
+
+
+  2.打包已安装的包
+  在python目录下新建packages文件夹用来存储下载下来的所需安装包。
+
+
+pip list #查看安装的包
+pip freeze &gt;requirements.txt
+pip install --downlo...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on February 10, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2017/02/10/JupyterNotebook/">
+        <h2 class="post-title">
+            远程访问jupyter notebook
+        </h2>
+        
+        <div class="post-content-preview">
+            
+  登陆远程服务器
+  生成配置文件
+
+
+jupyter notebook --generate-config
+
+
+
+
+  生成密码
+
+
+打开ipython，创建一个密文的密码：
+
+In [1]: from notebook.auth import passwd
+In [2]: passwd()
+Enter password:
+Verify password:
+Out[2]: 'sha1:...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on February 10, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/quant/2017/02/07/quant-zipline/">
         <h2 class="post-title">
             Zipline量化平台
@@ -374,51 +442,6 @@ First we will build a word cloud using TF-IDF weights on a relatively small corp
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/mladvance/2016/12/05/nb/">
-        <h2 class="post-title">
-            Spark-ML-0302-Naive Bayes
-        </h2>
-        
-        <div class="post-content-preview">
-            朴素贝叶斯
-
-1 介绍
-
-  朴素贝叶斯是一种构建分类器的简单方法。该分类器模型会给问题实例分配用特征值表示的类标签，类标签取自有限集合。它不是训练这种分类器的单一算法，而是一系列基于相同原理的算法：所有朴素贝叶斯分类器都假定样本每个特征与其他特征都不相关。
-举个例子，如果一种水果其具有红，圆，直径大概3英寸等特征，该水果可以被判定为是苹果。尽管这些特征相互依赖或者有些特征由其他特征决定，然...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on December 5, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/mladvance/2016/12/05/decision-tree/">
-        <h2 class="post-title">
-            Spark-ML-0303-Decision Tree
-        </h2>
-        
-        <div class="post-content-preview">
-            决策树
-
-1 决策树理论
-
-1.1 什么是决策树
-
-  所谓决策树，顾名思义，是一种树，一种依托于策略抉择而建立起来的树。机器学习中，决策树是一个预测模型；他代表的是对象属性与对象值之间的一种映射关系。
-树中每个节点表示某个对象，而每个分叉路径则代表的某个可能的属性值，从根节点到叶节点所经历的路径对应一个判定测试序列。决策树仅有单一输出，若欲有复数输出，可以建立独立的决策树以处理不同输出。
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on December 5, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -500,7 +523,7 @@ First we will build a word cloud using TF-IDF weights on a relatively small corp
                             
                         
                             
-                                <a href="/tags/#Python" title="Python" rel="22">
+                                <a href="/tags/#Python" title="Python" rel="24">
                                     Python
                                 </a>
                             
@@ -530,7 +553,7 @@ First we will build a word cloud using TF-IDF weights on a relatively small corp
                             
                         
                             
-                                <a href="/tags/#IT" title="IT" rel="9">
+                                <a href="/tags/#IT" title="IT" rel="10">
                                     IT
                                 </a>
                             
@@ -593,6 +616,10 @@ First we will build a word cloud using TF-IDF weights on a relatively small corp
                                 <a href="/tags/#Clustering" title="Clustering" rel="3">
                                     Clustering
                                 </a>
+                            
+                        
+                            
+                        
                             
                         
                             
@@ -766,7 +793,7 @@ First we will build a word cloud using TF-IDF weights on a relatively small corp
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2017
+                    Copyright &copy; Big Data Memo 2018
                 </p>
             </div>
         </div>

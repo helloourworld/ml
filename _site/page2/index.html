@@ -179,6 +179,58 @@
             ">
     			
 <div class="post-preview">
+    <a href="/mladvance/2017/04/06/regression/">
+        <h2 class="post-title">
+            Spark-ML-030103-Linear Model-Regression
+        </h2>
+        
+        <div class="post-content-preview">
+            线性回归
+
+  回归问题的条件或者说前提是
+
+  1） 收集的数据
+  2） 假设的模型，即一个函数，这个函数里含有未知的参数，通过学习，可以估计出参数。然后利用这个模型去预测/分类新的数据。
+
+
+1 线性回归的概念
+
+  线性回归假设特征和结果都满足线性。即不大于一次方。收集的数据中，每一个分量，就可以看做一个特征数据。每个特征至少对应一个未知的参数。这样就形成了一个线性模型函数，向量表示...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on April 6, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2017/04/06/lsvm/">
+        <h2 class="post-title">
+            Spark-ML-030101-Linear Model-LSVM
+        </h2>
+        
+        <div class="post-content-preview">
+            线性支持向量机
+
+1 介绍
+
+  线性支持向量机是一个用于大规模分类任务的标准方法。它的目标函数线性模型中的公式（1）。它的损失函数是海格损失，如下所示
+
+
+
+  默认情况下，线性支持向量机训练时使用L2正则化。线性支持向量机输出一个SVM模型。给定一个新的数据点x，模型通过w^Tx的值预测，当这个值大于0时，输出为正，否则输出为负。
+
+  线性支持向量机并不需要核函数，要详细了解支持向量机...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on April 6, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/mladvance/2017/04/06/logic-regression/">
         <h2 class="post-title">
             Spark-ML-030102-Linear Model-LR
@@ -373,74 +425,6 @@ A Guide to Fault Detection and Diagnosis
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/mladvance/2017/02/10/pip_install_from_local/">
-        <h2 class="post-title">
-            断网环境下利用pip安装Python离线安装包
-        </h2>
-        
-        <div class="post-content-preview">
-            
-  1.在可以联网的开发机器上安装好需要的包
-  例如：
-
-
-pip install numpy
-pip install pandas
-
-
-
-
-  2.打包已安装的包
-  在python目录下新建packages文件夹用来存储下载下来的所需安装包。
-
-
-pip list #查看安装的包
-pip freeze &gt;requirements.txt
-pip install --downlo...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on February 10, 2017
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/mladvance/2017/02/10/JupyterNotebook/">
-        <h2 class="post-title">
-            远程访问jupyter notebook
-        </h2>
-        
-        <div class="post-content-preview">
-            
-  登陆远程服务器
-  生成配置文件
-
-
-jupyter notebook --generate-config
-
-
-
-
-  生成密码
-
-
-打开ipython，创建一个密文的密码：
-
-In [1]: from notebook.auth import passwd
-In [2]: passwd()
-Enter password:
-Verify password:
-Out[2]: 'sha1:...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on February 10, 2017
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -522,7 +506,7 @@ Out[2]: 'sha1:...
                             
                         
                             
-                                <a href="/tags/#Python" title="Python" rel="22">
+                                <a href="/tags/#Python" title="Python" rel="24">
                                     Python
                                 </a>
                             
@@ -552,7 +536,7 @@ Out[2]: 'sha1:...
                             
                         
                             
-                                <a href="/tags/#IT" title="IT" rel="9">
+                                <a href="/tags/#IT" title="IT" rel="10">
                                     IT
                                 </a>
                             
@@ -615,6 +599,10 @@ Out[2]: 'sha1:...
                                 <a href="/tags/#Clustering" title="Clustering" rel="3">
                                     Clustering
                                 </a>
+                            
+                        
+                            
+                        
                             
                         
                             
@@ -788,7 +776,7 @@ Out[2]: 'sha1:...
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2017
+                    Copyright &copy; Big Data Memo 2018
                 </p>
             </div>
         </div>

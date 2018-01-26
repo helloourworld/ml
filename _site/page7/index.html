@@ -179,6 +179,53 @@
             ">
     			
 <div class="post-preview">
+    <a href="/mladvance/2016/11/17/random-data-generation/">
+        <h2 class="post-title">
+            Spark-ML-0205-Random data generation
+        </h2>
+        
+        <div class="post-content-preview">
+            随机数生成
+
+  随机数生成在随机算法、性能测试中非常有用，spark.mllib支持生成随机的RDD,RDD的独立同分布(iid)的值来自于给定的分布：均匀分布、标准正太分布、泊松分布。
+
+  RandomRDDs提供工厂方法生成随机的双精度RDD或者向量RDD。下面的例子生成了一个随机的双精度RDD，它的值来自于标准的正太分布N(0,1)。
+
+import org.apache.spar...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/kernel-density-estimation/">
+        <h2 class="post-title">
+            Spark-ML-0206-Kernel density estimation
+        </h2>
+        
+        <div class="post-content-preview">
+            核密度估计
+
+1 理论分析
+
+  核密度估计是在概率论中用来估计未知的密度函数，属于非参数检验方法之一。假设我们有n个数，要计算某个数X的概率密度有多大，
+可以通过下面的核密度估计方法估计。
+
+
+
+  在上面的式子中，K为核密度函数，h为窗宽。核密度函数的原理比较简单，在我们知道某一事物的概率分布的情况下，如果某一个数在观察中出现了，我们可以认为这个数的概率密度很大，和这个数比较近的数的概率...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/mladvance/2016/11/17/hypothesis-testing/">
         <h2 class="post-title">
             Spark-ML-0204-Hypothesis testing
@@ -391,93 +438,6 @@ import scala....
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/blog/2016/10/01/travel-site/">
-        <h2 class="post-title">
-            travel site
-        </h2>
-        
-        <div class="post-content-preview">
-            10.2
-
-
-
-10.3
-
-
-
-10.4
-
-
-
-10.5
-
-
-
-10.6
-
-
-
-10.7
-
-
-
-10.8
-
-
-
-10.2–10.8
-
-
-
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on October 1, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/blog/2016/09/29/Vim_often_use/">
-        <h2 class="post-title">
-            Vim常用命令
-        </h2>
-        
-        <div class="post-content-preview">
-            1 切换输入模式
-
-命令模式下
-
-
-  
-    
-      a
-      (小写)光标之后进行插入
-    
-    
-      A
-      (大写)光标所在行尾进行插入
-    
-    
-      i
-      (小写)光标前开始进行插入
-    
-    
-      I
-      (大写)光标所在行首进行插入
-    
-    
-      o
-      (小写)...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 29, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -559,7 +519,7 @@ import scala....
                             
                         
                             
-                                <a href="/tags/#Python" title="Python" rel="22">
+                                <a href="/tags/#Python" title="Python" rel="24">
                                     Python
                                 </a>
                             
@@ -589,7 +549,7 @@ import scala....
                             
                         
                             
-                                <a href="/tags/#IT" title="IT" rel="9">
+                                <a href="/tags/#IT" title="IT" rel="10">
                                     IT
                                 </a>
                             
@@ -652,6 +612,10 @@ import scala....
                                 <a href="/tags/#Clustering" title="Clustering" rel="3">
                                     Clustering
                                 </a>
+                            
+                        
+                            
+                        
                             
                         
                             
@@ -825,7 +789,7 @@ import scala....
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2017
+                    Copyright &copy; Big Data Memo 2018
                 </p>
             </div>
         </div>
