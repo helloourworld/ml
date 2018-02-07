@@ -1,17 +1,26 @@
-table.example3 {background-color:transparent;
-                border-collapse:collapse;
-                width:100%;}
-
-table.example3 th, table.example3 td {border:1px solid black;
-                                      padding:5px;
-                                      vertical-align:text-top;}
-                                                       
-table.example3 th {background-color:#0033FF;
-                            color:white; 
-                            font-weight:bold;
-                            text-transform:capitalize;}
-                            
-table.example3 td:first-child {width:20%;
-                               font-weight:bold;
-                               text-align: left;
-                               font-size: 15}
+﻿
+table.hovertable {
+	font-family: verdana,arial,sans-serif;
+	font-size:8px;
+	color:#333333;
+	border-width: 0px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.hovertable th {
+	background-color:#c3dde0;
+	border-width: 0px;
+	padding: 4px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+table.hovertable tr {
+	background-color:#d4e3e5;
+}
+table.hovertable td {
+	border-width: 0px;
+	font-size:4px;
+	padding: 4px;
+	border-style: solid;
+	border-color: #13180e;
+}
