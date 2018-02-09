@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="g89MuzujW3" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于机器学习，关于大数据，关于你身边的金融，关于我们的生活... | LijunYu">
+    <meta name="keywords"  content="LijunYu, 包包的老公, 大数据, 机器学习, CFA, Machine Learning(Deep Learning), Big Data, Spark">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link rel="alternatecss" type="application/rss+xml" title="“Lijun Yu's Blog”" href="http://helloourworld.github.io/feed.xml">
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+    <title>如何用Python发送邮件 - Maching Learning | 机器学习笔记</title>
+
+    <link rel="canonical" href="http://localhost:4000/python%20email%20hive/2018/02/03/python_send_email/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- ga & ba script hoook -->
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Big Data Memo</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/">Category</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/images/background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/images/background.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                        <a class="tag" href="/tags/#smtplib" title="smtplib">smtplib</a>
+                        
+                        <a class="tag" href="/tags/#email" title="email">email</a>
+                        
+                        <a class="tag" href="/tags/#bottle" title="bottle">bottle</a>
+                        
+                    </div>
+                    <h1>如何用Python发送邮件</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by Big Data Memo on February 3, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h2 id="1-背景介绍">1 背景介绍</h2>
+
+<p>工作当中，每天会有比较大的数据报表的监控，需要手动复制粘贴比较多的内容，重复工作会占用大量的时间，如果实现自动化就能够释放出大量的宝贵时间。因而自动发送邮件项目就诞生啦。</p>
+
+<h2 id="2-项目开始">2 项目开始</h2>
+
+<h3 id="21-数据源">2.1 数据源</h3>
+
+<p>数据源的稳定是基础前提。本次我们读的数据源在大数据平台上，如何通过python相应接口来读呢？直接上代码：</p>
+
+<pre><code class="language-Python">
+# Hive connect Test
+import pyhs2
+
+conn = pyhs2.connect(host="NN01.HadoopVM", user='*', password='*', authMechanism="NOSASL")
+cur = conn.cursor()
+# Show databases
+cur.getDatabases()
+# Execute query
+cur.execute("select * from bank limit 10")
+# Return column info from query
+print cur.getSchema()
+# Fetch table resultsYou can connect to Hive in two modes. Through thrift server and embedded mode.
+for i in cur.fetch():
+    print i
+</code></pre>
+
+<p>很不幸，本司对于python直接访问Hive的接口没有放开。不过，Hive在操作系统的命令是可用的。如下解决方案：</p>
+
+<pre><code class="language-Python">def run_transfer(data_raw):
+    new_data = []
+    for i in data_raw:
+        read = i.split('\t')
+        new_data1 = []
+        for j in range(len(read)):
+            m = read[j].rstrip('\n')
+            new_data1.append(m)
+        new_data.append(new_data1)
+    return new_data
+
+
+def run_hive(tablename):
+    data_raw = os.popen("""hive -e "
+    select  * from %s where dt=%s;"
+    """ % (tablename, day_1_ago8)).readlines()
+    return run_transfer(data_raw)
+</code></pre>
+
+<p>os.popen() 方法用于从一个命令打开一个管道，并返回一个file read对象, 对其进行读取 read() 的操作可以看到执行的输出。</p>
+
+<pre><code class="language-Python">&gt;&gt;&gt; z = os.popen('hive -e "select unix_timestamp();"')
+&gt;&gt;&gt; z
+&lt;open file 'hive -e "select unix_timestamp();"', mode 'r' at 0x7ffff7f2d0c0&gt;
+&gt;&gt;&gt; 
+Logging initialized using configuration in jar:file:/export/server/apache-hive-1.2.2-bin/lib/hive-common-1.2.2.jar!/hive-log4j.properties
+OK
+Time taken: 1.404 seconds, Fetched: 1 row(s)
+
+&gt;&gt;&gt; z
+&lt;open file 'hive -e "select unix_timestamp();"', mode 'r' at 0x7ffff7f2d0c0&gt;
+&gt;&gt;&gt; z.readlines()
+['1518144252\n']
+</code></pre>
+<blockquote>
+  <blockquote>
+    <p>补充1：os.system()也可以调用系统命令，但是返回只会有返回值（0,1,2）。</p>
+  </blockquote>
+</blockquote>
+
+<pre><code class="language-Python">&gt;&gt;&gt; z = os.system('pwd')
+/export/grid/05/risklabhome/yulijun1
+&gt;&gt;&gt; z
+0
+</code></pre>
+
+<blockquote>
+  <blockquote>
+    <p>补充2：commands 模块，可以获得到返回值和输出。</p>
+  </blockquote>
+</blockquote>
+
+<pre><code class="language-Python">&gt;&gt;&gt; z = os.system('pwd')
+&gt;&gt;&gt; import commands
+&gt;&gt;&gt; commands.getstatusoutput('hive -e "select unix_timestamp();"')
+(0, '\nLogging initialized...\nOK\n1518145376\nTime taken: 1.265 seconds, Fetched: 1 row(s)')
+</code></pre>
+
+<p>数据源的读取简单介绍到此。</p>
+
+<h3 id="22-smtplib模块">2.2 <a href="https://docs.python.org/3/library/smtplib.html?highlight=smtplib#module-smtplib">smtplib模块</a></h3>
+
+<p>smtplib模块定义了一个SMTP客户端会话对象可以用来发送邮件到任何互联网机SMTP或ESMTP的倾听者守护。SMTP和ESMTP的操作细节，参考RFC 821（简单邮件传输协议）和RFC 1869（SMTP服务扩展）。</p>
+
+<p>smtplib.SMTP(host=’’, port=0, local_hostname=None, [timeout, ]source_address=None)</p>
+
+<p>SMTP类构造函数，表示与SMTP服务器之间的连接，通过这个连接可以向smtp服务器发送指令，执行相关操作（如：登陆、发送邮件）。所有参数都是可选的。</p>
+
+<p>host：smtp服务器主机名</p>
+
+<p>port：smtp服务的端口，默认是25；如果在创建SMTP对象的时候提供了这两个参数，在初始化的时候会自动调用connect方法去连接服务器。</p>
+
+<p>smtplib模块还提供了SMTP_SSL类和LMTP类，对它们的操作与SMTP基本一致。</p>
+
+<p>smtplib.SMTP提供的方法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> SMTP.set_debuglevel(level)：设置是否为调试模式。默认为False，即非调试模式，表示不输出任何调试信息。
+
+ SMTP.connect([host[, port]])：连接到指定的smtp服务器。参数分别表示smpt主机和端口。注意: 也可以在host参数中指定端口号（如：smpt.yeah.net:25），这样就没必要给出port参数。
+
+ SMTP.docmd(cmd[, argstring])：向smtp服务器发送指令。可选参数argstring表示指令的参数。
+
+ SMTP.helo([hostname]) ：使用"helo"指令向服务器确认身份。相当于告诉smtp服务器“我是谁”。
+
+ SMTP.has_extn(name)：判断指定名称在服务器邮件列表中是否存在。出于安全考虑，smtp服务器往往屏蔽了该指令。
+
+ SMTP.verify(address) ：判断指定邮件地址是否在服务器中存在。出于安全考虑，smtp服务器往往屏蔽了该指令。
+
+ SMTP.login(user, password) ：登陆到smtp服务器。现在几乎所有的smtp服务器，都必须在验证用户信息合法之后才允许发送邮件。
+
+ SMTP.sendmail(from_addr, to_addrs, msg[, mail_options, rcpt_options]) ：发送邮件。这里要注意一下第三个参数，msg是字符串，表示邮件。我们知道邮件一般由标题，发信人，收件人，邮件内容，附件等构成，发送邮件的时候，要注意msg的格式。这个格式就是smtp协议中定义的格式。
+
+ SMTP.quit()：断开与smtp服务器的连接。
+</code></pre>
+</div>
+
+<p>参考如下：</p>
+
+<pre><code class="language-Python"># send mail!
+import smtplib
+server = smtplib.SMTP()
+server.connect("smtp...local", 25)
+server.starttls()
+server.login(user, password)
+server.sendmail(me, mailto_list, msg.as_string())
+server.quit()
+</code></pre>
+
+<h3 id="23-email模块">2.3 <a href="https://docs.python.org/3/library/email.html?highlight=email">email模块</a></h3>
+
+<p>email模块是一个管理电子邮件的库。它是专门设计不做任何发送电子邮件的SMTP（RFC 2821）、NNTP、或者其他服务器上；那些如smtplib和nntplib模块功能。email包试图为RFC兼容的可能，支持RFC 5233和RFC 6532，以及这种MIME相关RFC RFC 2045和RFC 2046和RFC 2047和RFC 2183和RFC 2231中。</p>
+
+<pre><code class="language-Python"># Email!
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.image import MIMEImage # 发送图片
+from email.header import Header
+me = "**@**.com&gt;"
+mailto_list = ["**@**.com&gt;", "**@**.com&gt;"]
+msg = MIMEMultipart('related')
+msg['From'] = me
+msg['Cc'] =  mailto_list[-1]
+msg['To'] = ','.join(mailto_list[:-1])
+msg['Subject'] = Header(u"Demo", 'utf-8')
+msgtext = MIMEText(html, 'html', 'utf-8') # MIMEText(_text[, _subtype[, _charset]])：MIME文本对象，其中_text是邮件内容，_subtype邮件类型，可以是text/plain（普通文本邮件），html/plain(html邮件),  _charset编码，可以是gb2312等
+msg.attach(msgtext)
+
+#构造附件1
+att1 = MIMEText(open('**.html', 'rb').read(), 'base64', 'gb2312')
+att1["Content-Type"] = 'application/octet-stream'
+att1["Content-Disposition"] = 'attachment; filename="**.html"'#这里的filename可以任意写，写什么名字，邮件中显示什么名字
+msg.attach(att1)
+
+</code></pre>
+
+<h3 id="24-bottle模块">2.4 <a href="http://bottlepy.org/docs/dev/stpl.html">bottle模块</a></h3>
+
+<p><img src="/images/logo_nav.png" alt="" />
+本次任务还有一个难点，即发送的是带格式的文本，包括表格，字体设计等，以及会有图片等要求。静态HTML是最初考虑的一个实现版本，但是执行起来时间上浪费不起啊，太多的硬编码。怎么办？然后就想啊，能不能动态生成HTML文件呢？之前有用过Flask等框架，是一个不错的选择，备选。但服务器上安装这样的包，还是比较难，没有root伤不起。好在bottle最轻量级的web框架解决了这个问题。开撸。</p>
+
+<p>感受一下：</p>
+
+<pre><code class="language-Python">&gt;&gt;&gt; from bottle import template
+&gt;&gt;&gt; my_dict={'number': '123', 'street': 'Fake St.', 'city': 'Fakeville'}
+&gt;&gt;&gt; template('I live at  , ', **my_dict)
+u'I live at 123 Fake St., Fakeville'
+</code></pre>
+
+<p>就是这么好用。but there is more: any python expression is allowed within the curly brackets as long as it evaluates to a string or something that has a string representation:</p>
+
+<pre><code class="language-Python">&gt;&gt;&gt; template('Hello !', name='mArC')
+u'Hello Marc!'
+
+# start the expression with an exclamation mark to disable escaping for that expression
+&gt;&gt;&gt; template('Hello !', name='&lt;b&gt;World&lt;/b&gt;')
+u'Hello &amp;lt;b&amp;gt;World&amp;lt;/b&amp;gt;!'
+&gt;&gt;&gt; template('Hello !', name='&lt;b&gt;World&lt;/b&gt;')
+u'Hello &lt;b&gt;World&lt;/b&gt;!'
+</code></pre>
+
+<pre><code class="language-~HTML"># EMBEDDED PYTHON CODE
+% name = "Bob"  # a line of python code
+&lt;p&gt;Some plain text in between&lt;/p&gt;
+&lt;%
+  # A block of python code
+  name = name.title().strip()
+%&gt;
+&lt;p&gt;More plain text&lt;/p&gt;
+
+# Embedded python code follows regular python syntax, but with two additional syntax rules:
+# Indentation is ignored. You can put as much whitespace in front of statements as you want. This allows you to align your code with the surrounding markup and can greatly improve readability.
+# Blocks that are normally indented now have to be closed explicitly with an end keyword.
+
+ul&gt;
+  % for item in basket:
+    &lt;li&gt;&lt;/li&gt;
+  % end
+&lt;/ul&gt;
+
+% include('header.tpl', title='Page Title')
+Page Content
+% include('footer.tpl')
+</code></pre>
+
+<h2 id="3-项目总结">3 项目总结</h2>
+
+<p>平常的一个发邮件，涉及的内容也是方方面面的，以上内容Get？那么就可以开心地定制属于你的报告模板了。</p>
+
+<p>其实还有一些小的细节需要注意，比如，怎么增加HTML的格式？如何应用CSS来添加样式？</p>
+
+<p>以下是一个table.css的样式，供参考：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+table.hovertable {
+	font-family: verdana,arial,sans-serif;
+	font-size:8px;
+	color:#333333;
+	border-width: 0px;
+	border-color: #13180e;
+	border-collapse: collapse;
+}
+table.hovertable th {
+	background-color:#c3dde0;
+	border-width: 0px;
+	padding: 4px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+table.hovertable tr {
+	background-color:#d4e3e5;
+}
+table.hovertable td {
+	border-width: 0px;
+	font-size:4px;
+	padding: 4px;
+	border-style: solid;
+	border-color: #13180e;
+}
+</code></pre>
+</div>
+
+<p>以下是对某一DF写出HTML表格的脚本，请参考：</p>
+
+<pre><code class="language-Python">% for subtitle, theads,items  in reports:
+&lt;p font-size:6px&gt;&lt;/p&gt;
+&lt;table class="hovertable" border="1" bordercolor="black" cellspacing="0"&gt;
+% for i1, i2, i3, i4, i5,i6,i7,i8,i9,i10, i11, i12,i13,i14,i15 in theads:
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+...
+&lt;/tr&gt;
+%end
+% for i1, i2, i3, i4, i5,i6,i7,i8,i9,i10, i11, i12,i13,i14,i15 in items:
+&lt;tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';"&gt;
+% i2 = '{:,}'.format(int(i2))
+% i3 = '{:,}'.format(int(i3))
+% i9 = '{:,}'.format(float(i9))
+% i12 = '{:,}'.format(float(i12))
+
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+
+&lt;/tr&gt;
+%end
+&lt;/table&gt;
+%end
+</code></pre>
+<blockquote>
+  <p>补充3: 增加包查询路径，前文提到，没有root权限，那怎么引用bottle呢？虽然bottle只有一个文件，但是不是放在同一目录下的话，也是需要指定的。如下为在.bashrc下增加PATHPATH包查询路径，请参照：</p>
+</blockquote>
+
+<div class="language-vim highlighter-rouge"><pre class="highlight"><code># <span class="nb">User</span> specific aliases and functions
+export PYTHONPATH<span class="p">=</span>$PYTHONPATH<span class="p">:</span><span class="s2">"$HOME/bottle"</span>
+</code></pre>
+</div>
+
+<p>看似容易，执行难，如果有问题，请咚咚我即可。</p>
+
+
+                <hr>
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/mladvance/2018/01/03/cnn-image-classification/" data-toggle="tooltip" data-placement="top" title="如何用Python和深度神经网络识别图像？[转录]">
+                        Previous<br>
+                        <span>如何用Python和深度神经网络识别图像？[转录]</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                    <div class="ds-share flat"
+                    <div class="ds-thread"
+                        data-thread-key="/python%20email%20hive/2018/02/03/python_send_email"
+                        data-title="如何用Python发送邮件"
+                        data-url="http://localhost:4000/python%20email%20hive/2018/02/03/python_send_email/" >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+                        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+                        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                 </div>
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/python%20email%20hive/2018/02/03/python_send_email"
+                        data-title="如何用Python发送邮件"
+                        data-url="http://localhost:4000/python%20email%20hive/2018/02/03/python_send_email/" >
+                    </div>
+
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#Machine Learning" title="Machine Learning" rel="27">
+                                Machine Learning
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Spark" title="Spark" rel="20">
+                                Spark
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#ME" title="ME" rel="4">
+                                ME
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Other" title="Other" rel="4">
+                                Other
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#CFAL1" title="CFAL1" rel="9">
+                                CFAL1
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Python" title="Python" rel="25">
+                                Python
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#maths" title="maths" rel="2">
+                                maths
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Baby" title="Baby" rel="2">
+                                Baby
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                                Big Data
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#大数据" title="大数据" rel="20">
+                                大数据
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#IT" title="IT" rel="10">
+                                IT
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Scala" title="Scala" rel="24">
+                                Scala
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#English" title="English" rel="23">
+                                English
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#wordcloud" title="wordcloud" rel="3">
+                                wordcloud
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#quant" title="quant" rel="3">
+                                quant
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#python" title="python" rel="2">
+                                python
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Clustering" title="Clustering" rel="3">
+                                Clustering
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://www.kaggle.com/">Your Home for Data Science</a></li>
+                    
+                        <li><a href="https://www.analyticsvidhya.com/">Analytics Vidhya</a></li>
+                    
+                        <li><a href="https://www.cfainstitute.org/pages/index.aspx">CFA</a></li>
+                    
+                        <li><a href="http://www.garp.org/#!/home">GARP</a></li>
+                    
+                        <li><a href="http://www.investopedia.com/">Investopedia</a></li>
+                    
+                        <li><a href="https://www.quantstart.com/">Quant Start</a></li>
+                    
+                        <li><a href="http://muchong.com/bbs/">muchong</a></li>
+                    
+                        <li><a href="https://www.coursera.org/learn/machine-learning">Coursera</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+<script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"machinelearningadvance"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/2672280861">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/davidyjun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/helloourworld">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/lijun-yu-13b9b475">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Big Data Memo 2018
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-82819752-1';
+    var _gaDomain = 'machinelearningadvance.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '863b1f46c83a8e14e47782106aee7e7f';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/images/background.jpg" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
