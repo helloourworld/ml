@@ -188,13 +188,13 @@ u'I live at 123 Fake St., Fakeville'
 就是这么好用。but there is more: any python expression is allowed within the curly brackets as long as it evaluates to a string or something that has a string representation:
 
 ```Python
->>> template('Hello {{name.title() if name else "stranger"}}!', name='mArC')
+>>> template('Hello \{\{name.title() if name else "stranger"\}\}!', name='mArC')
 u'Hello Marc!'
 
 # start the expression with an exclamation mark to disable escaping for that expression
->>> template('Hello {{name}}!', name='<b>World</b>')
+>>> template('Hello {{name}}\!', name='<b>World</b>')
 u'Hello &lt;b&gt;World&lt;/b&gt;!'
->>> template('Hello {{!name}}!', name='<b>World</b>')
+>>> template('Hello \{\{\!name}}\!', name='<b>World</b>')
 u'Hello <b>World</b>!'
 ```
 
@@ -212,7 +212,7 @@ u'Hello <b>World</b>!'
 # Indentation is ignored. You can put as much whitespace in front of statements as you want. This allows you to align your code with the surrounding markup and can greatly improve readability.
 # Blocks that are normally indented now have to be closed explicitly with an end keyword.
 
-ul>
+<ul>
   % for item in basket:
     <li>{{item}}</li>
   % end
@@ -267,19 +267,8 @@ table.hovertable td {
 <p font-size:6px>{{subtitle}}</p>
 <table class="hovertable" border="1" bordercolor="black" cellspacing="0">
 % for i1, i2, i3, i4, i5,i6,i7,i8,i9,i10, i11, i12,i13,i14,i15 in theads:
-<tr>
-<th>{{i1.strip()}}</th>
-<th>{{i2.strip()}}</th>
-...
-</tr>
-%end
 % for i1, i2, i3, i4, i5,i6,i7,i8,i9,i10, i11, i12,i13,i14,i15 in items:
 <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
-% i2 = '{:,}'.format(int(i2))
-% i3 = '{:,}'.format(int(i3))
-<td>{{i1.strip()}}</td>
-<td>{{i2.strip()}}</td>
-...
 </tr>
 %end
 </table>
