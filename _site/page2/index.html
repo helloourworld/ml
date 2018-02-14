@@ -179,6 +179,108 @@
             ">
     			
 <div class="post-preview">
+    <a href="/spark/2017/04/07/secondarysort/">
+        <h2 class="post-title">
+            Secondary Sort
+        </h2>
+        
+        <div class="post-content-preview">
+            secondarysort
+
+data:
+
+20 21
+50 51
+50 52
+50 53
+50 54
+60 51
+60 53
+60 52
+60 56
+60 57
+70 58
+60 61
+70 54
+70 55
+70 56
+70 57
+70 58
+10 55
+80 67
+90 43
+30 44
+50 67
+50 87
+40 77
+20 11
+10 55
+20 84
+70 45
+90 55
+9...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on April 7, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2017/04/07/k-means/">
+        <h2 class="post-title">
+            Spark-ML-0501-Clustering-KMeans
+        </h2>
+        
+        <div class="post-content-preview">
+            k-means、k-means++以及k-means||算法分析
+
+  本文会介绍一般的k-means算法、k-means++算法以及基于k-means++算法的k-means||算法。在spark ml，已经实现了k-means算法以及k-means||算法。
+本文首先会介绍这三个算法的原理，然后在了解原理的基础上分析spark中的实现代码。
+
+1 k-means算法原理分析
+
+  k-m...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on April 7, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2017/04/07/gaussian-mixture/">
+        <h2 class="post-title">
+            Spark-ML-0502-Clustering-Gaussian mixture
+        </h2>
+        
+        <div class="post-content-preview">
+            高斯混合模型
+
+
+    现有的高斯模型有单高斯模型（SGM）和高斯混合模型（GMM）两种。从几何上讲，单高斯分布模型在二维空间上近似于椭圆，在三维空间上近似于椭球。
+在很多情况下，属于同一类别的样本点并不满足“椭圆”分布的特性，所以我们需要引入混合高斯模型来解决这种情况。
+
+
+1 单高斯模型
+
+  多维变量X服从高斯分布时，它的概率密度函数PDF定义如下：
+
+
+
+
+  在上述定义中,x是维...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on April 7, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/mladvance/2017/04/07/clustering/">
         <h2 class="post-title">
             Spark-ML-05-Clustering
@@ -355,85 +457,6 @@ spark.mllib包中支持下面的模型。
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/mladvance/2017/04/06/gbts/">
-        <h2 class="post-title">
-            Spark-ML-0304-Ensembles-Gradient-Boosted Trees (GBTs)
-        </h2>
-        
-        <div class="post-content-preview">
-            梯度提升树
-
-1 Boosting
-
-  Boosting是一类将弱学习器提升为强学习器的算法。这类算法的工作机制类似：先从初始训练集中训练出一个基学习器，再根据基学习器的表现对训练样本分布进行调整，使得先前基学习器做错的训练样本在后续受到更多关注。
-然后基于调整后的样本分布来训练下一个基学习器；如此重复进行，直至基学习器的数目达到事先指定的值T，最终将这T个基学习器进行加权结合。
-
-  B...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on April 6, 2017
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/mladvance/2017/04/06/ensembles/">
-        <h2 class="post-title">
-            Spark-ML-0304-Ensembles
-        </h2>
-        
-        <div class="post-content-preview">
-            集成学习
-
-  集成学习通过构建并结合多个学习器来完成学习任务，有时也被称为多分类器系统。集成学习通过将多个学习器进行结合，常可获得比单一学习器显著优越的泛化能力。
-
-  根据个体学习器的生成方式，目前的集成学习方法大致可以分为两大类。即个体学习器之间存在强依赖性，必须串行生成的序列化方法以及个体学习器之间不存在强依赖性，可同时生成的并行化方法。
-前者的代表是Boosting，后者的代表是B...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on April 6, 2017
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/mladvance/2017/04/06/classification-regression/">
-        <h2 class="post-title">
-            Spark-ML-03-Classification-Regression
-        </h2>
-        
-        <div class="post-content-preview">
-            分类与回归
-
-  spark.mllib提供了多种方法用于用于二分类、多分类以及回归分析。
-下表介绍了每种问题类型支持的算法。
-
-
-  
-    
-      问题类型
-      支持的方法
-    
-  
-  
-    
-      二分类
-      线性SVMs、逻辑回归、决策树、随机森林、梯度增强树、朴素贝叶斯
-    
-    
-      多分类
-      逻辑回归、决策树、...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on April 6, 2017
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -491,7 +514,7 @@ spark.mllib包中支持下面的模型。
                             
                         
                             
-                                <a href="/tags/#Spark" title="Spark" rel="20">
+                                <a href="/tags/#Spark" title="Spark" rel="23">
                                     Spark
                                 </a>
                             
@@ -618,6 +641,12 @@ spark.mllib包中支持下面的模型。
                         
                             
                         
+                            
+                        
+                            
+                                <a href="/tags/#Graphx" title="Graphx" rel="3">
+                                    Graphx
+                                </a>
                             
                         
                             

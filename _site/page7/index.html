@@ -179,6 +179,80 @@
             ">
     			
 <div class="post-preview">
+    <a href="/mladvance/2016/11/19/CF_KNN/">
+        <h2 class="post-title">
+            推荐系统中的相似度计算方法总结
+        </h2>
+        
+        <div class="post-content-preview">
+            1 相似度计算方法总结
+
+相似度的计算是推荐系统非常重要的环节，包括：用户与用户之间的相似度，物品与物品之间的相似度或者用户与物品的相关性。
+
+下面以在协同过滤中计算两个用户的相似度来介绍几种常用的相似度计算方法。其中有些方法只适用于协同过滤，有些适应于更多其他推荐方法。
+
+1）共同邻居。直接计算两个用户的交集
+
+
+
+2）Jaccard系数。基于共同邻居的一个显著问题是用户的物品集越大，越可...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 19, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/19/ALS/">
+        <h2 class="post-title">
+            Spark-ML-04-collaborative-filtering
+        </h2>
+        
+        <div class="post-content-preview">
+            1 推荐算法概述
+需求背景：
+
+
+上图所示为用户评分矩阵，其中用户评分为1-5，?所示为需要估算的用户评分。如果能够快速估算出用户的评分那么就可以对用户进行推荐了，估计的方法非常多，以下为常用的推荐算法概述。
+
+
+
+本章节主要介绍CF中ALS算法。
+
+2 什么是ALS
+
+ALS是交替最小二乘（alternating least squares）的简称。在机器学习中，ALS特指使用交替最小二乘...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 19, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/tratified-sampling/">
+        <h2 class="post-title">
+            Spark-ML-0203-Stratified sampling
+        </h2>
+        
+        <div class="post-content-preview">
+            分层取样
+
+  先将总体的单位按某种特征分为若干次级总体（层），然后再从每一层内进行单纯随机抽样，组成一个样本的统计学计算方法叫做分层抽样。在spark.mllib中，用key来分层。
+
+  与存在于spark.mllib中的其它统计函数不同，分层采样方法sampleByKey和sampleByKeyExact可以在key-value对的RDD上执行。在分层采样中，可以认为key是一个标签，...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/mladvance/2016/11/17/statistics/">
         <h2 class="post-title">
             Spark-ML-0201-Summary statistics
@@ -352,89 +426,6 @@ import org.apache.spar...
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/log/2016/11/11/game1/">
-        <h2 class="post-title">
-            tmp
-        </h2>
-        
-        <div class="post-content-preview">
-            1 题1
-
-解：（1） 划线法求纯策略纳什均衡
-
-观察，乙的策略‘中’严格小于策略‘右’（），剔除。
-剔除后，甲的策略‘中‘和‘下’严格小于策略’上‘（; ），剔除。纯策略纳什均衡为（上，左)，如下所示：
-
-
-
-(2) 混合策略纳什均衡
-
-易见，博弈的混合策略纳什均衡为: ((1,0,0),(1,0,0))
-
-2 题2
-
-解：使用划线法求解。
-
-首先，针对参与 者甲，对三个矩阵中每列’上‘’...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on November 11, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/mladvance/2016/11/05/data-mining-tools/">
-        <h2 class="post-title">
-            DataMing Tools Collected
-        </h2>
-        
-        <div class="post-content-preview">
-            DataMing Tools Collected
-
-KNIME
-
-rapidminer
-
-8-open-source-big-data-mining-tools
-
-looking-for-data-mining-and-analytics-tools-check-out-these-open-source-options
-
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on November 5, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/hadoop/2016/10/19/python-kafka-sparkstreaming/">
-        <h2 class="post-title">
-            Python 2 Kafka 2 SparkStreaming
-        </h2>
-        
-        <div class="post-content-preview">
-            [SparkStreaming 原理综述与监测目录下文件]（http://blog.csdn.net/zfszhangyuan/article/details/52522974
-
-原理
-
-Spark Streaming 数据产生与导入相关的内存分析
-
-动态控制消费速率
-
-Spark Streaming Direct Approach (No Receivers) 分析
-python as K...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on October 19, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -492,7 +483,7 @@ python as K...
                             
                         
                             
-                                <a href="/tags/#Spark" title="Spark" rel="20">
+                                <a href="/tags/#Spark" title="Spark" rel="23">
                                     Spark
                                 </a>
                             
@@ -619,6 +610,12 @@ python as K...
                         
                             
                         
+                            
+                        
+                            
+                                <a href="/tags/#Graphx" title="Graphx" rel="3">
+                                    Graphx
+                                </a>
                             
                         
                             

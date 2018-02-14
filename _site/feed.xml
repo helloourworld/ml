@@ -8,6 +8,34 @@
 		
 			
 			<item>
+				<title>Graphx operation 2[转]</title>
+				
+					<description>&lt;p&gt;This page is maily from the web http://blog.csdn.net/u013468917/article/details/51199808 sth changed for 2.0.&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Tue, 13 Feb 2018 00:00:00 +0800</pubDate>
+				<link>http://localhost:4000/spark/2018/02/13/graphx_opt2/</link>
+				<guid isPermaLink="true">http://localhost:4000/spark/2018/02/13/graphx_opt2/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Graphx operation 1</title>
+				
+					<description>&lt;p&gt;This page is maily from the web http://blog.csdn.net/u013045749/article/details/50483407 sth changed for 2.0.&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Tue, 13 Feb 2018 00:00:00 +0800</pubDate>
+				<link>http://localhost:4000/spark/2018/02/13/graphx_opt1/</link>
+				<guid isPermaLink="true">http://localhost:4000/spark/2018/02/13/graphx_opt1/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title>如何用Python发送邮件</title>
 				
 					<description>&lt;h2 id=&quot;1-背景介绍&quot;&gt;1 背景介绍&lt;/h2&gt;
@@ -17,6 +45,21 @@
 				<pubDate>Sat, 03 Feb 2018 00:00:00 +0800</pubDate>
 				<link>http://localhost:4000/python%20email%20hive/2018/02/03/python_send_email/</link>
 				<guid isPermaLink="true">http://localhost:4000/python%20email%20hive/2018/02/03/python_send_email/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title>Graphx prelimery</title>
+				
+					<description>&lt;p&gt;This page is maily from http://spark.apache.org/docs/2.0.2/graphx-programming-guide.html.
+Just for markable.&lt;/p&gt;
+
+</description>
+				
+				<pubDate>Sun, 07 Jan 2018 00:00:00 +0800</pubDate>
+				<link>http://localhost:4000/spark/2018/01/07/graphx_pre/</link>
+				<guid isPermaLink="true">http://localhost:4000/spark/2018/01/07/graphx_pre/</guid>
 			</item>
 			
 		

@@ -282,4 +282,14 @@ table.hovertable td {
 export PYTHONPATH=$PYTHONPATH:"$HOME/bottle"
 ```
 
-看似容易，执行难，如果有问题，请咚咚我即可。
+> 补充4: 关于格式化代码，在发邮件过程中，经常会用到百分比、金额等格式，以下为常用格式化代码方法，供参考：
+
+Python主要有两种格式化代码的方法，一种是%（2.6版本之前），另外一种是通过{}和:来代替%，即str.format()。实践证明通过format转换格式后再进行template的render，会使代码更精炼。
+
+~~~Python
+df = df.replace('NULL', '0').applymap(
+    lambda x: '{:,}'.format(int(x))) # 替换Hive中的Null，并转换为金额的千位分割符。
+df = df.applymap(lambda x: '{:.2%}'.format(x)) # 长度为2的精度百分比
+~~~
+
+分享就这么多，请开始写Bug吧，如果有问题，请咚咚我即可。

@@ -473,7 +473,18 @@ export PYTHONPATH<span class="p">=</span>$PYTHONPATH<span class="p">:</span><spa
 </code></pre>
 </div>
 
-<p>看似容易，执行难，如果有问题，请咚咚我即可。</p>
+<blockquote>
+  <p>补充4: 关于格式化代码，在发邮件过程中，经常会用到百分比、金额等格式，以下为常用格式化代码方法，供参考：</p>
+</blockquote>
+
+<p>Python主要有两种格式化代码的方法，一种是%（2.6版本之前），另外一种是通过{}和:来代替%，即str.format()。实践证明通过format转换格式后再进行template的render，会使代码更精炼。</p>
+
+<pre><code class="language-Python">df = df.replace('NULL', '0').applymap(
+    lambda x: '{:,}'.format(int(x))) # 替换Hive中的Null，并转换为金额的千位分割符。
+df = df.applymap(lambda x: '{:.2%}'.format(x)) # 长度为2的精度百分比
+</code></pre>
+
+<p>分享就这么多，请开始写Bug吧，如果有问题，请咚咚我即可。</p>
 
 
                 <hr>
@@ -482,12 +493,19 @@ export PYTHONPATH<span class="p">=</span>$PYTHONPATH<span class="p">:</span><spa
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/mladvance/2018/01/03/cnn-image-classification/" data-toggle="tooltip" data-placement="top" title="如何用Python和深度神经网络识别图像？[转录]">
+                        <a href="/spark/2018/01/07/graphx_pre/" data-toggle="tooltip" data-placement="top" title="Graphx prelimery">
                         Previous<br>
-                        <span>如何用Python和深度神经网络识别图像？[转录]</span>
+                        <span>Graphx prelimery</span>
                         </a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/spark/2018/02/13/graphx_opt1/" data-toggle="tooltip" data-placement="top" title="Graphx operation 1">
+                        Next<br>
+                        <span>Graphx operation 1</span>
+                        </a>
+                    </li>
                     
                 </ul>
                     <div class="ds-share flat"
@@ -569,7 +587,7 @@ export PYTHONPATH<span class="p">=</span>$PYTHONPATH<span class="p">:</span><spa
                             
         				
                             
-                				<a href="/tags/#Spark" title="Spark" rel="20">
+                				<a href="/tags/#Spark" title="Spark" rel="23">
                                 Spark
                                 </a>
                             
@@ -696,6 +714,12 @@ export PYTHONPATH<span class="p">=</span>$PYTHONPATH<span class="p">:</span><spa
         				
                             
         				
+                            
+        				
+                            
+                				<a href="/tags/#Graphx" title="Graphx" rel="3">
+                                Graphx
+                                </a>
                             
         				
                             
