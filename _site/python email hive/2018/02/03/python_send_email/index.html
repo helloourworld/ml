@@ -484,6 +484,51 @@ export PYTHONPATH<span class="p">=</span>$PYTHONPATH<span class="p">:</span><spa
 df = df.applymap(lambda x: '{:.2%}'.format(x)) # 长度为2的精度百分比
 </code></pre>
 
+<blockquote>
+  <p>补充5: 使用xlrd,xlwt进行Excel文档附件的读写，请参照：<a href="http://www.python-excel.org/">Python-Excel</a></p>
+</blockquote>
+
+<p>The Packages:</p>
+
+<p><a href="http://xlrd.readthedocs.io/en/latest/">xlrd</a>
+This package is for reading data and formatting information from older Excel files (ie: .xls)</p>
+
+<p><a href="http://xlwt.readthedocs.io/en/latest/">xlwt</a>
+This package is for writing data and formatting information to older Excel files (ie: .xls)</p>
+<pre><code class="language-Python">from xlwt import Workbook
+
+book = Workbook()
+sheet1 = book.add_sheet('Sheet 1')
+book.add_sheet('Sheet 2')
+
+sheet1.write(0,0,'A1')
+sheet1.write(0,1,'B1')
+row1 = sheet1.row(1)
+row1.write(0,'A2')
+row1.write(4,'B2')
+sheet1.col(0).width = 10000
+
+sheet2 = book.get_sheet(1)
+sheet2.row(0).write(0,'Sheet 2 A1')
+sheet2.row(0).write(1,'Sheet 2 B1')
+sheet2.flush_row_data()
+sheet2.write(1,0,'Sheet 2 A3')
+sheet2.col(0).width = 5000
+# sheet2.col(0).hidden = True
+
+book.save('simple.xls')
+
+</code></pre>
+
+<p><a href="https://www.crifan.com/python_xlwt_set_cell_background_color/">Python中使用xlwt设置cell的背景色</a></p>
+
+<blockquote>
+  <p>补充6: 使用系统命令读取文件并提取数据时的小bug：</p>
+</blockquote>
+
+<pre><code class="language-Python">line=line.replace('\t\t', '\t') # 描述结尾有Tab分割符时，造成读取错误
+</code></pre>
+
 <p>分享就这么多，请开始写Bug吧，如果有问题，请咚咚我即可。</p>
 
 
@@ -611,7 +656,7 @@ df = df.applymap(lambda x: '{:.2%}'.format(x)) # 长度为2的精度百分比
                             
         				
                             
-                				<a href="/tags/#Python" title="Python" rel="25">
+                				<a href="/tags/#Python" title="Python" rel="26">
                                 Python
                                 </a>
                             

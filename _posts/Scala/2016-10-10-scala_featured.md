@@ -16,6 +16,8 @@ tags:
 
 [http://www.slideshare.net/normation/scala-dreaded](http://www.slideshare.net/normation/scala-dreaded)
 
+[6 Expressions](http://scala-lang.org/files/archive/spec/2.11/06-expressions.html)
+
 ~~~
 import scala._    // Wild card -- all of Scala is imported
 import scala.{ Predef => _, _ } // Exception, everything except Predef
@@ -84,3 +86,11 @@ t._2              // Part of a method name, such as tuple getters
 **Converting call-by-name parameters to functions**\\
 ```def toFunction(callByName: => Int): () => Int = callByName _```
 
+
+~~~scala
+def sum(xs: Int*) = (0 /: xs) ((x, y) => x + y)
+Then
+
+sum(1, 2, 3, 4)
+sum(List(1, 2, 3, 4): _*)
+~~~
