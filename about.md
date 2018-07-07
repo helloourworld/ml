@@ -23,6 +23,15 @@ header-img: "images/IMG_0006.JPG"
     <p>一些作品和开源项目，👉 戳 <a href="/portfolio">Portfolio</a> 与 <a href="http://github.com/helloourworld">Github</a>。</p>
 
     <h5>Talks</h5>
+    <ul>
+    <li><a href="https://github.com/helloourworld/CV/blob/master/CV_Analyst_LijunYu_cn.pdf">2018.4 The Principle and Application of Ensemble Learning</a></li>
+    </ul>
+    <ul>
+    <li><a href="https://github.com/helloourworld/CV/blob/master/CV_Analyst_LijunYu_cn.pdf">2018.3 Basic Concepts in Graph Theory</a></li>
+    </ul>
+    <ul>
+    <li><a href="https://github.com/helloourworld/CV/blob/master/CV_Analyst_LijunYu_cn.pdf">2017.6 Data Mining Processes and Common Algorithms Overview</a></li>
+    </ul>
 
     <ul>
     <li><a href="">Program on Hadoop</a></li>
