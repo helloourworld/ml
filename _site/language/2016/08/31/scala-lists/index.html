@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -201,7 +205,7 @@
   <li>列表的元素类型 T 可以写成 List[T]。例如，以下列出了多种类型的列表：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// 字符串列表
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 字符串列表
 </span><span class="k">val</span> <span class="n">site</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="s">"Runoob"</span><span class="o">,</span> <span class="s">"Google"</span><span class="o">,</span> <span class="s">"Baidu"</span><span class="o">)</span>
 
 <span class="c1">// 整型列表
@@ -217,8 +221,7 @@
       <span class="nc">List</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span>
       <span class="nc">List</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
    <span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>构造列表的两个基本单位是 Nil 和 ::</li>
@@ -226,7 +229,7 @@
   <li>以上实例我们可以写成如下所示：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// 字符串列表
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 字符串列表
 </span><span class="k">val</span> <span class="n">site</span> <span class="k">=</span> <span class="s">"Runoob"</span> <span class="o">::</span> <span class="o">(</span><span class="s">"Google"</span> <span class="o">::</span> <span class="o">(</span><span class="s">"Baidu"</span> <span class="o">::</span> <span class="nc">Nil</span><span class="o">))</span>
 
 <span class="c1">// 整型列表
@@ -239,8 +242,7 @@
 </span><span class="k">val</span> <span class="n">dim</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">::</span> <span class="o">(</span><span class="mi">0</span> <span class="o">::</span> <span class="o">(</span><span class="mi">0</span> <span class="o">::</span> <span class="nc">Nil</span><span class="o">)))</span> <span class="o">::</span>
           <span class="o">(</span><span class="mi">0</span> <span class="o">::</span> <span class="o">(</span><span class="mi">1</span> <span class="o">::</span> <span class="o">(</span><span class="mi">0</span> <span class="o">::</span> <span class="nc">Nil</span><span class="o">)))</span> <span class="o">::</span>
           <span class="o">(</span><span class="mi">0</span> <span class="o">::</span> <span class="o">(</span><span class="mi">0</span> <span class="o">::</span> <span class="o">(</span><span class="mi">1</span> <span class="o">::</span> <span class="nc">Nil</span><span class="o">)))</span> <span class="o">::</span> <span class="nc">Nil</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="1-列表基本操作">1 列表基本操作</h4>
 
@@ -254,7 +256,7 @@
 
 <p>对于Scala列表的任何操作都可以使用这三个基本操作来表达。实例如下:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Lists1</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Lists1</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">site</span> <span class="k">=</span> <span class="s">"Runoob"</span> <span class="o">::</span> <span class="o">(</span><span class="s">"Google"</span> <span class="o">::</span> <span class="o">(</span><span class="s">"Baidu"</span> <span class="o">::</span> <span class="nc">Nil</span><span class="o">))</span>
       <span class="k">val</span> <span class="n">nums</span> <span class="k">=</span> <span class="nc">Nil</span>
@@ -266,14 +268,13 @@
    <span class="o">}</span>
 <span class="o">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="2-连接列表">2 连接列表</h4>
 
 <p>你可以使用 ::: 运算符或 List.:::() 方法或 List.concat() 方法来连接两个或多个列表。实例如下:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Lists2</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Lists2</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">site1</span> <span class="k">=</span> <span class="s">"Runoob"</span> <span class="o">::</span> <span class="o">(</span><span class="s">"Google"</span> <span class="o">::</span> <span class="o">(</span><span class="s">"Baidu"</span> <span class="o">::</span> <span class="nc">Nil</span><span class="o">))</span>
       <span class="k">val</span> <span class="n">site2</span> <span class="k">=</span> <span class="s">"Facebook"</span> <span class="o">::</span> <span class="o">(</span><span class="s">"Taobao"</span> <span class="o">::</span> <span class="nc">Nil</span><span class="o">)</span>
@@ -294,14 +295,13 @@
    <span class="o">}</span>
 <span class="o">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="3-listfill">3 List.fill()</h4>
 
 <p>我们可以使用 List.fill() 方法来创建一个指定重复数量的元素列表：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Lists3</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Lists3</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">site</span> <span class="k">=</span> <span class="nc">List</span><span class="o">.</span><span class="n">fill</span><span class="o">(</span><span class="mi">3</span><span class="o">)(</span><span class="s">"Runoob"</span><span class="o">)</span> <span class="c1">// 重复 Runoob 3次
 </span>      <span class="n">println</span><span class="o">(</span> <span class="s">"site : "</span> <span class="o">+</span> <span class="n">site</span>  <span class="o">)</span>
@@ -310,8 +310,7 @@
 </span>      <span class="n">println</span><span class="o">(</span> <span class="s">"num : "</span> <span class="o">+</span> <span class="n">num</span>  <span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="4-listtabulate">4 List.tabulate()</h4>
 
@@ -337,7 +336,7 @@
 
 <p>List.reverse 用于将列表的顺序反转，实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Lists5</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Lists5</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">site</span> <span class="k">=</span> <span class="s">"Runoob"</span> <span class="o">::</span> <span class="o">(</span><span class="s">"Google"</span> <span class="o">::</span> <span class="o">(</span><span class="s">"Baidu"</span> <span class="o">::</span> <span class="nc">Nil</span><span class="o">))</span>
       <span class="n">println</span><span class="o">(</span> <span class="s">"site 反转前 : "</span> <span class="o">+</span> <span class="n">site</span> <span class="o">)</span>
@@ -345,8 +344,7 @@
       <span class="n">println</span><span class="o">(</span> <span class="s">"site 反转前 : "</span> <span class="o">+</span> <span class="n">site</span><span class="o">.</span><span class="n">reverse</span> <span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="6-scala-list-常用方法">6 Scala List 常用方法</h4>
 
@@ -691,13 +689,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

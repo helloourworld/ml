@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -204,7 +208,7 @@
 
 <p><strong>zeppelin.server and port modify:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> 22 &lt;property&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 22 &lt;property&gt;
  23   &lt;name&gt;zeppelin.server.addr&lt;/name&gt;
  24   &lt;value&gt;NN01.HadoopVM&lt;/value&gt;
  25   &lt;description&gt;Server address&lt;/description&gt;
@@ -215,16 +219,14 @@
  30   &lt;value&gt;9090&lt;/value&gt;
  31   &lt;description&gt;Server port.&lt;/description&gt;
  32 &lt;/property&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="hive-interpreter-for-zeppelin">HIve Interpreter for Zeppelin</h2>
 
 <p><strong>Importtant Notice</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Hive Interpreter will be deprecated and merged into JDBC Interpreter. You can use Hive Interpreter by using JDBC Interpreter with same functionality. See the example below of settings and dependencies.
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hive Interpreter will be deprecated and merged into JDBC Interpreter. You can use Hive Interpreter by using JDBC Interpreter with same functionality. See the example below of settings and dependencies.
+</code></pre></div></div>
 <p><strong>Properties</strong></p>
 
 <table>
@@ -301,16 +303,14 @@
 
 <p>for example</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>export SPARK_HOME=/usr/lib/spark
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export SPARK_HOME=/usr/lib/spark
+</code></pre></div></div>
 
 <h2 id="bugs">Bugs</h2>
 <p>1 Hive Connect</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Could not open client transport with JDBC Uri: jdbc:hive2://NN01.HadoopVM:10000: java.net.ConnectException: Connection refused
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Could not open client transport with JDBC Uri: jdbc:hive2://NN01.HadoopVM:10000: java.net.ConnectException: Connection refused
+</code></pre></div></div>
 
 <p>Modify</p>
 
@@ -318,23 +318,21 @@
 
 <p>2 Jackson version is too old 2.5.3</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>java.lang.NoClassDefFoundError: Could not initialize class org.apache.spark.rdd.RDDOperationScope$
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java.lang.NoClassDefFoundError: Could not initialize class org.apache.spark.rdd.RDDOperationScope$
   at org.apache.spark.SparkContext.withScope(SparkContext.scala:682)
   at org.apache.spark.SparkContext.textFile(SparkContext.scala:800)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Modify</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># Apache Spark2.0 依赖的jackson相关文件版本为2.6.5(参考 spark的pom.xml文件)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Apache Spark2.0 依赖的jackson相关文件版本为2.6.5(参考 spark的pom.xml文件)
 # Apache Zeppelin 在启动时会加载${ZEPPELIN_HOME}/lib下面的类库。使用${SPARK_HOME}/jars/下的替换。
 # Debug
 
 [hadoop@NN01 jars]$ cp jackson-core-2.6.5.jar ~/zeppelin/lib/.
 [hadoop@NN01 jars]$ cp jackson-annotations-2.6.5.jar ~/zeppelin/lib/.
 [hadoop@NN01 jars]$ cp jackson-databind-2.6.5.jar ~/zeppelin/lib/.
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <pre><code class="language-Zeppelin">%spark
 val bankText = sc.textFile("file:///home/hadoop/bankfull.csv")
@@ -483,13 +481,13 @@ val bankText = sc.textFile("file:///home/hadoop/bankfull.csv")
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

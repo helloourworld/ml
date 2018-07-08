@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -207,57 +211,51 @@ tools工具已经下载</p>
 <p>Step 1: Install Pip
 pip 是“A tool for installing and managing Python packages.”，也就是说pip是python的软件安装工具。使用root身份</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cd /usr/local/src
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /usr/local/src
 wget "https://pypi.python.org/packages/source/p/pip/pip-1.5.4.tar.gz#md5=834b2904f92d46aaa333267fb1c922bb" --no-check-certificate
 tar -xzvf pip-1.5.4.tar.gz
 cd pip-1.5.4
 python setup.py install
 pip --version
 pip 1.5.4 from /usr/lib/python2.6/site-packages/pip-1.5.4-py2.6.egg (python 2.6)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Step 2: Install Scala</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">$</span> <span class="n">cd</span> <span class="o">~/</span><span class="nc">Downloads</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">$</span> <span class="n">cd</span> <span class="o">~/</span><span class="nc">Downloads</span>
  <span class="n">$</span> <span class="n">wget</span> <span class="n">http</span><span class="o">://</span><span class="n">www</span><span class="o">.</span><span class="n">scala</span><span class="o">-</span><span class="n">lang</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">files</span><span class="o">/</span><span class="n">archive</span><span class="o">/</span><span class="n">scala</span><span class="o">-</span><span class="mf">2.11</span><span class="o">.</span><span class="mf">8.d</span><span class="n">eb</span>
  <span class="n">$</span> <span class="n">sudo</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span> <span class="n">scala</span><span class="o">-</span><span class="mf">2.11</span><span class="o">.</span><span class="mf">8.d</span><span class="n">eb</span>
  <span class="n">$</span> <span class="n">scala</span> <span class="err">–</span><span class="n">version</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Step 3: Install py4j</p>
 
 <p>Py4J is used on the driver for local communication between the Python and Java SparkContext objects; large data transfers are performed through a different mechanism.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> $ sudo pip install py4j
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ sudo pip install py4j
+</code></pre></div></div>
 
 <p>Step 4: Install Spark.</p>
 
 <p>By now, we have installed the dependencies which are required to install Apache Spark. Next, we need to download and extract Spark source tar. We can get the latest version Apache Spark using wget:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> $ cd ~/Downloads
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ cd ~/Downloads
  $ wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.0.tgz
  $ tar xvf spark-1.6.0.tgz
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Step 5: Compile the extracted source</p>
 
 <p>sbt is an open source build tool for Scala and Java projects which is similar to Java’s Maven.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> $ cd ~/Downloads/spark-1.6.0
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ cd ~/Downloads/spark-1.6.0
  $ sbt/sbt assembly
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This will take some time to install Spark. After installing, we can check whether Spark is running correctly or not by typing.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> $ ./bin/run-example SparkPi 10
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ ./bin/run-example SparkPi 10
+</code></pre></div></div>
 
 <p>this will produce the output:</p>
 
@@ -265,59 +263,51 @@ pip 1.5.4 from /usr/lib/python2.6/site-packages/pip-1.5.4-py2.6.egg (python 2.6)
 
 <p>To see the above results we need to lower the verbosity level of the log4j logger in log4j.properties.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ cp conf/log4j.properties.template conf/log4j.properties
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cp conf/log4j.properties.template conf/log4j.properties
 $ nano conf/log4j.properties
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>After opening the file ‘log4j.properties’, we need to replace following line:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>log4j.rootCategory=INFO, console
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>log4j.rootCategory=INFO, console
+</code></pre></div></div>
 
 <p>by</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>log4j.rootCategory=ERROR, console
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>log4j.rootCategory=ERROR, console
+</code></pre></div></div>
 
 <p>Step 6: Move the files in the right folders (to make it convenient to access them)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo mv ~/Downloads/spark-1.6.0 /opt/
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo mv ~/Downloads/spark-1.6.0 /opt/
 $ sudo ln -s /opt/spark-1.6.0 /opt/spark
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Add this to your path by editing your bashrc file:</p>
 
 <p>Step 7: Create environment variables. To set the environment variables, open bashrc file in any editor.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> $ nano ~/.bashrc
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ nano ~/.bashrc
+</code></pre></div></div>
 
 <p>Set the SPARK_HOME and PYTHONPATH by adding following lines at the bottom of this file</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>export SPARK_HOME=/opt/spark
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export SPARK_HOME=/opt/spark
 export PYTHONPATH=$SPARK_HOME/python
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Next, restart bashrc by typing in:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> $ . ~/.bashrc
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ . ~/.bashrc
+</code></pre></div></div>
 
 <p>Let’s add  this setting for ipython by creating a new python script to automatically export settings, just in case above change did not work.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ nano ~/.ipython/profile_default/startup/load_spark_environment_variables.py
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ nano ~/.ipython/profile_default/startup/load_spark_environment_variables.py
+</code></pre></div></div>
 
 <p>Paste some lines in this file.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import os
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import os
 import sys
 
 if 'SPARK_HOME' not in os.environ:
@@ -325,19 +315,16 @@ if 'SPARK_HOME' not in os.environ:
 
 if '/opt/spark/python' not in sys.path:
     sys.path.insert(0, '/opt/spark/python')
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Step 8: We are all set now. Let us start PySpark by typing command in root directory:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> $ ./bin/pyspark --packages
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ ./bin/pyspark --packages
+</code></pre></div></div>
 <p>We can also start ipython notebook in shell by typing:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> $ PYSPARK_DRIVER_PYTHON=ipython ./bin/pyspark
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ PYSPARK_DRIVER_PYTHON=ipython ./bin/pyspark
+</code></pre></div></div>
 
 <p>When we launch the shell in PySpark, it will automatically load spark Context as sc and SQLContext as sqlContext.</p>
 
@@ -488,13 +475,13 @@ if '/opt/spark/python' not in sys.path:
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

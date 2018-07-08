@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -207,7 +211,7 @@
 <p>  <a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions">sampleByKeyExact()</a>允许用户准确抽取<code class="highlighter-rouge">f_k * n_k</code>个样本，
 这里<code class="highlighter-rouge">f_k</code>表示期望获取键为<code class="highlighter-rouge">k</code>的样本的比例，<code class="highlighter-rouge">n_k</code>表示键为<code class="highlighter-rouge">k</code>的键值对的数量。下面是一个使用的例子：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.SparkContext</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.SparkContext</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.SparkContext._</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.rdd.PairRDDFunctions</span>
 <span class="k">val</span> <span class="n">sc</span><span class="k">:</span> <span class="kt">SparkContext</span> <span class="o">=</span> <span class="o">...</span>
@@ -216,12 +220,11 @@
 // Get an exact sample from each stratum
 </span><span class="k">val</span> <span class="n">approxSample</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sampleByKey</span><span class="o">(</span><span class="n">withReplacement</span> <span class="k">=</span> <span class="kc">false</span><span class="o">,</span> <span class="n">fractions</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">exactSample</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sampleByKeyExact</span><span class="o">(</span><span class="n">withReplacement</span> <span class="k">=</span> <span class="kc">false</span><span class="o">,</span> <span class="n">fractions</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  当<code class="highlighter-rouge">withReplacement</code>为<code class="highlighter-rouge">true</code>时，采用<code class="highlighter-rouge">PoissonSampler</code>取样器，当<code class="highlighter-rouge">withReplacement</code>为<code class="highlighter-rouge">false</code>使，采用<code class="highlighter-rouge">BernoulliSampler</code>取样器。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">sampleByKey</span><span class="o">(</span><span class="n">withReplacement</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">sampleByKey</span><span class="o">(</span><span class="n">withReplacement</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span>
       <span class="n">fractions</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">Double</span><span class="o">],</span>
       <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="nc">Utils</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">nextLong</span><span class="o">)</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)]</span> <span class="k">=</span> <span class="n">self</span><span class="o">.</span><span class="n">withScope</span> <span class="o">{</span>
     <span class="k">val</span> <span class="n">samplingFunc</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">withReplacement</span><span class="o">)</span> <span class="o">{</span>
@@ -242,8 +245,7 @@
     <span class="o">}</span>
     <span class="n">self</span><span class="o">.</span><span class="n">mapPartitionsWithIndex</span><span class="o">(</span><span class="n">samplingFunc</span><span class="o">,</span> <span class="n">preservesPartitioning</span> <span class="k">=</span> <span class="kc">true</span><span class="o">)</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  下面我们分别来看<code class="highlighter-rouge">sampleByKey</code>和<code class="highlighter-rouge">sampleByKeyExact</code>的实现。</p>
 
 <h2 id="1-samplebykey的实现">1 <code class="highlighter-rouge">sampleByKey</code>的实现</h2>
@@ -254,7 +256,7 @@
 
 <p>  我们首先看泊松抽样器的实现。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">getPoissonSamplingFunction</span><span class="o">[</span><span class="kt">K:</span> <span class="kt">ClassTag</span>, <span class="kt">V:</span> <span class="kt">ClassTag</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">getPoissonSamplingFunction</span><span class="o">[</span><span class="kt">K:</span> <span class="kt">ClassTag</span>, <span class="kt">V:</span> <span class="kt">ClassTag</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
       <span class="n">fractions</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">Double</span><span class="o">],</span>
       <span class="n">exact</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span>
       <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Int</span><span class="o">,</span> <span class="kt">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)])</span> <span class="k">=&gt;</span> <span class="nc">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)]</span> <span class="k">=</span> <span class="o">{</span>
@@ -273,13 +275,12 @@
               <span class="o">}</span>
             <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  <code class="highlighter-rouge">getPoissonSamplingFunction</code>返回的是一个函数，传递给<code class="highlighter-rouge">mapPartitionsWithIndex</code>处理每个分区的数据。这里<code class="highlighter-rouge">RandomDataGenerator</code>是一个随机生成器，它用于同时生成均匀值(<code class="highlighter-rouge">uniform values</code>)和泊松值(<code class="highlighter-rouge">Poisson values</code>)。</p>
 
 <h3 id="12-伯努利抽样器">1.2 伯努利抽样器</h3>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">getBernoulliSamplingFunction</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">getBernoulliSamplingFunction</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
       <span class="n">fractions</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">Double</span><span class="o">],</span>
       <span class="n">exact</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span>
       <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Int</span><span class="o">,</span> <span class="kt">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)])</span> <span class="k">=&gt;</span> <span class="nc">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)]</span> <span class="k">=</span> <span class="o">{</span>
@@ -293,8 +294,7 @@
 </span>      <span class="n">iter</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">t</span> <span class="k">=&gt;</span> <span class="n">rng</span><span class="o">.</span><span class="n">nextUniform</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">samplingRateByKey</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="n">_1</span><span class="o">))</span>
     <span class="o">}</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="2-samplebykeyexact的实现">2 <code class="highlighter-rouge">sampleByKeyExact</code>的实现</h2>
 
@@ -302,7 +302,7 @@
 
 <h3 id="21-泊松抽样器">2.1 泊松抽样器</h3>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">counts</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="n">rdd</span><span class="o">.</span><span class="n">countByKey</span><span class="o">())</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">counts</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="n">rdd</span><span class="o">.</span><span class="n">countByKey</span><span class="o">())</span>
 <span class="c1">//计算立即接受的样本数量，并且为每层生成候选名单
 </span><span class="k">val</span> <span class="n">finalResult</span> <span class="k">=</span> <span class="n">getAcceptanceResults</span><span class="o">(</span><span class="n">rdd</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">fractions</span><span class="o">,</span> <span class="n">counts</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
 <span class="c1">//决定接受样本的阈值，生成准确的样本大小
@@ -327,12 +327,11 @@
           <span class="o">}</span>
      <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="22-伯努利抽样">2.2 伯努利抽样</h3>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">getBernoulliSamplingFunction</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">getBernoulliSamplingFunction</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
       <span class="n">fractions</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">Double</span><span class="o">],</span>
       <span class="n">exact</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span>
       <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Int</span><span class="o">,</span> <span class="kt">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)])</span> <span class="k">=&gt;</span> <span class="nc">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)]</span> <span class="k">=</span> <span class="o">{</span>
@@ -349,8 +348,7 @@
 </span>      <span class="n">iter</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">t</span> <span class="k">=&gt;</span> <span class="n">rng</span><span class="o">.</span><span class="n">nextUniform</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">samplingRateByKey</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="n">_1</span><span class="o">))</span>
     <span class="o">}</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
                 <hr>
@@ -495,13 +493,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

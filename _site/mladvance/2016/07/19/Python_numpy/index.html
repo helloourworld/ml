@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -204,22 +208,20 @@
 
 <p>A NumPy array is a grid of values. They are similar to lists, except that every element of an array must be the same type.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 a = numpy.array([1, 2, 3, 4, 5])
 b = numpy.array([1, 2, 3, 4, 5], float)
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>reverse a np.array</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy as np
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy as np
 array1 = np.array(map(float,raw_input().split(' ')), float)
 array2 = array1[::-1]
 print array2
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="shape-and-reshape">Shape and Reshape</h2>
 
@@ -252,12 +254,11 @@ print array2
 
 <p>The reshape tool gives a new shape to an array without changing its data. It creates a new array and does not modify the original array itself.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 my_array = numpy.array([1, 2, 3, 4, 5, 6])
 print my_array.reshape(my_array, (3,2))
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="transpose-and-flatten">Transpose and Flatten</h2>
 
@@ -269,13 +270,12 @@ print my_array.reshape(my_array, (3,2))
 
 <p>It will not affect the original array, but it will create a new array.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy as np
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy as np
 my_array = np.array([[1, 2, 3],
                                 [4, 5, 6]])
 print np.transpose(my_array)
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>2 Flatten</li>
@@ -283,12 +283,11 @@ print np.transpose(my_array)
 
 <p>The tool flatten creates a copy of the input array flattened to one dimension.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy as np
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy as np
 my_array = np.array([[1, 2, 3], [4, 5, 6]])
 print my_array.flatten()
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>
@@ -303,20 +302,19 @@ print my_array.flatten()
 
 <p>another method</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 shape1 = numpy.array(map(int, raw_input().split(' ')))
 array1 = numpy.array(map(int, raw_input().split(' ')))
 print numpy.transpose(array1.reshape(array1, shape1))
 print array1.flatten()
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="concatenate">Concatenate</h2>
 
 <p>Two or more arrays can be concatenated together using the concatenate function with a tuple of the arrays to be joined:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 array_1 = numpy.array([1,2,3])
 array_2 = numpy.array([4,5,6])
@@ -327,12 +325,11 @@ print numpy.concatenate((array_1, array_2, array_3))
 #Output
 [1 2 3 4 5 6 7 8 9]
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If an array has more than one dimension, it is possible to specify the axis along which multiple arrays are concatenated. By default, it is along the first dimension.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`
 import numpy
 
 array_1 = numpy.array([[1,2,3],[0,0,0]])
@@ -351,14 +348,13 @@ array1 = numpy.array([raw_input().split() for _ in range(n)], int)
 array2 = numpy.array([raw_input().split() for _ in range(m)], int)
 print numpy.concatenate((array1, array2))
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="zeros-and-ones">Zeros and ones</h2>
 
 <p>The zeros tool returns a new array with a given shape and type filled with ‘s.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 print numpy.zeros((1,2))                    #Default type is float
 #Output : [[ 0.  0.]]
@@ -366,14 +362,13 @@ print numpy.zeros((1,2))                    #Default type is float
 print numpy.zeros((1,2), dtype = numpy.int) #Type changes to int
 #Output : [[0 0]]
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>ones</p>
 
 <p>The ones tool returns a new array with a given shape and type filled with ‘s.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 print numpy.ones((1,2))                    #Default type is float
 #Output : [[ 1.  1.]]
@@ -381,14 +376,13 @@ print numpy.ones((1,2))                    #Default type is float
 print numpy.ones((1,2), dtype = numpy.int) #Type changes to int
 #Output : [[1 1]]
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>identity</p>
 
 <p>The identity tool returns an identity array. An identity array is a square matrix with all the main diagonal elements as  and the rest as . The default type of elements is float.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 print numpy.identity(3) #3 is for  dimension 3 X 3
 
 #Output
@@ -396,14 +390,13 @@ print numpy.identity(3) #3 is for  dimension 3 X 3
 [ 0.  1.  0.]
 [ 0.  0.  1.]]
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>eye</p>
 
 <p>The eye tool returns a 2-D array with ‘s as the diagonal and ‘s elsewhere. The diagonal can be main, upper or lower depending on the optional parameter . A positive  is for the upper diagonal, a negative  is for the lower, and a   (default) is for the main diagonal.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 print numpy.eye(8, 7, k = 1)    # 8 X 7 Dimensional array with first upper diagonal 1.
 
 #Output
@@ -418,14 +411,13 @@ print numpy.eye(8, 7, k = 1)    # 8 X 7 Dimensional array with first upper diago
 
 print numpy.eye(8, 7, k = -2)   # 8 X 7 Dimensional array with second lower diagonal 1.
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="array-mathematics">Array Mathematics</h2>
 
 <p>Basic mathematical functions operate element-wise on arrays. They are available both as operator overloads and as functions in the NumPy module.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 a = numpy.array([1,2,3,4], float)
 b = numpy.array([5,6,7,8], float)
@@ -448,8 +440,7 @@ print numpy.mod(a, b)           #[ 1.  2.  3.  4.]
 print a**b                      #[  1.00000000e+00   6.40000000e+01   2.18700000e+03   6.55360000e+04]
 print numpy.power(a, b)         #[  1.00000000e+00   6.40000000e+01   2.18700000e+03   6.55360000e+04]
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="floor-ceil-and-rint">Floor, Ceil and Rint</h2>
 
@@ -460,13 +451,12 @@ print numpy.power(a, b)         #[  1.00000000e+00   6.40000000e+01   2.18700000
 <p>The tool floor returns the floor of the input element-wise.
 The floor of x is the largest integer i where i &lt;= x</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 my_array = numpy.array([1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9])
 print numpy.floor(my_array)         #[ 1.  2.  3.  4.  5.  6.  7.  8.  9.]
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>2 ceil</li>
@@ -475,13 +465,12 @@ print numpy.floor(my_array)         #[ 1.  2.  3.  4.  5.  6.  7.  8.  9.]
 <p>The tool ceil returns the ceiling of the input element-wise.
 The ceiling of x is the smallest integer i where i &gt;= x</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 my_array = numpy.array([1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9])
 print numpy.ceil(my_array)         #[ 2.  3.  4.  5.  6.  7.  8.  9.  10.]
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>3 rint</li>
@@ -489,13 +478,12 @@ print numpy.ceil(my_array)         #[ 2.  3.  4.  5.  6.  7.  8.  9.  10.]
 
 <p>The rint tool rounds to the nearest integer of input element-wise.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 my_array = numpy.array([1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9])
 print numpy.rint(my_array)         #[1.  2.  3.  4.  6.  7.  8.  9.  10.]
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="sum-and-prod">Sum and Prod</h2>
 
@@ -505,7 +493,7 @@ print numpy.rint(my_array)         #[1.  2.  3.  4.  6.  7.  8.  9.  10.]
 
 <p>The sum tool returns the sum of array elements over a given axis.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 my_array = numpy.array([ [1, 2], [3, 4] ])
 
@@ -515,8 +503,7 @@ print numpy.sum(my_array, axis = None)      #Output : 10
 print numpy.sum(my_array)                   #Output : 10
 
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>By default, the axis value is None. Therefore, it performs a sum over all the dimensions of the input array.</p>
 
@@ -526,7 +513,7 @@ print numpy.sum(my_array)                   #Output : 10
 
 <p>The prod tool returns the product of array elements over a given axis.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 my_array = numpy.array([ [1, 2], [3, 4] ])
 
@@ -535,8 +522,7 @@ print numpy.prod(my_array, axis = 1)            #Output : [ 2 12]
 print numpy.prod(my_array, axis = None)         #Output : 24
 print numpy.prod(my_array)                      #Output : 24
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>By default, the axis value is None. Therefore, it performs the product over all the dimensions of the input array.</p>
 
@@ -546,15 +532,14 @@ print numpy.prod(my_array)                      #Output : 24
 
 <p>hacking</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 N = map(int, raw_input().split())
 array1 = numpy.array([raw_input().split() for _ in range(N[0])], int)
 s = numpy.sum(array1, axis = 0)
 print numpy.prod(s)
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="min-and-max">Min and Max</h2>
 
@@ -564,7 +549,7 @@ print numpy.prod(s)
 
 <p>The tool min returns the minimum value along a given axis.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 my_array = numpy.array([[2, 5],
                         [3, 7],
@@ -576,8 +561,7 @@ print numpy.min(my_array, axis = 1)         #Output : [2 3 1 0]
 print numpy.min(my_array, axis = None)      #Output : 0
 print numpy.min(my_array)                   #Output : 0
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>By default, the axis value is None. Therefore, it finds the minimum over all the dimensions of the input array.</p>
 
@@ -621,15 +605,14 @@ print numpy.min(my_array)                   #Output : 0
 
 <p>The dot tool returns the <a href="https://en.wikipedia.org/wiki/Dot_product">dot product</a> of two arrays.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 A = numpy.array([ 1, 2 ])
 B = numpy.array([ 3, 4 ])
 
 print numpy.dot(A, B)       #Output : 11
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>2 Cross</li>
@@ -637,15 +620,14 @@ print numpy.dot(A, B)       #Output : 11
 
 <p>The cross tool returns the <a href="https://en.wikipedia.org/wiki/Cross_product">cross product</a> of two arrays.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 A = numpy.array([ 1, 2 ])
 B = numpy.array([ 3, 4 ])
 
 print numpy.cross(A, B)     #Output : -2
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="inner-and-outer">Inner and Outer</h2>
 
@@ -655,15 +637,14 @@ print numpy.cross(A, B)     #Output : -2
 
 <p>The inner tool returns the <a href="https://en.wikipedia.org/wiki/Inner_product_space">inner product</a> of two arrays.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 A = numpy.array([0, 1])
 B = numpy.array([3, 4])
 
 print numpy.inner(A, B)     #Output : 4
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>2 Outer</li>
@@ -671,7 +652,7 @@ print numpy.inner(A, B)     #Output : 4
 
 <p>The outer tool returns the <a href="https://en.wikipedia.org/wiki/Outer_product">outer product</a> of two arrays.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`import numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`import numpy
 
 A = numpy.array([0, 1])
 B = numpy.array([3, 4])
@@ -679,8 +660,7 @@ B = numpy.array([3, 4])
 print numpy.outer(A, B)     #Output : [[0 0]
                             #          [3 4]]
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="polynomials">Polynomials</h2>
 
@@ -690,9 +670,8 @@ print numpy.outer(A, B)     #Output : [[0 0]
 
 <p>The poly tool returns the coefficients of a polynomial with the given sequence of roots.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.poly([-1, 1, 1, 10])        #Output : [  1 -11   9  11 -10]`
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`print numpy.poly([-1, 1, 1, 10])        #Output : [  1 -11   9  11 -10]`
+</code></pre></div></div>
 
 <ul>
   <li>2 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.roots.html">roots</a></li>
@@ -700,9 +679,8 @@ print numpy.outer(A, B)     #Output : [[0 0]
 
 <p>The roots tool returns the roots of a polynomial with the given coefficients.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.roots([1, 0, -1])           #Output : [-1.  1.]`
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`print numpy.roots([1, 0, -1])           #Output : [-1.  1.]`
+</code></pre></div></div>
 
 <ul>
   <li>3 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyint.html">polyint</a></li>
@@ -710,9 +688,8 @@ print numpy.outer(A, B)     #Output : [[0 0]
 
 <p>The polyint tool returns an antiderivative (indefinite integral) of a polynomial.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.polyint([1, 1, 1])          #Output : [ 0.33333333  0.5         1.          0.        ]`
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`print numpy.polyint([1, 1, 1])          #Output : [ 0.33333333  0.5         1.          0.        ]`
+</code></pre></div></div>
 
 <ul>
   <li>4 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyder.html#numpy.polyder">polyder</a></li>
@@ -720,9 +697,8 @@ print numpy.outer(A, B)     #Output : [[0 0]
 
 <p>The polyder tool returns the derivative of the specified order of a polynomial.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.polyder([1, 1, 1, 1])       #Output : [3 2 1]`
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`print numpy.polyder([1, 1, 1, 1])       #Output : [3 2 1]`
+</code></pre></div></div>
 
 <ul>
   <li>5 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyval.html#numpy.polyval">polyval</a></li>
@@ -730,9 +706,8 @@ print numpy.outer(A, B)     #Output : [[0 0]
 
 <p>The polyval tool evaluates the polynomial at specific value.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.polyval([1, -2, 0, 2], 4)   #Output : 34`
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`print numpy.polyval([1, -2, 0, 2], 4)   #Output : 34`
+</code></pre></div></div>
 
 <ul>
   <li>6 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyfit.html">polyfit</a></li>
@@ -740,11 +715,10 @@ print numpy.outer(A, B)     #Output : [[0 0]
 
 <p>The polyfit tool fits a polynomial of a specified order to a set of data using a least-squares approach.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.polyfit([0,1,-1, 2, -2], [0,1,1, 4, 4], 2)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`print numpy.polyfit([0,1,-1, 2, -2], [0,1,1, 4, 4], 2)
 #Output : [  1.00000000e+00   0.00000000e+00  -3.97205465e-16]
 `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>多项式加减乘除
 The functions <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polyadd.html#numpy.polyadd">polyadd</a>, <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polysub.html#numpy.polysub">polysub</a>, <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polymul.html">polymul</a>, and <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.polydiv.html#numpy.polydiv">polydiv</a> also handle proper addition, subtraction, multiplication, and division of polynomial coefficients, respectively.</p>
@@ -759,9 +733,8 @@ The functions <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy
 
 <p>The linalg.det tool computes the determinant of an array.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.linalg.det([[1 , 2], [2, 1]])       #Output : -3.0`
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`print numpy.linalg.det([[1 , 2], [2, 1]])       #Output : -3.0`
+</code></pre></div></div>
 
 <ul>
   <li>2 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.eig.html">linalg.eig</a></li>
@@ -770,10 +743,9 @@ The functions <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy
 <p>numpy.linalg.eig(a)[source]
 Compute the eigenvalues and right eigenvectors of a square array.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`from numpy import linalg as LA
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`from numpy import linalg as LA
 w, v = LA.eig(np.diag((1, 2, 3)))`
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>3 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.inv.html">linalg.inv</a></li>
@@ -781,11 +753,10 @@ w, v = LA.eig(np.diag((1, 2, 3)))`
 
 <p>The linalg.inv tool computes the (multiplicative) inverse of a matrix.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>`print numpy.linalg.inv([[1 , 2], [2, 1]])       #Output : [[-0.33333333  0.66666667]
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`print numpy.linalg.inv([[1 , 2], [2, 1]])       #Output : [[-0.33333333  0.66666667]
                                             #          [ 0.66666667 -0.33333333]]
                                             `
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Other routines can be found <a href="http://docs.scipy.org/doc/numpy/reference/routines.linalg.html">here</a></p>
 
@@ -900,13 +871,13 @@ w, v = LA.eig(np.diag((1, 2, 3)))`
                             
                         
                             
-                                <a href="/tags/#Big Data" title="Big Data" rel="22">
+                                <a href="/tags/#Big Data" title="Big Data" rel="23">
                                     Big Data
                                 </a>
                             
                         
                             
-                                <a href="/tags/#大数据" title="大数据" rel="20">
+                                <a href="/tags/#大数据" title="大数据" rel="21">
                                     大数据
                                 </a>
                             

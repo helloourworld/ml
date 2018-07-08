@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -198,7 +202,7 @@
 
 <p>Scala 通过 scala.util.matching 包种的 Regex 类来支持正则表达式。以下实例演示了使用正则表达式查找单词 Scala :</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.util.matching.Regex</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.util.matching.Regex</span>
 
 <span class="k">object</span> <span class="nc">RegExp1</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
@@ -209,8 +213,7 @@
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="nc">Some</span><span class="o">(</span><span class="nc">Scala</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>实例中使用 String 类的 r() 方法构造了一个Regex对象。</li>
@@ -219,7 +222,7 @@
   <li>你可以使用<strong>mkString( )</strong>方法来连接正则表达式匹配结果的字符串，并可以使用管道(|)来设置不同的模式：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.util.matching.Regex</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.util.matching.Regex</span>
 
 <span class="k">object</span> <span class="nc">RegExp2</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
@@ -231,12 +234,11 @@
 <span class="o">}</span>
 <span class="k">#</span> <span class="n">output</span>
 <span class="nc">Scala</span><span class="o">,</span><span class="n">scala</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>如果你需要将匹配的文本替换为指定的关键词，可以使用 replaceFirstIn( ) 方法来替换第一个匹配项，使用 replaceAllIn( ) 方法替换所有匹配项，实例如下:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">RegExp3</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">RegExp3</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">val</span> <span class="n">pattern</span> <span class="k">=</span> <span class="s">"(S|s)cala"</span><span class="o">.</span><span class="n">r</span>
         <span class="k">val</span> <span class="n">str</span> <span class="k">=</span> <span class="s">"Scala is scalable and cool"</span>
@@ -244,8 +246,7 @@
         <span class="n">println</span> <span class="o">(</span><span class="n">pattern</span> <span class="n">replaceFirstIn</span><span class="o">(</span><span class="n">str</span><span class="o">,</span> <span class="s">"Java"</span><span class="o">))</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="正则表达式">正则表达式</h3>
 
@@ -502,7 +503,7 @@
   <p>注意上表中的每个字符使用了两个反斜线。这是因为在 Java 和 Scala 中字符串中的反斜线是转义字符。所以如果你要输出 <code class="highlighter-rouge">\</code>，你需要在字符串中写成 <code class="highlighter-rouge">\\</code> 来获取一个反斜线。查看以下实例：</p>
 </blockquote>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.util.matching.Regex</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.util.matching.Regex</span>
 
 <span class="k">object</span> <span class="nc">RegExp4</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
@@ -513,8 +514,7 @@
     <span class="o">}</span>
 <span class="o">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
                 <hr>
@@ -659,13 +659,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -300,7 +304,7 @@
 <p>  在<code class="highlighter-rouge">spark</code>中，<code class="highlighter-rouge">org.apache.spark.mllib.clustering.KMeans</code>文件实现了<code class="highlighter-rouge">k-means</code>算法以及<code class="highlighter-rouge">k-means||</code>算法，<code class="highlighter-rouge">org.apache.spark.mllib.clustering.LocalKMeans</code>文件实现了<code class="highlighter-rouge">k-means++</code>算法。
 在分步骤分析<code class="highlighter-rouge">spark</code>中的源码之前我们先来了解<code class="highlighter-rouge">KMeans</code>类中参数的含义。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">KMeans</span> <span class="k">private</span> <span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">KMeans</span> <span class="k">private</span> <span class="o">(</span>
     <span class="k">private</span> <span class="k">var</span> <span class="n">k</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span><span class="c1">//聚类个数
 </span>    <span class="k">private</span> <span class="k">var</span> <span class="n">maxIterations</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span><span class="c1">//迭代次数
 </span>    <span class="k">private</span> <span class="k">var</span> <span class="n">runs</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span><span class="c1">//运行kmeans算法的次数
@@ -308,8 +312,7 @@
 </span>    <span class="k">private</span> <span class="k">var</span> <span class="n">initializationSteps</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span><span class="c1">//初始化步数
 </span>    <span class="k">private</span> <span class="k">var</span> <span class="n">epsilon</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span><span class="c1">//判断kmeans算法是否收敛的阈值
 </span>    <span class="k">private</span> <span class="k">var</span> <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  在上面的定义中，<code class="highlighter-rouge">k</code>表示聚类的个数，<code class="highlighter-rouge">maxIterations</code>表示最大的迭代次数，<code class="highlighter-rouge">runs</code>表示运行<code class="highlighter-rouge">KMeans</code>算法的次数，在<code class="highlighter-rouge">spark 2.0。0</code>开始，该参数已经不起作用了。为了更清楚的理解算法我们可以认为它为1。
 <code class="highlighter-rouge">initializationMode</code>表示初始化模式，有两种选择：随机初始化和通过<code class="highlighter-rouge">k-means||</code>初始化，默认是通过<code class="highlighter-rouge">k-means||</code>初始化。<code class="highlighter-rouge">initializationSteps</code>表示通过<code class="highlighter-rouge">k-means||</code>初始化时的迭代步骤，默认是5，这是<code class="highlighter-rouge">spark</code>实现与第三章的算法步骤不一样的地方，这里迭代次数人为指定，
@@ -319,20 +322,19 @@
 
 <h5 id="41-处理数据转换为vectorwithnorm集">4.1 处理数据，转换为<code class="highlighter-rouge">VectorWithNorm</code>集。</h5>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//求向量的二范式，返回double值
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//求向量的二范式，返回double值
 </span><span class="k">val</span> <span class="n">norms</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="nc">Vectors</span><span class="o">.</span><span class="n">norm</span><span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">))</span>
 <span class="n">norms</span><span class="o">.</span><span class="n">persist</span><span class="o">()</span>
 <span class="k">val</span> <span class="n">zippedData</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">zip</span><span class="o">(</span><span class="n">norms</span><span class="o">).</span><span class="n">map</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">norm</span><span class="o">)</span> <span class="k">=&gt;</span>
    <span class="k">new</span> <span class="nc">VectorWithNorm</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">norm</span><span class="o">)</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h5 id="42-初始化中心点">4.2 初始化中心点。</h5>
 
 <p>  初始化中心点根据<code class="highlighter-rouge">initializationMode</code>的值来判断，如果<code class="highlighter-rouge">initializationMode</code>等于<code class="highlighter-rouge">KMeans.RANDOM</code>，那么随机初始化<code class="highlighter-rouge">k</code>个中心点，否则使用<code class="highlighter-rouge">k-means||</code>初始化<code class="highlighter-rouge">k</code>个中心点。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">centers</span> <span class="k">=</span> <span class="n">initialModel</span> <span class="k">match</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">centers</span> <span class="k">=</span> <span class="n">initialModel</span> <span class="k">match</span> <span class="o">{</span>
       <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">kMeansCenters</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
         <span class="nc">Array</span><span class="o">(</span><span class="n">kMeansCenters</span><span class="o">.</span><span class="n">clusterCenters</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">s</span> <span class="k">=&gt;</span> <span class="k">new</span> <span class="nc">VectorWithNorm</span><span class="o">(</span><span class="n">s</span><span class="o">)))</span>
       <span class="o">}</span>
@@ -344,8 +346,7 @@
         <span class="o">}</span>
       <span class="o">}</span>
     <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li><strong>（1）随机初始化中心点。</strong></li>
@@ -353,7 +354,7 @@
 
 <p>  随机初始化<code class="highlighter-rouge">k</code>个中心点很简单，具体代码如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">initRandom</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">VectorWithNorm</span><span class="o">])</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">initRandom</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">VectorWithNorm</span><span class="o">])</span>
   <span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Array</span><span class="o">[</span><span class="kt">VectorWithNorm</span><span class="o">]]</span> <span class="k">=</span> <span class="o">{</span>
     <span class="c1">//采样固定大小为k的子集
 </span>    <span class="c1">//这里run表示我们运行的KMeans算法的次数，默认为1，以后将停止提供该参数
@@ -363,8 +364,7 @@
       <span class="k">new</span> <span class="nc">VectorWithNorm</span><span class="o">(</span><span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="n">vector</span><span class="o">.</span><span class="n">toArray</span><span class="o">),</span> <span class="n">v</span><span class="o">.</span><span class="n">norm</span><span class="o">)</span>
     <span class="o">}.</span><span class="n">toArray</span><span class="o">)</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li><strong>（2）通过<code class="highlighter-rouge">k-means||</code>初始化中心点。</strong></li>
@@ -377,18 +377,17 @@
   <li>第一步，我们要随机初始化第一个中心点。</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//初始化第一个中心点
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//初始化第一个中心点
 </span><span class="k">val</span> <span class="n">seed</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">XORShiftRandom</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="n">seed</span><span class="o">).</span><span class="n">nextInt</span><span class="o">()</span>
 <span class="k">val</span> <span class="n">sample</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">takeSample</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">runs</span><span class="o">,</span> <span class="n">seed</span><span class="o">).</span><span class="n">toSeq</span>
 <span class="k">val</span> <span class="n">newCenters</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">tabulate</span><span class="o">(</span><span class="n">runs</span><span class="o">)(</span><span class="n">r</span> <span class="k">=&gt;</span> <span class="nc">ArrayBuffer</span><span class="o">(</span><span class="n">sample</span><span class="o">(</span><span class="n">r</span><span class="o">).</span><span class="n">toDense</span><span class="o">))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>第二步，通过已知的中心点，循环迭代求得其它的中心点。</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">step</span> <span class="k">=</span> <span class="mi">0</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">step</span> <span class="k">=</span> <span class="mi">0</span>
 <span class="k">while</span> <span class="o">(</span><span class="n">step</span> <span class="o">&lt;</span> <span class="n">initializationSteps</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">val</span> <span class="n">bcNewCenters</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">broadcast</span><span class="o">(</span><span class="n">newCenters</span><span class="o">)</span>
     <span class="k">val</span> <span class="n">preCosts</span> <span class="k">=</span> <span class="n">costs</span>
@@ -440,8 +439,7 @@
       <span class="o">}</span>
       <span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  在这段代码中，我们并没有选择使用<code class="highlighter-rouge">log(pha)</code>的大小作为迭代的次数，而是直接使用了人为确定的<code class="highlighter-rouge">initializationSteps</code>，这是与论文中不一致的地方。
 在迭代内部我们使用概率公式</p>
@@ -459,7 +457,7 @@
 <p>  通过以上步骤求得的候选中心点的个数可能会多于<code class="highlighter-rouge">k</code>个，这样怎么办呢？我们给每个中心点赋一个权重，权重值是数据集中属于该中心点所在类别的数据点的个数。
 然后我们使用本地<code class="highlighter-rouge">k-means++</code>来得到这<code class="highlighter-rouge">k</code>个初始化点。具体的实现代码如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">bcCenters</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">broadcast</span><span class="o">(</span><span class="n">centers</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">bcCenters</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">broadcast</span><span class="o">(</span><span class="n">centers</span><span class="o">)</span>
     <span class="c1">//计算权重值，即各中心点所在类别的个数
 </span>    <span class="k">val</span> <span class="n">weightMap</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">flatMap</span> <span class="o">{</span> <span class="n">p</span> <span class="k">=&gt;</span>
       <span class="nc">Iterator</span><span class="o">.</span><span class="n">tabulate</span><span class="o">(</span><span class="n">runs</span><span class="o">)</span> <span class="o">{</span> <span class="n">r</span> <span class="k">=&gt;</span>
@@ -472,12 +470,11 @@
       <span class="k">val</span> <span class="n">myWeights</span> <span class="k">=</span> <span class="o">(</span><span class="mi">0</span> <span class="n">until</span> <span class="n">myCenters</span><span class="o">.</span><span class="n">length</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="n">i</span> <span class="k">=&gt;</span> <span class="n">weightMap</span><span class="o">.</span><span class="n">getOrElse</span><span class="o">((</span><span class="n">r</span><span class="o">,</span> <span class="n">i</span><span class="o">),</span> <span class="mf">0.0</span><span class="o">)).</span><span class="n">toArray</span>
       <span class="nc">LocalKMeans</span><span class="o">.</span><span class="n">kMeansPlusPlus</span><span class="o">(</span><span class="n">r</span><span class="o">,</span> <span class="n">myCenters</span><span class="o">,</span> <span class="n">myWeights</span><span class="o">,</span> <span class="n">k</span><span class="o">,</span> <span class="mi">30</span><span class="o">)</span>
     <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  上述代码的关键点时通过本地<code class="highlighter-rouge">k-means++</code>算法求最终的初始化点。它是通过<code class="highlighter-rouge">LocalKMeans.kMeansPlusPlus</code>来实现的。它使用<code class="highlighter-rouge">k-means++</code>来处理。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// 初始化一个中心点
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 初始化一个中心点
 </span><span class="n">centers</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="k">=</span> <span class="n">pickWeighted</span><span class="o">(</span><span class="n">rand</span><span class="o">,</span> <span class="n">points</span><span class="o">,</span> <span class="n">weights</span><span class="o">).</span><span class="n">toDense</span>
 <span class="c1">//
 </span><span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="n">until</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
@@ -502,8 +499,7 @@
         <span class="n">centers</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="n">points</span><span class="o">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">).</span><span class="n">toDense</span>
       <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  上述代码中，<code class="highlighter-rouge">points</code>指的是候选的中心点，<code class="highlighter-rouge">weights</code>指这些点相应地权重。寻找概率最大的点的方式就是第二章提到的方式。初始化<code class="highlighter-rouge">k</code>个中心点后，
 就可以通过一般的<code class="highlighter-rouge">k-means</code>流程来求最终的<code class="highlighter-rouge">k</code>个中心点了。具体的过程4.3会讲到。</p>
@@ -512,7 +508,7 @@
 
 <p>  找到中心点后，我们就需要根据距离确定数据点的聚类，即数据点和哪个中心点最近。具体代码如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code>      <span class="c1">// 找到每个聚类中包含的点距离中心点的距离和以及这些点的个数
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="c1">// 找到每个聚类中包含的点距离中心点的距离和以及这些点的个数
 </span>      <span class="k">val</span> <span class="n">totalContribs</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mapPartitions</span> <span class="o">{</span> <span class="n">points</span> <span class="k">=&gt;</span>
         <span class="k">val</span> <span class="n">thisActiveCenters</span> <span class="k">=</span> <span class="n">bcActiveCenters</span><span class="o">.</span><span class="n">value</span>
         <span class="k">val</span> <span class="n">runs</span> <span class="k">=</span> <span class="n">thisActiveCenters</span><span class="o">.</span><span class="n">length</span>
@@ -541,14 +537,13 @@
         <span class="o">}</span>
         <span class="n">contribs</span><span class="o">.</span><span class="n">iterator</span>
       <span class="o">}.</span><span class="n">reduceByKey</span><span class="o">(</span><span class="n">mergeContribs</span><span class="o">).</span><span class="n">collectAsMap</span><span class="o">()</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h5 id="44-重新确定中心点">4.4 重新确定中心点</h5>
 
 <p>  找到类别中包含的数据点以及它们距离中心点的距离，我们可以重新计算中心点。代码如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//更新中心点
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//更新中心点
 </span><span class="k">for</span> <span class="o">((</span><span class="n">run</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="k">&lt;-</span> <span class="n">activeRuns</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">var</span> <span class="n">changed</span> <span class="k">=</span> <span class="kc">false</span>
     <span class="k">var</span> <span class="n">j</span> <span class="k">=</span> <span class="mi">0</span>
@@ -574,8 +569,7 @@
     <span class="o">}</span>
     <span class="n">costs</span><span class="o">(</span><span class="n">run</span><span class="o">)</span> <span class="k">=</span> <span class="n">costAccums</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="n">value</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="5-参考文献">5 参考文献</h4>
 
@@ -732,13 +726,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

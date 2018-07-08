@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -206,22 +210,20 @@
   <li>在 Scala 中 你可以同时使用可变与不可变 Map，不可变的直接使用 Map，可变的使用 mutable.Map。以下实例演示了不可变 Map 的应用：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// 空哈希表，键为字符串，值为整型
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 空哈希表，键为字符串，值为整型
 </span><span class="k">var</span> <span class="n">A</span><span class="k">:</span><span class="kt">Map</span><span class="o">[</span><span class="kt">Char</span>,<span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">()</span>
 
 <span class="c1">// Map 键值对演示
 </span><span class="k">val</span> <span class="n">colors</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"red"</span> <span class="o">-&gt;</span> <span class="s">"#FF0000"</span><span class="o">,</span> <span class="s">"azure"</span> <span class="o">-&gt;</span> <span class="s">"#F0FFFF"</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>定义 Map 时，需要为键值对定义类型。如果需要添加 key-value 对，可以使用 + 号，如下所示：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">A</span> <span class="o">+=</span> <span class="o">(</span><span class="sc">'I'</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">A</span> <span class="o">+=</span> <span class="o">(</span><span class="sc">'I'</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="o">)</span>
 <span class="n">A</span> <span class="o">+=</span> <span class="o">(</span><span class="sc">'J'</span> <span class="o">-&gt;</span> <span class="mi">5</span><span class="o">)</span>
 <span class="n">A</span> <span class="o">+=</span> <span class="o">(</span><span class="sc">'K'</span> <span class="o">-&gt;</span> <span class="mi">10</span><span class="o">)</span>
 <span class="n">A</span> <span class="o">+=</span> <span class="o">(</span><span class="sc">'L'</span> <span class="o">-&gt;</span> <span class="mi">100</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="1-map-基本操作">1 Map 基本操作</h4>
 
@@ -250,7 +252,7 @@
 
 <p><strong>Example</strong></p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Maps1</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Maps1</span><span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">val</span> <span class="n">colors</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"red"</span> <span class="o">-&gt;</span> <span class="s">"#FF0000"</span><span class="o">,</span>
                                     <span class="s">"azure"</span> <span class="o">-&gt;</span> <span class="s">"#F0FFFF"</span><span class="o">,</span>
@@ -264,23 +266,21 @@
         <span class="n">println</span><span class="o">(</span><span class="s">"检测nums是否为空："</span> <span class="o">+</span> <span class="n">nums</span><span class="o">.</span><span class="n">isEmpty</span><span class="o">)</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>输出结果：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">colors中的键为</span><span class="err">：</span><span class="nc">Set</span><span class="o">(</span><span class="n">red</span><span class="o">,</span> <span class="n">azure</span><span class="o">,</span> <span class="n">peru</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">colors中的键为</span><span class="err">：</span><span class="nc">Set</span><span class="o">(</span><span class="n">red</span><span class="o">,</span> <span class="n">azure</span><span class="o">,</span> <span class="n">peru</span><span class="o">)</span>
 <span class="n">colors中的值为</span><span class="err">：</span><span class="nc">MapLike</span><span class="o">(</span><span class="k">#</span><span class="nc">FF0000</span><span class="o">,</span> <span class="k">#</span><span class="n">F0FFFF</span><span class="o">,</span> <span class="k">#</span><span class="nc">CD853F</span><span class="o">)</span>
 <span class="n">检测colors是否为空</span><span class="err">：</span><span class="kc">false</span>
 <span class="n">检测nums是否为空</span><span class="err">：</span><span class="kc">true</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="2-map合并">2 Map合并</h4>
 
 <p>你可以使用 ++ 运算符或 Map.++() 方法来连接两个 Map，Map 合并时会移除重复的 key。以下演示了两个 Map 合并的实例:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Maps2</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Maps2</span><span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">val</span> <span class="n">colors1</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"red"</span> <span class="o">-&gt;</span> <span class="s">"#FF0000"</span><span class="o">,</span>
                         <span class="s">"azure"</span> <span class="o">-&gt;</span> <span class="s">"#F0FFFF"</span><span class="o">,</span>
@@ -298,14 +298,13 @@
         <span class="n">println</span><span class="o">(</span><span class="s">"colors1.++(colors2: "</span> <span class="o">+</span> <span class="n">colors</span><span class="o">)</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="3-输出-map-的-keys-和-values">3 输出 Map 的 keys 和 values</h4>
 
 <p>以下通过 foreach 循环输出 Map 中的 keys 和 values：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Maps3</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Maps3</span><span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">sites</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"runoob"</span> <span class="o">-&gt;</span> <span class="s">"http://www.runoob.com"</span><span class="o">,</span>
                        <span class="s">"baidu"</span> <span class="o">-&gt;</span> <span class="s">"http://www.baidu.com"</span><span class="o">,</span>
@@ -320,14 +319,13 @@
 <span class="nc">Key</span> <span class="k">=</span> <span class="n">runoob</span> <span class="nc">Value</span> <span class="k">=</span> <span class="n">http</span><span class="o">://</span><span class="n">www</span><span class="o">.</span><span class="n">runoob</span><span class="o">.</span><span class="n">com</span>
 <span class="nc">Key</span> <span class="k">=</span> <span class="n">baidu</span> <span class="nc">Value</span> <span class="k">=</span> <span class="n">http</span><span class="o">://</span><span class="n">www</span><span class="o">.</span><span class="n">baidu</span><span class="o">.</span><span class="n">com</span>
 <span class="nc">Key</span> <span class="k">=</span> <span class="n">taobao</span> <span class="nc">Value</span> <span class="k">=</span> <span class="n">http</span><span class="o">://</span><span class="n">www</span><span class="o">.</span><span class="n">taobao</span><span class="o">.</span><span class="n">com</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="4-查看-map-中是否存在指定的-key">4 查看 Map 中是否存在指定的 Key</h4>
 
 <p>你可以使用 Map.contains 方法来查看 Map 中是否存在指定的 Key。实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Maps4</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Maps4</span><span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">sites</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"runoob"</span> <span class="o">-&gt;</span> <span class="s">"http://www.runoob.com"</span><span class="o">,</span>
                        <span class="s">"baidu"</span> <span class="o">-&gt;</span> <span class="s">"http://www.baidu.com"</span><span class="o">,</span>
@@ -350,8 +348,7 @@
       <span class="o">}</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="返回-scala-lesson7"><a href="/language/2016/08/31/Scala-Lesson7/">返回 Scala-Lesson7</a></h4>
 
@@ -833,13 +830,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

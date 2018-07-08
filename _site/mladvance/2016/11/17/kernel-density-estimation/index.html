@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -217,7 +221,7 @@
 
 <p>  <code class="highlighter-rouge">KernelDensity</code>提供了方法通过样本<code class="highlighter-rouge">RDD</code>计算核密度估计。下面的例子给出了使用方法。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.KernelDensity</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.KernelDensity</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.rdd.RDD</span>
 
 <span class="c1">// an RDD of sample data
@@ -231,14 +235,13 @@
 
 <span class="c1">// Find density estimates for the given values
 </span><span class="k">val</span> <span class="n">densities</span> <span class="k">=</span> <span class="n">kd</span><span class="o">.</span><span class="n">estimate</span><span class="o">(</span><span class="nc">Array</span><span class="o">(-</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">5.0</span><span class="o">))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="3-代码实现">3 代码实现</h2>
 
 <p>  通过调用<code class="highlighter-rouge">KernelDensity.estimate</code>方法来实现核密度函数估计。看下面的代码。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">estimate</span><span class="o">(</span><span class="n">points</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">estimate</span><span class="o">(</span><span class="n">points</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
     <span class="k">val</span> <span class="n">sample</span> <span class="k">=</span> <span class="k">this</span><span class="o">.</span><span class="n">sample</span>
     <span class="k">val</span> <span class="n">bandwidth</span> <span class="k">=</span> <span class="k">this</span><span class="o">.</span><span class="n">bandwidth</span>
     <span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="n">points</span><span class="o">.</span><span class="n">length</span>
@@ -263,11 +266,10 @@
     <span class="n">densities</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  上述代码的<code class="highlighter-rouge">seqOp</code>函数中调用了<code class="highlighter-rouge">normPdf</code>，这个函数用于计算核函数为高斯分布的概率密度函数。参见上面的公式<strong>(1)</strong>。公式<strong>(1)</strong>的实现如下面代码。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code> <span class="k">def</span> <span class="n">normPdf</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">def</span> <span class="n">normPdf</span><span class="o">(</span>
       <span class="n">mean</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
       <span class="n">standardDeviation</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
       <span class="n">logStandardDeviationPlusHalfLog2Pi</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
@@ -277,14 +279,12 @@
     <span class="k">val</span> <span class="n">logDensity</span> <span class="k">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">logStandardDeviationPlusHalfLog2Pi</span>
     <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(</span><span class="n">logDensity</span><span class="o">)</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  该方法首先将公式<strong>(1)</strong>取对数，计算结果，然后再对计算结果取指数。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>![][1]
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>![][1]
 [1]: http://latex.codecogs.com/gif.latex?\prod\(n_{i}\)+1
-</code></pre>
-</div>
+</code></pre></div></div>
 <p><script type="math/tex">% <![CDATA[
 A=U{A}^{T},k <= m,n %]]></script></p>
 
@@ -437,13 +437,13 @@ A=U{A}^{T},k <= m,n %]]></script></p>
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

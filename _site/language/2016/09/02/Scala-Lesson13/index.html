@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -213,7 +217,7 @@
 
 <p>捕捉异常的catch子句，语法与其他语言中不太一样。在Scala里，借用了模式匹配的思想来做异常的匹配，因此，在catch的代码里，是一系列case字句，如下例所示：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.io.FileReader</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.io.FileReader</span>
 <span class="k">import</span> <span class="nn">java.io.FileNotFoundException</span>
 <span class="k">import</span> <span class="nn">java.io.IOException</span>
 
@@ -234,8 +238,7 @@
 
 <span class="k">#</span> <span class="n">output</span><span class="k">:</span>
 <span class="kt">Missing</span> <span class="kt">file</span> <span class="kt">exception</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>catch字句里的内容跟match里的case是完全一样的。由于异常捕捉是按次序，如果最普遍的异常，Throwable，写在最前面，则在它后面的case都捕捉不到，因此需要将它写在最后面。</p>
 
@@ -243,7 +246,7 @@
 
 <p>finally 语句用于执行不管是正常处理还是有异常发生时都需要执行的步骤，实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.io.FileReader</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.io.FileReader</span>
 <span class="k">import</span> <span class="nn">java.io.FileNotFoundException</span>
 <span class="k">import</span> <span class="nn">java.io.IOException</span>
 
@@ -263,8 +266,7 @@
       <span class="o">}</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
                 <hr>
@@ -409,13 +411,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

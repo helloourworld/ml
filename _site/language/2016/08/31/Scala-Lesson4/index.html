@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -204,25 +208,23 @@ Scala 有函数和方法，二者在语义上的区别很小。Scala 方法是�
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">functionName</span> <span class="o">([</span><span class="kt">参数列表</span><span class="o">])</span> <span class="k">:</span> <span class="err">[</span><span class="kt">return</span> <span class="k">type</span><span class="err">]</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">functionName</span> <span class="o">([</span><span class="kt">参数列表</span><span class="o">])</span> <span class="k">:</span> <span class="err">[</span><span class="kt">return</span> <span class="k">type</span><span class="err">]</span>
+</code></pre></div></div>
 <p>如果你不写等于号和方法主体，那么方法会被隐式声明为”抽象(abstract)”，包含它的类型于是也是一个抽象类型。</p>
 
 <h4 id="2-函数定义">2 函数定义</h4>
 <p>方法定义由一个def 关键字开始，紧接着是可选的参数列表，一个冒号”：” 和方法的返回类型，一个等于号”=”，最后是方法的主体。
 Scala 函数定义格式如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">functionName</span> <span class="o">([</span><span class="kt">参数列表</span><span class="o">])</span> <span class="k">:</span> <span class="err">[</span><span class="kt">return</span> <span class="k">type</span><span class="err">]</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">functionName</span> <span class="o">([</span><span class="kt">参数列表</span><span class="o">])</span> <span class="k">:</span> <span class="err">[</span><span class="kt">return</span> <span class="k">type</span><span class="err">]</span> <span class="o">=</span> <span class="o">{</span>
    <span class="n">function</span> <span class="n">body</span>
    <span class="k">return</span> <span class="o">[</span><span class="kt">expr</span><span class="o">]</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>以上代码中 return type 可以是任意合法的 Scala 数据类型。参数列表中的参数可以使用逗号分隔。
 以下函数的功能是将两个传入的参数相加并求和：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funadd</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funadd</span><span class="o">{</span>
    <span class="k">def</span> <span class="n">addInt</span><span class="o">(</span> <span class="n">a</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span><span class="kt">Int</span> <span class="o">)</span> <span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
       <span class="k">var</span> <span class="n">sum</span><span class="k">:</span><span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
       <span class="n">sum</span> <span class="k">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
@@ -233,37 +235,33 @@ Scala 函数定义格式如下：</p>
       <span class="n">println</span><span class="o">(</span><span class="s">"value of 1 add 2: "</span> <span class="o">+</span> <span class="n">addInt</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">));</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>如果函数没有返回值，可以返回为 <strong>Unit</strong>，这个类似于 <strong>Java</strong> 的 void, 实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Hello</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Hello</span><span class="o">{</span>
    <span class="k">def</span> <span class="n">printMe</span><span class="o">(</span> <span class="o">)</span> <span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
       <span class="n">println</span><span class="o">(</span><span class="s">"Hello, Scala!"</span><span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="3-函数调用">3 函数调用</h4>
 
 <p>Scala 提供了多种不同的函数调用方式：
 以下是调用方法的标准格式：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">functionName</span><span class="o">(</span> <span class="n">参数列表</span><span class="o">)</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">functionName</span><span class="o">(</span> <span class="n">参数列表</span><span class="o">)</span>
+</code></pre></div></div>
 
 <p>如果函数使用了实例的对象来调用，我们可以使用类似java的格式 (使用 . 号)：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="o">[</span><span class="kt">instance.</span><span class="o">]</span><span class="n">functionName</span><span class="o">(</span> <span class="n">参数列表</span> <span class="o">)</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="kt">instance.</span><span class="o">]</span><span class="n">functionName</span><span class="o">(</span> <span class="n">参数列表</span> <span class="o">)</span>
+</code></pre></div></div>
 
 <p>实例演示了定义与调用函数的实例:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Test</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Test</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="n">println</span><span class="o">(</span> <span class="s">"Returned Value : "</span> <span class="o">+</span> <span class="n">addInt</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span><span class="mi">7</span><span class="o">)</span> <span class="o">);</span>
    <span class="o">}</span>
@@ -274,8 +272,7 @@ Scala 函数定义格式如下：</p>
       <span class="k">return</span> <span class="n">sum</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Scala也是一种函数式语言，所以函数是 Scala 语言的核心。以下一些函数概念有助于我们更好的理解 Scala 编程：</p>
 
@@ -291,7 +288,7 @@ Scala 函数定义格式如下：</p>
 <p>在进入函数内部前，传值调用方式就已经将参数表达式的值计算完毕，而传名调用是在函数内部进行参数表达式的值计算的。
 这就造成了一种现象，每次使用传名调用时，解释器都会计算一次表达式的值。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funcallbys</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funcallbys</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="n">delayed</span><span class="o">(</span><span class="n">time</span><span class="o">());</span>
    <span class="o">}</span>
@@ -306,24 +303,22 @@ Scala 函数定义格式如下：</p>
       <span class="n">t</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>以上实例中我们声明了 delayed 方法， 该方法在变量名和变量类型使用 <strong>=&gt; 符号</strong>来设置传名调用。执行以上代码，输出结果如下：output:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">在</span> <span class="n">delayed</span> <span class="n">方法内</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">在</span> <span class="n">delayed</span> <span class="n">方法内</span>
 <span class="n">获取时间</span><span class="err">，</span><span class="n">单位为纳秒</span>
 <span class="n">参数</span><span class="err">：</span> <span class="mi">91298184175656</span>
 <span class="n">获取时间</span><span class="err">，</span><span class="n">单位为纳秒</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>实例中 delay 方法打印了一条信息表示进入了该方法，接着 delay 方法打印接收到的值，最后再返回 t。</p>
 
 <h4 id="5-指定函数参数名">5 指定函数参数名</h4>
 
 <p>一般情况下函数调用参数，就按照函数定义时的参数顺序一个个传递。但是我们也可以通过指定函数参数名，并且不需要按照顺序向函数传递参数，实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funcallbys</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funcallbys</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="n">printInt</span><span class="o">(</span><span class="n">b</span><span class="k">=</span><span class="mi">5</span><span class="o">,</span> <span class="n">a</span><span class="k">=</span><span class="mi">7</span><span class="o">);</span>
    <span class="o">}</span>
@@ -332,15 +327,14 @@ Scala 函数定义格式如下：</p>
       <span class="n">println</span><span class="o">(</span><span class="s">"Value of b : "</span> <span class="o">+</span> <span class="n">b</span> <span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="6-函数---可变参数">6 函数 - 可变参数</h4>
 
 <p>Scala 允许你指明函数的最后一个参数可以是重复的，即我们不需要指定函数参数的个数，可以向函数传入可变长度参数列表。
 Scala 通过在参数的类型之后放一个星号来设置可变参数(可重复的参数)。例如：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funcallbys</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funcallbys</span><span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span> <span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="n">dosome</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">,</span> <span class="s">"4"</span><span class="o">);</span>
    <span class="o">}</span>
@@ -352,8 +346,7 @@ Scala 通过在参数的类型之后放一个星号来设置可变参数(可重�
       <span class="o">}</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="7-递归函数">7 递归函数</h4>
 
@@ -362,7 +355,7 @@ Scala 同样支持递归函数。
 递归函数意味着函数可以调用它本身。
 以上实例使用递归函数来计算阶乘：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Factorial</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Factorial</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">9</span><span class="o">)</span>
         <span class="n">println</span><span class="o">(</span><span class="s">"factorial"</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">"is: "</span> <span class="o">+</span> <span class="n">factorial</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
@@ -375,14 +368,13 @@ Scala 同样支持递归函数。
     <span class="o">}</span>
 <span class="o">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="8-函数---默认参数值">8 函数 - 默认参数值</h4>
 
 <p>Scala 可以为函数参数指定默认参数值，使用了默认参数，你在调用函数的过程中可以不需要传递参数，这时函数就会调用它的默认参数值，如果传递了参数，则传递值会取代默认值。实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Fundefault</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Fundefault</span><span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="n">println</span><span class="o">(</span><span class="s">"return value: "</span> <span class="o">+</span> <span class="n">addInt</span><span class="o">());</span>
     <span class="o">}</span>
@@ -393,8 +385,7 @@ Scala 同样支持递归函数。
         <span class="k">return</span> <span class="n">sum</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="9-高阶函数">9 高阶函数</h4>
 
@@ -402,7 +393,7 @@ Scala 同样支持递归函数。
 Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参数，或者使用函数作为输出结果。
 以下实例中，apply() 函数使用了另外一个函数 f 和 值 v 作为参数，而函数 f 又调用了参数 v：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funapply</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funapply</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
 
       <span class="n">println</span><span class="o">(</span> <span class="n">apply</span><span class="o">(</span> <span class="n">layout</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span> <span class="o">)</span>
@@ -417,15 +408,14 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
 
 <span class="k">#</span> <span class="n">output</span>
 <span class="o">[</span><span class="err">10</span><span class="o">]</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="10-函数嵌套">10 函数嵌套</h4>
 
 <p>我么可以在 Scala 函数内定义函数，定义在函数内的函数称之为局部函数。
 以下实例我们实现阶乘运算，并使用内嵌函数：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">FunInner</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">FunInner</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="n">println</span><span class="o">(</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">)</span>
       <span class="n">println</span><span class="o">(</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">)</span>
@@ -443,72 +433,63 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
       <span class="n">fact</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="11-匿名函数">11 匿名函数</h4>
 
 <p>Scala 中定义匿名函数的语法很简单，箭头左边是参数列表，右边是函数体，参数的类型是可省略的，Scala 的类型推测系统会推测出参数的类型。使用匿名函数后，我们的代码变得更简洁了。
 下面的表达式就定义了一个接受一个Int类型输入参数的匿名函数:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">inc</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">inc</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+</code></pre></div></div>
 
 <p>上述定义的匿名函数，其实是下面这种写法的简写：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">add2</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Function1</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">add2</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Function1</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]{</span>
    <span class="k">def</span> <span class="n">apply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>以上实例的inc现在可可作为一个函数，使用方法如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">x</span> <span class="k">=</span> <span class="n">inc</span><span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="o">-</span><span class="mi">1</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">x</span> <span class="k">=</span> <span class="n">inc</span><span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
 
 <p>同样我们可以在匿名函数中定义多个参数：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">mul</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">mul</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
+</code></pre></div></div>
 
 <p>mul现在可作为一个函数，使用方法如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">println</span><span class="o">(</span><span class="n">mul</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">))</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">println</span><span class="o">(</span><span class="n">mul</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">))</span>
+</code></pre></div></div>
 
 <p>我们也可以<strong>不给匿名函数设置参数</strong>，如下所示：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">userDir</span> <span class="k">=</span> <span class="o">()</span> <span class="k">=&gt;</span> <span class="o">{</span> <span class="nc">System</span><span class="o">.</span><span class="n">getProperty</span><span class="o">(</span><span class="s">"user.dir"</span><span class="o">)</span> <span class="o">}</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">userDir</span> <span class="k">=</span> <span class="o">()</span> <span class="k">=&gt;</span> <span class="o">{</span> <span class="nc">System</span><span class="o">.</span><span class="n">getProperty</span><span class="o">(</span><span class="s">"user.dir"</span><span class="o">)</span> <span class="o">}</span>
+</code></pre></div></div>
 
 <p>userDir 现在可作为一个函数，使用方式如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">println</span><span class="o">(</span> <span class="n">userDir</span> <span class="o">)</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">println</span><span class="o">(</span> <span class="n">userDir</span> <span class="o">)</span>
+</code></pre></div></div>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Lambda</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Lambda</span><span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="n">println</span><span class="o">(</span><span class="s">"The user dir is: "</span> <span class="o">+</span> <span class="n">userDir</span><span class="o">());</span>
    <span class="o">}</span>
 
    <span class="k">var</span> <span class="n">userDir</span> <span class="k">=</span> <span class="o">()</span> <span class="k">=&gt;</span> <span class="o">{</span> <span class="nc">System</span><span class="o">.</span><span class="n">getProperty</span><span class="o">(</span><span class="s">"user.dir"</span><span class="o">)}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="12-偏应用函数">12 偏应用函数</h4>
 
 <p>Scala 偏应用函数是一种表达式，你不需要提供函数需要的所有参数，只需要提供部分，或不提供所需参数。
 如下实例，我们打印日志信息：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.util.Date</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.util.Date</span>
 
 <span class="k">object</span> <span class="nc">PartiallyAppliedFunction</span><span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
@@ -524,13 +505,12 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
       <span class="n">println</span><span class="o">(</span><span class="n">date</span> <span class="o">+</span> <span class="s">"------"</span> <span class="o">+</span> <span class="n">message</span><span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>实例中，log() 方法接收两个参数：date 和 message。我们在程序执行时调用了三次，参数 date 值都相同，message 不同。
 我们可以使用偏应用函数优化以上方法，绑定第一个 date 参数，第二个参数使用下划线(_)替换缺失的参数列表，并把这个新的函数值的索引的赋给变量。以上实例修改如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.util.Date</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.util.Date</span>
 
 <span class="k">object</span> <span class="nc">PartiallyAppliedFunction</span><span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
@@ -548,8 +528,7 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
       <span class="n">println</span><span class="o">(</span><span class="n">date</span> <span class="o">+</span> <span class="s">"------"</span> <span class="o">+</span> <span class="n">message</span><span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="13-scala-函数柯里化currying">13 Scala 函数柯里化(Currying)</h4>
 
@@ -590,7 +569,7 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
 
 <p><strong>完整实例</strong></p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">CurryFun</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">CurryFun</span><span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">str1</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"Hello, "</span>
       <span class="k">val</span> <span class="n">str2</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"Scala!"</span>
@@ -601,8 +580,7 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
       <span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="14-scala-闭包">14 Scala 闭包</h4>
 
@@ -619,10 +597,9 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
 
 <p>在 multiplier 中有两个变量：i 和 factor。其中的一个 i 是函数的形式参数，在 multiplier 函数被调用时，i 被赋予一个新的值。然而，factor不是形式参数，而是自由变量，考虑下面代码：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">factor</span> <span class="k">=</span> <span class="mi">3</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">factor</span> <span class="k">=</span> <span class="mi">3</span>
 <span class="k">val</span> <span class="n">multiplier</span> <span class="k">=</span> <span class="o">(</span><span class="n">i</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">i</span> <span class="o">*</span> <span class="n">factor</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>这里我们引入一个自由变量 factor，这个变量定义在函数外面。</p>
 
@@ -630,7 +607,7 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
 
 <p><strong>完整实例</strong></p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Closures</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Closures</span><span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="n">println</span><span class="o">(</span><span class="s">"muliplier(1) value = "</span> <span class="o">+</span> <span class="n">multiplier</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
         <span class="n">println</span><span class="o">(</span><span class="s">"muliplier(2) value = "</span> <span class="o">+</span> <span class="n">multiplier</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
@@ -639,8 +616,7 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
     <span class="k">var</span> <span class="n">factor</span> <span class="k">=</span> <span class="mi">3</span>
     <span class="k">val</span> <span class="n">multiplier</span> <span class="k">=</span> <span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">i</span> <span class="o">*</span> <span class="n">factor</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
                 <hr>
@@ -785,13 +761,13 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -200,7 +204,7 @@
 
 <p>Scala 进行文件写操作，直接用的都是 java中 的 I/O 类 （java.io.File)：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.io._</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.io._</span>
 
 <span class="k">object</span> <span class="nc">IOs1</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
@@ -210,14 +214,13 @@
       <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="o">()</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="2-从屏幕上读取用户输入">2 从屏幕上读取用户输入</h4>
 
 <p>有时候我们需要接收用户在屏幕输入的指令来处理程序。实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.io.StdIn</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.io.StdIn</span>
 
 <span class="k">object</span> <span class="nc">IOs2</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
@@ -227,14 +230,13 @@
       <span class="n">println</span><span class="o">(</span><span class="s">"谢谢，你输入的是: "</span> <span class="o">+</span> <span class="n">line</span><span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>warning</strong>: method readLine in class DeprecatedConsole is deprecated (since 2.11.0): use the method in scala.io.StdIn</p>
 
 <p><a href="https://github.com/scala/scala/blob/v2.11.8/src/library/scala/io/StdIn.scala#L1">源码</a>：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">package</span> <span class="nn">scala</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">scala</span>
 <span class="k">package</span> <span class="nn">io</span>
 
 <span class="k">import</span> <span class="nn">java.text.MessageFormat</span>
@@ -463,14 +465,13 @@
 <span class="o">}</span>
 
 <span class="k">object</span> <span class="nc">StdIn</span> <span class="k">extends</span> <span class="nc">StdIn</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="3-从文件上读取内容">3 从文件上读取内容</h4>
 
 <p>从文件读取内容非常简单。我们可以使用 Scala 的 Source 类及伴生对象来读取文件。以下实例演示了从 “test.txt”(之前已创建过) 文件中读取内容:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.io.Source</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.io.Source</span>
 
 <span class="k">object</span> <span class="nc">IOs3</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
@@ -483,8 +484,7 @@
 
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
 
@@ -502,9 +502,9 @@
                     
                     
                     <li class="next">
-                        <a href="/2016/09/02/hadoop_kafka/" data-toggle="tooltip" data-placement="top" title="Hadoop_kafka">
+                        <a href="/hadoop/2016/09/02/hadoop_kafka/" data-toggle="tooltip" data-placement="top" title="kafka组件深度解析">
                         Next<br>
-                        <span>Hadoop_kafka</span>
+                        <span>kafka组件深度解析</span>
                         </a>
                     </li>
                     
@@ -630,13 +630,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

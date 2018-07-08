@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -236,7 +240,7 @@ ts.get_deposit_rate()
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>       date            deposit_type             rate
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       date            deposit_type             rate
 0    2014-11-22            定活两便(定期)         --
 1    2014-11-22            定期存款整存整取(半年)   2.55
 2    2014-11-22            定期存款整存整取(二年)   3.35
@@ -248,8 +252,7 @@ ts.get_deposit_rate()
 8    2014-11-22  零存整取、整存零取、存本取息定期存款(三年)   2.80
 9    2014-11-22  零存整取、整存零取、存本取息定期存款(五年)   3.00
 10   2014-11-22  零存整取、整存零取、存本取息定期存款(一年)   2.60
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="12-贷款利率">1.2 贷款利率</h3>
 
@@ -266,7 +269,7 @@ ts.get_deposit_rate()
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>       date            loan_type            rate
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       date            loan_type            rate
 0    2014-11-22          短期贷款(六个月以内)   5.60
 1    2014-11-22         短期贷款(六个月至一年)   5.60
 2    2014-11-22          中长期贷款(三至五年)   6.00
@@ -278,8 +281,7 @@ ts.get_deposit_rate()
 8    2014-11-22     优惠贷款(民政部门福利工厂贷款)     --
 9    2014-11-22     优惠贷款(民族贸易及民族用品生产贷款)     --
 10   2014-11-22     优惠贷款(贫困县办工业贷款)     --
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="13-存款准备金率">1.3 存款准备金率</h3>
 
@@ -297,7 +299,7 @@ ts.get_deposit_rate()
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>      date      before  now     changed
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      date      before  now     changed
 0   2012-05-18  20.50  20.00   -0.50
 1   2012-02-24  21.00  20.50   -0.50
 2   2011-12-05  21.50  21.00   -0.50
@@ -309,8 +311,7 @@ ts.get_deposit_rate()
 8   2011-01-20  18.50  19.00    0.50
 9   2010-12-20  18.00  18.50    0.50
 10  2010-11-29  17.50  18.00    0.50
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="14-货币供应量">1.4 货币供应量</h3>
 
@@ -341,7 +342,7 @@ ts.get_deposit_rate()
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>        month         m2 m2_yoy         m1   m1_yoy   m0      m0_yoy         cd  \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        month         m2 m2_yoy         m1   m1_yoy   m0      m0_yoy         cd  \
 0    2014.12  1228374.81  12.20  348056.41   3.20  60259.53   2.90  287796.88
 1    2014.11  1208605.95  12.30  335114.13   3.20  58438.53   3.50  276675.60
 2    2014.10  1199236.31  12.60  329617.73   3.20  57691.64   3.80  271926.09
@@ -353,8 +354,7 @@ ts.get_deposit_rate()
 8     2014.4  1168812.67  13.20  324482.52   5.50  58615.54   5.40  265866.98
 9     2014.3  1160687.38  12.10  327683.74   5.40  58329.30   5.20  269354.44
 10    2014.2  1131760.83  13.30  316625.11   6.90  62320.95   3.30  254304.16
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="15-货币供应量年底余额">1.5 货币供应量(年底余额)</h3>
 
@@ -377,7 +377,7 @@ ts.get_deposit_rate()
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    year          m2         m1        m0         cd         qm        ftd  \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    year          m2         m1        m0         cd         qm        ftd  \
 0   2013  1106525.00  337291.10  58574.40  278716.60  769233.90  232696.60
 1   2012   974159.50  308673.00  54659.80  254013.20  665486.50  195946.30
 2   2011   851590.90  289847.70  50748.50  239099.20  561743.20  166616.00
@@ -389,8 +389,7 @@ ts.get_deposit_rate()
 8   2004   254107.00   95969.70  21468.30   74501.40  158137.20   25382.20
 9   2003   221222.80   84118.60  19746.00   64372.60  137104.30   20940.40
 10  2002   185007.00   70881.80  17278.00   53603.80  114125.20   16433.80
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="16-国内生产总值年度">1.6 国内生产总值(年度)</h3>
 
@@ -415,7 +414,7 @@ ts.get_deposit_rate()
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    year        gdp    pc_gdp        gnp        pi         si   industry  \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    year        gdp    pc_gdp        gnp        pi         si   industry  \
 0   2014  636463.00       NaN        NaN  58332.00  271392.00        NaN
 1   2013  588019.00  41907.59        NaN  55322.00  256810.00  210689.42
 2   2012  519470.10  38459.47        NaN  52373.63  235161.99  199670.66
@@ -428,8 +427,7 @@ ts.get_deposit_rate()
 9   2005  184937.37  14185.36  183617.37  22420.00   87598.09   77230.78
 10  2004  159878.34  12335.58  159453.60  21412.73   73904.31   65210.03
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="17-国内生产总值季度">1.7 国内生产总值(季度)</h3>
 
@@ -452,7 +450,7 @@ ts.get_deposit_rate()
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>     quarter        gdp  gdp_yoy        pi  pi_yoy         si  si_yoy  \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     quarter        gdp  gdp_yoy        pi  pi_yoy         si  si_yoy  \
 0    2014.4  636463.00     7.40  58332.00    4.10  271392.00    7.30
 1    2014.3  419908.00     7.40  37996.00    4.20  185787.00    7.40
 2    2014.2  269044.09     7.42  19812.00    3.90  123871.33    7.41
@@ -464,8 +462,7 @@ ts.get_deposit_rate()
 8    2012.4  519470.10     7.65  52373.63    4.55  235161.99    7.92
 9    2012.3  353741.55     7.56  33085.87    4.25  165316.31    7.90
 10   2012.2  228003.09     7.68  17469.87    4.35  110785.17    8.16
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="18-三大需求对gdp贡献">1.8 三大需求对GDP贡献</h3>
 
@@ -486,7 +483,7 @@ ts.get_deposit_rate()
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    year  end_for  for_rate  asset_for  asset_rate  goods_for  goods_rate
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    year  end_for  for_rate  asset_for  asset_rate  goods_for  goods_rate
 0   2013     50.0       3.9       54.4         4.2       -4.4        -0.3
 1   2012     55.1       4.2       47.0         3.6       -2.1        -0.1
 2   2011     56.5       5.3       47.7         4.4       -4.2        -0.4
@@ -498,8 +495,7 @@ ts.get_deposit_rate()
 8   2005     38.7       4.4       38.5         4.3       22.8         2.6
 9   2004     39.5       4.0       54.5         5.5        6.0         0.6
 10  2003     35.8       3.6       63.2         6.3        1.0         0.1
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="19-三大产业对gdp拉动">1.9 三大产业对GDP拉动</h3>
 
@@ -519,7 +515,7 @@ ts.get_deposit_rate()
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    year  gdp_yoy   pi   si  industry   ti
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    year  gdp_yoy   pi   si  industry   ti
 0   2013      7.7  0.4  3.7       3.1  3.6
 1   2012      7.7  0.4  3.7       3.1  3.5
 2   2011      9.3  0.4  4.8       4.2  4.1
@@ -531,8 +527,7 @@ ts.get_deposit_rate()
 8   2005     11.3  0.6  5.8       4.9  4.9
 9   2004     10.1  0.8  5.3       4.8  4.0
 10  2003     10.0  0.3  5.9       5.2  3.8
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="110-三大产业贡献率">1.10 三大产业贡献率</h3>
 
@@ -552,7 +547,7 @@ ts.get_deposit_rate()
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    year  gdp_yoy     pi     si  industry     ti
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    year  gdp_yoy     pi     si  industry     ti
 0   2013      100   4.88  48.28     39.86  46.84
 1   2012      100   5.72  48.71     40.59  45.56
 2   2011      100   4.61  51.61     44.67  43.77
@@ -564,8 +559,7 @@ ts.get_deposit_rate()
 8   2005      100   5.60  51.10     43.40  43.30
 9   2004      100   7.90  52.20     47.70  39.90
 10  2003      100   3.40  58.50     51.90  38.10
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="111-居民消费价格指数">1.11 居民消费价格指数</h3>
 
@@ -581,7 +575,7 @@ ts.get_deposit_rate()
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>      month     cpi
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      month     cpi
 0    2014.12  101.51
 1    2014.11  101.44
 2    2014.10  101.60
@@ -593,8 +587,7 @@ ts.get_deposit_rate()
 8     2014.4  101.80
 9     2014.3  102.38
 10    2014.2  101.95
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="112-工业品出厂价格指数">1.12 工业品出厂价格指数</h3>
 
@@ -619,7 +612,7 @@ ts.get_deposit_rate()
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>     month   ppiip    ppi      qm     rmi     pi      cg    food  clothing  \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     month   ppiip    ppi      qm     rmi     pi      cg    food  clothing  \
 0    2014.12   96.68  95.71   86.80   93.64  97.49   99.84   99.71    100.57
 1    2014.11   97.31  96.51   89.35   95.31  97.75   99.87   99.85    100.50
 2    2014.10   97.76  97.05   91.13   96.32  97.95  100.04  100.17    100.51
@@ -631,8 +624,7 @@ ts.get_deposit_rate()
 8     2014.3   97.70  97.05   93.34   96.19  97.79   99.79   99.78    100.83
 9     2014.2   97.98  97.46   94.67   96.78  98.03   99.67   99.70    100.77
 10    2014.1   98.36  97.95   95.95   97.52  98.34   99.65     NaN    100.72
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="2-etf数据">2 <a href="https://www.jisilu.cn/data/etf/#money">ETF数据</a></h2>
 
@@ -672,14 +664,13 @@ for each in code_list:
 
 <p>以下ETF无数据</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>519800	保证金A	申赎型	-	-	-	2018-03-09	-	-	3.508%	3.594%	3.493%	0.00	1.71	   
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>519800	保证金A	申赎型	-	-	-	2018-03-09	-	-	3.508%	3.594%	3.493%	0.00	1.71	   
 519808	嘉实宝A	申赎型	-	-	-	2018-03-12	-	-	3.411%	3.278%	3.302%	0.00	1.17	   
 519858	广发宝A	申赎型	-	-	-	2018-03-12	-	-	3.389%	3.623%	3.757%	0.00	3.09	   
 519878	国保A	申赎型	-	-	-	2018-03-12	-	-	3.690%	3.415%	3.516%	0.00	2.26	   
 519888	添富快线A	申赎型	-	-	-	2018-03-12	-	-	3.347%	3.451%	3.279%	0.00	67.44	   
 519898	现金宝A	申赎型	-	-	-	2018-03-12	-	-	3.748%	3.832%	3.335%	0.00	3.78	   
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="3-交易数据">3 <a href="http://tushare.org/trading.html">交易数据</a></h2>
 
@@ -724,7 +715,7 @@ for each in code_list:
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>             open    high   close     low     volume    p_change  ma5 \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>             open    high   close     low     volume    p_change  ma5 \
 date
 2012-01-11   6.880   7.380   7.060   6.880   14129.96     2.62   7.060
 2012-01-12   7.050   7.100   6.980   6.900    7895.19    -1.13   7.020
@@ -745,8 +736,7 @@ date
 2012-01-18   6.833   6.833    7833.33    8882.77    8882.77     0.45
 2012-01-19   6.841   6.841    7477.76    8487.71    8487.71     0.21
 2012-01-20   6.863   6.863    7518.00    8278.38    8278.38     0.23
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>其他：</p>
 
@@ -808,7 +798,7 @@ ts.get_h_data('399106', index=True) #深圳综合指数
 
 <p>结果：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>            open   high  close    low     volume      amount
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            open   high  close    low     volume      amount
 date
 2015-03-16  13.27  13.45  13.39  13.00   81212976  1073862784
 2015-03-13  13.04  13.38  13.37  13.00   40548836   532739744
@@ -820,8 +810,7 @@ date
 2015-03-05  12.79  12.80  12.17  12.08   26040832   966927360
 2015-03-04  13.96  13.96  13.30  12.58   26636174  1060270720
 2015-03-03  12.17  13.10  13.10  12.05   19290366   733336768
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="33-实时行情">3.3 实时行情</h3>
 
@@ -852,7 +841,7 @@ date
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>      code    name     changepercent  trade   open   high    low  settlement \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      code    name     changepercent  trade   open   high    low  settlement \
 0     002738  中矿资源         10.023  19.32  19.32  19.32  19.32       17.56
 1     300410  正业科技         10.022  25.03  25.03  25.03  25.03       22.75
 2     002736  国信证券         10.013  16.37  16.37  16.37  16.37       14.88
@@ -875,8 +864,7 @@ date
 7       2025030        6.88669
 8     433453523        4.28056
 9     323469835        9.61735
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="33-历史分笔">3.3 历史分笔</h3>
 
@@ -909,7 +897,7 @@ date
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>     time       price change  volume  amount  type
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     time       price change  volume  amount  type
 0    15:00:00   6.05     --       8    4840   卖盘
 1    14:59:55   6.05     --      50   30250   卖盘
 2    14:59:35   6.05     --      20   12100   卖盘
@@ -920,8 +908,7 @@ date
 7    14:58:45   6.06     --       2    1212   买盘
 8    14:58:35   6.06   0.01       2    1212   买盘
 9    14:58:25   6.05  -0.01      20   12100   卖盘
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="35-实时分笔">3.5 <strong>实时分笔</strong></h3>
 
@@ -939,14 +926,13 @@ df[['code','name','price','bid','ask','volume','amount','time']]
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>   code    name     price  bid    ask    volume   amount        time
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   code    name     price  bid    ask    volume   amount        time
 0  000581  威孚高科  31.15  31.14  31.15  8183020  253494991.16  11:30:36
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>返回值说明：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>0：name，股票名字
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0：name，股票名字
 1：open，今日开盘价
 2：pre_close，昨日收盘价
 3：price，当前价格
@@ -971,8 +957,7 @@ df[['code','name','price','bid','ask','volume','amount','time']]
 ...
 30：date，日期；
 31：time，时间；
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>请求多个股票方法（一次最好不要超过30个）：</p>
 
@@ -984,14 +969,13 @@ ts.get_realtime_quotes(df['code'].tail(10))  #一次获取10个股票的实时�
 
 <p><strong>获取实时指数：</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>#上证指数
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#上证指数
 ts.get_realtime_quotes('sh')
 #上证指数 深圳成指 沪深300指数 上证50 中小板 创业板
 ts.get_realtime_quotes(['sh','sz','hs300','sz50','zxb','cyb'])
 #或者混搭
 ts.get_realtime_quotes(['sh','600848'])
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="36-当日历史分笔">3.6 当日历史分笔</h3>
 
@@ -1007,9 +991,8 @@ ts.get_realtime_quotes(['sh','600848'])
 
 <p>调用方法：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>df = ts.get_today_ticks('601333')
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df = ts.get_today_ticks('601333')
+</code></pre></div></div>
 
 <p>返回值说明：</p>
 
@@ -1025,7 +1008,7 @@ ts.get_realtime_quotes(['sh','600848'])
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>        time     price pchange  change  volume   amount type
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        time     price pchange  change  volume   amount type
 0     11:30:07   5.77   -0.52    0.00     634   366372   买盘
 1     11:29:57   5.77   -0.52    0.00     216   124632   买盘
 2     11:29:52   5.77   -0.52    0.00     306   176562   买盘
@@ -1036,8 +1019,7 @@ ts.get_realtime_quotes(['sh','600848'])
 7     11:29:17   5.77   -0.52    0.00     762   439674   买盘
 8     11:29:12   5.77   -0.52    0.00     164    95182   买盘
 9     11:29:07   5.77   -0.52    0.00     303   174854   买盘
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="38-大盘指数行情列表">3.8 大盘指数行情列表</h3>
 
@@ -1045,9 +1027,8 @@ ts.get_realtime_quotes(['sh','600848'])
 
 <p>调用方法：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>df = ts.get_index()
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df = ts.get_index()
+</code></pre></div></div>
 
 <p>返回值说明：</p>
 
@@ -1066,7 +1047,7 @@ ts.get_realtime_quotes(['sh','600848'])
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    code        name    change   preclose      close       high        low  \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    code        name    change   preclose      close       high        low  \
 0   000001    上证指数  -1.13   4527.396   4476.215   4572.391   4432.904
 1   000002    Ａ股指数  -1.13   4744.093   4690.628   4791.534   4645.190
 2   000003    Ｂ股指数  -2.15    403.694    395.018    405.795    392.173
@@ -1118,8 +1099,7 @@ ts.get_realtime_quotes(['sh','600848'])
 21    120921645      8.77
 22   3071396395    830.54
 23   1441659735    551.73
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="39-大单交易数据">3.9 大单交易数据</h3>
 
@@ -1147,14 +1127,13 @@ ts.get_realtime_quotes(['sh','600848'])
 
 <p>调用方法：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>df = ts.get_sina_dd('600848', date='2015-12-24') #默认400手
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df = ts.get_sina_dd('600848', date='2015-12-24') #默认400手
 #df = ts.get_sina_dd('600848', date='2015-12-24', vol=500)  #指定大于等于500手的数据
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>结果显示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    code    name      time      price  volume  preprice  type
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    code    name      time      price  volume  preprice  type
 0   600848  上海临港  14:58:10  23.05  104309     23.05   卖盘
 1   600848  上海临港  14:57:03  23.05   56500     23.07   卖盘
 2   600848  上海临港  14:52:47  23.00   76750     23.04   卖盘
@@ -1165,8 +1144,7 @@ ts.get_realtime_quotes(['sh','600848'])
 7   600848  上海临港  13:25:24  23.28   42000     23.09   买盘
 8   600848  上海临港  13:23:54  23.28   79600     23.07   买盘
 9   600848  上海临港  13:16:16  23.03   40000     23.08   卖盘
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="4-其它">4 其它</h2>
 
@@ -1174,21 +1152,20 @@ ts.get_realtime_quotes(['sh','600848'])
 
 <p>投资参考提供一些可能会影响股票价格走势的信息数据，为投资者在做投资决策时提供数据参考，亦可作为量化策略模型的事件因子纳入模型的计算。TuShare提供的参考数据主要包括以下：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>分配预案
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>分配预案
 业绩预告
 限售股解禁
 基金持股
 新股上市
 融资融券（沪市）
 融资融券（深市）
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><a href="http://tushare.org/classifying.html">股票分类数据</a></p>
 
 <p>分类数据提供股票的分类信息数据，从股票类型的不同角度进行数据分类，在一些统计套利方法的应用中，时常会以股票的分类来做切入，比如对某些行业或概念进行阶段统计来决定近期的交易策略等。TuShare提供的分类数据主要包括以下类别：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>行业分类
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>行业分类
 概念分类
 地域分类
 中小板分类
@@ -1199,14 +1176,13 @@ ts.get_realtime_quotes(['sh','600848'])
 中证500成份股
 终止上市股票列表
 暂停上市股票列表
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><a href="http://tushare.org/fundamental.html">基本面数据</a></p>
 
 <p>基本面类数据提供所有股票的基本面情况，包括股本情况、业绩预告和业绩报告等。主要包括以下类别：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>沪深股票列表
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>沪深股票列表
 业绩预告
 业绩报告（主表）
 盈利能力数据
@@ -1214,42 +1190,38 @@ ts.get_realtime_quotes(['sh','600848'])
 成长能力数据
 偿债能力数据
 现金流量数据
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><a href="http://tushare.org/billboard.html">龙虎榜数据</a></p>
 
 <p>龙虎榜数据接口提供历史龙虎榜上榜股票数据，主要包括以下类别：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>每日龙虎榜列表
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>每日龙虎榜列表
 个股上榜统计
 营业部上榜统计
 龙虎榜机构席位追踪
 龙虎榜机构席位成交明细
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><a href="http://tushare.org/newsevent.html">新闻事件数据</a></p>
 
 <p>新闻事件接口主要提供国内财经、证券、港股和期货方面的滚动新闻，以及个股的信息地雷数据。目前主要包括以下类别：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>即时财经新闻
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>即时财经新闻
 个股信息地雷
 新浪股吧新闻
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><a href="http://tushare.org/shibor.html">银行间同业拆放利率</a></p>
 
 <p>Shibor接口是获取上海银行间同业拆放利率（Shanghai Interbank Offered Rate，简称Shibor）的便捷接口，以年为参数获取，可以取到公布的Shibor品种包括隔夜、1周、2周、1个月、3个月、6个月、9个月及1年的周期数据。目前主要包括以下类别：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Shibor拆放利率
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Shibor拆放利率
 银行报价数据
 Shibor均值数据
 贷款基础利率（LPR）
 LPR均值数据
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
                 <hr>
@@ -1387,13 +1359,13 @@ LPR均值数据
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -305,7 +309,7 @@ Time taken: 1.404 seconds, Fetched: 1 row(s)
 
 <p>smtplib.SMTP提供的方法：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> SMTP.set_debuglevel(level)：设置是否为调试模式。默认为False，即非调试模式，表示不输出任何调试信息。
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> SMTP.set_debuglevel(level)：设置是否为调试模式。默认为False，即非调试模式，表示不输出任何调试信息。
 
  SMTP.connect([host[, port]])：连接到指定的smtp服务器。参数分别表示smpt主机和端口。注意: 也可以在host参数中指定端口号（如：smpt.yeah.net:25），这样就没必要给出port参数。
 
@@ -322,8 +326,7 @@ Time taken: 1.404 seconds, Fetched: 1 row(s)
  SMTP.sendmail(from_addr, to_addrs, msg[, mail_options, rcpt_options]) ：发送邮件。这里要注意一下第三个参数，msg是字符串，表示邮件。我们知道邮件一般由标题，发信人，收件人，邮件内容，附件等构成，发送邮件的时候，要注意msg的格式。这个格式就是smtp协议中定义的格式。
 
  SMTP.quit()：断开与smtp服务器的连接。
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>参考如下：</p>
 
@@ -421,7 +424,7 @@ Page Content
 
 <p>以下是一个table.css的样式，供参考：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 table.hovertable {
 	font-family: verdana,arial,sans-serif;
 	font-size:8px;
@@ -447,8 +450,7 @@ table.hovertable td {
 	border-style: solid;
 	border-color: #13180e;
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>以下是对某一DF写出HTML表格的脚本，请参考：</p>
 
@@ -468,10 +470,9 @@ table.hovertable td {
   <p>补充3: 增加包查询路径，前文提到，没有root权限，那怎么引用bottle呢？虽然bottle只有一个文件，但是不是放在同一目录下的话，也是需要指定的。如下为在.bashrc下增加PATHPATH包查询路径，请参照：</p>
 </blockquote>
 
-<div class="language-vim highlighter-rouge"><pre class="highlight"><code># <span class="nb">User</span> specific aliases and functions
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code># <span class="nb">User</span> specific aliases and functions
 export PYTHONPATH<span class="p">=</span>$PYTHONPATH<span class="p">:</span><span class="s2">"$HOME/bottle"</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>补充4: 关于格式化代码，在发邮件过程中，经常会用到百分比、金额等格式，以下为常用格式化代码方法，供参考：</p>
@@ -674,13 +675,13 @@ book.save('simple.xls')
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

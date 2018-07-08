@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -202,7 +206,7 @@ Scala 中的 private 限定符，比 Java 更严格，在嵌套类情况下，�
 <h3 id="1-私有private成员">1 私有(Private)成员</h3>
 <p>用private关键字修饰，带有此标记的成员仅在包含了成员定义的类或对象内部可见，同样的规则还适用内部类。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Outer</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Outer</span><span class="o">{</span>
     <span class="k">class</span> <span class="nc">Inner</span><span class="o">{</span>
     <span class="k">private</span> <span class="k">def</span> <span class="n">f</span><span class="o">(){</span><span class="n">println</span><span class="o">(</span><span class="s">"f"</span><span class="o">)}</span>
     <span class="k">class</span> <span class="nc">InnerMost</span><span class="o">{</span>
@@ -211,8 +215,7 @@ Scala 中的 private 限定符，比 Java 更严格，在嵌套类情况下，�
     <span class="o">}</span>
     <span class="o">(</span><span class="k">new</span> <span class="nc">Inner</span><span class="o">).</span><span class="n">f</span><span class="o">()</span> <span class="c1">//错误
 </span><span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>(new Inner).f( ) 访问不合法是因为 f 在 Inner 中被声明为 private，而访问不在类Inner之内。
 但在 InnerMost 里访问f就没有问题的，因为这个访问包含在 Inner 类之内。
 Java中允许这两种访问，因为它允许外部类访问内部类的私有成员。</p>
@@ -220,7 +223,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
 <h3 id="2-保护protected成员">2 保护(Protected)成员</h3>
 <p>在 scala 中，对保护（Protected）成员的访问比 java 更严格一些。因为它只允许保护成员在定义了该成员的的类的子类中被访问。而在java中，用protected关键字修饰的成员，除了定义了该成员的类的子类可以访问，同一个包里的其他类也可以进行访问。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">package</span> <span class="nn">p</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">p</span><span class="o">{</span>
 <span class="k">class</span> <span class="nc">Super</span><span class="o">{</span>
     <span class="k">protected</span> <span class="k">def</span> <span class="n">f</span><span class="o">()</span> <span class="o">{</span><span class="n">println</span><span class="o">(</span><span class="s">"f"</span><span class="o">)}</span>
     <span class="o">}</span>
@@ -231,13 +234,12 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
         <span class="o">(</span><span class="k">new</span> <span class="nc">Super</span><span class="o">).</span><span class="n">f</span><span class="o">()</span> <span class="c1">//错误
 </span>    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>上例中，Sub 类对 f 的访问没有问题，因为 f 在 Super 中被声明为 protected，而 Sub 是 Super 的子类。相反，Other 对 f 的访问不被允许，因为 other 没有继承自 Super。而后者在 java 里同样被认可，因为 Other 与 Sub 在同一包里。</p>
 
 <h3 id="3-公共public成员">3 公共(Public)成员</h3>
 <p>Scala中，如果没有指定任何的修饰符，则默认为 public。这样的成员在任何地方都可以被访问。</p>
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Outer</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Outer</span> <span class="o">{</span>
    <span class="k">class</span> <span class="nc">Inner</span> <span class="o">{</span>
       <span class="k">def</span> <span class="n">f</span><span class="o">()</span> <span class="o">{</span> <span class="n">println</span><span class="o">(</span><span class="s">"f"</span><span class="o">)</span> <span class="o">}</span>
       <span class="k">class</span> <span class="nc">InnerMost</span> <span class="o">{</span>
@@ -246,20 +248,18 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
    <span class="o">}</span>
    <span class="o">(</span><span class="k">new</span> <span class="nc">Inner</span><span class="o">).</span><span class="n">f</span><span class="o">()</span> <span class="c1">// 正确因为 f() 是 public
 </span><span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <h3 id="4-作用域保护">4 作用域保护</h3>
 <p>Scala中，访问修饰符可以通过使用限定词强调。格式为:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">private</span><span class="o">[</span><span class="kt">x</span><span class="o">]</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span><span class="o">[</span><span class="kt">x</span><span class="o">]</span>
 <span class="n">或</span>
 <span class="k">protected</span><span class="o">[</span><span class="kt">x</span><span class="o">]</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>这里的x指代某个所属的包、类或单例对象。如果写成private[x],读作”这个成员除了对[…]中的类或[…]中的包中的类及它们的伴生对像可见外，对其它所有类都是private。
 这种技巧在横跨了若干包的大型项目中非常有用，它允许你定义一些在你项目的若干子包中可见但对于项目外部的客户却始终不可见的东西。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">package</span> <span class="nn">bobsrocckets</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">bobsrocckets</span><span class="o">{</span>
     <span class="k">package</span> <span class="nn">navigation</span><span class="o">{</span>
         <span class="k">private</span><span class="o">[</span><span class="kt">bobsrockets</span><span class="o">]</span> <span class="k">class</span> <span class="nc">Navigator</span><span class="o">{</span>
          <span class="k">protected</span><span class="o">[</span><span class="kt">navigation</span><span class="o">]</span> <span class="k">def</span> <span class="n">useStarChart</span><span class="o">(){}</span>
@@ -276,8 +276,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>上述例子中，类Navigator被标记为private[bobsrockets]就是说这个类对包含在bobsrockets包里的所有的类和对象可见。
 比如说，从Vehicle对象里对Navigator的访问是被允许的，因为对象Vehicle包含在包launch中，而launch包在bobsrockets中，相反，所有在包bobsrockets之外的代码都不能访问类Navigator。</p>
 
@@ -285,7 +284,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
 
 <h3 id="1-算术运算符">1 算术运算符</h3>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Yunsunfu</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Yunsunfu</span><span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">10</span><span class="o">;</span>
         <span class="k">var</span> <span class="n">b</span> <span class="k">=</span> <span class="mi">20</span><span class="o">;</span>
@@ -299,8 +298,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
         <span class="n">println</span><span class="o">(</span><span class="s">"c % a = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">c</span> <span class="o">%</span> <span class="n">a</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="2-关系运算符">2 关系运算符</h3>
 
@@ -347,7 +345,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
   </tbody>
 </table>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Test</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Test</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">10</span><span class="o">;</span>
       <span class="k">var</span> <span class="n">b</span> <span class="k">=</span> <span class="mi">20</span><span class="o">;</span>
@@ -359,8 +357,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
       <span class="n">println</span><span class="o">(</span><span class="s">"b &lt;= a = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">b</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="o">)</span> <span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="3-逻辑运算符">3 逻辑运算符</h3>
 <p>下表列出了 Scala 支持的逻辑运算符。
@@ -391,7 +388,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
   </tbody>
 </table>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Yunsunfu</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Yunsunfu</span><span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="kc">true</span><span class="o">;</span>
         <span class="k">var</span> <span class="n">b</span> <span class="k">=</span> <span class="kc">false</span><span class="o">;</span>
@@ -401,8 +398,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
         <span class="n">println</span><span class="o">(</span><span class="s">"! (a &amp;&amp; b) = "</span> <span class="o">+</span> <span class="o">(!(</span><span class="n">a</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">)));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="4-位运算符">4 位运算符</h3>
 <p>位运算符用来对二进制位进行操作，~,&amp;,|,^分别为取反，按位与与，按位与或，按位与异或运算，如下表实例：</p>
@@ -449,7 +445,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
 
 <p>如果指定 A = 60; 及 B = 13; 两个变量对应的二进制为：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">A</span> <span class="k">=</span> <span class="mi">0011</span> <span class="mi">1100</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">A</span> <span class="k">=</span> <span class="mi">0011</span> <span class="mi">1100</span>
 <span class="n">B</span> <span class="k">=</span> <span class="mi">0000</span> <span class="mi">1101</span>
 <span class="o">-------</span><span class="n">位运算</span><span class="o">----------</span>
 
@@ -484,8 +480,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
 <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span> <span class="k">=</span><span class="mi">240</span>
 <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span> <span class="k">=</span><span class="mi">15</span>
 <span class="n">a</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">2</span> <span class="k">=</span><span class="mi">15</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>Scala 中的按位运算法则如下：</p>
 
 <table>
@@ -601,7 +596,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
   </tbody>
 </table>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Yunsunfu</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Yunsunfu</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">10</span><span class="o">;</span>
       <span class="k">var</span> <span class="n">b</span> <span class="k">=</span> <span class="mi">20</span><span class="o">;</span>
@@ -661,8 +656,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
 <span class="n">c</span> <span class="o">&amp;=</span> <span class="mi">2</span>  <span class="k">=</span><span class="mi">0</span>
 <span class="n">c</span> <span class="o">^=</span> <span class="mi">2</span>  <span class="k">=</span><span class="mi">2</span>
 <span class="n">c</span> <span class="o">|=</span> <span class="mi">2</span>  <span class="k">=</span><span class="mi">2</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="6-运算符优先级">6 运算符优先级</h3>
 
@@ -822,13 +816,13 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

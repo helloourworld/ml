@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -254,7 +258,7 @@
 
 <p>  下面的例子用于分类。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.RandomForest</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.RandomForest</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.model.RandomForestModel</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
 <span class="c1">// Load and parse the data file.
@@ -281,12 +285,11 @@
 <span class="k">val</span> <span class="n">testErr</span> <span class="k">=</span> <span class="n">labelAndPreds</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">r</span> <span class="k">=&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">_1</span> <span class="o">!=</span> <span class="n">r</span><span class="o">.</span><span class="n">_2</span><span class="o">).</span><span class="n">count</span><span class="o">.</span><span class="n">toDouble</span> <span class="o">/</span> <span class="n">testData</span><span class="o">.</span><span class="n">count</span><span class="o">()</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Test Error = "</span> <span class="o">+</span> <span class="n">testErr</span><span class="o">)</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Learned classification forest model:\n"</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">toDebugString</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  下面的例子用于回归。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.RandomForest</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.RandomForest</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.model.RandomForestModel</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
 <span class="c1">// Load and parse the data file.
@@ -313,8 +316,7 @@
 <span class="k">val</span> <span class="n">testMSE</span> <span class="k">=</span> <span class="n">labelsAndPredictions</span><span class="o">.</span><span class="n">map</span><span class="o">{</span> <span class="k">case</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="o">((</span><span class="n">v</span> <span class="o">-</span> <span class="n">p</span><span class="o">),</span> <span class="mi">2</span><span class="o">)}.</span><span class="n">mean</span><span class="o">()</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Test Mean Squared Error = "</span> <span class="o">+</span> <span class="n">testMSE</span><span class="o">)</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Learned regression forest model:\n"</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">toDebugString</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="5-源码分析">5 源码分析</h2>
 
@@ -324,7 +326,7 @@
 
 <h4 id="511-初始化">5.1.1 初始化</h4>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">retaggedInput</span> <span class="k">=</span> <span class="n">input</span><span class="o">.</span><span class="n">retag</span><span class="o">(</span><span class="n">classOf</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">retaggedInput</span> <span class="k">=</span> <span class="n">input</span><span class="o">.</span><span class="n">retag</span><span class="o">(</span><span class="n">classOf</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span>
 <span class="c1">//建立决策树的元数据信息（分裂点位置、箱子数及各箱子包含特征属性的值等）
 </span><span class="k">val</span> <span class="n">metadata</span> <span class="k">=</span>
     <span class="nc">DecisionTreeMetadata</span><span class="o">.</span><span class="n">buildMetadata</span><span class="o">(</span><span class="n">retaggedInput</span><span class="o">,</span> <span class="n">strategy</span><span class="o">,</span> <span class="n">numTrees</span><span class="o">,</span> <span class="n">featureSubsetStrategy</span><span class="o">)</span>
@@ -355,12 +357,11 @@
     <span class="c1">//计算聚合操作时节点的内存
 </span>    <span class="nc">RandomForest</span><span class="o">.</span><span class="n">aggregateSizeForNode</span><span class="o">(</span><span class="n">metadata</span><span class="o">,</span> <span class="n">featureSubset</span><span class="o">)</span> <span class="o">*</span> <span class="mi">8L</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  初始化的第一步就是决策树元数据信息的构建。它的代码如下所示。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">buildMetadata</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">buildMetadata</span><span class="o">(</span>
       <span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">],</span>
       <span class="n">strategy</span><span class="k">:</span> <span class="kt">Strategy</span><span class="o">,</span>
       <span class="n">numTrees</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
@@ -452,12 +453,11 @@
       <span class="n">strategy</span><span class="o">.</span><span class="n">impurity</span><span class="o">,</span> <span class="n">strategy</span><span class="o">.</span><span class="n">quantileCalculationStrategy</span><span class="o">,</span> <span class="n">strategy</span><span class="o">.</span><span class="n">maxDepth</span><span class="o">,</span>
       <span class="n">strategy</span><span class="o">.</span><span class="n">minInstancesPerNode</span><span class="o">,</span> <span class="n">strategy</span><span class="o">.</span><span class="n">minInfoGain</span><span class="o">,</span> <span class="n">numTrees</span><span class="o">,</span> <span class="n">numFeaturesPerNode</span><span class="o">)</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  初始化的第二步就是找到切分点（<code class="highlighter-rouge">splits</code>）及箱子信息（<code class="highlighter-rouge">Bins</code>）。这时，调用了<code class="highlighter-rouge">DecisionTree.findSplitsBins</code>方法，进入该方法了解详细信息。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
    * Returns splits and bins for decision tree calculation.
    * Continuous and categorical features are handled differently.
    *
@@ -519,11 +519,10 @@
         <span class="k">throw</span> <span class="k">new</span> <span class="nc">UnsupportedOperationException</span><span class="o">(</span><span class="s">"approximate histogram not supported yet."</span><span class="o">)</span>
     <span class="o">}</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  我们进入<code class="highlighter-rouge">findSplitsBinsBySorting</code>方法了解<code class="highlighter-rouge">Sort</code>分裂策略的实现。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">findSplitsBinsBySorting</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">findSplitsBinsBySorting</span><span class="o">(</span>
       <span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">],</span>
       <span class="n">metadata</span><span class="k">:</span> <span class="kt">DecisionTreeMetadata</span><span class="o">,</span>
       <span class="n">continuousFeatures</span><span class="k">:</span> <span class="kt">IndexedSeq</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="o">(</span><span class="kt">Array</span><span class="o">[</span><span class="kt">Array</span><span class="o">[</span><span class="kt">Split</span><span class="o">]],</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Array</span><span class="o">[</span><span class="kt">Bin</span><span class="o">]])</span> <span class="k">=</span> <span class="o">{</span>
@@ -595,12 +594,11 @@
     <span class="o">}</span>
     <span class="o">(</span><span class="n">splits</span><span class="o">.</span><span class="n">toArray</span><span class="o">,</span> <span class="n">bins</span><span class="o">.</span><span class="n">toArray</span><span class="o">)</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  计算连续特征的所有切分位置需要调用方法<code class="highlighter-rouge">findSplitsForContinuousFeature</code>方法。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">private</span><span class="o">[</span><span class="kt">tree</span><span class="o">]</span> <span class="k">def</span> <span class="n">findSplitsForContinuousFeature</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span><span class="o">[</span><span class="kt">tree</span><span class="o">]</span> <span class="k">def</span> <span class="n">findSplitsForContinuousFeature</span><span class="o">(</span>
       <span class="n">featureSamples</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">],</span>
       <span class="n">metadata</span><span class="k">:</span> <span class="kt">DecisionTreeMetadata</span><span class="o">,</span>
       <span class="n">featureIndex</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
@@ -651,12 +649,11 @@
     <span class="o">}</span>
     <span class="n">splits</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="512-迭代构建随机森林">5.1.2 迭代构建随机森林</h4>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//节点是否使用缓存，节点 ID 从 1 开始，1 即为这颗树的根节点，左节点为 2，右节点为 3，依次递增下去
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//节点是否使用缓存，节点 ID 从 1 开始，1 即为这颗树的根节点，左节点为 2，右节点为 3，依次递增下去
 </span><span class="k">val</span> <span class="n">nodeIdCache</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">strategy</span><span class="o">.</span><span class="n">useNodeIdCache</span><span class="o">)</span> <span class="o">{</span>
    <span class="nc">Some</span><span class="o">(</span><span class="nc">NodeIdCache</span><span class="o">.</span><span class="n">init</span><span class="o">(</span>
         <span class="n">data</span> <span class="k">=</span> <span class="n">baggedInput</span><span class="o">,</span>
@@ -685,8 +682,7 @@
 </span>    <span class="nc">DecisionTree</span><span class="o">.</span><span class="n">findBestSplits</span><span class="o">(</span><span class="n">baggedInput</span><span class="o">,</span> <span class="n">metadata</span><span class="o">,</span> <span class="n">topNodes</span><span class="o">,</span> <span class="n">nodesForGroup</span><span class="o">,</span>
         <span class="n">treeToNodeToIndexInfo</span><span class="o">,</span> <span class="n">splits</span><span class="o">,</span> <span class="n">bins</span><span class="o">,</span> <span class="n">nodeQueue</span><span class="o">,</span> <span class="n">timer</span><span class="o">,</span> <span class="n">nodeIdCache</span> <span class="k">=</span> <span class="n">nodeIdCache</span><span class="o">)</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  这里有两点需要重点介绍，第一点是取得每个树所有需要切分的节点，通过<code class="highlighter-rouge">RandomForest.selectNodesToSplit</code>方法实现；第二点是找出最优的切分，通过<code class="highlighter-rouge">DecisionTree.findBestSplits</code>方法实现。下面分别介绍这两点。</p>
 
@@ -694,7 +690,7 @@
   <li>取得每个树所有需要切分的节点</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code> <span class="k">private</span><span class="o">[</span><span class="kt">tree</span><span class="o">]</span> <span class="k">def</span> <span class="n">selectNodesToSplit</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">private</span><span class="o">[</span><span class="kt">tree</span><span class="o">]</span> <span class="k">def</span> <span class="n">selectNodesToSplit</span><span class="o">(</span>
       <span class="n">nodeQueue</span><span class="k">:</span> <span class="kt">mutable.Queue</span><span class="o">[(</span><span class="kt">Int</span>, <span class="kt">Node</span><span class="o">)],</span>
       <span class="n">maxMemoryUsage</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span>
       <span class="n">metadata</span><span class="k">:</span> <span class="kt">DecisionTreeMetadata</span><span class="o">,</span>
@@ -736,14 +732,13 @@
     <span class="k">val</span> <span class="n">treeToNodeToIndexInfo</span> <span class="k">=</span> <span class="n">mutableTreeToNodeToIndexInfo</span><span class="o">.</span><span class="n">mapValues</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">toMap</span><span class="o">).</span><span class="n">toMap</span>
     <span class="o">(</span><span class="n">nodesForGroup</span><span class="o">,</span> <span class="n">treeToNodeToIndexInfo</span><span class="o">)</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>选中最优切分</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//所有可切分的节点
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//所有可切分的节点
 </span><span class="k">val</span> <span class="n">nodes</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Node</span><span class="o">](</span><span class="n">numNodes</span><span class="o">)</span>
 <span class="n">nodesForGroup</span><span class="o">.</span><span class="n">foreach</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">treeIndex</span><span class="o">,</span> <span class="n">nodesForTree</span><span class="o">)</span> <span class="k">=&gt;</span>
    <span class="n">nodesForTree</span><span class="o">.</span><span class="n">foreach</span> <span class="o">{</span> <span class="n">node</span> <span class="k">=&gt;</span>
@@ -806,12 +801,11 @@
         <span class="n">binsToBestSplit</span><span class="o">(</span><span class="n">aggStats</span><span class="o">,</span> <span class="n">splits</span><span class="o">,</span> <span class="n">featuresForNode</span><span class="o">,</span> <span class="n">nodes</span><span class="o">(</span><span class="n">nodeIndex</span><span class="o">))</span>
     <span class="o">(</span><span class="n">nodeIndex</span><span class="o">,</span> <span class="o">(</span><span class="n">split</span><span class="o">,</span> <span class="n">stats</span><span class="o">,</span> <span class="n">predict</span><span class="o">))</span>
 <span class="o">}.</span><span class="n">collectAsMap</span><span class="o">()</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  该方法中的关键是对<code class="highlighter-rouge">binsToBestSplit</code>方法的调用，<code class="highlighter-rouge">binsToBestSplit</code>方法代码如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">binsToBestSplit</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">binsToBestSplit</span><span class="o">(</span>
       <span class="n">binAggregates</span><span class="k">:</span> <span class="kt">DTStatsAggregator</span><span class="o">,</span>
       <span class="n">splits</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Array</span><span class="o">[</span><span class="kt">Split</span><span class="o">]],</span>
       <span class="n">featuresForNode</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">]],</span>
@@ -954,14 +948,13 @@
     <span class="o">}.</span><span class="n">maxBy</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">_2</span><span class="o">.</span><span class="n">gain</span><span class="o">)</span>
     <span class="o">(</span><span class="n">bestSplit</span><span class="o">,</span> <span class="n">bestSplitStats</span><span class="o">,</span> <span class="n">predictWithImpurity</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">_1</span><span class="o">)</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="52-预测分析">5.2 预测分析</h3>
 
 <p>  在利用随机森林进行预测时，调用的<code class="highlighter-rouge">predict</code>方法扩展自<code class="highlighter-rouge">TreeEnsembleModel</code>，它是树结构组合模型的表示，其核心代码如下所示：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//不同的策略采用不同的预测方法
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//不同的策略采用不同的预测方法
 </span><span class="k">def</span> <span class="n">predict</span><span class="o">(</span><span class="n">features</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
     <span class="o">(</span><span class="n">algo</span><span class="o">,</span> <span class="n">combiningStrategy</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
       <span class="k">case</span> <span class="o">(</span><span class="nc">Regression</span><span class="o">,</span> <span class="nc">Sum</span><span class="o">)</span> <span class="k">=&gt;</span>
@@ -992,8 +985,7 @@
     <span class="o">}</span>
     <span class="n">votes</span><span class="o">.</span><span class="n">maxBy</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">_2</span><span class="o">).</span><span class="n">_1</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h1 id="参考文献">参考文献</h1>
 
@@ -1146,13 +1138,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

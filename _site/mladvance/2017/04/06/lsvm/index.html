@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -212,7 +216,7 @@
 
 <h3 id="21-实例">2.1 实例</h3>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.classification.</span><span class="o">{</span><span class="nc">SVMModel</span><span class="o">,</span> <span class="nc">SVMWithSGD</span><span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.classification.</span><span class="o">{</span><span class="nc">SVMModel</span><span class="o">,</span> <span class="nc">SVMWithSGD</span><span class="o">}</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.evaluation.BinaryClassificationMetrics</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
 <span class="c1">// Load training data in LIBSVM format.
@@ -235,15 +239,14 @@
 </span><span class="k">val</span> <span class="n">metrics</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">BinaryClassificationMetrics</span><span class="o">(</span><span class="n">scoreAndLabels</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">auROC</span> <span class="k">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">areaUnderROC</span><span class="o">()</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Area under ROC = "</span> <span class="o">+</span> <span class="n">auROC</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="22-训练">2.2 训练</h3>
 
 <p>  和逻辑回归一样，训练过程均使用<code class="highlighter-rouge">GeneralizedLinearModel</code>中的<code class="highlighter-rouge">run</code>训练，只是训练使用的<code class="highlighter-rouge">Gradient</code>和<code class="highlighter-rouge">Updater</code>不同。在线性支持向量机中，使用<code class="highlighter-rouge">HingeGradient</code>计算梯度，使用<code class="highlighter-rouge">SquaredL2Updater</code>进行更新。
 它的实现过程分为4步。参加<a href="../逻辑回归/logic-regression.md">逻辑回归</a>了解这五步的详细情况。我们只需要了解<code class="highlighter-rouge">HingeGradient</code>和<code class="highlighter-rouge">SquaredL2Updater</code>的实现。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">HingeGradient</span> <span class="k">extends</span> <span class="nc">Gradient</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">HingeGradient</span> <span class="k">extends</span> <span class="nc">Gradient</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">weights</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Vector</span><span class="o">,</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
     <span class="k">val</span> <span class="n">dotProduct</span> <span class="k">=</span> <span class="n">dot</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">weights</span><span class="o">)</span>
     <span class="c1">// 我们的损失函数是 max(0, 1 - (2y - 1) (f_w(x)))
@@ -277,12 +280,11 @@
     <span class="o">}</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  线性支持向量机的训练使用<code class="highlighter-rouge">L2</code>正则化方法。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SquaredL2Updater</span> <span class="k">extends</span> <span class="nc">Updater</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SquaredL2Updater</span> <span class="k">extends</span> <span class="nc">Updater</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span>
       <span class="n">weightsOld</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">gradient</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
@@ -303,19 +305,17 @@
     <span class="o">(</span><span class="nc">Vectors</span><span class="o">.</span><span class="n">fromBreeze</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">),</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">norm</span> <span class="o">*</span> <span class="n">norm</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  该函数的实现规则是：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">w</span><span class="o">'</span> <span class="k">=</span> <span class="n">w</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="o">(</span><span class="n">gradient</span> <span class="o">+</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">w</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">w</span><span class="o">'</span> <span class="k">=</span> <span class="n">w</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="o">(</span><span class="n">gradient</span> <span class="o">+</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">w</span><span class="o">)</span>
 <span class="n">w</span><span class="o">'</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="n">regParam</span><span class="o">)</span> <span class="o">*</span> <span class="n">w</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="n">gradient</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  这里<code class="highlighter-rouge">thisIterStepSize</code>表示参数沿负梯度方向改变的速率，它随着迭代次数的增多而减小。</p>
 
 <h3 id="23-预测">2.3 预测</h3>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="n">predictPoint</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="n">predictPoint</span><span class="o">(</span>
       <span class="n">dataMatrix</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">weightMatrix</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">intercept</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
@@ -326,8 +326,7 @@
       <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="n">margin</span>
     <span class="o">}</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h1 id="参考文献">参考文献</h1>
 
@@ -477,13 +476,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

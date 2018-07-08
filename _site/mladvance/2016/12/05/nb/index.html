@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -311,7 +315,7 @@
 
 <h3 id="41-实例">4.1 实例</h3>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.classification.</span><span class="o">{</span><span class="nc">NaiveBayes</span><span class="o">,</span> <span class="nc">NaiveBayesModel</span><span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.classification.</span><span class="o">{</span><span class="nc">NaiveBayes</span><span class="o">,</span> <span class="nc">NaiveBayesModel</span><span class="o">}</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vectors</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LabeledPoint</span>
 <span class="c1">//读取并处理数据
@@ -329,8 +333,7 @@
 <span class="c1">//测试数据
 </span><span class="k">val</span> <span class="n">predictionAndLabel</span> <span class="k">=</span> <span class="n">test</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">p</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="n">features</span><span class="o">),</span> <span class="n">p</span><span class="o">.</span><span class="n">label</span><span class="o">))</span>
 <span class="k">val</span> <span class="n">accuracy</span> <span class="k">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">predictionAndLabel</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">_1</span> <span class="o">==</span> <span class="n">x</span><span class="o">.</span><span class="n">_2</span><span class="o">).</span><span class="n">count</span><span class="o">()</span> <span class="o">/</span> <span class="n">test</span><span class="o">.</span><span class="n">count</span><span class="o">()</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="42-训练模型">4.2 训练模型</h3>
 
@@ -341,7 +344,7 @@
   <li><strong>1</strong> 计算每个标签对应的<code class="highlighter-rouge">term</code>的频率</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">aggregated</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">p</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="n">label</span><span class="o">,</span> <span class="n">p</span><span class="o">.</span><span class="n">features</span><span class="o">)).</span><span class="n">combineByKey</span><span class="o">[(</span><span class="kt">Long</span>, <span class="kt">DenseVector</span><span class="o">)](</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">aggregated</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">p</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="n">label</span><span class="o">,</span> <span class="n">p</span><span class="o">.</span><span class="n">features</span><span class="o">)).</span><span class="n">combineByKey</span><span class="o">[(</span><span class="kt">Long</span>, <span class="kt">DenseVector</span><span class="o">)](</span>
       <span class="n">createCombiner</span> <span class="k">=</span> <span class="o">(</span><span class="n">v</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">modelType</span> <span class="o">==</span> <span class="nc">Bernoulli</span><span class="o">)</span> <span class="o">{</span>
           <span class="n">requireZeroOneBernoulliValues</span><span class="o">(</span><span class="n">v</span><span class="o">)</span>
@@ -362,14 +365,13 @@
       <span class="o">}</span>
     <span class="c1">//根据标签进行排序
 </span>    <span class="o">).</span><span class="n">collect</span><span class="o">().</span><span class="n">sortBy</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">_1</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  这里我们需要先了解<code class="highlighter-rouge">createCombiner</code>函数的作用。<code class="highlighter-rouge">createCombiner</code>的作用是将原<code class="highlighter-rouge">RDD</code>中的<code class="highlighter-rouge">Vector</code>类型转换为<code class="highlighter-rouge">(long,Vector)</code>类型。</p>
 
 <p>  如果<code class="highlighter-rouge">modelType</code>为<code class="highlighter-rouge">Bernoulli</code>，那么<code class="highlighter-rouge">v</code>中包含的值只能为0或者1。如果<code class="highlighter-rouge">modelType</code>为<code class="highlighter-rouge">multinomial</code>，那么<code class="highlighter-rouge">v</code>中包含的值必须大于0。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//值非负
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//值非负
 </span><span class="k">val</span> <span class="n">requireNonnegativeValues</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=&gt;</span> <span class="nc">Unit</span> <span class="k">=</span> <span class="o">(</span><span class="n">v</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">values</span> <span class="k">=</span> <span class="n">v</span> <span class="k">match</span> <span class="o">{</span>
         <span class="k">case</span> <span class="n">sv</span><span class="k">:</span> <span class="kt">SparseVector</span> <span class="o">=&gt;</span> <span class="n">sv</span><span class="o">.</span><span class="n">values</span>
@@ -390,8 +392,7 @@
           <span class="n">s</span><span class="s">"Bernoulli naive Bayes requires 0 or 1 feature values but found $v."</span><span class="o">)</span>
       <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  <code class="highlighter-rouge">mergeValue</code>函数的作用是将新来的<code class="highlighter-rouge">Vector</code>累加到已有向量中，并更新词率。<code class="highlighter-rouge">mergeCombiners</code>则是合并不同分区的<code class="highlighter-rouge">(long,Vector)</code>数据。
 通过这个函数，我们就找到了每个标签对应的词频率，并得到了标签对应的所有文档的累加向量。</p>
 
@@ -399,7 +400,7 @@
   <li><strong>2</strong> 迭代计算<code class="highlighter-rouge">p(C)</code>和<code class="highlighter-rouge">p(F|C)</code></li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//标签数
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//标签数
 </span><span class="k">val</span> <span class="n">numLabels</span> <span class="k">=</span> <span class="n">aggregated</span><span class="o">.</span><span class="n">length</span>
 <span class="c1">//文档数
 </span><span class="k">var</span> <span class="n">numDocuments</span> <span class="k">=</span> <span class="mi">0L</span>
@@ -434,8 +435,7 @@
       <span class="o">}</span>
       <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  这段代码计算上文提到的<code class="highlighter-rouge">p(C)</code>和<code class="highlighter-rouge">p(F|C)</code>。这里的<code class="highlighter-rouge">lambda</code>表示平滑因子，一般情况下，我们将它设置为1。代码中，<code class="highlighter-rouge">p(c_i)=log (n+lambda)/(numDocs+numLabels*lambda)</code>，这对应上文训练过程的第5步<code class="highlighter-rouge">prior(c)=N_c/N</code>。</p>
 
 <p>  根据<code class="highlighter-rouge">modelType</code>类型的不同，<code class="highlighter-rouge">p(F|C)</code>的实现则不同。当<code class="highlighter-rouge">modelType</code>为<code class="highlighter-rouge">Multinomial</code>时，<code class="highlighter-rouge">P(F|C)=T_ct/sum(T_ct)</code>，这里<code class="highlighter-rouge">sum(T_ct)=sumTermFreqs.values.sum + numFeatures * lambda</code>。这对应多元朴素贝叶斯训练过程的第10步。
@@ -445,7 +445,7 @@
 
 <h2 id="43-预测数据">4.3 预测数据</h2>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">override</span> <span class="k">def</span> <span class="n">predict</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">override</span> <span class="k">def</span> <span class="n">predict</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
     <span class="n">modelType</span> <span class="k">match</span> <span class="o">{</span>
       <span class="k">case</span> <span class="nc">Multinomial</span> <span class="k">=&gt;</span>
         <span class="n">labels</span><span class="o">(</span><span class="n">multinomialCalculation</span><span class="o">(</span><span class="n">testData</span><span class="o">).</span><span class="n">argmax</span><span class="o">)</span>
@@ -453,24 +453,22 @@
         <span class="n">labels</span><span class="o">(</span><span class="n">bernoulliCalculation</span><span class="o">(</span><span class="n">testData</span><span class="o">).</span><span class="n">argmax</span><span class="o">)</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  预测也是根据<code class="highlighter-rouge">modelType</code>的不同作不同的处理。当<code class="highlighter-rouge">modelType</code>为<code class="highlighter-rouge">Multinomial</code>时，调用<code class="highlighter-rouge">multinomialCalculation</code>函数。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">multinomialCalculation</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">multinomialCalculation</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
     <span class="k">val</span> <span class="n">prob</span> <span class="k">=</span> <span class="n">thetaMatrix</span><span class="o">.</span><span class="n">multiply</span><span class="o">(</span><span class="n">testData</span><span class="o">)</span>
     <span class="nc">BLAS</span><span class="o">.</span><span class="n">axpy</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="n">piVector</span><span class="o">,</span> <span class="n">prob</span><span class="o">)</span>
     <span class="n">prob</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  这里的<code class="highlighter-rouge">thetaMatrix</code>和<code class="highlighter-rouge">piVector</code>即上文中训练得到的<code class="highlighter-rouge">P(F|C)</code>和<code class="highlighter-rouge">P(C)</code>，根据<code class="highlighter-rouge">P(C|F)=P(F|C)*P(C)</code>即可以得到预测数据归属于某类别的概率。
 注意，这些概率都是基于对数结果计算的。</p>
 
 <p>  当<code class="highlighter-rouge">modelType</code>为<code class="highlighter-rouge">Bernoulli</code>时，实现代码略有不同。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">bernoulliCalculation</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">bernoulliCalculation</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
     <span class="n">testData</span><span class="o">.</span><span class="n">foreachActive</span><span class="o">((</span><span class="k">_</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span>
       <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="mf">0.0</span> <span class="o">&amp;&amp;</span> <span class="n">value</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nc">SparkException</span><span class="o">(</span>
@@ -482,12 +480,11 @@
     <span class="nc">BLAS</span><span class="o">.</span><span class="n">axpy</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="n">negThetaSum</span><span class="o">.</span><span class="n">get</span><span class="o">,</span> <span class="n">prob</span><span class="o">)</span>
     <span class="n">prob</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  当词在训练数据中出现与否处理的过程不同。见伯努利模型测试过程。这里用矩阵和向量的操作来实现这个过程，需要仔细体会。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code> <span class="k">private</span> <span class="k">val</span> <span class="o">(</span><span class="n">thetaMinusNegTheta</span><span class="o">,</span> <span class="n">negThetaSum</span><span class="o">)</span> <span class="k">=</span> <span class="n">modelType</span> <span class="k">match</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">private</span> <span class="k">val</span> <span class="o">(</span><span class="n">thetaMinusNegTheta</span><span class="o">,</span> <span class="n">negThetaSum</span><span class="o">)</span> <span class="k">=</span> <span class="n">modelType</span> <span class="k">match</span> <span class="o">{</span>
     <span class="k">case</span> <span class="nc">Multinomial</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="nc">None</span><span class="o">,</span> <span class="nc">None</span><span class="o">)</span>
     <span class="k">case</span> <span class="nc">Bernoulli</span> <span class="k">=&gt;</span>
       <span class="k">val</span> <span class="n">negTheta</span> <span class="k">=</span> <span class="n">thetaMatrix</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">value</span> <span class="k">=&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(</span><span class="n">value</span><span class="o">)))</span>
@@ -500,8 +497,7 @@
       <span class="c1">// This should never happen.
 </span>      <span class="k">throw</span> <span class="k">new</span> <span class="nc">UnknownError</span><span class="o">(</span><span class="n">s</span><span class="s">"Invalid modelType: $modelType."</span><span class="o">)</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  这里<code class="highlighter-rouge">math.exp(value)</code>将对数概率恢复成真实的概率。</p>
 
@@ -656,13 +652,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

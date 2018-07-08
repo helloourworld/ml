@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -201,44 +205,39 @@
   <li>例如：</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pip install numpy
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install numpy
 pip install pandas
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>2.打包已安装的包</li>
   <li>在python目录下新建packages文件夹用来存储下载下来的所需安装包。</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pip list #查看安装的包
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip list #查看安装的包
 pip freeze &gt;requirements.txt
 pip install --download packages -r requirements.txt
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>3.离线情况安装打包好的包</li>
   <li>将packages文件夹和requirement.txt拷贝至离线机器上目录下，packages文件夹放在Python目录下，requirement.txt放在Scripts目录下。</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pip install --no-index --find-links=d:\python27\packages -r requirements.txt
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install --no-index --find-links=d:\python27\packages -r requirements.txt
+</code></pre></div></div>
 
 <p>补充</p>
 
 <p>1.下载指定的包到指定文件夹</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pip install --download d:\python27\packs pandas（-r requirements.txt）
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install --download d:\python27\packs pandas（-r requirements.txt）
+</code></pre></div></div>
 
 <p>2.安装指定的离线包</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pip install --no-index --find-links=d:\python27\packs\ pandas （-r requirements.txt）
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install --no-index --find-links=d:\python27\packs\ pandas （-r requirements.txt）
+</code></pre></div></div>
 
 <ol>
   <li><a href="https://taizilongxu.gitbooks.io/stackoverflow-about-python/content/8/README.html">stackoverflow-about-python</a></li>
@@ -389,13 +388,13 @@ pip install --download packages -r requirements.txt
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

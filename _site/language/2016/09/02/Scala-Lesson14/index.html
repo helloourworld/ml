@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -204,7 +208,7 @@
 
 <p>以下实例演示了邮件地址的提取器对象：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Extractors1</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Extractors1</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
 
       <span class="n">println</span> <span class="o">(</span><span class="s">"Apply 方法 : "</span> <span class="o">+</span> <span class="n">apply</span><span class="o">(</span><span class="s">"Zara"</span><span class="o">,</span> <span class="s">"gmail.com"</span><span class="o">));</span>
@@ -231,8 +235,7 @@
 <span class="nc">Apply</span> <span class="n">方法</span> <span class="k">:</span> <span class="kt">Zara@gmail.com</span>
 <span class="nc">Unapply</span> <span class="n">方法</span> <span class="k">:</span> <span class="kt">Some</span><span class="o">((</span><span class="kt">Zara</span><span class="o">,</span><span class="kt">gmail.com</span><span class="o">))</span>
 <span class="nc">Unapply</span> <span class="n">方法</span> <span class="k">:</span> <span class="kt">None</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>以上对象定义了两个方法： apply 和 unapply 方法。通过 apply 方法我们无需使用 new 操作就可以创建对象。所以你可以通过语句 Test(“Zara”, “gmail.com”) 来构造一个字符串 “Zara@gmail.com”。</li>
@@ -240,10 +243,9 @@
   <li>实例中 unapply 方法在传入的字符串不是邮箱地址时返回 None。代码演示如下：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">unapply</span><span class="o">(</span><span class="s">"Zara@gmail.com"</span><span class="o">)</span> <span class="n">相等于</span> <span class="nc">Some</span><span class="o">(</span><span class="s">"Zara"</span><span class="o">,</span> <span class="s">"gmail.com"</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">unapply</span><span class="o">(</span><span class="s">"Zara@gmail.com"</span><span class="o">)</span> <span class="n">相等于</span> <span class="nc">Some</span><span class="o">(</span><span class="s">"Zara"</span><span class="o">,</span> <span class="s">"gmail.com"</span><span class="o">)</span>
 <span class="n">unapply</span><span class="o">(</span><span class="s">"Zara Ali"</span><span class="o">)</span> <span class="n">相等于</span> <span class="nc">None</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="提取器使用模式匹配">提取器使用模式匹配</h3>
 
@@ -252,7 +254,7 @@
   <li>就像我们之前提到过的，unapply 用于提取我们指定查找的值，它与 apply 的操作相反。 当我们在提取器对象中使用 match 语句是，unapply 将自动执行，如下所示：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Extractors2</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Extractors2</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
 
       <span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="nc">Extractors2</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
@@ -272,9 +274,8 @@
 <span class="k">#</span> <span class="n">output</span>
 <span class="mi">10</span>
 <span class="mi">10</span> <span class="n">是</span> <span class="mi">5</span> <span class="n">的两倍</span><span class="err">！</span>
-</code></pre>
-</div>
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Twice</span> <span class="o">{</span>
+</code></pre></div></div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Twice</span> <span class="o">{</span>
   <span class="k">def</span> <span class="n">apply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
   <span class="k">def</span> <span class="n">unapply</span><span class="o">(</span><span class="n">z</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">z</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="n">z</span><span class="o">/</span><span class="mi">2</span><span class="o">)</span> <span class="k">else</span> <span class="nc">None</span>
 <span class="o">}</span>
@@ -283,8 +284,7 @@
   <span class="n">println</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
   <span class="n">x</span> <span class="k">match</span> <span class="o">{</span> <span class="k">case</span> <span class="nc">Twice</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Console</span><span class="o">.</span><span class="n">println</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">}</span> <span class="c1">// prints 21
 </span><span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
                 <hr>
@@ -429,13 +429,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

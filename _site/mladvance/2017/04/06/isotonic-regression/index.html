@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -303,7 +307,7 @@
 
 <h3 id="41-实例">4.1 实例</h3>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.</span><span class="o">{</span><span class="nc">IsotonicRegression</span><span class="o">,</span> <span class="nc">IsotonicRegressionModel</span><span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.</span><span class="o">{</span><span class="nc">IsotonicRegression</span><span class="o">,</span> <span class="nc">IsotonicRegressionModel</span><span class="o">}</span>
 <span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="s">"data/mllib/sample_isotonic_regression_data.txt"</span><span class="o">)</span>
 <span class="c1">// 创建（label, feature, weight） tuples ，权重默认设置为1.0
 </span><span class="k">val</span> <span class="n">parsedData</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">line</span> <span class="k">=&gt;</span>
@@ -325,14 +329,13 @@
 <span class="c1">// Calculate mean squared error between predicted and real labels.
 </span><span class="k">val</span> <span class="n">meanSquaredError</span> <span class="k">=</span> <span class="n">predictionAndLabel</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">l</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="o">((</span><span class="n">p</span> <span class="o">-</span> <span class="n">l</span><span class="o">),</span> <span class="mi">2</span><span class="o">)</span> <span class="o">}.</span><span class="n">mean</span><span class="o">()</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Mean Squared Error = "</span> <span class="o">+</span> <span class="n">meanSquaredError</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="42-训练过程分析">4.2 训练过程分析</h3>
 
 <p>  <code class="highlighter-rouge">parallelPoolAdjacentViolators</code>方法用于实现保序回归的训练。<code class="highlighter-rouge">parallelPoolAdjacentViolators</code>方法的代码如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">parallelPoolAdjacentViolators</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">parallelPoolAdjacentViolators</span><span class="o">(</span>
       <span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)])</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span> <span class="k">=</span> <span class="o">{</span>
     <span class="k">val</span> <span class="n">parallelStepResult</span> <span class="k">=</span> <span class="n">input</span>
       <span class="c1">//以（feature，label）为key进行排序
@@ -343,11 +346,10 @@
       <span class="o">.</span><span class="n">sortBy</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="n">_2</span><span class="o">,</span> <span class="n">x</span><span class="o">.</span><span class="n">_1</span><span class="o">))</span> <span class="c1">// Sort again because collect() doesn't promise ordering.
 </span>    <span class="n">poolAdjacentViolators</span><span class="o">(</span><span class="n">parallelStepResult</span><span class="o">)</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  <code class="highlighter-rouge">parallelPoolAdjacentViolators</code>方法的主要实现是<code class="highlighter-rouge">poolAdjacentViolators</code>方法，该方法主要的实现过程如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
 <span class="k">val</span> <span class="n">len</span> <span class="k">=</span> <span class="n">input</span><span class="o">.</span><span class="n">length</span>
 <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
      <span class="k">var</span> <span class="n">j</span> <span class="k">=</span> <span class="n">i</span>
@@ -368,12 +370,11 @@
        <span class="n">i</span> <span class="k">=</span> <span class="n">j</span>
      <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  <code class="highlighter-rouge">pool</code>方法的实现如下所示。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">pool</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)],</span> <span class="n">start</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">pool</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)],</span> <span class="n">start</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
       <span class="c1">//取得i到j之间的元组组成的子序列
 </span>      <span class="k">val</span> <span class="n">poolSubArray</span> <span class="k">=</span> <span class="n">input</span><span class="o">.</span><span class="n">slice</span><span class="o">(</span><span class="n">start</span><span class="o">,</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
       <span class="c1">//求子序列sum（label * w）之和
@@ -388,11 +389,10 @@
         <span class="n">i</span> <span class="k">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
       <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  经过上文的处理之后，<code class="highlighter-rouge">input</code>根据中的<code class="highlighter-rouge">label</code>和<code class="highlighter-rouge">feature</code>均是按升序排列。对于拥有相同预测的点，我们只保留两个特征边界点。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">compressed</span> <span class="k">=</span> <span class="nc">ArrayBuffer</span><span class="o">.</span><span class="n">empty</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">compressed</span> <span class="k">=</span> <span class="nc">ArrayBuffer</span><span class="o">.</span><span class="n">empty</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span>
 <span class="k">var</span> <span class="o">(</span><span class="n">curLabel</span><span class="o">,</span> <span class="n">curFeature</span><span class="o">,</span> <span class="n">curWeight</span><span class="o">)</span> <span class="k">=</span> <span class="n">input</span><span class="o">.</span><span class="n">head</span>
 <span class="k">var</span> <span class="n">rightBound</span> <span class="k">=</span> <span class="n">curFeature</span>
 <span class="k">def</span> <span class="n">merge</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
@@ -418,22 +418,20 @@
     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="o">}</span>
 <span class="n">merge</span><span class="o">()</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  最后将训练的结果保存为模型。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//标签集
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//标签集
 </span><span class="k">val</span> <span class="n">predictions</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">isotonic</span><span class="o">)</span> <span class="n">pooled</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">_1</span><span class="o">)</span> <span class="k">else</span> <span class="n">pooled</span><span class="o">.</span><span class="n">map</span><span class="o">(-</span><span class="k">_</span><span class="o">.</span><span class="n">_1</span><span class="o">)</span>
 <span class="c1">//特征集
 </span><span class="k">val</span> <span class="n">boundaries</span> <span class="k">=</span> <span class="n">pooled</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">_2</span><span class="o">)</span>
 <span class="k">new</span> <span class="nc">IsotonicRegressionModel</span><span class="o">(</span><span class="n">boundaries</span><span class="o">,</span> <span class="n">predictions</span><span class="o">,</span> <span class="n">isotonic</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="43-预测过程分析">4.3 预测过程分析</h3>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">predict</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">predict</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">linearInterpolation</span><span class="o">(</span><span class="n">x1</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">y1</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x2</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">y2</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
       <span class="n">y1</span> <span class="o">+</span> <span class="o">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x1</span><span class="o">)</span> <span class="o">/</span> <span class="o">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="o">)</span>
     <span class="o">}</span>
@@ -457,8 +455,7 @@
       <span class="n">predictions</span><span class="o">(</span><span class="n">foundIndex</span><span class="o">)</span>
     <span class="o">}</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  当测试数据精确匹配一个边界，那么返回相应的特征。如果测试数据比所有边界都大或者小，那么分别返回第一个和最后一个特征。当测试数据位于两个边界之间，使用<code class="highlighter-rouge">linearInterpolation</code>方法计算特征。
 这个方法是线性内插法。</p>
 
@@ -623,13 +620,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

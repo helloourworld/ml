@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -203,7 +207,7 @@
   <li>默认引用 scala.collection.immutable.Set，不可变集合实例如下：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="n">a</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="n">a</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">)</span>
 <span class="n">a</span><span class="k">:</span> <span class="kt">scala.collection.immutable.Set</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
 
 <span class="n">scala</span><span class="o">&gt;</span> <span class="n">print</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="n">getClass</span><span class="o">.</span><span class="n">getName</span><span class="o">)</span> <span class="c1">//
@@ -213,12 +217,11 @@
 
 <span class="n">scala</span><span class="o">&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="n">drop</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span> <span class="c1">//Set(2,3)
 </span><span class="nc">Set</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>如果需要使用可变集合需要引入 scala.collection.mutable.Set：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.collection.mutable.Set</span> <span class="c1">// 可以在任何地方引入 可变集合
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.collection.mutable.Set</span> <span class="c1">// 可以在任何地方引入 可变集合
 </span>
 <span class="k">val</span> <span class="n">mutableSet</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">)</span>
 <span class="n">println</span><span class="o">(</span><span class="n">mutableSet</span><span class="o">.</span><span class="n">getClass</span><span class="o">.</span><span class="n">getName</span><span class="o">)</span> <span class="c1">// scala.collection.mutable.HashSet
@@ -232,8 +235,7 @@
 </span>
 <span class="k">val</span> <span class="n">another</span> <span class="k">=</span> <span class="n">mutableSet</span><span class="o">.</span><span class="n">toSet</span>
 <span class="n">println</span><span class="o">(</span><span class="n">another</span><span class="o">.</span><span class="n">getClass</span><span class="o">.</span><span class="n">getName</span><span class="o">)</span> <span class="c1">// scala.collection.immutable.Set
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <p><code class="highlighter-rouge">注意： 虽然可变Set和不可变Set都有添加或删除元素的操作，但是有一个非常大的差别。对不可变Set进行操作，会产生一个新的set，原来的set并没有改变，这与List一样。 而对可变Set进行操作，改变的是该Set本身，与ListBuffer类似。</code></p>
 
@@ -249,7 +251,7 @@
 
 <p>对于Scala集合的任何操作都可以使用这三个基本操作来表达。实例如下:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Sets1</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Sets1</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">site</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"Runoob"</span><span class="o">,</span> <span class="s">"Google"</span><span class="o">,</span> <span class="s">"Baidu"</span><span class="o">)</span>
       <span class="k">val</span> <span class="n">nums</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">()</span>
@@ -260,15 +262,14 @@
       <span class="n">println</span><span class="o">(</span> <span class="s">"查看 nums 是否为空 : "</span> <span class="o">+</span> <span class="n">nums</span><span class="o">.</span><span class="n">isEmpty</span> <span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="2-连接集合">2 连接集合</h4>
 
 <p>你可以使用 ++ 运算符或 Set.++() 方法来连接两个集合。
 如果元素有重复的就会移除重复的元素。实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Sets2</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Sets2</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">site1</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"Runoob"</span><span class="o">,</span> <span class="s">"Google"</span><span class="o">,</span> <span class="s">"Baidu"</span><span class="o">)</span>
       <span class="k">val</span> <span class="n">site2</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="s">"Faceboook"</span><span class="o">,</span> <span class="s">"Taobao"</span><span class="o">)</span>
@@ -282,14 +283,13 @@
       <span class="n">println</span><span class="o">(</span> <span class="s">"site1.++(site2) : "</span> <span class="o">+</span> <span class="n">site</span> <span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="3-查找集合中最大与最小元素">3 查找集合中最大与最小元素</h4>
 
 <p>你可以使用 Set.min 方法来查找集合中的最小元素，使用 Set.max 方法查找集合中的最大元素。实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Sets3</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Sets3</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">num</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">,</span><span class="mi">9</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">30</span><span class="o">,</span><span class="mi">45</span><span class="o">)</span>
 
@@ -298,14 +298,13 @@
       <span class="n">println</span><span class="o">(</span> <span class="s">"Set(5,6,9,20,30,45) 集合中的最大元素是 : "</span> <span class="o">+</span> <span class="n">num</span><span class="o">.</span><span class="n">max</span> <span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="4-交集">4 交集</h4>
 
 <p>你可以使用 Set.&amp; 方法或 Set.intersect 方法来查看两个集合的交集元素。实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Sets4</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Sets4</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">num1</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">,</span><span class="mi">9</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">30</span><span class="o">,</span><span class="mi">45</span><span class="o">)</span>
       <span class="k">val</span> <span class="n">num2</span> <span class="k">=</span> <span class="nc">Set</span><span class="o">(</span><span class="mi">50</span><span class="o">,</span><span class="mi">60</span><span class="o">,</span><span class="mi">9</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">35</span><span class="o">,</span><span class="mi">55</span><span class="o">)</span>
@@ -315,8 +314,7 @@
       <span class="n">println</span><span class="o">(</span> <span class="s">"num1.intersect(num2) : "</span> <span class="o">+</span> <span class="n">num1</span><span class="o">.</span><span class="n">intersect</span><span class="o">(</span><span class="n">num2</span><span class="o">)</span> <span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="返回-scala-lesson7"><a href="/language/2016/08/31/Scala-Lesson7/">返回 Scala-Lesson7</a></h4>
 
@@ -813,13 +811,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

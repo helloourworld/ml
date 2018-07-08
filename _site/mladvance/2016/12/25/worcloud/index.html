@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -210,18 +214,17 @@
 
 <h3 id="building-a-term-frequency-inverse-document-frequency-word-cloud">Building a Term Frequency-Inverse Document Frequency Word Cloud</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import sys
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import sys
 
 for file in sys.argv[1:]:                # Iterate over the files
     contents = open(file).read().lower() # Load file contents
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Next we need to split the document into its constituent components. These are words, punctuation marks etc. For this we’ll use NLTK. We’ll also stem the tokens using the Porter stemmer. Stemming attempts to resolve variants of words back to their **root form. **For example, instances of the words “run”, “ran”, “runs”, “running” should all be resolved to the word “run”. Stemming  is quite crude and the results aren’t really suitable for human consumption, but it’s a fairly effective method of merging tokens.</p>
 
 <p>We’ll store all our documents in memory just because it’s easier to implement for now. However, this will quickly become unsustainable for large collections. We really ought to load our corpus bit by bit (functionality which Gensim is designed to support). We’ll store both the original tokenized text and the stemmed text.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import sys
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import sys
 from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
 
@@ -236,14 +239,13 @@ for file in sys.argv[1:]:                # Iterate over the files
 
     stemmed_corpus.append(stemmed)    # Store stemmed document
     original_corpus.append(tokens)    # Store original document
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This is all that’s involved in preparing the collection for Gensim. We’re now ready to start analysing the collection using the data structures the library provides.</p>
 
 <p>Gensim substitutes terms for integer IDs using a dictionary structure, so the first thing we need to do is build the dictionary. The dictionary contains unique instances of terms found within the collection. It is a complete lexicon of the vocabulary used in the documents. Building the dictionary is as simple as importing the data structure and passing our stemmed tokens to it. We’re only going to build the dictionary from the stemmed tokens and later we’ll use the non-stemmed tokens for presentation purposes.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import sys
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import sys
 from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
 from gensim.corpora import Dictionary
@@ -261,12 +263,11 @@ for file in sys.argv[1:]:                # Iterate over the files
     original_corpus.append(tokens)    # Store original document
 
 dictionary = Dictionary(stemmed_corpus) # Build the dictionary
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>We are now going to build the TF-IDF model. There are two steps involved in this process. We need to convert the text corpus into a vector format. Then we pass the corpus to the TF-IDF model for analysis. Don’t forget to include the model from the gensim package!</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import sys
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import sys
 from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
 from gensim.corpora import Dictionary
@@ -291,8 +292,7 @@ vectors = [dictionary.doc2bow(text) for text in stemmed_corpus]
 
 # Build TF-IDF model
 tfidf = TfidfModel(vectors)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>TF-IDF determines what words are most important for distinguishing the content of one document from another. Arguably, it identifies the terms on which the document is most authoritative although there is no theoretical basis for this. Proving it has been something of  a bane for the computer science community. Still, for our purposes we’ll say it’s true. What we plan to do is produce a word cloud where the size of a term is dictated by its TF-IDF weight in a given document.</p>
 
@@ -313,10 +313,9 @@ original_corpus = []      # For storing the non-stemmed tokens</p>
     tokens = word_tokenize(contents)     # Extract tokens
     stemmed = [stemmer.stem(token) for token in tokens] # Stem tokens</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>stemmed_corpus.append(stemmed)    # Store stemmed document
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stemmed_corpus.append(stemmed)    # Store stemmed document
 original_corpus.append(tokens)    # Store original document
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>dictionary = Dictionary(stemmed_corpus) # Build the dictionary</p>
 
@@ -475,13 +474,13 @@ original_corpus.append(tokens)    # Store original document
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

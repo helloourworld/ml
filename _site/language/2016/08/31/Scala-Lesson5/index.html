@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -196,15 +200,14 @@
 
 				<h3 id="scala-字符串">Scala 字符串</h3>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Strings</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Strings</span><span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="n">println</span><span class="o">(</span><span class="n">greeting</span><span class="o">)</span>
     <span class="o">}</span>
 
     <span class="k">val</span> <span class="n">greeting</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"Hello, World!"</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>以上实例定义了变量 greeting，为字符串常量，它的类型为 String (java.lang.String)。</li>
@@ -217,18 +220,17 @@
 
 <p>创建字符串实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">greeting</span> <span class="k">=</span> <span class="s">"Hello, World!"</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">greeting</span> <span class="k">=</span> <span class="s">"Hello, World!"</span>
 <span class="n">or</span>
 <span class="k">var</span> <span class="n">greeting</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"Hello, Wrold!"</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>你不一定为字符串指定 String 类型，因为 Scala 编译器会自动推断出字符串的类型为 String。</li>
   <li>我们前面提到过 String 对象是不可变的，如果你需要创建一个可以修改的字符串，可以使用 String Builder 类，如下实例:</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Strings</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Strings</span><span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">val</span> <span class="n">buf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">;</span>
         <span class="n">buf</span> <span class="o">+=</span> <span class="sc">'a'</span>
@@ -236,22 +238,20 @@
         <span class="n">println</span><span class="o">(</span><span class="s">"buf is : "</span> <span class="o">+</span> <span class="n">buf</span><span class="o">.</span><span class="n">toString</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="2-字符串长度">2 字符串长度</h4>
 
 <p>我们可以使用 length() 方法来获取字符串长度：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Strings</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Strings</span><span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">val</span> <span class="n">palindrome</span> <span class="k">=</span> <span class="s">"www.machinelearningadvance.com"</span><span class="o">;</span>
         <span class="k">val</span> <span class="n">len</span> <span class="k">=</span> <span class="n">palindrome</span><span class="o">.</span><span class="n">length</span><span class="o">();</span>
         <span class="n">println</span><span class="o">(</span><span class="s">"String length is : "</span> <span class="o">+</span> <span class="n">len</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="3-字符串连接">3 字符串连接</h4>
 
@@ -261,23 +261,21 @@
 
 <p>实例演示：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="s">"大数据日志:"</span><span class="o">.</span><span class="n">concat</span><span class="o">(</span><span class="s">"www.machinelearningadvance.com"</span><span class="o">);</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="s">"大数据日志:"</span><span class="o">.</span><span class="n">concat</span><span class="o">(</span><span class="s">"www.machinelearningadvance.com"</span><span class="o">);</span>
 <span class="n">res13</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">大数据日志</span><span class="k">:</span><span class="kt">www.machinelearningadvance.com</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>同样你也可以使用加号(+)来连接：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="s">"大数据日志:"</span> <span class="o">+</span> <span class="s">"www.machinelearningadvance.com"</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="s">"大数据日志:"</span> <span class="o">+</span> <span class="s">"www.machinelearningadvance.com"</span>
 <span class="n">res14</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">大数据日志</span><span class="k">:</span><span class="kt">www.machinelearningadvance.com</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="4-创建格式化字符串">4 创建格式化字符串</h4>
 
 <p>String 类中你可以使用 printf() 方法来格式化字符串并输出，String format() 方法可以返回 String 对象而不是 PrintStream 对象。以下实例演示了 printf() 方法的使用：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Prints</span><span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Prints</span><span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">val</span> <span class="n">floatVar</span> <span class="k">=</span> <span class="mf">12.345</span>
         <span class="k">var</span> <span class="n">intVar</span> <span class="k">=</span> <span class="mi">2900</span>
@@ -287,8 +285,7 @@
        <span class="n">println</span><span class="o">(</span><span class="n">fs</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="5-string-方法">5 String 方法</h4>
 
@@ -630,13 +627,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

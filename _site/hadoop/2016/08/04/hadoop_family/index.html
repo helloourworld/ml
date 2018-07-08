@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -306,13 +310,12 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
 
 <p>物理存储位置：</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 subdir2]<span class="nv">$ </span><span class="nb">pwd</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 subdir2]<span class="nv">$ </span><span class="nb">pwd</span>
 /home/hadoop/hadoop2.6/hdfs/data/current/BP-1413666402-192.168.71.128-1470385990339/current/finalized/subdir0/subdir2
-<span class="o">[</span>hadoop@NN01 subdir2]<span class="nv">$ </span>find . -name <span class="s2">"*1073742529*"</span>
+<span class="o">[</span>hadoop@NN01 subdir2]<span class="nv">$ </span>find <span class="nb">.</span> <span class="nt">-name</span> <span class="s2">"*1073742529*"</span>
 ./blk_1073742529_1778.meta
 ./blk_1073742529
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h5 id="1113-数据存储-staging">1.1.1.3 数据存储： staging</h5>
 
@@ -475,7 +478,7 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
 
 <h5 id="1221-演示wordcount">1.2.2.1 演示WordCount</h5>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">file1</span><span class="o">.</span><span class="n">txt</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">file1</span><span class="o">.</span><span class="n">txt</span>
 <span class="nc">Hello</span> <span class="nc">World</span>
 <span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">file2</span><span class="o">.</span><span class="n">txt</span>
 <span class="nc">Hello</span> <span class="nc">Hadoop</span>
@@ -571,8 +574,7 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
 		<span class="nc">Bytes</span> <span class="nc">Read</span><span class="k">=</span><span class="mi">47</span>
 	<span class="nc">File</span> <span class="nc">Output</span> <span class="nc">Format</span> <span class="nc">Counters</span>
 		<span class="nc">Bytes</span> <span class="nc">Written</span><span class="k">=</span><span class="mi">49</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h5 id="1222-演示上述平均温度统计">1.2.2.2 演示上述平均温度统计</h5>
 
@@ -580,8 +582,8 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
 
 <p>需要使用到<a href="http://hadoop.apache.org/docs/r2.6.4/hadoop-mapreduce-client/hadoop-mapreduce-client-core/HadoopStreaming.html">streaming</a></p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 temperature]<span class="nv">$ </span>hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/<span class="k">*</span>streaming<span class="k">*</span>.jar -input /temperature/input/<span class="k">*</span> -output /temperature/py-output -file mapper.py -mapper mapper.py -file reducer.py -reducer reducer.py
-16/08/09 22:26:30 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 temperature]<span class="nv">$ </span>hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/<span class="k">*</span>streaming<span class="k">*</span>.jar <span class="nt">-input</span> /temperature/input/<span class="k">*</span> <span class="nt">-output</span> /temperature/py-output <span class="nt">-file</span> mapper.py <span class="nt">-mapper</span> mapper.py <span class="nt">-file</span> reducer.py <span class="nt">-reducer</span> reducer.py
+16/08/09 22:26:30 WARN streaming.StreamJob: <span class="nt">-file</span> option is deprecated, please use generic option <span class="nt">-files</span> instead.
 packageJobJar: <span class="o">[</span>mapper.py, reducer.py, /tmp/hadoop-unjar8704173289988394156/] <span class="o">[]</span> /tmp/streamjob6992547910816721479.jar <span class="nv">tmpDir</span><span class="o">=</span>null
 16/08/09 22:26:32 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
 16/08/09 22:26:32 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
@@ -626,10 +628,10 @@ packageJobJar: <span class="o">[</span>mapper.py, reducer.py, /tmp/hadoop-unjar8
 		Map output <span class="nv">records</span><span class="o">=</span>9
 		Map output <span class="nv">bytes</span><span class="o">=</span>54
 		Map output materialized <span class="nv">bytes</span><span class="o">=</span>84
-		Input split <span class="nv">bytes</span><span class="o">=</span>222
+		Input <span class="nb">split </span><span class="nv">bytes</span><span class="o">=</span>222
 		Combine input <span class="nv">records</span><span class="o">=</span>0
 		Combine output <span class="nv">records</span><span class="o">=</span>0
-		Reduce input <span class="nv">groups</span><span class="o">=</span>3
+		Reduce input <span class="nb">groups</span><span class="o">=</span>3
 		Reduce shuffle <span class="nv">bytes</span><span class="o">=</span>84
 		Reduce input <span class="nv">records</span><span class="o">=</span>9
 		Reduce output <span class="nv">records</span><span class="o">=</span>3
@@ -654,8 +656,7 @@ packageJobJar: <span class="o">[</span>mapper.py, reducer.py, /tmp/hadoop-unjar8
 	File Output Format Counters
 		Bytes <span class="nv">Written</span><span class="o">=</span>18
 16/08/09 22:27:06 INFO streaming.StreamJob: Output directory: /temperature/py-output
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h5 id="1223-writing-an-hadoop-mapreduce-program-in-python">1.2.2.3 Writing an Hadoop MapReduce Program in Python</h5>
 
@@ -663,8 +664,8 @@ packageJobJar: <span class="o">[</span>mapper.py, reducer.py, /tmp/hadoop-unjar8
 
 <p><a href="http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/">Writing an Hadoop MapReduce Program in Python</a></p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 hadoop]<span class="nv">$ </span>hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/<span class="k">*</span>streaming<span class="k">*</span>.jar -file /home/hadoop/words/mapper.py -mapper /home/hadoop/words/mapper.py -file /home/hadoop/words/reducer.py -reducer /home/hadoop/words/reducer.py -input /words/input/<span class="k">*</span> -output /words/py-output
-16/08/09 20:10:28 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 hadoop]<span class="nv">$ </span>hadoop jar /home/hadoop/hadoop2.6/share/hadoop/tools/lib/<span class="k">*</span>streaming<span class="k">*</span>.jar <span class="nt">-file</span> /home/hadoop/words/mapper.py <span class="nt">-mapper</span> /home/hadoop/words/mapper.py <span class="nt">-file</span> /home/hadoop/words/reducer.py <span class="nt">-reducer</span> /home/hadoop/words/reducer.py <span class="nt">-input</span> /words/input/<span class="k">*</span> <span class="nt">-output</span> /words/py-output
+16/08/09 20:10:28 WARN streaming.StreamJob: <span class="nt">-file</span> option is deprecated, please use generic option <span class="nt">-files</span> instead.
 packageJobJar: <span class="o">[</span>/home/hadoop/words/mapper.py, /home/hadoop/words/reducer.py, /tmp/hadoop-unjar5100483106189698643/] <span class="o">[]</span> /tmp/streamjob6336434171947928949.jar <span class="nv">tmpDir</span><span class="o">=</span>null
 16/08/09 20:10:29 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
 16/08/09 20:10:29 INFO client.RMProxy: Connecting to ResourceManager at NN01.HadoopVM/192.168.71.128:8032
@@ -709,10 +710,10 @@ packageJobJar: <span class="o">[</span>/home/hadoop/words/mapper.py, /home/hadoo
 		Map output <span class="nv">records</span><span class="o">=</span>4
 		Map output <span class="nv">bytes</span><span class="o">=</span>33
 		Map output materialized <span class="nv">bytes</span><span class="o">=</span>53
-		Input split <span class="nv">bytes</span><span class="o">=</span>198
+		Input <span class="nb">split </span><span class="nv">bytes</span><span class="o">=</span>198
 		Combine input <span class="nv">records</span><span class="o">=</span>0
 		Combine output <span class="nv">records</span><span class="o">=</span>0
-		Reduce input <span class="nv">groups</span><span class="o">=</span>3
+		Reduce input <span class="nb">groups</span><span class="o">=</span>3
 		Reduce shuffle <span class="nv">bytes</span><span class="o">=</span>53
 		Reduce input <span class="nv">records</span><span class="o">=</span>4
 		Reduce output <span class="nv">records</span><span class="o">=</span>3
@@ -737,8 +738,7 @@ packageJobJar: <span class="o">[</span>/home/hadoop/words/mapper.py, /home/hadoo
 	File Output Format Counters
 		Bytes <span class="nv">Written</span><span class="o">=</span>25
 16/08/09 20:11:06 INFO streaming.StreamJob: Output directory: /words/py-output
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="123-mapr问题">1.2.3 MapR问题</h4>
 
@@ -764,7 +764,7 @@ packageJobJar: <span class="o">[</span>/home/hadoop/words/mapper.py, /home/hadoo
   <li>答：可以。需要改动yarn-site.xml文件并指明ResorceManager并在需要启动ResorceManager的节点上修改相应slave及master文件配置。RM与AM的关系参见<a href="/hadoop/2016/08/04/hadoop_family/#apache-hadoop-yarn">YARN</a>.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@DN01 sbin]<span class="nv">$ </span>jps
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>hadoop@DN01 sbin]<span class="nv">$ </span>jps
 6980 NodeManager
 4870 DataNode
 6873 ResourceManager
@@ -776,8 +776,7 @@ packageJobJar: <span class="o">[</span>/home/hadoop/words/mapper.py, /home/hadoo
 <span class="o">[</span>hadoop@DN02 ~]<span class="nv">$ </span>jps
 4587 DataNode
 5549 NodeManager
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>NameNode与DataNode的关系：NameNode可以看作是分布式文件系统中的管理者，主要负责管理文件系统的命名空间、集群配置信息和存储块的复制等。NameNode会将文件系统的Meta-data存储在内存中，这些信息主要包括了文件信息、每一个文件对应的文件块的信息和每一个文件块在DataNode的信息等。DataNode是文件存储的基本单元，它将Block存储在本地文件系统中，保存了Block的Meta-data，同时周期性地将所有存在的Block信息发送给NameNode。</p>
 
@@ -793,13 +792,12 @@ packageJobJar: <span class="o">[</span>/home/hadoop/words/mapper.py, /home/hadoo
   <li>默认为2</li>
 </ul>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;property&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;property&gt;</span>
 <span class="nt">&lt;name&gt;</span>mapreduce.job.maps<span class="nt">&lt;/name&gt;</span>
 <span class="nt">&lt;value&gt;</span>2<span class="nt">&lt;/value&gt;</span>
 <span class="nt">&lt;source&gt;</span>mapred-default.xml<span class="nt">&lt;/source&gt;</span>
 <span class="nt">&lt;/property&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>参考：</p>
 
@@ -848,13 +846,12 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
   <li>默认为1：</li>
 </ul>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;property&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;property&gt;</span>
 <span class="nt">&lt;name&gt;</span>mapreduce.job.reduces<span class="nt">&lt;/name&gt;</span>
 <span class="nt">&lt;value&gt;</span>1<span class="nt">&lt;/value&gt;</span>
 <span class="nt">&lt;source&gt;</span>mapred-default.xml<span class="nt">&lt;/source&gt;</span>
 <span class="nt">&lt;/property&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <ul>
   <li><a href="http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/Partitioner.html">Partitioner</a></li>
   <li>Partitioner partitions the key space.</li>
@@ -1010,13 +1007,12 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
 
 <h4 id="222-集群实现与演示">2.2.2 集群实现与演示</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 ~]$ ~/tools/runRemoteCmd.sh "/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;" all
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@NN01 ~]$ ~/tools/runRemoteCmd.sh "/home/hadoop/kafka/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;" all
 
 [hadoop@DN02 bin]$ $KAFKA_HOME/bin/kafka-console-producer.sh --broker-list NN01.HadoopVM:9092 --sync --topic test
 
 [hadoop@DN01 bin]$ $KAFKA_HOME/bin/kafka-console-consumer.sh --zookeeper NN01.HadoopVM:2181 --topic test --from-beginning
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="3-distributed-programming">3 Distributed Programming</h2>
 
@@ -1081,7 +1077,7 @@ compute_map_num = min(split_num,  max(default_num, goal_num))</p>
 
 <p><strong>hive修改默认元数据存储数据库derby改为mysql</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo yum install mysql
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum install mysql
 mysql -uroot -p //[密码修改](http://blog.csdn.net/leili0806/article/details/8573636)
 CREATE USER 'hive' IDENTIFIED BY '*******';
 # SET PASSWORD FOR 'username'@'host' = PASSWORD('newpassword');
@@ -1095,12 +1091,11 @@ create database hive;
 wget http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz/from/http://mysql.he.net/
 tar -xvzf mysql-connector-java-5.1.39.tar.gz
 cp mysql-connector-java-5.1.39/*.jar $HIVE_HOME/lib
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>配置hive-site.xml</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;configuration&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;configuration&gt;
     &lt;property&gt;
         &lt;name&gt;hive.metastore.local&lt;/name&gt;
         &lt;value&gt;true&lt;/value&gt;
@@ -1122,8 +1117,7 @@ cp mysql-connector-java-5.1.39/*.jar $HIVE_HOME/lib
         &lt;value&gt;******&lt;/value&gt;
     &lt;/property&gt;
 &lt;/configuration&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>1.hive允许远程客户端使用哪些编程语言？</li>
@@ -1139,13 +1133,12 @@ cp mysql-connector-java-5.1.39/*.jar $HIVE_HOME/lib
 
 <p>配置hiveserver2，修改hive-site.xml</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Configuration Properties in the hive-site.xml File
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Configuration Properties in the hive-site.xml File
 hive.server2.thrift.min.worker.threads – Minimum number of worker threads, default 5.
 hive.server2.thrift.max.worker.threads – Maximum number of worker threads, default 500.
 hive.server2.thrift.port – TCP port number to listen on, default 10000.
 hive.server2.thrift.bind.host – TCP interface to bind to.
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>关于 HIVE Beeline 问题</p>
 
@@ -1158,7 +1151,7 @@ Beeline version 2.1.0 by Apache Hive</p>
 
 <p>解决 ：在hdfs 的配置文件core-site.xml中加入如下配置，root 为位置填入  User:*  ，etc   hadoop.proxyuser.eamon.hosts</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;property&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;property&gt;
   &lt;name&gt;hadoop.proxyuser.root.hosts&lt;/name&gt;
   &lt;value&gt;*&lt;/value&gt;
  &lt;/property&gt;
@@ -1166,8 +1159,7 @@ Beeline version 2.1.0 by Apache Hive</p>
   &lt;name&gt;hadoop.proxyuser.root.groups&lt;/name&gt;
   &lt;value&gt;*&lt;/value&gt;
 &lt;/property&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>重新启动HDFS 。</p>
 
@@ -1179,22 +1171,20 @@ Beeline version 2.1.0 by Apache Hive</p>
 
 <p>解决 ： 临时解决</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>bin/hdfs dfs -chmod -R 777  /tmp/
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bin/hdfs dfs -chmod -R 777  /tmp/
+</code></pre></div></div>
 
 <h4 id="322-running-hive">3.2.2 Running Hive</h4>
 
 <p><a href="https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive">Running Hive</a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>	# Starting from Hive 2.1, we need to run the schematool command below as an initialization step. For example, we can use "derby" as db type.
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	# Starting from Hive 2.1, we need to run the schematool command below as an initialization step. For example, we can use "derby" as db type.
 	$HIVE_HOME/bin/schematool -dbType &lt;db type&gt; -initSchema
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>1 hive 连接测试</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>hive&gt; CREATE TABLE bank(
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hive&gt; CREATE TABLE bank(
     &gt; age int,
     &gt; job string,
     &gt; marital string,
@@ -1243,12 +1233,11 @@ hive&gt; load data local inpath "/home/hadoop/bank-full.csv" overwrite into tabl
 Loading data to table default.bank
 OK
 Time taken: 2.019 seconds
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>2 beeline 连接测试</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>beeline&gt; !connect jdbc:hive2://localhost:10000 hive ******
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>beeline&gt; !connect jdbc:hive2://localhost:10000 hive ******
 Connecting to jdbc:hive2://localhost:10000
 Connected to: Apache Hive (version 2.1.0)
 Driver: Hive JDBC (version 2.1.0)
@@ -1278,30 +1267,27 @@ WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the futu
 +--------+--+
 1 row selected (203.928 seconds)
 0: jdbc:hive2://localhost:10000&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>3 python 连接hive</p>
 
 <p><a href="http://hxl2009.blog.51cto.com/779549/1334664">安装Pip</a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>wget --no-check-certificate https://pypi.python.org/packages/source/p/pip/pip-1.4.1.tar.gz
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget --no-check-certificate https://pypi.python.org/packages/source/p/pip/pip-1.4.1.tar.gz
 tar zxvf pip-1.4.1.tar.gz
 cd pip-1.4.1
 python setup.py install
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>安装依赖包</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo yum install gcc-c++ python-devel.x86_64 cyrus-sasl-devel.x86_64
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum install gcc-c++ python-devel.x86_64 cyrus-sasl-devel.x86_64
 sudo pip install pyhs2
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>python 连接测试</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@DN02 ~]$ python
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@DN02 ~]$ python
 
 &gt;&gt;&gt; import pyhs2
 &gt;&gt;&gt; conn = pyhs2.connect(host="NN01.HadoopVM",user='hive',password='hive',authMechanism='PLAIN')
@@ -1320,12 +1306,11 @@ sudo pip install pyhs2
 ...
 [58, 'management', 'married', 'tertiary', 'no', 2143, 'yes', 'no', 'unknown', 5, 'may', 261, 1, -1, 0, 'unknown', 'no']
 ...
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>windows连接报错</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> conn = pyhs2.connect(host="192.168.71.128", user='hive', password='hive', authMechanism='PLAIN')
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> conn = pyhs2.connect(host="192.168.71.128", user='hive', password='hive', authMechanism='PLAIN')
 Traceback (most recent call last):
   File "C:\Anaconda2\lib\site-packages\IPython\core\interactiveshell.py", line 2885, in run_code
     exec(code_obj, self.user_global_ns, self.user_ns)
@@ -1337,21 +1322,19 @@ Traceback (most recent call last):
     transport.open()
   File "C:\Anaconda2\lib\site-packages\pyhs2\cloudera\thrift_sasl.py", line 66, in open
     message=("Could not start SASL: %s" % self.sasl.getError()))
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>1 In hive-site.xml, set configuration as below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;property&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;property&gt;
    &lt;name&gt;hive.server2.authentication&lt;/name&gt;
    &lt;value&gt;NOSASL&lt;/value&gt;
 &lt;/property&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>2 Test again</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>In[6]: import pyhs2
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In[6]: import pyhs2
 In[7]: conn = pyhs2.connect(host="192.168.71.128", user='hive', password='hive', authMechanism='NOSASL')
 In[8]: cur= conn.cursor()
 In[9]: cur.execute("show databases")
@@ -1360,8 +1343,7 @@ Out[10]: [['default']]
 In[11]: cur.execute("show tables")
 In[12]: cur.fetch()
 Out[12]: [['bank'], ['david_test'], ['test']]
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>4 连接客户端查看：</p>
 
@@ -1371,7 +1353,7 @@ Out[12]: [['bank'], ['david_test'], ['test']]
 
 <p>1) script</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hivetest]$ cat hive_script3.sql
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@NN01 hivetest]$ cat hive_script3.sql
 select * from bank limit 10;
 select count(*) from bank;
 [hadoop@NN01 hivetest]$ hive -S -f hive_script3.sql
@@ -1381,10 +1363,9 @@ select count(*) from bank;
 43	technician	single	secondary	n593	yes	no	unknown	5	may	5-1	0	unknown	no
 45211
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># create table
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># create table
 &gt;&gt;&gt; conn = pyhs2.connect(host="NN01.HadoopVM", user="hive",password = 'hive', authMechanism='PLAIN')&gt;&gt;&gt; cur = conn.cursor()
 &gt;&gt;&gt; cur.execute("create table david_test(id int, name string)")
 &gt;&gt;&gt; cur.execute("desc david_test")
@@ -1411,18 +1392,16 @@ use default;
 --tables
 select * from david_test
 where id='${hivevar:id}' ;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>2) 命令行模式</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hivetest]$ hive -e "select count(*) from bank"
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@NN01 hivetest]$ hive -e "select count(*) from bank"
 ......
 OK
 45211
 Time taken: 36.675 seconds, Fetched: 1 row(s)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="333-hive-相关问题">3.3.3 Hive 相关问题</h4>
 
@@ -1499,12 +1478,11 @@ Image source:https://spark.apache.org/docs/2.0.0/img/cluster-overview.png</p>
 
 <p><strong>一句话实现MapReduce</strong></p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s">"README.md"</span><span class="p">)</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">.</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">word</span><span class="p">:</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s">"README.md"</span><span class="p">)</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">.</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">word</span><span class="p">:</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 <span class="n">textFile</span><span class="o">.</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span><span class="o">.</span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="k">else</span> <span class="n">b</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="n">textFile</span><span class="o">.</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span><span class="o">.</span><span class="nb">reduce</span><span class="p">(</span><span class="nb">max</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <pre><code class="language-spark">sc.textFile("README.md").flatMap(line =&gt; line.split(" ")).map(word =&gt; (word,1)).reduceByKey(_ + _).collect()
 textFile.map(line =&gt; line.split(" ").size).reduce((a, b) =&gt; if (a &gt; b) a else b)
@@ -1514,30 +1492,28 @@ textFile.map(line =&gt; line.split(" ").length).reduce((a,b) =&gt; Math.max(a,b)
 
 <p><strong><a href="http://spark.apache.org/docs/latest/quick-start.html#self-contained-applications">Self-Contained Applications</a></strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 sparkapp]$ spark-submit --master spark://NN01.HadoopVm:7077 SimpleApp.py
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@NN01 sparkapp]$ spark-submit --master spark://NN01.HadoopVm:7077 SimpleApp.py
 /home/hadoop/spark/python/lib/pyspark.zip/pyspark/sql/context.py:477: DeprecationWarning: HiveContext is deprecated in Spark 2.0.0. Please use SparkSession.builder.enableHiveSupport().getOrCreate() instead.
 /home/hadoop/spark/python/lib/pyspark.zip/pyspark/sql/context.py:477: DeprecationWarning: HiveContext is deprecated in Spark 2.0.0. Please use SparkSession.builder.enableHiveSupport().getOrCreate() instead.
 Lines with a: 4, lines with b: 2
 
 [hadoop@NN01 sparkapp]$ spark-submit --class "SimpleApp" ~/sparkapp/target/scala-2.11/simple-project_2.11-1.0.jar 2&gt;&amp;1|grep "Line"
 Lines with a: 4, Lines with b: 2
-</code></pre>
-</div>
+</code></pre></div></div>
 <p><strong>Spark 计算 Pi</strong></p>
 
 <p>using a <a href="http://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo method to estimate the value of Pi</a></p>
 
 <p>在终端中执行如下命令创建一个文件夹 pi  作为应用程序根目录</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span><span class="nb">cd</span> ~
-<span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>mkdir ./pi
-<span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>mkdir -p ./pi/src/main/scala
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span><span class="nb">cd</span> ~
+<span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span><span class="nb">mkdir</span> ./pi
+<span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> ./pi/src/main/scala
+</code></pre></div></div>
 
 <p>Scala脚本</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">#</span> <span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">vim</span> <span class="n">pi</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">scala</span><span class="o">/</span><span class="nc">Pi</span><span class="o">.</span><span class="n">scala</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">#</span> <span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">vim</span> <span class="n">pi</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">scala</span><span class="o">/</span><span class="nc">Pi</span><span class="o">.</span><span class="n">scala</span>
 <span class="k">import</span> <span class="nn">scala.math.random</span>
 <span class="k">import</span> <span class="nn">org.apache.spark._</span>
 
@@ -1561,8 +1537,7 @@ Lines with a: 4, Lines with b: 2
         <span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="o">()</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Link sbt with spark</p>
 
@@ -1578,39 +1553,37 @@ libraryDependencies += "org.apache.spark" %% "spark-core" % "2.0.0"
 
 <p>查看目录并打包</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>sbt sbt-version
-Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM warning: ignoring option <span class="nv">MaxPermSize</span><span class="o">=</span>256M; support was removed <span class="k">in </span>8.0
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>sbt sbt-version
+Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM warning: ignoring option <span class="nv">MaxPermSize</span><span class="o">=</span>256M<span class="p">;</span> support was removed <span class="k">in </span>8.0
 <span class="o">[</span>info] Set current project to hadoop <span class="o">(</span><span class="k">in </span>build file:/home/hadoop/<span class="o">)</span>
 <span class="o">[</span>info] 0.13.12
 <span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span><span class="nb">cd </span>pi
-<span class="o">[</span>hadoop@NN01 pi]<span class="nv">$ </span>find .
-.
+<span class="o">[</span>hadoop@NN01 pi]<span class="nv">$ </span>find <span class="nb">.</span>
+<span class="nb">.</span>
 ./pi.sbt
 ./src
 ./src/main
 ./src/main/scala
 ./src/main/scala/Pi.scala
 <span class="o">[</span>hadoop@NN01 pi]<span class="nv">$ </span>sbt package
-Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM warning: ignoring option <span class="nv">MaxPermSize</span><span class="o">=</span>256M; support was removed <span class="k">in </span>8.0
+Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM warning: ignoring option <span class="nv">MaxPermSize</span><span class="o">=</span>256M<span class="p">;</span> support was removed <span class="k">in </span>8.0
 <span class="o">[</span>info] Set current project to Spark Pi <span class="o">(</span><span class="k">in </span>build file:/home/hadoop/pi/<span class="o">)</span>
 <span class="o">[</span>info] Updating <span class="o">{</span>file:/home/hadoop/pi/<span class="o">}</span>pi...
-<span class="o">[</span>info] Resolving jline#jline;2.12.1 ...
+<span class="o">[</span>info] Resolving jline#jline<span class="p">;</span>2.12.1 ...
 <span class="o">[</span>info] Done updating.
 <span class="o">[</span>info] Compiling 1 Scala <span class="nb">source </span>to /home/hadoop/pi/target/scala-2.11/classes...
 <span class="o">[</span>info] Packaging /home/hadoop/pi/target/scala-2.11/spark-pi_2.11-1.0.jar ...
 <span class="o">[</span>info] Done packaging.
 <span class="o">[</span>success] Total <span class="nb">time</span>: 19 s, completed Sep 10, 2016 1:50:51 AM
-<span class="o">[</span>hadoop@NN01 pi]<span class="nv">$ </span>ls
-pi.sbt  project  src  target
-</code></pre>
-</div>
+<span class="o">[</span>hadoop@NN01 pi]<span class="nv">$ </span><span class="nb">ls
+</span>pi.sbt  project  src  target
+</code></pre></div></div>
 
 <p>提交,我们就可以将生成的 jar 包通过 spark-submit 提交到 Spark 中运行了，命令如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">pi</span><span class="o">]</span><span class="n">$</span> <span class="n">spark</span><span class="o">-</span><span class="n">submit</span> <span class="o">--</span><span class="k">class</span> <span class="err">"</span><span class="nc">SparkPi</span><span class="err">"</span> <span class="o">~/</span><span class="n">pi</span><span class="o">/</span><span class="n">target</span><span class="o">/</span><span class="n">scala</span><span class="o">-</span><span class="mf">2.11</span><span class="o">/</span><span class="n">spark</span><span class="o">-</span><span class="n">pi_2</span><span class="o">.</span><span class="mi">11</span><span class="o">-</span><span class="mf">1.0</span><span class="o">.</span><span class="n">jar</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">pi</span><span class="o">]</span><span class="n">$</span> <span class="n">spark</span><span class="o">-</span><span class="n">submit</span> <span class="o">--</span><span class="k">class</span> <span class="err">"</span><span class="nc">SparkPi</span><span class="err">"</span> <span class="o">~/</span><span class="n">pi</span><span class="o">/</span><span class="n">target</span><span class="o">/</span><span class="n">scala</span><span class="o">-</span><span class="mf">2.11</span><span class="o">/</span><span class="n">spark</span><span class="o">-</span><span class="n">pi_2</span><span class="o">.</span><span class="mi">11</span><span class="o">-</span><span class="mf">1.0</span><span class="o">.</span><span class="n">jar</span>
 <span class="nc">Pi</span> <span class="n">is</span> <span class="n">roughly</span><span class="k">:</span> <span class="err">3</span><span class="kt">.</span><span class="err">13858</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><img src="/images/hadoop/sparkpi.jpg" alt="" /></p>
 
@@ -1618,9 +1591,8 @@ pi.sbt  project  src  target
 
 <p>Spark also supports pulling data sets into a cluster-wide in-memory cache. This is very useful when data is accessed repeatedly, such as when querying a small “hot” dataset or when running an iterative algorithm like PageRank. As a simple example, let’s mark our linesWithSpark dataset to be cached:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>linesWithSpark.cache()
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linesWithSpark.cache()
+</code></pre></div></div>
 
 <p><strong>Apache Spark data representations: RDD / Dataframe / Dataset</strong></p>
 
@@ -1660,10 +1632,9 @@ pi.sbt  project  src  target
 
 <p>First step in any Apache programming is to create a SparkContext. SparkContext is needed when we want to execute operations in a cluster. SparkContext tells Spark how and where to access a cluster. It is first step to connect with Apache Cluster. If you are using Spark Shell, we will find that this is already created. Otherwise, we can create the Spark Context by importing, initializing and providing the configuration settings. For example:</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code> <span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">SparkContext</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">SparkContext</span>
  <span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="p">()</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Step2: Create a RDD</p>
 
@@ -1672,44 +1643,38 @@ pi.sbt  project  src  target
 <p>We can also provide the number of partitions as a parameter to parallelize method. If we do not give number of partition parameter, then Spark will automatically set the number of partition in a cluster. The number of partition can be set manually by passing second parameter to parallelize method. For example, sc.parallelize(data, 10)), where data is an existing data in driver program and 10 is the number of partitions.
 Lets create the first Spark RDD called rdd.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>data = range(1,1000)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data = range(1,1000)
 rdd = sc.parallelize(data)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>We have a collect method to see the content of RDD.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>rdd.collect()
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rdd.collect()
+</code></pre></div></div>
 
 <p>To see the first n element of a RDD we have a method take:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>rdd.take(2) # It will print first 2 elements of rdd
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rdd.take(2) # It will print first 2 elements of rdd
+</code></pre></div></div>
 
 <p>Step 3: Map transformation.</p>
 
 <p>Map transformation returns a Mapped RDD by applying function to each element of the base RDD. Let’s repeat the first step of creating a RDD from existing source, For example,</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>data = ['Hello' , 'I' , 'AM', 'Ankit ', 'Gupta']
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data = ['Hello' , 'I' , 'AM', 'Ankit ', 'Gupta']
 Rdd = sc.parallelize(data)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Now a RDD (name is ‘Rdd’) is created from the existing source, which is a list of string in a driver program. We will now apply lambda function to each element of Rdd and return the mapped (transformed) RDD (word,1) pair in the Rdd1.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Rdd1 = Rdd.map(lambda x: (x,1))
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Rdd1 = Rdd.map(lambda x: (x,1))
+</code></pre></div></div>
 
 <p>Let’s see the out of this map operation.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Rdd1.collect()
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Rdd1.collect()
 output: [('Hello', 1), ('I', 1), ('AM', 1), ('Ankit ', 1), ('Gupta', 1)]
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If you noticed, nothing happened after applying the lambda function on Rdd1 (we won’t see any computation happening in a cluster). This is called the lazy operation. All transformation operations in Spark are lazy, which means that we will not see any computations on RDD, until we need them for further action.</p>
 
@@ -1783,42 +1748,38 @@ output: [('Hello', 1), ('I', 1), ('AM', 1), ('Ankit ', 1), ('Gupta', 1)]
 
 <p><a href="http://www.ithao123.cn/content-2994768.html">Redis分布式部署，一致性hash;分布式与缓存队列</a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@DN01 init.d]$ sudo cp ~/redis-3.2.3/utils/redis_init_script redis
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@DN01 init.d]$ sudo cp ~/redis-3.2.3/utils/redis_init_script redis
 [hadoop@DN01 init.d]$ sudo chmod +x redis
 [hadoop@DN01 init.d]$ cd ..
 [hadoop@DN01 etc]$ sudo mkdir redis
 [hadoop@DN01 etc]$ sudo cp ~/redis-3.2.3/redis.conf redis/6379.conf
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>官方：</p>
 
 <p><a href="http://redis.io/topics/cluster-tutorial">Redis cluster tutorial</a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>start:
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>start:
 $ ./src/redis-server redis.conf
 close:
 $ ./src/redis-cli -n 6379 shutdown
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>安装python的redis模块</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>wget --no-check-certificate https://pypi.python.org/packages/source/r/redis/redis-2.8.0.tar.gz
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget --no-check-certificate https://pypi.python.org/packages/source/r/redis/redis-2.8.0.tar.gz
 tar -zvxf redis-2.8.0.tar.gz
 mv redis-2.8.0 python-redis-2.8.0
 cd python-redis-2.8.0
 python setup.py install
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>部署成功，写段代码验证一下</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import redis
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import redis
 client =  redis.StrictRedis(host='localhost', port=6379)
 print client.ping()
 True
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="7-system-deployment">7 System Deployment</h2>
 
@@ -1970,13 +1931,13 @@ True
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -209,14 +213,13 @@
   <li>接下来我们来看一段代码：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">myMap</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"key1"</span> <span class="o">-&gt;</span> <span class="s">"value"</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">myMap</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"key1"</span> <span class="o">-&gt;</span> <span class="s">"value"</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">value1</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">myMap</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"key1"</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">value2</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">myMap</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"key2"</span><span class="o">)</span>
 
 <span class="n">println</span><span class="o">(</span><span class="n">value1</span><span class="o">)</span> <span class="c1">// Some("value1")
 </span><span class="n">println</span><span class="o">(</span><span class="n">value2</span><span class="o">)</span> <span class="c1">// None
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <ul>
   <li>在上面的代码中，myMap 是一个 Key 的类型是 String，Value 的类型是 String 的 hash map，但不一样的是他的 get() 返回的是一个叫 Option[String] 的类别。</li>
@@ -226,7 +229,7 @@
   <li>另一个实例：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options1</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options1</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">sites</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"runoob"</span> <span class="o">-&gt;</span> <span class="s">"www.runoob.com"</span><span class="o">,</span> <span class="s">"google"</span> <span class="o">-&gt;</span> <span class="s">"www.google.com"</span><span class="o">)</span>
 
@@ -237,14 +240,13 @@
 <span class="k">#</span> <span class="n">result</span><span class="k">:</span>
 <span class="kt">sites.get</span><span class="o">(</span> <span class="err">"</span><span class="kt">runoob</span><span class="err">"</span> <span class="o">)</span> <span class="kt">:</span> <span class="kt">Some</span><span class="o">(</span><span class="kt">www.runoob.com</span><span class="o">)</span>
 <span class="kt">sites.get</span><span class="o">(</span> <span class="err">"</span><span class="kt">baidu</span><span class="err">"</span> <span class="o">)</span> <span class="kt">:</span> <span class="kt">None</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="1-模式匹配">1 模式匹配</h4>
 
 <p>你也可以通过模式匹配来输出匹配值。实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options2</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options2</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">sites</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"runoob"</span> <span class="o">-&gt;</span> <span class="s">"www.runoob.com"</span><span class="o">,</span> <span class="s">"google"</span> <span class="o">-&gt;</span> <span class="s">"www.google.com"</span><span class="o">)</span>
 
@@ -262,14 +264,13 @@
 <span class="k">#</span> <span class="n">result</span>
 <span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"runoob"</span><span class="o">))</span> <span class="k">:</span> <span class="kt">www.runoob.com</span>
 <span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"baidu"</span><span class="o">))</span> <span class="k">:</span> <span class="kt">?</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="2-getorelse-方法">2 getOrElse() 方法</h4>
 
 <p>你可以使用 getOrElse() 方法来获取元组中存在的元素或者使用其默认的值，实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options3</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options3</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
 
       <span class="k">val</span> <span class="n">a</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
@@ -279,14 +280,13 @@
       <span class="n">println</span><span class="o">(</span><span class="s">"b.getOrElse(10): "</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">getOrElse</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span> <span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="3-isempty-方法">3 isEmpty() 方法</h4>
 
 <p>你可以使用 isEmpty() 方法来检测元组中的元素是否为 None，实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options4</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options4</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
 
       <span class="k">val</span> <span class="n">a</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
@@ -296,8 +296,7 @@
       <span class="n">println</span><span class="o">(</span><span class="s">"b.isEmpty: "</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">isEmpty</span> <span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="4-scala-option-常用方法">4 Scala Option 常用方法</h4>
 
@@ -558,13 +557,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -282,7 +286,7 @@
 
 <p>  下面的例子展示了如何使用逻辑回归。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.SparkContext</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.SparkContext</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.classification.</span><span class="o">{</span><span class="nc">LogisticRegressionWithLBFGS</span><span class="o">,</span> <span class="nc">LogisticRegressionModel</span><span class="o">}</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.evaluation.MulticlassMetrics</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LabeledPoint</span>
@@ -310,8 +314,7 @@
 <span class="c1">// 保存和加载模型
 </span><span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"myModelPath"</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">sameModel</span> <span class="k">=</span> <span class="nc">LogisticRegressionModel</span><span class="o">.</span><span class="n">load</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"myModelPath"</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="5-源码分析">5 源码分析</h2>
 
@@ -321,7 +324,7 @@
 
 <p>  <code class="highlighter-rouge">LogisticRegressionWithLBFGS</code>和<code class="highlighter-rouge">LogisticRegressionWithSGD</code>的入口函数均是<code class="highlighter-rouge">GeneralizedLinearAlgorithm.run</code>，下面详细分析该方法。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span><span class="k">:</span> <span class="kt">M</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span><span class="k">:</span> <span class="kt">M</span> <span class="o">=</span> <span class="o">{</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">numFeatures</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
       <span class="c1">//计算特征数
 </span>      <span class="n">numFeatures</span> <span class="k">=</span> <span class="n">input</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">size</span><span class="o">).</span><span class="n">first</span><span class="o">()</span>
@@ -337,14 +340,13 @@
     <span class="o">}</span>
     <span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="o">,</span> <span class="n">initialWeights</span><span class="o">)</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  上面的代码初始化权重向量，向量的值均初始化为0。需要注意的是，<code class="highlighter-rouge">addIntercept</code>表示是否添加截距(<code class="highlighter-rouge">Intercept</code>，指函数图形与坐标的交点到原点的距离)，默认是不添加的。<code class="highlighter-rouge">numOfLinearPredictor</code>表示二元逻辑回归模型的个数。
 我们重点看<code class="highlighter-rouge">run(input, initialWeights)</code>的实现。它的实现分四步。</p>
 
 <h4 id="511-根据提供的参数缩放特征并添加截距">5.1.1 根据提供的参数缩放特征并添加截距</h4>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">scaler</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">useFeatureScaling</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">scaler</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">useFeatureScaling</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">new</span> <span class="nc">StandardScaler</span><span class="o">(</span><span class="n">withStd</span> <span class="k">=</span> <span class="kc">true</span><span class="o">,</span> <span class="n">withMean</span> <span class="k">=</span> <span class="kc">false</span><span class="o">).</span><span class="n">fit</span><span class="o">(</span><span class="n">input</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">features</span><span class="o">))</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
       <span class="kc">null</span>
@@ -369,13 +371,12 @@
       <span class="cm">/** If `numOfLinearPredictor &gt; 1`, initialWeights already contains intercepts. */</span>
       <span class="n">initialWeights</span>
     <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  在最优化过程中，收敛速度依赖于训练数据集的条件数(<code class="highlighter-rouge">condition number</code>)，缩放变量经常可以启发式地减少这些条件数，提高收敛速度。不减少条件数，一些混合有不同范围列的数据集可能不能收敛。
 在这里使用<code class="highlighter-rouge">StandardScaler</code>将数据集的特征进行缩放。详细信息请看<a href="../../../特征抽取和转换/StandardScaler.md">StandardScaler</a>。<code class="highlighter-rouge">appendBias</code>方法很简单，就是在每个向量后面加一个值为1的项。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">appendBias</span><span class="o">(</span><span class="n">vector</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">appendBias</span><span class="o">(</span><span class="n">vector</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="o">{</span>
     <span class="n">vector</span> <span class="k">match</span> <span class="o">{</span>
       <span class="k">case</span> <span class="n">dv</span><span class="k">:</span> <span class="kt">DenseVector</span> <span class="o">=&gt;</span>
         <span class="k">val</span> <span class="n">inputValues</span> <span class="k">=</span> <span class="n">dv</span><span class="o">.</span><span class="n">values</span>
@@ -398,18 +399,16 @@
         <span class="nc">Vectors</span><span class="o">.</span><span class="n">sparse</span><span class="o">(</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">outputIndices</span><span class="o">,</span> <span class="n">outputValues</span><span class="o">)</span>
       <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">IllegalArgumentException</span><span class="o">(</span><span class="n">s</span><span class="s">"Do not support vector type ${vector.getClass}"</span><span class="o">)</span>
     <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="512-使用最优化算法计算最终的权重值">5.1.2 使用最优化算法计算最终的权重值</h4>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">weightsWithIntercept</span> <span class="k">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">optimize</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">initialWeightsWithIntercept</span><span class="o">)</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">weightsWithIntercept</span> <span class="k">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">optimize</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">initialWeightsWithIntercept</span><span class="o">)</span>
+</code></pre></div></div>
 <p>  有梯度下降算法和<code class="highlighter-rouge">L-BFGS</code>两种算法来计算最终的权重值，查看<a href="../../../最优化算法/梯度下降/gradient-descent.md">梯度下降法</a>和<a href="../../../最优化算法/L-BFGS/lbfgs.md">L-BFGS</a>了解详细实现。
 这两种算法均使用<code class="highlighter-rouge">Gradient</code>的实现类计算梯度，使用<code class="highlighter-rouge">Updater</code>的实现类更新参数。在 <code class="highlighter-rouge">LogisticRegressionWithSGD</code> 和 <code class="highlighter-rouge">LogisticRegressionWithLBFGS</code> 中，它们均使用 <code class="highlighter-rouge">LogisticGradient</code> 实现类计算梯度，使用 <code class="highlighter-rouge">SquaredL2Updater</code> 实现类更新参数。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//在GradientDescent中
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//在GradientDescent中
 </span><span class="k">private</span> <span class="k">val</span> <span class="n">gradient</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LogisticGradient</span><span class="o">()</span>
 <span class="k">private</span> <span class="k">val</span> <span class="n">updater</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SquaredL2Updater</span><span class="o">()</span>
 <span class="k">override</span> <span class="k">val</span> <span class="n">optimizer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">GradientDescent</span><span class="o">(</span><span class="n">gradient</span><span class="o">,</span> <span class="n">updater</span><span class="o">)</span>
@@ -419,8 +418,7 @@
     <span class="o">.</span><span class="n">setMiniBatchFraction</span><span class="o">(</span><span class="n">miniBatchFraction</span><span class="o">)</span>
 <span class="c1">//在LBFGS中
 </span><span class="k">override</span> <span class="k">val</span> <span class="n">optimizer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LBFGS</span><span class="o">(</span><span class="k">new</span> <span class="nc">LogisticGradient</span><span class="o">,</span> <span class="k">new</span> <span class="nc">SquaredL2Updater</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  下面将详细介绍<code class="highlighter-rouge">LogisticGradient</code>的实现和<code class="highlighter-rouge">SquaredL2Updater</code>的实现。</p>
 
 <ul>
@@ -429,7 +427,7 @@
 
 <p>  <code class="highlighter-rouge">LogisticGradient</code>中使用<code class="highlighter-rouge">compute</code>方法计算梯度。计算分为两种情况，即二元逻辑回归的情况和多元逻辑回归的情况。虽然多元逻辑回归也可以实现二元分类，但是为了效率，<code class="highlighter-rouge">compute</code>方法仍然实现了一个二元逻辑回归的版本。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">margin</span> <span class="k">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">*</span> <span class="n">dot</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">weights</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">margin</span> <span class="k">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">*</span> <span class="n">dot</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">weights</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">multiplier</span> <span class="k">=</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(</span><span class="n">margin</span><span class="o">)))</span> <span class="o">-</span> <span class="n">label</span>
 <span class="c1">//y += a * x，即cumGradient += multiplier * data
 </span><span class="n">axpy</span><span class="o">(</span><span class="n">multiplier</span><span class="o">,</span> <span class="n">data</span><span class="o">,</span> <span class="n">cumGradient</span><span class="o">)</span>
@@ -439,11 +437,10 @@
 <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
     <span class="nc">MLUtils</span><span class="o">.</span><span class="n">log1pExp</span><span class="o">(</span><span class="n">margin</span><span class="o">)</span> <span class="o">-</span> <span class="n">margin</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  这里的<code class="highlighter-rouge">multiplier</code>就是上文的公式<strong>(2)</strong>。<code class="highlighter-rouge">axpy</code>方法用于计算梯度，这里表示的意思是<code class="highlighter-rouge">h(x) * x</code>。下面是多元逻辑回归的实现方法。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//权重
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//权重
 </span><span class="k">val</span> <span class="n">weightsArray</span> <span class="k">=</span> <span class="n">weights</span> <span class="k">match</span> <span class="o">{</span>
     <span class="k">case</span> <span class="n">dv</span><span class="k">:</span> <span class="kt">DenseVector</span> <span class="o">=&gt;</span> <span class="n">dv</span><span class="o">.</span><span class="n">values</span>
     <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span>
@@ -506,13 +503,12 @@
 <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
      <span class="n">loss</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <ul>
   <li>SquaredL2Updater</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SquaredL2Updater</span> <span class="k">extends</span> <span class="nc">Updater</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SquaredL2Updater</span> <span class="k">extends</span> <span class="nc">Updater</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span>
       <span class="n">weightsOld</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">gradient</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
@@ -533,19 +529,17 @@
     <span class="o">(</span><span class="nc">Vectors</span><span class="o">.</span><span class="n">fromBreeze</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">),</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">norm</span> <span class="o">*</span> <span class="n">norm</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  该函数的实现规则是：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">w</span><span class="o">'</span> <span class="k">=</span> <span class="n">w</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="o">(</span><span class="n">gradient</span> <span class="o">+</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">w</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">w</span><span class="o">'</span> <span class="k">=</span> <span class="n">w</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="o">(</span><span class="n">gradient</span> <span class="o">+</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">w</span><span class="o">)</span>
 <span class="n">w</span><span class="o">'</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="n">regParam</span><span class="o">)</span> <span class="o">*</span> <span class="n">w</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="n">gradient</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  这里<code class="highlighter-rouge">thisIterStepSize</code>表示参数沿负梯度方向改变的速率，它随着迭代次数的增多而减小。</p>
 
 <h4 id="513-对最终的权重值进行后处理">5.1.3 对最终的权重值进行后处理</h4>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">intercept</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">addIntercept</span> <span class="o">&amp;&amp;</span> <span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">intercept</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">addIntercept</span> <span class="o">&amp;&amp;</span> <span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">weightsWithIntercept</span><span class="o">(</span><span class="n">weightsWithIntercept</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
       <span class="mf">0.0</span>
@@ -555,12 +549,11 @@
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
       <span class="n">weightsWithIntercept</span>
     <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  该段代码获得了截距（<code class="highlighter-rouge">intercept</code>）以及最终的权重值。由于截距（<code class="highlighter-rouge">intercept</code>）和权重是在收缩的空间进行训练的，所以我们需要再把它们转换到原始的空间。数学知识告诉我们，如果我们仅仅执行标准化而没有减去均值，即<code class="highlighter-rouge">withStd = true, withMean = false</code>，
 那么截距（<code class="highlighter-rouge">intercept</code>）的值并不会发送改变。所以下面的代码仅仅处理权重向量。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">useFeatureScaling</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">useFeatureScaling</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">if</span> <span class="o">(</span><span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">weights</span> <span class="k">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="o">(</span><span class="n">weights</span><span class="o">)</span>
       <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
@@ -579,14 +572,12 @@
         <span class="n">weights</span> <span class="k">=</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">weightsArray</span><span class="o">)</span>
       <span class="o">}</span>
     <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="514-创建模型">5.1.4 创建模型</h4>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">createModel</span><span class="o">(</span><span class="n">weights</span><span class="o">,</span> <span class="n">intercept</span><span class="o">)</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">createModel</span><span class="o">(</span><span class="n">weights</span><span class="o">,</span> <span class="n">intercept</span><span class="o">)</span>
+</code></pre></div></div>
 
 <h3 id="52-预测">5.2 预测</h3>
 
@@ -596,21 +587,20 @@
   <li>二分类的情况</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">margin</span> <span class="k">=</span> <span class="n">dot</span><span class="o">(</span><span class="n">weightMatrix</span><span class="o">,</span> <span class="n">dataMatrix</span><span class="o">)</span> <span class="o">+</span> <span class="n">intercept</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">margin</span> <span class="k">=</span> <span class="n">dot</span><span class="o">(</span><span class="n">weightMatrix</span><span class="o">,</span> <span class="n">dataMatrix</span><span class="o">)</span> <span class="o">+</span> <span class="n">intercept</span>
 <span class="k">val</span> <span class="n">score</span> <span class="k">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(-</span><span class="n">margin</span><span class="o">))</span>
 <span class="n">threshold</span> <span class="k">match</span> <span class="o">{</span>
     <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">t</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="k">if</span> <span class="o">(</span><span class="n">score</span> <span class="o">&gt;</span> <span class="n">t</span><span class="o">)</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="mf">0.0</span>
     <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="n">score</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  我们可以看到<code class="highlighter-rouge">1.0 / (1.0 + math.exp(-margin))</code>就是上文提到的逻辑函数即<code class="highlighter-rouge">sigmoid</code>函数。</p>
 
 <ul>
   <li>多分类情况</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">bestClass</span> <span class="k">=</span> <span class="mi">0</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">bestClass</span> <span class="k">=</span> <span class="mi">0</span>
 <span class="k">var</span> <span class="n">maxMargin</span> <span class="k">=</span> <span class="mf">0.0</span>
 <span class="k">val</span> <span class="n">withBias</span> <span class="k">=</span> <span class="n">dataMatrix</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">dataWithBiasSize</span>
 <span class="o">(</span><span class="mi">0</span> <span class="n">until</span> <span class="n">numClasses</span> <span class="o">-</span> <span class="mi">1</span><span class="o">).</span><span class="n">foreach</span> <span class="o">{</span> <span class="n">i</span> <span class="k">=&gt;</span>
@@ -628,8 +618,7 @@
         <span class="o">}</span>
 <span class="o">}</span>
 <span class="n">bestClass</span><span class="o">.</span><span class="n">toDouble</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  该段代码计算并找到最大的<code class="highlighter-rouge">margin</code>。如果<code class="highlighter-rouge">maxMargin</code>为负，那么第一类是该数据的类别。</p>
 
 <h1 id="参考文献">参考文献</h1>
@@ -782,13 +771,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

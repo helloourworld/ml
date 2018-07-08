@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -204,7 +208,7 @@
   <li>让迭代器 it 逐个返回所有元素最简单的方法是使用 while 循环：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Iterators</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Iterators</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">it</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="s">"Baidu"</span><span class="o">,</span> <span class="s">"Google"</span><span class="o">)</span>
 
@@ -213,14 +217,13 @@
       <span class="o">}</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="查找最大与最小元素">查找最大与最小元素</h4>
 
 <p>你可以使用 it.min 和 it.max 方法从迭代器中查找最大与最小元素，实例如下:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Iterators2</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Iterators2</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">ita</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
       <span class="k">val</span> <span class="n">itb</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
@@ -230,14 +233,13 @@
 
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="获取迭代器的长度">获取迭代器的长度</h4>
 
 <p>你可以使用 it.size 或 it.length 方法来查看迭代器中的元素个数。实例如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Iterators3</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Iterators3</span> <span class="o">{</span>
    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">val</span> <span class="n">ita</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
       <span class="k">val</span> <span class="n">itb</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
@@ -247,8 +249,7 @@
 
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="scala-iterator-常用方法">Scala Iterator 常用方法</h4>
 
@@ -756,13 +757,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

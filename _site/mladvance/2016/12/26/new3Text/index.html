@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -220,7 +224,7 @@
   <p>代码示例与说明（注释中有详细信息）</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>class EastmoneySpider(scrapy.Spider):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class EastmoneySpider(scrapy.Spider):
     name = "eastmoney"
     allowed_domains = ["http://data.eastmoney.com", "data.eastmoney.com"]
     """
@@ -256,19 +260,17 @@
         item['rep_content'] = response.xpath('//*[@id="ContentBody"]/div/p/text()').extract()
         yield item  # 返回至Pipeline
         yield scrapy.Request(response.meta['main_url'], callback=self.parse)  # callback to crawl others
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>信息爬取</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># 在项目根目录下执行，输出json格式信息
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 在项目根目录下执行，输出json格式信息
 del sbyb.json # scrapy 默认为追加
 scrapy crawl sbyb -o sbyb.json
 # Crawled 3462 pages (at 1728 pages/min), scraped 3461 items (at 1735 items/min)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="2-文本数据解析">2 文本数据解析</h2>
 
@@ -312,7 +314,7 @@ scrapy crawl sbyb -o sbyb.json
   <p>代码示例与说明（注释中有详细信息）</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import pandas as pd
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import pandas as pd
 
 from toolkits.awful.sogouciku import GTable
 from toolkits.awful.sogouciku import deal
@@ -332,26 +334,24 @@ with open(f + '.txt', 'w') as f:
     for count, py, word in GTable:
         # GTable保存着结果，是一个列表，每个元素是一个元组(词频,拼音,中文词组)，有需要的话可以保存成自己需要的格式
         f.write(word.encode('utf-8') + '\n')  # 最终保存文件的编码，可以修改
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>增加jieba词库</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># # jieba载入词典
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># # jieba载入词典
 # 开发者可以指定自己自定义的词典，以便包含 jieba 词库里没有的词。虽然 jieba 有新词识别能力，但是自行添加新词可以保证更高的正确率。
 # 用法：
 jieba.load_userdict(file_name) # file_name 为自定义词典的路径。
 # 词典格式和dict.txt一样，一个词占一行；每一行分三部分，一部分为词语，另一部分为词频（可省略），最后为词性（可省略），用空格隔开。
 # 词频可省略，使用计算出的能保证分出该词的词频。
 # 更改分词器的 tmp_dir 和 cache_file 属性，可指定缓存文件位置，用于受限的文件系统。
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="22-读取文件">2.2 读取文件</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>def loadjsonFile(jsonFile):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def loadjsonFile(jsonFile):
     df_raw = pd.read_json(jsonFile)
     df = df_raw[['rep_content', 'rep_date']]
     dfday = df['rep_date'].apply(lambda x: pd.to_datetime(str(x)).date())  # turn to date type
@@ -365,12 +365,11 @@ jieba.load_userdict(file_name) # file_name 为自定义词典的路径。
     return retcontent
 
 dfcontent = loadjsonFile(u"D:\python_workspace\crawler\\new3\\new3.json")
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="23-按时间分片">2.3 按时间分片</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>def slice_df(exp1_y, exp1_m, exp1_d, exp2_y, exp2_m, exp2_d):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def slice_df(exp1_y, exp1_m, exp1_d, exp2_y, exp2_m, exp2_d):
     return dfcontent[(dfcontent.index &gt; datetime.date(exp1_y, exp1_m, exp1_d, )) &amp; (
     dfcontent.index &lt;= datetime.date(exp2_y, exp2_m, exp2_d))]
 
@@ -384,12 +383,11 @@ df_2016Q2 = slice_df(2016, 3, 31, 2016, 6, 30)
 df_2016Q3 = slice_df(2016, 6, 30, 2016, 9, 30)
 df_2016Q4 = slice_df(2016, 9, 30, 2016, 12, 31)
 df_2017Q1 = slice_df(2016, 12, 31, 2017, 3, 31)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="24-转换为词向量及进行jieba-tf-idf抽取关键词">2.4 转换为词向量及进行jieba TF-IDF抽取关键词</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># 分词
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 分词
 def convert_doc_to_wordlist(dataFrameIn, method=None):
     # 分词的主要方法
     dataFrame2Str = " ".join(flatten(dataFrameIn.to_string()))
@@ -403,14 +401,13 @@ def convert_doc_to_wordlist(dataFrameIn, method=None):
         if re.search(r'\d+\.?\d*', each) or each in nonattention:  # 去除数字 # 去除非关注词
             segDict.pop(each)
     return segDict
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="3-文本数据分析">3 文本数据分析</h2>
 
 <h3 id="31-对jieba抽取语料进行tf-idf抽取关键词">3.1 对jieba抽取语料进行TF-IDF抽取关键词</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># 对jieba抽取语料进行TF-IDF抽取关键词
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 对jieba抽取语料进行TF-IDF抽取关键词
 def word_tfidf_vec(corpus):
     stop_add = ["公司", "ni", "用钢", "员工", "计划", "品种", "几无", "悬念", "做市", "三板", "亿元", "成交额", "协议", "分别", "股票", "转让", "亿股",
                 "当日", "挂牌", "股份", "上涨", "指数", "企业", "行业", "市场", "oc", "上周"]
@@ -426,20 +423,18 @@ def word_tfidf_vec(corpus):
     df_res = pd.DataFrame(weight.T)
     df_res['word'] = word
     return df_res
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="32-展示重要词及权重">3.2 展示重要词及权重</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>r = word_tfidf_vec(corpuses)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>r = word_tfidf_vec(corpuses)
 for i in range(corpuses.__len__()):
     print "****\n", i, r.sort_values(by=i, ascending=False)[:20]["word"]
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="4-文本数据词云">4 文本数据词云</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>def plot_cloudMap(nWord=100):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def plot_cloudMap(nWord=100):
     # backgroud_Image = plt.imread("../../images/stock.jpg")
     wc = WordCloud(background_color='white',  # 设置背景颜色
                    # mask = backgroud_Image,        # 设置背景图片
@@ -464,8 +459,7 @@ for i in range(corpuses.__len__()):
         plt.axis('off')
         plt.savefig("./outputfile//" + res.columns[i] + '.png',format="png")
         # plt.show()
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="5-新三板市场研报文本词云展示">5 新三板市场研报文本词云展示</h2>
 
@@ -634,13 +628,13 @@ for i in range(corpuses.__len__()):
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

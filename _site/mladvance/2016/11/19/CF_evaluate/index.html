@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -198,10 +202,9 @@
 
 				<script type="math/tex; mode=display">\textrm{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}</script>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>from sklearn.metrics import mean_squared_error
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from sklearn.metrics import mean_squared_error
 RMSE = mean_squared_error(y, y_pred)**0.5
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{bmatrix}1 & 4 & 3 & 2\\ 0 & 1 & 2 & 4\\ 1 & 4 & 3 & 2\\ 1 & 4 & 3 & 2 \end{bmatrix} =
@@ -214,7 +217,7 @@ RMSE = mean_squared_error(y, y_pred)**0.5
       })
     })</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt; val a = sc.textFile("README.md").filter(s =&gt; s contains "root")
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val a = sc.textFile("README.md").filter(s =&gt; s contains "root")
 a: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[2] at filter at &lt;console&gt;:24
 //toDebugString方法会打印出RDD的家族关系
 //可以看到textFile方法会生成两个RDD，分别是HadoopRDD
@@ -224,9 +227,8 @@ res0: String =
 (2) MapPartitionsRDD[2] at filter at &lt;console&gt;:24 []
  |  README.md MapPartitionsRDD[1] at textFile at &lt;console&gt;:24 []
  |  README.md HadoopRDD[0] at textFile at &lt;console&gt;:24 []
-</code></pre>
-</div>
-<div class="highlighter-rouge"><pre class="highlight"><code>scala&gt; val data =Array(Array(1, 2, 3, 4, 5),Array(4,5,6))
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val data =Array(Array(1, 2, 3, 4, 5),Array(4,5,6))
 data: Array[Array[Int]] = Array(Array(1, 2, 3, 4, 5), Array(4, 5, 6))
 
 scala&gt;  val rdd1=sc.parallelize(data)
@@ -251,8 +253,7 @@ rdd3: org.apache.spark.rdd.RDD[Array[Int]] = MapPartitionsRDD[5] at map at &lt;c
 
 scala&gt; rdd3.collect()
 res4: Array[Array[Int]] = Array(Array(1, 2, 3, 4, 5), Array(4, 5, 6))
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
                 <hr>
@@ -397,13 +398,13 @@ res4: Array[Array[Int]] = Array(Array(1, 2, 3, 4, 5), Array(4, 5, 6))
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

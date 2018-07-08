@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -241,21 +245,19 @@ IF EXIST %~n1.class (
 
 <h2 id="scala示例">scala示例</h2>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Hello</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Hello</span> <span class="o">{</span>
   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
     <span class="n">println</span><span class="o">(</span><span class="s">"Hello, world!"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="r-示例">R 示例</h2>
 
-<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="s2">"cmd"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Rscript.exe"</span><span class="p">,</span><span class="w"> </span><span class="s2">"$file"</span><span class="p">],</span><span class="w">
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="s2">"cmd"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Rscript.exe"</span><span class="p">,</span><span class="w"> </span><span class="s2">"$file"</span><span class="p">],</span><span class="w">
 </span><span class="s2">"path"</span><span class="o">:</span><span class="w"> </span><span class="s2">"C:\\Program Files\\R\\R-3.3.0\\bin\\x64\\"</span><span class="p">,</span><span class="w">
 </span><span class="s2">"selector"</span><span class="o">:</span><span class="w"> </span><span class="s2">"source.r"</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <h2 id="javascript-示例">JavaScript 示例</h2>
 <pre><code class="language-JavaScript">{
@@ -287,7 +289,7 @@ IF EXIST %~n1.class (
 
 <p>2.打开exec.py.找到类ExecCommand的append_data函数,在以下位置添加代码</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    def append_data(self, proc, data):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    def append_data(self, proc, data):
          if proc != self.proc:
              # a second call to exec has been made before the first one
              # finished, ignore it instead of intermingling the output.
@@ -313,8 +315,7 @@ IF EXIST %~n1.class (
          str = str.replace('\r\n', '\n').replace('\r', '\n')
 
          self.output_view.run_command('append', {'characters': str, 'force': True, 'scroll_to_end': True})
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
                 <hr>
@@ -459,13 +460,13 @@ IF EXIST %~n1.class (
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

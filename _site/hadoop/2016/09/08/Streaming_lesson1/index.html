@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -206,7 +210,7 @@
 
 <h3 id="2-a-quick-example">2 A Quick Example</h3>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="mi">18</span> <span class="c1">// scalastyle:off println
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">18</span> <span class="c1">// scalastyle:off println
 </span><span class="mi">19</span> <span class="k">package</span> <span class="nn">org.apache.spark.examples.streaming</span>
 <span class="mi">20</span>
 <span class="mi">21</span> <span class="k">import</span> <span class="nn">org.apache.spark.SparkConf</span>
@@ -250,17 +254,15 @@
 <span class="mi">59</span>   <span class="o">}</span>
 <span class="mi">60</span> <span class="o">}</span>
 <span class="mi">61</span> <span class="c1">// scalastyle:on println
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">nc</span> <span class="o">-</span><span class="n">lp</span> <span class="mi">9999</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">nc</span> <span class="o">-</span><span class="n">lp</span> <span class="mi">9999</span>
 <span class="nc">Hello</span> <span class="n">world</span>
 <span class="nc">This</span> <span class="n">is</span> <span class="n">david</span>
 <span class="n">stop</span> <span class="n">now</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">spark</span><span class="o">]</span><span class="n">$</span> <span class="o">./</span><span class="n">bin</span><span class="o">/</span><span class="n">run</span><span class="o">-</span><span class="n">example</span> <span class="n">streaming</span><span class="o">.</span><span class="nc">NetworkWordCount</span> <span class="nc">NN01</span><span class="o">.</span><span class="nc">HadoopVM</span> <span class="mi">9999</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">spark</span><span class="o">]</span><span class="n">$</span> <span class="o">./</span><span class="n">bin</span><span class="o">/</span><span class="n">run</span><span class="o">-</span><span class="n">example</span> <span class="n">streaming</span><span class="o">.</span><span class="nc">NetworkWordCount</span> <span class="nc">NN01</span><span class="o">.</span><span class="nc">HadoopVM</span> <span class="mi">9999</span>
 <span class="o">-------------------------------------------</span>
 <span class="nc">Time</span><span class="k">:</span> <span class="err">1473325234000</span> <span class="kt">ms</span>
 <span class="o">-------------------------------------------</span>
@@ -274,8 +276,7 @@
 <span class="o">-------------------------------------------</span>
 <span class="o">(</span><span class="n">stop</span><span class="o">,</span><span class="mi">1</span><span class="o">)</span>
 <span class="o">(</span><span class="n">now</span><span class="o">,</span><span class="mi">1</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="3-basic-concepts">3 Basic Concepts</h3>
 
@@ -283,7 +284,7 @@
 
 <p>Similar to Spark, Spark Streaming is available through Maven Central. To write your own Spark Streaming program, you will have to add the following dependency to your SBT or Maven project.</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">#</span> <span class="n">maven</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">#</span> <span class="n">maven</span>
 <span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">spark</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">spark</span><span class="o">-</span><span class="n">streaming_2</span><span class="o">.</span><span class="mi">11</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span>
@@ -292,8 +293,7 @@
 
 <span class="k">#</span> <span class="nc">SBT</span>
 <span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="s">"org.apache.spark"</span> <span class="o">%</span> <span class="s">"spark-streaming_2.11"</span> <span class="o">%</span> <span class="s">"2.0.0"</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>For ingesting data from sources like Kafka, Flume, and Kinesis that are not present in the Spark Streaming core API, you will have to add the corresponding artifact spark-streaming-xyz_2.11 to the dependencies. For example, some of the common ones are as follows.</p>
 
@@ -328,25 +328,23 @@
 
 <p>A StreamingContext object can be created from a <a href="http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.SparkConf">SparkConf object</a>.</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark._</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark._</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.streaming._</span>
 
 <span class="k">val</span> <span class="n">conf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="o">().</span><span class="n">setAppName</span><span class="o">(</span><span class="n">appName</span><span class="o">).</span><span class="n">setMaster</span><span class="o">(</span><span class="n">master</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">ssc</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">StreamingContext</span><span class="o">(</span><span class="n">conf</span><span class="o">,</span> <span class="nc">Seconds</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>python</strong></p>
 
 <p>A StreamingContext object can be created from a <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.SparkContext">SparkContext object</a>.</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">SparkContext</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">SparkContext</span>
 <span class="kn">from</span> <span class="nn">pyspark.streaming</span> <span class="kn">import</span> <span class="n">StreamingContext</span>
 
 <span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="p">(</span><span class="n">master</span><span class="p">,</span> <span class="n">appName</span><span class="p">)</span>
 <span class="n">ssc</span> <span class="o">=</span> <span class="n">StreamingContext</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The <strong>appName</strong> parameter is a name for your application to show on the cluster UI. master is a <a href="http://spark.apache.org/docs/latest/submitting-applications.html#master-urls">Spark, Mesos or YARN cluster URL</a>, or a special <strong>“local[*]”</strong> string to run in local mode. In practice, when running on a cluster, you will not want to hardcode master in the program, but rather <a href="http://spark.apache.org/docs/latest/submitting-applications.html">launch the application with spark-submit</a> and receive it there. However, for local testing and unit tests, you can pass “local[*]” to run Spark Streaming in-process (detects the number of cores in the local system). Note that this internally creates a SparkContext (starting point of all Spark functionality) which can be accessed as ssc.sparkContext.</p>
 
@@ -373,12 +371,11 @@
   <li>A SparkContext can be re-used to create multiple StreamingContexts, as long as the previous StreamingContext is stopped (without stopping the SparkContext) before the next StreamingContext is created.</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.streaming._</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.streaming._</span>
 
 <span class="k">val</span> <span class="n">sc</span> <span class="k">=</span> <span class="o">...</span>                <span class="c1">// existing SparkContext
 </span><span class="k">val</span> <span class="n">ssc</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">StreamingContext</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="nc">Seconds</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="33-discretized-streamsdstreams">3.3 Discretized Streams(DStreams)</h4>
 
@@ -404,12 +401,11 @@ These underlying RDD transformations are computed by the Spark engine. The DStre
 
 <p><strong>File Streams</strong></p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">#</span> <span class="n">scala</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">#</span> <span class="n">scala</span>
 <span class="n">streamingContext</span><span class="o">.</span><span class="n">fileStream</span><span class="o">[</span><span class="kt">KeyClass</span>, <span class="kt">ValueClass</span>, <span class="kt">InputFormatClass</span><span class="o">](</span><span class="n">dataDirectory</span><span class="o">)</span>
 <span class="k">#</span> <span class="n">python</span>
 <span class="n">streamingContext</span><span class="o">.</span><span class="n">textFileStream</span><span class="o">(</span><span class="n">dataDirectory</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Advanced Sources</strong></p>
 
@@ -497,15 +493,14 @@ These underlying RDD transformations are computed by the Spark engine. The DStre
 
 <p>Let’s illustrate this with an example. Say you want to maintain a running count of each word seen in a text data stream. Here, the running count is the state and it is an integer. We define the update function as:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">updateFunction</span><span class="o">(</span><span class="n">newValues</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">runningCount</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">updateFunction</span><span class="o">(</span><span class="n">newValues</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">runningCount</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
     <span class="k">val</span> <span class="n">newCount</span> <span class="k">=</span> <span class="o">...</span>  <span class="c1">// add the new values with the previous running count to get the new count
 </span>    <span class="nc">Some</span><span class="o">(</span><span class="n">newCount</span><span class="o">)</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="nc">This</span> <span class="n">is</span> <span class="n">applied</span> <span class="n">on</span> <span class="n">a</span> <span class="nc">DStream</span> <span class="n">containing</span> <span class="n">words</span> <span class="o">(</span><span class="n">say</span><span class="o">,</span> <span class="n">the</span> <span class="n">pairs</span> <span class="nc">DStream</span> <span class="n">containing</span> <span class="o">(</span><span class="n">word</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span> <span class="n">pairs</span> <span class="n">in</span> <span class="n">the</span> <span class="n">earlier</span> <span class="n">example</span><span class="o">).</span>
 
 <span class="k">val</span> <span class="n">runningCounts</span> <span class="k">=</span> <span class="n">pairs</span><span class="o">.</span><span class="n">updateStateByKey</span><span class="o">[</span><span class="kt">Int</span><span class="o">](</span><span class="n">updateFunction</span> <span class="k">_</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <pre><code class="language-Python">def updateFunction(newValues, runningCount):
     if runningCount is None:
@@ -525,21 +520,19 @@ runningCounts = pairs.updateStateByKey(updateFunction)
 <p>The transform operation (along with its variations like transformWith) allows arbitrary RDD-to-RDD functions to be applied on a DStream. It can be used to apply any RDD operation that is not exposed in the DStream API. For example, the functionality of joining every batch in a data stream with another dataset is not directly exposed in the DStream API. However, you can easily use transform to do this. This enables very powerful possibilities. For example, one can do real-time data cleaning by joining the input data stream with precomputed spam information (maybe generated with Spark as well) and then filtering based on it.
 该transform操作（转换操作）连同其其类似的 transformWith操作允许DStream 上应用任意RDD-to-RDD函数。它可以被应用于未在 DStream API 中暴露任何的RDD操作。例如，在每批次的数据流与另一数据集的连接功能不直接暴露在DStream API 中，但可以轻松地使用transform操作来做到这一点，这使得DStream的功能非常强大。例如，你可以通过连接预先计算的垃圾邮件信息的输入数据流（可能也有Spark生成的），然后基于此做实时数据清理的筛选，如下面官方提供的伪代码所示。事实上，也可以在transform方法中使用机器学习和图形计算的算法。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">spamInfoRDD</span> <span class="k">=</span> <span class="n">ssc</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">newAPIHadoopRDD</span><span class="o">(...)</span> <span class="c1">// RDD containing spam information
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">spamInfoRDD</span> <span class="k">=</span> <span class="n">ssc</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">newAPIHadoopRDD</span><span class="o">(...)</span> <span class="c1">// RDD containing spam information
 </span>
 <span class="k">val</span> <span class="n">cleanedDStream</span> <span class="k">=</span> <span class="n">wordCounts</span><span class="o">.</span><span class="n">transform</span><span class="o">(</span><span class="n">rdd</span> <span class="k">=&gt;</span> <span class="o">{</span>
   <span class="n">rdd</span><span class="o">.</span><span class="n">join</span><span class="o">(</span><span class="n">spamInfoRDD</span><span class="o">).</span><span class="n">filter</span><span class="o">(...)</span> <span class="c1">// join data stream with spam information to do data cleaning
 </span>  <span class="o">...</span>
 <span class="o">})</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">spamInfoRDD</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pickleFile</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="c"># RDD containing spam information</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">spamInfoRDD</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pickleFile</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="c"># RDD containing spam information</span>
 
 <span class="c"># join data stream with spam information to do data cleaning</span>
 <span class="n">cleanedDStream</span> <span class="o">=</span> <span class="n">wordCounts</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rdd</span><span class="p">:</span> <span class="n">rdd</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">spamInfoRDD</span><span class="p">)</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Window Operations</strong></p>
 
@@ -564,15 +557,13 @@ runningCounts = pairs.updateStateByKey(updateFunction)
 
 <p>Let’s illustrate the window operations with an example. Say, you want to extend the earlier example by generating word counts over the last 30 seconds of data, every 10 seconds. To do this, we have to apply the reduceByKey operation on the pairs DStream of (word, 1) pairs over the last 30 seconds of data. This is done using the operation reduceByKeyAndWindow.</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// Reduce last 30 seconds of data, every 10 seconds
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Reduce last 30 seconds of data, every 10 seconds
 </span><span class="k">val</span> <span class="n">windowedWordCounts</span> <span class="k">=</span> <span class="n">pairs</span><span class="o">.</span><span class="n">reduceByKeyAndWindow</span><span class="o">((</span><span class="n">a</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span><span class="n">b</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">),</span> <span class="nc">Seconds</span><span class="o">(</span><span class="mi">30</span><span class="o">),</span> <span class="nc">Seconds</span><span class="o">(</span><span class="mi">10</span><span class="o">))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># Reduce last 30 seconds of data, every 10 seconds</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Reduce last 30 seconds of data, every 10 seconds</span>
 <span class="n">windowedWordCounts</span> <span class="o">=</span> <span class="n">pairs</span><span class="o">.</span><span class="n">reduceByKeyAndWindow</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Some of the common window operations are as follows. All of these operations take the said two parameters - windowLength and slideInterval.</p>
 
@@ -615,44 +606,38 @@ runningCounts = pairs.updateStateByKey(updateFunction)
 
 <p>Streams can be very easily joined with other streams.</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">stream1</span><span class="k">:</span> <span class="kt">DStream</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">stream1</span><span class="k">:</span> <span class="kt">DStream</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
 <span class="k">val</span> <span class="n">stream2</span><span class="k">:</span> <span class="kt">DStream</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
 <span class="k">val</span> <span class="n">joinedStream</span> <span class="k">=</span> <span class="n">stream1</span><span class="o">.</span><span class="n">join</span><span class="o">(</span><span class="n">stream2</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">stream1</span> <span class="o">=</span> <span class="o">...</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stream1</span> <span class="o">=</span> <span class="o">...</span>
 <span class="n">stream2</span> <span class="o">=</span> <span class="o">...</span>
 <span class="n">joinedStream</span> <span class="o">=</span> <span class="n">stream1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stream2</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Here, in each batch interval, the RDD generated by stream1 will be joined with the RDD generated by stream2. You can also do leftOuterJoin, rightOuterJoin, fullOuterJoin. Furthermore, it is often very useful to do joins over windows of the streams. That is pretty easy as well.</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">windowedStream1</span> <span class="k">=</span> <span class="n">stream1</span><span class="o">.</span><span class="n">window</span><span class="o">(</span><span class="nc">Seconds</span><span class="o">(</span><span class="mi">20</span><span class="o">))</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">windowedStream1</span> <span class="k">=</span> <span class="n">stream1</span><span class="o">.</span><span class="n">window</span><span class="o">(</span><span class="nc">Seconds</span><span class="o">(</span><span class="mi">20</span><span class="o">))</span>
 <span class="k">val</span> <span class="n">windowedStream2</span> <span class="k">=</span> <span class="n">stream2</span><span class="o">.</span><span class="n">window</span><span class="o">(</span><span class="nc">Minutes</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
 <span class="k">val</span> <span class="n">joinedStream</span> <span class="k">=</span> <span class="n">windowedStream1</span><span class="o">.</span><span class="n">join</span><span class="o">(</span><span class="n">windowedStream2</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">windowedStream1</span> <span class="o">=</span> <span class="n">stream1</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">windowedStream1</span> <span class="o">=</span> <span class="n">stream1</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">windowedStream2</span> <span class="o">=</span> <span class="n">stream2</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
 <span class="n">joinedStream</span> <span class="o">=</span> <span class="n">windowedStream1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">windowedStream2</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><em>Stream-dataset joins</em></p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">dataset</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">dataset</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
 <span class="k">val</span> <span class="n">windowedStream</span> <span class="k">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">window</span><span class="o">(</span><span class="nc">Seconds</span><span class="o">(</span><span class="mi">20</span><span class="o">))...</span>
 <span class="k">val</span> <span class="n">joinedStream</span> <span class="k">=</span> <span class="n">windowedStream</span><span class="o">.</span><span class="n">transform</span> <span class="o">{</span> <span class="n">rdd</span> <span class="k">=&gt;</span> <span class="n">rdd</span><span class="o">.</span><span class="n">join</span><span class="o">(</span><span class="n">dataset</span><span class="o">)</span> <span class="o">}</span>
-</code></pre>
-</div>
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">dataset</span> <span class="o">=</span> <span class="o">...</span> <span class="c"># some RDD</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dataset</span> <span class="o">=</span> <span class="o">...</span> <span class="c"># some RDD</span>
 <span class="n">windowedStream</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">joinedStream</span> <span class="o">=</span> <span class="n">windowedStream</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rdd</span><span class="p">:</span> <span class="n">rdd</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Output Operations on DStreams</strong></p>
 
@@ -689,7 +674,7 @@ runningCounts = pairs.updateStateByKey(updateFunction)
 
 <p><strong>Design Patterns for using foreachRDD</strong></p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">dstream</span><span class="o">.</span><span class="n">foreachRDD</span> <span class="o">{</span> <span class="n">rdd</span> <span class="k">=&gt;</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dstream</span><span class="o">.</span><span class="n">foreachRDD</span> <span class="o">{</span> <span class="n">rdd</span> <span class="k">=&gt;</span>
   <span class="n">rdd</span><span class="o">.</span><span class="n">foreachPartition</span> <span class="o">{</span> <span class="n">partitionOfRecords</span> <span class="k">=&gt;</span>
     <span class="c1">// ConnectionPool is a static, lazily initialized pool of connections
 </span>    <span class="k">val</span> <span class="n">connection</span> <span class="k">=</span> <span class="nc">ConnectionPool</span><span class="o">.</span><span class="n">getConnection</span><span class="o">()</span>
@@ -697,9 +682,8 @@ runningCounts = pairs.updateStateByKey(updateFunction)
     <span class="nc">ConnectionPool</span><span class="o">.</span><span class="n">returnConnection</span><span class="o">(</span><span class="n">connection</span><span class="o">)</span>  <span class="c1">// return to the pool for future reuse
 </span>  <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">sendPartition</span><span class="p">(</span><span class="nb">iter</span><span class="p">):</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">sendPartition</span><span class="p">(</span><span class="nb">iter</span><span class="p">):</span>
     <span class="c"># ConnectionPool is a static, lazily initialized pool of connections</span>
     <span class="n">connection</span> <span class="o">=</span> <span class="n">ConnectionPool</span><span class="o">.</span><span class="n">getConnection</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">:</span>
@@ -708,8 +692,7 @@ runningCounts = pairs.updateStateByKey(updateFunction)
     <span class="n">ConnectionPool</span><span class="o">.</span><span class="n">returnConnection</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
 
 <span class="n">dstream</span><span class="o">.</span><span class="n">foreachRDD</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rdd</span><span class="p">:</span> <span class="n">rdd</span><span class="o">.</span><span class="n">foreachPartition</span><span class="p">(</span><span class="n">sendPartition</span><span class="p">))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>通常情况下，创建一个连接对象有时间和资源开销。因此，创建和销毁的每条记录的连接对象可能招致不必要的资源开销，并显著降低系统整体的吞吐量 。一个更好的解决方案是使用rdd.foreachPartition方法创建一个单独的连接对象，然后使用该连接对象输出的所有RDD分区中的数据到外部系统。</p>
 
 <p>这缓解了创建多条记录连接的开销。最后，还可以进一步通过在多个RDDs/ batches上重用连接对象进行优化。一个保持连接对象的静态池可以重用在多个批处理的RDD上将其输出到外部系统，从而进一步降低了开销。</p>
@@ -725,7 +708,7 @@ runningCounts = pairs.updateStateByKey(updateFunction)
 
 <p>使用累加器可以很简便地对各个worker返回给driver的值进行聚合。累加器最常见的用途之一就是对一个job执行期间发生的事件进行计数。例如，当我们统计输入文件信息时，有时需要统计空白行的数量。下面的程序描述了这个过程。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="n">file</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="s">"README.md"</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="n">file</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="s">"README.md"</span><span class="o">)</span>
 <span class="n">file</span><span class="k">:</span> <span class="kt">org.apache.spark.rdd.RDD</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">README</span><span class="o">.</span><span class="n">md</span> <span class="nc">MapPart12</span><span class="err">]</span> <span class="n">at</span> <span class="n">textFile</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">console</span><span class="k">&gt;:</span><span class="mi">24</span>
 
 <span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="n">blankLines</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">accumulator</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
@@ -744,10 +727,9 @@ runningCounts = pairs.updateStateByKey(updateFunction)
 <span class="o">[</span><span class="kt">Stage</span> <span class="err">0</span><span class="kt">:&gt;</span>                                                <span class="o">[</span><span class="kt">Stage</span> <span class="err">0</span><span class="kt">:&gt;</span>                                                <span class="o">[</span><span class="kt">Stage</span> <span class="err">0</span><span class="kt">:=============================&gt;</span>
 <span class="kt">scala&gt;</span> <span class="kt">println</span><span class="o">(</span><span class="err">"</span><span class="kt">Blank</span> <span class="kt">Lines:</span> <span class="err">"</span> <span class="kt">+</span> <span class="kt">blankLines.value</span><span class="o">)</span>
 <span class="kt">Blank</span> <span class="kt">Lines:</span> <span class="err">2</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s">"README.md"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s">"README.md"</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="c"># create Accumulator[Int] initialized to 0</span>
 <span class="o">...</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">blankLines</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">accumulator</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -763,8 +745,7 @@ runningCounts = pairs.updateStateByKey(updateFunction)
 <span class="p">[</span><span class="n">Stage</span> <span class="mi">0</span><span class="p">:</span><span class="o">=============================&gt;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="s">"Blank Lines: </span><span class="si">%</span><span class="s">d"</span> <span class="o">%</span> <span class="n">blankLines</span><span class="o">.</span><span class="n">value</span>
 <span class="n">Blank</span> <span class="n">Lines</span><span class="p">:</span> <span class="mi">2</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>在上面的例子中，我们创建了一个名为blankLines的整型累加器（Accumulator[Int]），初始化为0，然后再每次读到一个空白行的时候blankLines加一。因此，累加器使我们可以用一种更简便的方式，在一个RDD的转换过程中对值进行聚合，而不用额外使用一个filter()或reduce()操作。
 需要注意的是，由于Spark的lazy机制，只有在saveAsTestFile这个action算子执行后我们才能得到blankLines的正确结果。</p>
 
@@ -780,7 +761,7 @@ Spark also attempts to distribute broadcast variables using efficient broadcast 
 
 <p>You can easily use DataFrames and SQL operations on streaming data. You have to create a SparkSession using the SparkContext that the StreamingContext is using. Furthermore this has to done such that it can be restarted on driver failures. This is done by creating a lazily instantiated singleton instance of SparkSession. This is shown in the following example. It modifies the earlier word count example to generate word counts using DataFrames and SQL. Each RDD is converted to a DataFrame, registered as a temporary table and then queried using SQL.</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="cm">/** DataFrame operations inside your streaming program */</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/** DataFrame operations inside your streaming program */</span>
 
 <span class="k">val</span> <span class="n">words</span><span class="k">:</span> <span class="kt">DStream</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
 
@@ -801,10 +782,9 @@ Spark also attempts to distribute broadcast variables using efficient broadcast 
     <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">(</span><span class="s">"select word, count(*) as total from words group by word"</span><span class="o">)</span>
   <span class="n">wordCountsDataFrame</span><span class="o">.</span><span class="n">show</span><span class="o">()</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># Lazily instantiated global instance of SparkSession</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Lazily instantiated global instance of SparkSession</span>
 <span class="k">def</span> <span class="nf">getSparkSessionInstance</span><span class="p">(</span><span class="n">sparkConf</span><span class="p">):</span>
     <span class="k">if</span> <span class="p">(</span><span class="s">'sparkSessionSingletonInstance'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()):</span>
         <span class="nb">globals</span><span class="p">()[</span><span class="s">'sparkSessionSingletonInstance'</span><span class="p">]</span> <span class="o">=</span> <span class="n">SparkSession</span>\
@@ -839,8 +819,7 @@ Spark also attempts to distribute broadcast variables using efficient broadcast 
         <span class="k">pass</span>
 
 <span class="n">words</span><span class="o">.</span><span class="n">foreachRDD</span><span class="p">(</span><span class="n">process</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="38-mllib-operations">3.8 MLlib Operations</h4>
 
@@ -878,19 +857,17 @@ Spark also attempts to distribute broadcast variables using efficient broadcast 
 
 <h3 id="ref-nc-input--output">Ref: nc input &amp; output</h3>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>nc -lp 9999
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>nc <span class="nt">-lp</span> 9999
 hhh <span class="c"># input</span>
 this is a <span class="nb">test</span> <span class="c"># input</span>
 hello <span class="c">#output</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>nc 127.0.0.1 9999
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>nc 127.0.0.1 9999
 hhh
 this is a <span class="nb">test
 </span>hello
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>参考资料：</p>
 
@@ -1039,13 +1016,13 @@ this is a <span class="nb">test
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

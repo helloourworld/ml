@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -245,9 +249,9 @@ tools工具已经下载</p>
 
 <h3 id="1-建立以上目录">1 建立以上目录</h3>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 hadoop]<span class="nv">$ </span><span class="nb">cd</span> ~/hadoop-2.7.3/
-<span class="o">[</span>hadoop@NN01 hadoop-2.7.3]<span class="nv">$ </span>ls
-bin  etc  include  lib  libexec  LICENSE.txt  NOTICE.txt  README.txt  sbin  share
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 hadoop]<span class="nv">$ </span><span class="nb">cd</span> ~/hadoop-2.7.3/
+<span class="o">[</span>hadoop@NN01 hadoop-2.7.3]<span class="nv">$ </span><span class="nb">ls
+</span>bin  etc  include  lib  libexec  LICENSE.txt  NOTICE.txt  README.txt  sbin  share
 <span class="o">[</span>hadoop@NN01 hadoop-2.7.3]<span class="nv">$ </span>~/tools/runRemoteCmd.sh <span class="s2">"mkdir ~/hadoop-2.7.3/hdfs ~/hadoop-2.7.3/logs ~/hadoop-2.7.3/tmp"</span> all
 <span class="k">**************</span>NN01.HadoopVM<span class="k">************</span>
 <span class="k">**************</span>DN01.HadoopVM<span class="k">************</span>
@@ -256,12 +260,11 @@ bin  etc  include  lib  libexec  LICENSE.txt  NOTICE.txt  README.txt  sbin  shar
 <span class="k">**************</span>NN01.HadoopVM<span class="k">************</span>
 <span class="k">**************</span>DN01.HadoopVM<span class="k">************</span>
 <span class="k">**************</span>DN02.HadoopVM<span class="k">************</span>
-<span class="o">[</span>hadoop@NN01 hadoop-2.7.3]<span class="nv">$ </span>ls
-bin  etc  hdfs  include  lib  libexec  LICENSE.txt  logs  NOTICE.txt  README.txt  sbin  share  tmp
-<span class="o">[</span>hadoop@NN01 hadoop-2.7.3]<span class="nv">$ </span>ls hdfs
+<span class="o">[</span>hadoop@NN01 hadoop-2.7.3]<span class="nv">$ </span><span class="nb">ls
+</span>bin  etc  hdfs  include  lib  libexec  LICENSE.txt  logs  NOTICE.txt  README.txt  sbin  share  tmp
+<span class="o">[</span>hadoop@NN01 hadoop-2.7.3]<span class="nv">$ </span><span class="nb">ls </span>hdfs
 data  logs  name
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="2-修改配置文件">2 修改配置文件</h3>
 
@@ -281,9 +284,8 @@ data  logs  name
 <p><strong>注意：</strong>
 修改配置前将hadoop-2.7.3软链接为hadoop</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>./tools/runRemoteCmd.sh <span class="s2">"ln -s hadoop-2.7.3 hadoop"</span> all
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>./tools/runRemoteCmd.sh <span class="s2">"ln -s hadoop-2.7.3 hadoop"</span> all
+</code></pre></div></div>
 
 <h4 id="21-修改etchadoopcore-sitexml">2.1 修改etc/hadoop/core-site.xml</h4>
 
@@ -307,7 +309,7 @@ data  logs  name
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!-- Put site-specific property overrides in this file. --&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- Put site-specific property overrides in this file. --&gt;
 
 &lt;configuration&gt;
   &lt;property&gt;
@@ -331,8 +333,7 @@ data  logs  name
       &lt;value&gt;NN01.HadoopVM:2181,DN01.HadoopVM:2181,DN02.HadoopVM:2181&lt;/value&gt;
   &lt;/property&gt;
 &lt;/configuration&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="22-修改etchadoophdfs-sitexml">2.2 修改etc/hadoop/hdfs-site.xml</h4>
 
@@ -385,7 +386,7 @@ data  logs  name
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!-- Put site-specific property overrides in this file. --&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- Put site-specific property overrides in this file. --&gt;
 
 &lt;configuration&gt;
   &lt;property&gt;
@@ -404,8 +405,7 @@ data  logs  name
       &lt;value&gt;2&lt;/value&gt;
   &lt;/property&gt;
 &lt;/configuration&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="23-修改etchadoopyarn-sitexml">2.3 修改etc/hadoop/yarn-site.xml</h4>
 
@@ -550,7 +550,7 @@ data  logs  name
   </tbody>
 </table>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>&lt;!-- Site specific YARN configuration properties --&gt;
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;<span class="o">!</span><span class="nt">--</span> Site specific YARN configuration properties <span class="nt">--</span><span class="o">&gt;</span>
 &lt;configuration&gt;
   &lt;property&gt;
       &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
@@ -587,8 +587,7 @@ data  logs  name
       &lt;value&gt;NN01.HadoopVM:8088&lt;/value&gt;
   &lt;/property&gt;
 &lt;/configuration&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="24-修改etchadoopmapred-sitexml">2.4 修改etc/hadoop/mapred-site.xml</h4>
 
@@ -676,7 +675,7 @@ data  logs  name
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!-- Put site-specific property overrides in this file. --&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- Put site-specific property overrides in this file. --&gt;
 
 &lt;configuration&gt;
    &lt;property&gt;
@@ -692,30 +691,27 @@ data  logs  name
           &lt;value&gt;NN01.HadoopVM:19888&lt;/value&gt;
    &lt;/property&gt;
 &lt;/configuration&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="25-修改masters-slaves">2.5 修改masters slaves</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hadoop]$ cat masters
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@NN01 hadoop]$ cat masters
 NN01.HadoopVM
 [hadoop@NN01 hadoop]$ cat slaves
 NN01.HadoopVM
 
 DN01.HadoopVM
 DN02.HadoopVM
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="26-增加执行权限">2.6 增加执行权限</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hadoop]$ chmod +x *.sh
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@NN01 hadoop]$ chmod +x *.sh
+</code></pre></div></div>
 
 <h4 id="27-环境配置">2.7 环境配置</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>export JAVA_HOME=/opt/tool/jdk1.8
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export JAVA_HOME=/opt/tool/jdk1.8
 export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export HADOOP_HOME=/home/hadoop/hadoop
@@ -726,26 +722,23 @@ export HADOOP_PREFIX=$HADOOP_HOME
 export HADOOP_CONF_DIR=/home/hadoop/hadoop/etc/hadoop
 export HADOOP_YARN_HOME=$HADOOP_HOME
 export HADOOP_CLASSPATH=$JAVA_HOME/lib/tools.jar
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="28-修改yarn-envsh">2.8 修改yarn-env.sh</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>export JAVA_HOME=/opt/tool/jdk1.8
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export JAVA_HOME=/opt/tool/jdk1.8
+</code></pre></div></div>
 
 <h3 id="3-hadoop-startup">3 Hadoop Startup</h3>
 
 <p>The first time you bring up HDFS, it must be formatted. Format a new distributed filesystem as hdfs:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hdfs]$ $HADOOP_PREFIX/bin/hdfs namenode -format &lt;cluster_name&gt;
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hdfs]$ $HADOOP_PREFIX/bin/hdfs namenode -format &lt;cluster_name&gt;
+</code></pre></div></div>
 
 <p>Start HDFS AND YARN</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 sbin]$ ./start-dfs.sh
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@NN01 sbin]$ ./start-dfs.sh
 Starting namenodes on [NN01.HadoopVM]
 NN01.HadoopVM: starting namenode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-namenode-NN01.HadoopVM.out
 DN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-DN01.HadoopVM.out
@@ -759,15 +752,13 @@ starting resourcemanager, logging to /home/hadoop/hadoop/logs/yarn-hadoop-resour
 NN01.HadoopVM: starting nodemanager, logging to /home/hadoop/hadoop/logs/yarn-hadoop-nodemanager-NN01.HadoopVM.out
 DN01.HadoopVM: starting nodemanager, logging to /home/hadoop/hadoop/logs/yarn-hadoop-nodemanager-DN01.HadoopVM.out
 DN02.HadoopVM: starting nodemanager, logging to /home/hadoop/hadoop/logs/yarn-hadoop-nodemanager-DN02.HadoopVM.out
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Start the MapReduce JobHistory Server with the following command, run on the designated server as mapred:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 sbin]$ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh --config $HADOOP_CONF_DIR start historyserver
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@NN01 sbin]$ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh --config $HADOOP_CONF_DIR start historyserver
 starting historyserver, logging to /home/hadoop/hadoop/logs/mapred-hadoop-historyserver-NN01.HadoopVM.out
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Web Interfaces</p>
 
@@ -802,7 +793,7 @@ starting historyserver, logging to /home/hadoop/hadoop/logs/mapred-hadoop-histor
 
 <p>Stop HDFS AND YARN</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 sbin]$ ./stop-dfs.sh
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@NN01 sbin]$ ./stop-dfs.sh
 Stopping namenodes on [NN01.HadoopVM]
 NN01.HadoopVM: stopping namenode
 NN01.HadoopVM: stopping datanode
@@ -816,15 +807,13 @@ stopping resourcemanager
 NN01.HadoopVM: stopping nodemanager
 DN01.HadoopVM: stopping nodemanager
 DN02.HadoopVM: stopping nodemanager
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Stop the MapReduce JobHistory Server with the following command, run on the designated server as mapred:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 sbin]$ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh --config $HADOOP_CONF_DIR stop historyserver
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@NN01 sbin]$ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh --config $HADOOP_CONF_DIR stop historyserver
 stopping historyserver
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="5-hadoop版本切换">5 Hadoop版本切换</h3>
 
@@ -838,7 +827,7 @@ stopping historyserver
 
 <p>即将软链接改为指向2.6.4即可</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>./tools/runRemoteCmd.sh <span class="s2">"rm ~/hadoop"</span> all
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>hadoop@NN01 ~]<span class="nv">$ </span>./tools/runRemoteCmd.sh <span class="s2">"rm ~/hadoop"</span> all
 <span class="k">**************</span>NN01.HadoopVM<span class="k">************</span>
 <span class="k">**************</span>DN01.HadoopVM<span class="k">************</span>
 <span class="k">**************</span>DN02.HadoopVM<span class="k">************</span>
@@ -846,8 +835,7 @@ stopping historyserver
 <span class="k">**************</span>NN01.HadoopVM<span class="k">************</span>
 <span class="k">**************</span>DN01.HadoopVM<span class="k">************</span>
 <span class="k">**************</span>DN02.HadoopVM<span class="k">************</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>查看目前版本状态</strong></p>
 
@@ -857,7 +845,7 @@ stopping historyserver
 
 <p>配置SecondaryNameNode</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hadoop]$ tail etc/hadoop/hdfs-site.xml
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@NN01 hadoop]$ tail etc/hadoop/hdfs-site.xml
 ...
   &lt;property&gt;
     &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;
@@ -874,8 +862,7 @@ DN01.HadoopVM: starting secondarynamenode, logging to /home/hadoop/hadoop/logs/h
 [hadoop@DN01 current]$ jps
 4504 DataNode
 4570 SecondaryNameNode
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>故障恢复</p>
 
@@ -889,7 +876,7 @@ DN01.HadoopVM: starting secondarynamenode, logging to /home/hadoop/hadoop/logs/h
 
 <p>The NameNode will upload the checkpoint from the dfs.namenode.checkpoint.dir directory and then save it to the NameNode directory(s) set in dfs.namenode.name.dir. The NameNodewill fail if a legal image is contained in dfs.namenode.name.dir. The NameNode verifies that the image indfs.namenode.checkpoint.dir is consistent, but does not modify it in any way.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[hadoop@NN01 hdfs]$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh --config $HADOOP_CONF_DIR --script hdfs start namenode -importCheckpoint
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hadoop@NN01 hdfs]$ $HADOOP_PREFIX/sbin/hadoop-daemon.sh --config $HADOOP_CONF_DIR --script hdfs start namenode -importCheckpoint
 starting namenode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-namenode-NN01.HadoopVM.out
 [hadoop@NN01 hdfs]$ jps
 11571 Jps
@@ -898,8 +885,7 @@ starting namenode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-namenode-NN
 DN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-DN01.HadoopVM.out
 DN02.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-DN02.HadoopVM.out
 NN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-NN01.HadoopVM.out
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
                 <hr>
@@ -1044,13 +1030,13 @@ NN01.HadoopVM: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-had
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

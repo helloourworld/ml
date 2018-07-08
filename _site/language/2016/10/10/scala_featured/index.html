@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -204,7 +208,7 @@
 
 <p><a href="http://scala-lang.org/files/archive/spec/2.11/06-expressions.html">6 Expressions</a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import scala._    // Wild card -- all of Scala is imported
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala._    // Wild card -- all of Scala is imported
 import scala.{ Predef =&gt; _, _ } // Exception, everything except Predef
 def f[M[_]]       // Higher kinded type parameter
 def f(m: M[_])    // Existential type
@@ -220,8 +224,7 @@ case Seq(xs @ _*) // Identifier xs is bound to the whole matched sequence
 var i: Int = _    // Initialization to the default value
 def abc_&lt;&gt;!       // An underscore must separate alphanumerics from symbols on identifiers
 t._2              // Part of a method name, such as tuple getters
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Existential types</strong><br />
 <code class="highlighter-rouge">def foo(l: List[Option[_]]) = ...</code></p>
@@ -262,13 +265,12 @@ t._2              // Part of a method name, such as tuple getters
 <p><strong>Converting call-by-name parameters to functions</strong><br />
 <code class="highlighter-rouge">def toFunction(callByName: =&gt; Int): () =&gt; Int = callByName _</code></p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">Int*</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">/:</span> <span class="n">xs</span><span class="o">)</span> <span class="o">((</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">Int*</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">/:</span> <span class="n">xs</span><span class="o">)</span> <span class="o">((</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">)</span>
 <span class="nc">Then</span>
 
 <span class="n">sum</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
 <span class="n">sum</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
                 <hr>
@@ -413,13 +415,13 @@ t._2              // Part of a method name, such as tuple getters
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

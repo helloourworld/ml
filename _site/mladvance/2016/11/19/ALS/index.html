@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -294,7 +298,7 @@ p_{ij} =
 
 <p>在<code class="highlighter-rouge">spark</code>的源代码中，<code class="highlighter-rouge">ALS</code>算法实现于<code class="highlighter-rouge">org.apache.spark.ml.recommendation.ALS.scala</code>文件中。我们以官方文档中的例子为起点，来分析<code class="highlighter-rouge">ALS</code>算法的分布式实现。下面是官方的例子：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//处理训练数据
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//处理训练数据
 </span><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="s">"data/mllib/als/test.data"</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">ratings</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="sc">','</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span> <span class="k">case</span> <span class="nc">Array</span><span class="o">(</span><span class="n">user</span><span class="o">,</span> <span class="n">item</span><span class="o">,</span> <span class="n">rate</span><span class="o">)</span> <span class="k">=&gt;</span>
   <span class="nc">Rating</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="n">toInt</span><span class="o">,</span> <span class="n">item</span><span class="o">.</span><span class="n">toInt</span><span class="o">,</span> <span class="n">rate</span><span class="o">.</span><span class="n">toDouble</span><span class="o">)</span>
@@ -303,12 +307,11 @@ p_{ij} =
 </span><span class="k">val</span> <span class="n">rank</span> <span class="k">=</span> <span class="mi">10</span>
 <span class="k">val</span> <span class="n">numIterations</span> <span class="k">=</span> <span class="mi">10</span>
 <span class="k">val</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">ALS</span><span class="o">.</span><span class="n">train</span><span class="o">(</span><span class="n">ratings</span><span class="o">,</span> <span class="n">rank</span><span class="o">,</span> <span class="n">numIterations</span><span class="o">,</span> <span class="mf">0.01</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>从代码中我们知道，训练模型用到了<code class="highlighter-rouge">ALS.scala</code>文件中的<code class="highlighter-rouge">train</code>方法，下面我们将详细介绍<code class="highlighter-rouge">train</code>方法的实现。在此之前，我们先了解一下<code class="highlighter-rouge">train</code>方法的参数表示的含义。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">train</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">train</span><span class="o">(</span>
     <span class="n">ratings</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Rating</span><span class="o">[</span><span class="kt">ID</span><span class="o">]],</span>  <span class="c1">//训练数据
 </span>    <span class="n">rank</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span><span class="o">,</span>   <span class="c1">//隐含特征数
 </span>    <span class="n">numUserBlocks</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span><span class="o">,</span> <span class="c1">//分区数
@@ -322,8 +325,7 @@ p_{ij} =
     <span class="n">finalRDDStorageLevel</span><span class="k">:</span> <span class="kt">StorageLevel</span> <span class="o">=</span> <span class="nc">StorageLevel</span><span class="o">.</span><span class="nc">MEMORY_AND_DISK</span><span class="o">,</span>
     <span class="n">checkpointInterval</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span><span class="o">,</span>
     <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">)</span><span class="k">:</span> <span class="kt">MatrixFactorizationModel</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>以上定义中，<code class="highlighter-rouge">ratings</code>指用户提供的训练数据，它包括用户<code class="highlighter-rouge">id</code>集、商品<code class="highlighter-rouge">id</code>集以及相应的打分集。<code class="highlighter-rouge">rank</code>表示隐含因素的数量，也即特征的数量。<code class="highlighter-rouge">numUserBlocks</code>和<code class="highlighter-rouge">numItemBlocks</code>分别指用户和商品的块数量，即分区数量。<code class="highlighter-rouge">maxIter</code>表示迭代次数。<code class="highlighter-rouge">regParam</code>表示最小二乘法中<code class="highlighter-rouge">lambda</code>值的大小。
 <code class="highlighter-rouge">implicitPrefs</code>表示我们的训练数据是否是隐式反馈数据。<code class="highlighter-rouge">Nonnegative</code>表示求解的最小二乘的值是否是非负,根据<code class="highlighter-rouge">Nonnegative</code>的值的不同，<code class="highlighter-rouge">spark</code>使用了不同的求解方法。</p>
@@ -337,7 +339,7 @@ p_{ij} =
 <p><code class="highlighter-rouge">ALSPartitioner</code>实现了基于<code class="highlighter-rouge">hash</code>的分区，它根据用户或者商品<code class="highlighter-rouge">id</code>的<code class="highlighter-rouge">hash</code>值来进行分区。<code class="highlighter-rouge">LocalIndexEncoder</code>对<code class="highlighter-rouge">（blockid，localindex）</code>即<code class="highlighter-rouge">（分区id，分区内索引）</code>进行编码，并将其转换为一个整数，这个整数在高位存分区<code class="highlighter-rouge">ID</code>，在低位存对应分区的索引，在空间上尽量做到了不浪费。
 同时也可以根据这个转换的整数分别获得<code class="highlighter-rouge">blockid</code>和<code class="highlighter-rouge">localindex</code>。这两个对象在后续的代码中会用到。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">userPart</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ALSPartitioner</span><span class="o">(</span><span class="n">numUserBlocks</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">userPart</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ALSPartitioner</span><span class="o">(</span><span class="n">numUserBlocks</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">itemPart</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ALSPartitioner</span><span class="o">(</span><span class="n">numItemBlocks</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">userLocalIndexEncoder</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LocalIndexEncoder</span><span class="o">(</span><span class="n">userPart</span><span class="o">.</span><span class="n">numPartitions</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">itemLocalIndexEncoder</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LocalIndexEncoder</span><span class="o">(</span><span class="n">itemPart</span><span class="o">.</span><span class="n">numPartitions</span><span class="o">)</span>
@@ -380,8 +382,7 @@ p_{ij} =
       <span class="n">encoded</span> <span class="o">&amp;</span> <span class="n">localIndexMask</span>
     <span class="o">}</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li><strong>(2) 根据<code class="highlighter-rouge">nonnegative</code>参数选择解决矩阵分解的方法</strong>。</li>
@@ -389,14 +390,12 @@ p_{ij} =
 
 <p>如果需要解的值为非负,即<code class="highlighter-rouge">nonnegative</code>为<code class="highlighter-rouge">true</code>，那么用非负最小二乘（<code class="highlighter-rouge">NNLS</code>）来解，如果没有这个限制，用乔里斯基（<code class="highlighter-rouge">Cholesky</code>）分解来解。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">solver</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">nonnegative</span><span class="o">)</span> <span class="k">new</span> <span class="nc">NNLSSolver</span> <span class="k">else</span> <span class="k">new</span> <span class="nc">CholeskySolver</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">solver</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">nonnegative</span><span class="o">)</span> <span class="k">new</span> <span class="nc">NNLSSolver</span> <span class="k">else</span> <span class="k">new</span> <span class="nc">CholeskySolver</span>
+</code></pre></div></div>
 <p>乔里斯基分解分解是把一个对称正定的矩阵表示成一个上三角矩阵<code class="highlighter-rouge">U</code>的转置和其本身的乘积的分解。在<code class="highlighter-rouge">ml</code>代码中，直接调用<a href="https://github.com/fommil/netlib-java">netlib-java</a>封装的<code class="highlighter-rouge">dppsv</code>方法实现。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">lapack</span><span class="o">.</span><span class="n">dppsv</span><span class="o">(</span><span class="err">“</span><span class="n">u</span><span class="err">”</span><span class="o">,</span> <span class="n">k</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">ne</span><span class="o">.</span><span class="n">ata</span><span class="o">,</span> <span class="n">ne</span><span class="o">.</span><span class="n">atb</span><span class="o">,</span> <span class="n">k</span><span class="o">,</span> <span class="n">info</span><span class="o">)</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lapack</span><span class="o">.</span><span class="n">dppsv</span><span class="o">(</span><span class="err">“</span><span class="n">u</span><span class="err">”</span><span class="o">,</span> <span class="n">k</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">ne</span><span class="o">.</span><span class="n">ata</span><span class="o">,</span> <span class="n">ne</span><span class="o">.</span><span class="n">atb</span><span class="o">,</span> <span class="n">k</span><span class="o">,</span> <span class="n">info</span><span class="o">)</span>
+</code></pre></div></div>
 
 <p>可以深入<code class="highlighter-rouge">dppsv</code>代码（<code class="highlighter-rouge">Fortran</code>代码）了解更深的细节。我们分析的重点是非负正则化最小二乘的实现，因为在某些情况下，方程组的解为负数是没有意义的。虽然方程组可以得到精确解，但却不能取负值解。在这种情况下，其非负最小二乘解比方程的精确解更有意义。``NNLS`在最优化模块会作详细讲解。</p>
 
@@ -407,7 +406,7 @@ p_{ij} =
 <p>将<code class="highlighter-rouge">ratings</code>数据转换为分区的形式，即<code class="highlighter-rouge">（（用户分区id，商品分区id），分区数据集blocks））</code>的形式，并缓存到内存中。其中分区id的计算是通过<code class="highlighter-rouge">ALSPartitioner</code>的<code class="highlighter-rouge">getPartitions</code>方法获得的，分区数据集由<code class="highlighter-rouge">RatingBlock</code>组成，
 它表示<code class="highlighter-rouge">（用户分区id，商品分区id ）</code>对所对应的用户id集，商品id集，以及打分集，即<code class="highlighter-rouge">（用户id集，商品id集，打分集）</code>。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">blockRatings</span> <span class="k">=</span> <span class="n">partitionRatings</span><span class="o">(</span><span class="n">ratings</span><span class="o">,</span> <span class="n">userPart</span><span class="o">,</span> <span class="n">itemPart</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">blockRatings</span> <span class="k">=</span> <span class="n">partitionRatings</span><span class="o">(</span><span class="n">ratings</span><span class="o">,</span> <span class="n">userPart</span><span class="o">,</span> <span class="n">itemPart</span><span class="o">)</span>
   <span class="o">.</span><span class="n">persist</span><span class="o">(</span><span class="n">intermediateRDDStorageLevel</span><span class="o">)</span>
 
 <span class="c1">//以下是partitionRatings的实现
@@ -445,8 +444,7 @@ p_{ij} =
       <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="o">()</span>
     <span class="o">}.</span><span class="n">setName</span><span class="o">(</span><span class="s">"ratingBlocks"</span><span class="o">)</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li><strong>（4）获取<code class="highlighter-rouge">inblocks</code>和<code class="highlighter-rouge">outblocks</code>数据</strong>。</li>
@@ -468,7 +466,7 @@ p_{ij} =
 
 <p>下面介绍获取<code class="highlighter-rouge">InBlock</code>和<code class="highlighter-rouge">OutBlock</code>的方法。下面的代码用来分别获取用户和商品的<code class="highlighter-rouge">InBlock</code>和<code class="highlighter-rouge">OutBlock</code>。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="o">(</span><span class="n">userInBlocks</span><span class="o">,</span> <span class="n">userOutBlocks</span><span class="o">)</span> <span class="k">=</span><span class="n">makeBlocks</span><span class="o">(</span><span class="s">"user"</span><span class="o">,</span> <span class="n">blockRatings</span><span class="o">,</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="o">(</span><span class="n">userInBlocks</span><span class="o">,</span> <span class="n">userOutBlocks</span><span class="o">)</span> <span class="k">=</span><span class="n">makeBlocks</span><span class="o">(</span><span class="s">"user"</span><span class="o">,</span> <span class="n">blockRatings</span><span class="o">,</span>
  <span class="n">userPart</span><span class="o">,</span> <span class="n">itemPart</span><span class="o">,</span><span class="n">intermediateRDDStorageLevel</span><span class="o">)</span>
 <span class="c1">//交换userBlockId和itemBlockId以及其对应的数据
 </span><span class="k">val</span> <span class="n">swappedBlockRatings</span> <span class="k">=</span> <span class="n">blockRatings</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span>
@@ -477,14 +475,13 @@ p_{ij} =
 <span class="o">}</span>
 <span class="k">val</span> <span class="o">(</span><span class="n">itemInBlocks</span><span class="o">,</span> <span class="n">itemOutBlocks</span><span class="o">)</span> <span class="k">=</span><span class="n">makeBlocks</span><span class="o">(</span><span class="s">"item"</span><span class="o">,</span> <span class="n">swappedBlockRatings</span><span class="o">,</span>
  <span class="n">itemPart</span><span class="o">,</span> <span class="n">userPart</span><span class="o">,</span><span class="n">intermediateRDDStorageLevel</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>我们会以求商品的<code class="highlighter-rouge">InBlock</code>以及用户的<code class="highlighter-rouge">OutBlock</code>为例来分析<code class="highlighter-rouge">makeBlocks</code>方法。因为在第（5）步中构建最小二乘的讲解中，我们会用到这两部分数据。</p>
 
 <p>下面的代码用来求商品的<code class="highlighter-rouge">InBlock</code>信息。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">inBlocks</span> <span class="k">=</span> <span class="n">ratingBlocks</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">inBlocks</span> <span class="k">=</span> <span class="n">ratingBlocks</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span>
   <span class="k">case</span> <span class="o">((</span><span class="n">srcBlockId</span><span class="o">,</span> <span class="n">dstBlockId</span><span class="o">),</span> <span class="nc">RatingBlock</span><span class="o">(</span><span class="n">srcIds</span><span class="o">,</span> <span class="n">dstIds</span><span class="o">,</span> <span class="n">ratings</span><span class="o">))</span> <span class="k">=&gt;</span>
     <span class="k">val</span> <span class="n">start</span> <span class="k">=</span> <span class="nc">System</span><span class="o">.</span><span class="n">nanoTime</span><span class="o">()</span>
     <span class="k">val</span> <span class="n">dstIdSet</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">OpenHashSet</span><span class="o">[</span><span class="kt">ID</span><span class="o">](</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="o">)</span>
@@ -521,8 +518,7 @@ p_{ij} =
 </span>    <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="o">().</span><span class="n">compress</span><span class="o">()</span>
   <span class="o">}.</span><span class="n">setName</span><span class="o">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s">"InBlocks"</span><span class="o">)</span>
   <span class="o">.</span><span class="n">persist</span><span class="o">(</span><span class="n">storageLevel</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>这段代码首先对<code class="highlighter-rouge">ratingBlocks</code>数据集作<code class="highlighter-rouge">map</code>操作，将<code class="highlighter-rouge">ratingBlocks</code>转换成<code class="highlighter-rouge">（商品分区id，（用户分区id，商品集合，用户id在分区中相对应的位置，打分）</code>这样的集合形式。然后对这个数据集作<code class="highlighter-rouge">groupByKey</code>操作，以商品分区<code class="highlighter-rouge">id</code>为<code class="highlighter-rouge">key</code>值，处理<code class="highlighter-rouge">key</code>对应的值，将数据集转换成<code class="highlighter-rouge">（商品分区id，InBlocks）</code>的形式。
 这里值得我们去分析的是输入块（<code class="highlighter-rouge">InBlock</code>）的结构。为简单起见，我们用图3.2为例来说明输入块的结构。</p>
@@ -537,7 +533,7 @@ p_{ij} =
 
 <p><code class="highlighter-rouge">Compress</code>方法利用<code class="highlighter-rouge">spark</code>内置的<code class="highlighter-rouge">Timsort</code>算法将<code class="highlighter-rouge">UncompressedInBlock</code>进行排序并转换为<code class="highlighter-rouge">InBlock</code>。代码如下所示：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">compress</span><span class="o">()</span><span class="k">:</span> <span class="kt">InBlock</span><span class="o">[</span><span class="kt">ID</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">compress</span><span class="o">()</span><span class="k">:</span> <span class="kt">InBlock</span><span class="o">[</span><span class="kt">ID</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
   <span class="k">val</span> <span class="n">sz</span> <span class="k">=</span> <span class="n">length</span>
   <span class="c1">//Timsort排序
 </span>  <span class="n">sort</span><span class="o">()</span>
@@ -581,12 +577,11 @@ p_{ij} =
   <span class="k">val</span> <span class="n">sorter</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Sorter</span><span class="o">(</span><span class="k">new</span> <span class="nc">UncompressedInBlockSort</span><span class="o">[</span><span class="kt">ID</span><span class="o">])</span>
   <span class="n">sorter</span><span class="o">.</span><span class="n">sort</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">length</span><span class="o">,</span> <span class="nc">Ordering</span><span class="o">[</span><span class="kt">KeyWrapper</span><span class="o">[</span><span class="kt">ID</span><span class="o">]])</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>下面的代码用来求用户的<code class="highlighter-rouge">OutBlock</code>信息。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">outBlocks</span> <span class="k">=</span> <span class="n">inBlocks</span><span class="o">.</span><span class="n">mapValues</span> <span class="o">{</span> <span class="k">case</span> <span class="nc">InBlock</span><span class="o">(</span><span class="n">srcIds</span><span class="o">,</span> <span class="n">dstPtrs</span><span class="o">,</span> <span class="n">dstEncodedIndices</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="k">=&gt;</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">outBlocks</span> <span class="k">=</span> <span class="n">inBlocks</span><span class="o">.</span><span class="n">mapValues</span> <span class="o">{</span> <span class="k">case</span> <span class="nc">InBlock</span><span class="o">(</span><span class="n">srcIds</span><span class="o">,</span> <span class="n">dstPtrs</span><span class="o">,</span> <span class="n">dstEncodedIndices</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="k">=&gt;</span>
   <span class="k">val</span> <span class="n">encoder</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LocalIndexEncoder</span><span class="o">(</span><span class="n">dstPart</span><span class="o">.</span><span class="n">numPartitions</span><span class="o">)</span>
   <span class="k">val</span> <span class="n">activeIds</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">fill</span><span class="o">(</span><span class="n">dstPart</span><span class="o">.</span><span class="n">numPartitions</span><span class="o">)(</span><span class="n">mutable</span><span class="o">.</span><span class="nc">ArrayBuilder</span><span class="o">.</span><span class="n">make</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span>
   <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
@@ -609,8 +604,7 @@ p_{ij} =
   <span class="o">}</span>
 <span class="o">}.</span><span class="n">setName</span><span class="o">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s">"OutBlocks"</span><span class="o">)</span>
   <span class="o">.</span><span class="n">persist</span><span class="o">(</span><span class="n">storageLevel</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>这段代码中，<code class="highlighter-rouge">inBlocks</code>表示用户的输入分区块，格式为<code class="highlighter-rouge">（用户分区id，（不重复的用户id集，用户位置偏移集，商品id集对应的编码集，打分集））</code>。
 <code class="highlighter-rouge">activeIds</code>表示商品分区中涉及的用户id集，也即上文所说的需要发送给确定的商品分区的用户信息。<code class="highlighter-rouge">activeIds</code>是一个二维数组，第一维表示分区，第二维表示用户id集。用户<code class="highlighter-rouge">OutBlocks</code>的最终格式是<code class="highlighter-rouge">（用户分区id，OutBlocks）</code>。</p>
@@ -624,10 +618,9 @@ p_{ij} =
 
 <p>交换最小二乘算法是分别固定用户特征矩阵和商品特征矩阵来交替计算下一次迭代的商品特征矩阵和用户特征矩阵。通过下面的代码初始化第一次迭代的特征矩阵。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">userFactors</span> <span class="k">=</span> <span class="n">initialize</span><span class="o">(</span><span class="n">userInBlocks</span><span class="o">,</span> <span class="n">rank</span><span class="o">,</span> <span class="n">seedGen</span><span class="o">.</span><span class="n">nextLong</span><span class="o">())</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">userFactors</span> <span class="k">=</span> <span class="n">initialize</span><span class="o">(</span><span class="n">userInBlocks</span><span class="o">,</span> <span class="n">rank</span><span class="o">,</span> <span class="n">seedGen</span><span class="o">.</span><span class="n">nextLong</span><span class="o">())</span>
 <span class="k">var</span> <span class="n">itemFactors</span> <span class="k">=</span> <span class="n">initialize</span><span class="o">(</span><span class="n">itemInBlocks</span><span class="o">,</span> <span class="n">rank</span><span class="o">,</span> <span class="n">seedGen</span><span class="o">.</span><span class="n">nextLong</span><span class="o">())</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>初始化后的<code class="highlighter-rouge">userFactors</code>的格式是<code class="highlighter-rouge">（用户分区id，用户特征矩阵factors）</code>，其中<code class="highlighter-rouge">factors</code>是一个二维数组，第一维的长度是用户数，第二维的长度是<code class="highlighter-rouge">rank</code>数。初始化的值是异或随机数的F范式。<code class="highlighter-rouge">itemFactors</code>的初始化与此类似。</p>
 
@@ -639,7 +632,7 @@ p_{ij} =
 每一个商品分区包含一组所需的用户分区及其对应的用户<code class="highlighter-rouge">factor</code>信息，格式即<code class="highlighter-rouge">（用户分区id集，用户分区对应的factor集）</code>。紧接着，用商品<code class="highlighter-rouge">inblock</code>信息与<code class="highlighter-rouge">merged</code>进行<code class="highlighter-rouge">join</code>操作，得到商品分区所需要的所有信息，即<code class="highlighter-rouge">（商品inblock，（用户分区id集，用户分区对应的factor集））</code>。
 有了这些信息，构建最小二乘的数据就齐全了。详细代码如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">srcOut</span> <span class="k">=</span> <span class="n">srcOutBlocks</span><span class="o">.</span><span class="n">join</span><span class="o">(</span><span class="n">srcFactorBlocks</span><span class="o">).</span><span class="n">flatMap</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">srcOut</span> <span class="k">=</span> <span class="n">srcOutBlocks</span><span class="o">.</span><span class="n">join</span><span class="o">(</span><span class="n">srcFactorBlocks</span><span class="o">).</span><span class="n">flatMap</span> <span class="o">{</span>
   <span class="k">case</span> <span class="o">(</span><span class="n">srcBlockId</span><span class="o">,</span> <span class="o">(</span><span class="n">srcOutBlock</span><span class="o">,</span> <span class="n">srcFactors</span><span class="o">))</span> <span class="k">=&gt;</span>
     <span class="n">srcOutBlock</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">activeIndices</span><span class="o">,</span> <span class="n">dstBlockId</span><span class="o">)</span> <span class="k">=&gt;</span>
       <span class="o">(</span><span class="n">dstBlockId</span><span class="o">,</span> <span class="o">(</span><span class="n">srcBlockId</span><span class="o">,</span> <span class="n">activeIndices</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">idx</span> <span class="k">=&gt;</span> <span class="n">srcFactors</span><span class="o">(</span><span class="n">idx</span><span class="o">))))</span>
@@ -647,15 +640,14 @@ p_{ij} =
 <span class="o">}</span>
 <span class="k">val</span> <span class="n">merged</span> <span class="k">=</span> <span class="n">srcOut</span><span class="o">.</span><span class="n">groupByKey</span><span class="o">(</span><span class="k">new</span> <span class="nc">ALSPartitioner</span><span class="o">(</span><span class="n">dstInBlocks</span><span class="o">.</span><span class="n">partitions</span><span class="o">.</span><span class="n">length</span><span class="o">))</span>
 <span class="n">dstInBlocks</span><span class="o">.</span><span class="n">join</span><span class="o">(</span><span class="n">merged</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>我们知道求解商品值时，我们需要通过所有和商品关联的用户向量信息来构建最小二乘问题。这里有两个选择，第一是扫一遍<code class="highlighter-rouge">InBlock</code>信息，同时对所有的产品构建对应的最小二乘问题；
 第二是对于每一个产品，扫描<code class="highlighter-rouge">InBlock</code>信息，构建并求解其对应的最小二乘问题。第一种方式复杂度较高，具体的复杂度计算在此不作推导。<code class="highlighter-rouge">spark</code>选取第二种方法求解最小二乘问题，同时也做了一些优化。
 做优化的原因是二种方法针对每个商品，都会扫描一遍<code class="highlighter-rouge">InBlock</code>信息，这会浪费较多时间，为此，将<code class="highlighter-rouge">InBlock</code>按照商品<code class="highlighter-rouge">id</code>进行排序（前文已经提到过），我们通过一次扫描就可以创建所有的最小二乘问题并求解。
 构建代码如下所示：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">dstIds</span><span class="o">.</span><span class="n">length</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">dstIds</span><span class="o">.</span><span class="n">length</span><span class="o">)</span> <span class="o">{</span>
   <span class="n">ls</span><span class="o">.</span><span class="n">reset</span><span class="o">()</span>
   <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="n">srcPtrs</span><span class="o">(</span><span class="n">j</span><span class="o">)</span>
   <span class="k">var</span> <span class="n">numExplicits</span> <span class="k">=</span> <span class="mi">0</span>
@@ -672,12 +664,11 @@ p_{ij} =
    <span class="n">dstFactors</span><span class="o">(</span><span class="n">j</span><span class="o">)</span> <span class="k">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="o">(</span><span class="n">ls</span><span class="o">,</span> <span class="n">numExplicits</span> <span class="o">*</span> <span class="n">regParam</span><span class="o">)</span>
   <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>到了这一步，构建显式反馈算法的最小二乘就结束了。隐式反馈算法的实现与此类似，不同的地方是它将<code class="highlighter-rouge">YtY</code>这个值预先计算了（可以参考文献【1】了解更多信息），而不用在每次迭代中都计算一遍。代码如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//在循环之外计算
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//在循环之外计算
 </span><span class="k">val</span> <span class="nc">YtY</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">implicitPrefs</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="n">computeYtY</span><span class="o">(</span><span class="n">srcFactorBlocks</span><span class="o">,</span> <span class="n">rank</span><span class="o">))</span> <span class="k">else</span> <span class="nc">None</span>
 
 <span class="c1">//在每个循环内
@@ -695,8 +686,7 @@ p_{ij} =
     <span class="n">ls</span><span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="n">srcFactor</span><span class="o">,</span> <span class="o">(</span><span class="n">c1</span> <span class="o">+</span> <span class="mf">1.0</span><span class="o">)</span> <span class="o">/</span> <span class="n">c1</span><span class="o">,</span> <span class="n">c1</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>后面的问题就如何求解最小二乘了。我们会在最优化章节介绍<code class="highlighter-rouge">spark</code>版本的<a href="../最优化算法/非负最小二乘/NNLS.md">NNLS</a>。</p>
 
@@ -853,13 +843,13 @@ p_{ij} =
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

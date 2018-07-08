@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -224,7 +228,7 @@
 
 <h3 id="21-实例">2.1 实例</h3>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LabeledPoint</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LabeledPoint</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LinearRegressionModel</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LinearRegressionWithSGD</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vectors</span>
@@ -245,8 +249,7 @@
 <span class="o">}</span>
 <span class="k">val</span> <span class="nc">MSE</span> <span class="k">=</span> <span class="n">valuesAndPreds</span><span class="o">.</span><span class="n">map</span><span class="o">{</span><span class="k">case</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="o">((</span><span class="n">v</span> <span class="o">-</span> <span class="n">p</span><span class="o">),</span> <span class="mi">2</span><span class="o">)}.</span><span class="n">mean</span><span class="o">()</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"training Mean Squared Error = "</span> <span class="o">+</span> <span class="nc">MSE</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="22-代码实现">2.2 代码实现</h3>
 
@@ -255,7 +258,7 @@
 
 <p>  普通线性回归的损失函数是最小二乘损失，如上面的公式<strong>（1）</strong>所示。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">LeastSquaresGradient</span> <span class="k">extends</span> <span class="nc">Gradient</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">LeastSquaresGradient</span> <span class="k">extends</span> <span class="nc">Gradient</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">weights</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Vector</span><span class="o">,</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
     <span class="c1">//diff = xw-y
 </span>    <span class="k">val</span> <span class="n">diff</span> <span class="k">=</span> <span class="n">dot</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">weights</span><span class="o">)</span> <span class="o">-</span> <span class="n">label</span>
@@ -278,11 +281,10 @@
     <span class="n">diff</span> <span class="o">*</span> <span class="n">diff</span> <span class="o">/</span> <span class="mf">2.0</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  普通线性回归的不适用正则化方法，所以它用<code class="highlighter-rouge">SimpleUpdater</code>实现<code class="highlighter-rouge">Updater</code>。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SimpleUpdater</span> <span class="k">extends</span> <span class="nc">Updater</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SimpleUpdater</span> <span class="k">extends</span> <span class="nc">Updater</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span>
       <span class="n">weightsOld</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">gradient</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
@@ -297,15 +299,14 @@
     <span class="o">(</span><span class="nc">Vectors</span><span class="o">.</span><span class="n">fromBreeze</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">),</span> <span class="mi">0</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  这里<code class="highlighter-rouge">thisIterStepSize</code>表示参数沿负梯度方向改变的速率，它随着迭代次数的增多而减小。</p>
 
 <h2 id="3-lasso回归源码分析">3 Lasso回归源码分析</h2>
 
 <p>  <code class="highlighter-rouge">lasso</code>回归和普通线性回归不同的地方是，它使用<code class="highlighter-rouge">L1</code>正则化方法。即使用<code class="highlighter-rouge">L1Updater</code>。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">L1Updater</span> <span class="k">extends</span> <span class="nc">Updater</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">L1Updater</span> <span class="k">extends</span> <span class="nc">Updater</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span>
       <span class="n">weightsOld</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">gradient</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
@@ -329,8 +330,7 @@
     <span class="o">(</span><span class="nc">Vectors</span><span class="o">.</span><span class="n">fromBreeze</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">),</span> <span class="n">brzNorm</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">)</span> <span class="o">*</span> <span class="n">regParam</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  这个类解决<code class="highlighter-rouge">L1</code>范式正则化问题。这里<code class="highlighter-rouge">thisIterStepSize</code>表示参数沿负梯度方向改变的速率，它随着迭代次数的增多而减小。该实现没有使用<a href="/mladvance/2017/04/06/linear-model/">线性模型</a>中介绍的子梯度方法，而是使用了邻近算子（<code class="highlighter-rouge">proximal operator</code>）来解决，该方法的结果拥有更好的稀疏性。
 <code class="highlighter-rouge">L1</code>范式的邻近算子是软阈值（<code class="highlighter-rouge">soft-thresholding</code>）函数。</p>
 
@@ -352,7 +352,7 @@
 
 <p>  <code class="highlighter-rouge">ridge</code>回归的训练过程也是一样，它使用<code class="highlighter-rouge">L2</code>正则化方法。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SquaredL2Updater</span> <span class="k">extends</span> <span class="nc">Updater</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SquaredL2Updater</span> <span class="k">extends</span> <span class="nc">Updater</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span>
       <span class="n">weightsOld</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">gradient</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
@@ -373,14 +373,12 @@
     <span class="o">(</span><span class="nc">Vectors</span><span class="o">.</span><span class="n">fromBreeze</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">),</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">norm</span> <span class="o">*</span> <span class="n">norm</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  该函数的实现规则是：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code> <span class="n">w1</span> <span class="k">=</span> <span class="n">w</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="o">(</span><span class="n">gradient</span> <span class="o">+</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">w</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">w1</span> <span class="k">=</span> <span class="n">w</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="o">(</span><span class="n">gradient</span> <span class="o">+</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">w</span><span class="o">)</span>
  <span class="n">w1</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="n">regParam</span><span class="o">)</span> <span class="o">*</span> <span class="n">w</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="n">gradient</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  这里<code class="highlighter-rouge">thisIterStepSize</code>表示参数沿负梯度方向改变的速率（即步长），它随着迭代次数的增多而减小。</p>
 
 
@@ -526,13 +524,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

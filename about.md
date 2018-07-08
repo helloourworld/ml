@@ -18,7 +18,7 @@ header-img: "images/IMG_0006.JPG"
     <blockquote><p>写写代码，做做金融，诗与文章。<br>
     世界那么大，仗剑走天涯。</p></blockquote>
 
-    <p>Hey，我是<strong>于利军</strong>，程序员 &amp; 数据分析师，目前任职于中软国际，负责大数据项目方面的技术方案，欢迎交流合作。</p>
+    <p>Hey，我是<strong>于利军</strong>，金融分析师 and 数据挖掘工程师，目前任职于KPMG，欢迎交流合作。</p>
 
     <p>一些作品和开源项目，👉 戳 <a href="/portfolio">Portfolio</a> 与 <a href="http://github.com/helloourworld">Github</a>。</p>
 

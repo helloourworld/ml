@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -303,7 +307,7 @@
 
 <p>前面提到 K 的选择是 K-means 算法的关键，Spark MLlib 在 KMeansModel 类里提供了 computeCost 方法，该方法通过计算所有数据点到其最近的中心点的平方和来评估聚类的效果。一般来说，同样的迭代次数和算法跑的次数，这个值越小代表聚类的效果越好。但是在实际情况下，我们还要考虑到聚类结果的可解释性，不能一味的选择使 computeCost 结果值最小的那个 K。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.clustering.</span><span class="o">{</span><span class="nc">KMeans</span><span class="o">,</span> <span class="nc">KMeansModel</span><span class="o">}</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vectors</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.</span><span class="o">{</span><span class="nc">SparkConf</span><span class="o">,</span> <span class="nc">SparkContext</span><span class="o">}</span>
@@ -345,32 +349,30 @@
     <span class="k">else</span> <span class="kc">false</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>结果如下：</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>rawTrainingData is: 441 <span class="k">*******</span> and parsedTrainingData is: 356
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>3 -&gt; 7.140043596954352E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>4 -&gt; 5.828120398877622E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>5 -&gt; 4.877187386940861E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>6 -&gt; 4.159989838378546E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>7 -&gt; 3.668188571522888E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>8 -&gt; <span class="k">**</span>3.583448066234746E10<span class="k">**</span>
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>9 -&gt; 2.8447515194141922E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>10 -&gt; 2.6456968510064972E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>11 -&gt; 2.4973296946980904E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>12 -&gt; 2.284145771589616E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>13 -&gt; 2.214691923763228E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>14 -&gt; 2.087706648769969E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>15 -&gt; 1.948901455097017E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>16 -&gt; 1.9436597320674072E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>17 -&gt; 1.56625179067911E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>18 -&gt; 1.579405375095717E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>19 -&gt; 1.3642911747596188E10
-sum of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>20 -&gt; 1.3876552141098682E10
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rawTrainingData is: 441 <span class="k">*******</span> and parsedTrainingData is: 356
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>3 -&gt; 7.140043596954352E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>4 -&gt; 5.828120398877622E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>5 -&gt; 4.877187386940861E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>6 -&gt; 4.159989838378546E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>7 -&gt; 3.668188571522888E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>8 -&gt; <span class="k">**</span>3.583448066234746E10<span class="k">**</span>
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>9 -&gt; 2.8447515194141922E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>10 -&gt; 2.6456968510064972E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>11 -&gt; 2.4973296946980904E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>12 -&gt; 2.284145771589616E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>13 -&gt; 2.214691923763228E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>14 -&gt; 2.087706648769969E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>15 -&gt; 1.948901455097017E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>16 -&gt; 1.9436597320674072E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>17 -&gt; 1.56625179067911E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>18 -&gt; 1.579405375095717E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>19 -&gt; 1.3642911747596188E10
+<span class="nb">sum </span>of squared distances of points to their nearest center when <span class="nv">k</span><span class="o">=</span>20 -&gt; 1.3876552141098682E10
+</code></pre></div></div>
 
 <p>从上图的运行结果可以看到，当 K=9 时，cost 值有波动，但是后面又逐渐减小了，所以我们选择 8 这个临界点作为 K 的个数。当然可以多跑几次，找一个稳定的 K 值。理论上 K 的值越大，聚类的 cost 越小，极限情况下，每个点都是一个聚类，这时候 cost 是 0，但是显然这不是一个具有实际意义的聚类结果。</p>
 
@@ -380,7 +382,7 @@ sum of squared distances of points to their nearest center when <span class="nv"
 
 <p>接上述K类别选择，我们将根据目标客户的消费数据，将每一列视为一个特征指标，对数据集进行聚类分析。代码实现如下。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.</span><span class="o">{</span><span class="nc">SparkContext</span><span class="o">,</span> <span class="nc">SparkConf</span><span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.</span><span class="o">{</span><span class="nc">SparkContext</span><span class="o">,</span> <span class="nc">SparkConf</span><span class="o">}</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.clustering.</span><span class="o">{</span><span class="nc">KMeans</span><span class="o">,</span> <span class="nc">KMeansModel</span><span class="o">}</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vectors</span>
 
@@ -440,8 +442,7 @@ sum of squared distances of points to their nearest center when <span class="nv"
     <span class="k">else</span> <span class="kc">false</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>该示例程序接受五个入参，分别是</li>
@@ -453,7 +454,7 @@ sum of squared distances of points to their nearest center when <span class="nv"
 
 <p><strong>K-means 聚类示例程序运行结果</strong></p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>Cluster Number:8
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cluster Number:8
 Cluster Centers Information Overview:
 Center Point of Cluster 0:[2.0,2.5,15958.833333333332,35388.166666666664,56218.666666666664,1695.0,28223.5,1895.3333333333333]
 Center Point of Cluster 1:[1.1818181818181819,2.5454545454545454,32552.666666666668,5293.030303030303,5921.909090909091,4403.242424242424,1080.7878787878788,2077.090909090909]
@@ -472,14 +473,13 @@ The data <span class="o">[</span>1.0,3.0,39228.0,1431.0,764.0,4510.0,93.0,2346.0
 The data <span class="o">[</span>1.0,3.0,10290.0,1981.0,2232.0,1038.0,168.0,2125.0] belongs to cluster 6
 The data <span class="o">[</span>1.0,3.0,2787.0,1698.0,2510.0,65.0,477.0,52.0] belongs to cluster 2
 Spark MLlib K-means clustering <span class="nb">test </span>finished.
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="3-spark-mysql-读取数据">3 spark MySQL 读取数据</h2>
 
 <p>上述例子已经完整地描述了如何用K-means进行聚类分析。测试数据集很小。通常情况下我们会从数据库中直接读取数据。以下为使用spark读取MySQL数据示例。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import org.apache.spark.sql.SparkSession
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import org.apache.spark.sql.SparkSession
 import org.apache.spark.{SparkConf, SparkContext}
 
 object KMeansDF {
@@ -514,8 +514,7 @@ object KMeansDF {
 
   }
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="4-其它">4 其它</h2>
 
@@ -662,13 +661,13 @@ object KMeansDF {
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

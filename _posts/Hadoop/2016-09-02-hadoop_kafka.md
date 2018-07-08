@@ -1,6 +1,6 @@
 ﻿---
 layout: post
-title:kafka组件深度解析
+title: kafka组件深度解析
 category: Hadoop
 catalog: yes
 description:  kafka组件深度解析

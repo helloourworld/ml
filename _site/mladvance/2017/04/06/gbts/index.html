@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -237,7 +241,7 @@
 
 <p>  下面的代码是分类的例子。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.GradientBoostedTrees</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.GradientBoostedTrees</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.configuration.BoostingStrategy</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.model.GradientBoostedTreesModel</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
@@ -263,11 +267,10 @@
 <span class="k">val</span> <span class="n">testErr</span> <span class="k">=</span> <span class="n">labelAndPreds</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">r</span> <span class="k">=&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">_1</span> <span class="o">!=</span> <span class="n">r</span><span class="o">.</span><span class="n">_2</span><span class="o">).</span><span class="n">count</span><span class="o">.</span><span class="n">toDouble</span> <span class="o">/</span> <span class="n">testData</span><span class="o">.</span><span class="n">count</span><span class="o">()</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Test Error = "</span> <span class="o">+</span> <span class="n">testErr</span><span class="o">)</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Learned classification GBT model:\n"</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">toDebugString</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  下面的代码是回归的例子。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.GradientBoostedTrees</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.GradientBoostedTrees</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.configuration.BoostingStrategy</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.model.GradientBoostedTreesModel</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
@@ -292,8 +295,7 @@
 <span class="k">val</span> <span class="n">testMSE</span> <span class="k">=</span> <span class="n">labelsAndPredictions</span><span class="o">.</span><span class="n">map</span><span class="o">{</span> <span class="k">case</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="o">((</span><span class="n">v</span> <span class="o">-</span> <span class="n">p</span><span class="o">),</span> <span class="mi">2</span><span class="o">)}.</span><span class="n">mean</span><span class="o">()</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Test Mean Squared Error = "</span> <span class="o">+</span> <span class="n">testMSE</span><span class="o">)</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Learned regression GBT model:\n"</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">toDebugString</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="5-源码分析">5 源码分析</h2>
 
@@ -301,7 +303,7 @@
 
 <p>  梯度提升树的训练从<code class="highlighter-rouge">run</code>方法开始。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span><span class="k">:</span> <span class="kt">GradientBoostedTreesModel</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span><span class="k">:</span> <span class="kt">GradientBoostedTreesModel</span> <span class="o">=</span> <span class="o">{</span>
     <span class="k">val</span> <span class="n">algo</span> <span class="k">=</span> <span class="n">boostingStrategy</span><span class="o">.</span><span class="n">treeStrategy</span><span class="o">.</span><span class="n">algo</span>
     <span class="n">algo</span> <span class="k">match</span> <span class="o">{</span>
       <span class="k">case</span> <span class="nc">Regression</span> <span class="k">=&gt;</span>
@@ -314,8 +316,7 @@
         <span class="k">throw</span> <span class="k">new</span> <span class="nc">IllegalArgumentException</span><span class="o">(</span><span class="n">s</span><span class="s">"$algo is not supported by the gradient boosting."</span><span class="o">)</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  在<code class="highlighter-rouge">MLlib</code>中，梯度提升树只能用于二分类和回归。所以，在上面的代码中，将标签映射为<code class="highlighter-rouge">-1,+1</code>，那么二分类也可以被当做回归。整个训练过程在<code class="highlighter-rouge">GradientBoostedTrees.boost</code>中实现。
 <code class="highlighter-rouge">GradientBoostedTrees.boost</code>的过程分为三步，第一步，初始化参数；第二步，训练第一棵树；第三步，迭代训练后续的树。下面分别介绍这三步。</p>
@@ -324,7 +325,7 @@
   <li>初始化参数</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// 初始化梯度提升参数
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 初始化梯度提升参数
 // 迭代次数，默认为100
 </span><span class="k">val</span> <span class="n">numIterations</span> <span class="k">=</span> <span class="n">boostingStrategy</span><span class="o">.</span><span class="n">numIterations</span>
 <span class="c1">// 基学习器
@@ -352,14 +353,13 @@
     <span class="n">treeStrategy</span><span class="o">.</span><span class="n">getCheckpointInterval</span><span class="o">,</span> <span class="n">input</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">validatePredErrorCheckpointer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PeriodicRDDCheckpointer</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)](</span>
     <span class="n">treeStrategy</span><span class="o">.</span><span class="n">getCheckpointInterval</span><span class="o">,</span> <span class="n">input</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>训练第一棵树（即第一个基学习器）</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//通过训练数据训练出一颗决策树，具体信息请参考随机森林的分析
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//通过训练数据训练出一颗决策树，具体信息请参考随机森林的分析
 </span><span class="k">val</span> <span class="n">firstTreeModel</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DecisionTree</span><span class="o">(</span><span class="n">treeStrategy</span><span class="o">).</span><span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">firstTreeWeight</span> <span class="k">=</span> <span class="mf">1.0</span>
 <span class="n">baseLearners</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="k">=</span> <span class="n">firstTreeModel</span>
@@ -367,12 +367,11 @@
 <span class="k">var</span> <span class="n">predError</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span> <span class="k">=</span> <span class="nc">GradientBoostedTreesModel</span><span class="o">.</span>
       <span class="n">computeInitialPredictionAndError</span><span class="o">(</span><span class="n">input</span><span class="o">,</span> <span class="n">firstTreeWeight</span><span class="o">,</span> <span class="n">firstTreeModel</span><span class="o">,</span> <span class="n">loss</span><span class="o">)</span>
 <span class="n">predErrorCheckpointer</span><span class="o">.</span><span class="n">update</span><span class="o">(</span><span class="n">predError</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  这里比较关键的是通过<code class="highlighter-rouge">GradientBoostedTreesModel.computeInitialPredictionAndError</code>计算初始的预测和误差。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">computeInitialPredictionAndError</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">computeInitialPredictionAndError</span><span class="o">(</span>
       <span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">],</span>
       <span class="n">initTreeWeight</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
       <span class="n">initTree</span><span class="k">:</span> <span class="kt">DecisionTreeModel</span><span class="o">,</span>
@@ -383,12 +382,11 @@
       <span class="o">(</span><span class="n">pred</span><span class="o">,</span> <span class="n">error</span><span class="o">)</span>
     <span class="o">}</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  根据选择的损失函数的不同，<code class="highlighter-rouge">computeError</code>的实现不同。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//对数损失的实现
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//对数损失的实现
 </span><span class="k">override</span> <span class="k">private</span><span class="o">[</span><span class="kt">mllib</span><span class="o">]</span> <span class="k">def</span> <span class="n">computeError</span><span class="o">(</span><span class="n">prediction</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
     <span class="k">val</span> <span class="n">margin</span> <span class="k">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">label</span> <span class="o">*</span> <span class="n">prediction</span>
     <span class="c1">// The following is equivalent to 2.0 * log(1 + exp(-margin)) but more numerically stable.
@@ -399,14 +397,13 @@
     <span class="k">val</span> <span class="n">err</span> <span class="k">=</span> <span class="n">label</span> <span class="o">-</span> <span class="n">prediction</span>
     <span class="n">err</span> <span class="o">*</span> <span class="n">err</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>迭代训练后续树</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">validatePredError</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span> <span class="k">=</span> <span class="nc">GradientBoostedTreesModel</span><span class="o">.</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">validatePredError</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span> <span class="k">=</span> <span class="nc">GradientBoostedTreesModel</span><span class="o">.</span>
       <span class="n">computeInitialPredictionAndError</span><span class="o">(</span><span class="n">validationInput</span><span class="o">,</span> <span class="n">firstTreeWeight</span><span class="o">,</span> <span class="n">firstTreeModel</span><span class="o">,</span> <span class="n">loss</span><span class="o">)</span>
 <span class="k">if</span> <span class="o">(</span><span class="n">validate</span><span class="o">)</span> <span class="n">validatePredErrorCheckpointer</span><span class="o">.</span><span class="n">update</span><span class="o">(</span><span class="n">validatePredError</span><span class="o">)</span>
 <span class="k">var</span> <span class="n">bestValidateError</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">validate</span><span class="o">)</span> <span class="n">validatePredError</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="o">()</span> <span class="k">else</span> <span class="mf">0.0</span>
@@ -452,12 +449,11 @@
     <span class="o">}</span>
     <span class="n">m</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  上面代码最重要的部分是更新预测和误差的实现。通过<code class="highlighter-rouge">GradientBoostedTreesModel.updatePredictionError</code>实现。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code> <span class="k">def</span> <span class="n">updatePredictionError</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">def</span> <span class="n">updatePredictionError</span><span class="o">(</span>
     <span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">],</span>
     <span class="n">predictionAndError</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)],</span>
     <span class="n">treeWeight</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
@@ -472,14 +468,13 @@
     <span class="o">}</span>
     <span class="n">newPredError</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="52-测试">5.2 测试</h3>
 
 <p>  利用梯度提升树进行预测时，调用的<code class="highlighter-rouge">predict</code>方法扩展自<code class="highlighter-rouge">TreeEnsembleModel</code>，它是树结构组合模型的表示，其核心代码如下所示：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">//不同的策略采用不同的预测方法
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//不同的策略采用不同的预测方法
 </span><span class="k">def</span> <span class="n">predict</span><span class="o">(</span><span class="n">features</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
     <span class="o">(</span><span class="n">algo</span><span class="o">,</span> <span class="n">combiningStrategy</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
       <span class="k">case</span> <span class="o">(</span><span class="nc">Regression</span><span class="o">,</span> <span class="nc">Sum</span><span class="o">)</span> <span class="k">=&gt;</span>
@@ -502,8 +497,7 @@
     <span class="c1">//两个向量的内集
 </span>    <span class="n">blas</span><span class="o">.</span><span class="n">ddot</span><span class="o">(</span><span class="n">numTrees</span><span class="o">,</span> <span class="n">treePredictions</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">treeWeights</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h1 id="参考文献">参考文献</h1>
 
@@ -654,13 +648,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

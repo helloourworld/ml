@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -200,7 +204,7 @@
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">boole</span> <span class="n">express</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">boole</span> <span class="n">express</span><span class="o">)</span>
 <span class="o">{</span>
     <span class="c1">// 如果布尔表达式为true则执行该语句块；否则跳过大括号内的语句块，执行大括号之后的语句块。
 </span><span class="o">}</span>
@@ -214,15 +218,14 @@
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="2-ifelse-语句">2 if…else 语句</h4>
 <p>if 语句后可以紧跟 else 语句，else 内的语句块可以在布尔表达式为 false 的时候执行。</p>
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span><span class="o">){</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span><span class="o">){</span>
    <span class="c1">// 如果布尔表达式为 true 则执行该语句块
 </span><span class="o">}</span><span class="k">else</span><span class="o">{</span>
    <span class="c1">// 如果布尔表达式为 false 则执行该语句块
@@ -239,14 +242,13 @@
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="3-ifelse-ifelse-语句">3 if…else if…else 语句</h4>
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">1</span><span class="o">){</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">1</span><span class="o">){</span>
    <span class="c1">// 如果布尔表达式 1 为 true 则执行该语句块
 </span><span class="o">}</span><span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">2</span><span class="o">){</span>
    <span class="c1">// 如果布尔表达式 2 为 true 则执行该语句块
@@ -269,14 +271,13 @@
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="4-ifelse-嵌套语句">4 if…else 嵌套语句</h4>
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">1</span><span class="o">){</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">1</span><span class="o">){</span>
    <span class="c1">// 如果布尔表达式 1 为 true 则执行该语句块
 </span>   <span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">2</span><span class="o">){</span>
       <span class="c1">// 如果布尔表达式 2 为 true 则执行该语句块
@@ -294,8 +295,7 @@
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="循环">循环</h3>
 
@@ -309,7 +309,7 @@
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">while</span><span class="o">(</span><span class="n">condition</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="o">(</span><span class="n">condition</span><span class="o">)</span>
 <span class="o">{</span>
     <span class="n">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 <span class="o">}</span>
@@ -325,8 +325,7 @@
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="2-dowhile-循环">2 do…while 循环</h4>
 <p>不像 while 循环在循环头部测试循环条件, Scala 语言中，do…while 循环是在循环的尾部检查它的条件。
@@ -341,7 +340,7 @@ do…while 循环与 while 循环类似，但是 do…while 循环会确保至�
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">do</span>  <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">do</span>  <span class="o">{</span>
     <span class="n">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">condition</span><span class="o">);</span>
 <span class="k">#</span> <span class="n">ex</span>
@@ -356,14 +355,13 @@ do…while 循环与 while 循环类似，但是 do…while 循环会确保至�
         <span class="o">}</span><span class="k">while</span> <span class="o">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="o">);</span><span class="k">#</span> <span class="mi">10</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="3-for-循环">3 for 循环</h4>
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">Range</span> <span class="o">){</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">Range</span> <span class="o">){</span>
    <span class="n">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="n">ex</span>
@@ -376,12 +374,11 @@ do…while 循环与 while 循环类似，但是 do…while 循环会确保至�
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>以下是一个使用了 i until j 语法(不包含 j)的实例:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Loops</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Loops</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
         <span class="c1">//for Loop
@@ -390,12 +387,11 @@ do…while 循环与 while 循环类似，但是 do…while 循环会确保至�
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>在 for 循环 中你可以使用分号 (;) 来设置多个区间，它将迭代给定区间所有的可能值。以下实例演示了两个区间的循环实例：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Loops</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Loops</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
         <span class="k">var</span> <span class="n">b</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
@@ -426,12 +422,11 @@ do…while 循环与 while 循环类似，但是 do…while 循环会确保至�
 <span class="kt">Value</span> <span class="kt">of</span> <span class="kt">b:</span> <span class="err">2</span>
 <span class="kt">Value</span> <span class="kt">of</span> <span class="kt">a:</span> <span class="err">3</span>
 <span class="kt">Value</span> <span class="kt">of</span> <span class="kt">b:</span> <span class="err">3</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>for 循环集合</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">List</span> <span class="o">){</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">List</span> <span class="o">){</span>
    <span class="n">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="n">ex</span>
@@ -445,14 +440,13 @@ do…while 循环与 while 循环类似，但是 do…while 循环会确保至�
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>for 循环过滤
 Scala 可以使用一个或多个 if 语句来过滤一些元素。
 以下是在 for 循环中使用过滤器的语法。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">List</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">List</span>
       <span class="k">if</span> <span class="n">condition1</span><span class="o">;</span> <span class="k">if</span> <span class="n">condition2</span><span class="o">...</span>
    <span class="o">){</span>
    <span class="n">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
@@ -467,13 +461,12 @@ Scala 可以使用一个或多个 if 语句来过滤一些元素。
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>for 使用 yield
 你可以将 for 循环的返回值作为一个变量存储。语法格式如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">retVal</span> <span class="k">=</span> <span class="k">for</span><span class="o">{</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">List</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">retVal</span> <span class="k">=</span> <span class="k">for</span><span class="o">{</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">List</span>
      <span class="k">if</span> <span class="n">condition1</span><span class="o">;</span> <span class="k">if</span> <span class="n">condition2</span><span class="o">...</span>
 <span class="o">}</span><span class="k">yield</span> <span class="n">x</span>
 <span class="k">#</span> <span class="n">ex</span>
@@ -491,8 +484,7 @@ Scala 可以使用一个或多个 if 语句来过滤一些元素。
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>注意大括号中用于保存变量和条件，retVal 是变量， 循环中的 yield 会把当前的元素记下来，保存在集合中，循环结束后将返回该集合。</p>
 
@@ -502,7 +494,7 @@ Scala 可以使用一个或多个 if 语句来过滤一些元素。
 
 <p>Scala 中 break 的语法有点不大一样，格式如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// 导入以下包
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 导入以下包
 </span><span class="k">import</span> <span class="nn">scala.util.control._</span>
 
 <span class="c1">// 创建 Breaks 对象
@@ -517,13 +509,12 @@ Scala 可以使用一个或多个 if 语句来过滤一些元素。
 </span>       <span class="n">loop</span><span class="o">.</span><span class="n">break</span><span class="o">;</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>流程图
 <img src="/images/scala/cpp_break_statement.jpg" alt="" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import scala.util.control._
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.util.control._
 
 object Loops {
     def main(args: Array[String]) {
@@ -548,13 +539,12 @@ Value of a: 2
 Value of a: 3
 Value of a: 4
 After the loop
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>中断嵌套循环
 以下实例演示了如何中断嵌套循环：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.util.control._</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.util.control._</span>
 
 <span class="k">object</span> <span class="nc">Breaks</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
@@ -597,8 +587,7 @@ After the loop
 <span class="kt">Value</span> <span class="kt">of</span> <span class="kt">a:</span> <span class="err">5</span>
 <span class="kt">Value</span> <span class="kt">of</span> <span class="kt">b:</span> <span class="err">11</span>
 <span class="kt">Value</span> <span class="kt">of</span> <span class="kt">b:</span> <span class="err">12</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
                 <hr>
@@ -743,13 +732,13 @@ After the loop
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

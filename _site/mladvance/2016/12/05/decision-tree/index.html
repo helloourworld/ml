@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -209,7 +213,7 @@
 
 <p>  决策树学习的主要目的是为了产生一棵泛化能力强的决策树。其基本流程遵循简单而直接的“分而治之”的策略。它的流程实现如下所示：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>输入：训练集 D={(x_1,y_1),(x_2,y_2),...,(x_m,y_m)};
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>输入：训练集 D={(x_1,y_1),(x_2,y_2),...,(x_m,y_m)};
       属性集 A={a_1,a_2,...,a_d}
 过程：函数GenerateTree(D,A)
 1: 生成节点node；
@@ -228,8 +232,7 @@
 14:       以GenerateTree(D_v,A\{a*})为分支节点
 15:    end if
 16: end for
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  决策树的生成是一个递归的过程。有三种情况会导致递归的返回：（1）当前节点包含的样本全属于同一个类别。（2）当前属性值为空，或者所有样本在所有属性上取相同的值。
 （3）当前节点包含的样本集合为空。</p>
 
@@ -314,7 +317,7 @@
 
 <p>  下面的例子用于分类。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.DecisionTree</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.DecisionTree</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.model.DecisionTreeModel</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
 <span class="c1">// Load and parse the data file.
@@ -339,12 +342,11 @@
 <span class="k">val</span> <span class="n">testErr</span> <span class="k">=</span> <span class="n">labelAndPreds</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">r</span> <span class="k">=&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">_1</span> <span class="o">!=</span> <span class="n">r</span><span class="o">.</span><span class="n">_2</span><span class="o">).</span><span class="n">count</span><span class="o">().</span><span class="n">toDouble</span> <span class="o">/</span> <span class="n">testData</span><span class="o">.</span><span class="n">count</span><span class="o">()</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Test Error = "</span> <span class="o">+</span> <span class="n">testErr</span><span class="o">)</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Learned classification tree model:\n"</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">toDebugString</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  下面的例子用于回归。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.DecisionTree</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.DecisionTree</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.model.DecisionTreeModel</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
 <span class="c1">// Load and parse the data file.
@@ -368,25 +370,23 @@
 <span class="k">val</span> <span class="n">testMSE</span> <span class="k">=</span> <span class="n">labelsAndPredictions</span><span class="o">.</span><span class="n">map</span><span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="o">(</span><span class="n">v</span> <span class="o">-</span> <span class="n">p</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">}.</span><span class="n">mean</span><span class="o">()</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Test Mean Squared Error = "</span> <span class="o">+</span> <span class="n">testMSE</span><span class="o">)</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Learned regression tree model:\n"</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">toDebugString</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="22-源码分析">2.2 源码分析</h3>
 
 <p>  在<code class="highlighter-rouge">MLlib</code>中，决策树的实现和随机森林的实现是在一起的。随机森林实现中，当树的个数为1时，它的实现即为决策树的实现。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span><span class="k">:</span> <span class="kt">DecisionTreeModel</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span><span class="k">:</span> <span class="kt">DecisionTreeModel</span> <span class="o">=</span> <span class="o">{</span>
     <span class="c1">//树个数为1
 </span>    <span class="k">val</span> <span class="n">rf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">RandomForest</span><span class="o">(</span><span class="n">strategy</span><span class="o">,</span> <span class="n">numTrees</span> <span class="k">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">featureSubsetStrategy</span> <span class="k">=</span> <span class="s">"all"</span><span class="o">,</span> <span class="n">seed</span> <span class="k">=</span> <span class="mi">0</span><span class="o">)</span>
     <span class="k">val</span> <span class="n">rfModel</span> <span class="k">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="o">)</span>
     <span class="n">rfModel</span><span class="o">.</span><span class="n">trees</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  这里的<code class="highlighter-rouge">strategy</code>是<code class="highlighter-rouge">Strategy</code>的实例，它包含如下信息：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
  * Stores all the configuration options for tree construction
  * @param algo  Learning goal.  Supported:
  *              [[org.apache.spark.mllib.tree.configuration.Algo.Classification]],
@@ -442,8 +442,7 @@
     <span class="nd">@Since</span><span class="o">(</span><span class="s">"1.2.0"</span><span class="o">)</span> <span class="nd">@BeanProperty</span> <span class="k">var</span> <span class="n">subsamplingRate</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span>
     <span class="nd">@Since</span><span class="o">(</span><span class="s">"1.2.0"</span><span class="o">)</span> <span class="nd">@BeanProperty</span> <span class="k">var</span> <span class="n">useNodeIdCache</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="o">,</span>
     <span class="nd">@Since</span><span class="o">(</span><span class="s">"1.2.0"</span><span class="o">)</span> <span class="nd">@BeanProperty</span> <span class="k">var</span> <span class="n">checkpointInterval</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Serializable</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  决策树的实现我们在<a href="../组合树/随机森林/random-forests.md">随机森林</a>专题介绍。这里我们只需要知道，当随机森林的树个数为1时，它即为决策树，
 并且此时，树的训练所用的特征是全部特征，而不是随机选择的部分特征。即<code class="highlighter-rouge">featureSubsetStrategy = "all"</code>。</p>
@@ -597,13 +596,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

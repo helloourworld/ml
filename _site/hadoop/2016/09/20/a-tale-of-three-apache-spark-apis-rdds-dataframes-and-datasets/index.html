@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -292,18 +296,16 @@
 
 <p>You could express each JSON entry as DeviceIoTData, a custom object, with a Scala case class.</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">case</span> <span class="k">class</span> <span class="nc">DeviceIoTData</span> <span class="o">(</span><span class="n">battery_level</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">c02_level</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">cca2</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">cca3</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">cn</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">device_id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">device_name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">humidity</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">ip</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">latitude</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">lcd</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">longitude</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">scale</span><span class="k">:</span><span class="kt">String</span><span class="o">,</span> <span class="n">temp</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">timestamp</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">case</span> <span class="k">class</span> <span class="nc">DeviceIoTData</span> <span class="o">(</span><span class="n">battery_level</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">c02_level</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">cca2</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">cca3</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">cn</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">device_id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">device_name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">humidity</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">ip</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">latitude</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">lcd</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">longitude</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">scale</span><span class="k">:</span><span class="kt">String</span><span class="o">,</span> <span class="n">temp</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">timestamp</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span>
+</code></pre></div></div>
 
 <p>Next, we can read the data from a JSON file.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// read the json file and create the dataset from the
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// read the json file and create the dataset from the
 // case class DeviceIoTData
 // ds is now a collection of JVM Scala objects DeviceIoTData
 val ds = spark.read.json("/databricks-public-datasets/data/iot/iot_devices.json").as[DeviceIoTData]
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Three things happen here under the hood in the code above:</p>
 
@@ -323,7 +325,7 @@ val ds = spark.read.json("/databricks-public-datasets/data/iot/iot_devices.json"
 
 <p>Expressing your computation in a domain specific API is far simpler and easier than with relation algebra type expressions (in RDDs). For instance, the code below will filter() and  map() create another immutable Dataset.</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// Use filter(), map(), groupBy() country, and compute avg()
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Use filter(), map(), groupBy() country, and compute avg()
 // for temperatures and humidity. This operation results in
 // another immutable Dataset. The query is simpler to read,
 // and expressive
@@ -332,8 +334,7 @@ val ds = spark.read.json("/databricks-public-datasets/data/iot/iot_devices.json"
 
 <span class="c1">//display the resulting dataset
 </span><span class="n">display</span><span class="o">(</span><span class="n">dsAvgTmp</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><img src="https://databricks.com/wp-content/uploads/2016/07/displaying-a-dataset-in-databricks.gif" alt="" /></p>
 
@@ -360,14 +361,13 @@ val ds = spark.read.json("/databricks-public-datasets/data/iot/iot_devices.json"
 
 <p>Note that you can always seamlessly interoperate or convert from DataFrame and/or Dataset to an RDD, by simple method call .rdd. For instance,</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// select specific fields from the Dataset, apply a predicate
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// select specific fields from the Dataset, apply a predicate
 // using the where() method, convert to an RDD, and show first 10
 // RDD rows
 </span><span class="k">val</span> <span class="n">deviceEventsDS</span> <span class="k">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">select</span><span class="o">(</span><span class="n">$</span><span class="s">"device_name"</span><span class="o">,</span> <span class="n">$</span><span class="s">"cca3"</span><span class="o">,</span> <span class="n">$</span><span class="s">"c02_level"</span><span class="o">).</span><span class="n">where</span><span class="o">(</span><span class="n">$</span><span class="s">"c02_level"</span> <span class="o">&gt;</span> <span class="mi">1300</span><span class="o">)</span>
 <span class="c1">// convert to RDDs and take the first 10 rows
 </span><span class="k">val</span> <span class="n">eventsRDD</span> <span class="k">=</span> <span class="n">deviceEventsDS</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">take</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><img src="/images/spark/convert-dataset-to-rdd-on-Databricks.png" alt="" /></p>
 
@@ -524,13 +524,13 @@ val ds = spark.read.json("/databricks-public-datasets/data/iot/iot_devices.json"
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

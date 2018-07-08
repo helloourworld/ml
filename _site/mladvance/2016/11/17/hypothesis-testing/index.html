@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -203,7 +207,7 @@
 
 <p>  <code class="highlighter-rouge">spark.mllib</code>也支持输入数据类型为<code class="highlighter-rouge">RDD[LabeledPoint]</code>，它用来通过卡方独立性检测作特征选择。<code class="highlighter-rouge">Statistics</code>提供方法用来作皮尔森卡方检测。下面是一个例子：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code>    <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg._</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg._</span>
     <span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LabeledPoint</span>
     <span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.Statistics</span>
     <span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.test.ChiSqTestResult</span>
@@ -247,14 +251,13 @@
       <span class="n">println</span><span class="o">(</span><span class="n">k</span> <span class="o">+</span> <span class="s">"\n"</span><span class="o">)</span>
     <span class="o">}</span>  <span class="c1">// summary of the test
 </span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  另外，<code class="highlighter-rouge">spark.mllib</code>提供了一个<code class="highlighter-rouge">Kolmogorov-Smirnov (KS)</code>检测的<code class="highlighter-rouge">1-sample, 2-sided</code>实现，用来检测概率分布的相等性。通过提供理论分布（现在仅仅支持正太分布）的名字以及它相应的参数，
 或者提供一个计算累积分布(<code class="highlighter-rouge">cumulative distribution</code>)的函数，用户可以检测原假设或零假设(<code class="highlighter-rouge">null hypothesis</code>)：即样本是否来自于这个分布。用户检测正太分布，但是不提供分布参数，检测会默认该分布为标准正太分布。</p>
 
 <p>  <code class="highlighter-rouge">Statistics</code>提供了一个运行<code class="highlighter-rouge">1-sample, 2-sided KS</code>检测的方法，下面就是一个应用的例子。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code>    <span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.Statistics</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.Statistics</span>
     <span class="k">import</span> <span class="nn">org.apache.spark.rdd.RDD</span>
 
     <span class="k">val</span> <span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="o">(</span><span class="nc">Seq</span><span class="o">(</span><span class="mf">0.1</span><span class="o">,</span> <span class="mf">0.15</span><span class="o">,</span> <span class="mf">0.2</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">,</span> <span class="mf">0.25</span><span class="o">))</span>  <span class="c1">// an RDD of sample data
@@ -270,8 +273,7 @@
 </span>    <span class="k">val</span> <span class="n">myCDF</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="mf">0.1</span> <span class="o">-&gt;</span> <span class="mf">0.2</span><span class="o">,</span> <span class="mf">0.15</span> <span class="o">-&gt;</span> <span class="mf">0.6</span><span class="o">,</span> <span class="mf">0.2</span> <span class="o">-&gt;</span> <span class="mf">0.05</span><span class="o">,</span> <span class="mf">0.3</span> <span class="o">-&gt;</span> <span class="mf">0.05</span><span class="o">,</span> <span class="mf">0.25</span> <span class="o">-&gt;</span> <span class="mf">0.1</span><span class="o">)</span>
     <span class="k">val</span> <span class="n">testResult2</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">kolmogorovSmirnovTest</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">myCDF</span><span class="o">)</span>
     <span class="n">println</span><span class="o">(</span><span class="n">testResult2</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="流式显著性检测">流式显著性检测</h2>
 
@@ -306,7 +308,7 @@
 
 <p>  <code class="highlighter-rouge">StreamingTest</code>支持流式假设检测。下面是一个应用的例子。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="n">ssc</span><span class="o">.</span><span class="n">textFileStream</span><span class="o">(</span><span class="n">dataDir</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="s">","</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="n">ssc</span><span class="o">.</span><span class="n">textFileStream</span><span class="o">(</span><span class="n">dataDir</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="s">","</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
   <span class="k">case</span> <span class="nc">Array</span><span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">BinarySample</span><span class="o">(</span><span class="n">label</span><span class="o">.</span><span class="n">toBoolean</span><span class="o">,</span> <span class="n">value</span><span class="o">.</span><span class="n">toDouble</span><span class="o">)</span>
 <span class="o">})</span>
 <span class="k">val</span> <span class="n">streamingTest</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">StreamingTest</span><span class="o">()</span>
@@ -315,8 +317,7 @@
   <span class="o">.</span><span class="n">setTestMethod</span><span class="o">(</span><span class="s">"welch"</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">out</span> <span class="k">=</span> <span class="n">streamingTest</span><span class="o">.</span><span class="n">registerStream</span><span class="o">(</span><span class="n">data</span><span class="o">)</span>
 <span class="n">out</span><span class="o">.</span><span class="n">print</span><span class="o">()</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h1 id="参考文献">参考文献</h1>
 
@@ -466,13 +467,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

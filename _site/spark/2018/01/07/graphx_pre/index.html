@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -243,13 +247,12 @@ graph.edges.filter(e =&gt; e.srcId &gt; e.dstId).count
   <p>Note that graph.vertices returns an VertexRDD[(String, String)] which extends RDD[(VertexID, (String, String))] and so we use the scala case expression to deconstruct the tuple. On the other hand, graph.edges returns an EdgeRDD containing Edge[String] objects. We could have also used the case class type constructor as in the following</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>graph.edges.filter { case Edge(src, dst, prop) =&gt; src &gt; dst }.count
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph.edges.filter { case Edge(src, dst, prop) =&gt; src &gt; dst }.count
+</code></pre></div></div>
 
 <p>In addition to the vertex and edge views of the property graph, GraphX also exposes a triplet view. The triplet view logically joins the vertex and edge properties yielding an RDD[EdgeTriplet[VD, ED]] containing instances of the EdgeTriplet class. This join can be expressed in the following SQL expression:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>SELECT src.id, dst.id, src.attr, e.attr, dst.attr
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT src.id, dst.id, src.attr, e.attr, dst.attr
 FROM edges AS e LEFT JOIN vertices AS src, vertices AS dst
 ON e.srcId = src.Id AND e.dstId = dst.Id
 
@@ -266,15 +269,14 @@ from ylj_edge as e
 left join ylj_vertex as src
 left join ylj_vertex as dst
 on e.srcid = src.id and e.dstid = dst.id;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>or graphically as:
 <img src="/images/spark/graphx/triplet.png" alt="The triplet graph" /></p>
 
 <p>The EdgeTriplet class extends the Edge class by adding the srcAttr and dstAttr members which contain the source and destination properties respectively. We can use the triplet view of a graph to render a collection of strings describing relationships between users.</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">graph</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">)</span>, <span class="kt">String</span><span class="o">]</span> <span class="c1">// Constructed from above
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">graph</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">)</span>, <span class="kt">String</span><span class="o">]</span> <span class="c1">// Constructed from above
 // Use the triplets view to create an RDD of facts.
 </span><span class="k">val</span> <span class="n">facts</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span>
   <span class="n">graph</span><span class="o">.</span><span class="n">triplets</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">triplet</span> <span class="k">=&gt;</span>
@@ -283,22 +285,20 @@ on e.srcid = src.id and e.dstid = dst.id;
 
 <span class="k">val</span> <span class="n">facts</span> <span class="k">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">triplets</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">triplet</span> <span class="k">=&gt;</span> <span class="n">triplet</span><span class="o">.</span><span class="n">srcId</span> <span class="o">+</span> <span class="s">" is the "</span> <span class="o">+</span> <span class="n">triplet</span><span class="o">.</span><span class="n">attr</span> <span class="o">+</span> <span class="s">" of "</span> <span class="o">+</span> <span class="n">triplet</span><span class="o">.</span><span class="n">dstId</span><span class="o">)</span>
 <span class="n">facts</span><span class="o">.</span><span class="n">collect</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="graph-operators"><a href="http://spark.apache.org/docs/2.0.2/graphx-programming-guide.html#graph-operators">Graph Operators</a></h2>
 
 <p>Just as RDDs have basic operations like map, filter, and reduceByKey, property graphs also have a collection of basic operators that take user defined functions and produce new graphs with transformed properties and structure. The core operators that have optimized implementations are defined in Graph and convenient operators that are expressed as a compositions of the core operators are defined in <a href="http://spark.apache.org/docs/2.0.2/api/scala/index.html#org.apache.spark.graphx.GraphOps">GraphOps</a>. However, thanks to Scala implicits the operators in GraphOps are automatically available as members of Graph. For example, we can compute the in-degree of each vertex (defined in GraphOps) by the following:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">graph</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">)</span>, <span class="kt">String</span><span class="o">]</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">graph</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">)</span>, <span class="kt">String</span><span class="o">]</span>
 <span class="c1">// Use the implicit GraphOps.inDegrees operator
 </span><span class="k">val</span> <span class="n">inDegrees</span><span class="k">:</span> <span class="kt">VertexRDD</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">inDegrees</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Summary List of Operators</strong></p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="cm">/** Summary of the functionality in the property graph */</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/** Summary of the functionality in the property graph */</span>
 <span class="k">class</span> <span class="nc">Graph</span><span class="o">[</span><span class="kt">VD</span>, <span class="kt">ED</span><span class="o">]</span> <span class="o">{</span>
   <span class="c1">// Information about the Graph ===================================================================
 </span>  <span class="k">val</span> <span class="n">numEdges</span><span class="k">:</span> <span class="kt">Long</span>
@@ -356,52 +356,48 @@ on e.srcid = src.id and e.dstid = dst.id;
   <span class="k">def</span> <span class="n">triangleCount</span><span class="o">()</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">ED</span><span class="o">]</span>
   <span class="k">def</span> <span class="n">stronglyConnectedComponents</span><span class="o">(</span><span class="n">numIter</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[</span><span class="kt">VertexID</span>, <span class="kt">ED</span><span class="o">]</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="property-operators"><a href="http://spark.apache.org/docs/2.0.2/graphx-programming-guide.html#property-operators">Property Operators</a></h3>
 
 <p>Like the RDD map operator, the property graph contains the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>class Graph[VD, ED] {
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Graph[VD, ED] {
   def mapVertices[VD2](map: (VertexId, VD) =&gt; VD2): Graph[VD2, ED]
   def mapEdges[ED2](map: Edge[ED] =&gt; ED2): Graph[VD, ED2]
   def mapTriplets[ED2](map: EdgeTriplet[VD, ED] =&gt; ED2): Graph[VD, ED2]
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Each of these operators yields a new graph with the vertex or edge properties modified by the user defined map function.</p>
 
 <p>These operators are often used to initialize the graph for a particular computation or project away unnecessary properties. For example, given a graph with the out degrees as the vertex properties (we describe how to construct such a graph later), we initialize it for PageRank:</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="c1">// Given a graph where the vertex property is the out degree
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Given a graph where the vertex property is the out degree
 </span><span class="k">val</span> <span class="n">inputGraph</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">String</span><span class="o">]</span> <span class="k">=</span>
   <span class="n">graph</span><span class="o">.</span><span class="n">outerJoinVertices</span><span class="o">(</span><span class="n">graph</span><span class="o">.</span><span class="n">outDegrees</span><span class="o">)((</span><span class="n">vid</span><span class="o">,</span> <span class="k">_</span><span class="o">,</span> <span class="n">degOpt</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">degOpt</span><span class="o">.</span><span class="n">getOrElse</span><span class="o">(</span><span class="mi">0</span><span class="o">))</span>
 <span class="c1">// Construct a graph where each edge contains the weight
 // and each vertex is the initial PageRank
 </span><span class="k">val</span> <span class="n">outputGraph</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">]</span> <span class="k">=</span>
   <span class="n">inputGraph</span><span class="o">.</span><span class="n">mapTriplets</span><span class="o">(</span><span class="n">triplet</span> <span class="k">=&gt;</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">triplet</span><span class="o">.</span><span class="n">srcAttr</span><span class="o">).</span><span class="n">mapVertices</span><span class="o">((</span><span class="n">id</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="mf">1.0</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="structural-operators"><a href="http://spark.apache.org/docs/2.0.2/graphx-programming-guide.html#structural-operators">Structural Operators</a></h3>
 
 <p>Currently GraphX supports only a simple set of commonly used structural operators and we expect to add more in the future. The following is a list of the basic structural operators.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>class Graph[VD, ED] {
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Graph[VD, ED] {
   def reverse: Graph[VD, ED]
   def subgraph(epred: EdgeTriplet[VD,ED] =&gt; Boolean,
                vpred: (VertexId, VD) =&gt; Boolean): Graph[VD, ED]
   def mask[VD2, ED2](other: Graph[VD2, ED2]): Graph[VD, ED]
   def groupEdges(merge: (ED, ED) =&gt; ED): Graph[VD,ED]
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The subgraph operator takes vertex and edge predicates and returns the graph containing only the vertices that satisfy the vertex predicate (evaluate to true) and edges that satisfy the edge predicate and connect vertices that satisfy the vertex predicate. The subgraph operator can be used in number of situations to restrict the graph to the vertices and edges of interest or eliminate broken links. For example in the following code we remove broken links:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// Create an RDD for the vertices
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Create an RDD for the vertices
 val users: RDD[(VertexId, (String, String))] =
   sc.parallelize(Array((3L, ("rxin", "student")), (7L, ("jgonzal", "postdoc")),
                        (5L, ("franklin", "prof")), (2L, ("istoica", "prof")),
@@ -427,33 +423,30 @@ validGraph.vertices.collect.foreach(println(_))
 validGraph.triplets.map(
     triplet =&gt; triplet.srcAttr._1 + " is the " + triplet.attr + " of " + triplet.dstAttr._1
   ).collect.foreach(println(_))
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The mask operator constructs a subgraph by returning a graph that contains the vertices and edges that are also found in the input graph. This can be used in conjunction with the subgraph operator to restrict a graph based on the properties in another related graph. For example, we might run connected components using the graph with missing vertices and then restrict the answer to the valid subgraph.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// Run Connected Components
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Run Connected Components
 val ccGraph = graph.connectedComponents() // No longer contains missing field
 // Remove missing vertices as well as the edges to connected to them
 val validGraph = graph.subgraph(vpred = (id, attr) =&gt; attr._2 != "Missing")
 // Restrict the answer to the valid subgraph
 val validCCGraph = ccGraph.mask(validGraph)
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>The groupEdges operator merges parallel edges (i.e., duplicate edges between pairs of vertices) in the multigraph. In many numerical applications, parallel edges can be added (their weights combined) into a single edge thereby <strong>reducing the size of the graph.</strong></p>
 
 <h3 id="join-operators"><a href="http://spark.apache.org/docs/2.0.2/graphx-programming-guide.html#join-operators">Join Operators</a></h3>
 
 <p>In many cases it is necessary to join data from external collections (RDDs) with graphs. For example, we might have extra user properties that we want to merge with an existing graph or we might want to pull vertex properties from one graph into another. These tasks can be accomplished using the join operators. Below we list the key join operators:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>class Graph[VD, ED] {
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Graph[VD, ED] {
   def joinVertices[U](table: RDD[(VertexId, U)])(map: (VertexId, VD, U) =&gt; VD)
     : Graph[VD, ED]
   def outerJoinVertices[U, VD2](table: RDD[(VertexId, U)])(map: (VertexId, VD, Option[U]) =&gt; VD2)
     : Graph[VD2, ED]
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 <h3 id="neighborhood-aggregation"><a href="http://spark.apache.org/docs/2.0.2/graphx-programming-guide.html#neighborhood-aggregation">Neighborhood Aggregation</a></h3>
 
 <p>A key step in many graph analytics tasks is aggregating information about the neighborhood of each vertex. For example, we might want to know the number of followers each user has or the average age of the the followers of each user.</p>
@@ -462,15 +455,14 @@ val validCCGraph = ccGraph.mask(validGraph)
 
 <p>The core aggregation operation in GraphX is aggregateMessages. This operator applies a user defined sendMsg function to each edge triplet in the graph and then uses the mergeMsg function to aggregate those messages at their destination vertex.</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Graph</span><span class="o">[</span><span class="kt">VD</span>, <span class="kt">ED</span><span class="o">]</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Graph</span><span class="o">[</span><span class="kt">VD</span>, <span class="kt">ED</span><span class="o">]</span> <span class="o">{</span>
   <span class="k">def</span> <span class="n">aggregateMessages</span><span class="o">[</span><span class="kt">Msg:</span> <span class="kt">ClassTag</span><span class="o">](</span>
       <span class="n">sendMsg</span><span class="k">:</span> <span class="kt">EdgeContext</span><span class="o">[</span><span class="kt">VD</span>, <span class="kt">ED</span>, <span class="kt">Msg</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="nc">Unit</span><span class="o">,</span>
       <span class="n">mergeMsg</span><span class="k">:</span> <span class="o">(</span><span class="kt">Msg</span><span class="o">,</span> <span class="kt">Msg</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Msg</span><span class="o">,</span>
       <span class="n">tripletFields</span><span class="k">:</span> <span class="kt">TripletFields</span> <span class="o">=</span> <span class="nc">TripletFields</span><span class="o">.</span><span class="nc">All</span><span class="o">)</span>
     <span class="k">:</span> <span class="kt">VertexRDD</span><span class="o">[</span><span class="kt">Msg</span><span class="o">]</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>用户定义的sendMsg函数使用一个<a href="http://spark.apache.org/docs/2.0.2/api/scala/index.html#org.apache.spark.graphx.EdgeContext">EdgeContext</a>通过暴露源和目标属性同边属性及函数（<a href="http://spark.apache.org/docs/2.0.2/api/scala/index.html#org.apache.spark.graphx.EdgeContext@sendToSrc(msg:A):Unit">sendToSrc</a>, and <a href="http://spark.apache.org/docs/2.0.2/api/scala/index.html#org.apache.spark.graphx.EdgeContext@sendToDst(msg:A):Unit">sendToDst</a>）一起来发送短消息到源和目标属性。<strong>SendMsg如同MR中的map</strong>。</p>
 
@@ -486,7 +478,7 @@ val validCCGraph = ccGraph.mask(validGraph)
 
 <p>In the following example we use the aggregateMessages operator to compute the average age of the more senior followers of each user.</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.graphx.</span><span class="o">{</span><span class="nc">Graph</span><span class="o">,</span> <span class="nc">VertexRDD</span><span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.graphx.</span><span class="o">{</span><span class="nc">Graph</span><span class="o">,</span> <span class="nc">VertexRDD</span><span class="o">}</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.graphx.util.GraphGenerators</span>
 
 <span class="c1">// Create a graph with "age" as the vertex property.
@@ -510,12 +502,11 @@ val validCCGraph = ccGraph.mask(validGraph)
     <span class="n">value</span> <span class="k">match</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">count</span><span class="o">,</span> <span class="n">totalAge</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">totalAge</span> <span class="o">/</span> <span class="n">count</span> <span class="o">}</span> <span class="o">)</span>
 <span class="c1">// Display the results
 </span><span class="n">avgAgeOfOlderFollowers</span><span class="o">.</span><span class="n">collect</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>GraphGenerators.logNormalGraph随机图生成方法源码：默认出度为4，标准偏差为1.3，并行生成numVertices，partition默认为sc的默认partition。然后Vertex的属性值生成调用了sampleLogNormal方法生成，边的生成调用了generateRandomEdges方法，总边数为每个顶点与其出度的乘积之和，默认生成的边为：Edge<a href="src, rand.nextInt(maxVertexId), 1">Int</a>，也就是说目的顶点随机，可能重复也可能指向自己。 如下：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>def logNormalGraph(  
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def logNormalGraph(  
      sc: SparkContext, numVertices: Int, numEParts: Int = 0, mu: Double = 4.0,  
      sigma: Double = 1.3, seed: Long = -1): Graph[Long, Int] = {  
   
@@ -536,17 +527,15 @@ val validCCGraph = ccGraph.mask(validGraph)
   
    Graph(vertices, edges, 0)  
  }  
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code> <span class="k">val</span> <span class="n">graph</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Float</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">val</span> <span class="n">graph</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Float</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
 <span class="k">def</span> <span class="n">msgFun</span><span class="o">(</span><span class="n">triplet</span><span class="k">:</span> <span class="kt">EdgeContext</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Float</span>, <span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
   <span class="n">triplet</span><span class="o">.</span><span class="n">sendToDst</span><span class="o">(</span><span class="s">"Hi"</span><span class="o">)</span>
 <span class="o">}</span>
 <span class="k">def</span> <span class="n">reduceFun</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">b</span>
 <span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">aggregateMessages</span><span class="o">[</span><span class="kt">String</span><span class="o">](</span><span class="n">msgFun</span><span class="o">,</span> <span class="n">reduceFun</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="pregel-api"><a href="http://spark.apache.org/docs/2.0.2/graphx-programming-guide.html#pregel-api">Pregel API</a></h4>
 
@@ -560,7 +549,7 @@ val validCCGraph = ccGraph.mask(validGraph)
 
 <p>The following is the type signature of the Pregel operator as well as a sketch of its implementation (note calls to graph.cache have been removed):</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="k">class</span> <span class="nc">GraphOps</span><span class="o">[</span><span class="kt">VD</span>, <span class="kt">ED</span><span class="o">]</span> <span class="o">{</span>
   <span class="k">def</span> <span class="n">pregel</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>
       <span class="o">(</span><span class="n">initialMsg</span><span class="k">:</span> <span class="kt">A</span><span class="o">,</span>
@@ -592,8 +581,7 @@ val validCCGraph = ccGraph.mask(validGraph)
     <span class="n">g</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>各个参数的意义详细解释如下：</p>
 
@@ -613,7 +601,7 @@ val validCCGraph = ccGraph.mask(validGraph)
 
 <p>We can use the Pregel operator to express computation such as single source shortest path in the following example.</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.graphx.</span><span class="o">{</span><span class="nc">Graph</span><span class="o">,</span> <span class="nc">VertexId</span><span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.graphx.</span><span class="o">{</span><span class="nc">Graph</span><span class="o">,</span> <span class="nc">VertexId</span><span class="o">}</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.graphx.util.GraphGenerators</span>
 
 <span class="c1">// A graph with edge attributes containing distances
@@ -636,8 +624,7 @@ val validCCGraph = ccGraph.mask(validGraph)
 </span><span class="o">)</span>
 <span class="n">println</span><span class="o">(</span><span class="n">sssp</span><span class="o">.</span><span class="n">vertices</span><span class="o">.</span><span class="n">collect</span><span class="o">.</span><span class="n">mkString</span><span class="o">(</span><span class="s">"\n"</span><span class="o">))</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="graph-algorithms">Graph Algorithms</h2>
 
@@ -665,7 +652,7 @@ val validCCGraph = ccGraph.mask(validGraph)
 8,anonsys
 </code></pre>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.graphx.GraphLoader</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.graphx.GraphLoader</span>
 
 <span class="c1">// Load the edges as a graph
 </span><span class="k">val</span> <span class="n">graph</span> <span class="k">=</span> <span class="nc">GraphLoader</span><span class="o">.</span><span class="n">edgeListFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/graphx/followers.txt"</span><span class="o">)</span>
@@ -682,14 +669,13 @@ val validCCGraph = ccGraph.mask(validGraph)
 <span class="c1">// Print the result
 </span><span class="n">println</span><span class="o">(</span><span class="n">ranksByUsername</span><span class="o">.</span><span class="n">collect</span><span class="o">().</span><span class="n">mkString</span><span class="o">(</span><span class="s">"\n"</span><span class="o">))</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>PageRank algorithm implementation. There are two implementations of PageRank implemented.</p>
 
 <p>The first implementation uses the standalone Graph interface and runs PageRank for a fixed number of iterations:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>var PR = Array.fill(n)( 1.0 )
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var PR = Array.fill(n)( 1.0 )
 val oldPR = Array.fill(n)( 1.0 )
 for( iter &lt;- 0 until numIter ) {
   swap(oldPR, PR)
@@ -697,11 +683,10 @@ for( iter &lt;- 0 until numIter ) {
     PR[i] = alpha + (1 - alpha) * inNbrs[i].map(j =&gt; oldPR[j] / outDeg[j]).sum
   }
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>The second implementation uses the Pregel interface and runs PageRank until convergence:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>var PR = Array.fill(n)( 1.0 )
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var PR = Array.fill(n)( 1.0 )
 val oldPR = Array.fill(n)( 0.0 )
 while( max(abs(PR - oldPr)) &gt; tol ) {
   swap(oldPR, PR)
@@ -709,14 +694,13 @@ while( max(abs(PR - oldPr)) &gt; tol ) {
     PR[i] = alpha + (1 - \alpha) * inNbrs[i].map(j =&gt; oldPR[j] / outDeg[j]).sum
   }
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="connected-components"><a href="">Connected Components</a></h3>
 
 <p>The connected components algorithm labels each connected component of the graph with the ID of its lowest-numbered vertex. For example, in a social network, connected components can approximate clusters. GraphX contains an implementation of the algorithm in the <a href="http://spark.apache.org/docs/2.0.2/api/scala/index.html#org.apache.spark.graphx.lib.ConnectedComponents$">ConnectedComponents object</a>, and we compute the connected components of the example social network dataset from the PageRank section as follows:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import org.apache.spark.graphx.GraphLoader
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import org.apache.spark.graphx.GraphLoader
 
 // Load the graph as in the PageRank example
 val graph = GraphLoader.edgeListFile(sc, "data/graphx/followers.txt")
@@ -732,14 +716,13 @@ val ccByUsername = users.join(cc).map {
 }
 // Print the result
 println(ccByUsername.collect().mkString("\n"))
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="triangle-counting"><a href="http://spark.apache.org/docs/2.0.2/graphx-programming-guide.html#triangle-counting">Triangle Counting</a></h3>
 
 <p>A vertex is part of a triangle when it has two adjacent vertices with an edge between them. GraphX implements a triangle counting algorithm in the TriangleCount object that determines the number of triangles passing through each vertex, providing a measure of clustering. We compute the triangle count of the social network dataset from the PageRank section. Note that TriangleCount requires the edges to be in canonical orientation (srcId &lt; dstId) and the graph to be partitioned using Graph.partitionBy.</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>import org.apache.spark.graphx.<span class="o">{</span>GraphLoader, PartitionStrategy<span class="o">}</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import org.apache.spark.graphx.<span class="o">{</span>GraphLoader, PartitionStrategy<span class="o">}</span>
 
 // Load the edges <span class="k">in </span>canonical order and partition the graph <span class="k">for </span>triangle count
 val graph <span class="o">=</span> GraphLoader.edgeListFile<span class="o">(</span>sc, <span class="s2">"data/graphx/followers.txt"</span>, <span class="nb">true</span><span class="o">)</span>
@@ -747,18 +730,17 @@ val graph <span class="o">=</span> GraphLoader.edgeListFile<span class="o">(</sp
 // Find the triangle count <span class="k">for </span>each vertex
 val triCounts <span class="o">=</span> graph.triangleCount<span class="o">()</span>.vertices
 // Join the triangle counts with the usernames
-val users <span class="o">=</span> sc.textFile<span class="o">(</span><span class="s2">"data/graphx/users.txt"</span><span class="o">)</span>.map <span class="o">{</span> line <span class="o">=</span>&gt;
+val <span class="nb">users</span> <span class="o">=</span> sc.textFile<span class="o">(</span><span class="s2">"data/graphx/users.txt"</span><span class="o">)</span>.map <span class="o">{</span> line <span class="o">=&gt;</span>
   val fields <span class="o">=</span> line.split<span class="o">(</span><span class="s2">","</span><span class="o">)</span>
   <span class="o">(</span>fields<span class="o">(</span>0<span class="o">)</span>.toLong, fields<span class="o">(</span>1<span class="o">))</span>
 <span class="o">}</span>
-val triCountByUsername <span class="o">=</span> users.join<span class="o">(</span>triCounts<span class="o">)</span>.map <span class="o">{</span> <span class="k">case</span> <span class="o">(</span>id, <span class="o">(</span>username, tc<span class="p">)</span><span class="o">)</span> <span class="o">=</span>&gt;
+val triCountByUsername <span class="o">=</span> users.join<span class="o">(</span>triCounts<span class="o">)</span>.map <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="nb">id</span>, <span class="o">(</span>username, tc<span class="p">)</span><span class="o">)</span> <span class="o">=&gt;</span>
   <span class="o">(</span>username, tc<span class="o">)</span>
 <span class="o">}</span>
 // Print the result
 println<span class="o">(</span>triCountByUsername.collect<span class="o">()</span>.mkString<span class="o">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">))</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="prelimery-end">prelimery End.</h3>
 
@@ -905,13 +887,13 @@ println<span class="o">(</span>triCountByUsername.collect<span class="o">()</spa
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

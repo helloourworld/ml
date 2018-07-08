@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -202,7 +206,7 @@
   <li>以下是一个简单的整型值模式匹配实例：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">PatternMatching1</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">PatternMatching1</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span> <span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="n">println</span><span class="o">(</span><span class="n">matchTest</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
     <span class="o">}</span>
@@ -213,8 +217,7 @@
         <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">"many"</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>match 对应 Java 里的 switch，但是写在选择器表达式之后。即： <strong>选择器 match {备选项}</strong>。</li>
@@ -222,7 +225,7 @@
   <li>接下来我们来看一个不同数据类型的模式匹配：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">PatternMatching2</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">PatternMatching2</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span> <span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="n">println</span><span class="o">(</span><span class="n">matchTest</span><span class="o">(</span><span class="s">"two"</span><span class="o">))</span>
         <span class="n">println</span><span class="o">(</span><span class="n">matchTest</span><span class="o">(</span><span class="s">"2"</span><span class="o">))</span>
@@ -243,8 +246,7 @@
 <span class="n">many</span>
 <span class="n">one</span>
 <span class="n">scala</span><span class="o">.</span><span class="nc">Int</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="使用样例类">使用样例类</h3>
 
@@ -253,7 +255,7 @@
   <li>以下是样例类的简单实例:</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">object</span> <span class="nc">PatternMatching3</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">PatternMatching3</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">val</span> <span class="n">alice</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Alice"</span><span class="o">,</span> <span class="mi">28</span><span class="o">)</span>
         <span class="k">val</span> <span class="n">baobao</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Baobao"</span><span class="o">,</span> <span class="mi">29</span><span class="o">)</span>
@@ -275,8 +277,7 @@
 <span class="nc">Hi</span> <span class="nc">Alice</span><span class="o">!</span>
 <span class="nc">Hi</span><span class="o">,</span> <span class="nc">Baobao</span>
 <span class="nc">Age</span><span class="k">:</span> <span class="err">32</span> <span class="kt">year</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">Charlie?</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>在声明样例类时，下面的过程自动发生了：</p>
 
@@ -296,9 +297,9 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2016/09/02/hadoop_kafka/" data-toggle="tooltip" data-placement="top" title="Hadoop_kafka">
+                        <a href="/hadoop/2016/09/02/hadoop_kafka/" data-toggle="tooltip" data-placement="top" title="kafka组件深度解析">
                         Previous<br>
-                        <span>Hadoop_kafka</span>
+                        <span>kafka组件深度解析</span>
                         </a>
                     </li>
                     
@@ -432,13 +433,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

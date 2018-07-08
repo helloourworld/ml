@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -205,9 +209,8 @@
   </ul>
 </blockquote>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="n">a</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">5</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">a</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">5</span>
+</code></pre></div></div>
 
 <h3 id="2-函数function过程procedure">2 函数（function），过程（procedure）</h3>
 
@@ -217,24 +220,22 @@
   </ul>
 </blockquote>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">add</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">add</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
     <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 <span class="o">}</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"2 + 3 = "</span> <span class="o">+</span> <span class="n">add</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <ul>
     <li>过程的目的是为了某种“副作用”，而不是为了得到计算结果。如上所述，过程只是一种特殊的函数，具体来说，是没有返回值，或者说返回类型为Unit的函数。</li>
   </ul>
 </blockquote>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">sayHiTo</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">sayHiTo</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="o">{</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Hi, "</span> <span class="o">+</span> <span class="n">name</span><span class="o">)</span>
 <span class="o">}</span>
 <span class="n">sayHiTo</span><span class="o">(</span><span class="s">"DAVE"</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>PS:</p>
 
@@ -244,7 +245,7 @@
   <li>(3) 重复参数，类型后面有一个’*‘，这表示这个参数可以重复不定次数，包括0次。当参数个数不是0时，重复参数在内部其实是一个Array。使用时跟Array差不多，只是，调用时不能传递直接Array进来。如果需要传递整个Array（或者别的类型的序列）的话，有一个变通方法，那就是，加一个’_<em>‘符号，该符号与参数之间用逗号分隔，比如log(array: _</em>)。</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">log</span><span class="o">(</span><span class="n">msgs</span><span class="k">:</span> <span class="kt">String*</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">log</span><span class="o">(</span><span class="n">msgs</span><span class="k">:</span> <span class="kt">String*</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
   <span class="n">println</span><span class="o">(</span><span class="n">msgs</span><span class="o">.</span><span class="n">getClass</span><span class="o">.</span><span class="n">getName</span><span class="o">)</span>
   <span class="n">println</span><span class="o">(</span><span class="n">msgs</span><span class="o">.</span><span class="n">mkString</span><span class="o">(</span><span class="s">","</span><span class="o">))</span>
 <span class="o">}</span>
@@ -255,8 +256,7 @@
 <span class="c1">//log(array)
 //above line wouldn't compile, type mismatch, expected String
 </span><span class="n">log</span><span class="o">(</span><span class="n">array</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="3-操作符">3 操作符</h3>
 
@@ -305,7 +305,7 @@
 
 <p>每一个基本类型都有一个相对应的富包装类。 基本类型，在必要的时候通过隐式转换转换为对应的富包装类，从而可调用富包装类提供的方法。</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="err">／／</span><span class="no">RichInt</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">／／</span><span class="no">RichInt</span>
 <span class="n">val</span> <span class="n">n1</span> <span class="o">=</span> <span class="mi">2</span> <span class="n">max</span> <span class="mi">3</span>
 <span class="n">println</span><span class="p">(</span><span class="s2">"2 max 3 = "</span> <span class="o">+</span> <span class="n">n1</span><span class="p">)</span>
 
@@ -320,8 +320,7 @@
 
 <span class="n">val</span> <span class="n">n5</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="nf">isValidChar</span>
 <span class="n">println</span><span class="p">(</span><span class="s2">"-1.isValidChar = "</span> <span class="o">+</span> <span class="n">n5</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>2 String</li>
@@ -329,33 +328,30 @@
 
 <p>Scala里的String是直接借用了Java的String。不过，由于String实际是一系列Char的不可变的集合，Scala中大部分针对集合的操作，都可以用于String，具体来说，String的这些方法存在于类scala.collection.immutable.StringOps中。 由于String在需要时能隐式转换为StringOps，因此不需要任何额外的转换，String就可以使用这些方法。字符串表示方法是在双引号中(“) 包含一系列字符。多行字符串用三个双引号来表示分隔符，格式为：””” … “”“。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">r3</span> <span class="k">=</span> <span class="n">str</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span> <span class="k">_</span> <span class="o">!=</span> <span class="sc">'l'</span><span class="o">)</span> <span class="c1">//"Heo"
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">r3</span> <span class="k">=</span> <span class="n">str</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span> <span class="k">_</span> <span class="o">!=</span> <span class="sc">'l'</span><span class="o">)</span> <span class="c1">//"Heo"
 </span><span class="n">println</span><span class="o">(</span><span class="s">"\"Hello\".filter( _ != 'l') = "</span> <span class="o">+</span> <span class="n">r3</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>与Java或C#一样，String是不可变的，对String进行操作，会得到新的String实例。因此在需要频繁操作String的情况下，请使用StringBuilder。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">builder</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">builder</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span>
 <span class="n">builder</span><span class="o">.</span><span class="n">append</span><span class="o">(</span><span class="s">"Hello"</span><span class="o">)</span>
 <span class="n">builder</span><span class="o">.</span><span class="n">append</span><span class="o">(</span><span class="s">", world"</span><span class="o">)</span>
 <span class="n">builder</span> <span class="o">+=</span> <span class="sc">'!'</span>
 <span class="n">builder</span><span class="o">.</span><span class="n">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="s">"Me: "</span><span class="o">)</span>
 <span class="n">println</span><span class="o">(</span><span class="n">builder</span><span class="o">)</span>   <span class="c1">//Me: Hello, world!
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <ul>
   <li>3 字面常量：同java。XML扩展。函数常量。</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">val</span> <span class="n">fun</span><span class="k">=</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">fun</span><span class="k">=</span>
 <span class="k">new</span> <span class="nc">Function2</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]</span> <span class="o">{</span>
     <span class="k">def</span> <span class="n">apply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 <span class="o">}</span>
 <span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">fun</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">4</span><span class="o">)</span>
 <span class="n">println</span><span class="o">(</span><span class="s">"Result = "</span> <span class="o">+</span> <span class="n">result</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>4 类对象</li>
@@ -380,48 +376,44 @@
   <li>第一种方法和 Java 一样，在文件的头定义包名，这种方法就后续所有代码都放在该报中。 比如：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">package</span> <span class="nn">com.runoob</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">com.runoob</span>
 <span class="k">class</span> <span class="nc">HelloWorld</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>第二种方法有些类似 C#，如：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">package</span> <span class="nn">com.runoob</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">com.runoob</span> <span class="o">{</span>
   <span class="k">class</span> <span class="nc">HelloWorld</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>第二种方法，可以在一个文件中定义多个包。</p>
 
 <p><strong>2 引用包</strong></p>
 
 <p>Scala 使用 import 关键字引用包。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.awt.Color</span>  <span class="c1">// 引入Color
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.awt.Color</span>  <span class="c1">// 引入Color
 </span>
 <span class="k">import</span> <span class="nn">java.awt._</span>  <span class="c1">// 引入包内所有成员
 </span>
 <span class="k">def</span> <span class="n">handler</span><span class="o">(</span><span class="n">evt</span><span class="k">:</span> <span class="kt">event.ActionEvent</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// java.awt.event.ActionEvent
 </span>  <span class="o">...</span>  <span class="c1">// 因为引入了java.awt，所以可以省去前面的部分
 </span><span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>import语句可以出现在任何地方，而不是只能在文件顶部。import的效果从开始延伸到语句块的结束。这可以大幅减少名称冲突的可能性。</li>
   <li>如果想要引入包中的几个成员，可以使用selector（选取器）：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.awt.</span><span class="o">{</span><span class="nc">Color</span><span class="o">,</span> <span class="nc">Font</span><span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.awt.</span><span class="o">{</span><span class="nc">Color</span><span class="o">,</span> <span class="nc">Font</span><span class="o">}</span>
 
 <span class="c1">// 重命名成员
 </span><span class="k">import</span> <span class="nn">java.util.</span><span class="o">{</span><span class="nc">HashMap</span> <span class="k">=&gt;</span> <span class="nc">JavaHashMap</span><span class="o">}</span>
 
 <span class="c1">// 隐藏成员
 </span><span class="k">import</span> <span class="nn">java.util.</span><span class="o">{</span><span class="nc">HashMap</span> <span class="k">=&gt;</span> <span class="k">_</span><span class="o">,</span> <span class="k">_</span><span class="o">}</span> <span class="c1">// 引入了util包的所有成员，但是HashMap被隐藏了
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <blockquote>
   <p><strong>注意</strong>：默认情况下，Scala 总会引入 java.lang._ 、 scala._ 和 Predef._，这里也能解释，为什么以scala开头的包，在使用时都是省去scala.的。</p>
@@ -613,13 +605,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             

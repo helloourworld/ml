@@ -87,6 +87,10 @@
                         <a href="/tags/">Tags</a>
                     </li>
                     
+                    <li>
+                        <a href="/talks/">Talks</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -211,19 +215,18 @@
 <a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.mllib.linalg.DenseVector">DenseVector</a>和<a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.mllib.linalg.SparseVector">SparseVector</a>。
 <code class="highlighter-rouge">Spark</code>官方推荐使用<a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.mllib.linalg.Vectors$">Vectors</a>中实现的工厂方法去创建本地向量。下面是创建本地向量的例子。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.</span><span class="o">{</span><span class="nc">Vector</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.</span><span class="o">{</span><span class="nc">Vector</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">}</span>
 <span class="c1">// 创建一个dense vector (1.0, 0.0, 3.0).
 </span><span class="k">val</span> <span class="n">dv</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">)</span>
 <span class="c1">// 创建一个sparse vector (1.0, 0.0, 3.0)并且指定它的索引和值
 </span><span class="k">val</span> <span class="n">sv1</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">sparse</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">),</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">))</span>
 <span class="c1">// 创建一个sparse vector (1.0, 0.0, 3.0)并且指定它的索引和值
 </span><span class="k">val</span> <span class="n">sv2</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">sparse</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Seq</span><span class="o">((</span><span class="mi">0</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">)))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>   注意，<code class="highlighter-rouge">Scala</code>默认引入<code class="highlighter-rouge">scala.collection.immutable.Vector</code>，这里我们需要主动引入<code class="highlighter-rouge">MLLib</code>中的<code class="highlighter-rouge">org.apache.spark.mllib.linalg.Vector</code>来操作。我们可以看看<code class="highlighter-rouge">Vectors</code>对象的部分方法。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="n">dense</span><span class="o">(</span><span class="n">firstValue</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">otherValues</span><span class="k">:</span> <span class="kt">Double*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">dense</span><span class="o">(</span><span class="n">firstValue</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">otherValues</span><span class="k">:</span> <span class="kt">Double*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span>
     <span class="k">new</span> <span class="nc">DenseVector</span><span class="o">((</span><span class="n">firstValue</span> <span class="o">+:</span> <span class="n">otherValues</span><span class="o">).</span><span class="n">toArray</span><span class="o">)</span>
 <span class="k">def</span> <span class="n">dense</span><span class="o">(</span><span class="n">values</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DenseVector</span><span class="o">(</span><span class="n">values</span><span class="o">)</span>
 <span class="k">def</span> <span class="n">sparse</span><span class="o">(</span><span class="n">size</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">indices</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">values</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span>
@@ -240,8 +243,7 @@
       <span class="n">s</span><span class="s">"size of your vector is $size"</span><span class="o">)</span>
     <span class="k">new</span> <span class="nc">SparseVector</span><span class="o">(</span><span class="n">size</span><span class="o">,</span> <span class="n">indices</span><span class="o">.</span><span class="n">toArray</span><span class="o">,</span> <span class="n">values</span><span class="o">.</span><span class="n">toArray</span><span class="o">)</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h1 id="2-标注点labeled-point">2 标注点(Labeled point)</h1>
 
@@ -250,7 +252,7 @@
 
 <p>  在<code class="highlighter-rouge">MLlib</code>中，一个标注点通过样本类<a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.mllib.regression.LabeledPoint">LabeledPoint</a>表示。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="nd">@Since</span><span class="o">(</span><span class="s">"0.8.0"</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Since</span><span class="o">(</span><span class="s">"0.8.0"</span><span class="o">)</span>
 <span class="nd">@BeanInfo</span>
 <span class="k">case</span> <span class="k">class</span> <span class="nc">LabeledPoint</span> <span class="nd">@Since</span><span class="o">(</span><span class="s">"1.0.0"</span><span class="o">)</span> <span class="o">(</span>
     <span class="nd">@Since</span><span class="o">(</span><span class="s">"0.8.0"</span><span class="o">)</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
@@ -259,25 +261,22 @@
     <span class="n">s</span><span class="s">"($label,$features)"</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  下面是使用<code class="highlighter-rouge">LabeledPoint</code>的一个例子。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vectors</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vectors</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LabeledPoint</span>
 <span class="c1">// Create a labeled point with a positive label and a dense feature vector.
 </span><span class="k">val</span> <span class="n">pos</span> <span class="k">=</span> <span class="nc">LabeledPoint</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">))</span>
 <span class="c1">// Create a labeled point with a negative label and a sparse feature vector.
 </span><span class="k">val</span> <span class="n">neg</span> <span class="k">=</span> <span class="nc">LabeledPoint</span><span class="o">(</span><span class="mf">0.0</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">sparse</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">),</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">)))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>  在现实的应用中，训练数据是稀疏的情况非常常见，<code class="highlighter-rouge">MLlib</code>支持读取训练数据存储为<code class="highlighter-rouge">LIBSVM</code>格式。它是<a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/">LIBSVM</a>和<a href="http://www.csie.ntu.edu.tw/~cjlin/liblinear/">LIBLINEAR</a>默认的格式。
 它是一种文本格式，每一行表示一个标注的稀疏特征向量，如下所示：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="n">label</span> <span class="n">index1</span><span class="k">:</span><span class="kt">value1</span> <span class="kt">index2:value2</span> <span class="kt">...</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">label</span> <span class="n">index1</span><span class="k">:</span><span class="kt">value1</span> <span class="kt">index2:value2</span> <span class="kt">...</span>
+</code></pre></div></div>
 
 <h1 id="3-本地矩阵local-matrix">3 本地矩阵（Local matrix）</h1>
 
@@ -296,13 +295,12 @@
 <p>  本地矩阵的基类是<a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.mllib.linalg.Matrix">Matrix</a>，它提供了两种实现：<a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.mllib.linalg.DenseMatrix">DenseMatrix</a>和<a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.mllib.linalg.SparseMatrix">SparseMatrix</a>。
 推荐使用<a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.mllib.linalg.Matrices$">Matrices</a>的工厂方法来创建本地矩阵。下面是一个实现的例子：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.</span><span class="o">{</span><span class="nc">Matrix</span><span class="o">,</span> <span class="nc">Matrices</span><span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.</span><span class="o">{</span><span class="nc">Matrix</span><span class="o">,</span> <span class="nc">Matrices</span><span class="o">}</span>
 <span class="c1">// Create a dense matrix ((1.0, 2.0), (3.0, 4.0), (5.0, 6.0))
 </span><span class="k">val</span> <span class="n">dm</span><span class="k">:</span> <span class="kt">Matrix</span> <span class="o">=</span> <span class="nc">Matrices</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">,</span> <span class="mf">5.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">4.0</span><span class="o">,</span> <span class="mf">6.0</span><span class="o">))</span>
 <span class="c1">// Create a sparse matrix ((9.0, 0.0), (0.0, 8.0), (0.0, 6.0))
 </span><span class="k">val</span> <span class="n">sm</span><span class="k">:</span> <span class="kt">Matrix</span> <span class="o">=</span> <span class="nc">Matrices</span><span class="o">.</span><span class="n">sparse</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">),</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">1</span><span class="o">),</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">9</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">8</span><span class="o">))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>  稠密矩阵的存储很简单，不赘述。稀疏矩阵的存储使用<code class="highlighter-rouge">CSC</code>。关于压缩矩阵的介绍，请参看文献【1】。</p>
 
 <h1 id="4-分布式矩阵distributed-matrix">4 分布式矩阵(Distributed matrix)</h1>
@@ -320,7 +318,7 @@
 <p>  一个<code class="highlighter-rouge">RowMatrix</code>可以通过<code class="highlighter-rouge">RDD[Vector]</code>实例创建。创建完之后，我们可以计算它的列的统计和分解。<a href="https://en.wikipedia.org/wiki/QR_decomposition">QR分解</a>的形式为<code class="highlighter-rouge">A=QR</code>，其中<code class="highlighter-rouge">Q</code>是一个正交矩阵，
 <code class="highlighter-rouge">R</code>是一个上三角矩阵。下面是一个<code class="highlighter-rouge">RowMatrix</code>的例子。</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vector</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vector</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.distributed.RowMatrix</span>
 <span class="k">val</span> <span class="n">rows</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Vector</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of local vectors
 // Create a RowMatrix from an RDD[Vector].
@@ -330,8 +328,7 @@
 <span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">numCols</span><span class="o">()</span>
 <span class="c1">// QR decomposition
 </span><span class="k">val</span> <span class="n">qrResult</span> <span class="k">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">tallSkinnyQR</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="42-indexedrowmatrix">4.2 IndexedRowMatrix</h2>
 
@@ -339,7 +336,7 @@
 
 <p>  一个<code class="highlighter-rouge">IndexedRowMatrix</code>可以通过<code class="highlighter-rouge">RDD[IndexedRow]</code>实例创建，并且一个<code class="highlighter-rouge">IndexedRowMatrix</code>可以通过去掉它的行索引，转换成<code class="highlighter-rouge">RowMatrix</code>。下面是一个例子：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.distributed.</span><span class="o">{</span><span class="nc">IndexedRow</span><span class="o">,</span> <span class="nc">IndexedRowMatrix</span><span class="o">,</span> <span class="nc">RowMatrix</span><span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.distributed.</span><span class="o">{</span><span class="nc">IndexedRow</span><span class="o">,</span> <span class="nc">IndexedRowMatrix</span><span class="o">,</span> <span class="nc">RowMatrix</span><span class="o">}</span>
 <span class="k">val</span> <span class="n">rows</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">IndexedRow</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of indexed rows
 // Create an IndexedRowMatrix from an RDD[IndexedRow].
 </span><span class="k">val</span> <span class="n">mat</span><span class="k">:</span> <span class="kt">IndexedRowMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IndexedRowMatrix</span><span class="o">(</span><span class="n">rows</span><span class="o">)</span>
@@ -348,13 +345,11 @@
 <span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">numCols</span><span class="o">()</span>
 <span class="c1">// Drop its row indices.
 </span><span class="k">val</span> <span class="n">rowMat</span><span class="k">:</span> <span class="kt">RowMatrix</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">toRowMatrix</span><span class="o">()</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>   <code class="highlighter-rouge">IndexedRow</code>这个样本类的代码如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">case</span> <span class="k">class</span> <span class="nc">IndexedRow</span><span class="o">(</span><span class="n">index</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">vector</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">case</span> <span class="k">class</span> <span class="nc">IndexedRow</span><span class="o">(</span><span class="n">index</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">vector</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span>
+</code></pre></div></div>
 
 <h2 id="43-coordinatematrix">4.3 CoordinateMatrix</h2>
 
@@ -363,7 +358,7 @@
 
 <p>  <code class="highlighter-rouge">CoordinateMatrix</code>可以通过<code class="highlighter-rouge">RDD[MatrixEntry]</code>实例创建，其中<code class="highlighter-rouge">MatrixEntry</code>是<code class="highlighter-rouge">(Long, Long, Double)</code>的包装。<code class="highlighter-rouge">CoordinateMatrix</code>可以转换成<code class="highlighter-rouge">IndexedRowMatrix</code>。下面是一个例子：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.distributed.</span><span class="o">{</span><span class="nc">CoordinateMatrix</span><span class="o">,</span> <span class="nc">MatrixEntry</span><span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.distributed.</span><span class="o">{</span><span class="nc">CoordinateMatrix</span><span class="o">,</span> <span class="nc">MatrixEntry</span><span class="o">}</span>
 <span class="k">val</span> <span class="n">entries</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">MatrixEntry</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of matrix entries
 // Create a CoordinateMatrix from an RDD[MatrixEntry].
 </span><span class="k">val</span> <span class="n">mat</span><span class="k">:</span> <span class="kt">CoordinateMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CoordinateMatrix</span><span class="o">(</span><span class="n">entries</span><span class="o">)</span>
@@ -372,13 +367,11 @@
 <span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">numCols</span><span class="o">()</span>
 <span class="c1">// Convert it to an IndexRowMatrix whose rows are sparse vectors.
 </span><span class="k">val</span> <span class="n">indexedRowMatrix</span> <span class="k">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">toIndexedRowMatrix</span><span class="o">()</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>   <code class="highlighter-rouge">MatrixEntry</code>这个样本类的代码如下：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">case</span> <span class="k">class</span> <span class="nc">MatrixEntry</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">j</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">value</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span>
-</code></pre>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">case</span> <span class="k">class</span> <span class="nc">MatrixEntry</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">j</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">value</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span>
+</code></pre></div></div>
 
 <h2 id="44-blockmatrix">4.4 BlockMatrix</h2>
 
@@ -388,7 +381,7 @@
 <p>  可以轻松的通过调用<code class="highlighter-rouge">toBlockMatrix</code>从一个<code class="highlighter-rouge">IndexedRowMatrix</code>或者<code class="highlighter-rouge">CoordinateMatrix</code>创建一个<code class="highlighter-rouge">BlockMatrix</code>。<code class="highlighter-rouge">toBlockMatrix</code>默认创建<code class="highlighter-rouge">1024 * 1024</code>大小的块，用户可以手动修个块的大小。
 下面是一个例子：</p>
 
-<div class="language-scala highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.distributed.</span><span class="o">{</span><span class="nc">BlockMatrix</span><span class="o">,</span> <span class="nc">CoordinateMatrix</span><span class="o">,</span> <span class="nc">MatrixEntry</span><span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.distributed.</span><span class="o">{</span><span class="nc">BlockMatrix</span><span class="o">,</span> <span class="nc">CoordinateMatrix</span><span class="o">,</span> <span class="nc">MatrixEntry</span><span class="o">}</span>
 <span class="k">val</span> <span class="n">entries</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">MatrixEntry</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of (i, j, v) matrix entries
 // Create a CoordinateMatrix from an RDD[MatrixEntry].
 </span><span class="k">val</span> <span class="n">coordMat</span><span class="k">:</span> <span class="kt">CoordinateMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CoordinateMatrix</span><span class="o">(</span><span class="n">entries</span><span class="o">)</span>
@@ -399,8 +392,7 @@
 </span><span class="n">matA</span><span class="o">.</span><span class="n">validate</span><span class="o">()</span>
 <span class="c1">// Calculate A^T A.
 </span><span class="k">val</span> <span class="n">ata</span> <span class="k">=</span> <span class="n">matA</span><span class="o">.</span><span class="n">transpose</span><span class="o">.</span><span class="n">multiply</span><span class="o">(</span><span class="n">matA</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h1 id="5-参考文献">5 参考文献</h1>
 
@@ -543,13 +535,13 @@
                             
         				
                             
-                				<a href="/tags/#Big Data" title="Big Data" rel="22">
+                				<a href="/tags/#Big Data" title="Big Data" rel="23">
                                 Big Data
                                 </a>
                             
         				
                             
-                				<a href="/tags/#大数据" title="大数据" rel="20">
+                				<a href="/tags/#大数据" title="大数据" rel="21">
                                 大数据
                                 </a>
                             
