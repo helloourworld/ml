@@ -16,13 +16,13 @@ header-img: "images/IMG_0006.JPG"
 
     <h5>Talks</h5>
     <ul>
-    <li><a href="attach/speech/集成学习原理与应用.pptx">2018.4 The Principle and Application of Ensemble Learning</a></li>
+    <li><a href="talks/attach/speech/集成学习原理与应用.pptx">2018.4 The Principle and Application of Ensemble Learning</a></li>
     </ul>
     <ul>
-    <li><a href="attach/speech/">2018.3 Basic Concepts in Graph Theory</a></li>
+    <li><a href="takls/attach/speech/">2018.3 Basic Concepts in Graph Theory</a></li>
     </ul>
     <ul>
-    <li><a href="attach/speech/数据挖掘流程与常用算法概览.pptx">2017.6 Data Mining Processes and Common Algorithms Overview</a></li>
+    <li><a href="talks/attach/speech/数据挖掘流程与常用算法概览.pptx">2017.6 Data Mining Processes and Common Algorithms Overview</a></li>
     </ul>
 
 
