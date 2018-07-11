@@ -1,6 +1,6 @@
 misc
 #
-
+*.DS_Store
 *.a       #  .a
 !lib.a    # lib.a
 /TODO     # subdir/TODO
