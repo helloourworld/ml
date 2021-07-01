@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -225,59 +229,59 @@
 <span class="k">import</span> <span class="nn">org.apache.spark.rdd.RDD</span>
 
 <span class="c1">// an RDD of sample data
-</span><span class="k">val</span> <span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="o">(</span><span class="nc">Seq</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">9</span><span class="o">))</span>
+</span><span class="k">val</span> <span class="nv">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="nv">sc</span><span class="o">.</span><span class="py">parallelize</span><span class="o">(</span><span class="nc">Seq</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">9</span><span class="o">))</span>
 
 <span class="c1">// Construct the density estimator with the sample data and a standard deviation
 // for the Gaussian kernels
-</span><span class="k">val</span> <span class="n">kd</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">KernelDensity</span><span class="o">()</span>
-  <span class="o">.</span><span class="n">setSample</span><span class="o">(</span><span class="n">data</span><span class="o">)</span>
-  <span class="o">.</span><span class="n">setBandwidth</span><span class="o">(</span><span class="mf">3.0</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">kd</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">KernelDensity</span><span class="o">()</span>
+  <span class="o">.</span><span class="py">setSample</span><span class="o">(</span><span class="n">data</span><span class="o">)</span>
+  <span class="o">.</span><span class="py">setBandwidth</span><span class="o">(</span><span class="mf">3.0</span><span class="o">)</span>
 
 <span class="c1">// Find density estimates for the given values
-</span><span class="k">val</span> <span class="n">densities</span> <span class="k">=</span> <span class="n">kd</span><span class="o">.</span><span class="n">estimate</span><span class="o">(</span><span class="nc">Array</span><span class="o">(-</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">5.0</span><span class="o">))</span>
+</span><span class="k">val</span> <span class="nv">densities</span> <span class="k">=</span> <span class="nv">kd</span><span class="o">.</span><span class="py">estimate</span><span class="o">(</span><span class="nc">Array</span><span class="o">(-</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">5.0</span><span class="o">))</span>
 </code></pre></div></div>
 
 <h2 id="3-代码实现">3 代码实现</h2>
 
 <p>  通过调用<code class="highlighter-rouge">KernelDensity.estimate</code>方法来实现核密度函数估计。看下面的代码。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">estimate</span><span class="o">(</span><span class="n">points</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">sample</span> <span class="k">=</span> <span class="k">this</span><span class="o">.</span><span class="n">sample</span>
-    <span class="k">val</span> <span class="n">bandwidth</span> <span class="k">=</span> <span class="k">this</span><span class="o">.</span><span class="n">bandwidth</span>
-    <span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="n">points</span><span class="o">.</span><span class="n">length</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">estimate</span><span class="o">(</span><span class="n">points</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">sample</span> <span class="k">=</span> <span class="k">this</span><span class="o">.</span><span class="py">sample</span>
+    <span class="k">val</span> <span class="nv">bandwidth</span> <span class="k">=</span> <span class="k">this</span><span class="o">.</span><span class="py">bandwidth</span>
+    <span class="k">val</span> <span class="nv">n</span> <span class="k">=</span> <span class="nv">points</span><span class="o">.</span><span class="py">length</span>
     <span class="c1">// 在每个高斯密度函数计算中，这个值都需要计算，所以提前计算。
-</span>    <span class="k">val</span> <span class="n">logStandardDeviationPlusHalfLog2Pi</span> <span class="k">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="n">bandwidth</span><span class="o">)</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="nc">Pi</span><span class="o">)</span>
-    <span class="k">val</span> <span class="o">(</span><span class="n">densities</span><span class="o">,</span> <span class="n">count</span><span class="o">)</span> <span class="k">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">aggregate</span><span class="o">((</span><span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">),</span> <span class="mi">0L</span><span class="o">))(</span>
+</span>    <span class="k">val</span> <span class="nv">logStandardDeviationPlusHalfLog2Pi</span> <span class="k">=</span> <span class="nv">math</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="n">bandwidth</span><span class="o">)</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="nv">math</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nv">math</span><span class="o">.</span><span class="py">Pi</span><span class="o">)</span>
+    <span class="nf">val</span> <span class="o">(</span><span class="n">densities</span><span class="o">,</span> <span class="n">count</span><span class="o">)</span> <span class="k">=</span> <span class="nv">sample</span><span class="o">.</span><span class="py">aggregate</span><span class="o">((</span><span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">),</span> <span class="mi">0L</span><span class="o">))(</span>
       <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
         <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">x</span><span class="o">.</span><span class="n">_1</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+=</span> <span class="n">normPdf</span><span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">bandwidth</span><span class="o">,</span> <span class="n">logStandardDeviationPlusHalfLog2Pi</span><span class="o">,</span> <span class="n">points</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
+        <span class="nf">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+          <span class="nv">x</span><span class="o">.</span><span class="py">_1</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+=</span> <span class="nf">normPdf</span><span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">bandwidth</span><span class="o">,</span> <span class="n">logStandardDeviationPlusHalfLog2Pi</span><span class="o">,</span> <span class="nf">points</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
           <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="o">}</span>
-        <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="n">_1</span><span class="o">,</span> <span class="n">x</span><span class="o">.</span><span class="n">_2</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+        <span class="o">(</span><span class="nv">x</span><span class="o">.</span><span class="py">_1</span><span class="o">,</span> <span class="nv">x</span><span class="o">.</span><span class="py">_2</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
       <span class="o">},</span>
       <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
         <span class="c1">//daxpy函数的作用是将一个向量加上另一个向量的值，即：dy[i]+=da*dx[i]，其中da为常数
-</span>        <span class="n">blas</span><span class="o">.</span><span class="n">daxpy</span><span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">,</span> <span class="n">y</span><span class="o">.</span><span class="n">_1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">x</span><span class="o">.</span><span class="n">_1</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
-        <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="n">_1</span><span class="o">,</span> <span class="n">x</span><span class="o">.</span><span class="n">_2</span> <span class="o">+</span> <span class="n">y</span><span class="o">.</span><span class="n">_2</span><span class="o">)</span>
+</span>        <span class="nv">blas</span><span class="o">.</span><span class="py">daxpy</span><span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">,</span> <span class="nv">y</span><span class="o">.</span><span class="py">_1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="nv">x</span><span class="o">.</span><span class="py">_1</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+        <span class="o">(</span><span class="nv">x</span><span class="o">.</span><span class="py">_1</span><span class="o">,</span> <span class="nv">x</span><span class="o">.</span><span class="py">_2</span> <span class="o">+</span> <span class="nv">y</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>
       <span class="o">})</span>
     <span class="c1">//在向量上乘一个常数
-</span>    <span class="n">blas</span><span class="o">.</span><span class="n">dscal</span><span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">count</span><span class="o">,</span> <span class="n">densities</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+</span>    <span class="nv">blas</span><span class="o">.</span><span class="py">dscal</span><span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">count</span><span class="o">,</span> <span class="n">densities</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
     <span class="n">densities</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>  上述代码的<code class="highlighter-rouge">seqOp</code>函数中调用了<code class="highlighter-rouge">normPdf</code>，这个函数用于计算核函数为高斯分布的概率密度函数。参见上面的公式<strong>(1)</strong>。公式<strong>(1)</strong>的实现如下面代码。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">def</span> <span class="n">normPdf</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">def</span> <span class="nf">normPdf</span><span class="o">(</span>
       <span class="n">mean</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
       <span class="n">standardDeviation</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
       <span class="n">logStandardDeviationPlusHalfLog2Pi</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
       <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">x0</span> <span class="k">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">mean</span>
-    <span class="k">val</span> <span class="n">x1</span> <span class="k">=</span> <span class="n">x0</span> <span class="o">/</span> <span class="n">standardDeviation</span>
-    <span class="k">val</span> <span class="n">logDensity</span> <span class="k">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">logStandardDeviationPlusHalfLog2Pi</span>
-    <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(</span><span class="n">logDensity</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">x0</span> <span class="k">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">mean</span>
+    <span class="k">val</span> <span class="nv">x1</span> <span class="k">=</span> <span class="n">x0</span> <span class="o">/</span> <span class="n">standardDeviation</span>
+    <span class="k">val</span> <span class="nv">logDensity</span> <span class="k">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">logStandardDeviationPlusHalfLog2Pi</span>
+    <span class="nv">math</span><span class="o">.</span><span class="py">exp</span><span class="o">(</span><span class="n">logDensity</span><span class="o">)</span>
   <span class="o">}</span>
 </code></pre></div></div>
 <p>  该方法首先将公式<strong>(1)</strong>取对数，计算结果，然后再对计算结果取指数。</p>
@@ -523,7 +527,7 @@ A=U{A}^{T},k <= m,n %]]></script></p>
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -695,7 +699,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

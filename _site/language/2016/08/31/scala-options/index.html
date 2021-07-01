@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -213,12 +217,12 @@
   <li>接下来我们来看一段代码：</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">myMap</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"key1"</span> <span class="o">-&gt;</span> <span class="s">"value"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">value1</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">myMap</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"key1"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">value2</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">myMap</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"key2"</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">myMap</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"key1"</span> <span class="o">-&gt;</span> <span class="s">"value"</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">value1</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nv">myMap</span><span class="o">.</span><span class="py">get</span><span class="o">(</span><span class="s">"key1"</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">value2</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nv">myMap</span><span class="o">.</span><span class="py">get</span><span class="o">(</span><span class="s">"key2"</span><span class="o">)</span>
 
-<span class="n">println</span><span class="o">(</span><span class="n">value1</span><span class="o">)</span> <span class="c1">// Some("value1")
-</span><span class="n">println</span><span class="o">(</span><span class="n">value2</span><span class="o">)</span> <span class="c1">// None
+<span class="nf">println</span><span class="o">(</span><span class="n">value1</span><span class="o">)</span> <span class="c1">// Some("value1")
+</span><span class="nf">println</span><span class="o">(</span><span class="n">value2</span><span class="o">)</span> <span class="c1">// None
 </span></code></pre></div></div>
 
 <ul>
@@ -230,11 +234,11 @@
 </ul>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options1</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">sites</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"runoob"</span> <span class="o">-&gt;</span> <span class="s">"www.runoob.com"</span><span class="o">,</span> <span class="s">"google"</span> <span class="o">-&gt;</span> <span class="s">"www.google.com"</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">sites</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"runoob"</span> <span class="o">-&gt;</span> <span class="s">"www.runoob.com"</span><span class="o">,</span> <span class="s">"google"</span> <span class="o">-&gt;</span> <span class="s">"www.google.com"</span><span class="o">)</span>
 
-      <span class="n">println</span><span class="o">(</span><span class="s">"sites.get( \"runoob\" ) : "</span> <span class="o">+</span>  <span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"runoob"</span> <span class="o">))</span> <span class="c1">// Some(www.runoob.com)
-</span>      <span class="n">println</span><span class="o">(</span><span class="s">"sites.get( \"baidu\" ) : "</span> <span class="o">+</span>  <span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"baidu"</span> <span class="o">))</span>  <span class="c1">//  None
+      <span class="nf">println</span><span class="o">(</span><span class="s">"sites.get( \"runoob\" ) : "</span> <span class="o">+</span>  <span class="nv">sites</span><span class="o">.</span><span class="py">get</span><span class="o">(</span> <span class="s">"runoob"</span> <span class="o">))</span> <span class="c1">// Some(www.runoob.com)
+</span>      <span class="nf">println</span><span class="o">(</span><span class="s">"sites.get( \"baidu\" ) : "</span> <span class="o">+</span>  <span class="nv">sites</span><span class="o">.</span><span class="py">get</span><span class="o">(</span> <span class="s">"baidu"</span> <span class="o">))</span>  <span class="c1">//  None
 </span>   <span class="o">}</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="n">result</span><span class="k">:</span>
@@ -247,23 +251,23 @@
 <p>你也可以通过模式匹配来输出匹配值。实例如下：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options2</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">sites</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"runoob"</span> <span class="o">-&gt;</span> <span class="s">"www.runoob.com"</span><span class="o">,</span> <span class="s">"google"</span> <span class="o">-&gt;</span> <span class="s">"www.google.com"</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">sites</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"runoob"</span> <span class="o">-&gt;</span> <span class="s">"www.runoob.com"</span><span class="o">,</span> <span class="s">"google"</span> <span class="o">-&gt;</span> <span class="s">"www.google.com"</span><span class="o">)</span>
 
-      <span class="n">println</span><span class="o">(</span><span class="s">"show(sites.get( \"runoob\")) : "</span> <span class="o">+</span>
-                                          <span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"runoob"</span><span class="o">))</span> <span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"show(sites.get( \"baidu\")) : "</span> <span class="o">+</span>
-                                          <span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"baidu"</span><span class="o">))</span> <span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"show(sites.get( \"runoob\")) : "</span> <span class="o">+</span>
+                                          <span class="nf">show</span><span class="o">(</span><span class="nv">sites</span><span class="o">.</span><span class="py">get</span><span class="o">(</span> <span class="s">"runoob"</span><span class="o">))</span> <span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"show(sites.get( \"baidu\")) : "</span> <span class="o">+</span>
+                                          <span class="nf">show</span><span class="o">(</span><span class="nv">sites</span><span class="o">.</span><span class="py">get</span><span class="o">(</span> <span class="s">"baidu"</span><span class="o">))</span> <span class="o">)</span>
    <span class="o">}</span>
 
-   <span class="k">def</span> <span class="n">show</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="k">=</span> <span class="n">x</span> <span class="k">match</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="k">=</span> <span class="n">x</span> <span class="k">match</span> <span class="o">{</span>
       <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">s</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">s</span>
       <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="s">"?"</span>
    <span class="o">}</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="n">result</span>
-<span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"runoob"</span><span class="o">))</span> <span class="k">:</span> <span class="kt">www.runoob.com</span>
-<span class="n">show</span><span class="o">(</span><span class="n">sites</span><span class="o">.</span><span class="n">get</span><span class="o">(</span> <span class="s">"baidu"</span><span class="o">))</span> <span class="k">:</span> <span class="kt">?</span>
+<span class="nf">show</span><span class="o">(</span><span class="nv">sites</span><span class="o">.</span><span class="py">get</span><span class="o">(</span> <span class="s">"runoob"</span><span class="o">))</span> <span class="k">:</span> <span class="kt">www.runoob.com</span>
+<span class="nf">show</span><span class="o">(</span><span class="nv">sites</span><span class="o">.</span><span class="py">get</span><span class="o">(</span> <span class="s">"baidu"</span><span class="o">))</span> <span class="k">:</span> <span class="kt">?</span>
 </code></pre></div></div>
 
 <h4 id="2-getorelse-方法">2 getOrElse() 方法</h4>
@@ -271,13 +275,13 @@
 <p>你可以使用 getOrElse() 方法来获取元组中存在的元素或者使用其默认的值，实例如下：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options3</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
 
-      <span class="k">val</span> <span class="n">a</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
-      <span class="k">val</span> <span class="n">b</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span>
+      <span class="k">val</span> <span class="nv">a</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
+      <span class="k">val</span> <span class="nv">b</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span>
 
-      <span class="n">println</span><span class="o">(</span><span class="s">"a.getOrElse(0): "</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="n">getOrElse</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"b.getOrElse(10): "</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">getOrElse</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span> <span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"a.getOrElse(0): "</span> <span class="o">+</span> <span class="nv">a</span><span class="o">.</span><span class="py">getOrElse</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"b.getOrElse(10): "</span> <span class="o">+</span> <span class="nv">b</span><span class="o">.</span><span class="py">getOrElse</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span> <span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -287,13 +291,13 @@
 <p>你可以使用 isEmpty() 方法来检测元组中的元素是否为 None，实例如下：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Options4</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
 
-      <span class="k">val</span> <span class="n">a</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
-      <span class="k">val</span> <span class="n">b</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span>
+      <span class="k">val</span> <span class="nv">a</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
+      <span class="k">val</span> <span class="nv">b</span><span class="k">:</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span>
 
-      <span class="n">println</span><span class="o">(</span><span class="s">"a.isEmpty: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="n">isEmpty</span> <span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"b.isEmpty: "</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">isEmpty</span> <span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"a.isEmpty: "</span> <span class="o">+</span> <span class="nv">a</span><span class="o">.</span><span class="py">isEmpty</span> <span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"b.isEmpty: "</span> <span class="o">+</span> <span class="nv">b</span><span class="o">.</span><span class="py">isEmpty</span> <span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -643,7 +647,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -815,7 +819,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -321,27 +325,27 @@
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.model.DecisionTreeModel</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
 <span class="c1">// Load and parse the data file.
-</span><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="nc">MLUtils</span><span class="o">.</span><span class="n">loadLibSVMFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/mllib/sample_libsvm_data.txt"</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">data</span> <span class="k">=</span> <span class="nv">MLUtils</span><span class="o">.</span><span class="py">loadLibSVMFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/mllib/sample_libsvm_data.txt"</span><span class="o">)</span>
 <span class="c1">// Split the data into training and test sets (30% held out for testing)
-</span><span class="k">val</span> <span class="n">splits</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.7</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">))</span>
-<span class="k">val</span> <span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">testData</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="n">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="n">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
+</span><span class="k">val</span> <span class="nv">splits</span> <span class="k">=</span> <span class="nv">data</span><span class="o">.</span><span class="py">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.7</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">))</span>
+<span class="nf">val</span> <span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">testData</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="nf">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="nf">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
 <span class="c1">// Train a DecisionTree model.
 //  Empty categoricalFeaturesInfo indicates all features are continuous.
-</span><span class="k">val</span> <span class="n">numClasses</span> <span class="k">=</span> <span class="mi">2</span>
-<span class="k">val</span> <span class="n">categoricalFeaturesInfo</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]()</span>
-<span class="k">val</span> <span class="n">impurity</span> <span class="k">=</span> <span class="s">"gini"</span>
-<span class="k">val</span> <span class="n">maxDepth</span> <span class="k">=</span> <span class="mi">5</span>
-<span class="k">val</span> <span class="n">maxBins</span> <span class="k">=</span> <span class="mi">32</span>
-<span class="k">val</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">DecisionTree</span><span class="o">.</span><span class="n">trainClassifier</span><span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">numClasses</span><span class="o">,</span> <span class="n">categoricalFeaturesInfo</span><span class="o">,</span>
+</span><span class="k">val</span> <span class="nv">numClasses</span> <span class="k">=</span> <span class="mi">2</span>
+<span class="k">val</span> <span class="nv">categoricalFeaturesInfo</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]()</span>
+<span class="k">val</span> <span class="nv">impurity</span> <span class="k">=</span> <span class="s">"gini"</span>
+<span class="k">val</span> <span class="nv">maxDepth</span> <span class="k">=</span> <span class="mi">5</span>
+<span class="k">val</span> <span class="nv">maxBins</span> <span class="k">=</span> <span class="mi">32</span>
+<span class="k">val</span> <span class="nv">model</span> <span class="k">=</span> <span class="nv">DecisionTree</span><span class="o">.</span><span class="py">trainClassifier</span><span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">numClasses</span><span class="o">,</span> <span class="n">categoricalFeaturesInfo</span><span class="o">,</span>
   <span class="n">impurity</span><span class="o">,</span> <span class="n">maxDepth</span><span class="o">,</span> <span class="n">maxBins</span><span class="o">)</span>
 <span class="c1">// Evaluate model on test instances and compute test error
-</span><span class="k">val</span> <span class="n">labelAndPreds</span> <span class="k">=</span> <span class="n">testData</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">point</span> <span class="k">=&gt;</span>
-  <span class="k">val</span> <span class="n">prediction</span> <span class="k">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">point</span><span class="o">.</span><span class="n">features</span><span class="o">)</span>
-  <span class="o">(</span><span class="n">point</span><span class="o">.</span><span class="n">label</span><span class="o">,</span> <span class="n">prediction</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">labelAndPreds</span> <span class="k">=</span> <span class="nv">testData</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="n">point</span> <span class="k">=&gt;</span>
+  <span class="k">val</span> <span class="nv">prediction</span> <span class="k">=</span> <span class="nv">model</span><span class="o">.</span><span class="py">predict</span><span class="o">(</span><span class="nv">point</span><span class="o">.</span><span class="py">features</span><span class="o">)</span>
+  <span class="o">(</span><span class="nv">point</span><span class="o">.</span><span class="py">label</span><span class="o">,</span> <span class="n">prediction</span><span class="o">)</span>
 <span class="o">}</span>
-<span class="k">val</span> <span class="n">testErr</span> <span class="k">=</span> <span class="n">labelAndPreds</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">r</span> <span class="k">=&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">_1</span> <span class="o">!=</span> <span class="n">r</span><span class="o">.</span><span class="n">_2</span><span class="o">).</span><span class="n">count</span><span class="o">().</span><span class="n">toDouble</span> <span class="o">/</span> <span class="n">testData</span><span class="o">.</span><span class="n">count</span><span class="o">()</span>
-<span class="n">println</span><span class="o">(</span><span class="s">"Test Error = "</span> <span class="o">+</span> <span class="n">testErr</span><span class="o">)</span>
-<span class="n">println</span><span class="o">(</span><span class="s">"Learned classification tree model:\n"</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">toDebugString</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">testErr</span> <span class="k">=</span> <span class="nv">labelAndPreds</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="n">r</span> <span class="k">=&gt;</span> <span class="nv">r</span><span class="o">.</span><span class="py">_1</span> <span class="o">!=</span> <span class="nv">r</span><span class="o">.</span><span class="py">_2</span><span class="o">).</span><span class="py">count</span><span class="o">().</span><span class="py">toDouble</span> <span class="o">/</span> <span class="nv">testData</span><span class="o">.</span><span class="py">count</span><span class="o">()</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Test Error = "</span> <span class="o">+</span> <span class="n">testErr</span><span class="o">)</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Learned classification tree model:\n"</span> <span class="o">+</span> <span class="nv">model</span><span class="o">.</span><span class="py">toDebugString</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>  下面的例子用于回归。</p>
@@ -350,37 +354,37 @@
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.model.DecisionTreeModel</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
 <span class="c1">// Load and parse the data file.
-</span><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="nc">MLUtils</span><span class="o">.</span><span class="n">loadLibSVMFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/mllib/sample_libsvm_data.txt"</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">data</span> <span class="k">=</span> <span class="nv">MLUtils</span><span class="o">.</span><span class="py">loadLibSVMFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/mllib/sample_libsvm_data.txt"</span><span class="o">)</span>
 <span class="c1">// Split the data into training and test sets (30% held out for testing)
-</span><span class="k">val</span> <span class="n">splits</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.7</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">))</span>
-<span class="k">val</span> <span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">testData</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="n">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="n">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
+</span><span class="k">val</span> <span class="nv">splits</span> <span class="k">=</span> <span class="nv">data</span><span class="o">.</span><span class="py">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.7</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">))</span>
+<span class="nf">val</span> <span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">testData</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="nf">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="nf">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
 <span class="c1">// Train a DecisionTree model.
 //  Empty categoricalFeaturesInfo indicates all features are continuous.
-</span><span class="k">val</span> <span class="n">categoricalFeaturesInfo</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]()</span>
-<span class="k">val</span> <span class="n">impurity</span> <span class="k">=</span> <span class="s">"variance"</span>
-<span class="k">val</span> <span class="n">maxDepth</span> <span class="k">=</span> <span class="mi">5</span>
-<span class="k">val</span> <span class="n">maxBins</span> <span class="k">=</span> <span class="mi">32</span>
-<span class="k">val</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">DecisionTree</span><span class="o">.</span><span class="n">trainRegressor</span><span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">categoricalFeaturesInfo</span><span class="o">,</span> <span class="n">impurity</span><span class="o">,</span>
+</span><span class="k">val</span> <span class="nv">categoricalFeaturesInfo</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]()</span>
+<span class="k">val</span> <span class="nv">impurity</span> <span class="k">=</span> <span class="s">"variance"</span>
+<span class="k">val</span> <span class="nv">maxDepth</span> <span class="k">=</span> <span class="mi">5</span>
+<span class="k">val</span> <span class="nv">maxBins</span> <span class="k">=</span> <span class="mi">32</span>
+<span class="k">val</span> <span class="nv">model</span> <span class="k">=</span> <span class="nv">DecisionTree</span><span class="o">.</span><span class="py">trainRegressor</span><span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">categoricalFeaturesInfo</span><span class="o">,</span> <span class="n">impurity</span><span class="o">,</span>
   <span class="n">maxDepth</span><span class="o">,</span> <span class="n">maxBins</span><span class="o">)</span>
 <span class="c1">// Evaluate model on test instances and compute test error
-</span><span class="k">val</span> <span class="n">labelsAndPredictions</span> <span class="k">=</span> <span class="n">testData</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">point</span> <span class="k">=&gt;</span>
-  <span class="k">val</span> <span class="n">prediction</span> <span class="k">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">point</span><span class="o">.</span><span class="n">features</span><span class="o">)</span>
-  <span class="o">(</span><span class="n">point</span><span class="o">.</span><span class="n">label</span><span class="o">,</span> <span class="n">prediction</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">labelsAndPredictions</span> <span class="k">=</span> <span class="nv">testData</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="n">point</span> <span class="k">=&gt;</span>
+  <span class="k">val</span> <span class="nv">prediction</span> <span class="k">=</span> <span class="nv">model</span><span class="o">.</span><span class="py">predict</span><span class="o">(</span><span class="nv">point</span><span class="o">.</span><span class="py">features</span><span class="o">)</span>
+  <span class="o">(</span><span class="nv">point</span><span class="o">.</span><span class="py">label</span><span class="o">,</span> <span class="n">prediction</span><span class="o">)</span>
 <span class="o">}</span>
-<span class="k">val</span> <span class="n">testMSE</span> <span class="k">=</span> <span class="n">labelsAndPredictions</span><span class="o">.</span><span class="n">map</span><span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="o">(</span><span class="n">v</span> <span class="o">-</span> <span class="n">p</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">}.</span><span class="n">mean</span><span class="o">()</span>
-<span class="n">println</span><span class="o">(</span><span class="s">"Test Mean Squared Error = "</span> <span class="o">+</span> <span class="n">testMSE</span><span class="o">)</span>
-<span class="n">println</span><span class="o">(</span><span class="s">"Learned regression tree model:\n"</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">toDebugString</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">testMSE</span> <span class="k">=</span> <span class="nv">labelsAndPredictions</span><span class="o">.</span><span class="py">map</span><span class="o">{</span> <span class="nf">case</span> <span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">math</span><span class="o">.</span><span class="py">pow</span><span class="o">(</span><span class="n">v</span> <span class="o">-</span> <span class="n">p</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">}.</span><span class="py">mean</span><span class="o">()</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Test Mean Squared Error = "</span> <span class="o">+</span> <span class="n">testMSE</span><span class="o">)</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Learned regression tree model:\n"</span> <span class="o">+</span> <span class="nv">model</span><span class="o">.</span><span class="py">toDebugString</span><span class="o">)</span>
 </code></pre></div></div>
 
 <h3 id="22-源码分析">2.2 源码分析</h3>
 
 <p>  在<code class="highlighter-rouge">MLlib</code>中，决策树的实现和随机森林的实现是在一起的。随机森林实现中，当树的个数为1时，它的实现即为决策树的实现。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span><span class="k">:</span> <span class="kt">DecisionTreeModel</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">run</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span><span class="k">:</span> <span class="kt">DecisionTreeModel</span> <span class="o">=</span> <span class="o">{</span>
     <span class="c1">//树个数为1
-</span>    <span class="k">val</span> <span class="n">rf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">RandomForest</span><span class="o">(</span><span class="n">strategy</span><span class="o">,</span> <span class="n">numTrees</span> <span class="k">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">featureSubsetStrategy</span> <span class="k">=</span> <span class="s">"all"</span><span class="o">,</span> <span class="n">seed</span> <span class="k">=</span> <span class="mi">0</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">rfModel</span> <span class="k">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="o">)</span>
-    <span class="n">rfModel</span><span class="o">.</span><span class="n">trees</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">rf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">RandomForest</span><span class="o">(</span><span class="n">strategy</span><span class="o">,</span> <span class="n">numTrees</span> <span class="k">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">featureSubsetStrategy</span> <span class="k">=</span> <span class="s">"all"</span><span class="o">,</span> <span class="n">seed</span> <span class="k">=</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">rfModel</span> <span class="k">=</span> <span class="nv">rf</span><span class="o">.</span><span class="py">run</span><span class="o">(</span><span class="n">input</span><span class="o">)</span>
+    <span class="nv">rfModel</span><span class="o">.</span><span class="py">trees</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
   <span class="o">}</span>
 </code></pre></div></div>
 
@@ -682,7 +686,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -854,7 +858,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

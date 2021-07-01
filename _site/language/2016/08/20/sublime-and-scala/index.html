@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -230,24 +234,24 @@
   <p>将cmdjava替换为如下bat脚本，并放置于javac路径</p>
 </blockquote>
 
-<pre><code class="language-bat">    @ECHO OFF
-cd %~dp1
-ECHO Compiling %~nx1......
-IF EXIST %~n1.class (
-    DEL %~n1.class
-    )
-javac %~nx1
-IF EXIST %~n1.class (
-    ECHO ----------------------OUTPUT--------------
-    java %~n1
-    )
-</code></pre>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @ECHO <span class="kd">OFF</span>
+<span class="nb">cd</span> <span class="vm">%~dp1</span>
+<span class="kd">ECHO</span> <span class="kd">Compiling</span> <span class="vm">%~nx1</span>......
+<span class="kd">IF</span> <span class="kd">EXIST</span> <span class="vm">%~n1</span>.class <span class="o">(</span>
+    <span class="kd">DEL</span> <span class="vm">%~n1</span>.class
+    <span class="o">)</span>
+<span class="kd">javac</span> <span class="vm">%~nx1</span>
+<span class="kd">IF</span> <span class="kd">EXIST</span> <span class="vm">%~n1</span>.class <span class="o">(</span>
+    <span class="kd">ECHO</span> <span class="o">---------------------</span><span class="na">-OUTPUT</span><span class="o">--------------</span>
+    <span class="kd">java</span> <span class="vm">%~n1</span>
+    <span class="o">)</span>
+</code></pre></div></div>
 
 <h2 id="scala示例">scala示例</h2>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Hello</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">println</span><span class="o">(</span><span class="s">"Hello, world!"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"Hello, world!"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -546,7 +550,7 @@ IF EXIST %~n1.class (
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -718,7 +722,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

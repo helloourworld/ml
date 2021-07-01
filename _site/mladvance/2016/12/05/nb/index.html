@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -319,20 +323,20 @@
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vectors</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LabeledPoint</span>
 <span class="c1">//读取并处理数据
-</span><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="s">"data/mllib/sample_naive_bayes_data.txt"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">parsedData</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">line</span> <span class="k">=&gt;</span>
-  <span class="k">val</span> <span class="n">parts</span> <span class="k">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="sc">','</span><span class="o">)</span>
-  <span class="nc">LabeledPoint</span><span class="o">(</span><span class="n">parts</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">toDouble</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">parts</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="n">split</span><span class="o">(</span><span class="sc">' '</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">toDouble</span><span class="o">)))</span>
+</span><span class="k">val</span> <span class="nv">data</span> <span class="k">=</span> <span class="nv">sc</span><span class="o">.</span><span class="py">textFile</span><span class="o">(</span><span class="s">"data/mllib/sample_naive_bayes_data.txt"</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">parsedData</span> <span class="k">=</span> <span class="nv">data</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="n">line</span> <span class="k">=&gt;</span>
+  <span class="k">val</span> <span class="nv">parts</span> <span class="k">=</span> <span class="nv">line</span><span class="o">.</span><span class="py">split</span><span class="o">(</span><span class="sc">','</span><span class="o">)</span>
+  <span class="nc">LabeledPoint</span><span class="o">(</span><span class="nf">parts</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="py">toDouble</span><span class="o">,</span> <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="nf">parts</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="py">split</span><span class="o">(</span><span class="sc">' '</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">toDouble</span><span class="o">)))</span>
 <span class="o">}</span>
 <span class="c1">// 切分数据为训练数据和测试数据
-</span><span class="k">val</span> <span class="n">splits</span> <span class="k">=</span> <span class="n">parsedData</span><span class="o">.</span><span class="n">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.6</span><span class="o">,</span> <span class="mf">0.4</span><span class="o">),</span> <span class="n">seed</span> <span class="k">=</span> <span class="mi">11L</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">training</span> <span class="k">=</span> <span class="n">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">test</span> <span class="k">=</span> <span class="n">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">splits</span> <span class="k">=</span> <span class="nv">parsedData</span><span class="o">.</span><span class="py">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.6</span><span class="o">,</span> <span class="mf">0.4</span><span class="o">),</span> <span class="n">seed</span> <span class="k">=</span> <span class="mi">11L</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">training</span> <span class="k">=</span> <span class="nf">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">test</span> <span class="k">=</span> <span class="nf">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
 <span class="c1">//训练模型
-</span><span class="k">val</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">NaiveBayes</span><span class="o">.</span><span class="n">train</span><span class="o">(</span><span class="n">training</span><span class="o">,</span> <span class="n">lambda</span> <span class="k">=</span> <span class="mf">1.0</span><span class="o">,</span> <span class="n">modelType</span> <span class="k">=</span> <span class="s">"multinomial"</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">model</span> <span class="k">=</span> <span class="nv">NaiveBayes</span><span class="o">.</span><span class="py">train</span><span class="o">(</span><span class="n">training</span><span class="o">,</span> <span class="n">lambda</span> <span class="k">=</span> <span class="mf">1.0</span><span class="o">,</span> <span class="n">modelType</span> <span class="k">=</span> <span class="s">"multinomial"</span><span class="o">)</span>
 <span class="c1">//测试数据
-</span><span class="k">val</span> <span class="n">predictionAndLabel</span> <span class="k">=</span> <span class="n">test</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">p</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="n">features</span><span class="o">),</span> <span class="n">p</span><span class="o">.</span><span class="n">label</span><span class="o">))</span>
-<span class="k">val</span> <span class="n">accuracy</span> <span class="k">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">predictionAndLabel</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">_1</span> <span class="o">==</span> <span class="n">x</span><span class="o">.</span><span class="n">_2</span><span class="o">).</span><span class="n">count</span><span class="o">()</span> <span class="o">/</span> <span class="n">test</span><span class="o">.</span><span class="n">count</span><span class="o">()</span>
+</span><span class="k">val</span> <span class="nv">predictionAndLabel</span> <span class="k">=</span> <span class="nv">test</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">p</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="nv">model</span><span class="o">.</span><span class="py">predict</span><span class="o">(</span><span class="nv">p</span><span class="o">.</span><span class="py">features</span><span class="o">),</span> <span class="nv">p</span><span class="o">.</span><span class="py">label</span><span class="o">))</span>
+<span class="k">val</span> <span class="nv">accuracy</span> <span class="k">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="nv">predictionAndLabel</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="nv">x</span><span class="o">.</span><span class="py">_1</span> <span class="o">==</span> <span class="nv">x</span><span class="o">.</span><span class="py">_2</span><span class="o">).</span><span class="py">count</span><span class="o">()</span> <span class="o">/</span> <span class="nv">test</span><span class="o">.</span><span class="py">count</span><span class="o">()</span>
 </code></pre></div></div>
 
 <h3 id="42-训练模型">4.2 训练模型</h3>
@@ -344,27 +348,27 @@
   <li><strong>1</strong> 计算每个标签对应的<code class="highlighter-rouge">term</code>的频率</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">aggregated</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">p</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="n">label</span><span class="o">,</span> <span class="n">p</span><span class="o">.</span><span class="n">features</span><span class="o">)).</span><span class="n">combineByKey</span><span class="o">[(</span><span class="kt">Long</span>, <span class="kt">DenseVector</span><span class="o">)](</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">aggregated</span> <span class="k">=</span> <span class="nv">data</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">p</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="nv">p</span><span class="o">.</span><span class="py">label</span><span class="o">,</span> <span class="nv">p</span><span class="o">.</span><span class="py">features</span><span class="o">)).</span><span class="py">combineByKey</span><span class="o">[(</span><span class="kt">Long</span>, <span class="kt">DenseVector</span><span class="o">)](</span>
       <span class="n">createCombiner</span> <span class="k">=</span> <span class="o">(</span><span class="n">v</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">modelType</span> <span class="o">==</span> <span class="nc">Bernoulli</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">requireZeroOneBernoulliValues</span><span class="o">(</span><span class="n">v</span><span class="o">)</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">modelType</span> <span class="o">==</span> <span class="nc">Bernoulli</span><span class="o">)</span> <span class="o">{</span>
+          <span class="nf">requireZeroOneBernoulliValues</span><span class="o">(</span><span class="n">v</span><span class="o">)</span>
         <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-          <span class="n">requireNonnegativeValues</span><span class="o">(</span><span class="n">v</span><span class="o">)</span>
+          <span class="nf">requireNonnegativeValues</span><span class="o">(</span><span class="n">v</span><span class="o">)</span>
         <span class="o">}</span>
-        <span class="o">(</span><span class="mi">1L</span><span class="o">,</span> <span class="n">v</span><span class="o">.</span><span class="n">copy</span><span class="o">.</span><span class="n">toDense</span><span class="o">)</span>
+        <span class="o">(</span><span class="mi">1L</span><span class="o">,</span> <span class="nv">v</span><span class="o">.</span><span class="py">copy</span><span class="o">.</span><span class="py">toDense</span><span class="o">)</span>
       <span class="o">},</span>
       <span class="n">mergeValue</span> <span class="k">=</span> <span class="o">(</span><span class="n">c</span><span class="k">:</span> <span class="o">(</span><span class="kt">Long</span><span class="o">,</span> <span class="kt">DenseVector</span><span class="o">),</span> <span class="n">v</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
-        <span class="n">requireNonnegativeValues</span><span class="o">(</span><span class="n">v</span><span class="o">)</span>
+        <span class="nf">requireNonnegativeValues</span><span class="o">(</span><span class="n">v</span><span class="o">)</span>
         <span class="c1">//c._2 = v*1 + c._2
-</span>        <span class="nc">BLAS</span><span class="o">.</span><span class="n">axpy</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">c</span><span class="o">.</span><span class="n">_2</span><span class="o">)</span>
-        <span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="n">_1</span> <span class="o">+</span> <span class="mi">1L</span><span class="o">,</span> <span class="n">c</span><span class="o">.</span><span class="n">_2</span><span class="o">)</span>
+</span>        <span class="nv">BLAS</span><span class="o">.</span><span class="py">axpy</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="nv">c</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>
+        <span class="o">(</span><span class="nv">c</span><span class="o">.</span><span class="py">_1</span> <span class="o">+</span> <span class="mi">1L</span><span class="o">,</span> <span class="nv">c</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>
       <span class="o">},</span>
       <span class="n">mergeCombiners</span> <span class="k">=</span> <span class="o">(</span><span class="n">c1</span><span class="k">:</span> <span class="o">(</span><span class="kt">Long</span><span class="o">,</span> <span class="kt">DenseVector</span><span class="o">),</span> <span class="n">c2</span><span class="k">:</span> <span class="o">(</span><span class="kt">Long</span><span class="o">,</span> <span class="kt">DenseVector</span><span class="o">))</span> <span class="k">=&gt;</span> <span class="o">{</span>
-        <span class="nc">BLAS</span><span class="o">.</span><span class="n">axpy</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="n">c2</span><span class="o">.</span><span class="n">_2</span><span class="o">,</span> <span class="n">c1</span><span class="o">.</span><span class="n">_2</span><span class="o">)</span>
-        <span class="o">(</span><span class="n">c1</span><span class="o">.</span><span class="n">_1</span> <span class="o">+</span> <span class="n">c2</span><span class="o">.</span><span class="n">_1</span><span class="o">,</span> <span class="n">c1</span><span class="o">.</span><span class="n">_2</span><span class="o">)</span>
+        <span class="nv">BLAS</span><span class="o">.</span><span class="py">axpy</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="nv">c2</span><span class="o">.</span><span class="py">_2</span><span class="o">,</span> <span class="nv">c1</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>
+        <span class="o">(</span><span class="nv">c1</span><span class="o">.</span><span class="py">_1</span> <span class="o">+</span> <span class="nv">c2</span><span class="o">.</span><span class="py">_1</span><span class="o">,</span> <span class="nv">c1</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>
       <span class="o">}</span>
     <span class="c1">//根据标签进行排序
-</span>    <span class="o">).</span><span class="n">collect</span><span class="o">().</span><span class="n">sortBy</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">_1</span><span class="o">)</span>
+</span>    <span class="o">).</span><span class="py">collect</span><span class="o">().</span><span class="py">sortBy</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">_1</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>  这里我们需要先了解<code class="highlighter-rouge">createCombiner</code>函数的作用。<code class="highlighter-rouge">createCombiner</code>的作用是将原<code class="highlighter-rouge">RDD</code>中的<code class="highlighter-rouge">Vector</code>类型转换为<code class="highlighter-rouge">(long,Vector)</code>类型。</p>
@@ -372,22 +376,22 @@
 <p>  如果<code class="highlighter-rouge">modelType</code>为<code class="highlighter-rouge">Bernoulli</code>，那么<code class="highlighter-rouge">v</code>中包含的值只能为0或者1。如果<code class="highlighter-rouge">modelType</code>为<code class="highlighter-rouge">multinomial</code>，那么<code class="highlighter-rouge">v</code>中包含的值必须大于0。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//值非负
-</span><span class="k">val</span> <span class="n">requireNonnegativeValues</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=&gt;</span> <span class="nc">Unit</span> <span class="k">=</span> <span class="o">(</span><span class="n">v</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">values</span> <span class="k">=</span> <span class="n">v</span> <span class="k">match</span> <span class="o">{</span>
-        <span class="k">case</span> <span class="n">sv</span><span class="k">:</span> <span class="kt">SparseVector</span> <span class="o">=&gt;</span> <span class="n">sv</span><span class="o">.</span><span class="n">values</span>
-        <span class="k">case</span> <span class="n">dv</span><span class="k">:</span> <span class="kt">DenseVector</span> <span class="o">=&gt;</span> <span class="n">dv</span><span class="o">.</span><span class="n">values</span>
+</span><span class="k">val</span> <span class="nv">requireNonnegativeValues</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=&gt;</span> <span class="nc">Unit</span> <span class="k">=</span> <span class="o">(</span><span class="n">v</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">values</span> <span class="k">=</span> <span class="n">v</span> <span class="k">match</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="n">sv</span><span class="k">:</span> <span class="kt">SparseVector</span> <span class="o">=&gt;</span> <span class="nv">sv</span><span class="o">.</span><span class="py">values</span>
+        <span class="k">case</span> <span class="n">dv</span><span class="k">:</span> <span class="kt">DenseVector</span> <span class="o">=&gt;</span> <span class="nv">dv</span><span class="o">.</span><span class="py">values</span>
       <span class="o">}</span>
-      <span class="k">if</span> <span class="o">(!</span><span class="n">values</span><span class="o">.</span><span class="n">forall</span><span class="o">(</span><span class="k">_</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="o">))</span> <span class="o">{</span>
+      <span class="nf">if</span> <span class="o">(!</span><span class="nv">values</span><span class="o">.</span><span class="py">forall</span><span class="o">(</span><span class="k">_</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="o">))</span> <span class="o">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nc">SparkException</span><span class="o">(</span><span class="n">s</span><span class="s">"Naive Bayes requires nonnegative feature values but found $v."</span><span class="o">)</span>
       <span class="o">}</span>
 <span class="o">}</span>
 <span class="c1">//值为0或者1
-</span><span class="k">val</span> <span class="n">requireZeroOneBernoulliValues</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=&gt;</span> <span class="nc">Unit</span> <span class="k">=</span> <span class="o">(</span><span class="n">v</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">values</span> <span class="k">=</span> <span class="n">v</span> <span class="k">match</span> <span class="o">{</span>
-        <span class="k">case</span> <span class="n">sv</span><span class="k">:</span> <span class="kt">SparseVector</span> <span class="o">=&gt;</span> <span class="n">sv</span><span class="o">.</span><span class="n">values</span>
-        <span class="k">case</span> <span class="n">dv</span><span class="k">:</span> <span class="kt">DenseVector</span> <span class="o">=&gt;</span> <span class="n">dv</span><span class="o">.</span><span class="n">values</span>
+</span><span class="k">val</span> <span class="nv">requireZeroOneBernoulliValues</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=&gt;</span> <span class="nc">Unit</span> <span class="k">=</span> <span class="o">(</span><span class="n">v</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">values</span> <span class="k">=</span> <span class="n">v</span> <span class="k">match</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="n">sv</span><span class="k">:</span> <span class="kt">SparseVector</span> <span class="o">=&gt;</span> <span class="nv">sv</span><span class="o">.</span><span class="py">values</span>
+        <span class="k">case</span> <span class="n">dv</span><span class="k">:</span> <span class="kt">DenseVector</span> <span class="o">=&gt;</span> <span class="nv">dv</span><span class="o">.</span><span class="py">values</span>
       <span class="o">}</span>
-      <span class="k">if</span> <span class="o">(!</span><span class="n">values</span><span class="o">.</span><span class="n">forall</span><span class="o">(</span><span class="n">v</span> <span class="k">=&gt;</span> <span class="n">v</span> <span class="o">==</span> <span class="mf">0.0</span> <span class="o">||</span> <span class="n">v</span> <span class="o">==</span> <span class="mf">1.0</span><span class="o">))</span> <span class="o">{</span>
+      <span class="nf">if</span> <span class="o">(!</span><span class="nv">values</span><span class="o">.</span><span class="py">forall</span><span class="o">(</span><span class="n">v</span> <span class="k">=&gt;</span> <span class="n">v</span> <span class="o">==</span> <span class="mf">0.0</span> <span class="o">||</span> <span class="n">v</span> <span class="o">==</span> <span class="mf">1.0</span><span class="o">))</span> <span class="o">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nc">SparkException</span><span class="o">(</span>
           <span class="n">s</span><span class="s">"Bernoulli naive Bayes requires 0 or 1 feature values but found $v."</span><span class="o">)</span>
       <span class="o">}</span>
@@ -401,36 +405,36 @@
 </ul>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//标签数
-</span><span class="k">val</span> <span class="n">numLabels</span> <span class="k">=</span> <span class="n">aggregated</span><span class="o">.</span><span class="n">length</span>
+</span><span class="k">val</span> <span class="nv">numLabels</span> <span class="k">=</span> <span class="nv">aggregated</span><span class="o">.</span><span class="py">length</span>
 <span class="c1">//文档数
 </span><span class="k">var</span> <span class="n">numDocuments</span> <span class="k">=</span> <span class="mi">0L</span>
-<span class="n">aggregated</span><span class="o">.</span><span class="n">foreach</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="k">_</span><span class="o">))</span> <span class="k">=&gt;</span>
+<span class="nv">aggregated</span><span class="o">.</span><span class="py">foreach</span> <span class="o">{</span> <span class="nf">case</span> <span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="k">_</span><span class="o">))</span> <span class="k">=&gt;</span>
   <span class="n">numDocuments</span> <span class="o">+=</span> <span class="n">n</span>
 <span class="o">}</span>
 <span class="c1">//特征维数
-</span><span class="k">val</span> <span class="n">numFeatures</span> <span class="k">=</span> <span class="n">aggregated</span><span class="o">.</span><span class="n">head</span> <span class="k">match</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="n">v</span><span class="o">))</span> <span class="k">=&gt;</span> <span class="n">v</span><span class="o">.</span><span class="n">size</span> <span class="o">}</span>
-<span class="k">val</span> <span class="n">labels</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">numLabels</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">numFeatures</span> <span class="k">=</span> <span class="nv">aggregated</span><span class="o">.</span><span class="py">head</span> <span class="k">match</span> <span class="o">{</span> <span class="nf">case</span> <span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="n">v</span><span class="o">))</span> <span class="k">=&gt;</span> <span class="nv">v</span><span class="o">.</span><span class="py">size</span> <span class="o">}</span>
+<span class="k">val</span> <span class="nv">labels</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">numLabels</span><span class="o">)</span>
 <span class="c1">//表示logP(C)
-</span><span class="k">val</span> <span class="n">pi</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">numLabels</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">pi</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">numLabels</span><span class="o">)</span>
 <span class="c1">//表示logP(F|C)
-</span><span class="k">val</span> <span class="n">theta</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">fill</span><span class="o">(</span><span class="n">numLabels</span><span class="o">)(</span><span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">numFeatures</span><span class="o">))</span>
-<span class="k">val</span> <span class="n">piLogDenom</span> <span class="k">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="n">numDocuments</span> <span class="o">+</span> <span class="n">numLabels</span> <span class="o">*</span> <span class="n">lambda</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">theta</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">fill</span><span class="o">(</span><span class="n">numLabels</span><span class="o">)(</span><span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">numFeatures</span><span class="o">))</span>
+<span class="k">val</span> <span class="nv">piLogDenom</span> <span class="k">=</span> <span class="nv">math</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="n">numDocuments</span> <span class="o">+</span> <span class="n">numLabels</span> <span class="o">*</span> <span class="n">lambda</span><span class="o">)</span>
 <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
-<span class="n">aggregated</span><span class="o">.</span><span class="n">foreach</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="n">sumTermFreqs</span><span class="o">))</span> <span class="k">=&gt;</span>
-      <span class="n">labels</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="n">label</span>
+<span class="nv">aggregated</span><span class="o">.</span><span class="py">foreach</span> <span class="o">{</span> <span class="nf">case</span> <span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="n">sumTermFreqs</span><span class="o">))</span> <span class="k">=&gt;</span>
+      <span class="nf">labels</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="n">label</span>
       <span class="c1">//训练步骤的第5步
-</span>      <span class="n">pi</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">lambda</span><span class="o">)</span> <span class="o">-</span> <span class="n">piLogDenom</span>
-      <span class="k">val</span> <span class="n">thetaLogDenom</span> <span class="k">=</span> <span class="n">modelType</span> <span class="k">match</span> <span class="o">{</span>
-        <span class="k">case</span> <span class="nc">Multinomial</span> <span class="k">=&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="n">sumTermFreqs</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span> <span class="o">+</span> <span class="n">numFeatures</span> <span class="o">*</span> <span class="n">lambda</span><span class="o">)</span>
-        <span class="k">case</span> <span class="nc">Bernoulli</span> <span class="k">=&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">lambda</span><span class="o">)</span>
+</span>      <span class="nf">pi</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="nv">math</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">lambda</span><span class="o">)</span> <span class="o">-</span> <span class="n">piLogDenom</span>
+      <span class="k">val</span> <span class="nv">thetaLogDenom</span> <span class="k">=</span> <span class="n">modelType</span> <span class="k">match</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="nc">Multinomial</span> <span class="k">=&gt;</span> <span class="nv">math</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="nv">sumTermFreqs</span><span class="o">.</span><span class="py">values</span><span class="o">.</span><span class="py">sum</span> <span class="o">+</span> <span class="n">numFeatures</span> <span class="o">*</span> <span class="n">lambda</span><span class="o">)</span>
+        <span class="k">case</span> <span class="nc">Bernoulli</span> <span class="k">=&gt;</span> <span class="nv">math</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">lambda</span><span class="o">)</span>
         <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span>
           <span class="c1">// This should never happen.
 </span>          <span class="k">throw</span> <span class="k">new</span> <span class="nc">UnknownError</span><span class="o">(</span><span class="n">s</span><span class="s">"Invalid modelType: $modelType."</span><span class="o">)</span>
       <span class="o">}</span>
       <span class="c1">//训练步骤的第6步
 </span>      <span class="k">var</span> <span class="n">j</span> <span class="k">=</span> <span class="mi">0</span>
-      <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">numFeatures</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">theta</span><span class="o">(</span><span class="n">i</span><span class="o">)(</span><span class="n">j</span><span class="o">)</span> <span class="k">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="n">sumTermFreqs</span><span class="o">(</span><span class="n">j</span><span class="o">)</span> <span class="o">+</span> <span class="n">lambda</span><span class="o">)</span> <span class="o">-</span> <span class="n">thetaLogDenom</span>
+      <span class="nf">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">numFeatures</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nf">theta</span><span class="o">(</span><span class="n">i</span><span class="o">)(</span><span class="n">j</span><span class="o">)</span> <span class="k">=</span> <span class="nv">math</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="nf">sumTermFreqs</span><span class="o">(</span><span class="n">j</span><span class="o">)</span> <span class="o">+</span> <span class="n">lambda</span><span class="o">)</span> <span class="o">-</span> <span class="n">thetaLogDenom</span>
         <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
       <span class="o">}</span>
       <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -445,21 +449,21 @@
 
 <h2 id="43-预测数据">4.3 预测数据</h2>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">override</span> <span class="k">def</span> <span class="n">predict</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">override</span> <span class="k">def</span> <span class="nf">predict</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
     <span class="n">modelType</span> <span class="k">match</span> <span class="o">{</span>
       <span class="k">case</span> <span class="nc">Multinomial</span> <span class="k">=&gt;</span>
-        <span class="n">labels</span><span class="o">(</span><span class="n">multinomialCalculation</span><span class="o">(</span><span class="n">testData</span><span class="o">).</span><span class="n">argmax</span><span class="o">)</span>
+        <span class="nf">labels</span><span class="o">(</span><span class="nf">multinomialCalculation</span><span class="o">(</span><span class="n">testData</span><span class="o">).</span><span class="py">argmax</span><span class="o">)</span>
       <span class="k">case</span> <span class="nc">Bernoulli</span> <span class="k">=&gt;</span>
-        <span class="n">labels</span><span class="o">(</span><span class="n">bernoulliCalculation</span><span class="o">(</span><span class="n">testData</span><span class="o">).</span><span class="n">argmax</span><span class="o">)</span>
+        <span class="nf">labels</span><span class="o">(</span><span class="nf">bernoulliCalculation</span><span class="o">(</span><span class="n">testData</span><span class="o">).</span><span class="py">argmax</span><span class="o">)</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>  预测也是根据<code class="highlighter-rouge">modelType</code>的不同作不同的处理。当<code class="highlighter-rouge">modelType</code>为<code class="highlighter-rouge">Multinomial</code>时，调用<code class="highlighter-rouge">multinomialCalculation</code>函数。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">multinomialCalculation</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">prob</span> <span class="k">=</span> <span class="n">thetaMatrix</span><span class="o">.</span><span class="n">multiply</span><span class="o">(</span><span class="n">testData</span><span class="o">)</span>
-    <span class="nc">BLAS</span><span class="o">.</span><span class="n">axpy</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="n">piVector</span><span class="o">,</span> <span class="n">prob</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="nf">multinomialCalculation</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">prob</span> <span class="k">=</span> <span class="nv">thetaMatrix</span><span class="o">.</span><span class="py">multiply</span><span class="o">(</span><span class="n">testData</span><span class="o">)</span>
+    <span class="nv">BLAS</span><span class="o">.</span><span class="py">axpy</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="n">piVector</span><span class="o">,</span> <span class="n">prob</span><span class="o">)</span>
     <span class="n">prob</span>
   <span class="o">}</span>
 </code></pre></div></div>
@@ -468,31 +472,31 @@
 
 <p>  当<code class="highlighter-rouge">modelType</code>为<code class="highlighter-rouge">Bernoulli</code>时，实现代码略有不同。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">bernoulliCalculation</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="n">testData</span><span class="o">.</span><span class="n">foreachActive</span><span class="o">((</span><span class="k">_</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="mf">0.0</span> <span class="o">&amp;&amp;</span> <span class="n">value</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="nf">bernoulliCalculation</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="nv">testData</span><span class="o">.</span><span class="py">foreachActive</span><span class="o">((</span><span class="k">_</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span>
+      <span class="nf">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="mf">0.0</span> <span class="o">&amp;&amp;</span> <span class="n">value</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nc">SparkException</span><span class="o">(</span>
           <span class="n">s</span><span class="s">"Bernoulli naive Bayes requires 0 or 1 feature values but found $testData."</span><span class="o">)</span>
       <span class="o">}</span>
     <span class="o">)</span>
-    <span class="k">val</span> <span class="n">prob</span> <span class="k">=</span> <span class="n">thetaMinusNegTheta</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">multiply</span><span class="o">(</span><span class="n">testData</span><span class="o">)</span>
-    <span class="nc">BLAS</span><span class="o">.</span><span class="n">axpy</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="n">piVector</span><span class="o">,</span> <span class="n">prob</span><span class="o">)</span>
-    <span class="nc">BLAS</span><span class="o">.</span><span class="n">axpy</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="n">negThetaSum</span><span class="o">.</span><span class="n">get</span><span class="o">,</span> <span class="n">prob</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">prob</span> <span class="k">=</span> <span class="nv">thetaMinusNegTheta</span><span class="o">.</span><span class="py">get</span><span class="o">.</span><span class="py">multiply</span><span class="o">(</span><span class="n">testData</span><span class="o">)</span>
+    <span class="nv">BLAS</span><span class="o">.</span><span class="py">axpy</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="n">piVector</span><span class="o">,</span> <span class="n">prob</span><span class="o">)</span>
+    <span class="nv">BLAS</span><span class="o">.</span><span class="py">axpy</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="nv">negThetaSum</span><span class="o">.</span><span class="py">get</span><span class="o">,</span> <span class="n">prob</span><span class="o">)</span>
     <span class="n">prob</span>
   <span class="o">}</span>
 </code></pre></div></div>
 
 <p>  当词在训练数据中出现与否处理的过程不同。见伯努利模型测试过程。这里用矩阵和向量的操作来实现这个过程，需要仔细体会。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">private</span> <span class="k">val</span> <span class="o">(</span><span class="n">thetaMinusNegTheta</span><span class="o">,</span> <span class="n">negThetaSum</span><span class="o">)</span> <span class="k">=</span> <span class="n">modelType</span> <span class="k">match</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">private</span> <span class="nf">val</span> <span class="o">(</span><span class="n">thetaMinusNegTheta</span><span class="o">,</span> <span class="n">negThetaSum</span><span class="o">)</span> <span class="k">=</span> <span class="n">modelType</span> <span class="k">match</span> <span class="o">{</span>
     <span class="k">case</span> <span class="nc">Multinomial</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="nc">None</span><span class="o">,</span> <span class="nc">None</span><span class="o">)</span>
     <span class="k">case</span> <span class="nc">Bernoulli</span> <span class="k">=&gt;</span>
-      <span class="k">val</span> <span class="n">negTheta</span> <span class="k">=</span> <span class="n">thetaMatrix</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">value</span> <span class="k">=&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(</span><span class="n">value</span><span class="o">)))</span>
-      <span class="k">val</span> <span class="n">ones</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DenseVector</span><span class="o">(</span><span class="nc">Array</span><span class="o">.</span><span class="n">fill</span><span class="o">(</span><span class="n">thetaMatrix</span><span class="o">.</span><span class="n">numCols</span><span class="o">){</span><span class="mf">1.0</span><span class="o">})</span>
-      <span class="k">val</span> <span class="n">thetaMinusNegTheta</span> <span class="k">=</span> <span class="n">thetaMatrix</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">value</span> <span class="k">=&gt;</span>
-        <span class="n">value</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="o">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(</span><span class="n">value</span><span class="o">))</span>
+      <span class="k">val</span> <span class="nv">negTheta</span> <span class="k">=</span> <span class="nv">thetaMatrix</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">value</span> <span class="k">=&gt;</span> <span class="nv">math</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="nv">math</span><span class="o">.</span><span class="py">exp</span><span class="o">(</span><span class="n">value</span><span class="o">)))</span>
+      <span class="k">val</span> <span class="nv">ones</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DenseVector</span><span class="o">(</span><span class="nv">Array</span><span class="o">.</span><span class="py">fill</span><span class="o">(</span><span class="nv">thetaMatrix</span><span class="o">.</span><span class="py">numCols</span><span class="o">){</span><span class="mf">1.0</span><span class="o">})</span>
+      <span class="k">val</span> <span class="nv">thetaMinusNegTheta</span> <span class="k">=</span> <span class="nv">thetaMatrix</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="n">value</span> <span class="k">=&gt;</span>
+        <span class="n">value</span> <span class="o">-</span> <span class="nv">math</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="nv">math</span><span class="o">.</span><span class="py">exp</span><span class="o">(</span><span class="n">value</span><span class="o">))</span>
       <span class="o">}</span>
-      <span class="o">(</span><span class="nc">Option</span><span class="o">(</span><span class="n">thetaMinusNegTheta</span><span class="o">),</span> <span class="nc">Option</span><span class="o">(</span><span class="n">negTheta</span><span class="o">.</span><span class="n">multiply</span><span class="o">(</span><span class="n">ones</span><span class="o">)))</span>
+      <span class="o">(</span><span class="nc">Option</span><span class="o">(</span><span class="n">thetaMinusNegTheta</span><span class="o">),</span> <span class="nc">Option</span><span class="o">(</span><span class="nv">negTheta</span><span class="o">.</span><span class="py">multiply</span><span class="o">(</span><span class="n">ones</span><span class="o">)))</span>
     <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span>
       <span class="c1">// This should never happen.
 </span>      <span class="k">throw</span> <span class="k">new</span> <span class="nc">UnknownError</span><span class="o">(</span><span class="n">s</span><span class="s">"Invalid modelType: $modelType."</span><span class="o">)</span>
@@ -738,7 +742,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -910,7 +914,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

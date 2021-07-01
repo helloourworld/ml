@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -209,38 +213,38 @@
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.SparkContext</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.random.RandomRDDs._</span>
 
-<span class="k">val</span> <span class="n">sc</span><span class="k">:</span> <span class="kt">SparkContext</span> <span class="o">=</span> <span class="o">...</span>
+<span class="k">val</span> <span class="nv">sc</span><span class="k">:</span> <span class="kt">SparkContext</span> <span class="o">=</span> <span class="o">...</span>
 
 <span class="c1">// Generate a random double RDD that contains 1 million i.i.d. values drawn from the
 // standard normal distribution `N(0, 1)`, evenly distributed in 10 partitions.
-</span><span class="k">val</span> <span class="n">u</span> <span class="k">=</span> <span class="n">normalRDD</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="mi">1000000L</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">u</span> <span class="k">=</span> <span class="nf">normalRDD</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="mi">1000000L</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
 <span class="c1">// Apply a transform to get a random double RDD following `N(1, 4)`.
-</span><span class="k">val</span> <span class="n">v</span> <span class="k">=</span> <span class="n">u</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">x</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">v</span> <span class="k">=</span> <span class="nv">u</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">x</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>  <code class="highlighter-rouge">normalRDD</code>的实现如下面代码所示。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">normalRDD</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">normalRDD</span><span class="o">(</span>
       <span class="n">sc</span><span class="k">:</span> <span class="kt">SparkContext</span><span class="o">,</span>
       <span class="n">size</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span>
       <span class="n">numPartitions</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span>
-      <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="nc">Utils</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">nextLong</span><span class="o">())</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">normal</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">StandardNormalGenerator</span><span class="o">()</span>
-    <span class="n">randomRDD</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="n">normal</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">numPartitionsOrDefault</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="n">numPartitions</span><span class="o">),</span> <span class="n">seed</span><span class="o">)</span>
+      <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="nv">Utils</span><span class="o">.</span><span class="py">random</span><span class="o">.</span><span class="py">nextLong</span><span class="o">())</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">normal</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">StandardNormalGenerator</span><span class="o">()</span>
+    <span class="nf">randomRDD</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="n">normal</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="nf">numPartitionsOrDefault</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="n">numPartitions</span><span class="o">),</span> <span class="n">seed</span><span class="o">)</span>
   <span class="o">}</span>
-<span class="k">def</span> <span class="n">randomRDD</span><span class="o">[</span><span class="kt">T:</span> <span class="kt">ClassTag</span><span class="o">](</span>
+<span class="k">def</span> <span class="nf">randomRDD</span><span class="o">[</span><span class="kt">T:</span> <span class="kt">ClassTag</span><span class="o">](</span>
       <span class="n">sc</span><span class="k">:</span> <span class="kt">SparkContext</span><span class="o">,</span>
       <span class="n">generator</span><span class="k">:</span> <span class="kt">RandomDataGenerator</span><span class="o">[</span><span class="kt">T</span><span class="o">],</span>
       <span class="n">size</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span>
       <span class="n">numPartitions</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span>
-      <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="nc">Utils</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">nextLong</span><span class="o">())</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">new</span> <span class="nc">RandomRDD</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">sc</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">numPartitionsOrDefault</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="n">numPartitions</span><span class="o">),</span> <span class="n">generator</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
+      <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="nv">Utils</span><span class="o">.</span><span class="py">random</span><span class="o">.</span><span class="py">nextLong</span><span class="o">())</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">new</span> <span class="nc">RandomRDD</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">sc</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="nf">numPartitionsOrDefault</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="n">numPartitions</span><span class="o">),</span> <span class="n">generator</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="k">private</span><span class="o">[</span><span class="kt">mllib</span><span class="o">]</span> <span class="k">class</span> <span class="nc">RandomRDD</span><span class="o">[</span><span class="kt">T:</span> <span class="kt">ClassTag</span><span class="o">](</span><span class="n">sc</span><span class="k">:</span> <span class="kt">SparkContext</span><span class="o">,</span>
     <span class="n">size</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span>
     <span class="n">numPartitions</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
-    <span class="nd">@transient</span> <span class="k">private</span> <span class="k">val</span> <span class="n">rng</span><span class="k">:</span> <span class="kt">RandomDataGenerator</span><span class="o">[</span><span class="kt">T</span><span class="o">],</span>
-    <span class="nd">@transient</span> <span class="k">private</span> <span class="k">val</span> <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="nc">Utils</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">nextLong</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">RDD</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">sc</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">)</span>
+    <span class="nd">@transient</span> <span class="k">private</span> <span class="k">val</span> <span class="nv">rng</span><span class="k">:</span> <span class="kt">RandomDataGenerator</span><span class="o">[</span><span class="kt">T</span><span class="o">],</span>
+    <span class="nd">@transient</span> <span class="k">private</span> <span class="k">val</span> <span class="nv">seed</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="nv">Utils</span><span class="o">.</span><span class="py">random</span><span class="o">.</span><span class="py">nextLong</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">RDD</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">sc</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">)</span>
 </code></pre></div></div>
 
 
@@ -472,7 +476,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -644,7 +648,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

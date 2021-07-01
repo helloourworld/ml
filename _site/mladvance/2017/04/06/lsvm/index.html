@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -220,25 +224,25 @@
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.evaluation.BinaryClassificationMetrics</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
 <span class="c1">// Load training data in LIBSVM format.
-</span><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="nc">MLUtils</span><span class="o">.</span><span class="n">loadLibSVMFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/mllib/sample_libsvm_data.txt"</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">data</span> <span class="k">=</span> <span class="nv">MLUtils</span><span class="o">.</span><span class="py">loadLibSVMFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/mllib/sample_libsvm_data.txt"</span><span class="o">)</span>
 <span class="c1">// Split data into training (60%) and test (40%).
-</span><span class="k">val</span> <span class="n">splits</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.6</span><span class="o">,</span> <span class="mf">0.4</span><span class="o">),</span> <span class="n">seed</span> <span class="k">=</span> <span class="mi">11L</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">training</span> <span class="k">=</span> <span class="n">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">cache</span><span class="o">()</span>
-<span class="k">val</span> <span class="n">test</span> <span class="k">=</span> <span class="n">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">splits</span> <span class="k">=</span> <span class="nv">data</span><span class="o">.</span><span class="py">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.6</span><span class="o">,</span> <span class="mf">0.4</span><span class="o">),</span> <span class="n">seed</span> <span class="k">=</span> <span class="mi">11L</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">training</span> <span class="k">=</span> <span class="nf">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="py">cache</span><span class="o">()</span>
+<span class="k">val</span> <span class="nv">test</span> <span class="k">=</span> <span class="nf">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
 <span class="c1">// Run training algorithm to build the model
-</span><span class="k">val</span> <span class="n">numIterations</span> <span class="k">=</span> <span class="mi">100</span>
-<span class="k">val</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">SVMWithSGD</span><span class="o">.</span><span class="n">train</span><span class="o">(</span><span class="n">training</span><span class="o">,</span> <span class="n">numIterations</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">numIterations</span> <span class="k">=</span> <span class="mi">100</span>
+<span class="k">val</span> <span class="nv">model</span> <span class="k">=</span> <span class="nv">SVMWithSGD</span><span class="o">.</span><span class="py">train</span><span class="o">(</span><span class="n">training</span><span class="o">,</span> <span class="n">numIterations</span><span class="o">)</span>
 <span class="c1">// Clear the default threshold.
-</span><span class="n">model</span><span class="o">.</span><span class="n">clearThreshold</span><span class="o">()</span>
+</span><span class="nv">model</span><span class="o">.</span><span class="py">clearThreshold</span><span class="o">()</span>
 <span class="c1">// Compute raw scores on the test set.
-</span><span class="k">val</span> <span class="n">scoreAndLabels</span> <span class="k">=</span> <span class="n">test</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">point</span> <span class="k">=&gt;</span>
-  <span class="k">val</span> <span class="n">score</span> <span class="k">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">point</span><span class="o">.</span><span class="n">features</span><span class="o">)</span>
-  <span class="o">(</span><span class="n">score</span><span class="o">,</span> <span class="n">point</span><span class="o">.</span><span class="n">label</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">scoreAndLabels</span> <span class="k">=</span> <span class="nv">test</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="n">point</span> <span class="k">=&gt;</span>
+  <span class="k">val</span> <span class="nv">score</span> <span class="k">=</span> <span class="nv">model</span><span class="o">.</span><span class="py">predict</span><span class="o">(</span><span class="nv">point</span><span class="o">.</span><span class="py">features</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">score</span><span class="o">,</span> <span class="nv">point</span><span class="o">.</span><span class="py">label</span><span class="o">)</span>
 <span class="o">}</span>
 <span class="c1">// Get evaluation metrics.
-</span><span class="k">val</span> <span class="n">metrics</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">BinaryClassificationMetrics</span><span class="o">(</span><span class="n">scoreAndLabels</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">auROC</span> <span class="k">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">areaUnderROC</span><span class="o">()</span>
-<span class="n">println</span><span class="o">(</span><span class="s">"Area under ROC = "</span> <span class="o">+</span> <span class="n">auROC</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">metrics</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">BinaryClassificationMetrics</span><span class="o">(</span><span class="n">scoreAndLabels</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">auROC</span> <span class="k">=</span> <span class="nv">metrics</span><span class="o">.</span><span class="py">areaUnderROC</span><span class="o">()</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Area under ROC = "</span> <span class="o">+</span> <span class="n">auROC</span><span class="o">)</span>
 </code></pre></div></div>
 
 <h3 id="22-训练">2.2 训练</h3>
@@ -247,32 +251,32 @@
 它的实现过程分为4步。参加<a href="../逻辑回归/logic-regression.md">逻辑回归</a>了解这五步的详细情况。我们只需要了解<code class="highlighter-rouge">HingeGradient</code>和<code class="highlighter-rouge">SquaredL2Updater</code>的实现。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">HingeGradient</span> <span class="k">extends</span> <span class="nc">Gradient</span> <span class="o">{</span>
-  <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">weights</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Vector</span><span class="o">,</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">dotProduct</span> <span class="k">=</span> <span class="n">dot</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">weights</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">compute</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">weights</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Vector</span><span class="o">,</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">dotProduct</span> <span class="k">=</span> <span class="nf">dot</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">weights</span><span class="o">)</span>
     <span class="c1">// 我们的损失函数是 max(0, 1 - (2y - 1) (f_w(x)))
 </span>    <span class="c1">// 所以梯度是 -(2y - 1)*x
-</span>    <span class="k">val</span> <span class="n">labelScaled</span> <span class="k">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">label</span> <span class="o">-</span> <span class="mf">1.0</span>
-    <span class="k">if</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">&gt;</span> <span class="n">labelScaled</span> <span class="o">*</span> <span class="n">dotProduct</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">gradient</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span>
-      <span class="n">scal</span><span class="o">(-</span><span class="n">labelScaled</span><span class="o">,</span> <span class="n">gradient</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">labelScaled</span> <span class="k">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">label</span> <span class="o">-</span> <span class="mf">1.0</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">&gt;</span> <span class="n">labelScaled</span> <span class="o">*</span> <span class="n">dotProduct</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">gradient</span> <span class="k">=</span> <span class="nv">data</span><span class="o">.</span><span class="py">copy</span>
+      <span class="nf">scal</span><span class="o">(-</span><span class="n">labelScaled</span><span class="o">,</span> <span class="n">gradient</span><span class="o">)</span>
       <span class="o">(</span><span class="n">gradient</span><span class="o">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">labelScaled</span> <span class="o">*</span> <span class="n">dotProduct</span><span class="o">)</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-      <span class="o">(</span><span class="nc">Vectors</span><span class="o">.</span><span class="n">sparse</span><span class="o">(</span><span class="n">weights</span><span class="o">.</span><span class="n">size</span><span class="o">,</span> <span class="nc">Array</span><span class="o">.</span><span class="n">empty</span><span class="o">,</span> <span class="nc">Array</span><span class="o">.</span><span class="n">empty</span><span class="o">),</span> <span class="mf">0.0</span><span class="o">)</span>
+      <span class="o">(</span><span class="nv">Vectors</span><span class="o">.</span><span class="py">sparse</span><span class="o">(</span><span class="nv">weights</span><span class="o">.</span><span class="py">size</span><span class="o">,</span> <span class="nv">Array</span><span class="o">.</span><span class="py">empty</span><span class="o">,</span> <span class="nv">Array</span><span class="o">.</span><span class="py">empty</span><span class="o">),</span> <span class="mf">0.0</span><span class="o">)</span>
     <span class="o">}</span>
   <span class="o">}</span>
 
-  <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">compute</span><span class="o">(</span>
       <span class="n">data</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
       <span class="n">weights</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">cumGradient</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">dotProduct</span> <span class="k">=</span> <span class="n">dot</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">weights</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">dotProduct</span> <span class="k">=</span> <span class="nf">dot</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">weights</span><span class="o">)</span>
     <span class="c1">// 我们的损失函数是 max(0, 1 - (2y - 1) (f_w(x)))
 </span>    <span class="c1">// 所以梯度是 -(2y - 1)*x
-</span>    <span class="k">val</span> <span class="n">labelScaled</span> <span class="k">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">label</span> <span class="o">-</span> <span class="mf">1.0</span>
-    <span class="k">if</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">&gt;</span> <span class="n">labelScaled</span> <span class="o">*</span> <span class="n">dotProduct</span><span class="o">)</span> <span class="o">{</span>
+</span>    <span class="k">val</span> <span class="nv">labelScaled</span> <span class="k">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">label</span> <span class="o">-</span> <span class="mf">1.0</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">&gt;</span> <span class="n">labelScaled</span> <span class="o">*</span> <span class="n">dotProduct</span><span class="o">)</span> <span class="o">{</span>
       <span class="c1">//cumGradient -= labelScaled * data
-</span>      <span class="n">axpy</span><span class="o">(-</span><span class="n">labelScaled</span><span class="o">,</span> <span class="n">data</span><span class="o">,</span> <span class="n">cumGradient</span><span class="o">)</span>
+</span>      <span class="nf">axpy</span><span class="o">(-</span><span class="n">labelScaled</span><span class="o">,</span> <span class="n">data</span><span class="o">,</span> <span class="n">cumGradient</span><span class="o">)</span>
       <span class="c1">//损失值
 </span>      <span class="mf">1.0</span> <span class="o">-</span> <span class="n">labelScaled</span> <span class="o">*</span> <span class="n">dotProduct</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
@@ -285,7 +289,7 @@
 <p>  线性支持向量机的训练使用<code class="highlighter-rouge">L2</code>正则化方法。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SquaredL2Updater</span> <span class="k">extends</span> <span class="nc">Updater</span> <span class="o">{</span>
-  <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">compute</span><span class="o">(</span>
       <span class="n">weightsOld</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">gradient</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">stepSize</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
@@ -294,15 +298,15 @@
     <span class="c1">// w' = w - thisIterStepSize * (gradient + regParam * w)
 </span>    <span class="c1">// w' = (1 - thisIterStepSize * regParam) * w - thisIterStepSize * gradient
 </span>    <span class="c1">//表示步长，即负梯度方向的大小
-</span>    <span class="k">val</span> <span class="n">thisIterStepSize</span> <span class="k">=</span> <span class="n">stepSize</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="o">(</span><span class="n">iter</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">brzWeights</span><span class="k">:</span> <span class="kt">BV</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="n">weightsOld</span><span class="o">.</span><span class="n">toBreeze</span><span class="o">.</span><span class="n">toDenseVector</span>
+</span>    <span class="k">val</span> <span class="nv">thisIterStepSize</span> <span class="k">=</span> <span class="n">stepSize</span> <span class="o">/</span> <span class="nv">math</span><span class="o">.</span><span class="py">sqrt</span><span class="o">(</span><span class="n">iter</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">brzWeights</span><span class="k">:</span> <span class="kt">BV</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="nv">weightsOld</span><span class="o">.</span><span class="py">toBreeze</span><span class="o">.</span><span class="py">toDenseVector</span>
     <span class="c1">//正则化，brzWeights每行数据均乘以(1.0 - thisIterStepSize * regParam)
 </span>    <span class="n">brzWeights</span> <span class="o">:*=</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="n">regParam</span><span class="o">)</span>
     <span class="c1">//y += x * a，即brzWeights -= gradient * thisInterStepSize
-</span>    <span class="n">brzAxpy</span><span class="o">(-</span><span class="n">thisIterStepSize</span><span class="o">,</span> <span class="n">gradient</span><span class="o">.</span><span class="n">toBreeze</span><span class="o">,</span> <span class="n">brzWeights</span><span class="o">)</span>
+</span>    <span class="nf">brzAxpy</span><span class="o">(-</span><span class="n">thisIterStepSize</span><span class="o">,</span> <span class="nv">gradient</span><span class="o">.</span><span class="py">toBreeze</span><span class="o">,</span> <span class="n">brzWeights</span><span class="o">)</span>
     <span class="c1">//正则化||w||_2
-</span>    <span class="k">val</span> <span class="n">norm</span> <span class="k">=</span> <span class="n">brzNorm</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">)</span>
-    <span class="o">(</span><span class="nc">Vectors</span><span class="o">.</span><span class="n">fromBreeze</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">),</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">norm</span> <span class="o">*</span> <span class="n">norm</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">norm</span> <span class="k">=</span> <span class="nf">brzNorm</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">)</span>
+    <span class="o">(</span><span class="nv">Vectors</span><span class="o">.</span><span class="py">fromBreeze</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">),</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">norm</span> <span class="o">*</span> <span class="n">norm</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -315,14 +319,14 @@
 
 <h3 id="23-预测">2.3 预测</h3>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="n">predictPoint</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="nf">predictPoint</span><span class="o">(</span>
       <span class="n">dataMatrix</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">weightMatrix</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">intercept</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
     <span class="c1">//w^Tx
-</span>    <span class="k">val</span> <span class="n">margin</span> <span class="k">=</span> <span class="n">weightMatrix</span><span class="o">.</span><span class="n">toBreeze</span><span class="o">.</span><span class="n">dot</span><span class="o">(</span><span class="n">dataMatrix</span><span class="o">.</span><span class="n">toBreeze</span><span class="o">)</span> <span class="o">+</span> <span class="n">intercept</span>
+</span>    <span class="k">val</span> <span class="nv">margin</span> <span class="k">=</span> <span class="nv">weightMatrix</span><span class="o">.</span><span class="py">toBreeze</span><span class="o">.</span><span class="py">dot</span><span class="o">(</span><span class="nv">dataMatrix</span><span class="o">.</span><span class="py">toBreeze</span><span class="o">)</span> <span class="o">+</span> <span class="n">intercept</span>
     <span class="n">threshold</span> <span class="k">match</span> <span class="o">{</span>
-      <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">t</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="k">if</span> <span class="o">(</span><span class="n">margin</span> <span class="o">&gt;</span> <span class="n">t</span><span class="o">)</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="mf">0.0</span>
+      <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">t</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nf">if</span> <span class="o">(</span><span class="n">margin</span> <span class="o">&gt;</span> <span class="n">t</span><span class="o">)</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="mf">0.0</span>
       <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="n">margin</span>
     <span class="o">}</span>
   <span class="o">}</span>
@@ -562,7 +566,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -734,7 +738,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

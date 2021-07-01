@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -207,11 +211,11 @@
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.io._</span>
 
 <span class="k">object</span> <span class="nc">IOs1</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">writer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PrintWriter</span><span class="o">(</span><span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"test.txt"</span> <span class="o">))</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">writer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PrintWriter</span><span class="o">(</span><span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"test.txt"</span> <span class="o">))</span>
 
-      <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="o">(</span><span class="s">"ML Big Data 教程"</span><span class="o">)</span>
-      <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="o">()</span>
+      <span class="nv">writer</span><span class="o">.</span><span class="py">write</span><span class="o">(</span><span class="s">"ML Big Data 教程"</span><span class="o">)</span>
+      <span class="nv">writer</span><span class="o">.</span><span class="py">close</span><span class="o">()</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -223,11 +227,11 @@
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.io.StdIn</span>
 
 <span class="k">object</span> <span class="nc">IOs2</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="n">print</span><span class="o">(</span><span class="s">"请输入任意字符 : "</span> <span class="o">)</span>
-      <span class="k">val</span> <span class="n">line</span> <span class="k">=</span> <span class="nc">StdIn</span><span class="o">.</span><span class="n">readLine</span><span class="o">()</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="nf">print</span><span class="o">(</span><span class="s">"请输入任意字符 : "</span> <span class="o">)</span>
+      <span class="k">val</span> <span class="nv">line</span> <span class="k">=</span> <span class="nv">StdIn</span><span class="o">.</span><span class="py">readLine</span><span class="o">()</span>
 
-      <span class="n">println</span><span class="o">(</span><span class="s">"谢谢，你输入的是: "</span> <span class="o">+</span> <span class="n">line</span><span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"谢谢，你输入的是: "</span> <span class="o">+</span> <span class="n">line</span><span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -253,7 +257,7 @@
    *
    * @return the string read from the terminal or null if the end of stream was reached.
    */</span>
-  <span class="k">def</span> <span class="n">readLine</span><span class="o">()</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="n">readLine</span><span class="o">()</span>
+  <span class="k">def</span> <span class="nf">readLine</span><span class="o">()</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nv">in</span><span class="o">.</span><span class="py">readLine</span><span class="o">()</span>
 
   <span class="cm">/** Print and flush formatted text to the default output, and read a full line from the default input.
    *  Returns `null` if the end of the input stream has been reached.
@@ -262,10 +266,10 @@
    *  @param args the parameters used to instantiate the format, as in `printf`.
    *  @return the string read from the default input
    */</span>
-  <span class="k">def</span> <span class="n">readLine</span><span class="o">(</span><span class="n">text</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">args</span><span class="k">:</span> <span class="kt">Any*</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">printf</span><span class="o">(</span><span class="n">text</span><span class="o">,</span> <span class="n">args</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">)</span>
-    <span class="n">out</span><span class="o">.</span><span class="n">flush</span><span class="o">()</span>
-    <span class="n">readLine</span><span class="o">()</span>
+  <span class="k">def</span> <span class="nf">readLine</span><span class="o">(</span><span class="n">text</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">args</span><span class="k">:</span> <span class="kt">Any*</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">printf</span><span class="o">(</span><span class="n">text</span><span class="o">,</span> <span class="n">args</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">)</span>
+    <span class="nv">out</span><span class="o">.</span><span class="py">flush</span><span class="o">()</span>
+    <span class="nf">readLine</span><span class="o">()</span>
   <span class="o">}</span>
 
   <span class="cm">/** Reads a boolean value from an entire line of the default input.
@@ -274,12 +278,12 @@
    *  @return the boolean value read, or false if it couldn't be converted to a boolean
    *  @throws java.io.EOFException if the end of the input stream has been reached.
    */</span>
-  <span class="k">def</span> <span class="n">readBoolean</span><span class="o">()</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">readBoolean</span><span class="o">()</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">s</span> <span class="k">=</span> <span class="nf">readLine</span><span class="o">()</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">io</span><span class="o">.</span><span class="py">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
     <span class="k">else</span>
-      <span class="n">s</span><span class="o">.</span><span class="n">toLowerCase</span><span class="o">()</span> <span class="k">match</span> <span class="o">{</span>
+      <span class="nv">s</span><span class="o">.</span><span class="py">toLowerCase</span><span class="o">()</span> <span class="k">match</span> <span class="o">{</span>
         <span class="k">case</span> <span class="s">"true"</span> <span class="k">=&gt;</span> <span class="kc">true</span>
         <span class="k">case</span> <span class="s">"t"</span> <span class="k">=&gt;</span> <span class="kc">true</span>
         <span class="k">case</span> <span class="s">"yes"</span> <span class="k">=&gt;</span> <span class="kc">true</span>
@@ -295,12 +299,12 @@
    *  input stream has been reached.
    *  @throws java.lang.NumberFormatException if the value couldn't be converted to a Byte
    */</span>
-  <span class="k">def</span> <span class="n">readByte</span><span class="o">()</span><span class="k">:</span> <span class="kt">Byte</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">readByte</span><span class="o">()</span><span class="k">:</span> <span class="kt">Byte</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">s</span> <span class="k">=</span> <span class="nf">readLine</span><span class="o">()</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">io</span><span class="o">.</span><span class="py">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
     <span class="k">else</span>
-      <span class="n">s</span><span class="o">.</span><span class="n">toByte</span>
+      <span class="nv">s</span><span class="o">.</span><span class="py">toByte</span>
   <span class="o">}</span>
 
   <span class="cm">/** Reads a short value from an entire line of the default input.
@@ -310,12 +314,12 @@
    *  input stream has been reached.
    *  @throws java.lang.NumberFormatException if the value couldn't be converted to a Short
    */</span>
-  <span class="k">def</span> <span class="n">readShort</span><span class="o">()</span><span class="k">:</span> <span class="kt">Short</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">readShort</span><span class="o">()</span><span class="k">:</span> <span class="kt">Short</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">s</span> <span class="k">=</span> <span class="nf">readLine</span><span class="o">()</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">io</span><span class="o">.</span><span class="py">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
     <span class="k">else</span>
-      <span class="n">s</span><span class="o">.</span><span class="n">toShort</span>
+      <span class="nv">s</span><span class="o">.</span><span class="py">toShort</span>
   <span class="o">}</span>
 
   <span class="cm">/** Reads a char value from an entire line of the default input.
@@ -325,10 +329,10 @@
    *  input stream has been reached.
    *  @throws java.lang.StringIndexOutOfBoundsException if the line read from default input was empty
    */</span>
-  <span class="k">def</span> <span class="n">readChar</span><span class="o">()</span><span class="k">:</span> <span class="kt">Char</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">readChar</span><span class="o">()</span><span class="k">:</span> <span class="kt">Char</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">s</span> <span class="k">=</span> <span class="nf">readLine</span><span class="o">()</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">io</span><span class="o">.</span><span class="py">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
     <span class="k">else</span>
       <span class="n">s</span> <span class="n">charAt</span> <span class="mi">0</span>
   <span class="o">}</span>
@@ -340,12 +344,12 @@
    *  input stream has been reached.
    *  @throws java.lang.NumberFormatException if the value couldn't be converted to an Int
    */</span>
-  <span class="k">def</span> <span class="n">readInt</span><span class="o">()</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">readInt</span><span class="o">()</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">s</span> <span class="k">=</span> <span class="nf">readLine</span><span class="o">()</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">io</span><span class="o">.</span><span class="py">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
     <span class="k">else</span>
-      <span class="n">s</span><span class="o">.</span><span class="n">toInt</span>
+      <span class="nv">s</span><span class="o">.</span><span class="py">toInt</span>
   <span class="o">}</span>
 
   <span class="cm">/** Reads an long value from an entire line of the default input.
@@ -355,12 +359,12 @@
    *  input stream has been reached.
    *  @throws java.lang.NumberFormatException if the value couldn't be converted to a Long
    */</span>
-  <span class="k">def</span> <span class="n">readLong</span><span class="o">()</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">readLong</span><span class="o">()</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">s</span> <span class="k">=</span> <span class="nf">readLine</span><span class="o">()</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">io</span><span class="o">.</span><span class="py">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
     <span class="k">else</span>
-      <span class="n">s</span><span class="o">.</span><span class="n">toLong</span>
+      <span class="nv">s</span><span class="o">.</span><span class="py">toLong</span>
   <span class="o">}</span>
 
   <span class="cm">/** Reads a float value from an entire line of the default input.
@@ -370,12 +374,12 @@
    *  @throws java.lang.NumberFormatException if the value couldn't be converted to a Float
    *
    */</span>
-  <span class="k">def</span> <span class="n">readFloat</span><span class="o">()</span><span class="k">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">readFloat</span><span class="o">()</span><span class="k">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">s</span> <span class="k">=</span> <span class="nf">readLine</span><span class="o">()</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">io</span><span class="o">.</span><span class="py">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
     <span class="k">else</span>
-      <span class="n">s</span><span class="o">.</span><span class="n">toFloat</span>
+      <span class="nv">s</span><span class="o">.</span><span class="py">toFloat</span>
   <span class="o">}</span>
 
   <span class="cm">/** Reads a double value from an entire line of the default input.
@@ -385,12 +389,12 @@
    *  input stream has been reached.
    *  @throws java.lang.NumberFormatException if the value couldn't be converted to a Float
    */</span>
-  <span class="k">def</span> <span class="n">readDouble</span><span class="o">()</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">readDouble</span><span class="o">()</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">s</span> <span class="k">=</span> <span class="nf">readLine</span><span class="o">()</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">io</span><span class="o">.</span><span class="py">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
     <span class="k">else</span>
-      <span class="n">s</span><span class="o">.</span><span class="n">toDouble</span>
+      <span class="nv">s</span><span class="o">.</span><span class="py">toDouble</span>
   <span class="o">}</span>
 
   <span class="cm">/** Reads in some structured input (from the default input), specified by
@@ -402,12 +406,12 @@
    *  @throws java.io.EOFException if the end of the input stream has been
    *          reached.
    */</span>
-  <span class="k">def</span> <span class="n">readf</span><span class="o">(</span><span class="n">format</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">s</span> <span class="k">=</span> <span class="n">readLine</span><span class="o">()</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">readf</span><span class="o">(</span><span class="n">format</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">s</span> <span class="k">=</span> <span class="nf">readLine</span><span class="o">()</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">io</span><span class="o">.</span><span class="py">EOFException</span><span class="o">(</span><span class="s">"Console has reached end of input"</span><span class="o">)</span>
     <span class="k">else</span>
-      <span class="n">textComponents</span><span class="o">(</span><span class="k">new</span> <span class="nc">MessageFormat</span><span class="o">(</span><span class="n">format</span><span class="o">).</span><span class="n">parse</span><span class="o">(</span><span class="n">s</span><span class="o">))</span>
+      <span class="nf">textComponents</span><span class="o">(</span><span class="k">new</span> <span class="nc">MessageFormat</span><span class="o">(</span><span class="n">format</span><span class="o">).</span><span class="py">parse</span><span class="o">(</span><span class="n">s</span><span class="o">))</span>
   <span class="o">}</span>
 
   <span class="cm">/** Reads in some structured input (from the default input), specified by
@@ -417,7 +421,7 @@
    *  @param format format string, as accepted by `readf`.
    *  @return The first value that was extracted from the input
    */</span>
-  <span class="k">def</span> <span class="n">readf1</span><span class="o">(</span><span class="n">format</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="n">readf</span><span class="o">(</span><span class="n">format</span><span class="o">).</span><span class="n">head</span>
+  <span class="k">def</span> <span class="nf">readf1</span><span class="o">(</span><span class="n">format</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="nf">readf</span><span class="o">(</span><span class="n">format</span><span class="o">).</span><span class="py">head</span>
 
   <span class="cm">/** Reads in some structured input (from the default input), specified
    *  by a format specifier, returning only the first two values extracted,
@@ -426,9 +430,9 @@
    *  @param format format string, as accepted by `readf`.
    *  @return A [[scala.Tuple2]] containing the first two values extracted
    */</span>
-  <span class="k">def</span> <span class="n">readf2</span><span class="o">(</span><span class="n">format</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Any</span><span class="o">,</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">res</span> <span class="k">=</span> <span class="n">readf</span><span class="o">(</span><span class="n">format</span><span class="o">)</span>
-    <span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="n">head</span><span class="o">,</span> <span class="n">res</span><span class="o">.</span><span class="n">tail</span><span class="o">.</span><span class="n">head</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">readf2</span><span class="o">(</span><span class="n">format</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Any</span><span class="o">,</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">res</span> <span class="k">=</span> <span class="nf">readf</span><span class="o">(</span><span class="n">format</span><span class="o">)</span>
+    <span class="o">(</span><span class="nv">res</span><span class="o">.</span><span class="py">head</span><span class="o">,</span> <span class="nv">res</span><span class="o">.</span><span class="py">tail</span><span class="o">.</span><span class="py">head</span><span class="o">)</span>
   <span class="o">}</span>
 
   <span class="cm">/** Reads in some structured input (from the default input), specified
@@ -438,24 +442,24 @@
    *  @param format format string, as accepted by `readf`.
    *  @return A [[scala.Tuple3]] containing the first three values extracted
    */</span>
-  <span class="k">def</span> <span class="n">readf3</span><span class="o">(</span><span class="n">format</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Any</span><span class="o">,</span> <span class="kt">Any</span><span class="o">,</span> <span class="nc">Any</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">res</span> <span class="k">=</span> <span class="n">readf</span><span class="o">(</span><span class="n">format</span><span class="o">)</span>
-    <span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="n">head</span><span class="o">,</span> <span class="n">res</span><span class="o">.</span><span class="n">tail</span><span class="o">.</span><span class="n">head</span><span class="o">,</span> <span class="n">res</span><span class="o">.</span><span class="n">tail</span><span class="o">.</span><span class="n">tail</span><span class="o">.</span><span class="n">head</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">readf3</span><span class="o">(</span><span class="n">format</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Any</span><span class="o">,</span> <span class="kt">Any</span><span class="o">,</span> <span class="nc">Any</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">res</span> <span class="k">=</span> <span class="nf">readf</span><span class="o">(</span><span class="n">format</span><span class="o">)</span>
+    <span class="o">(</span><span class="nv">res</span><span class="o">.</span><span class="py">head</span><span class="o">,</span> <span class="nv">res</span><span class="o">.</span><span class="py">tail</span><span class="o">.</span><span class="py">head</span><span class="o">,</span> <span class="nv">res</span><span class="o">.</span><span class="py">tail</span><span class="o">.</span><span class="py">tail</span><span class="o">.</span><span class="py">head</span><span class="o">)</span>
   <span class="o">}</span>
 
-  <span class="k">private</span> <span class="k">def</span> <span class="n">textComponents</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">AnyRef</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">var</span> <span class="n">i</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span>
+  <span class="k">private</span> <span class="k">def</span> <span class="nf">textComponents</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">AnyRef</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">var</span> <span class="n">i</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">a</span><span class="o">.</span><span class="py">length</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="k">var</span> <span class="n">res</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Nil</span>
-    <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">res</span> <span class="k">=</span> <span class="o">(</span><span class="n">a</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
-        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Boolean</span>   <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">booleanValue</span><span class="o">()</span>
-        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Byte</span>      <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">byteValue</span><span class="o">()</span>
-        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Short</span>     <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">shortValue</span><span class="o">()</span>
-        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Character</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">charValue</span><span class="o">()</span>
-        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Integer</span>   <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">intValue</span><span class="o">()</span>
-        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Long</span>      <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">longValue</span><span class="o">()</span>
-        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Float</span>     <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">floatValue</span><span class="o">()</span>
-        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Double</span>    <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">doubleValue</span><span class="o">()</span>
+    <span class="nf">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">res</span> <span class="k">=</span> <span class="o">(</span><span class="nf">a</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Boolean</span>   <span class="o">=&gt;</span> <span class="nv">x</span><span class="o">.</span><span class="py">booleanValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Byte</span>      <span class="o">=&gt;</span> <span class="nv">x</span><span class="o">.</span><span class="py">byteValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Short</span>     <span class="o">=&gt;</span> <span class="nv">x</span><span class="o">.</span><span class="py">shortValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Character</span> <span class="o">=&gt;</span> <span class="nv">x</span><span class="o">.</span><span class="py">charValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Integer</span>   <span class="o">=&gt;</span> <span class="nv">x</span><span class="o">.</span><span class="py">intValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Long</span>      <span class="o">=&gt;</span> <span class="nv">x</span><span class="o">.</span><span class="py">longValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Float</span>     <span class="o">=&gt;</span> <span class="nv">x</span><span class="o">.</span><span class="py">floatValue</span><span class="o">()</span>
+        <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">java.lang.Double</span>    <span class="o">=&gt;</span> <span class="nv">x</span><span class="o">.</span><span class="py">doubleValue</span><span class="o">()</span>
         <span class="k">case</span> <span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span>
       <span class="o">})</span> <span class="o">::</span> <span class="n">res</span>
       <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
@@ -474,13 +478,13 @@
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.io.Source</span>
 
 <span class="k">object</span> <span class="nc">IOs3</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"文件内容为:"</span> <span class="o">)</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"文件内容为:"</span> <span class="o">)</span>
 
-      <span class="nc">Source</span><span class="o">.</span><span class="n">fromFile</span><span class="o">(</span><span class="s">"test.txt"</span> <span class="o">).</span><span class="n">foreach</span><span class="o">{</span>
+      <span class="nv">Source</span><span class="o">.</span><span class="py">fromFile</span><span class="o">(</span><span class="s">"test.txt"</span> <span class="o">).</span><span class="py">foreach</span><span class="o">{</span>
          <span class="n">print</span>
       <span class="o">}</span>
-     <span class="n">println</span><span class="o">()</span>
+     <span class="nf">println</span><span class="o">()</span>
 
    <span class="o">}</span>
 <span class="o">}</span>
@@ -716,7 +720,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -888,7 +892,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

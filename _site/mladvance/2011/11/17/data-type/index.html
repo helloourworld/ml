@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -217,31 +221,31 @@
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.</span><span class="o">{</span><span class="nc">Vector</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">}</span>
 <span class="c1">// 创建一个dense vector (1.0, 0.0, 3.0).
-</span><span class="k">val</span> <span class="n">dv</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">dv</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">)</span>
 <span class="c1">// 创建一个sparse vector (1.0, 0.0, 3.0)并且指定它的索引和值
-</span><span class="k">val</span> <span class="n">sv1</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">sparse</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">),</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">))</span>
+</span><span class="k">val</span> <span class="nv">sv1</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="nv">Vectors</span><span class="o">.</span><span class="py">sparse</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">),</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">))</span>
 <span class="c1">// 创建一个sparse vector (1.0, 0.0, 3.0)并且指定它的索引和值
-</span><span class="k">val</span> <span class="n">sv2</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">sparse</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Seq</span><span class="o">((</span><span class="mi">0</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">)))</span>
+</span><span class="k">val</span> <span class="nv">sv2</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="nv">Vectors</span><span class="o">.</span><span class="py">sparse</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Seq</span><span class="o">((</span><span class="mi">0</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">)))</span>
 </code></pre></div></div>
 
 <p>   注意，<code class="highlighter-rouge">Scala</code>默认引入<code class="highlighter-rouge">scala.collection.immutable.Vector</code>，这里我们需要主动引入<code class="highlighter-rouge">MLLib</code>中的<code class="highlighter-rouge">org.apache.spark.mllib.linalg.Vector</code>来操作。我们可以看看<code class="highlighter-rouge">Vectors</code>对象的部分方法。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">dense</span><span class="o">(</span><span class="n">firstValue</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">otherValues</span><span class="k">:</span> <span class="kt">Double*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span>
-    <span class="k">new</span> <span class="nc">DenseVector</span><span class="o">((</span><span class="n">firstValue</span> <span class="o">+:</span> <span class="n">otherValues</span><span class="o">).</span><span class="n">toArray</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">dense</span><span class="o">(</span><span class="n">values</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DenseVector</span><span class="o">(</span><span class="n">values</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">sparse</span><span class="o">(</span><span class="n">size</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">indices</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">values</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">dense</span><span class="o">(</span><span class="n">firstValue</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">otherValues</span><span class="k">:</span> <span class="kt">Double*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span>
+    <span class="k">new</span> <span class="nc">DenseVector</span><span class="o">((</span><span class="n">firstValue</span> <span class="o">+:</span> <span class="n">otherValues</span><span class="o">).</span><span class="py">toArray</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">dense</span><span class="o">(</span><span class="n">values</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DenseVector</span><span class="o">(</span><span class="n">values</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">sparse</span><span class="o">(</span><span class="n">size</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">indices</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">values</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span>
     <span class="k">new</span> <span class="nc">SparseVector</span><span class="o">(</span><span class="n">size</span><span class="o">,</span> <span class="n">indices</span><span class="o">,</span> <span class="n">values</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">sparse</span><span class="o">(</span><span class="n">size</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">elements</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[(</span><span class="kt">Int</span>, <span class="kt">Double</span><span class="o">)])</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">require</span><span class="o">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="s">"The size of the requested sparse vector must be greater than 0."</span><span class="o">)</span>
-    <span class="k">val</span> <span class="o">(</span><span class="n">indices</span><span class="o">,</span> <span class="n">values</span><span class="o">)</span> <span class="k">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">sortBy</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">_1</span><span class="o">).</span><span class="n">unzip</span>
+<span class="k">def</span> <span class="nf">sparse</span><span class="o">(</span><span class="n">size</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">elements</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[(</span><span class="kt">Int</span>, <span class="kt">Double</span><span class="o">)])</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">require</span><span class="o">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="s">"The size of the requested sparse vector must be greater than 0."</span><span class="o">)</span>
+    <span class="nf">val</span> <span class="o">(</span><span class="n">indices</span><span class="o">,</span> <span class="n">values</span><span class="o">)</span> <span class="k">=</span> <span class="nv">elements</span><span class="o">.</span><span class="py">sortBy</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">_1</span><span class="o">).</span><span class="py">unzip</span>
     <span class="k">var</span> <span class="n">prev</span> <span class="k">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="n">indices</span><span class="o">.</span><span class="n">foreach</span> <span class="o">{</span> <span class="n">i</span> <span class="k">=&gt;</span>
-      <span class="n">require</span><span class="o">(</span><span class="n">prev</span> <span class="o">&lt;</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span><span class="s">"Found duplicate indices: $i."</span><span class="o">)</span>
+    <span class="nv">indices</span><span class="o">.</span><span class="py">foreach</span> <span class="o">{</span> <span class="n">i</span> <span class="k">=&gt;</span>
+      <span class="nf">require</span><span class="o">(</span><span class="n">prev</span> <span class="o">&lt;</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span><span class="s">"Found duplicate indices: $i."</span><span class="o">)</span>
       <span class="n">prev</span> <span class="k">=</span> <span class="n">i</span>
     <span class="o">}</span>
-    <span class="n">require</span><span class="o">(</span><span class="n">prev</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">,</span> <span class="n">s</span><span class="s">"You may not write an element to index $prev because the declared "</span> <span class="o">+</span>
+    <span class="nf">require</span><span class="o">(</span><span class="n">prev</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">,</span> <span class="n">s</span><span class="s">"You may not write an element to index $prev because the declared "</span> <span class="o">+</span>
       <span class="n">s</span><span class="s">"size of your vector is $size"</span><span class="o">)</span>
-    <span class="k">new</span> <span class="nc">SparseVector</span><span class="o">(</span><span class="n">size</span><span class="o">,</span> <span class="n">indices</span><span class="o">.</span><span class="n">toArray</span><span class="o">,</span> <span class="n">values</span><span class="o">.</span><span class="n">toArray</span><span class="o">)</span>
+    <span class="k">new</span> <span class="nc">SparseVector</span><span class="o">(</span><span class="n">size</span><span class="o">,</span> <span class="nv">indices</span><span class="o">.</span><span class="py">toArray</span><span class="o">,</span> <span class="nv">values</span><span class="o">.</span><span class="py">toArray</span><span class="o">)</span>
   <span class="o">}</span>
 </code></pre></div></div>
 
@@ -257,7 +261,7 @@
 <span class="k">case</span> <span class="k">class</span> <span class="nc">LabeledPoint</span> <span class="nd">@Since</span><span class="o">(</span><span class="s">"1.0.0"</span><span class="o">)</span> <span class="o">(</span>
     <span class="nd">@Since</span><span class="o">(</span><span class="s">"0.8.0"</span><span class="o">)</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
     <span class="nd">@Since</span><span class="o">(</span><span class="s">"1.0.0"</span><span class="o">)</span> <span class="n">features</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span> <span class="o">{</span>
-  <span class="k">override</span> <span class="k">def</span> <span class="n">toString</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">toString</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
     <span class="n">s</span><span class="s">"($label,$features)"</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -267,9 +271,9 @@
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vectors</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.LabeledPoint</span>
 <span class="c1">// Create a labeled point with a positive label and a dense feature vector.
-</span><span class="k">val</span> <span class="n">pos</span> <span class="k">=</span> <span class="nc">LabeledPoint</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">))</span>
+</span><span class="k">val</span> <span class="nv">pos</span> <span class="k">=</span> <span class="nc">LabeledPoint</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">))</span>
 <span class="c1">// Create a labeled point with a negative label and a sparse feature vector.
-</span><span class="k">val</span> <span class="n">neg</span> <span class="k">=</span> <span class="nc">LabeledPoint</span><span class="o">(</span><span class="mf">0.0</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">sparse</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">),</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">)))</span>
+</span><span class="k">val</span> <span class="nv">neg</span> <span class="k">=</span> <span class="nc">LabeledPoint</span><span class="o">(</span><span class="mf">0.0</span><span class="o">,</span> <span class="nv">Vectors</span><span class="o">.</span><span class="py">sparse</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">),</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">)))</span>
 </code></pre></div></div>
 
 <p>  在现实的应用中，训练数据是稀疏的情况非常常见，<code class="highlighter-rouge">MLlib</code>支持读取训练数据存储为<code class="highlighter-rouge">LIBSVM</code>格式。它是<a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/">LIBSVM</a>和<a href="http://www.csie.ntu.edu.tw/~cjlin/liblinear/">LIBLINEAR</a>默认的格式。
@@ -297,9 +301,9 @@
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.</span><span class="o">{</span><span class="nc">Matrix</span><span class="o">,</span> <span class="nc">Matrices</span><span class="o">}</span>
 <span class="c1">// Create a dense matrix ((1.0, 2.0), (3.0, 4.0), (5.0, 6.0))
-</span><span class="k">val</span> <span class="n">dm</span><span class="k">:</span> <span class="kt">Matrix</span> <span class="o">=</span> <span class="nc">Matrices</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">,</span> <span class="mf">5.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">4.0</span><span class="o">,</span> <span class="mf">6.0</span><span class="o">))</span>
+</span><span class="k">val</span> <span class="nv">dm</span><span class="k">:</span> <span class="kt">Matrix</span> <span class="o">=</span> <span class="nv">Matrices</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">,</span> <span class="mf">5.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">4.0</span><span class="o">,</span> <span class="mf">6.0</span><span class="o">))</span>
 <span class="c1">// Create a sparse matrix ((9.0, 0.0), (0.0, 8.0), (0.0, 6.0))
-</span><span class="k">val</span> <span class="n">sm</span><span class="k">:</span> <span class="kt">Matrix</span> <span class="o">=</span> <span class="nc">Matrices</span><span class="o">.</span><span class="n">sparse</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">),</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">1</span><span class="o">),</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">9</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">8</span><span class="o">))</span>
+</span><span class="k">val</span> <span class="nv">sm</span><span class="k">:</span> <span class="kt">Matrix</span> <span class="o">=</span> <span class="nv">Matrices</span><span class="o">.</span><span class="py">sparse</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">),</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">1</span><span class="o">),</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">9</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">8</span><span class="o">))</span>
 </code></pre></div></div>
 <p>  稠密矩阵的存储很简单，不赘述。稀疏矩阵的存储使用<code class="highlighter-rouge">CSC</code>。关于压缩矩阵的介绍，请参看文献【1】。</p>
 
@@ -320,14 +324,14 @@
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vector</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.distributed.RowMatrix</span>
-<span class="k">val</span> <span class="n">rows</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Vector</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of local vectors
+<span class="k">val</span> <span class="nv">rows</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Vector</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of local vectors
 // Create a RowMatrix from an RDD[Vector].
-</span><span class="k">val</span> <span class="n">mat</span><span class="k">:</span> <span class="kt">RowMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RowMatrix</span><span class="o">(</span><span class="n">rows</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">mat</span><span class="k">:</span> <span class="kt">RowMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RowMatrix</span><span class="o">(</span><span class="n">rows</span><span class="o">)</span>
 <span class="c1">// Get its size.
-</span><span class="k">val</span> <span class="n">m</span> <span class="k">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">numRows</span><span class="o">()</span>
-<span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">numCols</span><span class="o">()</span>
+</span><span class="k">val</span> <span class="nv">m</span> <span class="k">=</span> <span class="nv">mat</span><span class="o">.</span><span class="py">numRows</span><span class="o">()</span>
+<span class="k">val</span> <span class="nv">n</span> <span class="k">=</span> <span class="nv">mat</span><span class="o">.</span><span class="py">numCols</span><span class="o">()</span>
 <span class="c1">// QR decomposition
-</span><span class="k">val</span> <span class="n">qrResult</span> <span class="k">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">tallSkinnyQR</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">qrResult</span> <span class="k">=</span> <span class="nv">mat</span><span class="o">.</span><span class="py">tallSkinnyQR</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
 </code></pre></div></div>
 
 <h2 id="42-indexedrowmatrix">4.2 IndexedRowMatrix</h2>
@@ -337,14 +341,14 @@
 <p>  一个<code class="highlighter-rouge">IndexedRowMatrix</code>可以通过<code class="highlighter-rouge">RDD[IndexedRow]</code>实例创建，并且一个<code class="highlighter-rouge">IndexedRowMatrix</code>可以通过去掉它的行索引，转换成<code class="highlighter-rouge">RowMatrix</code>。下面是一个例子：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.distributed.</span><span class="o">{</span><span class="nc">IndexedRow</span><span class="o">,</span> <span class="nc">IndexedRowMatrix</span><span class="o">,</span> <span class="nc">RowMatrix</span><span class="o">}</span>
-<span class="k">val</span> <span class="n">rows</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">IndexedRow</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of indexed rows
+<span class="k">val</span> <span class="nv">rows</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">IndexedRow</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of indexed rows
 // Create an IndexedRowMatrix from an RDD[IndexedRow].
-</span><span class="k">val</span> <span class="n">mat</span><span class="k">:</span> <span class="kt">IndexedRowMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IndexedRowMatrix</span><span class="o">(</span><span class="n">rows</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">mat</span><span class="k">:</span> <span class="kt">IndexedRowMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IndexedRowMatrix</span><span class="o">(</span><span class="n">rows</span><span class="o">)</span>
 <span class="c1">// Get its size.
-</span><span class="k">val</span> <span class="n">m</span> <span class="k">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">numRows</span><span class="o">()</span>
-<span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">numCols</span><span class="o">()</span>
+</span><span class="k">val</span> <span class="nv">m</span> <span class="k">=</span> <span class="nv">mat</span><span class="o">.</span><span class="py">numRows</span><span class="o">()</span>
+<span class="k">val</span> <span class="nv">n</span> <span class="k">=</span> <span class="nv">mat</span><span class="o">.</span><span class="py">numCols</span><span class="o">()</span>
 <span class="c1">// Drop its row indices.
-</span><span class="k">val</span> <span class="n">rowMat</span><span class="k">:</span> <span class="kt">RowMatrix</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">toRowMatrix</span><span class="o">()</span>
+</span><span class="k">val</span> <span class="nv">rowMat</span><span class="k">:</span> <span class="kt">RowMatrix</span> <span class="o">=</span> <span class="nv">mat</span><span class="o">.</span><span class="py">toRowMatrix</span><span class="o">()</span>
 </code></pre></div></div>
 <p>   <code class="highlighter-rouge">IndexedRow</code>这个样本类的代码如下：</p>
 
@@ -359,14 +363,14 @@
 <p>  <code class="highlighter-rouge">CoordinateMatrix</code>可以通过<code class="highlighter-rouge">RDD[MatrixEntry]</code>实例创建，其中<code class="highlighter-rouge">MatrixEntry</code>是<code class="highlighter-rouge">(Long, Long, Double)</code>的包装。<code class="highlighter-rouge">CoordinateMatrix</code>可以转换成<code class="highlighter-rouge">IndexedRowMatrix</code>。下面是一个例子：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.distributed.</span><span class="o">{</span><span class="nc">CoordinateMatrix</span><span class="o">,</span> <span class="nc">MatrixEntry</span><span class="o">}</span>
-<span class="k">val</span> <span class="n">entries</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">MatrixEntry</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of matrix entries
+<span class="k">val</span> <span class="nv">entries</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">MatrixEntry</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of matrix entries
 // Create a CoordinateMatrix from an RDD[MatrixEntry].
-</span><span class="k">val</span> <span class="n">mat</span><span class="k">:</span> <span class="kt">CoordinateMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CoordinateMatrix</span><span class="o">(</span><span class="n">entries</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">mat</span><span class="k">:</span> <span class="kt">CoordinateMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CoordinateMatrix</span><span class="o">(</span><span class="n">entries</span><span class="o">)</span>
 <span class="c1">// Get its size.
-</span><span class="k">val</span> <span class="n">m</span> <span class="k">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">numRows</span><span class="o">()</span>
-<span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">numCols</span><span class="o">()</span>
+</span><span class="k">val</span> <span class="nv">m</span> <span class="k">=</span> <span class="nv">mat</span><span class="o">.</span><span class="py">numRows</span><span class="o">()</span>
+<span class="k">val</span> <span class="nv">n</span> <span class="k">=</span> <span class="nv">mat</span><span class="o">.</span><span class="py">numCols</span><span class="o">()</span>
 <span class="c1">// Convert it to an IndexRowMatrix whose rows are sparse vectors.
-</span><span class="k">val</span> <span class="n">indexedRowMatrix</span> <span class="k">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">toIndexedRowMatrix</span><span class="o">()</span>
+</span><span class="k">val</span> <span class="nv">indexedRowMatrix</span> <span class="k">=</span> <span class="nv">mat</span><span class="o">.</span><span class="py">toIndexedRowMatrix</span><span class="o">()</span>
 </code></pre></div></div>
 <p>   <code class="highlighter-rouge">MatrixEntry</code>这个样本类的代码如下：</p>
 
@@ -382,16 +386,16 @@
 下面是一个例子：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.distributed.</span><span class="o">{</span><span class="nc">BlockMatrix</span><span class="o">,</span> <span class="nc">CoordinateMatrix</span><span class="o">,</span> <span class="nc">MatrixEntry</span><span class="o">}</span>
-<span class="k">val</span> <span class="n">entries</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">MatrixEntry</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of (i, j, v) matrix entries
+<span class="k">val</span> <span class="nv">entries</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">MatrixEntry</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of (i, j, v) matrix entries
 // Create a CoordinateMatrix from an RDD[MatrixEntry].
-</span><span class="k">val</span> <span class="n">coordMat</span><span class="k">:</span> <span class="kt">CoordinateMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CoordinateMatrix</span><span class="o">(</span><span class="n">entries</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">coordMat</span><span class="k">:</span> <span class="kt">CoordinateMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CoordinateMatrix</span><span class="o">(</span><span class="n">entries</span><span class="o">)</span>
 <span class="c1">// Transform the CoordinateMatrix to a BlockMatrix
-</span><span class="k">val</span> <span class="n">matA</span><span class="k">:</span> <span class="kt">BlockMatrix</span> <span class="o">=</span> <span class="n">coordMat</span><span class="o">.</span><span class="n">toBlockMatrix</span><span class="o">().</span><span class="n">cache</span><span class="o">()</span>
+</span><span class="k">val</span> <span class="nv">matA</span><span class="k">:</span> <span class="kt">BlockMatrix</span> <span class="o">=</span> <span class="nv">coordMat</span><span class="o">.</span><span class="py">toBlockMatrix</span><span class="o">().</span><span class="py">cache</span><span class="o">()</span>
 <span class="c1">// Validate whether the BlockMatrix is set up properly. Throws an Exception when it is not valid.
 // Nothing happens if it is valid.
-</span><span class="n">matA</span><span class="o">.</span><span class="n">validate</span><span class="o">()</span>
+</span><span class="nv">matA</span><span class="o">.</span><span class="py">validate</span><span class="o">()</span>
 <span class="c1">// Calculate A^T A.
-</span><span class="k">val</span> <span class="n">ata</span> <span class="k">=</span> <span class="n">matA</span><span class="o">.</span><span class="n">transpose</span><span class="o">.</span><span class="n">multiply</span><span class="o">(</span><span class="n">matA</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">ata</span> <span class="k">=</span> <span class="nv">matA</span><span class="o">.</span><span class="py">transpose</span><span class="o">.</span><span class="py">multiply</span><span class="o">(</span><span class="n">matA</span><span class="o">)</span>
 </code></pre></div></div>
 
 <h1 id="5-参考文献">5 参考文献</h1>
@@ -621,7 +625,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -793,7 +797,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

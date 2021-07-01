@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -207,77 +211,77 @@
 <span class="k">import</span> <span class="nn">org.apache.spark.graphx._</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.rdd.RDD</span>
 
-    <span class="nc">Logger</span><span class="o">.</span><span class="n">getLogger</span><span class="o">(</span><span class="s">"org.apache.spark"</span><span class="o">).</span><span class="n">setLevel</span><span class="o">(</span><span class="nc">Level</span><span class="o">.</span><span class="nc">ERROR</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">conf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="o">()</span>
-    <span class="n">conf</span><span class="o">.</span><span class="n">setAppName</span><span class="o">(</span><span class="s">"DeviceCom-"</span> <span class="o">+</span> <span class="nc">System</span><span class="o">.</span><span class="n">getenv</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)).</span><span class="n">setMaster</span><span class="o">(</span><span class="s">"local[*]"</span><span class="o">)</span>
-    <span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">"spark.testing.memory"</span><span class="o">,</span> <span class="s">"2147480000"</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">sc</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkContext</span><span class="o">(</span><span class="n">conf</span><span class="o">)</span>
+    <span class="nv">Logger</span><span class="o">.</span><span class="py">getLogger</span><span class="o">(</span><span class="s">"org.apache.spark"</span><span class="o">).</span><span class="py">setLevel</span><span class="o">(</span><span class="nv">Level</span><span class="o">.</span><span class="py">ERROR</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">conf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="o">()</span>
+    <span class="nv">conf</span><span class="o">.</span><span class="py">setAppName</span><span class="o">(</span><span class="s">"DeviceCom-"</span> <span class="o">+</span> <span class="nv">System</span><span class="o">.</span><span class="py">getenv</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)).</span><span class="py">setMaster</span><span class="o">(</span><span class="s">"local[*]"</span><span class="o">)</span>
+    <span class="nv">conf</span><span class="o">.</span><span class="py">set</span><span class="o">(</span><span class="s">"spark.testing.memory"</span><span class="o">,</span> <span class="s">"2147480000"</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">sc</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkContext</span><span class="o">(</span><span class="n">conf</span><span class="o">)</span>
     <span class="c1">// v.csv
 </span>    <span class="c1">// 1,AAAA,100
 </span>    <span class="c1">// 2,BBBB,200
 </span>    <span class="c1">// 3,CCCC,300
-</span>    <span class="k">val</span> <span class="n">vertexLines</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="s">"data/graphx/v.csv"</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">vertices</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">VertexId</span>, <span class="o">(</span><span class="kt">String</span>, <span class="kt">Long</span><span class="o">))]</span> <span class="k">=</span> <span class="n">vertexLines</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">cols</span> <span class="k">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="s">","</span><span class="o">)</span>
-      <span class="o">(</span><span class="n">cols</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">toLong</span><span class="o">,</span> <span class="o">(</span><span class="n">cols</span><span class="o">(</span><span class="mi">1</span><span class="o">),</span> <span class="n">cols</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="n">toLong</span><span class="o">))</span>
+</span>    <span class="k">val</span> <span class="nv">vertexLines</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nv">sc</span><span class="o">.</span><span class="py">textFile</span><span class="o">(</span><span class="s">"data/graphx/v.csv"</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">vertices</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">VertexId</span>, <span class="o">(</span><span class="kt">String</span>, <span class="kt">Long</span><span class="o">))]</span> <span class="k">=</span> <span class="nv">vertexLines</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">cols</span> <span class="k">=</span> <span class="nv">line</span><span class="o">.</span><span class="py">split</span><span class="o">(</span><span class="s">","</span><span class="o">)</span>
+      <span class="o">(</span><span class="nf">cols</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="py">toLong</span><span class="o">,</span> <span class="o">(</span><span class="nf">cols</span><span class="o">(</span><span class="mi">1</span><span class="o">),</span> <span class="nf">cols</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="py">toLong</span><span class="o">))</span>
     <span class="o">})</span>
 
     <span class="c1">// e.csv
 </span>    <span class="c1">// 1,2,100,2014/12/1
 </span>    <span class="c1">// 2,3,200,2014/12/2
 </span>    <span class="c1">// 3,1,300,2014/12/3
-</span>    <span class="k">val</span> <span class="n">format</span> <span class="k">=</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="nc">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyy/MM/dd"</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">edgeLines</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="s">"data/graphx/e.csv"</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">edges</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Edge</span><span class="o">[((</span><span class="kt">Long</span>, <span class="kt">java.util.Date</span><span class="o">))]]</span> <span class="k">=</span> <span class="n">edgeLines</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">cols</span> <span class="k">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="s">","</span><span class="o">)</span>
-      <span class="nc">Edge</span><span class="o">(</span><span class="n">cols</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">toLong</span><span class="o">,</span> <span class="n">cols</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="n">toLong</span><span class="o">,</span> <span class="o">(</span><span class="n">cols</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="n">toLong</span><span class="o">,</span> <span class="n">format</span><span class="o">.</span><span class="n">parse</span><span class="o">(</span><span class="n">cols</span><span class="o">(</span><span class="mi">3</span><span class="o">))))</span>
+</span>    <span class="k">val</span> <span class="nv">format</span> <span class="k">=</span> <span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">text</span><span class="o">.</span><span class="py">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyy/MM/dd"</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">edgeLines</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nv">sc</span><span class="o">.</span><span class="py">textFile</span><span class="o">(</span><span class="s">"data/graphx/e.csv"</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">edges</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Edge</span><span class="o">[((</span><span class="kt">Long</span>, <span class="kt">java.util.Date</span><span class="o">))]]</span> <span class="k">=</span> <span class="nv">edgeLines</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">cols</span> <span class="k">=</span> <span class="nv">line</span><span class="o">.</span><span class="py">split</span><span class="o">(</span><span class="s">","</span><span class="o">)</span>
+      <span class="nc">Edge</span><span class="o">(</span><span class="nf">cols</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="py">toLong</span><span class="o">,</span> <span class="nf">cols</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="py">toLong</span><span class="o">,</span> <span class="o">(</span><span class="nf">cols</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="py">toLong</span><span class="o">,</span> <span class="nv">format</span><span class="o">.</span><span class="py">parse</span><span class="o">(</span><span class="nf">cols</span><span class="o">(</span><span class="mi">3</span><span class="o">))))</span>
     <span class="o">})</span>
 
     <span class="c1">// 使用vertices和edges生成图
-</span>    <span class="k">val</span> <span class="n">graph</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">Long</span><span class="o">)</span>, <span class="o">(</span><span class="kt">Long</span>, <span class="kt">java.util.Date</span><span class="o">)]</span> <span class="k">=</span> <span class="nc">Graph</span><span class="o">(</span><span class="n">vertices</span><span class="o">,</span> <span class="n">edges</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">graph</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">Long</span><span class="o">)</span>, <span class="o">(</span><span class="kt">Long</span>, <span class="kt">java.util.Date</span><span class="o">)]</span> <span class="k">=</span> <span class="nc">Graph</span><span class="o">(</span><span class="n">vertices</span><span class="o">,</span> <span class="n">edges</span><span class="o">)</span>
 
-    <span class="n">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm Edges Internal of graph "</span><span class="o">)</span>
-    <span class="n">graph</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">collect</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm Edges Internal of graph "</span><span class="o">)</span>
+    <span class="nv">graph</span><span class="o">.</span><span class="py">edges</span><span class="o">.</span><span class="py">collect</span><span class="o">.</span><span class="py">foreach</span><span class="o">(</span><span class="nf">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
     <span class="c1">// Edge(1,2,(100,Mon Dec 01 00:00:00 EST 2014))
 </span>    <span class="c1">// Edge(2,3,(200,Tue Dec 02 00:00:00 EST 2014))
 </span>    <span class="c1">// Edge(3,1,(300,Wed Dec 03 00:00:00 EST 2014))
 </span>
-    <span class="n">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm Vertices Internal of graph "</span><span class="o">)</span>
-    <span class="n">graph</span><span class="o">.</span><span class="n">vertices</span><span class="o">.</span><span class="n">collect</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm Vertices Internal of graph "</span><span class="o">)</span>
+    <span class="nv">graph</span><span class="o">.</span><span class="py">vertices</span><span class="o">.</span><span class="py">collect</span><span class="o">.</span><span class="py">foreach</span><span class="o">(</span><span class="nf">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
     <span class="c1">// (2,(BBBB,200))
 </span>    <span class="c1">// (1,(AAAA,100))
 </span>    <span class="c1">// (3,(CCCC,300))
 </span>
     <span class="c1">// 使用mapVertices修改顶点的属性，由原先的(String, Long)修改为（String的length*Long的值）
-</span>    <span class="k">val</span> <span class="n">graph2</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[</span><span class="kt">Long</span>, <span class="o">(</span><span class="kt">Long</span>, <span class="kt">java.util.Date</span><span class="o">)]</span> <span class="k">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">mapVertices</span><span class="o">((</span><span class="n">vid</span><span class="k">:</span> <span class="kt">VertexId</span><span class="o">,</span> <span class="n">attr</span><span class="k">:</span> <span class="o">(</span><span class="kt">String</span><span class="o">,</span> <span class="kt">Long</span><span class="o">))</span> <span class="k">=&gt;</span> <span class="n">attr</span><span class="o">.</span><span class="n">_1</span><span class="o">.</span><span class="n">length</span> <span class="o">*</span> <span class="n">attr</span><span class="o">.</span><span class="n">_2</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">graph2</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[</span><span class="kt">Long</span>, <span class="o">(</span><span class="kt">Long</span>, <span class="kt">java.util.Date</span><span class="o">)]</span> <span class="k">=</span> <span class="nv">graph</span><span class="o">.</span><span class="py">mapVertices</span><span class="o">((</span><span class="n">vid</span><span class="k">:</span> <span class="kt">VertexId</span><span class="o">,</span> <span class="n">attr</span><span class="k">:</span> <span class="o">(</span><span class="kt">String</span><span class="o">,</span> <span class="kt">Long</span><span class="o">))</span> <span class="k">=&gt;</span> <span class="nv">attr</span><span class="o">.</span><span class="py">_1</span><span class="o">.</span><span class="py">length</span> <span class="o">*</span> <span class="nv">attr</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>
 
-    <span class="n">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm Vertices Internal of graph2 "</span><span class="o">)</span>
-    <span class="n">graph2</span><span class="o">.</span><span class="n">vertices</span><span class="o">.</span><span class="n">collect</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm Vertices Internal of graph2 "</span><span class="o">)</span>
+    <span class="nv">graph2</span><span class="o">.</span><span class="py">vertices</span><span class="o">.</span><span class="py">collect</span><span class="o">.</span><span class="py">foreach</span><span class="o">(</span><span class="nf">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
     <span class="c1">// (2,800) BBBB的长度为4，乘以200得到800，下同
 </span>    <span class="c1">// (1,400)
 </span>    <span class="c1">// (3,1200)
 </span>
     <span class="c1">// 使用mapEdges将edge的属性由(100,Mon Dec 01 00:00:00 EST 2014)变为100
-</span>    <span class="k">val</span> <span class="n">graph3</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">Long</span><span class="o">)</span>, <span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">mapEdges</span><span class="o">(</span><span class="n">edge</span> <span class="k">=&gt;</span> <span class="n">edge</span><span class="o">.</span><span class="n">attr</span><span class="o">.</span><span class="n">_1</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">graph3</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">Long</span><span class="o">)</span>, <span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="nv">graph</span><span class="o">.</span><span class="py">mapEdges</span><span class="o">(</span><span class="n">edge</span> <span class="k">=&gt;</span> <span class="nv">edge</span><span class="o">.</span><span class="py">attr</span><span class="o">.</span><span class="py">_1</span><span class="o">)</span>
 
-    <span class="n">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm Vertices Internal of graph3 "</span><span class="o">)</span>
-    <span class="n">graph3</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">collect</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm Vertices Internal of graph3 "</span><span class="o">)</span>
+    <span class="nv">graph3</span><span class="o">.</span><span class="py">edges</span><span class="o">.</span><span class="py">collect</span><span class="o">.</span><span class="py">foreach</span><span class="o">(</span><span class="nf">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
     <span class="c1">// Edge(1,2,100)
 </span>    <span class="c1">// Edge(2,3,200)
 </span>    <span class="c1">// Edge(3,1,300)
 </span>
-    <span class="n">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm triplets Internal of graph "</span><span class="o">)</span>
-    <span class="n">graph</span><span class="o">.</span><span class="n">triplets</span><span class="o">.</span><span class="n">collect</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm triplets Internal of graph "</span><span class="o">)</span>
+    <span class="nv">graph</span><span class="o">.</span><span class="py">triplets</span><span class="o">.</span><span class="py">collect</span><span class="o">.</span><span class="py">foreach</span><span class="o">(</span><span class="nf">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
     <span class="c1">// ((1,(AAAA,100)),(2,(BBBB,200)),(100,Mon Dec 01 00:00:00 EST 2014))
 </span>    <span class="c1">// ((2,(BBBB,200)),(3,(CCCC,300)),(200,Tue Dec 02 00:00:00 EST 2014))
 </span>    <span class="c1">// ((3,(CCCC,300)),(1,(AAAA,100)),(300,Wed Dec 03 00:00:00 EST 2014))
 </span>    <span class="c1">// 到这里可以观察到，上述操作对graph本身并没有影响
 </span>
     <span class="c1">// 使用mapTriplets对三元组整体进行操作，即可以利用srcAttr attr dstAttr来修改attr的信息
-</span>    <span class="k">val</span> <span class="n">graph4</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">Long</span><span class="o">)</span>, <span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">mapTriplets</span><span class="o">(</span><span class="n">edge</span> <span class="k">=&gt;</span> <span class="n">edge</span><span class="o">.</span><span class="n">srcAttr</span><span class="o">.</span><span class="n">_2</span> <span class="o">+</span> <span class="n">edge</span><span class="o">.</span><span class="n">attr</span><span class="o">.</span><span class="n">_1</span> <span class="o">+</span> <span class="n">edge</span><span class="o">.</span><span class="n">dstAttr</span><span class="o">.</span><span class="n">_2</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">graph4</span><span class="k">:</span> <span class="kt">Graph</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">Long</span><span class="o">)</span>, <span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="nv">graph</span><span class="o">.</span><span class="py">mapTriplets</span><span class="o">(</span><span class="n">edge</span> <span class="k">=&gt;</span> <span class="nv">edge</span><span class="o">.</span><span class="py">srcAttr</span><span class="o">.</span><span class="py">_2</span> <span class="o">+</span> <span class="nv">edge</span><span class="o">.</span><span class="py">attr</span><span class="o">.</span><span class="py">_1</span> <span class="o">+</span> <span class="nv">edge</span><span class="o">.</span><span class="py">dstAttr</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>
 
-    <span class="n">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm Vertices Internal of graph4 "</span><span class="o">)</span>
-    <span class="n">graph4</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">collect</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm Vertices Internal of graph4 "</span><span class="o">)</span>
+    <span class="nv">graph4</span><span class="o">.</span><span class="py">edges</span><span class="o">.</span><span class="py">collect</span><span class="o">.</span><span class="py">foreach</span><span class="o">(</span><span class="nf">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
     <span class="c1">// Edge(1,2,400) //400 = 100+200+100
 </span>    <span class="c1">// Edge(2,3,700)
 </span>    <span class="c1">// Edge(3,1,700)
@@ -285,18 +289,18 @@
     <span class="c1">// 使用mapReduceTriplets来生成新的VertexRDD
 </span>    <span class="c1">// 利用map对每一个三元组进行操作
 </span>    <span class="c1">// 利用reduce对相同Id的顶点属性进行操作
-</span>    <span class="k">val</span> <span class="n">newVertices</span><span class="k">:</span> <span class="kt">VertexRDD</span><span class="o">[</span><span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">aggregateMessages</span><span class="o">(</span>
+</span>    <span class="k">val</span> <span class="nv">newVertices</span><span class="k">:</span> <span class="kt">VertexRDD</span><span class="o">[</span><span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="nv">graph</span><span class="o">.</span><span class="py">aggregateMessages</span><span class="o">(</span>
       <span class="n">triplet</span> <span class="k">=&gt;</span> <span class="o">{</span>
         <span class="c1">// Map Function
-</span>        <span class="n">triplet</span><span class="o">.</span><span class="n">sendToSrc</span><span class="o">(</span><span class="n">triplet</span><span class="o">.</span><span class="n">srcAttr</span><span class="o">.</span><span class="n">_2</span> <span class="o">-</span> <span class="n">triplet</span><span class="o">.</span><span class="n">attr</span><span class="o">.</span><span class="n">_1</span><span class="o">)</span>
-        <span class="n">triplet</span><span class="o">.</span><span class="n">sendToDst</span><span class="o">(</span><span class="n">triplet</span><span class="o">.</span><span class="n">dstAttr</span><span class="o">.</span><span class="n">_2</span> <span class="o">+</span> <span class="n">triplet</span><span class="o">.</span><span class="n">attr</span><span class="o">.</span><span class="n">_1</span><span class="o">)</span>
+</span>        <span class="nv">triplet</span><span class="o">.</span><span class="py">sendToSrc</span><span class="o">(</span><span class="nv">triplet</span><span class="o">.</span><span class="py">srcAttr</span><span class="o">.</span><span class="py">_2</span> <span class="o">-</span> <span class="nv">triplet</span><span class="o">.</span><span class="py">attr</span><span class="o">.</span><span class="py">_1</span><span class="o">)</span>
+        <span class="nv">triplet</span><span class="o">.</span><span class="py">sendToDst</span><span class="o">(</span><span class="nv">triplet</span><span class="o">.</span><span class="py">dstAttr</span><span class="o">.</span><span class="py">_2</span> <span class="o">+</span> <span class="nv">triplet</span><span class="o">.</span><span class="py">attr</span><span class="o">.</span><span class="py">_1</span><span class="o">)</span>
       <span class="o">},</span>
 
       <span class="o">(</span><span class="n">a1</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">a2</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">a1</span> <span class="o">+</span> <span class="n">a2</span><span class="o">)</span>
     <span class="o">)</span>
 
-    <span class="n">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm Vertices Internal of newVertices "</span><span class="o">)</span>
-    <span class="n">newVertices</span><span class="o">.</span><span class="n">collect</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"\n\n~~~~~~~~~ Confirm Vertices Internal of newVertices "</span><span class="o">)</span>
+    <span class="nv">newVertices</span><span class="o">.</span><span class="py">collect</span><span class="o">.</span><span class="py">foreach</span><span class="o">(</span><span class="nf">println</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
     <span class="c1">// (2,300)
 </span>    <span class="c1">// (1,400)
 </span>    <span class="c1">// (3,500)
@@ -531,7 +535,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -703,7 +707,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

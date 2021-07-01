@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -207,11 +211,11 @@
 </ul>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">PatternMatching1</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span> <span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="n">println</span><span class="o">(</span><span class="n">matchTest</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
+    <span class="k">def</span> <span class="nf">main</span> <span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="nf">println</span><span class="o">(</span><span class="nf">matchTest</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
     <span class="o">}</span>
 
-    <span class="k">def</span> <span class="n">matchTest</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">x</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">matchTest</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">x</span> <span class="k">match</span> <span class="o">{</span>
         <span class="k">case</span> <span class="mi">1</span> <span class="k">=&gt;</span> <span class="s">"one"</span>
         <span class="k">case</span> <span class="mi">2</span> <span class="k">=&gt;</span> <span class="s">"tow"</span>
         <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">"many"</span>
@@ -226,15 +230,15 @@
 </ul>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">PatternMatching2</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span> <span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="n">println</span><span class="o">(</span><span class="n">matchTest</span><span class="o">(</span><span class="s">"two"</span><span class="o">))</span>
-        <span class="n">println</span><span class="o">(</span><span class="n">matchTest</span><span class="o">(</span><span class="s">"2"</span><span class="o">))</span>
-        <span class="n">println</span><span class="o">(</span><span class="n">matchTest</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
-        <span class="n">println</span><span class="o">(</span><span class="n">matchTest</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
+    <span class="k">def</span> <span class="nf">main</span> <span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="nf">println</span><span class="o">(</span><span class="nf">matchTest</span><span class="o">(</span><span class="s">"two"</span><span class="o">))</span>
+        <span class="nf">println</span><span class="o">(</span><span class="nf">matchTest</span><span class="o">(</span><span class="s">"2"</span><span class="o">))</span>
+        <span class="nf">println</span><span class="o">(</span><span class="nf">matchTest</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
+        <span class="nf">println</span><span class="o">(</span><span class="nf">matchTest</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
 
     <span class="o">}</span>
 
-    <span class="k">def</span> <span class="n">matchTest</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="n">x</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">matchTest</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="n">x</span> <span class="k">match</span> <span class="o">{</span>
         <span class="k">case</span> <span class="mi">1</span> <span class="k">=&gt;</span> <span class="s">"one"</span>
         <span class="k">case</span> <span class="s">"two"</span> <span class="k">=&gt;</span> <span class="mi">2</span>
         <span class="k">case</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="s">"scala.Int"</span>
@@ -245,7 +249,7 @@
 <span class="mi">2</span>
 <span class="n">many</span>
 <span class="n">one</span>
-<span class="n">scala</span><span class="o">.</span><span class="nc">Int</span>
+<span class="nv">scala</span><span class="o">.</span><span class="py">Int</span>
 </code></pre></div></div>
 
 <h3 id="使用样例类">使用样例类</h3>
@@ -256,16 +260,16 @@
 </ul>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">PatternMatching3</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">alice</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Alice"</span><span class="o">,</span> <span class="mi">28</span><span class="o">)</span>
-        <span class="k">val</span> <span class="n">baobao</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Baobao"</span><span class="o">,</span> <span class="mi">29</span><span class="o">)</span>
-        <span class="k">val</span> <span class="n">charlie</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Charlie"</span><span class="o">,</span> <span class="mi">32</span><span class="o">)</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">alice</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Alice"</span><span class="o">,</span> <span class="mi">28</span><span class="o">)</span>
+        <span class="k">val</span> <span class="nv">baobao</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Baobao"</span><span class="o">,</span> <span class="mi">29</span><span class="o">)</span>
+        <span class="k">val</span> <span class="nv">charlie</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Charlie"</span><span class="o">,</span> <span class="mi">32</span><span class="o">)</span>
 
-        <span class="k">for</span> <span class="o">(</span><span class="n">person</span> <span class="k">&lt;-</span> <span class="nc">List</span><span class="o">(</span><span class="n">alice</span><span class="o">,</span> <span class="n">baobao</span><span class="o">,</span> <span class="n">charlie</span><span class="o">))</span> <span class="o">{</span>
+        <span class="nf">for</span> <span class="o">(</span><span class="n">person</span> <span class="k">&lt;-</span> <span class="nc">List</span><span class="o">(</span><span class="n">alice</span><span class="o">,</span> <span class="n">baobao</span><span class="o">,</span> <span class="n">charlie</span><span class="o">))</span> <span class="o">{</span>
             <span class="n">person</span> <span class="k">match</span> <span class="o">{</span>
-                <span class="k">case</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Alice"</span><span class="o">,</span> <span class="mi">28</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="s">"Hi Alice!"</span><span class="o">)</span>
-                <span class="k">case</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Baobao"</span><span class="o">,</span> <span class="mi">29</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="s">"Hi, Baobao"</span><span class="o">)</span>
-                <span class="k">case</span> <span class="nc">Person</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">age</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="s">"Age: "</span> <span class="o">+</span> <span class="n">age</span> <span class="o">+</span> <span class="s">" year, name: "</span> <span class="o">+</span><span class="n">name</span> <span class="o">+</span> <span class="s">"?"</span><span class="o">)</span>
+                <span class="k">case</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Alice"</span><span class="o">,</span> <span class="mi">28</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nf">println</span><span class="o">(</span><span class="s">"Hi Alice!"</span><span class="o">)</span>
+                <span class="k">case</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Baobao"</span><span class="o">,</span> <span class="mi">29</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nf">println</span><span class="o">(</span><span class="s">"Hi, Baobao"</span><span class="o">)</span>
+                <span class="k">case</span> <span class="nc">Person</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">age</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nf">println</span><span class="o">(</span><span class="s">"Age: "</span> <span class="o">+</span> <span class="n">age</span> <span class="o">+</span> <span class="s">" year, name: "</span> <span class="o">+</span><span class="n">name</span> <span class="o">+</span> <span class="s">"?"</span><span class="o">)</span>
             <span class="o">}</span>
         <span class="o">}</span>
     <span class="o">}</span>
@@ -519,7 +523,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -691,7 +695,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

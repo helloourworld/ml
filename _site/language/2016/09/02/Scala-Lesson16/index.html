@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -314,7 +318,7 @@
     <p>常量命名使用全大写字母，并将它们放在伴生对象中。</p>
 
     <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Configuration</span> <span class="o">{</span>
-  <span class="k">val</span> <span class="nc">DEFAULT_PORT</span> <span class="k">=</span> <span class="mi">10000</span>
+  <span class="k">val</span> <span class="nv">DEFAULT_PORT</span> <span class="k">=</span> <span class="mi">10000</span>
 <span class="o">}</span>
 </code></pre></div>    </div>
   </li>
@@ -353,15 +357,15 @@
   <li>
     <p>一般情况下，使用两个空格的缩进。</p>
 
-    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">println</span><span class="o">(</span><span class="s">"Wow!"</span><span class="o">)</span>
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">if</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nf">println</span><span class="o">(</span><span class="s">"Wow!"</span><span class="o">)</span>
 <span class="o">}</span>
 </code></pre></div>    </div>
   </li>
   <li>
     <p>对于方法声明，如果一行无法容纳下所有的参数，那么使用 4 个空格来缩进它们。返回类型可以与最后一个参数在同一行，也可以放在下一行，使用两个空格缩进。</p>
 
-    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">newAPIHadoopFile</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span>, <span class="kt">F</span> <span class="k">&lt;:</span> <span class="kt">NewInputFormat</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">]](</span>
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">newAPIHadoopFile</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span>, <span class="kt">F</span> <span class="k">&lt;:</span> <span class="kt">NewInputFormat</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">]](</span>
     <span class="n">path</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
     <span class="n">fClass</span><span class="k">:</span> <span class="kt">Class</span><span class="o">[</span><span class="kt">F</span><span class="o">],</span>
     <span class="n">kClass</span><span class="k">:</span> <span class="kt">Class</span><span class="o">[</span><span class="kt">K</span><span class="o">],</span>
@@ -370,7 +374,7 @@
   <span class="c1">// method body
 </span><span class="o">}</span>
 
-<span class="k">def</span> <span class="n">newAPIHadoopFile</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span>, <span class="kt">F</span> <span class="k">&lt;:</span> <span class="kt">NewInputFormat</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">]](</span>
+<span class="k">def</span> <span class="nf">newAPIHadoopFile</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span>, <span class="kt">F</span> <span class="k">&lt;:</span> <span class="kt">NewInputFormat</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">]](</span>
     <span class="n">path</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
     <span class="n">fClass</span><span class="k">:</span> <span class="kt">Class</span><span class="o">[</span><span class="kt">F</span><span class="o">],</span>
     <span class="n">kClass</span><span class="k">:</span> <span class="kt">Class</span><span class="o">[</span><span class="kt">K</span><span class="o">],</span>
@@ -385,13 +389,13 @@
     <p>如果一行无法容纳下类头（即 extends 后面那部分），则把它们放到新的一行，用两个空格缩进，然后在类内空一行再开始函数或字段的定义（或是包的导入）。</p>
 
     <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Foo</span><span class="o">(</span>
-    <span class="k">val</span> <span class="n">param1</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>  <span class="c1">// 4 space indent for parameters
-</span>    <span class="k">val</span> <span class="n">param2</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
-    <span class="k">val</span> <span class="n">param3</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Byte</span><span class="o">])</span>
+    <span class="k">val</span> <span class="nv">param1</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>  <span class="c1">// 4 space indent for parameters
+</span>    <span class="k">val</span> <span class="nv">param2</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+    <span class="k">val</span> <span class="nv">param3</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Byte</span><span class="o">])</span>
   <span class="k">extends</span> <span class="nc">FooInterface</span>  <span class="c1">// 2 space here
 </span>  <span class="k">with</span> <span class="nc">Logging</span> <span class="o">{</span>
 
-  <span class="k">def</span> <span class="n">firstMethod</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>  <span class="c1">// blank line above
+  <span class="k">def</span> <span class="nf">firstMethod</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>  <span class="c1">// blank line above
 </span><span class="o">}</span>
 </code></pre></div>    </div>
   </li>
@@ -399,14 +403,14 @@
     <p>不要使用垂直对齐。它使你的注意力放在代码的错误部分并增大了后人修改代码的难度。</p>
 
     <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Don't align vertically
-</span><span class="k">val</span> <span class="n">plus</span>     <span class="k">=</span> <span class="s">"+"</span>
-<span class="k">val</span> <span class="n">minus</span>    <span class="k">=</span> <span class="s">"-"</span>
-<span class="k">val</span> <span class="n">multiply</span> <span class="k">=</span> <span class="s">"*"</span>
+</span><span class="k">val</span> <span class="nv">plus</span>     <span class="k">=</span> <span class="s">"+"</span>
+<span class="k">val</span> <span class="nv">minus</span>    <span class="k">=</span> <span class="s">"-"</span>
+<span class="k">val</span> <span class="nv">multiply</span> <span class="k">=</span> <span class="s">"*"</span>
 
 <span class="c1">// Do the following
-</span><span class="k">val</span> <span class="n">plus</span> <span class="k">=</span> <span class="s">"+"</span>
-<span class="k">val</span> <span class="n">minus</span> <span class="k">=</span> <span class="s">"-"</span>
-<span class="k">val</span> <span class="n">multiply</span> <span class="k">=</span> <span class="s">"*"</span>
+</span><span class="k">val</span> <span class="nv">plus</span> <span class="k">=</span> <span class="s">"+"</span>
+<span class="k">val</span> <span class="nv">minus</span> <span class="k">=</span> <span class="s">"-"</span>
+<span class="k">val</span> <span class="nv">multiply</span> <span class="k">=</span> <span class="s">"*"</span>
 </code></pre></div>    </div>
   </li>
 </ul>
@@ -437,10 +441,10 @@
 
     <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Job</span> <span class="o">{</span>
   <span class="c1">// Wrong: killJob changes state. Should have ().
-</span>  <span class="k">def</span> <span class="n">killJob</span><span class="k">:</span> <span class="kt">Unit</span>
+</span>  <span class="k">def</span> <span class="nf">killJob</span><span class="k">:</span> <span class="kt">Unit</span>
 
   <span class="c1">// Correct:
-</span>  <span class="k">def</span> <span class="n">killJob</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span>
+</span>  <span class="k">def</span> <span class="nf">killJob</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span>
 <span class="o">}</span>
 </code></pre></div>    </div>
   </li>
@@ -448,15 +452,15 @@
     <p>函数调用应该与函数声明在形式上保持一致，也就是说，如果一个方法声明时带了括号，那调用时也要把括号带上。注意这不仅仅是语法层面的人为约定，当返回对象中定义了 <code class="highlighter-rouge">apply</code> 方法时，这一点还会影响正确性。</p>
 
     <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Foo</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">apply</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">String*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span>
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">String*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span>
 <span class="o">}</span>
 
 <span class="k">class</span> <span class="nc">Bar</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">foo</span><span class="k">:</span> <span class="kt">Foo</span>
+  <span class="k">def</span> <span class="nf">foo</span><span class="k">:</span> <span class="kt">Foo</span>
 <span class="o">}</span>
 
-<span class="k">new</span> <span class="nc">Bar</span><span class="o">().</span><span class="n">foo</span>  <span class="c1">// This returns a Foo
-</span><span class="k">new</span> <span class="nc">Bar</span><span class="o">().</span><span class="n">foo</span><span class="o">()</span>  <span class="c1">// This returns an Int!
+<span class="k">new</span> <span class="nc">Bar</span><span class="o">().</span><span class="py">foo</span>  <span class="c1">// This returns a Foo
+</span><span class="k">new</span> <span class="nc">Bar</span><span class="o">().</span><span class="py">foo</span><span class="o">()</span>  <span class="c1">// This returns an Int!
 </span></code></pre></div>    </div>
   </li>
 </ul>
@@ -466,26 +470,26 @@
 <p>即使条件语句或循环语句只有一行时，也请使用大括号。唯一的例外是，当你把 if/else 作为一个单行的三元操作符来使用并且没有副作用时，这时你可以不加大括号。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Correct:
-</span><span class="k">if</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">println</span><span class="o">(</span><span class="s">"Wow!"</span><span class="o">)</span>
+</span><span class="nf">if</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nf">println</span><span class="o">(</span><span class="s">"Wow!"</span><span class="o">)</span>
 <span class="o">}</span>
 
 <span class="c1">// Correct:
-</span><span class="k">if</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="n">statement1</span> <span class="k">else</span> <span class="n">statement2</span>
+</span><span class="nf">if</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="n">statement1</span> <span class="k">else</span> <span class="n">statement2</span>
 
 <span class="c1">// Correct:
 </span><span class="k">try</span> <span class="o">{</span>
-  <span class="n">foo</span><span class="o">()</span>
+  <span class="nf">foo</span><span class="o">()</span>
 <span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
   <span class="o">...</span>
 <span class="o">}</span>
 
 <span class="c1">// Wrong:
-</span><span class="k">if</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span>
-  <span class="n">println</span><span class="o">(</span><span class="s">"Wow!"</span><span class="o">)</span>
+</span><span class="nf">if</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+  <span class="nf">println</span><span class="o">(</span><span class="s">"Wow!"</span><span class="o">)</span>
 
 <span class="c1">// Wrong:
-</span><span class="k">try</span> <span class="n">foo</span><span class="o">()</span> <span class="k">catch</span> <span class="o">{</span>
+</span><span class="k">try</span> <span class="nf">foo</span><span class="o">()</span> <span class="k">catch</span> <span class="o">{</span>
   <span class="o">...</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -494,9 +498,9 @@
 
 <p>长整型字面量使用大写的 <code class="highlighter-rouge">L</code> 作为后缀，不要使用小写，因为它和数字 <code class="highlighter-rouge">1</code> 长得很像，常常难以区分。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">longValue</span> <span class="k">=</span> <span class="mi">5432L</span>  <span class="c1">// Do this
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">longValue</span> <span class="k">=</span> <span class="mi">5432L</span>  <span class="c1">// Do this
 </span>
-<span class="k">val</span> <span class="n">longValue</span> <span class="k">=</span> <span class="mi">5432</span><span class="n">l</span>  <span class="c1">// Do NOT do this
+<span class="k">val</span> <span class="nv">longValue</span> <span class="k">=</span> <span class="mi">5432</span><span class="n">l</span>  <span class="c1">// Do NOT do this
 </span></code></pre></div></div>
 
 <h3 id="文档风格"><a name="doc">文档风格</a></h3>
@@ -573,7 +577,7 @@ com.databricks  // or org.apache.spark if you are working on spark
   <li>
     <p>如果整个方法就是一个模式匹配表达式，可能的话，可以把 match 关键词与方法声明放在同一行，以此减少一级缩进。</p>
 
-    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">test</span><span class="o">(</span><span class="n">msg</span><span class="k">:</span> <span class="kt">Message</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="n">msg</span> <span class="k">match</span> <span class="o">{</span>
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test</span><span class="o">(</span><span class="n">msg</span><span class="k">:</span> <span class="kt">Message</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="n">msg</span> <span class="k">match</span> <span class="o">{</span>
   <span class="k">case</span> <span class="o">...</span>
 <span class="o">}</span>
 </code></pre></div>    </div>
@@ -581,13 +585,13 @@ com.databricks  // or org.apache.spark if you are working on spark
   <li>
     <p>当以闭包形式调用一个函数时，如果只有一个 case 语句，那么把 case 语句与函数调用放在同一行。</p>
 
-    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="k">=&gt;</span>
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">list</span><span class="o">.</span><span class="py">zipWithIndex</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="nf">case</span> <span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="k">=&gt;</span>
   <span class="c1">// ...
 </span><span class="o">}</span>
 </code></pre></div>    </div>
     <p>如果有多个 case 语句，把它们缩进并且包起来。</p>
 
-    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span>
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">list</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span>
   <span class="k">case</span> <span class="n">a</span><span class="k">:</span> <span class="kt">Foo</span> <span class="o">=&gt;</span>  <span class="o">...</span>
   <span class="k">case</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Bar</span> <span class="o">=&gt;</span>  <span class="o">...</span>
 <span class="o">}</span>
@@ -600,11 +604,11 @@ com.databricks  // or org.apache.spark if you are working on spark
 <p><strong>避免中缀表示法</strong>，除非是符号方法（即运算符重载）。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Correct
-</span><span class="n">list</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">func</span><span class="o">)</span>
-<span class="n">string</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="s">"foo"</span><span class="o">)</span>
+</span><span class="nv">list</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">func</span><span class="o">)</span>
+<span class="nv">string</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="s">"foo"</span><span class="o">)</span>
 
 <span class="c1">// Wrong
-</span><span class="n">list</span> <span class="n">map</span> <span class="o">(</span><span class="n">func</span><span class="o">)</span>
+</span><span class="n">list</span> <span class="nf">map</span> <span class="o">(</span><span class="n">func</span><span class="o">)</span>
 <span class="n">string</span> <span class="n">contains</span> <span class="s">"foo"</span>
 
 <span class="c1">// 重载的运算符应该以中缀形式调用
@@ -616,25 +620,25 @@ com.databricks  // or org.apache.spark if you are working on spark
 <p>对于匿名方法，<strong>避免使用过多的小括号和花括号</strong>。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Correct
-</span><span class="n">list</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">item</span> <span class="k">=&gt;</span>
+</span><span class="nv">list</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="n">item</span> <span class="k">=&gt;</span>
   <span class="o">...</span>
 <span class="o">}</span>
 
 <span class="c1">// Correct
-</span><span class="n">list</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">item</span> <span class="k">=&gt;</span> <span class="o">...)</span>
+</span><span class="nv">list</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">item</span> <span class="k">=&gt;</span> <span class="o">...)</span>
 
 <span class="c1">// Wrong
-</span><span class="n">list</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">item</span> <span class="k">=&gt;</span> <span class="o">{</span>
+</span><span class="nv">list</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">item</span> <span class="k">=&gt;</span> <span class="o">{</span>
   <span class="o">...</span>
 <span class="o">})</span>
 
 <span class="c1">// Wrong
-</span><span class="n">list</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">item</span> <span class="k">=&gt;</span> <span class="o">{</span>
+</span><span class="nv">list</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="n">item</span> <span class="k">=&gt;</span> <span class="o">{</span>
   <span class="o">...</span>
 <span class="o">}}</span>
 
 <span class="c1">// Wrong
-</span><span class="n">list</span><span class="o">.</span><span class="n">map</span><span class="o">({</span> <span class="n">item</span> <span class="k">=&gt;</span> <span class="o">...</span> <span class="o">})</span>
+</span><span class="nv">list</span><span class="o">.</span><span class="py">map</span><span class="o">({</span> <span class="n">item</span> <span class="k">=&gt;</span> <span class="o">...</span> <span class="o">})</span>
 </code></pre></div></div>
 
 <h2 id="scala-语言特性"><a name="lang">Scala 语言特性</a></h2>
@@ -647,10 +651,10 @@ com.databricks  // or org.apache.spark if you are working on spark
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">TreeNode</span> <span class="o">{</span>
   <span class="c1">// 下面这种定义是 OK 的
-</span>  <span class="k">def</span> <span class="n">apply</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">TreeNode</span> <span class="o">=</span> <span class="o">...</span>
+</span>  <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">TreeNode</span> <span class="o">=</span> <span class="o">...</span>
 
   <span class="c1">// 不要像下面那样定义，因为它没有返回其伴生类的类型：TreeNode
-</span>  <span class="k">def</span> <span class="n">apply</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">...</span>
+</span>  <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">...</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -659,8 +663,8 @@ com.databricks  // or org.apache.spark if you are working on spark
 <p>无论是覆盖具体的方法还是实现抽象的方法，始终都为方法加上 override 修饰符。实现抽象方法时，不加 override 修饰符，Scala 编译器也不会报错。即便如此，我们也应该始终把 override 修饰符加上，以此显式地表示覆盖行为。以此避免由于方法签名不同（而你也难以发现）而导致没有覆盖到本应覆盖的方法。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Parent</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">hello</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">print</span><span class="o">(</span><span class="n">data</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">hello</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">print</span><span class="o">(</span><span class="n">data</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 
@@ -670,8 +674,8 @@ com.databricks  // or org.apache.spark if you are working on spark
   <span class="c1">// 下面的方法没有覆盖 Parent.hello,
 </span>  <span class="c1">// 因为两个 Map 的类型是不同的。
 </span>  <span class="c1">// 如果我们加上 override 修饰符，编译器就会帮你找出问题并报错。
-</span>  <span class="k">def</span> <span class="n">hello</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">print</span><span class="o">(</span><span class="s">"This is supposed to override the parent method, but it is actually not!"</span><span class="o">)</span>
+</span>  <span class="k">def</span> <span class="nf">hello</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">print</span><span class="o">(</span><span class="s">"This is supposed to override the parent method, but it is actually not!"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -680,14 +684,14 @@ com.databricks  // or org.apache.spark if you are working on spark
 
 <p>解构绑定（有时也叫元组提取）是一种在一个表达式中为两个变量赋值的便捷方式。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">val</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>然而，请不要在构造函数中使用它们，尤其是当 <code class="highlighter-rouge">a</code> 和 <code class="highlighter-rouge">b</code> 需要被标记为 <code class="highlighter-rouge">transient</code> 的时候。Scala 编译器会产生一个额外的 Tuple2 字段，而它并不是暂态的（transient）。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MyClass</span> <span class="o">{</span>
   <span class="c1">// 以下代码无法 work，因为编译器会产生一个非暂态的 Tuple2 指向 a 和 b
-</span>  <span class="nd">@transient</span> <span class="k">private</span> <span class="k">val</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="k">=</span> <span class="n">someFuncThatReturnsTuple2</span><span class="o">()</span>
+</span>  <span class="nd">@transient</span> <span class="k">private</span> <span class="nf">val</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="k">=</span> <span class="nf">someFuncThatReturnsTuple2</span><span class="o">()</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -697,18 +701,18 @@ com.databricks  // or org.apache.spark if you are working on spark
 
 <p>背景：Scala 允许按名称来定义方法参数，例如：以下例子是可以成功执行的：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">print</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="n">println</span><span class="o">(</span><span class="n">value</span><span class="o">)</span>
-  <span class="n">println</span><span class="o">(</span><span class="n">value</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">print</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="nf">println</span><span class="o">(</span><span class="n">value</span><span class="o">)</span>
+  <span class="nf">println</span><span class="o">(</span><span class="n">value</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
 <span class="o">}</span>
 
 <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">0</span>
-<span class="k">def</span> <span class="n">inc</span><span class="o">()</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+<span class="k">def</span> <span class="nf">inc</span><span class="o">()</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
   <span class="n">a</span> <span class="o">+=</span> <span class="mi">1</span>
   <span class="n">a</span>
 <span class="o">}</span>
 
-<span class="n">print</span><span class="o">(</span><span class="n">inc</span><span class="o">())</span>
+<span class="nf">print</span><span class="o">(</span><span class="nf">inc</span><span class="o">())</span>
 </code></pre></div></div>
 
 <p>在上面的代码中，<code class="highlighter-rouge">inc()</code> 以闭包的形式传递给 <code class="highlighter-rouge">print</code> 函数，并且在 <code class="highlighter-rouge">print</code> 函数中被执行了两次，而不是以数值 <code class="highlighter-rouge">1</code> 传入。按名传参的一个主要问题是在方法调用处，我们无法区分是按名传参还是按值传参。因此无法确切地知道这个表达式是否会被执行（更糟糕的是它可能会被执行多次）。对于带有副作用的表达式来说，这一点是非常危险的。</p>
@@ -732,8 +736,8 @@ com.databricks  // or org.apache.spark if you are working on spark
 <span class="n">stream1</span> <span class="o">&gt;&gt;=</span> <span class="n">stream2</span>
 
 <span class="c1">// 下面的方法意图则不言而喻
-</span><span class="n">channel</span><span class="o">.</span><span class="n">send</span><span class="o">(</span><span class="n">msg</span><span class="o">)</span>
-<span class="n">stream1</span><span class="o">.</span><span class="n">join</span><span class="o">(</span><span class="n">stream2</span><span class="o">)</span>
+</span><span class="nv">channel</span><span class="o">.</span><span class="py">send</span><span class="o">(</span><span class="n">msg</span><span class="o">)</span>
+<span class="nv">stream1</span><span class="o">.</span><span class="py">join</span><span class="o">(</span><span class="n">stream2</span><span class="o">)</span>
 </code></pre></div></div>
 
 <h3 id="类型推导"><a name="type_inference">类型推导</a></h3>
@@ -750,9 +754,9 @@ com.databricks  // or org.apache.spark if you are working on spark
 
 <p><strong>闭包中避免使用 return</strong>。<code class="highlighter-rouge">return</code> 会被编译器转成 <code class="highlighter-rouge">scala.runtime.NonLocalReturnControl</code> 异常的 <code class="highlighter-rouge">try/catch</code> 语句，这可能会导致意外行为。请看下面的例子：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="n">receive</span><span class="o">(</span><span class="n">rpc</span><span class="k">:</span> <span class="kt">WebSocketRPC</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Response</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="n">tableFut</span><span class="o">.</span><span class="n">onComplete</span> <span class="o">{</span> <span class="n">table</span> <span class="k">=&gt;</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">table</span><span class="o">.</span><span class="n">isFailure</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="nf">receive</span><span class="o">(</span><span class="n">rpc</span><span class="k">:</span> <span class="kt">WebSocketRPC</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Response</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="nv">tableFut</span><span class="o">.</span><span class="py">onComplete</span> <span class="o">{</span> <span class="n">table</span> <span class="k">=&gt;</span>
+      <span class="nf">if</span> <span class="o">(</span><span class="nv">table</span><span class="o">.</span><span class="py">isFailure</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="nc">None</span> <span class="c1">// Do not do that!
 </span>      <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
     <span class="o">}</span>
@@ -767,8 +771,8 @@ com.databricks  // or org.apache.spark if you are working on spark
   <li>
     <p>使用 <code class="highlighter-rouge">return</code> 来简化控制流，避免增加一级缩进。</p>
 
-    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">doSomething</span><span class="o">(</span><span class="n">obj</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="k">if</span> <span class="o">(</span><span class="n">obj</span> <span class="n">eq</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">doSomething</span><span class="o">(</span><span class="n">obj</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="nf">if</span> <span class="o">(</span><span class="n">obj</span> <span class="n">eq</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">return</span> <span class="kc">null</span>
   <span class="o">}</span>
   <span class="c1">// do something ...
@@ -778,8 +782,8 @@ com.databricks  // or org.apache.spark if you are working on spark
   <li>
     <p>使用 <code class="highlighter-rouge">return</code> 来提前终止循环，这样就不用额外构造状态标志。</p>
 
-    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
-  <span class="k">if</span> <span class="o">(</span><span class="n">cond</span><span class="o">)</span> <span class="o">{</span>
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nf">if</span> <span class="o">(</span><span class="n">cond</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">return</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -796,23 +800,23 @@ com.databricks  // or org.apache.spark if you are working on spark
 <p>大多数的代码使用简单的循环和状态机会更容易推理，使用尾递归反而可能会使它更加繁琐且难以理解。例如，下面的例子中，命令式的代码比尾递归版本的代码要更加易读：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Tail recursive version.
-</span><span class="k">def</span> <span class="n">max</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class="k">def</span> <span class="nf">max</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
   <span class="nd">@tailrec</span>
-  <span class="k">def</span> <span class="n">max0</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">pos</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">max</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">pos</span> <span class="o">==</span> <span class="n">data</span><span class="o">.</span><span class="n">length</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">max0</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">pos</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">max</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">pos</span> <span class="o">==</span> <span class="nv">data</span><span class="o">.</span><span class="py">length</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">max</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-      <span class="n">max0</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="k">if</span> <span class="o">(</span><span class="n">data</span><span class="o">(</span><span class="n">pos</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">)</span> <span class="n">data</span><span class="o">(</span><span class="n">pos</span><span class="o">)</span> <span class="k">else</span> <span class="n">max</span><span class="o">)</span>
+      <span class="nf">max0</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="nf">if</span> <span class="o">(</span><span class="nf">data</span><span class="o">(</span><span class="n">pos</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">)</span> <span class="nf">data</span><span class="o">(</span><span class="n">pos</span><span class="o">)</span> <span class="k">else</span> <span class="n">max</span><span class="o">)</span>
     <span class="o">}</span>
   <span class="o">}</span>
-  <span class="n">max0</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="nc">Int</span><span class="o">.</span><span class="nc">MinValue</span><span class="o">)</span>
+  <span class="nf">max0</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="nv">Int</span><span class="o">.</span><span class="py">MinValue</span><span class="o">)</span>
 <span class="o">}</span>
 
 <span class="c1">// Explicit loop version
-</span><span class="k">def</span> <span class="n">max</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="k">var</span> <span class="n">max</span> <span class="k">=</span> <span class="nc">Int</span><span class="o">.</span><span class="nc">MinValue</span>
-  <span class="k">for</span> <span class="o">(</span><span class="n">v</span> <span class="k">&lt;-</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="k">def</span> <span class="nf">max</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="k">var</span> <span class="n">max</span> <span class="k">=</span> <span class="nv">Int</span><span class="o">.</span><span class="py">MinValue</span>
+  <span class="nf">for</span> <span class="o">(</span><span class="n">v</span> <span class="k">&lt;-</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">max</span> <span class="k">=</span> <span class="n">v</span>
     <span class="o">}</span>
   <span class="o">}</span>
@@ -836,14 +840,14 @@ com.databricks  // or org.apache.spark if you are working on spark
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 别这么做，这样使用者无法选择性地只导入其中一个方法。
 </span><span class="k">object</span> <span class="nc">ImplicitHolder</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">toRdd</span><span class="o">(</span><span class="n">seq</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
-  <span class="k">def</span> <span class="n">toRdd</span><span class="o">(</span><span class="n">seq</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Long</span><span class="o">])</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
+  <span class="k">def</span> <span class="nf">toRdd</span><span class="o">(</span><span class="n">seq</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
+  <span class="k">def</span> <span class="nf">toRdd</span><span class="o">(</span><span class="n">seq</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Long</span><span class="o">])</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
 <span class="o">}</span>
 
 <span class="c1">// 应该将它们定义为不同的名字：
 </span><span class="k">object</span> <span class="nc">ImplicitHolder</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">intSeqToRdd</span><span class="o">(</span><span class="n">seq</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
-  <span class="k">def</span> <span class="n">longSeqToRdd</span><span class="o">(</span><span class="n">seq</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Long</span><span class="o">])</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
+  <span class="k">def</span> <span class="nf">intSeqToRdd</span><span class="o">(</span><span class="n">seq</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
+  <span class="k">def</span> <span class="nf">longSeqToRdd</span><span class="o">(</span><span class="n">seq</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Long</span><span class="o">])</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -873,7 +877,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 
     <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">UserService</span> <span class="o">{</span>
   <span class="cm">/** Look up a user's profile in the user database. */</span>
-  <span class="k">def</span> <span class="n">get</span><span class="o">(</span><span class="n">userId</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Try</span><span class="o">[</span><span class="kt">User</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">get</span><span class="o">(</span><span class="n">userId</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Try</span><span class="o">[</span><span class="kt">User</span><span class="o">]</span>
 <span class="o">}</span>
 </code></pre></div>    </div>
     <p>以下的写法会更好：</p>
@@ -885,7 +889,7 @@ com.databricks  // or org.apache.spark if you are working on spark
    * @throws DatabaseConnectionException when we have trouble connecting to the database/
    */</span>
   <span class="nd">@throws</span><span class="o">(</span><span class="nc">DatabaseConnectionException</span><span class="o">)</span>
-  <span class="k">def</span> <span class="n">get</span><span class="o">(</span><span class="n">userId</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">User</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">get</span><span class="o">(</span><span class="n">userId</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">User</span><span class="o">]</span>
 <span class="o">}</span>
 </code></pre></div>    </div>
     <p>第二种写法非常明显地能让调用者知道需要处理哪些错误情况。</p>
@@ -899,11 +903,11 @@ com.databricks  // or org.apache.spark if you are working on spark
   <li>
     <p>构造 <code class="highlighter-rouge">Option</code> 值时，请使用 <code class="highlighter-rouge">Option</code> 而非 <code class="highlighter-rouge">Some</code>，以防那个值为 <code class="highlighter-rouge">null</code>。</p>
 
-    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">myMethod1</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Option</span><span class="o">(</span><span class="n">transform</span><span class="o">(</span><span class="n">input</span><span class="o">))</span>
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">myMethod1</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Option</span><span class="o">(</span><span class="nf">transform</span><span class="o">(</span><span class="n">input</span><span class="o">))</span>
 
 <span class="c1">// This is not as robust because transform can return null, and then
 // myMethod2 will return Some(null).
-</span><span class="k">def</span> <span class="n">myMethod2</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="n">transform</span><span class="o">(</span><span class="n">input</span><span class="o">))</span>
+</span><span class="k">def</span> <span class="nf">myMethod2</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="nf">transform</span><span class="o">(</span><span class="n">input</span><span class="o">))</span>
 </code></pre></div>    </div>
   </li>
   <li>不要使用 None 来表示异常，有异常时请显式抛出。</li>
@@ -922,25 +926,25 @@ com.databricks  // or org.apache.spark if you are working on spark
 
 <p>通过给中间结果显式地赋予一个变量名，将链接断开变成一种更加过程化的风格，能让单子链接更加易于理解。来看下面的例子：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Person</span><span class="o">(</span><span class="k">val</span> <span class="n">data</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">])</span>
-<span class="k">val</span> <span class="n">database</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">Person</span><span class="o">]</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Person</span><span class="o">(</span><span class="k">val</span> <span class="nv">data</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">])</span>
+<span class="k">val</span> <span class="nv">database</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">Person</span><span class="o">]</span>
 <span class="c1">// Sometimes the client can store "null" value in the  store "address"
 </span>
 <span class="c1">// A monadic chaining approach
-</span><span class="k">def</span> <span class="n">getAddress</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
-  <span class="n">database</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">name</span><span class="o">).</span><span class="n">flatMap</span> <span class="o">{</span> <span class="n">elem</span> <span class="k">=&gt;</span>
-    <span class="n">elem</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"address"</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">flatMap</span><span class="o">(</span><span class="nc">Option</span><span class="o">.</span><span class="n">apply</span><span class="o">)</span>  <span class="c1">// handle null value
+</span><span class="k">def</span> <span class="nf">getAddress</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+  <span class="nv">database</span><span class="o">.</span><span class="py">get</span><span class="o">(</span><span class="n">name</span><span class="o">).</span><span class="py">flatMap</span> <span class="o">{</span> <span class="n">elem</span> <span class="k">=&gt;</span>
+    <span class="nv">elem</span><span class="o">.</span><span class="py">data</span><span class="o">.</span><span class="py">get</span><span class="o">(</span><span class="s">"address"</span><span class="o">)</span>
+      <span class="o">.</span><span class="py">flatMap</span><span class="o">(</span><span class="nv">Option</span><span class="o">.</span><span class="py">apply</span><span class="o">)</span>  <span class="c1">// handle null value
 </span>  <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="c1">// 尽管代码会长一些，但以下方法可读性更高
-</span><span class="k">def</span> <span class="n">getAddress</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
-  <span class="k">if</span> <span class="o">(!</span><span class="n">database</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">name</span><span class="o">))</span> <span class="o">{</span>
+</span><span class="k">def</span> <span class="nf">getAddress</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+  <span class="nf">if</span> <span class="o">(!</span><span class="nv">database</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="n">name</span><span class="o">))</span> <span class="o">{</span>
     <span class="k">return</span> <span class="nc">None</span>
   <span class="o">}</span>
 
-  <span class="n">database</span><span class="o">(</span><span class="n">name</span><span class="o">).</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"address"</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
+  <span class="nf">database</span><span class="o">(</span><span class="n">name</span><span class="o">).</span><span class="py">data</span><span class="o">.</span><span class="py">get</span><span class="o">(</span><span class="s">"address"</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
     <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">None</span>  <span class="c1">// handle null value
 </span>    <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">addr</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Option</span><span class="o">(</span><span class="n">addr</span><span class="o">)</span>
     <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="nc">None</span>
@@ -963,13 +967,13 @@ com.databricks  // or org.apache.spark if you are working on spark
   <li>
     <p><code class="highlighter-rouge">java.util.concurrent.ConcurrentHashMap</code>：当所有的状态都存储在一个 map 中，并且有高程度的竞争时使用。</p>
 
-    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">val</span> <span class="n">map</span> <span class="k">=</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="nc">ConcurrentHashMap</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span>
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">val</span> <span class="nv">map</span> <span class="k">=</span> <span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">util</span><span class="o">.</span><span class="py">concurrent</span><span class="o">.</span><span class="py">ConcurrentHashMap</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span>
 </code></pre></div>    </div>
   </li>
   <li>
     <p><code class="highlighter-rouge">java.util.Collections.synchronizedMap</code>：使用情景：当所有状态都存储在一个 map 中，并且预期不存在竞争情况，但你仍想确保代码在并发下是安全的。如果没有竞争出现，JVM 的 JIT 编译器能够通过偏置锁（biased locking）移除同步开销。</p>
 
-    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">val</span> <span class="n">map</span> <span class="k">=</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="nc">Collections</span><span class="o">.</span><span class="n">synchronizedMap</span><span class="o">(</span><span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="nc">HashMap</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">])</span>
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">val</span> <span class="nv">map</span> <span class="k">=</span> <span class="nv">java</span><span class="o">.</span><span class="py">util</span><span class="o">.</span><span class="py">Collections</span><span class="o">.</span><span class="py">synchronizedMap</span><span class="o">(</span><span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">util</span><span class="o">.</span><span class="py">HashMap</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">])</span>
 </code></pre></div>    </div>
   </li>
   <li>
@@ -977,12 +981,12 @@ com.databricks  // or org.apache.spark if you are working on spark
 
     <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Manager</span> <span class="o">{</span>
   <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">var</span> <span class="n">count</span> <span class="k">=</span> <span class="mi">0</span>
-  <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">val</span> <span class="n">map</span> <span class="k">=</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="nc">HashMap</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span>
-  <span class="k">def</span> <span class="n">update</span><span class="o">(</span><span class="n">key</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">value</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="n">synchronized</span> <span class="o">{</span>
-    <span class="n">map</span><span class="o">.</span><span class="n">put</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span>
+  <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">val</span> <span class="nv">map</span> <span class="k">=</span> <span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">util</span><span class="o">.</span><span class="py">HashMap</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">update</span><span class="o">(</span><span class="n">key</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">value</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="n">synchronized</span> <span class="o">{</span>
+    <span class="nv">map</span><span class="o">.</span><span class="py">put</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span>
     <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
   <span class="o">}</span>
-  <span class="k">def</span> <span class="n">getCount</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">synchronized</span> <span class="o">{</span> <span class="n">count</span> <span class="o">}</span>
+  <span class="k">def</span> <span class="nf">getCount</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">synchronized</span> <span class="o">{</span> <span class="n">count</span> <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div>    </div>
   </li>
@@ -990,13 +994,13 @@ com.databricks  // or org.apache.spark if you are working on spark
 
 <p>注意，对于 case 1 和 case 2，不要让集合的视图或迭代器从保护区域逃逸。这可能会以一种不明显的方式发生，比如：返回了 <code class="highlighter-rouge">Map.keySet</code> 或 <code class="highlighter-rouge">Map.values</code>。如果需要传递集合的视图或值，生成一份数据拷贝再传递。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">val</span> <span class="n">map</span> <span class="k">=</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="nc">Collections</span><span class="o">.</span><span class="n">synchronizedMap</span><span class="o">(</span><span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="nc">HashMap</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">])</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">val</span> <span class="nv">map</span> <span class="k">=</span> <span class="nv">java</span><span class="o">.</span><span class="py">util</span><span class="o">.</span><span class="py">Collections</span><span class="o">.</span><span class="py">synchronizedMap</span><span class="o">(</span><span class="k">new</span> <span class="nv">java</span><span class="o">.</span><span class="py">util</span><span class="o">.</span><span class="py">HashMap</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">String</span><span class="o">])</span>
 
   <span class="c1">// This is broken!
-</span>  <span class="k">def</span> <span class="n">values</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">map</span><span class="o">.</span><span class="n">values</span>
+</span>  <span class="k">def</span> <span class="nf">values</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nv">map</span><span class="o">.</span><span class="py">values</span>
 
   <span class="c1">// Instead, copy the elements
-</span>  <span class="k">def</span> <span class="n">values</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">map</span><span class="o">.</span><span class="n">synchronized</span> <span class="o">{</span> <span class="nc">Seq</span><span class="o">(</span><span class="n">map</span><span class="o">.</span><span class="n">values</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">)</span> <span class="o">}</span>
+</span>  <span class="k">def</span> <span class="nf">values</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nv">map</span><span class="o">.</span><span class="py">synchronized</span> <span class="o">{</span> <span class="nc">Seq</span><span class="o">(</span><span class="nv">map</span><span class="o">.</span><span class="py">values</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">)</span> <span class="o">}</span>
 </code></pre></div></div>
 
 <h3 id="显式同步-vs-原子变量-vs-volatile"><a name="concurrency-sync-vs-atomic">显式同步 vs 原子变量 vs @volatile</a></h3>
@@ -1008,21 +1012,21 @@ com.databricks  // or org.apache.spark if you are working on spark
 <p>优先考虑使用原子变量而非显式同步的情况：（1）一个对象的所有临界区更新都被限制在单个变量里并且预期会有竞争情况出现。原子变量是无锁的并且允许更为有效的竞争。（2）同步被明确地表示为 <code class="highlighter-rouge">getAndSet</code> 操作。例如：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// good: 明确又有效地表达了下面的并发代码只执行一次
-</span>  <span class="k">val</span> <span class="n">initialized</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">AtomicBoolean</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
+</span>  <span class="k">val</span> <span class="nv">initialized</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">AtomicBoolean</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
   <span class="o">...</span>
-  <span class="k">if</span> <span class="o">(!</span><span class="n">initialized</span><span class="o">.</span><span class="n">getAndSet</span><span class="o">(</span><span class="kc">true</span><span class="o">))</span> <span class="o">{</span>
+  <span class="nf">if</span> <span class="o">(!</span><span class="nv">initialized</span><span class="o">.</span><span class="py">getAndSet</span><span class="o">(</span><span class="kc">true</span><span class="o">))</span> <span class="o">{</span>
     <span class="o">...</span>
   <span class="o">}</span>
 
   <span class="c1">// poor: 下面的同步就没那么明晰，而且会出现不必要的同步
-</span>  <span class="k">val</span> <span class="n">initialized</span> <span class="k">=</span> <span class="kc">false</span>
+</span>  <span class="k">val</span> <span class="nv">initialized</span> <span class="k">=</span> <span class="kc">false</span>
   <span class="o">...</span>
   <span class="k">var</span> <span class="n">wasInitialized</span> <span class="k">=</span> <span class="kc">false</span>
   <span class="n">synchronized</span> <span class="o">{</span>
     <span class="n">wasInitialized</span> <span class="k">=</span> <span class="n">initialized</span>
     <span class="n">initialized</span> <span class="k">=</span> <span class="kc">true</span>
   <span class="o">}</span>
-  <span class="k">if</span> <span class="o">(!</span><span class="n">wasInitialized</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nf">if</span> <span class="o">(!</span><span class="n">wasInitialized</span><span class="o">)</span> <span class="o">{</span>
     <span class="o">...</span>
   <span class="o">}</span>
 </code></pre></div></div>
@@ -1034,13 +1038,13 @@ com.databricks  // or org.apache.spark if you are working on spark
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 以下代码仍然是不安全的。
 </span><span class="k">class</span> <span class="nc">Foo</span> <span class="o">{</span>
   <span class="k">private</span> <span class="k">var</span> <span class="n">count</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="k">def</span> <span class="n">inc</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="n">synchronized</span> <span class="o">{</span> <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">}</span>
+  <span class="k">def</span> <span class="nf">inc</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="n">synchronized</span> <span class="o">{</span> <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="c1">// 以下代码是安全的。
 </span><span class="k">class</span> <span class="nc">Foo</span> <span class="o">{</span>
   <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">var</span> <span class="n">count</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="k">def</span> <span class="n">inc</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="n">synchronized</span> <span class="o">{</span> <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">}</span>
+  <span class="k">def</span> <span class="nf">inc</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="n">synchronized</span> <span class="o">{</span> <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -1068,18 +1072,18 @@ com.databricks  // or org.apache.spark if you are working on spark
 <p>使用 <code class="highlighter-rouge">while</code> 循环而非 <code class="highlighter-rouge">for</code> 循环或函数变换（如：<code class="highlighter-rouge">map</code>、<code class="highlighter-rouge">foreach</code>），for 循环和函数变换非常慢（由于虚函数调用和装箱的缘故）。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="k">val</span> <span class="n">arr</span> <span class="k">=</span> <span class="c1">// array of ints
+<span class="k">val</span> <span class="nv">arr</span> <span class="k">=</span> <span class="c1">// array of ints
 // 偶数位置的数置零
-</span><span class="k">val</span> <span class="n">newArr</span> <span class="k">=</span> <span class="n">list</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="k">=&gt;</span>
-  <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">elem</span>
+</span><span class="k">val</span> <span class="nv">newArr</span> <span class="k">=</span> <span class="nv">list</span><span class="o">.</span><span class="py">zipWithIndex</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="nf">case</span> <span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="k">=&gt;</span>
+  <span class="nf">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">elem</span>
 <span class="o">}</span>
 
 <span class="c1">// 这是上面代码的高性能版本
-</span><span class="k">val</span> <span class="n">newArr</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">](</span><span class="n">arr</span><span class="o">.</span><span class="n">length</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">newArr</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">](</span><span class="nv">arr</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>
 <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
-<span class="k">val</span> <span class="n">len</span> <span class="k">=</span> <span class="n">newArr</span><span class="o">.</span><span class="n">length</span>
-<span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">newArr</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">arr</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">len</span> <span class="k">=</span> <span class="nv">newArr</span><span class="o">.</span><span class="py">length</span>
+<span class="nf">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nf">newArr</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="mi">0</span> <span class="k">else</span> <span class="nf">arr</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
   <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -1089,7 +1093,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 <p>对于性能有要求的代码，优先考虑使用 <code class="highlighter-rouge">null</code> 而不是 <code class="highlighter-rouge">Option</code>，以此避免虚函数调用以及装箱操作。用 Nullable 注解明确标示出可能为 <code class="highlighter-rouge">null</code> 的值。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Foo</span> <span class="o">{</span>
-  <span class="nd">@javax</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="nc">Nullable</span>
+  <span class="nd">@javax</span><span class="o">.</span><span class="py">annotation</span><span class="o">.</span><span class="py">Nullable</span>
   <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">var</span> <span class="n">nullableField</span><span class="k">:</span> <span class="kt">Bar</span> <span class="o">=</span> <span class="k">_</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -1104,12 +1108,12 @@ com.databricks  // or org.apache.spark if you are working on spark
 <code class="highlighter-rouge">private[this]</code> 来确保没有虚函数调用会更保险。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MyClass</span> <span class="o">{</span>
-  <span class="k">private</span> <span class="k">val</span> <span class="n">field1</span> <span class="k">=</span> <span class="o">...</span>
-  <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">val</span> <span class="n">field2</span> <span class="k">=</span> <span class="o">...</span>
+  <span class="k">private</span> <span class="k">val</span> <span class="nv">field1</span> <span class="k">=</span> <span class="o">...</span>
+  <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">val</span> <span class="nv">field2</span> <span class="k">=</span> <span class="o">...</span>
 
-  <span class="k">def</span> <span class="n">perfSensitiveMethod</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">perfSensitiveMethod</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
     <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000000</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nf">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000000</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">field1</span>  <span class="c1">// This might invoke a virtual method call
 </span>      <span class="n">field2</span>  <span class="c1">// This is just a field access
 </span>      <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -1144,12 +1148,12 @@ com.databricks  // or org.apache.spark if you are working on spark
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 以下默认实现无法在 Java 中使用
 </span><span class="k">trait</span> <span class="nc">Listener</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">onTermination</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+  <span class="k">def</span> <span class="nf">onTermination</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="c1">// 可以在 Java 中使用
 </span><span class="k">abstract</span> <span class="k">class</span> <span class="nc">Listener</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">onTermination</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+  <span class="k">def</span> <span class="nf">onTermination</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -1162,11 +1166,11 @@ com.databricks  // or org.apache.spark if you are working on spark
 <p>不要使用默认参数值，通过重载方法来代替。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 打破了与 Java 的互操作性
-</span><span class="k">def</span> <span class="n">sample</span><span class="o">(</span><span class="n">ratio</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">withReplacement</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+</span><span class="k">def</span> <span class="nf">sample</span><span class="o">(</span><span class="n">ratio</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">withReplacement</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 
 <span class="c1">// 以下方法是 work 的
-</span><span class="k">def</span> <span class="n">sample</span><span class="o">(</span><span class="n">ratio</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">withReplacement</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">)</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
-<span class="k">def</span> <span class="n">sample</span><span class="o">(</span><span class="n">ratio</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="n">sample</span><span class="o">(</span><span class="n">ratio</span><span class="o">,</span> <span class="n">withReplacement</span> <span class="k">=</span> <span class="kc">false</span><span class="o">)</span>
+</span><span class="k">def</span> <span class="nf">sample</span><span class="o">(</span><span class="n">ratio</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">withReplacement</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">)</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="k">def</span> <span class="nf">sample</span><span class="o">(</span><span class="n">ratio</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="nf">sample</span><span class="o">(</span><span class="n">ratio</span><span class="o">,</span> <span class="n">withReplacement</span> <span class="k">=</span> <span class="kc">false</span><span class="o">)</span>
 </code></pre></div></div>
 
 <h3 id="多参数列表-1"><a name="java-multi-param-list">多参数列表</a></h3>
@@ -1179,8 +1183,8 @@ com.databricks  // or org.apache.spark if you are working on spark
   <li>
     <p>为可变参数方法添加 <code class="highlighter-rouge">@scala.annotation.varargs</code> 注解，以确保它能在 Java 中使用。Scala 编译器会生成两个方法，一个给 Scala 使用（字节码参数是一个 Seq），另一个给 Java 使用（字节码参数是一个数组）。</p>
 
-    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@scala</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="n">varargs</span>
-<span class="k">def</span> <span class="n">select</span><span class="o">(</span><span class="n">exprs</span><span class="k">:</span> <span class="kt">Expression*</span><span class="o">)</span><span class="k">:</span> <span class="kt">DataFrame</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@scala</span><span class="o">.</span><span class="py">annotation</span><span class="o">.</span><span class="py">varargs</span>
+<span class="k">def</span> <span class="nf">select</span><span class="o">(</span><span class="n">exprs</span><span class="k">:</span> <span class="kt">Expression*</span><span class="o">)</span><span class="k">:</span> <span class="kt">DataFrame</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 </code></pre></div>    </div>
   </li>
   <li>
@@ -1190,26 +1194,26 @@ com.databricks  // or org.apache.spark if you are working on spark
     <p>重载变参方法时要小心，用另一个类型去重载变参方法会破坏源码的兼容性。</p>
 
     <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Database</span> <span class="o">{</span>
-  <span class="nd">@scala</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="n">varargs</span>
-  <span class="k">def</span> <span class="n">remove</span><span class="o">(</span><span class="n">elems</span><span class="k">:</span> <span class="kt">String*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">...</span>
+  <span class="nd">@scala</span><span class="o">.</span><span class="py">annotation</span><span class="o">.</span><span class="py">varargs</span>
+  <span class="k">def</span> <span class="nf">remove</span><span class="o">(</span><span class="n">elems</span><span class="k">:</span> <span class="kt">String*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">...</span>
 
   <span class="c1">// 当调用无参的 remove 方法时会出问题。
-</span>  <span class="nd">@scala</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="n">varargs</span>
-  <span class="k">def</span> <span class="n">remove</span><span class="o">(</span><span class="n">elems</span><span class="k">:</span> <span class="kt">People*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">...</span>
+</span>  <span class="nd">@scala</span><span class="o">.</span><span class="py">annotation</span><span class="o">.</span><span class="py">varargs</span>
+  <span class="k">def</span> <span class="nf">remove</span><span class="o">(</span><span class="n">elems</span><span class="k">:</span> <span class="kt">People*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">...</span>
 <span class="o">}</span>
 
 <span class="c1">// remove 方法有歧义，因此编译不过。
-</span><span class="k">new</span> <span class="nc">Database</span><span class="o">().</span><span class="n">remove</span><span class="o">()</span>
+</span><span class="k">new</span> <span class="nc">Database</span><span class="o">().</span><span class="py">remove</span><span class="o">()</span>
 </code></pre></div>    </div>
     <p>一种解决方法是，在可变参数前显式地定义第一个参数：</p>
 
     <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Database</span> <span class="o">{</span>
-  <span class="nd">@scala</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="n">varargs</span>
-  <span class="k">def</span> <span class="n">remove</span><span class="o">(</span><span class="n">elems</span><span class="k">:</span> <span class="kt">String*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">...</span>
+  <span class="nd">@scala</span><span class="o">.</span><span class="py">annotation</span><span class="o">.</span><span class="py">varargs</span>
+  <span class="k">def</span> <span class="nf">remove</span><span class="o">(</span><span class="n">elems</span><span class="k">:</span> <span class="kt">String*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">...</span>
 
   <span class="c1">// 以下重载是 OK 的。
-</span>  <span class="nd">@scala</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="n">varargs</span>
-  <span class="k">def</span> <span class="n">remove</span><span class="o">(</span><span class="n">elem</span><span class="k">:</span> <span class="kt">People</span><span class="o">,</span> <span class="n">elems</span><span class="k">:</span> <span class="kt">People*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">...</span>
+</span>  <span class="nd">@scala</span><span class="o">.</span><span class="py">annotation</span><span class="o">.</span><span class="py">varargs</span>
+  <span class="k">def</span> <span class="nf">remove</span><span class="o">(</span><span class="n">elem</span><span class="k">:</span> <span class="kt">People</span><span class="o">,</span> <span class="n">elems</span><span class="k">:</span> <span class="kt">People*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">...</span>
 <span class="o">}</span>
 </code></pre></div>    </div>
   </li>
@@ -1221,7 +1225,7 @@ com.databricks  // or org.apache.spark if you are working on spark
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">JavaFriendlyAPI</span> <span class="o">{</span>
   <span class="c1">// 以下定义对 Java 是不友好的，因为方法中包含了一个隐式参数（ClassTag）。
-</span>  <span class="k">def</span> <span class="n">convertTo</span><span class="o">[</span><span class="kt">T:</span> <span class="kt">ClassTag</span><span class="o">]()</span><span class="k">:</span> <span class="kt">T</span>
+</span>  <span class="k">def</span> <span class="nf">convertTo</span><span class="o">[</span><span class="kt">T:</span> <span class="kt">ClassTag</span><span class="o">]()</span><span class="k">:</span> <span class="kt">T</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -1247,19 +1251,19 @@ com.databricks  // or org.apache.spark if you are working on spark
     <p>伴生对象里的方法会被自动转成伴生类里的静态方法，除非方法名有冲突。确保静态方法正确生成的最好方式是用 Java 写一个测试文件，然后调用生成的静态方法。</p>
 
     <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Foo</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">method2</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+  <span class="k">def</span> <span class="nf">method2</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="k">object</span> <span class="nc">Foo</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">method1</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>  <span class="c1">// 静态方法 Foo.method1 会被创建（字节码）
-</span>  <span class="k">def</span> <span class="n">method2</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>  <span class="c1">// 静态方法 Foo.method2 不会被创建
+  <span class="k">def</span> <span class="nf">method1</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>  <span class="c1">// 静态方法 Foo.method1 会被创建（字节码）
+</span>  <span class="k">def</span> <span class="nf">method2</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>  <span class="c1">// 静态方法 Foo.method2 不会被创建
 </span><span class="o">}</span>
 
 <span class="c1">// FooJavaTest.java (in test/scala/com/databricks/...)
 </span><span class="n">public</span> <span class="k">class</span> <span class="nc">FooJavaTest</span> <span class="o">{</span>
-  <span class="n">public</span> <span class="n">static</span> <span class="n">compileTest</span><span class="o">()</span> <span class="o">{</span>
-    <span class="nc">Foo</span><span class="o">.</span><span class="n">method1</span><span class="o">();</span>  <span class="c1">// 正常编译
-</span>    <span class="nc">Foo</span><span class="o">.</span><span class="n">method2</span><span class="o">();</span>  <span class="c1">// 编译失败，因为 method2 并没有生成
+  <span class="n">public</span> <span class="n">static</span> <span class="nf">compileTest</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nv">Foo</span><span class="o">.</span><span class="py">method1</span><span class="o">();</span>  <span class="c1">// 正常编译
+</span>    <span class="nv">Foo</span><span class="o">.</span><span class="py">method2</span><span class="o">();</span>  <span class="c1">// 编译失败，因为 method2 并没有生成
 </span>  <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div>    </div>
@@ -1270,7 +1274,7 @@ com.databricks  // or org.apache.spark if you are working on spark
     <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">case</span> <span class="k">object</span> <span class="nc">MyClass</span>
 
 <span class="c1">// Test.java
-</span><span class="k">if</span> <span class="o">(</span><span class="nc">MyClass</span><span class="n">$</span><span class="o">.</span><span class="nc">MODULE</span> <span class="n">instanceof</span> <span class="nc">MyClass</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="nf">if</span> <span class="o">(</span><span class="nv">MyClass$</span><span class="o">.</span><span class="py">MODULE</span> <span class="n">instanceof</span> <span class="nc">MyClass</span><span class="o">)</span> <span class="o">{</span>
   <span class="c1">// 上述条件始终为 false
 </span><span class="o">}</span>
 </code></pre></div>    </div>
@@ -1535,7 +1539,7 @@ com.databricks  // or org.apache.spark if you are working on spark
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -1707,7 +1711,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

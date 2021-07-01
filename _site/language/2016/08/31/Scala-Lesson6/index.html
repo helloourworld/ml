@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -231,27 +235,27 @@
 以下实例演示了数组的创建，初始化等处理过程：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Arrays</span><span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">var</span> <span class="n">myList</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.9</span><span class="o">,</span> <span class="mf">2.9</span><span class="o">,</span> <span class="mf">3.4</span><span class="o">,</span> <span class="mf">3.5</span><span class="o">)</span>
 
         <span class="c1">// 输出所有数组元素
-</span>        <span class="k">for</span> <span class="o">(</span><span class="n">x</span> <span class="k">&lt;-</span> <span class="n">myList</span><span class="o">){</span>
-            <span class="n">println</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+</span>        <span class="nf">for</span> <span class="o">(</span><span class="n">x</span> <span class="k">&lt;-</span> <span class="n">myList</span><span class="o">){</span>
+            <span class="nf">println</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
         <span class="o">}</span>
 
         <span class="c1">// 计算所有数组元素的和
 </span>        <span class="k">var</span> <span class="n">total</span> <span class="k">=</span> <span class="mf">0.0</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">to</span> <span class="o">(</span><span class="n">myList</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">total</span> <span class="o">+=</span> <span class="n">myList</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+        <span class="nf">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="nf">to</span> <span class="o">(</span><span class="nv">myList</span><span class="o">.</span><span class="py">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="nf">myList</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
         <span class="o">}</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"sum is: "</span> <span class="o">+</span> <span class="n">total</span><span class="o">)</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"sum is: "</span> <span class="o">+</span> <span class="n">total</span><span class="o">)</span>
 
         <span class="c1">// 查找数组中最大的元素
-</span>        <span class="k">var</span> <span class="n">max</span> <span class="k">=</span> <span class="n">myList</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="n">to</span> <span class="o">(</span><span class="n">myList</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">))</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">myList</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">)</span> <span class="n">max</span> <span class="k">=</span> <span class="n">myList</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span>        <span class="k">var</span> <span class="n">max</span> <span class="k">=</span> <span class="nf">myList</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+        <span class="nf">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="nf">to</span> <span class="o">(</span><span class="nv">myList</span><span class="o">.</span><span class="py">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">))</span> <span class="o">{</span>
+            <span class="nf">if</span> <span class="o">(</span><span class="nf">myList</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">)</span> <span class="n">max</span> <span class="k">=</span> <span class="nf">myList</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
         <span class="o">}</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"max is: "</span> <span class="o">+</span> <span class="n">max</span><span class="o">)</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"max is: "</span> <span class="o">+</span> <span class="n">max</span><span class="o">)</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -269,22 +273,22 @@
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">Array._</span>
 
 <span class="k">object</span> <span class="nc">Arrays2</span><span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">var</span> <span class="n">myMatrix</span> <span class="k">=</span> <span class="n">ofDim</span><span class="o">[</span><span class="kt">Int</span><span class="o">](</span><span class="mi">3</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
 
         <span class="c1">//创建矩阵
-</span>        <span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">to</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">for</span> <span class="o">(</span><span class="n">j</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">to</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">myMatrix</span><span class="o">(</span><span class="n">i</span><span class="o">)(</span><span class="n">j</span><span class="o">)</span> <span class="k">=</span> <span class="n">j</span><span class="o">;</span>
+</span>        <span class="nf">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">to</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nf">for</span> <span class="o">(</span><span class="n">j</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">to</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nf">myMatrix</span><span class="o">(</span><span class="n">i</span><span class="o">)(</span><span class="n">j</span><span class="o">)</span> <span class="k">=</span> <span class="n">j</span><span class="o">;</span>
             <span class="o">}</span>
         <span class="o">}</span>
 
         <span class="c1">//打印二维阵列
-</span>        <span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">to</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">for</span> <span class="o">(</span><span class="n">j</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">to</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">print</span><span class="o">(</span><span class="s">" "</span> <span class="o">+</span> <span class="n">myMatrix</span><span class="o">(</span><span class="n">i</span><span class="o">)(</span><span class="n">j</span><span class="o">));</span>
+</span>        <span class="nf">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">to</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nf">for</span> <span class="o">(</span><span class="n">j</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">to</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nf">print</span><span class="o">(</span><span class="s">" "</span> <span class="o">+</span> <span class="nf">myMatrix</span><span class="o">(</span><span class="n">i</span><span class="o">)(</span><span class="n">j</span><span class="o">));</span>
             <span class="o">}</span>
-            <span class="n">println</span><span class="o">();</span>
+            <span class="nf">println</span><span class="o">();</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -297,15 +301,15 @@
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">Array._</span>
 
 <span class="k">object</span> <span class="nc">Arrays3</span><span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">var</span> <span class="n">myList1</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.9</span><span class="o">,</span> <span class="mf">2.9</span><span class="o">,</span> <span class="mf">3.4</span><span class="o">,</span> <span class="mf">3.5</span><span class="o">)</span>
         <span class="k">var</span> <span class="n">myList2</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">8.9</span><span class="o">,</span> <span class="mf">0.4</span><span class="o">,</span> <span class="mf">1.5</span><span class="o">,</span> <span class="mf">7.9</span><span class="o">)</span>
 
-        <span class="k">var</span> <span class="n">myList3</span> <span class="k">=</span> <span class="n">concat</span><span class="o">(</span><span class="n">myList1</span><span class="o">,</span> <span class="n">myList2</span><span class="o">)</span>
+        <span class="k">var</span> <span class="n">myList3</span> <span class="k">=</span> <span class="nf">concat</span><span class="o">(</span><span class="n">myList1</span><span class="o">,</span> <span class="n">myList2</span><span class="o">)</span>
 
         <span class="c1">//输出所有元素
-</span>        <span class="k">for</span> <span class="o">(</span><span class="n">x</span> <span class="k">&lt;-</span> <span class="n">myList3</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">println</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+</span>        <span class="nf">for</span> <span class="o">(</span><span class="n">x</span> <span class="k">&lt;-</span> <span class="n">myList3</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nf">println</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -318,20 +322,20 @@
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">Array._</span>
 
 <span class="k">object</span> <span class="nc">Arrays4</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="k">var</span> <span class="n">myList1</span> <span class="k">=</span> <span class="n">range</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
-      <span class="k">var</span> <span class="n">myList2</span> <span class="k">=</span> <span class="n">range</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span><span class="mi">20</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="k">var</span> <span class="n">myList1</span> <span class="k">=</span> <span class="nf">range</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+      <span class="k">var</span> <span class="n">myList2</span> <span class="k">=</span> <span class="nf">range</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span><span class="mi">20</span><span class="o">)</span>
 
       <span class="c1">// 输出所有数组元素
-</span>      <span class="k">for</span> <span class="o">(</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="n">myList1</span> <span class="o">)</span> <span class="o">{</span>
-         <span class="n">print</span><span class="o">(</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">x</span> <span class="o">)</span>
+</span>      <span class="nf">for</span> <span class="o">(</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="n">myList1</span> <span class="o">)</span> <span class="o">{</span>
+         <span class="nf">print</span><span class="o">(</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">x</span> <span class="o">)</span>
       <span class="o">}</span>
-      <span class="n">println</span><span class="o">()</span>
+      <span class="nf">println</span><span class="o">()</span>
 
-      <span class="k">for</span> <span class="o">(</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="n">myList2</span> <span class="o">)</span> <span class="o">{</span>
-         <span class="n">print</span><span class="o">(</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">x</span> <span class="o">)</span>
+      <span class="nf">for</span> <span class="o">(</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="n">myList2</span> <span class="o">)</span> <span class="o">{</span>
+         <span class="nf">print</span><span class="o">(</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">x</span> <span class="o">)</span>
       <span class="o">}</span>
-      <span class="n">println</span><span class="o">()</span>
+      <span class="nf">println</span><span class="o">()</span>
    <span class="o">}</span>
 <span class="o">}</span>
 
@@ -636,7 +640,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -808,7 +812,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

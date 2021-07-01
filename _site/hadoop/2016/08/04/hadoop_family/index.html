@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -478,11 +482,11 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
 
 <h5 id="1221-演示wordcount">1.2.2.1 演示WordCount</h5>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">file1</span><span class="o">.</span><span class="n">txt</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="nv">file1</span><span class="o">.</span><span class="py">txt</span>
 <span class="nc">Hello</span> <span class="nc">World</span>
-<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">file2</span><span class="o">.</span><span class="n">txt</span>
+<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="nv">file2</span><span class="o">.</span><span class="py">txt</span>
 <span class="nc">Hello</span> <span class="nc">Hadoop</span>
-<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">duplicate</span><span class="o">.</span><span class="n">txt</span>
+<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">hdfs</span> <span class="n">dfs</span> <span class="o">-</span><span class="n">cat</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="nv">duplicate</span><span class="o">.</span><span class="py">txt</span>
 <span class="mi">2</span>
 <span class="mi">8</span>
 <span class="mi">8</span>
@@ -504,7 +508,7 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
 <span class="nc">Hadoop</span>	<span class="mi">1</span>
 <span class="nc">Hello</span>	<span class="mi">2</span>
 <span class="nc">World</span>	<span class="mi">1</span>
-<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">words</span><span class="o">]</span><span class="n">$</span> <span class="n">hadoop</span> <span class="n">jar</span> <span class="n">wc</span><span class="o">.</span><span class="n">jar</span> <span class="nc">WordCount</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">output2</span>
+<span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">words</span><span class="o">]</span><span class="n">$</span> <span class="n">hadoop</span> <span class="n">jar</span> <span class="nv">wc</span><span class="o">.</span><span class="py">jar</span> <span class="nc">WordCount</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">input</span><span class="o">/</span> <span class="o">/</span><span class="n">words</span><span class="o">/</span><span class="n">output2</span>
 <span class="mi">16</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">11</span> <span class="mi">21</span><span class="k">:</span><span class="err">48</span><span class="kt">:</span><span class="err">27</span> <span class="kt">INFO</span> <span class="kt">client.RMProxy:</span> <span class="kt">Connecting</span> <span class="kt">to</span> <span class="kt">ResourceManager</span> <span class="kt">at</span> <span class="kt">NN01.HadoopVM/</span><span class="err">192</span><span class="kt">.</span><span class="err">168</span><span class="kt">.</span><span class="err">71</span><span class="kt">.</span><span class="err">128</span><span class="kt">:</span><span class="err">8032</span>
 <span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">29</span> <span class="kt">WARN</span> <span class="kt">mapreduce.JobResourceUploader:</span> <span class="kt">Hadoop</span> <span class="kt">command-line</span> <span class="kt">option</span> <span class="kt">parsing</span> <span class="kt">not</span> <span class="kt">performed.</span> <span class="kt">Implement</span> <span class="kt">the</span> <span class="kt">Tool</span> <span class="kt">interface</span> <span class="kt">and</span> <span class="kt">execute</span> <span class="kt">your</span> <span class="kt">application</span> <span class="kt">with</span> <span class="kt">ToolRunner</span> <span class="kt">to</span> <span class="kt">remedy</span> <span class="kt">this.</span>
 <span class="err">16</span><span class="kt">/</span><span class="err">09</span><span class="kt">/</span><span class="err">11</span> <span class="err">21</span><span class="kt">:</span><span class="err">48</span><span class="kt">:</span><span class="err">31</span> <span class="kt">INFO</span> <span class="kt">input.FileInputFormat:</span> <span class="kt">Total</span> <span class="kt">input</span> <span class="kt">paths</span> <span class="kt">to</span> <span class="kt">process</span> <span class="kt">:</span> <span class="err">3</span>
@@ -534,10 +538,10 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
 		<span class="nc">Launched</span> <span class="n">map</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">3</span>
 		<span class="nc">Launched</span> <span class="n">reduce</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">1</span>
 		<span class="nc">Data</span><span class="o">-</span><span class="n">local</span> <span class="n">map</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">3</span>
-		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">maps</span> <span class="n">in</span> <span class="n">occupied</span> <span class="n">slots</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">24633</span>
-		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">reduces</span> <span class="n">in</span> <span class="n">occupied</span> <span class="n">slots</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">27722</span>
-		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">map</span> <span class="n">tasks</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">24633</span>
-		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">reduce</span> <span class="n">tasks</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">27722</span>
+		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">maps</span> <span class="n">in</span> <span class="n">occupied</span> <span class="nf">slots</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">24633</span>
+		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">reduces</span> <span class="n">in</span> <span class="n">occupied</span> <span class="nf">slots</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">27722</span>
+		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">map</span> <span class="nf">tasks</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">24633</span>
+		<span class="nc">Total</span> <span class="n">time</span> <span class="n">spent</span> <span class="n">by</span> <span class="n">all</span> <span class="n">reduce</span> <span class="nf">tasks</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">27722</span>
 		<span class="nc">Total</span> <span class="n">vcore</span><span class="o">-</span><span class="n">milliseconds</span> <span class="n">taken</span> <span class="n">by</span> <span class="n">all</span> <span class="n">map</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">24633</span>
 		<span class="nc">Total</span> <span class="n">vcore</span><span class="o">-</span><span class="n">milliseconds</span> <span class="n">taken</span> <span class="n">by</span> <span class="n">all</span> <span class="n">reduce</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">27722</span>
 		<span class="nc">Total</span> <span class="n">megabyte</span><span class="o">-</span><span class="n">milliseconds</span> <span class="n">taken</span> <span class="n">by</span> <span class="n">all</span> <span class="n">map</span> <span class="n">tasks</span><span class="k">=</span><span class="mi">25224192</span>
@@ -558,11 +562,11 @@ The NameNode and DataNode are pieces of software designed to run on commodity ma
 		<span class="nc">Shuffled</span> <span class="nc">Maps</span> <span class="k">=</span><span class="mi">3</span>
 		<span class="nc">Failed</span> <span class="nc">Shuffles</span><span class="k">=</span><span class="mi">0</span>
 		<span class="nc">Merged</span> <span class="nc">Map</span> <span class="n">outputs</span><span class="k">=</span><span class="mi">3</span>
-		<span class="nc">GC</span> <span class="n">time</span> <span class="n">elapsed</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">684</span>
-		<span class="nc">CPU</span> <span class="n">time</span> <span class="n">spent</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">3040</span>
-		<span class="nc">Physical</span> <span class="n">memory</span> <span class="o">(</span><span class="n">bytes</span><span class="o">)</span> <span class="n">snapshot</span><span class="k">=</span><span class="mi">869154816</span>
-		<span class="nc">Virtual</span> <span class="n">memory</span> <span class="o">(</span><span class="n">bytes</span><span class="o">)</span> <span class="n">snapshot</span><span class="k">=</span><span class="mi">8342061056</span>
-		<span class="nc">Total</span> <span class="n">committed</span> <span class="n">heap</span> <span class="n">usage</span> <span class="o">(</span><span class="n">bytes</span><span class="o">)</span><span class="k">=</span><span class="mi">639631360</span>
+		<span class="nc">GC</span> <span class="n">time</span> <span class="nf">elapsed</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">684</span>
+		<span class="nc">CPU</span> <span class="n">time</span> <span class="nf">spent</span> <span class="o">(</span><span class="n">ms</span><span class="o">)</span><span class="k">=</span><span class="mi">3040</span>
+		<span class="nc">Physical</span> <span class="nf">memory</span> <span class="o">(</span><span class="n">bytes</span><span class="o">)</span> <span class="n">snapshot</span><span class="k">=</span><span class="mi">869154816</span>
+		<span class="nc">Virtual</span> <span class="nf">memory</span> <span class="o">(</span><span class="n">bytes</span><span class="o">)</span> <span class="n">snapshot</span><span class="k">=</span><span class="mi">8342061056</span>
+		<span class="nc">Total</span> <span class="n">committed</span> <span class="n">heap</span> <span class="nf">usage</span> <span class="o">(</span><span class="n">bytes</span><span class="o">)</span><span class="k">=</span><span class="mi">639631360</span>
 	<span class="nc">Shuffle</span> <span class="nc">Errors</span>
 		<span class="nc">BAD_ID</span><span class="k">=</span><span class="mi">0</span>
 		<span class="nc">CONNECTION</span><span class="k">=</span><span class="mi">0</span>
@@ -1513,28 +1517,28 @@ Lines with a: 4, Lines with b: 2
 
 <p>Scala脚本</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">#</span> <span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">vim</span> <span class="n">pi</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">scala</span><span class="o">/</span><span class="nc">Pi</span><span class="o">.</span><span class="n">scala</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">#</span> <span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">~</span><span class="o">]</span><span class="n">$</span> <span class="n">vim</span> <span class="n">pi</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">scala</span><span class="o">/</span><span class="nv">Pi</span><span class="o">.</span><span class="py">scala</span>
 <span class="k">import</span> <span class="nn">scala.math.random</span>
 <span class="k">import</span> <span class="nn">org.apache.spark._</span>
 
 <span class="cm">/** Computes an approximation to Pi */</span>
 
 <span class="k">object</span> <span class="nc">SparkPi</span><span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">conf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="o">().</span><span class="n">setAppName</span><span class="o">(</span><span class="s">"Spark Pi"</span><span class="o">)</span>
-        <span class="k">val</span> <span class="n">spark</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkContext</span><span class="o">(</span><span class="n">conf</span><span class="o">)</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">conf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="o">().</span><span class="py">setAppName</span><span class="o">(</span><span class="s">"Spark Pi"</span><span class="o">)</span>
+        <span class="k">val</span> <span class="nv">spark</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkContext</span><span class="o">(</span><span class="n">conf</span><span class="o">)</span>
 
-        <span class="k">val</span> <span class="n">slices</span> <span class="k">=</span> <span class="k">if</span><span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span><span class="mi">0</span><span class="o">)</span> <span class="n">args</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">toInt</span> <span class="k">else</span> <span class="mi">2</span>
-        <span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="mi">100000</span> <span class="o">*</span> <span class="n">slices</span>
+        <span class="k">val</span> <span class="nv">slices</span> <span class="k">=</span> <span class="nf">if</span><span class="o">(</span><span class="nv">args</span><span class="o">.</span><span class="py">length</span> <span class="o">&gt;</span><span class="mi">0</span><span class="o">)</span> <span class="nf">args</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="py">toInt</span> <span class="k">else</span> <span class="mi">2</span>
+        <span class="k">val</span> <span class="nv">n</span> <span class="k">=</span> <span class="mi">100000</span> <span class="o">*</span> <span class="n">slices</span>
 
-        <span class="k">val</span> <span class="n">count</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">parallelize</span><span class="o">(</span><span class="mi">1</span> <span class="n">to</span> <span class="n">n</span><span class="o">,</span> <span class="n">slices</span><span class="o">).</span><span class="n">map</span><span class="o">{</span><span class="n">i</span> <span class="k">=&gt;</span>
-            <span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="n">random</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
-            <span class="k">val</span> <span class="n">y</span> <span class="k">=</span> <span class="n">random</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
-        <span class="o">}.</span><span class="n">reduce</span><span class="o">(</span><span class="k">_</span> <span class="o">+</span> <span class="k">_</span><span class="o">)</span>
+        <span class="k">val</span> <span class="nv">count</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">parallelize</span><span class="o">(</span><span class="mi">1</span> <span class="n">to</span> <span class="n">n</span><span class="o">,</span> <span class="n">slices</span><span class="o">).</span><span class="py">map</span><span class="o">{</span><span class="n">i</span> <span class="k">=&gt;</span>
+            <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="n">random</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">val</span> <span class="nv">y</span> <span class="k">=</span> <span class="n">random</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="o">}.</span><span class="py">reduce</span><span class="o">(</span><span class="k">_</span> <span class="o">+</span> <span class="k">_</span><span class="o">)</span>
 
-        <span class="n">println</span><span class="o">(</span><span class="s">"Pi is roughly: "</span> <span class="o">+</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">count</span> <span class="o">/</span> <span class="n">n</span><span class="o">)</span>
-        <span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="o">()</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"Pi is roughly: "</span> <span class="o">+</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">count</span> <span class="o">/</span> <span class="n">n</span><span class="o">)</span>
+        <span class="nv">spark</span><span class="o">.</span><span class="py">stop</span><span class="o">()</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -1581,7 +1585,7 @@ Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM 
 
 <p>提交,我们就可以将生成的 jar 包通过 spark-submit 提交到 Spark 中运行了，命令如下：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">pi</span><span class="o">]</span><span class="n">$</span> <span class="n">spark</span><span class="o">-</span><span class="n">submit</span> <span class="o">--</span><span class="k">class</span> <span class="err">"</span><span class="nc">SparkPi</span><span class="err">"</span> <span class="o">~/</span><span class="n">pi</span><span class="o">/</span><span class="n">target</span><span class="o">/</span><span class="n">scala</span><span class="o">-</span><span class="mf">2.11</span><span class="o">/</span><span class="n">spark</span><span class="o">-</span><span class="n">pi_2</span><span class="o">.</span><span class="mi">11</span><span class="o">-</span><span class="mf">1.0</span><span class="o">.</span><span class="n">jar</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="kt">hadoop@NN01</span> <span class="kt">pi</span><span class="o">]</span><span class="n">$</span> <span class="n">spark</span><span class="o">-</span><span class="n">submit</span> <span class="o">--</span><span class="k">class</span> <span class="err">"</span><span class="nc">SparkPi</span><span class="err">"</span> <span class="o">~/</span><span class="n">pi</span><span class="o">/</span><span class="n">target</span><span class="o">/</span><span class="n">scala</span><span class="o">-</span><span class="mf">2.11</span><span class="o">/</span><span class="n">spark</span><span class="o">-</span><span class="n">pi_2</span><span class="o">.</span><span class="mi">11</span><span class="o">-</span><span class="mf">1.0</span><span class="o">.</span><span class="py">jar</span>
 <span class="nc">Pi</span> <span class="n">is</span> <span class="n">roughly</span><span class="k">:</span> <span class="err">3</span><span class="kt">.</span><span class="err">13858</span>
 </code></pre></div></div>
 
@@ -2017,7 +2021,7 @@ True
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -2189,7 +2193,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

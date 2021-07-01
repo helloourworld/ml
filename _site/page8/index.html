@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -182,6 +186,27 @@
                 postlist-container
             ">
     			
+<div class="post-preview">
+    <a href="/mladvance/2016/11/17/correlations/">
+        <h2 class="post-title">
+            Spark-ML-0202-Correlations
+        </h2>
+        
+        <div class="post-content-preview">
+            相关性系数
+
+  计算两个数据集的相关性是统计中的常用操作。在MLlib中提供了计算多个数据集两两相关的方法。目前支持的相关性方法有皮尔森(Pearson)相关和斯皮尔曼(Spearman)相关。
+
+  Statistics提供方法计算数据集的相关性。根据输入的类型，两个RDD[Double]或者一个RDD[Vector]，输出将会是一个Double值或者相关性矩阵。下面是一个应用的例子。
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Big Data Memo on November 17, 2016
+    </p>
+</div>
+<hr>
+
 <div class="post-preview">
     <a href="/mladvance/2016/11/17/spark-ml-00/">
         <h2 class="post-title">
@@ -465,31 +490,6 @@ import scala._    // Wild card -- all of Scala is importe...
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/hadoop/2016/09/26/hadoop_tutorial_7/">
-        <h2 class="post-title">
-            Zeppelin安装 快速指南
-        </h2>
-        
-        <div class="post-content-preview">
-            Zeppelin Installation
-
-Stable binary package, please visit Apache Zeppelin download Page.
-
-Start Apache Zeppelin with a service manager
-
-zeppelin.server and port modify:
-
- 22 &lt;property&gt;
- 23  ...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Big Data Memo on September 26, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -675,7 +675,7 @@ zeppelin.server and port modify:
                             
                         
                             
-                                <a href="/tags/#ML" title="ML" rel="2">
+                                <a href="/tags/#ML" title="ML" rel="3">
                                     ML
                                 </a>
                             
@@ -857,7 +857,7 @@ zeppelin.server and port modify:
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

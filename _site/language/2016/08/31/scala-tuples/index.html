@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -221,12 +225,12 @@
 <p>我们可以使用 t._1 访问第一个元素， t._2 访问第二个元素，如下所示：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Tuples1</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">t</span> <span class="k">=</span> <span class="o">(</span><span class="mi">4</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">)</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">t</span> <span class="k">=</span> <span class="o">(</span><span class="mi">4</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">)</span>
 
-        <span class="k">val</span> <span class="n">sum</span> <span class="k">=</span> <span class="n">t</span><span class="o">.</span><span class="n">_1</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">_2</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">_3</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">_4</span>
+        <span class="k">val</span> <span class="nv">sum</span> <span class="k">=</span> <span class="nv">t</span><span class="o">.</span><span class="py">_1</span> <span class="o">+</span> <span class="nv">t</span><span class="o">.</span><span class="py">_2</span> <span class="o">+</span> <span class="nv">t</span><span class="o">.</span><span class="py">_3</span> <span class="o">+</span> <span class="nv">t</span><span class="o">.</span><span class="py">_4</span>
 
-        <span class="n">println</span><span class="o">(</span><span class="s">"tuples entity sum is: "</span> <span class="o">+</span> <span class="n">sum</span><span class="o">)</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"tuples entity sum is: "</span> <span class="o">+</span> <span class="n">sum</span><span class="o">)</span>
     <span class="o">}</span>
 <span class="o">}</span>
 
@@ -237,10 +241,10 @@
 <p>你可以使用 Tuple.productIterator() 方法来迭代输出元组的所有元素：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Tuples2</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">t</span> <span class="k">=</span> <span class="o">(</span><span class="mi">4</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">)</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">t</span> <span class="k">=</span> <span class="o">(</span><span class="mi">4</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">)</span>
 
-        <span class="n">t</span><span class="o">.</span><span class="n">productIterator</span><span class="o">.</span><span class="n">foreach</span><span class="o">{</span><span class="n">i</span> <span class="k">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="s">"Value of "</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">" is: "</span> <span class="o">+</span> <span class="n">i</span><span class="o">)}</span>
+        <span class="nv">t</span><span class="o">.</span><span class="py">productIterator</span><span class="o">.</span><span class="py">foreach</span><span class="o">{</span><span class="n">i</span> <span class="k">=&gt;</span> <span class="nf">println</span><span class="o">(</span><span class="s">"Value of "</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">" is: "</span> <span class="o">+</span> <span class="n">i</span><span class="o">)}</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -249,10 +253,10 @@
 <p>你可以使用 Tuple.toString() 方法将元组的所有元素组合成一个字符串，实例如下：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Tuples3</span><span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">t</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Tuple3</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"hello"</span><span class="o">,</span> <span class="nc">Console</span><span class="o">)</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">t</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Tuple3</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"hello"</span><span class="o">,</span> <span class="nc">Console</span><span class="o">)</span>
 
-        <span class="n">println</span><span class="o">(</span><span class="s">"连接后的字符串为："</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">toString</span><span class="o">())</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"连接后的字符串为："</span> <span class="o">+</span> <span class="nv">t</span><span class="o">.</span><span class="py">toString</span><span class="o">())</span>
 
     <span class="o">}</span>
 <span class="o">}</span>
@@ -262,9 +266,9 @@
 <p>你可以使用 Tuple.swap 方法来交换元组的元素。如下实例：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Tuples4</span><span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">t</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Tuple2</span><span class="o">(</span><span class="s">"www.google.com"</span><span class="o">,</span> <span class="s">"www.runoob.com"</span><span class="o">)</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"交换后的元组: "</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">swap</span><span class="o">)</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">t</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Tuple2</span><span class="o">(</span><span class="s">"www.google.com"</span><span class="o">,</span> <span class="s">"www.runoob.com"</span><span class="o">)</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"交换后的元组: "</span> <span class="o">+</span> <span class="nv">t</span><span class="o">.</span><span class="py">swap</span><span class="o">)</span>
 
     <span class="o">}</span>
 <span class="o">}</span>
@@ -502,7 +506,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -674,7 +678,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

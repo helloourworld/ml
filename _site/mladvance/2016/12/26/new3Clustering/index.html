@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -313,9 +317,9 @@
 <span class="k">import</span> <span class="nn">org.apache.spark.</span><span class="o">{</span><span class="nc">SparkConf</span><span class="o">,</span> <span class="nc">SparkContext</span><span class="o">}</span>
 
 <span class="k">object</span> <span class="nc">KMeansClusteringKChoiced</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">conf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="o">().</span><span class="n">setAppName</span><span class="o">(</span><span class="s">"KMeansClusteringKChoiced"</span><span class="o">).</span><span class="n">setMaster</span><span class="o">(</span><span class="s">"local[2]"</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">sc</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkContext</span><span class="o">(</span><span class="n">conf</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">conf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="o">().</span><span class="py">setAppName</span><span class="o">(</span><span class="s">"KMeansClusteringKChoiced"</span><span class="o">).</span><span class="py">setMaster</span><span class="o">(</span><span class="s">"local[2]"</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">sc</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkContext</span><span class="o">(</span><span class="n">conf</span><span class="o">)</span>
 
     <span class="cm">/**
       * Channel Region Fresh   Milk Grocery Frozen Detergents_Paper Delicassen
@@ -324,28 +328,28 @@
       * 2       3    6353 8808 7684    2405    3516                7844
       */</span>
 
-    <span class="k">val</span> <span class="n">rawTrainingData</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="s">"data/mllib/UCI/Wholesale_customers_data.csv"</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">rawData</span> <span class="k">=</span>
-      <span class="n">rawTrainingData</span><span class="o">.</span><span class="n">filter</span><span class="o">(!</span><span class="n">isColumnNameLine</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="n">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">rawTrainingData</span> <span class="k">=</span> <span class="nv">sc</span><span class="o">.</span><span class="py">textFile</span><span class="o">(</span><span class="s">"data/mllib/UCI/Wholesale_customers_data.csv"</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">rawData</span> <span class="k">=</span>
+      <span class="nv">rawTrainingData</span><span class="o">.</span><span class="py">filter</span><span class="o">(!</span><span class="nf">isColumnNameLine</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="py">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="o">{</span>
 
-        <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="s">","</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">trim</span><span class="o">).</span><span class="n">filter</span><span class="o">(!</span><span class="s">""</span><span class="o">.</span><span class="n">equals</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">toDouble</span><span class="o">))</span>
-      <span class="o">}).</span><span class="n">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.8</span><span class="o">,</span><span class="mf">0.2</span><span class="o">))</span>
+        <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="nv">line</span><span class="o">.</span><span class="py">split</span><span class="o">(</span><span class="s">","</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">trim</span><span class="o">).</span><span class="py">filter</span><span class="o">(!</span><span class="s">""</span><span class="o">.</span><span class="py">equals</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">toDouble</span><span class="o">))</span>
+      <span class="o">}).</span><span class="py">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.8</span><span class="o">,</span><span class="mf">0.2</span><span class="o">))</span>
 
     <span class="c1">// Cluster the data into two classes using KMeans
-</span>    <span class="k">val</span> <span class="n">parsedTrainingData</span> <span class="k">=</span> <span class="n">rawData</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">cache</span><span class="o">()</span>
-    <span class="n">println</span><span class="o">(</span><span class="s">"rawTrainingData is: "</span> <span class="o">+</span> <span class="n">rawTrainingData</span><span class="o">.</span><span class="n">count</span><span class="o">()</span> <span class="o">+</span> <span class="s">" ******* and parsedTrainingData is: "</span> <span class="o">+</span> <span class="n">parsedTrainingData</span><span class="o">.</span><span class="n">count</span><span class="o">())</span>
+</span>    <span class="k">val</span> <span class="nv">parsedTrainingData</span> <span class="k">=</span> <span class="nf">rawData</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="py">cache</span><span class="o">()</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"rawTrainingData is: "</span> <span class="o">+</span> <span class="nv">rawTrainingData</span><span class="o">.</span><span class="py">count</span><span class="o">()</span> <span class="o">+</span> <span class="s">" ******* and parsedTrainingData is: "</span> <span class="o">+</span> <span class="nv">parsedTrainingData</span><span class="o">.</span><span class="py">count</span><span class="o">())</span>
     <span class="k">var</span> <span class="n">clusterIndex</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">val</span> <span class="n">ks</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">11</span><span class="o">,</span> <span class="mi">12</span><span class="o">,</span> <span class="mi">13</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">15</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="mi">17</span><span class="o">,</span> <span class="mi">18</span><span class="o">,</span> <span class="mi">19</span><span class="o">,</span> <span class="mi">20</span><span class="o">)</span>
-    <span class="n">ks</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">cluster</span> <span class="k">=&gt;</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">model</span><span class="k">:</span> <span class="kt">KMeansModel</span> <span class="o">=</span> <span class="nc">KMeans</span><span class="o">.</span><span class="n">train</span><span class="o">(</span><span class="n">parsedTrainingData</span><span class="o">,</span> <span class="n">cluster</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
-      <span class="k">val</span> <span class="n">ssd</span> <span class="k">=</span> <span class="n">model</span><span class="o">.</span><span class="n">computeCost</span><span class="o">(</span><span class="n">parsedTrainingData</span><span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"sum of squared distances of points to their nearest center when k="</span> <span class="o">+</span> <span class="n">cluster</span> <span class="o">+</span> <span class="s">" -&gt; "</span> <span class="o">+</span> <span class="n">ssd</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">ks</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">11</span><span class="o">,</span> <span class="mi">12</span><span class="o">,</span> <span class="mi">13</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">15</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="mi">17</span><span class="o">,</span> <span class="mi">18</span><span class="o">,</span> <span class="mi">19</span><span class="o">,</span> <span class="mi">20</span><span class="o">)</span>
+    <span class="nv">ks</span><span class="o">.</span><span class="py">foreach</span><span class="o">(</span><span class="n">cluster</span> <span class="k">=&gt;</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">model</span><span class="k">:</span> <span class="kt">KMeansModel</span> <span class="o">=</span> <span class="nv">KMeans</span><span class="o">.</span><span class="py">train</span><span class="o">(</span><span class="n">parsedTrainingData</span><span class="o">,</span> <span class="n">cluster</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+      <span class="k">val</span> <span class="nv">ssd</span> <span class="k">=</span> <span class="nv">model</span><span class="o">.</span><span class="py">computeCost</span><span class="o">(</span><span class="n">parsedTrainingData</span><span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"sum of squared distances of points to their nearest center when k="</span> <span class="o">+</span> <span class="n">cluster</span> <span class="o">+</span> <span class="s">" -&gt; "</span> <span class="o">+</span> <span class="n">ssd</span><span class="o">)</span>
     <span class="o">})</span>
   <span class="o">}</span>
   <span class="k">private</span> <span class="k">def</span>
-  <span class="n">isColumnNameLine</span><span class="o">(</span><span class="n">line</span><span class="k">:</span><span class="kt">String</span><span class="o">)</span><span class="k">:</span><span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">line</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
-      <span class="n">line</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="s">"Channel"</span><span class="o">))</span> <span class="kc">true</span>
+  <span class="nf">isColumnNameLine</span><span class="o">(</span><span class="n">line</span><span class="k">:</span><span class="kt">String</span><span class="o">)</span><span class="k">:</span><span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">line</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
+      <span class="nv">line</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="s">"Channel"</span><span class="o">))</span> <span class="kc">true</span>
     <span class="k">else</span> <span class="kc">false</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -387,13 +391,13 @@
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vectors</span>
 
 <span class="k">object</span> <span class="nc">KMeansClustering</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="n">length</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"Usage:KMeansClustering rawDataFilePath numClusters numIterations runTimes"</span><span class="o">)</span>
-      <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="nv">args</span><span class="o">.</span><span class="py">length</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"Usage:KMeansClustering rawDataFilePath numClusters numIterations runTimes"</span><span class="o">)</span>
+      <span class="nv">sys</span><span class="o">.</span><span class="py">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
     <span class="o">}</span>
-    <span class="k">val</span> <span class="n">conf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="o">().</span><span class="n">setAppName</span><span class="o">(</span><span class="s">"KMeansClustering"</span><span class="o">).</span><span class="n">setMaster</span><span class="o">(</span><span class="s">"local[2]"</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">sc</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkContext</span><span class="o">(</span><span class="n">conf</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">conf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="o">().</span><span class="py">setAppName</span><span class="o">(</span><span class="s">"KMeansClustering"</span><span class="o">).</span><span class="py">setMaster</span><span class="o">(</span><span class="s">"local[2]"</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">sc</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SparkContext</span><span class="o">(</span><span class="n">conf</span><span class="o">)</span>
 
     <span class="cm">/**
       * Channel Region Fresh   Milk Grocery Frozen Detergents_Paper Delicassen
@@ -402,43 +406,43 @@
       * 2       3    6353 8808 7684    2405    3516                7844
       */</span>
 
-    <span class="k">val</span> <span class="n">rawTrainingData</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="n">args</span><span class="o">(</span><span class="mi">0</span><span class="o">))</span>
-    <span class="k">val</span> <span class="n">rawData</span> <span class="k">=</span>
-      <span class="n">rawTrainingData</span><span class="o">.</span><span class="n">filter</span><span class="o">(!</span><span class="n">isColumnNameLine</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="n">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">rawTrainingData</span> <span class="k">=</span> <span class="nv">sc</span><span class="o">.</span><span class="py">textFile</span><span class="o">(</span><span class="nf">args</span><span class="o">(</span><span class="mi">0</span><span class="o">))</span>
+    <span class="k">val</span> <span class="nv">rawData</span> <span class="k">=</span>
+      <span class="nv">rawTrainingData</span><span class="o">.</span><span class="py">filter</span><span class="o">(!</span><span class="nf">isColumnNameLine</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="py">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="o">{</span>
 
-        <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="s">","</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">trim</span><span class="o">).</span><span class="n">filter</span><span class="o">(!</span><span class="s">""</span><span class="o">.</span><span class="n">equals</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">toDouble</span><span class="o">))</span>
-      <span class="o">}).</span><span class="n">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.7</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">))</span>
+        <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="nv">line</span><span class="o">.</span><span class="py">split</span><span class="o">(</span><span class="s">","</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">trim</span><span class="o">).</span><span class="py">filter</span><span class="o">(!</span><span class="s">""</span><span class="o">.</span><span class="py">equals</span><span class="o">(</span><span class="k">_</span><span class="o">)).</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">toDouble</span><span class="o">))</span>
+      <span class="o">}).</span><span class="py">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.7</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">))</span>
 
     <span class="c1">// Cluster the data into two classes using KMeans
-</span>    <span class="k">val</span> <span class="n">parsedTrainingData</span> <span class="k">=</span> <span class="n">rawData</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">cache</span><span class="o">()</span>
+</span>    <span class="k">val</span> <span class="nv">parsedTrainingData</span> <span class="k">=</span> <span class="nf">rawData</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="py">cache</span><span class="o">()</span>
 
-    <span class="k">val</span> <span class="n">numClusters</span> <span class="k">=</span> <span class="n">args</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="n">toInt</span>
-    <span class="k">val</span> <span class="n">numIterations</span> <span class="k">=</span> <span class="n">args</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="n">toInt</span>
-    <span class="k">val</span> <span class="n">runTimes</span> <span class="k">=</span> <span class="n">args</span><span class="o">(</span><span class="mi">3</span><span class="o">).</span><span class="n">toInt</span>
+    <span class="k">val</span> <span class="nv">numClusters</span> <span class="k">=</span> <span class="nf">args</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="py">toInt</span>
+    <span class="k">val</span> <span class="nv">numIterations</span> <span class="k">=</span> <span class="nf">args</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="py">toInt</span>
+    <span class="k">val</span> <span class="nv">runTimes</span> <span class="k">=</span> <span class="nf">args</span><span class="o">(</span><span class="mi">3</span><span class="o">).</span><span class="py">toInt</span>
     <span class="k">var</span> <span class="n">clusterIndex</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">val</span> <span class="n">clusters</span><span class="k">:</span> <span class="kt">KMeansModel</span> <span class="o">=</span> <span class="nc">KMeans</span><span class="o">.</span><span class="n">train</span><span class="o">(</span><span class="n">parsedTrainingData</span><span class="o">,</span> <span class="n">numClusters</span><span class="o">,</span> <span class="n">numIterations</span><span class="o">,</span> <span class="n">runTimes</span><span class="o">)</span>
-    <span class="n">println</span><span class="o">(</span><span class="s">"Cluster Number:"</span> <span class="o">+</span> <span class="n">clusters</span><span class="o">.</span><span class="n">clusterCenters</span><span class="o">.</span><span class="n">length</span><span class="o">)</span>
-    <span class="n">println</span><span class="o">(</span><span class="s">"Cluster Centers Information Overview:"</span><span class="o">)</span>
-    <span class="n">clusters</span><span class="o">.</span><span class="n">clusterCenters</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span>
+    <span class="k">val</span> <span class="nv">clusters</span><span class="k">:</span> <span class="kt">KMeansModel</span> <span class="o">=</span> <span class="nv">KMeans</span><span class="o">.</span><span class="py">train</span><span class="o">(</span><span class="n">parsedTrainingData</span><span class="o">,</span> <span class="n">numClusters</span><span class="o">,</span> <span class="n">numIterations</span><span class="o">,</span> <span class="n">runTimes</span><span class="o">)</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"Cluster Number:"</span> <span class="o">+</span> <span class="nv">clusters</span><span class="o">.</span><span class="py">clusterCenters</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"Cluster Centers Information Overview:"</span><span class="o">)</span>
+    <span class="nv">clusters</span><span class="o">.</span><span class="py">clusterCenters</span><span class="o">.</span><span class="py">foreach</span><span class="o">(</span>
       <span class="n">x</span> <span class="k">=&gt;</span> <span class="o">{</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"Center Point of Cluster "</span> <span class="o">+</span> <span class="n">clusterIndex</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="n">x</span><span class="o">)</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"Center Point of Cluster "</span> <span class="o">+</span> <span class="n">clusterIndex</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="n">x</span><span class="o">)</span>
         <span class="n">clusterIndex</span> <span class="o">+=</span> <span class="mi">1</span>
       <span class="o">})</span>
 
     <span class="c1">//begin to check which cluster each test data belongs to based on the clustering result
-</span>    <span class="k">val</span> <span class="n">parsedTestData</span> <span class="k">=</span> <span class="n">rawData</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
-    <span class="n">parsedTestData</span><span class="o">.</span><span class="n">collect</span><span class="o">().</span><span class="n">foreach</span><span class="o">(</span><span class="n">testDataLine</span> <span class="k">=&gt;</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">predictedClusterIndex</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">clusters</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">testDataLine</span><span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"The data "</span> <span class="o">+</span> <span class="n">testDataLine</span><span class="o">.</span><span class="n">toString</span> <span class="o">+</span> <span class="s">" belongs to cluster "</span> <span class="o">+</span> <span class="n">predictedClusterIndex</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">parsedTestData</span> <span class="k">=</span> <span class="nf">rawData</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+    <span class="nv">parsedTestData</span><span class="o">.</span><span class="py">collect</span><span class="o">().</span><span class="py">foreach</span><span class="o">(</span><span class="n">testDataLine</span> <span class="k">=&gt;</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">predictedClusterIndex</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">clusters</span><span class="o">.</span><span class="py">predict</span><span class="o">(</span><span class="n">testDataLine</span><span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"The data "</span> <span class="o">+</span> <span class="nv">testDataLine</span><span class="o">.</span><span class="py">toString</span> <span class="o">+</span> <span class="s">" belongs to cluster "</span> <span class="o">+</span> <span class="n">predictedClusterIndex</span><span class="o">)</span>
     <span class="o">})</span>
 
-    <span class="n">println</span><span class="o">(</span><span class="s">"Spark MLlib K-means clustering test finished."</span><span class="o">)</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"Spark MLlib K-means clustering test finished."</span><span class="o">)</span>
   <span class="o">}</span>
 
   <span class="k">private</span> <span class="k">def</span>
-  <span class="n">isColumnNameLine</span><span class="o">(</span><span class="n">line</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">line</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
-      <span class="n">line</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="s">"Channel"</span><span class="o">))</span> <span class="kc">true</span>
+  <span class="nf">isColumnNameLine</span><span class="o">(</span><span class="n">line</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">line</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
+      <span class="nv">line</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="s">"Channel"</span><span class="o">))</span> <span class="kc">true</span>
     <span class="k">else</span> <span class="kc">false</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -747,7 +751,7 @@ object KMeansDF {
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -919,7 +923,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

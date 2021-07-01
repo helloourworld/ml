@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -205,11 +209,11 @@
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.util.matching.Regex</span>
 
 <span class="k">object</span> <span class="nc">RegExp1</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">pattern</span> <span class="k">=</span> <span class="s">"Scala"</span><span class="o">.</span><span class="n">r</span>
-        <span class="k">val</span> <span class="n">str</span> <span class="k">=</span> <span class="s">"Scala is Scalable and Cool"</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">pattern</span> <span class="k">=</span> <span class="s">"Scala"</span><span class="o">.</span><span class="py">r</span>
+        <span class="k">val</span> <span class="nv">str</span> <span class="k">=</span> <span class="s">"Scala is Scalable and Cool"</span>
 
-        <span class="n">println</span><span class="o">(</span><span class="n">pattern</span> <span class="n">findFirstIn</span> <span class="n">str</span><span class="o">)</span>
+        <span class="nf">println</span><span class="o">(</span><span class="n">pattern</span> <span class="n">findFirstIn</span> <span class="n">str</span><span class="o">)</span>
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="nc">Some</span><span class="o">(</span><span class="nc">Scala</span><span class="o">)</span>
@@ -225,11 +229,11 @@
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.util.matching.Regex</span>
 
 <span class="k">object</span> <span class="nc">RegExp2</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">pattern</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Regex</span><span class="o">(</span><span class="s">"(S|s)cala"</span><span class="o">)</span> <span class="c1">// 匹配大小写
-</span>        <span class="k">val</span> <span class="n">str</span> <span class="k">=</span> <span class="s">"Scala is scalable and cool"</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">pattern</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Regex</span><span class="o">(</span><span class="s">"(S|s)cala"</span><span class="o">)</span> <span class="c1">// 匹配大小写
+</span>        <span class="k">val</span> <span class="nv">str</span> <span class="k">=</span> <span class="s">"Scala is scalable and cool"</span>
 
-        <span class="n">println</span><span class="o">((</span><span class="n">pattern</span> <span class="n">findAllIn</span> <span class="n">str</span><span class="o">).</span><span class="n">mkString</span><span class="o">(</span><span class="s">","</span><span class="o">))</span>  <span class="c1">// 使用逗号 , 连接返回结果
+        <span class="nf">println</span><span class="o">((</span><span class="n">pattern</span> <span class="n">findAllIn</span> <span class="n">str</span><span class="o">).</span><span class="py">mkString</span><span class="o">(</span><span class="s">","</span><span class="o">))</span>  <span class="c1">// 使用逗号 , 连接返回结果
 </span>    <span class="o">}</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="n">output</span>
@@ -239,11 +243,11 @@
 <p>如果你需要将匹配的文本替换为指定的关键词，可以使用 replaceFirstIn( ) 方法来替换第一个匹配项，使用 replaceAllIn( ) 方法替换所有匹配项，实例如下:</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">RegExp3</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">pattern</span> <span class="k">=</span> <span class="s">"(S|s)cala"</span><span class="o">.</span><span class="n">r</span>
-        <span class="k">val</span> <span class="n">str</span> <span class="k">=</span> <span class="s">"Scala is scalable and cool"</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">pattern</span> <span class="k">=</span> <span class="s">"(S|s)cala"</span><span class="o">.</span><span class="py">r</span>
+        <span class="k">val</span> <span class="nv">str</span> <span class="k">=</span> <span class="s">"Scala is scalable and cool"</span>
 
-        <span class="n">println</span> <span class="o">(</span><span class="n">pattern</span> <span class="n">replaceFirstIn</span><span class="o">(</span><span class="n">str</span><span class="o">,</span> <span class="s">"Java"</span><span class="o">))</span>
+        <span class="nf">println</span> <span class="o">(</span><span class="n">pattern</span> <span class="nf">replaceFirstIn</span><span class="o">(</span><span class="n">str</span><span class="o">,</span> <span class="s">"Java"</span><span class="o">))</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -506,11 +510,11 @@
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.util.matching.Regex</span>
 
 <span class="k">object</span> <span class="nc">RegExp4</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-       <span class="k">val</span> <span class="n">pattern</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Regex</span><span class="o">(</span><span class="s">"abl[ae]\\d+"</span><span class="o">)</span>
-       <span class="k">val</span> <span class="n">str</span> <span class="k">=</span> <span class="s">"ablaw is able1 and cool"</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+       <span class="k">val</span> <span class="nv">pattern</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Regex</span><span class="o">(</span><span class="s">"abl[ae]\\d+"</span><span class="o">)</span>
+       <span class="k">val</span> <span class="nv">str</span> <span class="k">=</span> <span class="s">"ablaw is able1 and cool"</span>
 
-       <span class="n">println</span><span class="o">((</span><span class="n">pattern</span> <span class="n">findAllIn</span> <span class="n">str</span><span class="o">).</span><span class="n">mkString</span><span class="o">(</span><span class="s">","</span><span class="o">))</span>
+       <span class="nf">println</span><span class="o">((</span><span class="n">pattern</span> <span class="n">findAllIn</span> <span class="n">str</span><span class="o">).</span><span class="py">mkString</span><span class="o">(</span><span class="s">","</span><span class="o">))</span>
     <span class="o">}</span>
 <span class="o">}</span>
 
@@ -745,7 +749,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -917,7 +921,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

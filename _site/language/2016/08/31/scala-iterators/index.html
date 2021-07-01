@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -209,11 +213,11 @@
 </ul>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Iterators</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">it</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="s">"Baidu"</span><span class="o">,</span> <span class="s">"Google"</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">it</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="s">"Baidu"</span><span class="o">,</span> <span class="s">"Google"</span><span class="o">)</span>
 
-      <span class="k">while</span> <span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="n">hasNext</span><span class="o">){</span>
-         <span class="n">println</span><span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="n">next</span><span class="o">())</span>
+      <span class="nf">while</span> <span class="o">(</span><span class="nv">it</span><span class="o">.</span><span class="py">hasNext</span><span class="o">){</span>
+         <span class="nf">println</span><span class="o">(</span><span class="nv">it</span><span class="o">.</span><span class="py">next</span><span class="o">())</span>
       <span class="o">}</span>
    <span class="o">}</span>
 <span class="o">}</span>
@@ -224,12 +228,12 @@
 <p>你可以使用 it.min 和 it.max 方法从迭代器中查找最大与最小元素，实例如下:</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Iterators2</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">ita</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
-      <span class="k">val</span> <span class="n">itb</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">ita</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
+      <span class="k">val</span> <span class="nv">itb</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
 <span class="c1">// Warn: 在执行完ita.max后，ita为空
-</span>      <span class="n">println</span><span class="o">(</span><span class="s">"最大元素是："</span> <span class="o">+</span> <span class="n">ita</span><span class="o">.</span><span class="n">max</span> <span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"最小元素是："</span> <span class="o">+</span> <span class="n">itb</span><span class="o">.</span><span class="n">min</span> <span class="o">)</span>
+</span>      <span class="nf">println</span><span class="o">(</span><span class="s">"最大元素是："</span> <span class="o">+</span> <span class="nv">ita</span><span class="o">.</span><span class="py">max</span> <span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"最小元素是："</span> <span class="o">+</span> <span class="nv">itb</span><span class="o">.</span><span class="py">min</span> <span class="o">)</span>
 
    <span class="o">}</span>
 <span class="o">}</span>
@@ -240,12 +244,12 @@
 <p>你可以使用 it.size 或 it.length 方法来查看迭代器中的元素个数。实例如下：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Iterators3</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">ita</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
-      <span class="k">val</span> <span class="n">itb</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">ita</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
+      <span class="k">val</span> <span class="nv">itb</span> <span class="k">=</span> <span class="nc">Iterator</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">40</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">50</span><span class="o">,</span><span class="mi">69</span><span class="o">,</span> <span class="mi">90</span><span class="o">)</span>
 <span class="c1">// Warn: 在执行完ita.size后，ita为空
-</span>      <span class="n">println</span><span class="o">(</span><span class="s">"ita.size 的值: "</span> <span class="o">+</span> <span class="n">ita</span><span class="o">.</span><span class="n">size</span> <span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"itb.length 的值: "</span> <span class="o">+</span> <span class="n">itb</span><span class="o">.</span><span class="n">length</span> <span class="o">)</span>
+</span>      <span class="nf">println</span><span class="o">(</span><span class="s">"ita.size 的值: "</span> <span class="o">+</span> <span class="nv">ita</span><span class="o">.</span><span class="py">size</span> <span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"itb.length 的值: "</span> <span class="o">+</span> <span class="nv">itb</span><span class="o">.</span><span class="py">length</span> <span class="o">)</span>
 
    <span class="o">}</span>
 <span class="o">}</span>
@@ -843,7 +847,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -1015,7 +1019,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

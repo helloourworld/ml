@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -208,7 +212,7 @@ Scala 有函数和方法，二者在语义上的区别很小。Scala 方法是�
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">functionName</span> <span class="o">([</span><span class="kt">参数列表</span><span class="o">])</span> <span class="k">:</span> <span class="err">[</span><span class="kt">return</span> <span class="k">type</span><span class="err">]</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">functionName</span> <span class="o">([</span><span class="kt">参数列表</span><span class="o">])</span> <span class="k">:</span> <span class="err">[</span><span class="kt">return</span> <span class="k">type</span><span class="err">]</span>
 </code></pre></div></div>
 <p>如果你不写等于号和方法主体，那么方法会被隐式声明为”抽象(abstract)”，包含它的类型于是也是一个抽象类型。</p>
 
@@ -216,7 +220,7 @@ Scala 有函数和方法，二者在语义上的区别很小。Scala 方法是�
 <p>方法定义由一个def 关键字开始，紧接着是可选的参数列表，一个冒号”：” 和方法的返回类型，一个等于号”=”，最后是方法的主体。
 Scala 函数定义格式如下：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">functionName</span> <span class="o">([</span><span class="kt">参数列表</span><span class="o">])</span> <span class="k">:</span> <span class="err">[</span><span class="kt">return</span> <span class="k">type</span><span class="err">]</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">functionName</span> <span class="o">([</span><span class="kt">参数列表</span><span class="o">])</span> <span class="k">:</span> <span class="err">[</span><span class="kt">return</span> <span class="k">type</span><span class="err">]</span> <span class="o">=</span> <span class="o">{</span>
    <span class="n">function</span> <span class="n">body</span>
    <span class="k">return</span> <span class="o">[</span><span class="kt">expr</span><span class="o">]</span>
 <span class="o">}</span>
@@ -225,14 +229,14 @@ Scala 函数定义格式如下：</p>
 以下函数的功能是将两个传入的参数相加并求和：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funadd</span><span class="o">{</span>
-   <span class="k">def</span> <span class="n">addInt</span><span class="o">(</span> <span class="n">a</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span><span class="kt">Int</span> <span class="o">)</span> <span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">addInt</span><span class="o">(</span> <span class="n">a</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span><span class="kt">Int</span> <span class="o">)</span> <span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
       <span class="k">var</span> <span class="n">sum</span><span class="k">:</span><span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
       <span class="n">sum</span> <span class="k">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 
       <span class="k">return</span> <span class="n">sum</span>
    <span class="o">}</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"value of 1 add 2: "</span> <span class="o">+</span> <span class="n">addInt</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">));</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"value of 1 add 2: "</span> <span class="o">+</span> <span class="nf">addInt</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">));</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -240,8 +244,8 @@ Scala 函数定义格式如下：</p>
 <p>如果函数没有返回值，可以返回为 <strong>Unit</strong>，这个类似于 <strong>Java</strong> 的 void, 实例如下：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Hello</span><span class="o">{</span>
-   <span class="k">def</span> <span class="n">printMe</span><span class="o">(</span> <span class="o">)</span> <span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"Hello, Scala!"</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">printMe</span><span class="o">(</span> <span class="o">)</span> <span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"Hello, Scala!"</span><span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -251,21 +255,21 @@ Scala 函数定义格式如下：</p>
 <p>Scala 提供了多种不同的函数调用方式：
 以下是调用方法的标准格式：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">functionName</span><span class="o">(</span> <span class="n">参数列表</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">functionName</span><span class="o">(</span> <span class="n">参数列表</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>如果函数使用了实例的对象来调用，我们可以使用类似java的格式 (使用 . 号)：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="kt">instance.</span><span class="o">]</span><span class="n">functionName</span><span class="o">(</span> <span class="n">参数列表</span> <span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="kt">instance.</span><span class="o">]</span><span class="nf">functionName</span><span class="o">(</span> <span class="n">参数列表</span> <span class="o">)</span>
 </code></pre></div></div>
 
 <p>实例演示了定义与调用函数的实例:</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Test</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="n">println</span><span class="o">(</span> <span class="s">"Returned Value : "</span> <span class="o">+</span> <span class="n">addInt</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span><span class="mi">7</span><span class="o">)</span> <span class="o">);</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="nf">println</span><span class="o">(</span> <span class="s">"Returned Value : "</span> <span class="o">+</span> <span class="nf">addInt</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span><span class="mi">7</span><span class="o">)</span> <span class="o">);</span>
    <span class="o">}</span>
-   <span class="k">def</span> <span class="n">addInt</span><span class="o">(</span> <span class="n">a</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span><span class="kt">Int</span> <span class="o">)</span> <span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">addInt</span><span class="o">(</span> <span class="n">a</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span><span class="kt">Int</span> <span class="o">)</span> <span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
       <span class="k">var</span> <span class="n">sum</span><span class="k">:</span><span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
       <span class="n">sum</span> <span class="k">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 
@@ -289,17 +293,17 @@ Scala 函数定义格式如下：</p>
 这就造成了一种现象，每次使用传名调用时，解释器都会计算一次表达式的值。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funcallbys</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="n">delayed</span><span class="o">(</span><span class="n">time</span><span class="o">());</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="nf">delayed</span><span class="o">(</span><span class="nf">time</span><span class="o">());</span>
    <span class="o">}</span>
 
-   <span class="k">def</span> <span class="n">time</span><span class="o">()</span> <span class="k">=</span> <span class="o">{</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"获取时间，单位为纳秒"</span><span class="o">)</span>
-      <span class="nc">System</span><span class="o">.</span><span class="n">nanoTime</span>
+   <span class="k">def</span> <span class="nf">time</span><span class="o">()</span> <span class="k">=</span> <span class="o">{</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"获取时间，单位为纳秒"</span><span class="o">)</span>
+      <span class="nv">System</span><span class="o">.</span><span class="py">nanoTime</span>
    <span class="o">}</span>
-   <span class="k">def</span> <span class="n">delayed</span><span class="o">(</span> <span class="n">t</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Long</span> <span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"在 delayed 方法内"</span><span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"参数： "</span> <span class="o">+</span> <span class="n">t</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">delayed</span><span class="o">(</span> <span class="n">t</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Long</span> <span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"在 delayed 方法内"</span><span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"参数： "</span> <span class="o">+</span> <span class="n">t</span><span class="o">)</span>
       <span class="n">t</span>
    <span class="o">}</span>
 <span class="o">}</span>
@@ -319,12 +323,12 @@ Scala 函数定义格式如下：</p>
 <p>一般情况下函数调用参数，就按照函数定义时的参数顺序一个个传递。但是我们也可以通过指定函数参数名，并且不需要按照顺序向函数传递参数，实例如下：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funcallbys</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="n">printInt</span><span class="o">(</span><span class="n">b</span><span class="k">=</span><span class="mi">5</span><span class="o">,</span> <span class="n">a</span><span class="k">=</span><span class="mi">7</span><span class="o">);</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="nf">printInt</span><span class="o">(</span><span class="n">b</span><span class="k">=</span><span class="mi">5</span><span class="o">,</span> <span class="n">a</span><span class="k">=</span><span class="mi">7</span><span class="o">);</span>
    <span class="o">}</span>
-   <span class="k">def</span> <span class="n">printInt</span><span class="o">(</span> <span class="n">a</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span><span class="kt">Int</span> <span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"Value of a : "</span> <span class="o">+</span> <span class="n">a</span> <span class="o">);</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"Value of b : "</span> <span class="o">+</span> <span class="n">b</span> <span class="o">);</span>
+   <span class="k">def</span> <span class="nf">printInt</span><span class="o">(</span> <span class="n">a</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span><span class="kt">Int</span> <span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"Value of a : "</span> <span class="o">+</span> <span class="n">a</span> <span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"Value of b : "</span> <span class="o">+</span> <span class="n">b</span> <span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -335,13 +339,13 @@ Scala 函数定义格式如下：</p>
 Scala 通过在参数的类型之后放一个星号来设置可变参数(可重复的参数)。例如：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funcallbys</span><span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span> <span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="n">dosome</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">,</span> <span class="s">"4"</span><span class="o">);</span>
+   <span class="k">def</span> <span class="nf">main</span> <span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="nf">dosome</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">,</span> <span class="s">"4"</span><span class="o">);</span>
    <span class="o">}</span>
-   <span class="k">def</span> <span class="n">dosome</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">String*</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">dosome</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">String*</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
       <span class="k">var</span> <span class="n">i</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-      <span class="k">for</span> <span class="o">(</span><span class="n">arg</span> <span class="k">&lt;-</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-         <span class="n">println</span><span class="o">(</span><span class="s">"Arg value ["</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">"]"</span> <span class="o">+</span> <span class="n">arg</span><span class="o">);</span>
+      <span class="nf">for</span> <span class="o">(</span><span class="n">arg</span> <span class="k">&lt;-</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+         <span class="nf">println</span><span class="o">(</span><span class="s">"Arg value ["</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">"]"</span> <span class="o">+</span> <span class="n">arg</span><span class="o">);</span>
          <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
       <span class="o">}</span>
    <span class="o">}</span>
@@ -356,15 +360,15 @@ Scala 同样支持递归函数。
 以上实例使用递归函数来计算阶乘：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Factorial</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">9</span><span class="o">)</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"factorial"</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">"is: "</span> <span class="o">+</span> <span class="n">factorial</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="nf">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">9</span><span class="o">)</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"factorial"</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">"is: "</span> <span class="o">+</span> <span class="nf">factorial</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
     <span class="o">}</span>
-    <span class="k">def</span> <span class="n">factorial</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">BigInt</span><span class="o">)</span><span class="k">:</span> <span class="kt">BigInt</span> <span class="o">=</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="k">def</span> <span class="nf">factorial</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">BigInt</span><span class="o">)</span><span class="k">:</span> <span class="kt">BigInt</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="o">)</span>
             <span class="mi">1</span>
         <span class="k">else</span>
-            <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span>
+            <span class="n">n</span> <span class="o">*</span> <span class="nf">factorial</span><span class="o">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span>
     <span class="o">}</span>
 <span class="o">}</span>
 
@@ -375,11 +379,11 @@ Scala 同样支持递归函数。
 <p>Scala 可以为函数参数指定默认参数值，使用了默认参数，你在调用函数的过程中可以不需要传递参数，这时函数就会调用它的默认参数值，如果传递了参数，则传递值会取代默认值。实例如下：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Fundefault</span><span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"return value: "</span> <span class="o">+</span> <span class="n">addInt</span><span class="o">());</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"return value: "</span> <span class="o">+</span> <span class="nf">addInt</span><span class="o">());</span>
     <span class="o">}</span>
 
-    <span class="k">def</span> <span class="n">addInt</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">5</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">7</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">addInt</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">5</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">7</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
         <span class="k">var</span> <span class="n">sum</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">sum</span> <span class="k">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
         <span class="k">return</span> <span class="n">sum</span>
@@ -394,15 +398,15 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
 以下实例中，apply() 函数使用了另外一个函数 f 和 值 v 作为参数，而函数 f 又调用了参数 v：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Funapply</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
 
-      <span class="n">println</span><span class="o">(</span> <span class="n">apply</span><span class="o">(</span> <span class="n">layout</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span> <span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span> <span class="nf">apply</span><span class="o">(</span> <span class="n">layout</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span> <span class="o">)</span>
 
    <span class="o">}</span>
    <span class="c1">// 函数 f 和 值 v 作为参数，而函数 f 又调用了参数 v
-</span>   <span class="k">def</span> <span class="n">apply</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">String</span><span class="o">,</span> <span class="n">v</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">f</span><span class="o">(</span><span class="n">v</span><span class="o">)</span>
+</span>   <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">String</span><span class="o">,</span> <span class="n">v</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="nf">f</span><span class="o">(</span><span class="n">v</span><span class="o">)</span>
 
-   <span class="k">def</span> <span class="n">layout</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">x</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span> <span class="k">=</span> <span class="s">"["</span> <span class="o">+</span> <span class="n">x</span><span class="o">.</span><span class="n">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">"]"</span>
+   <span class="k">def</span> <span class="nf">layout</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">x</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span> <span class="k">=</span> <span class="s">"["</span> <span class="o">+</span> <span class="nv">x</span><span class="o">.</span><span class="py">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">"]"</span>
 
 <span class="o">}</span>
 
@@ -416,21 +420,21 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
 以下实例我们实现阶乘运算，并使用内嵌函数：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">FunInner</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="n">println</span><span class="o">(</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">)</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="nf">println</span><span class="o">(</span> <span class="nf">factorial</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span> <span class="nf">factorial</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span> <span class="nf">factorial</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span> <span class="nf">factorial</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">)</span>
    <span class="o">}</span>
 
-   <span class="k">def</span> <span class="n">factorial</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-      <span class="k">def</span> <span class="n">fact</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">accumulator</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-         <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">factorial</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+      <span class="k">def</span> <span class="nf">fact</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">accumulator</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+         <span class="nf">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="o">)</span>
             <span class="n">accumulator</span>
          <span class="k">else</span>
-            <span class="n">fact</span><span class="o">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">accumulator</span><span class="o">)</span>
+            <span class="nf">fact</span><span class="o">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">accumulator</span><span class="o">)</span>
       <span class="o">}</span>
-      <span class="n">fact</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+      <span class="nf">fact</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -445,14 +449,14 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
 
 <p>上述定义的匿名函数，其实是下面这种写法的简写：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">add2</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Function1</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]{</span>
-   <span class="k">def</span> <span class="n">apply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add2</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Function1</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]{</span>
+   <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>以上实例的inc现在可可作为一个函数，使用方法如下：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">x</span> <span class="k">=</span> <span class="n">inc</span><span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="o">-</span><span class="mi">1</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">x</span> <span class="k">=</span> <span class="nf">inc</span><span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="o">-</span><span class="mi">1</span>
 </code></pre></div></div>
 
 <p>同样我们可以在匿名函数中定义多个参数：</p>
@@ -462,25 +466,25 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
 
 <p>mul现在可作为一个函数，使用方法如下：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">println</span><span class="o">(</span><span class="n">mul</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">))</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">println</span><span class="o">(</span><span class="nf">mul</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">))</span>
 </code></pre></div></div>
 
 <p>我们也可以<strong>不给匿名函数设置参数</strong>，如下所示：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">userDir</span> <span class="k">=</span> <span class="o">()</span> <span class="k">=&gt;</span> <span class="o">{</span> <span class="nc">System</span><span class="o">.</span><span class="n">getProperty</span><span class="o">(</span><span class="s">"user.dir"</span><span class="o">)</span> <span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">userDir</span> <span class="k">=</span> <span class="o">()</span> <span class="k">=&gt;</span> <span class="o">{</span> <span class="nv">System</span><span class="o">.</span><span class="py">getProperty</span><span class="o">(</span><span class="s">"user.dir"</span><span class="o">)</span> <span class="o">}</span>
 </code></pre></div></div>
 
 <p>userDir 现在可作为一个函数，使用方式如下：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">println</span><span class="o">(</span> <span class="n">userDir</span> <span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">println</span><span class="o">(</span> <span class="n">userDir</span> <span class="o">)</span>
 </code></pre></div></div>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Lambda</span><span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"The user dir is: "</span> <span class="o">+</span> <span class="n">userDir</span><span class="o">());</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"The user dir is: "</span> <span class="o">+</span> <span class="nf">userDir</span><span class="o">());</span>
    <span class="o">}</span>
 
-   <span class="k">var</span> <span class="n">userDir</span> <span class="k">=</span> <span class="o">()</span> <span class="k">=&gt;</span> <span class="o">{</span> <span class="nc">System</span><span class="o">.</span><span class="n">getProperty</span><span class="o">(</span><span class="s">"user.dir"</span><span class="o">)}</span>
+   <span class="k">var</span> <span class="n">userDir</span> <span class="k">=</span> <span class="o">()</span> <span class="k">=&gt;</span> <span class="o">{</span> <span class="nv">System</span><span class="o">.</span><span class="py">getProperty</span><span class="o">(</span><span class="s">"user.dir"</span><span class="o">)}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -492,17 +496,17 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.util.Date</span>
 
 <span class="k">object</span> <span class="nc">PartiallyAppliedFunction</span><span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
-      <span class="k">val</span> <span class="n">date</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Date</span>
-      <span class="n">log</span><span class="o">(</span><span class="n">date</span><span class="o">,</span> <span class="s">"message1"</span><span class="o">)</span>
-      <span class="nc">Thread</span><span class="o">.</span><span class="n">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">)</span>
-      <span class="n">log</span><span class="o">(</span><span class="n">date</span><span class="o">,</span> <span class="s">"message2"</span><span class="o">)</span>
-      <span class="nc">Thread</span><span class="o">.</span><span class="n">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">)</span>
-      <span class="n">log</span><span class="o">(</span><span class="n">date</span><span class="o">,</span> <span class="s">"message3"</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+      <span class="k">val</span> <span class="nv">date</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Date</span>
+      <span class="nf">log</span><span class="o">(</span><span class="n">date</span><span class="o">,</span> <span class="s">"message1"</span><span class="o">)</span>
+      <span class="nv">Thread</span><span class="o">.</span><span class="py">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">)</span>
+      <span class="nf">log</span><span class="o">(</span><span class="n">date</span><span class="o">,</span> <span class="s">"message2"</span><span class="o">)</span>
+      <span class="nv">Thread</span><span class="o">.</span><span class="py">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">)</span>
+      <span class="nf">log</span><span class="o">(</span><span class="n">date</span><span class="o">,</span> <span class="s">"message3"</span><span class="o">)</span>
    <span class="o">}</span>
 
-   <span class="k">def</span> <span class="n">log</span><span class="o">(</span><span class="n">date</span><span class="k">:</span> <span class="kt">Date</span><span class="o">,</span> <span class="n">message</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-      <span class="n">println</span><span class="o">(</span><span class="n">date</span> <span class="o">+</span> <span class="s">"------"</span> <span class="o">+</span> <span class="n">message</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">log</span><span class="o">(</span><span class="n">date</span><span class="k">:</span> <span class="kt">Date</span><span class="o">,</span> <span class="n">message</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+      <span class="nf">println</span><span class="o">(</span><span class="n">date</span> <span class="o">+</span> <span class="s">"------"</span> <span class="o">+</span> <span class="n">message</span><span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -513,19 +517,19 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.util.Date</span>
 
 <span class="k">object</span> <span class="nc">PartiallyAppliedFunction</span><span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
-      <span class="k">val</span> <span class="n">date</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Date</span>
-      <span class="k">val</span> <span class="n">logWithDateBonud</span> <span class="k">=</span> <span class="n">log</span><span class="o">(</span><span class="n">date</span><span class="o">,</span> <span class="k">_</span> <span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+      <span class="k">val</span> <span class="nv">date</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Date</span>
+      <span class="k">val</span> <span class="nv">logWithDateBonud</span> <span class="k">=</span> <span class="nf">log</span><span class="o">(</span><span class="n">date</span><span class="o">,</span> <span class="k">_</span> <span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
 
-      <span class="n">logWithDateBonud</span><span class="o">(</span><span class="s">"message1"</span><span class="o">)</span>
-      <span class="nc">Thread</span><span class="o">.</span><span class="n">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">)</span>
-      <span class="n">logWithDateBonud</span><span class="o">(</span><span class="s">"message2"</span><span class="o">)</span>
-      <span class="nc">Thread</span><span class="o">.</span><span class="n">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">)</span>
-      <span class="n">logWithDateBonud</span><span class="o">(</span><span class="s">"message3"</span><span class="o">)</span>
+      <span class="nf">logWithDateBonud</span><span class="o">(</span><span class="s">"message1"</span><span class="o">)</span>
+      <span class="nv">Thread</span><span class="o">.</span><span class="py">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">)</span>
+      <span class="nf">logWithDateBonud</span><span class="o">(</span><span class="s">"message2"</span><span class="o">)</span>
+      <span class="nv">Thread</span><span class="o">.</span><span class="py">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">)</span>
+      <span class="nf">logWithDateBonud</span><span class="o">(</span><span class="s">"message3"</span><span class="o">)</span>
    <span class="o">}</span>
 
-   <span class="k">def</span> <span class="n">log</span><span class="o">(</span><span class="n">date</span><span class="k">:</span> <span class="kt">Date</span><span class="o">,</span> <span class="n">message</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-      <span class="n">println</span><span class="o">(</span><span class="n">date</span> <span class="o">+</span> <span class="s">"------"</span> <span class="o">+</span> <span class="n">message</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">log</span><span class="o">(</span><span class="n">date</span><span class="k">:</span> <span class="kt">Date</span><span class="o">,</span> <span class="n">message</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+      <span class="nf">println</span><span class="o">(</span><span class="n">date</span> <span class="o">+</span> <span class="s">"------"</span> <span class="o">+</span> <span class="n">message</span><span class="o">)</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -570,13 +574,13 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
 <p><strong>完整实例</strong></p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">CurryFun</span><span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">str1</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"Hello, "</span>
-      <span class="k">val</span> <span class="n">str2</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"Scala!"</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"Str1 + Str2 = "</span> <span class="o">+</span> <span class="n">strcat</span><span class="o">(</span><span class="n">str1</span><span class="o">)(</span><span class="n">str2</span><span class="o">));</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">str1</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"Hello, "</span>
+      <span class="k">val</span> <span class="nv">str2</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"Scala!"</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"Str1 + Str2 = "</span> <span class="o">+</span> <span class="nf">strcat</span><span class="o">(</span><span class="n">str1</span><span class="o">)(</span><span class="n">str2</span><span class="o">));</span>
    <span class="o">}</span>
 
-   <span class="k">def</span> <span class="n">strcat</span><span class="o">(</span><span class="n">s1</span><span class="k">:</span> <span class="kt">String</span><span class="o">)(</span><span class="n">s2</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">strcat</span><span class="o">(</span><span class="n">s1</span><span class="k">:</span> <span class="kt">String</span><span class="o">)(</span><span class="n">s2</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
       <span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span>
    <span class="o">}</span>
 <span class="o">}</span>
@@ -598,7 +602,7 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
 <p>在 multiplier 中有两个变量：i 和 factor。其中的一个 i 是函数的形式参数，在 multiplier 函数被调用时，i 被赋予一个新的值。然而，factor不是形式参数，而是自由变量，考虑下面代码：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">factor</span> <span class="k">=</span> <span class="mi">3</span>
-<span class="k">val</span> <span class="n">multiplier</span> <span class="k">=</span> <span class="o">(</span><span class="n">i</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">i</span> <span class="o">*</span> <span class="n">factor</span>
+<span class="k">val</span> <span class="nv">multiplier</span> <span class="k">=</span> <span class="o">(</span><span class="n">i</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">i</span> <span class="o">*</span> <span class="n">factor</span>
 </code></pre></div></div>
 
 <p>这里我们引入一个自由变量 factor，这个变量定义在函数外面。</p>
@@ -608,13 +612,13 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
 <p><strong>完整实例</strong></p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Closures</span><span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"muliplier(1) value = "</span> <span class="o">+</span> <span class="n">multiplier</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"muliplier(2) value = "</span> <span class="o">+</span> <span class="n">multiplier</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"muliplier(1) value = "</span> <span class="o">+</span> <span class="nf">multiplier</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"muliplier(2) value = "</span> <span class="o">+</span> <span class="nf">multiplier</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
     <span class="o">}</span>
 
     <span class="k">var</span> <span class="n">factor</span> <span class="k">=</span> <span class="mi">3</span>
-    <span class="k">val</span> <span class="n">multiplier</span> <span class="k">=</span> <span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">i</span> <span class="o">*</span> <span class="n">factor</span>
+    <span class="k">val</span> <span class="nv">multiplier</span> <span class="k">=</span> <span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">i</span> <span class="o">*</span> <span class="n">factor</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -847,7 +851,7 @@ Scala 中允许使用高阶函数, 高阶函数可以使用其他函数作为参
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -1019,7 +1023,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -222,15 +226,15 @@
 <span class="k">import</span> <span class="nn">java.io.IOException</span>
 
 <span class="k">object</span> <span class="nc">ExceptionHandling1</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">try</span> <span class="o">{</span>
-         <span class="k">val</span> <span class="n">f</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"input.txt"</span><span class="o">)</span>
+         <span class="k">val</span> <span class="nv">f</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"input.txt"</span><span class="o">)</span>
       <span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
          <span class="k">case</span> <span class="n">ex</span><span class="k">:</span> <span class="kt">FileNotFoundException</span> <span class="o">=&gt;{</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"Missing file exception"</span><span class="o">)</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"Missing file exception"</span><span class="o">)</span>
          <span class="o">}</span>
          <span class="k">case</span> <span class="n">ex</span><span class="k">:</span> <span class="kt">IOException</span> <span class="o">=&gt;</span> <span class="o">{</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"IO Exception"</span><span class="o">)</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"IO Exception"</span><span class="o">)</span>
          <span class="o">}</span>
       <span class="o">}</span>
    <span class="o">}</span>
@@ -251,18 +255,18 @@
 <span class="k">import</span> <span class="nn">java.io.IOException</span>
 
 <span class="k">object</span> <span class="nc">ExceptionHandling2</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">try</span> <span class="o">{</span>
-         <span class="k">val</span> <span class="n">f</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"input.txt"</span><span class="o">)</span>
+         <span class="k">val</span> <span class="nv">f</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"input.txt"</span><span class="o">)</span>
       <span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
          <span class="k">case</span> <span class="n">ex</span><span class="k">:</span> <span class="kt">FileNotFoundException</span> <span class="o">=&gt;</span> <span class="o">{</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"Missing file exception"</span><span class="o">)</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"Missing file exception"</span><span class="o">)</span>
          <span class="o">}</span>
          <span class="k">case</span> <span class="n">ex</span><span class="k">:</span> <span class="kt">IOException</span> <span class="o">=&gt;</span> <span class="o">{</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"IO Exception"</span><span class="o">)</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"IO Exception"</span><span class="o">)</span>
          <span class="o">}</span>
       <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-         <span class="n">println</span><span class="o">(</span><span class="s">"Exiting finally..."</span><span class="o">)</span>
+         <span class="nf">println</span><span class="o">(</span><span class="s">"Exiting finally..."</span><span class="o">)</span>
       <span class="o">}</span>
    <span class="o">}</span>
 <span class="o">}</span>
@@ -497,7 +501,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -669,7 +673,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

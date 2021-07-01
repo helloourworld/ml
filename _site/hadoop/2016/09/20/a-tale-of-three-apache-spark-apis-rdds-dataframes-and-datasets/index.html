@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -330,10 +334,10 @@ val ds = spark.read.json("/databricks-public-datasets/data/iot/iot_devices.json"
 // another immutable Dataset. The query is simpler to read,
 // and expressive
 </span>
-<span class="k">val</span> <span class="n">dsAvgTmp</span> <span class="k">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">d</span> <span class="k">=&gt;</span> <span class="o">{</span><span class="n">d</span><span class="o">.</span><span class="n">temp</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="o">}).</span><span class="n">map</span><span class="o">(</span><span class="n">d</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">d</span><span class="o">.</span><span class="n">temp</span><span class="o">,</span> <span class="n">d</span><span class="o">.</span><span class="n">humidity</span><span class="o">,</span> <span class="n">d</span><span class="o">.</span><span class="n">cca3</span><span class="o">)).</span><span class="n">groupBy</span><span class="o">(</span><span class="n">$</span><span class="s">"_3"</span><span class="o">).</span><span class="n">avg</span><span class="o">()</span>
+<span class="k">val</span> <span class="nv">dsAvgTmp</span> <span class="k">=</span> <span class="nv">ds</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="n">d</span> <span class="k">=&gt;</span> <span class="o">{</span><span class="nv">d</span><span class="o">.</span><span class="py">temp</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="o">}).</span><span class="py">map</span><span class="o">(</span><span class="n">d</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="nv">d</span><span class="o">.</span><span class="py">temp</span><span class="o">,</span> <span class="nv">d</span><span class="o">.</span><span class="py">humidity</span><span class="o">,</span> <span class="nv">d</span><span class="o">.</span><span class="py">cca3</span><span class="o">)).</span><span class="py">groupBy</span><span class="o">(</span><span class="n">$</span><span class="s">"_3"</span><span class="o">).</span><span class="py">avg</span><span class="o">()</span>
 
 <span class="c1">//display the resulting dataset
-</span><span class="n">display</span><span class="o">(</span><span class="n">dsAvgTmp</span><span class="o">)</span>
+</span><span class="nf">display</span><span class="o">(</span><span class="n">dsAvgTmp</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p><img src="https://databricks.com/wp-content/uploads/2016/07/displaying-a-dataset-in-databricks.gif" alt="" /></p>
@@ -364,9 +368,9 @@ val ds = spark.read.json("/databricks-public-datasets/data/iot/iot_devices.json"
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// select specific fields from the Dataset, apply a predicate
 // using the where() method, convert to an RDD, and show first 10
 // RDD rows
-</span><span class="k">val</span> <span class="n">deviceEventsDS</span> <span class="k">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">select</span><span class="o">(</span><span class="n">$</span><span class="s">"device_name"</span><span class="o">,</span> <span class="n">$</span><span class="s">"cca3"</span><span class="o">,</span> <span class="n">$</span><span class="s">"c02_level"</span><span class="o">).</span><span class="n">where</span><span class="o">(</span><span class="n">$</span><span class="s">"c02_level"</span> <span class="o">&gt;</span> <span class="mi">1300</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">deviceEventsDS</span> <span class="k">=</span> <span class="nv">ds</span><span class="o">.</span><span class="py">select</span><span class="o">(</span><span class="n">$</span><span class="s">"device_name"</span><span class="o">,</span> <span class="n">$</span><span class="s">"cca3"</span><span class="o">,</span> <span class="n">$</span><span class="s">"c02_level"</span><span class="o">).</span><span class="py">where</span><span class="o">(</span><span class="n">$</span><span class="s">"c02_level"</span> <span class="o">&gt;</span> <span class="mi">1300</span><span class="o">)</span>
 <span class="c1">// convert to RDDs and take the first 10 rows
-</span><span class="k">val</span> <span class="n">eventsRDD</span> <span class="k">=</span> <span class="n">deviceEventsDS</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">take</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">eventsRDD</span> <span class="k">=</span> <span class="nv">deviceEventsDS</span><span class="o">.</span><span class="py">rdd</span><span class="o">.</span><span class="py">take</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p><img src="/images/spark/convert-dataset-to-rdd-on-Databricks.png" alt="" /></p>
@@ -610,7 +614,7 @@ val ds = spark.read.json("/databricks-public-datasets/data/iot/iot_devices.json"
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -782,7 +786,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

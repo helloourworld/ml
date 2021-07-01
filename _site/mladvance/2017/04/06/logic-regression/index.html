@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -293,27 +297,27 @@
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vectors</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
 <span class="c1">// 加载训练数据
-</span><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="nc">MLUtils</span><span class="o">.</span><span class="n">loadLibSVMFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/mllib/sample_libsvm_data.txt"</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">data</span> <span class="k">=</span> <span class="nv">MLUtils</span><span class="o">.</span><span class="py">loadLibSVMFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/mllib/sample_libsvm_data.txt"</span><span class="o">)</span>
 <span class="c1">// 切分数据，training (60%) and test (40%).
-</span><span class="k">val</span> <span class="n">splits</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.6</span><span class="o">,</span> <span class="mf">0.4</span><span class="o">),</span> <span class="n">seed</span> <span class="k">=</span> <span class="mi">11L</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">training</span> <span class="k">=</span> <span class="n">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">cache</span><span class="o">()</span>
-<span class="k">val</span> <span class="n">test</span> <span class="k">=</span> <span class="n">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">splits</span> <span class="k">=</span> <span class="nv">data</span><span class="o">.</span><span class="py">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.6</span><span class="o">,</span> <span class="mf">0.4</span><span class="o">),</span> <span class="n">seed</span> <span class="k">=</span> <span class="mi">11L</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">training</span> <span class="k">=</span> <span class="nf">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="py">cache</span><span class="o">()</span>
+<span class="k">val</span> <span class="nv">test</span> <span class="k">=</span> <span class="nf">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
 <span class="c1">// 训练模型
-</span><span class="k">val</span> <span class="n">model</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LogisticRegressionWithLBFGS</span><span class="o">()</span>
-  <span class="o">.</span><span class="n">setNumClasses</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
-  <span class="o">.</span><span class="n">run</span><span class="o">(</span><span class="n">training</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">model</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LogisticRegressionWithLBFGS</span><span class="o">()</span>
+  <span class="o">.</span><span class="py">setNumClasses</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+  <span class="o">.</span><span class="py">run</span><span class="o">(</span><span class="n">training</span><span class="o">)</span>
 <span class="c1">// Compute raw scores on the test set.
-</span><span class="k">val</span> <span class="n">predictionAndLabels</span> <span class="k">=</span> <span class="n">test</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="k">case</span> <span class="nc">LabeledPoint</span><span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">features</span><span class="o">)</span> <span class="k">=&gt;</span>
-  <span class="k">val</span> <span class="n">prediction</span> <span class="k">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">features</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">predictionAndLabels</span> <span class="k">=</span> <span class="nv">test</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="k">case</span> <span class="nc">LabeledPoint</span><span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">features</span><span class="o">)</span> <span class="k">=&gt;</span>
+  <span class="k">val</span> <span class="nv">prediction</span> <span class="k">=</span> <span class="nv">model</span><span class="o">.</span><span class="py">predict</span><span class="o">(</span><span class="n">features</span><span class="o">)</span>
   <span class="o">(</span><span class="n">prediction</span><span class="o">,</span> <span class="n">label</span><span class="o">)</span>
 <span class="o">}</span>
 <span class="c1">// Get evaluation metrics.
-</span><span class="k">val</span> <span class="n">metrics</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">MulticlassMetrics</span><span class="o">(</span><span class="n">predictionAndLabels</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">precision</span> <span class="k">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision</span>
-<span class="n">println</span><span class="o">(</span><span class="s">"Precision = "</span> <span class="o">+</span> <span class="n">precision</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">metrics</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">MulticlassMetrics</span><span class="o">(</span><span class="n">predictionAndLabels</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">precision</span> <span class="k">=</span> <span class="nv">metrics</span><span class="o">.</span><span class="py">precision</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Precision = "</span> <span class="o">+</span> <span class="n">precision</span><span class="o">)</span>
 <span class="c1">// 保存和加载模型
-</span><span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"myModelPath"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">sameModel</span> <span class="k">=</span> <span class="nc">LogisticRegressionModel</span><span class="o">.</span><span class="n">load</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"myModelPath"</span><span class="o">)</span>
+</span><span class="nv">model</span><span class="o">.</span><span class="py">save</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"myModelPath"</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">sameModel</span> <span class="k">=</span> <span class="nv">LogisticRegressionModel</span><span class="o">.</span><span class="py">load</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"myModelPath"</span><span class="o">)</span>
 </code></pre></div></div>
 
 <h2 id="5-源码分析">5 源码分析</h2>
@@ -324,21 +328,21 @@
 
 <p>  <code class="highlighter-rouge">LogisticRegressionWithLBFGS</code>和<code class="highlighter-rouge">LogisticRegressionWithSGD</code>的入口函数均是<code class="highlighter-rouge">GeneralizedLinearAlgorithm.run</code>，下面详细分析该方法。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span><span class="k">:</span> <span class="kt">M</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">numFeatures</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">run</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span><span class="k">:</span> <span class="kt">M</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">numFeatures</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
       <span class="c1">//计算特征数
-</span>      <span class="n">numFeatures</span> <span class="k">=</span> <span class="n">input</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">size</span><span class="o">).</span><span class="n">first</span><span class="o">()</span>
+</span>      <span class="n">numFeatures</span> <span class="k">=</span> <span class="nv">input</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">features</span><span class="o">.</span><span class="py">size</span><span class="o">).</span><span class="py">first</span><span class="o">()</span>
     <span class="o">}</span>
-    <span class="k">val</span> <span class="n">initialWeights</span> <span class="k">=</span> <span class="o">{</span>
-          <span class="k">if</span> <span class="o">(</span><span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nc">Vectors</span><span class="o">.</span><span class="n">zeros</span><span class="o">(</span><span class="n">numFeatures</span><span class="o">)</span>
-          <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">addIntercept</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nc">Vectors</span><span class="o">.</span><span class="n">zeros</span><span class="o">((</span><span class="n">numFeatures</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">numOfLinearPredictor</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">initialWeights</span> <span class="k">=</span> <span class="o">{</span>
+          <span class="nf">if</span> <span class="o">(</span><span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nv">Vectors</span><span class="o">.</span><span class="py">zeros</span><span class="o">(</span><span class="n">numFeatures</span><span class="o">)</span>
+          <span class="o">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">addIntercept</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nv">Vectors</span><span class="o">.</span><span class="py">zeros</span><span class="o">((</span><span class="n">numFeatures</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">numOfLinearPredictor</span><span class="o">)</span>
           <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="nc">Vectors</span><span class="o">.</span><span class="n">zeros</span><span class="o">(</span><span class="n">numFeatures</span> <span class="o">*</span> <span class="n">numOfLinearPredictor</span><span class="o">)</span>
+            <span class="nv">Vectors</span><span class="o">.</span><span class="py">zeros</span><span class="o">(</span><span class="n">numFeatures</span> <span class="o">*</span> <span class="n">numOfLinearPredictor</span><span class="o">)</span>
           <span class="o">}</span>
     <span class="o">}</span>
-    <span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="o">,</span> <span class="n">initialWeights</span><span class="o">)</span>
+    <span class="nf">run</span><span class="o">(</span><span class="n">input</span><span class="o">,</span> <span class="n">initialWeights</span><span class="o">)</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>  上面的代码初始化权重向量，向量的值均初始化为0。需要注意的是，<code class="highlighter-rouge">addIntercept</code>表示是否添加截距(<code class="highlighter-rouge">Intercept</code>，指函数图形与坐标的交点到原点的距离)，默认是不添加的。<code class="highlighter-rouge">numOfLinearPredictor</code>表示二元逻辑回归模型的个数。
@@ -346,27 +350,27 @@
 
 <h4 id="511-根据提供的参数缩放特征并添加截距">5.1.1 根据提供的参数缩放特征并添加截距</h4>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">scaler</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">useFeatureScaling</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">new</span> <span class="nc">StandardScaler</span><span class="o">(</span><span class="n">withStd</span> <span class="k">=</span> <span class="kc">true</span><span class="o">,</span> <span class="n">withMean</span> <span class="k">=</span> <span class="kc">false</span><span class="o">).</span><span class="n">fit</span><span class="o">(</span><span class="n">input</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">features</span><span class="o">))</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">scaler</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">useFeatureScaling</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">new</span> <span class="nc">StandardScaler</span><span class="o">(</span><span class="n">withStd</span> <span class="k">=</span> <span class="kc">true</span><span class="o">,</span> <span class="n">withMean</span> <span class="k">=</span> <span class="kc">false</span><span class="o">).</span><span class="py">fit</span><span class="o">(</span><span class="nv">input</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">features</span><span class="o">))</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
       <span class="kc">null</span>
     <span class="o">}</span>
-<span class="k">val</span> <span class="n">data</span> <span class="k">=</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">addIntercept</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">useFeatureScaling</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">input</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">lp</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">lp</span><span class="o">.</span><span class="n">label</span><span class="o">,</span> <span class="n">appendBias</span><span class="o">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="o">(</span><span class="n">lp</span><span class="o">.</span><span class="n">features</span><span class="o">)))).</span><span class="n">cache</span><span class="o">()</span>
+<span class="k">val</span> <span class="nv">data</span> <span class="k">=</span>
+      <span class="nf">if</span> <span class="o">(</span><span class="n">addIntercept</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">useFeatureScaling</span><span class="o">)</span> <span class="o">{</span>
+          <span class="nv">input</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">lp</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="nv">lp</span><span class="o">.</span><span class="py">label</span><span class="o">,</span> <span class="nf">appendBias</span><span class="o">(</span><span class="nv">scaler</span><span class="o">.</span><span class="py">transform</span><span class="o">(</span><span class="nv">lp</span><span class="o">.</span><span class="py">features</span><span class="o">)))).</span><span class="py">cache</span><span class="o">()</span>
         <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-          <span class="n">input</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">lp</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">lp</span><span class="o">.</span><span class="n">label</span><span class="o">,</span> <span class="n">appendBias</span><span class="o">(</span><span class="n">lp</span><span class="o">.</span><span class="n">features</span><span class="o">))).</span><span class="n">cache</span><span class="o">()</span>
+          <span class="nv">input</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">lp</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="nv">lp</span><span class="o">.</span><span class="py">label</span><span class="o">,</span> <span class="nf">appendBias</span><span class="o">(</span><span class="nv">lp</span><span class="o">.</span><span class="py">features</span><span class="o">))).</span><span class="py">cache</span><span class="o">()</span>
         <span class="o">}</span>
       <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">useFeatureScaling</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">input</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">lp</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">lp</span><span class="o">.</span><span class="n">label</span><span class="o">,</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="o">(</span><span class="n">lp</span><span class="o">.</span><span class="n">features</span><span class="o">))).</span><span class="n">cache</span><span class="o">()</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">useFeatureScaling</span><span class="o">)</span> <span class="o">{</span>
+          <span class="nv">input</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">lp</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="nv">lp</span><span class="o">.</span><span class="py">label</span><span class="o">,</span> <span class="nv">scaler</span><span class="o">.</span><span class="py">transform</span><span class="o">(</span><span class="nv">lp</span><span class="o">.</span><span class="py">features</span><span class="o">))).</span><span class="py">cache</span><span class="o">()</span>
         <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-          <span class="n">input</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">lp</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">lp</span><span class="o">.</span><span class="n">label</span><span class="o">,</span> <span class="n">lp</span><span class="o">.</span><span class="n">features</span><span class="o">))</span>
+          <span class="nv">input</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">lp</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="nv">lp</span><span class="o">.</span><span class="py">label</span><span class="o">,</span> <span class="nv">lp</span><span class="o">.</span><span class="py">features</span><span class="o">))</span>
         <span class="o">}</span>
       <span class="o">}</span>
-<span class="k">val</span> <span class="n">initialWeightsWithIntercept</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">addIntercept</span> <span class="o">&amp;&amp;</span> <span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">appendBias</span><span class="o">(</span><span class="n">initialWeights</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">initialWeightsWithIntercept</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">addIntercept</span> <span class="o">&amp;&amp;</span> <span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nf">appendBias</span><span class="o">(</span><span class="n">initialWeights</span><span class="o">)</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
       <span class="cm">/** If `numOfLinearPredictor &gt; 1`, initialWeights already contains intercepts. */</span>
       <span class="n">initialWeights</span>
@@ -376,48 +380,48 @@
 <p>  在最优化过程中，收敛速度依赖于训练数据集的条件数(<code class="highlighter-rouge">condition number</code>)，缩放变量经常可以启发式地减少这些条件数，提高收敛速度。不减少条件数，一些混合有不同范围列的数据集可能不能收敛。
 在这里使用<code class="highlighter-rouge">StandardScaler</code>将数据集的特征进行缩放。详细信息请看<a href="../../../特征抽取和转换/StandardScaler.md">StandardScaler</a>。<code class="highlighter-rouge">appendBias</code>方法很简单，就是在每个向量后面加一个值为1的项。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">appendBias</span><span class="o">(</span><span class="n">vector</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">appendBias</span><span class="o">(</span><span class="n">vector</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="o">{</span>
     <span class="n">vector</span> <span class="k">match</span> <span class="o">{</span>
       <span class="k">case</span> <span class="n">dv</span><span class="k">:</span> <span class="kt">DenseVector</span> <span class="o">=&gt;</span>
-        <span class="k">val</span> <span class="n">inputValues</span> <span class="k">=</span> <span class="n">dv</span><span class="o">.</span><span class="n">values</span>
-        <span class="k">val</span> <span class="n">inputLength</span> <span class="k">=</span> <span class="n">inputValues</span><span class="o">.</span><span class="n">length</span>
-        <span class="k">val</span> <span class="n">outputValues</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">inputLength</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
-        <span class="nc">System</span><span class="o">.</span><span class="n">arraycopy</span><span class="o">(</span><span class="n">inputValues</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">outputValues</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">inputLength</span><span class="o">)</span>
-        <span class="n">outputValues</span><span class="o">(</span><span class="n">inputLength</span><span class="o">)</span> <span class="k">=</span> <span class="mf">1.0</span>
-        <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">outputValues</span><span class="o">)</span>
+        <span class="k">val</span> <span class="nv">inputValues</span> <span class="k">=</span> <span class="nv">dv</span><span class="o">.</span><span class="py">values</span>
+        <span class="k">val</span> <span class="nv">inputLength</span> <span class="k">=</span> <span class="nv">inputValues</span><span class="o">.</span><span class="py">length</span>
+        <span class="k">val</span> <span class="nv">outputValues</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">inputLength</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+        <span class="nv">System</span><span class="o">.</span><span class="py">arraycopy</span><span class="o">(</span><span class="n">inputValues</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">outputValues</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">inputLength</span><span class="o">)</span>
+        <span class="nf">outputValues</span><span class="o">(</span><span class="n">inputLength</span><span class="o">)</span> <span class="k">=</span> <span class="mf">1.0</span>
+        <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="n">outputValues</span><span class="o">)</span>
       <span class="k">case</span> <span class="n">sv</span><span class="k">:</span> <span class="kt">SparseVector</span> <span class="o">=&gt;</span>
-        <span class="k">val</span> <span class="n">inputValues</span> <span class="k">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">values</span>
-        <span class="k">val</span> <span class="n">inputIndices</span> <span class="k">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">indices</span>
-        <span class="k">val</span> <span class="n">inputValuesLength</span> <span class="k">=</span> <span class="n">inputValues</span><span class="o">.</span><span class="n">length</span>
-        <span class="k">val</span> <span class="n">dim</span> <span class="k">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">size</span>
-        <span class="k">val</span> <span class="n">outputValues</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">inputValuesLength</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
-        <span class="k">val</span> <span class="n">outputIndices</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">ofDim</span><span class="o">[</span><span class="kt">Int</span><span class="o">](</span><span class="n">inputValuesLength</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
-        <span class="nc">System</span><span class="o">.</span><span class="n">arraycopy</span><span class="o">(</span><span class="n">inputValues</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">outputValues</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">inputValuesLength</span><span class="o">)</span>
-        <span class="nc">System</span><span class="o">.</span><span class="n">arraycopy</span><span class="o">(</span><span class="n">inputIndices</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">outputIndices</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">inputValuesLength</span><span class="o">)</span>
-        <span class="n">outputValues</span><span class="o">(</span><span class="n">inputValuesLength</span><span class="o">)</span> <span class="k">=</span> <span class="mf">1.0</span>
-        <span class="n">outputIndices</span><span class="o">(</span><span class="n">inputValuesLength</span><span class="o">)</span> <span class="k">=</span> <span class="n">dim</span>
-        <span class="nc">Vectors</span><span class="o">.</span><span class="n">sparse</span><span class="o">(</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">outputIndices</span><span class="o">,</span> <span class="n">outputValues</span><span class="o">)</span>
+        <span class="k">val</span> <span class="nv">inputValues</span> <span class="k">=</span> <span class="nv">sv</span><span class="o">.</span><span class="py">values</span>
+        <span class="k">val</span> <span class="nv">inputIndices</span> <span class="k">=</span> <span class="nv">sv</span><span class="o">.</span><span class="py">indices</span>
+        <span class="k">val</span> <span class="nv">inputValuesLength</span> <span class="k">=</span> <span class="nv">inputValues</span><span class="o">.</span><span class="py">length</span>
+        <span class="k">val</span> <span class="nv">dim</span> <span class="k">=</span> <span class="nv">sv</span><span class="o">.</span><span class="py">size</span>
+        <span class="k">val</span> <span class="nv">outputValues</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">inputValuesLength</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+        <span class="k">val</span> <span class="nv">outputIndices</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">[</span><span class="kt">Int</span><span class="o">](</span><span class="n">inputValuesLength</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+        <span class="nv">System</span><span class="o">.</span><span class="py">arraycopy</span><span class="o">(</span><span class="n">inputValues</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">outputValues</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">inputValuesLength</span><span class="o">)</span>
+        <span class="nv">System</span><span class="o">.</span><span class="py">arraycopy</span><span class="o">(</span><span class="n">inputIndices</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">outputIndices</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">inputValuesLength</span><span class="o">)</span>
+        <span class="nf">outputValues</span><span class="o">(</span><span class="n">inputValuesLength</span><span class="o">)</span> <span class="k">=</span> <span class="mf">1.0</span>
+        <span class="nf">outputIndices</span><span class="o">(</span><span class="n">inputValuesLength</span><span class="o">)</span> <span class="k">=</span> <span class="n">dim</span>
+        <span class="nv">Vectors</span><span class="o">.</span><span class="py">sparse</span><span class="o">(</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">outputIndices</span><span class="o">,</span> <span class="n">outputValues</span><span class="o">)</span>
       <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">IllegalArgumentException</span><span class="o">(</span><span class="n">s</span><span class="s">"Do not support vector type ${vector.getClass}"</span><span class="o">)</span>
     <span class="o">}</span>
 </code></pre></div></div>
 
 <h4 id="512-使用最优化算法计算最终的权重值">5.1.2 使用最优化算法计算最终的权重值</h4>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">weightsWithIntercept</span> <span class="k">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">optimize</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">initialWeightsWithIntercept</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">weightsWithIntercept</span> <span class="k">=</span> <span class="nv">optimizer</span><span class="o">.</span><span class="py">optimize</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">initialWeightsWithIntercept</span><span class="o">)</span>
 </code></pre></div></div>
 <p>  有梯度下降算法和<code class="highlighter-rouge">L-BFGS</code>两种算法来计算最终的权重值，查看<a href="../../../最优化算法/梯度下降/gradient-descent.md">梯度下降法</a>和<a href="../../../最优化算法/L-BFGS/lbfgs.md">L-BFGS</a>了解详细实现。
 这两种算法均使用<code class="highlighter-rouge">Gradient</code>的实现类计算梯度，使用<code class="highlighter-rouge">Updater</code>的实现类更新参数。在 <code class="highlighter-rouge">LogisticRegressionWithSGD</code> 和 <code class="highlighter-rouge">LogisticRegressionWithLBFGS</code> 中，它们均使用 <code class="highlighter-rouge">LogisticGradient</code> 实现类计算梯度，使用 <code class="highlighter-rouge">SquaredL2Updater</code> 实现类更新参数。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//在GradientDescent中
-</span><span class="k">private</span> <span class="k">val</span> <span class="n">gradient</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LogisticGradient</span><span class="o">()</span>
-<span class="k">private</span> <span class="k">val</span> <span class="n">updater</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SquaredL2Updater</span><span class="o">()</span>
-<span class="k">override</span> <span class="k">val</span> <span class="n">optimizer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">GradientDescent</span><span class="o">(</span><span class="n">gradient</span><span class="o">,</span> <span class="n">updater</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">setStepSize</span><span class="o">(</span><span class="n">stepSize</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">setNumIterations</span><span class="o">(</span><span class="n">numIterations</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">setRegParam</span><span class="o">(</span><span class="n">regParam</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">setMiniBatchFraction</span><span class="o">(</span><span class="n">miniBatchFraction</span><span class="o">)</span>
+</span><span class="k">private</span> <span class="k">val</span> <span class="nv">gradient</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LogisticGradient</span><span class="o">()</span>
+<span class="k">private</span> <span class="k">val</span> <span class="nv">updater</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SquaredL2Updater</span><span class="o">()</span>
+<span class="k">override</span> <span class="k">val</span> <span class="nv">optimizer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">GradientDescent</span><span class="o">(</span><span class="n">gradient</span><span class="o">,</span> <span class="n">updater</span><span class="o">)</span>
+    <span class="o">.</span><span class="py">setStepSize</span><span class="o">(</span><span class="n">stepSize</span><span class="o">)</span>
+    <span class="o">.</span><span class="py">setNumIterations</span><span class="o">(</span><span class="n">numIterations</span><span class="o">)</span>
+    <span class="o">.</span><span class="py">setRegParam</span><span class="o">(</span><span class="n">regParam</span><span class="o">)</span>
+    <span class="o">.</span><span class="py">setMiniBatchFraction</span><span class="o">(</span><span class="n">miniBatchFraction</span><span class="o">)</span>
 <span class="c1">//在LBFGS中
-</span><span class="k">override</span> <span class="k">val</span> <span class="n">optimizer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LBFGS</span><span class="o">(</span><span class="k">new</span> <span class="nc">LogisticGradient</span><span class="o">,</span> <span class="k">new</span> <span class="nc">SquaredL2Updater</span><span class="o">)</span>
+</span><span class="k">override</span> <span class="k">val</span> <span class="nv">optimizer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LBFGS</span><span class="o">(</span><span class="k">new</span> <span class="nc">LogisticGradient</span><span class="o">,</span> <span class="k">new</span> <span class="nc">SquaredL2Updater</span><span class="o">)</span>
 </code></pre></div></div>
 <p>  下面将详细介绍<code class="highlighter-rouge">LogisticGradient</code>的实现和<code class="highlighter-rouge">SquaredL2Updater</code>的实现。</p>
 
@@ -427,78 +431,78 @@
 
 <p>  <code class="highlighter-rouge">LogisticGradient</code>中使用<code class="highlighter-rouge">compute</code>方法计算梯度。计算分为两种情况，即二元逻辑回归的情况和多元逻辑回归的情况。虽然多元逻辑回归也可以实现二元分类，但是为了效率，<code class="highlighter-rouge">compute</code>方法仍然实现了一个二元逻辑回归的版本。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">margin</span> <span class="k">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">*</span> <span class="n">dot</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">weights</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">multiplier</span> <span class="k">=</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(</span><span class="n">margin</span><span class="o">)))</span> <span class="o">-</span> <span class="n">label</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">margin</span> <span class="k">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">*</span> <span class="nf">dot</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">weights</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">multiplier</span> <span class="k">=</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="nv">math</span><span class="o">.</span><span class="py">exp</span><span class="o">(</span><span class="n">margin</span><span class="o">)))</span> <span class="o">-</span> <span class="n">label</span>
 <span class="c1">//y += a * x，即cumGradient += multiplier * data
-</span><span class="n">axpy</span><span class="o">(</span><span class="n">multiplier</span><span class="o">,</span> <span class="n">data</span><span class="o">,</span> <span class="n">cumGradient</span><span class="o">)</span>
-<span class="k">if</span> <span class="o">(</span><span class="n">label</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="nf">axpy</span><span class="o">(</span><span class="n">multiplier</span><span class="o">,</span> <span class="n">data</span><span class="o">,</span> <span class="n">cumGradient</span><span class="o">)</span>
+<span class="nf">if</span> <span class="o">(</span><span class="n">label</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// The following is equivalent to log(1 + exp(margin)) but more numerically stable.
-</span>    <span class="nc">MLUtils</span><span class="o">.</span><span class="n">log1pExp</span><span class="o">(</span><span class="n">margin</span><span class="o">)</span>
+</span>    <span class="nv">MLUtils</span><span class="o">.</span><span class="py">log1pExp</span><span class="o">(</span><span class="n">margin</span><span class="o">)</span>
 <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-    <span class="nc">MLUtils</span><span class="o">.</span><span class="n">log1pExp</span><span class="o">(</span><span class="n">margin</span><span class="o">)</span> <span class="o">-</span> <span class="n">margin</span>
+    <span class="nv">MLUtils</span><span class="o">.</span><span class="py">log1pExp</span><span class="o">(</span><span class="n">margin</span><span class="o">)</span> <span class="o">-</span> <span class="n">margin</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>  这里的<code class="highlighter-rouge">multiplier</code>就是上文的公式<strong>(2)</strong>。<code class="highlighter-rouge">axpy</code>方法用于计算梯度，这里表示的意思是<code class="highlighter-rouge">h(x) * x</code>。下面是多元逻辑回归的实现方法。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//权重
-</span><span class="k">val</span> <span class="n">weightsArray</span> <span class="k">=</span> <span class="n">weights</span> <span class="k">match</span> <span class="o">{</span>
-    <span class="k">case</span> <span class="n">dv</span><span class="k">:</span> <span class="kt">DenseVector</span> <span class="o">=&gt;</span> <span class="n">dv</span><span class="o">.</span><span class="n">values</span>
+</span><span class="k">val</span> <span class="nv">weightsArray</span> <span class="k">=</span> <span class="n">weights</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="n">dv</span><span class="k">:</span> <span class="kt">DenseVector</span> <span class="o">=&gt;</span> <span class="nv">dv</span><span class="o">.</span><span class="py">values</span>
     <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span>
             <span class="k">throw</span> <span class="k">new</span> <span class="nc">IllegalArgumentException</span>
 <span class="o">}</span>
 <span class="c1">//梯度
-</span><span class="k">val</span> <span class="n">cumGradientArray</span> <span class="k">=</span> <span class="n">cumGradient</span> <span class="k">match</span> <span class="o">{</span>
-    <span class="k">case</span> <span class="n">dv</span><span class="k">:</span> <span class="kt">DenseVector</span> <span class="o">=&gt;</span> <span class="n">dv</span><span class="o">.</span><span class="n">values</span>
+</span><span class="k">val</span> <span class="nv">cumGradientArray</span> <span class="k">=</span> <span class="n">cumGradient</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="n">dv</span><span class="k">:</span> <span class="kt">DenseVector</span> <span class="o">=&gt;</span> <span class="nv">dv</span><span class="o">.</span><span class="py">values</span>
     <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nc">IllegalArgumentException</span>
 <span class="o">}</span>
 <span class="c1">// 计算所有类别中最大的margin
 </span><span class="k">var</span> <span class="n">marginY</span> <span class="k">=</span> <span class="mf">0.0</span>
-<span class="k">var</span> <span class="n">maxMargin</span> <span class="k">=</span> <span class="nc">Double</span><span class="o">.</span><span class="nc">NegativeInfinity</span>
+<span class="k">var</span> <span class="n">maxMargin</span> <span class="k">=</span> <span class="nv">Double</span><span class="o">.</span><span class="py">NegativeInfinity</span>
 <span class="k">var</span> <span class="n">maxMarginIndex</span> <span class="k">=</span> <span class="mi">0</span>
-<span class="k">val</span> <span class="n">margins</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">tabulate</span><span class="o">(</span><span class="n">numClasses</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span> <span class="n">i</span> <span class="k">=&gt;</span>
+<span class="k">val</span> <span class="nv">margins</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">tabulate</span><span class="o">(</span><span class="n">numClasses</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span> <span class="n">i</span> <span class="k">=&gt;</span>
     <span class="k">var</span> <span class="n">margin</span> <span class="k">=</span> <span class="mf">0.0</span>
-    <span class="n">data</span><span class="o">.</span><span class="n">foreachActive</span> <span class="o">{</span> <span class="o">(</span><span class="n">index</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="n">margin</span> <span class="o">+=</span> <span class="n">value</span> <span class="o">*</span> <span class="n">weightsArray</span><span class="o">((</span><span class="n">i</span> <span class="o">*</span> <span class="n">dataSize</span><span class="o">)</span> <span class="o">+</span> <span class="n">index</span><span class="o">)</span>
+    <span class="nv">data</span><span class="o">.</span><span class="py">foreachActive</span> <span class="o">{</span> <span class="o">(</span><span class="n">index</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="n">margin</span> <span class="o">+=</span> <span class="n">value</span> <span class="o">*</span> <span class="nf">weightsArray</span><span class="o">((</span><span class="n">i</span> <span class="o">*</span> <span class="n">dataSize</span><span class="o">)</span> <span class="o">+</span> <span class="n">index</span><span class="o">)</span>
     <span class="o">}</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">label</span><span class="o">.</span><span class="n">toInt</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="n">marginY</span> <span class="k">=</span> <span class="n">margin</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">margin</span> <span class="o">&gt;</span> <span class="n">maxMargin</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="nv">label</span><span class="o">.</span><span class="py">toInt</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="n">marginY</span> <span class="k">=</span> <span class="n">margin</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">margin</span> <span class="o">&gt;</span> <span class="n">maxMargin</span><span class="o">)</span> <span class="o">{</span>
             <span class="n">maxMargin</span> <span class="k">=</span> <span class="n">margin</span>
             <span class="n">maxMarginIndex</span> <span class="k">=</span> <span class="n">i</span>
     <span class="o">}</span>
     <span class="n">margin</span>
 <span class="o">}</span>
 <span class="c1">//计算sum，保证每个margin都小于0，避免出现算术溢出的情况
-</span><span class="k">val</span> <span class="n">sum</span> <span class="k">=</span> <span class="o">{</span>
+</span><span class="k">val</span> <span class="nv">sum</span> <span class="k">=</span> <span class="o">{</span>
      <span class="k">var</span> <span class="n">temp</span> <span class="k">=</span> <span class="mf">0.0</span>
-     <span class="k">if</span> <span class="o">(</span><span class="n">maxMargin</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-         <span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">numClasses</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-              <span class="n">margins</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">-=</span> <span class="n">maxMargin</span>
-              <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">maxMarginIndex</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">temp</span> <span class="o">+=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(-</span><span class="n">maxMargin</span><span class="o">)</span>
+     <span class="nf">if</span> <span class="o">(</span><span class="n">maxMargin</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+         <span class="nf">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">numClasses</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+              <span class="nf">margins</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">-=</span> <span class="n">maxMargin</span>
+              <span class="nf">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">maxMarginIndex</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">temp</span> <span class="o">+=</span> <span class="nv">math</span><span class="o">.</span><span class="py">exp</span><span class="o">(-</span><span class="n">maxMargin</span><span class="o">)</span>
               <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                <span class="n">temp</span> <span class="o">+=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(</span><span class="n">margins</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
+                <span class="n">temp</span> <span class="o">+=</span> <span class="nv">math</span><span class="o">.</span><span class="py">exp</span><span class="o">(</span><span class="nf">margins</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
               <span class="o">}</span>
          <span class="o">}</span>
      <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-         <span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">numClasses</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-              <span class="n">temp</span> <span class="o">+=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(</span><span class="n">margins</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
+         <span class="nf">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">numClasses</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+              <span class="n">temp</span> <span class="o">+=</span> <span class="nv">math</span><span class="o">.</span><span class="py">exp</span><span class="o">(</span><span class="nf">margins</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
          <span class="o">}</span>
      <span class="o">}</span>
      <span class="n">temp</span>
 <span class="o">}</span>
 <span class="c1">//计算multiplier并计算梯度
-</span><span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">numClasses</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-     <span class="k">val</span> <span class="n">multiplier</span> <span class="k">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(</span><span class="n">margins</span><span class="o">(</span><span class="n">i</span><span class="o">))</span> <span class="o">/</span> <span class="o">(</span><span class="n">sum</span> <span class="o">+</span> <span class="mf">1.0</span><span class="o">)</span> <span class="o">-</span> <span class="o">{</span>
-          <span class="k">if</span> <span class="o">(</span><span class="n">label</span> <span class="o">!=</span> <span class="mf">0.0</span> <span class="o">&amp;&amp;</span> <span class="n">label</span> <span class="o">==</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="mf">0.0</span>
+</span><span class="nf">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">numClasses</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+     <span class="k">val</span> <span class="nv">multiplier</span> <span class="k">=</span> <span class="nv">math</span><span class="o">.</span><span class="py">exp</span><span class="o">(</span><span class="nf">margins</span><span class="o">(</span><span class="n">i</span><span class="o">))</span> <span class="o">/</span> <span class="o">(</span><span class="n">sum</span> <span class="o">+</span> <span class="mf">1.0</span><span class="o">)</span> <span class="o">-</span> <span class="o">{</span>
+          <span class="nf">if</span> <span class="o">(</span><span class="n">label</span> <span class="o">!=</span> <span class="mf">0.0</span> <span class="o">&amp;&amp;</span> <span class="n">label</span> <span class="o">==</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="mf">0.0</span>
      <span class="o">}</span>
-     <span class="n">data</span><span class="o">.</span><span class="n">foreachActive</span> <span class="o">{</span> <span class="o">(</span><span class="n">index</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span>
-         <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="n">cumGradientArray</span><span class="o">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">dataSize</span> <span class="o">+</span> <span class="n">index</span><span class="o">)</span> <span class="o">+=</span> <span class="n">multiplier</span> <span class="o">*</span> <span class="n">value</span>
+     <span class="nv">data</span><span class="o">.</span><span class="py">foreachActive</span> <span class="o">{</span> <span class="o">(</span><span class="n">index</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span>
+         <span class="nf">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="nf">cumGradientArray</span><span class="o">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">dataSize</span> <span class="o">+</span> <span class="n">index</span><span class="o">)</span> <span class="o">+=</span> <span class="n">multiplier</span> <span class="o">*</span> <span class="n">value</span>
      <span class="o">}</span>
 <span class="o">}</span>
 <span class="c1">//计算损失函数,
-</span><span class="k">val</span> <span class="n">loss</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">label</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="o">)</span> <span class="n">math</span><span class="o">.</span><span class="n">log1p</span><span class="o">(</span><span class="n">sum</span><span class="o">)</span> <span class="o">-</span> <span class="n">marginY</span> <span class="k">else</span> <span class="n">math</span><span class="o">.</span><span class="n">log1p</span><span class="o">(</span><span class="n">sum</span><span class="o">)</span>
-<span class="k">if</span> <span class="o">(</span><span class="n">maxMargin</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="k">val</span> <span class="nv">loss</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">label</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="o">)</span> <span class="nv">math</span><span class="o">.</span><span class="py">log1p</span><span class="o">(</span><span class="n">sum</span><span class="o">)</span> <span class="o">-</span> <span class="n">marginY</span> <span class="k">else</span> <span class="nv">math</span><span class="o">.</span><span class="py">log1p</span><span class="o">(</span><span class="n">sum</span><span class="o">)</span>
+<span class="nf">if</span> <span class="o">(</span><span class="n">maxMargin</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
      <span class="n">loss</span> <span class="o">+</span> <span class="n">maxMargin</span>
 <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
      <span class="n">loss</span>
@@ -509,7 +513,7 @@
 </ul>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SquaredL2Updater</span> <span class="k">extends</span> <span class="nc">Updater</span> <span class="o">{</span>
-  <span class="k">override</span> <span class="k">def</span> <span class="n">compute</span><span class="o">(</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">compute</span><span class="o">(</span>
       <span class="n">weightsOld</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">gradient</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span>
       <span class="n">stepSize</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
@@ -518,15 +522,15 @@
     <span class="c1">// w' = w - thisIterStepSize * (gradient + regParam * w)
 </span>    <span class="c1">// w' = (1 - thisIterStepSize * regParam) * w - thisIterStepSize * gradient
 </span>    <span class="c1">//表示步长，即负梯度方向的大小
-</span>    <span class="k">val</span> <span class="n">thisIterStepSize</span> <span class="k">=</span> <span class="n">stepSize</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="o">(</span><span class="n">iter</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">brzWeights</span><span class="k">:</span> <span class="kt">BV</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="n">weightsOld</span><span class="o">.</span><span class="n">toBreeze</span><span class="o">.</span><span class="n">toDenseVector</span>
+</span>    <span class="k">val</span> <span class="nv">thisIterStepSize</span> <span class="k">=</span> <span class="n">stepSize</span> <span class="o">/</span> <span class="nv">math</span><span class="o">.</span><span class="py">sqrt</span><span class="o">(</span><span class="n">iter</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">brzWeights</span><span class="k">:</span> <span class="kt">BV</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="nv">weightsOld</span><span class="o">.</span><span class="py">toBreeze</span><span class="o">.</span><span class="py">toDenseVector</span>
     <span class="c1">//正则化，brzWeights每行数据均乘以(1.0 - thisIterStepSize * regParam)
 </span>    <span class="n">brzWeights</span> <span class="o">:*=</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">thisIterStepSize</span> <span class="o">*</span> <span class="n">regParam</span><span class="o">)</span>
     <span class="c1">//y += x * a，即brzWeights -= gradient * thisInterStepSize
-</span>    <span class="n">brzAxpy</span><span class="o">(-</span><span class="n">thisIterStepSize</span><span class="o">,</span> <span class="n">gradient</span><span class="o">.</span><span class="n">toBreeze</span><span class="o">,</span> <span class="n">brzWeights</span><span class="o">)</span>
+</span>    <span class="nf">brzAxpy</span><span class="o">(-</span><span class="n">thisIterStepSize</span><span class="o">,</span> <span class="nv">gradient</span><span class="o">.</span><span class="py">toBreeze</span><span class="o">,</span> <span class="n">brzWeights</span><span class="o">)</span>
     <span class="c1">//正则化||w||_2
-</span>    <span class="k">val</span> <span class="n">norm</span> <span class="k">=</span> <span class="n">brzNorm</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">)</span>
-    <span class="o">(</span><span class="nc">Vectors</span><span class="o">.</span><span class="n">fromBreeze</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">),</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">norm</span> <span class="o">*</span> <span class="n">norm</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">norm</span> <span class="k">=</span> <span class="nf">brzNorm</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">)</span>
+    <span class="o">(</span><span class="nv">Vectors</span><span class="o">.</span><span class="py">fromBreeze</span><span class="o">(</span><span class="n">brzWeights</span><span class="o">),</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">regParam</span> <span class="o">*</span> <span class="n">norm</span> <span class="o">*</span> <span class="n">norm</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -539,13 +543,13 @@
 
 <h4 id="513-对最终的权重值进行后处理">5.1.3 对最终的权重值进行后处理</h4>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">intercept</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">addIntercept</span> <span class="o">&amp;&amp;</span> <span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">weightsWithIntercept</span><span class="o">(</span><span class="n">weightsWithIntercept</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">intercept</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">addIntercept</span> <span class="o">&amp;&amp;</span> <span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nf">weightsWithIntercept</span><span class="o">(</span><span class="nv">weightsWithIntercept</span><span class="o">.</span><span class="py">size</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
       <span class="mf">0.0</span>
     <span class="o">}</span>
-<span class="k">var</span> <span class="n">weights</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">addIntercept</span> <span class="o">&amp;&amp;</span> <span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-      <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">weightsWithIntercept</span><span class="o">.</span><span class="n">toArray</span><span class="o">.</span><span class="n">slice</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">weightsWithIntercept</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="o">))</span>
+<span class="k">var</span> <span class="n">weights</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">addIntercept</span> <span class="o">&amp;&amp;</span> <span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="nv">weightsWithIntercept</span><span class="o">.</span><span class="py">toArray</span><span class="o">.</span><span class="py">slice</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="nv">weightsWithIntercept</span><span class="o">.</span><span class="py">size</span> <span class="o">-</span> <span class="mi">1</span><span class="o">))</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
       <span class="n">weightsWithIntercept</span>
     <span class="o">}</span>
@@ -553,30 +557,30 @@
 <p>  该段代码获得了截距（<code class="highlighter-rouge">intercept</code>）以及最终的权重值。由于截距（<code class="highlighter-rouge">intercept</code>）和权重是在收缩的空间进行训练的，所以我们需要再把它们转换到原始的空间。数学知识告诉我们，如果我们仅仅执行标准化而没有减去均值，即<code class="highlighter-rouge">withStd = true, withMean = false</code>，
 那么截距（<code class="highlighter-rouge">intercept</code>）的值并不会发送改变。所以下面的代码仅仅处理权重向量。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">useFeatureScaling</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">weights</span> <span class="k">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="o">(</span><span class="n">weights</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">if</span> <span class="o">(</span><span class="n">useFeatureScaling</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nf">if</span> <span class="o">(</span><span class="n">numOfLinearPredictor</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">weights</span> <span class="k">=</span> <span class="nv">scaler</span><span class="o">.</span><span class="py">transform</span><span class="o">(</span><span class="n">weights</span><span class="o">)</span>
       <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
         <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
-        <span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">size</span> <span class="o">/</span> <span class="n">numOfLinearPredictor</span>
-        <span class="k">val</span> <span class="n">weightsArray</span> <span class="k">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">toArray</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">numOfLinearPredictor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">n</span> <span class="k">=</span> <span class="nv">weights</span><span class="o">.</span><span class="py">size</span> <span class="o">/</span> <span class="n">numOfLinearPredictor</span>
+        <span class="k">val</span> <span class="nv">weightsArray</span> <span class="k">=</span> <span class="nv">weights</span><span class="o">.</span><span class="py">toArray</span>
+        <span class="nf">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">numOfLinearPredictor</span><span class="o">)</span> <span class="o">{</span>
           <span class="c1">//排除intercept
-</span>          <span class="k">val</span> <span class="n">start</span> <span class="k">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">n</span>
-          <span class="k">val</span> <span class="n">end</span> <span class="k">=</span> <span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="n">addIntercept</span><span class="o">)</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="o">}</span>
-          <span class="k">val</span> <span class="n">partialWeightsArray</span> <span class="k">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="o">(</span>
-            <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">weightsArray</span><span class="o">.</span><span class="n">slice</span><span class="o">(</span><span class="n">start</span><span class="o">,</span> <span class="n">end</span><span class="o">))).</span><span class="n">toArray</span>
-          <span class="nc">System</span><span class="o">.</span><span class="n">arraycopy</span><span class="o">(</span><span class="n">partialWeightsArray</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">weightsArray</span><span class="o">,</span> <span class="n">start</span><span class="o">,</span> <span class="n">partialWeightsArray</span><span class="o">.</span><span class="n">size</span><span class="o">)</span>
+</span>          <span class="k">val</span> <span class="nv">start</span> <span class="k">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">n</span>
+          <span class="k">val</span> <span class="nv">end</span> <span class="k">=</span> <span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="o">{</span> <span class="nf">if</span> <span class="o">(</span><span class="n">addIntercept</span><span class="o">)</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="o">}</span>
+          <span class="k">val</span> <span class="nv">partialWeightsArray</span> <span class="k">=</span> <span class="nv">scaler</span><span class="o">.</span><span class="py">transform</span><span class="o">(</span>
+            <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="nv">weightsArray</span><span class="o">.</span><span class="py">slice</span><span class="o">(</span><span class="n">start</span><span class="o">,</span> <span class="n">end</span><span class="o">))).</span><span class="py">toArray</span>
+          <span class="nv">System</span><span class="o">.</span><span class="py">arraycopy</span><span class="o">(</span><span class="n">partialWeightsArray</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">weightsArray</span><span class="o">,</span> <span class="n">start</span><span class="o">,</span> <span class="nv">partialWeightsArray</span><span class="o">.</span><span class="py">size</span><span class="o">)</span>
           <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="o">}</span>
-        <span class="n">weights</span> <span class="k">=</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">weightsArray</span><span class="o">)</span>
+        <span class="n">weights</span> <span class="k">=</span> <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="n">weightsArray</span><span class="o">)</span>
       <span class="o">}</span>
     <span class="o">}</span>
 </code></pre></div></div>
 
 <h4 id="514-创建模型">5.1.4 创建模型</h4>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">createModel</span><span class="o">(</span><span class="n">weights</span><span class="o">,</span> <span class="n">intercept</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">createModel</span><span class="o">(</span><span class="n">weights</span><span class="o">,</span> <span class="n">intercept</span><span class="o">)</span>
 </code></pre></div></div>
 
 <h3 id="52-预测">5.2 预测</h3>
@@ -587,10 +591,10 @@
   <li>二分类的情况</li>
 </ul>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">margin</span> <span class="k">=</span> <span class="n">dot</span><span class="o">(</span><span class="n">weightMatrix</span><span class="o">,</span> <span class="n">dataMatrix</span><span class="o">)</span> <span class="o">+</span> <span class="n">intercept</span>
-<span class="k">val</span> <span class="n">score</span> <span class="k">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="o">(-</span><span class="n">margin</span><span class="o">))</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">margin</span> <span class="k">=</span> <span class="nf">dot</span><span class="o">(</span><span class="n">weightMatrix</span><span class="o">,</span> <span class="n">dataMatrix</span><span class="o">)</span> <span class="o">+</span> <span class="n">intercept</span>
+<span class="k">val</span> <span class="nv">score</span> <span class="k">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="o">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="nv">math</span><span class="o">.</span><span class="py">exp</span><span class="o">(-</span><span class="n">margin</span><span class="o">))</span>
 <span class="n">threshold</span> <span class="k">match</span> <span class="o">{</span>
-    <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">t</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="k">if</span> <span class="o">(</span><span class="n">score</span> <span class="o">&gt;</span> <span class="n">t</span><span class="o">)</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="mf">0.0</span>
+    <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">t</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nf">if</span> <span class="o">(</span><span class="n">score</span> <span class="o">&gt;</span> <span class="n">t</span><span class="o">)</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="mf">0.0</span>
     <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="n">score</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -602,22 +606,22 @@
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">bestClass</span> <span class="k">=</span> <span class="mi">0</span>
 <span class="k">var</span> <span class="n">maxMargin</span> <span class="k">=</span> <span class="mf">0.0</span>
-<span class="k">val</span> <span class="n">withBias</span> <span class="k">=</span> <span class="n">dataMatrix</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">dataWithBiasSize</span>
-<span class="o">(</span><span class="mi">0</span> <span class="n">until</span> <span class="n">numClasses</span> <span class="o">-</span> <span class="mi">1</span><span class="o">).</span><span class="n">foreach</span> <span class="o">{</span> <span class="n">i</span> <span class="k">=&gt;</span>
+<span class="k">val</span> <span class="nv">withBias</span> <span class="k">=</span> <span class="nv">dataMatrix</span><span class="o">.</span><span class="py">size</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="nf">dataWithBiasSize</span>
+<span class="o">(</span><span class="mi">0</span> <span class="n">until</span> <span class="n">numClasses</span> <span class="o">-</span> <span class="mi">1</span><span class="o">).</span><span class="py">foreach</span> <span class="o">{</span> <span class="n">i</span> <span class="k">=&gt;</span>
         <span class="k">var</span> <span class="n">margin</span> <span class="k">=</span> <span class="mf">0.0</span>
-        <span class="n">dataMatrix</span><span class="o">.</span><span class="n">foreachActive</span> <span class="o">{</span> <span class="o">(</span><span class="n">index</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span>
-          <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="n">margin</span> <span class="o">+=</span> <span class="n">value</span> <span class="o">*</span> <span class="n">weightsArray</span><span class="o">((</span><span class="n">i</span> <span class="o">*</span> <span class="n">dataWithBiasSize</span><span class="o">)</span> <span class="o">+</span> <span class="n">index</span><span class="o">)</span>
+        <span class="nv">dataMatrix</span><span class="o">.</span><span class="py">foreachActive</span> <span class="o">{</span> <span class="o">(</span><span class="n">index</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span>
+          <span class="nf">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="n">margin</span> <span class="o">+=</span> <span class="n">value</span> <span class="o">*</span> <span class="nf">weightsArray</span><span class="o">((</span><span class="n">i</span> <span class="o">*</span> <span class="n">dataWithBiasSize</span><span class="o">)</span> <span class="o">+</span> <span class="n">index</span><span class="o">)</span>
         <span class="o">}</span>
         <span class="c1">// Intercept is required to be added into margin.
-</span>        <span class="k">if</span> <span class="o">(</span><span class="n">withBias</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">margin</span> <span class="o">+=</span> <span class="n">weightsArray</span><span class="o">((</span><span class="n">i</span> <span class="o">*</span> <span class="n">dataWithBiasSize</span><span class="o">)</span> <span class="o">+</span> <span class="n">dataMatrix</span><span class="o">.</span><span class="n">size</span><span class="o">)</span>
+</span>        <span class="nf">if</span> <span class="o">(</span><span class="n">withBias</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">margin</span> <span class="o">+=</span> <span class="nf">weightsArray</span><span class="o">((</span><span class="n">i</span> <span class="o">*</span> <span class="n">dataWithBiasSize</span><span class="o">)</span> <span class="o">+</span> <span class="nv">dataMatrix</span><span class="o">.</span><span class="py">size</span><span class="o">)</span>
         <span class="o">}</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">margin</span> <span class="o">&gt;</span> <span class="n">maxMargin</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">margin</span> <span class="o">&gt;</span> <span class="n">maxMargin</span><span class="o">)</span> <span class="o">{</span>
           <span class="n">maxMargin</span> <span class="k">=</span> <span class="n">margin</span>
           <span class="n">bestClass</span> <span class="k">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="o">}</span>
 <span class="o">}</span>
-<span class="n">bestClass</span><span class="o">.</span><span class="n">toDouble</span>
+<span class="nv">bestClass</span><span class="o">.</span><span class="py">toDouble</span>
 </code></pre></div></div>
 <p>  该段代码计算并找到最大的<code class="highlighter-rouge">margin</code>。如果<code class="highlighter-rouge">maxMargin</code>为负，那么第一类是该数据的类别。</p>
 
@@ -857,7 +861,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -1029,7 +1033,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

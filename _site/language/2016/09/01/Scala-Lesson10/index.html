@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -208,8 +212,8 @@
 </ul>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Equal</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">isEqual</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span>
-  <span class="k">def</span> <span class="n">isNotEqual</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">!</span><span class="n">isEqual</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">isEqual</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span>
+  <span class="k">def</span> <span class="nf">isNotEqual</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">!</span><span class="nf">isEqual</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -218,27 +222,27 @@
 <p>以下演示了特征的完整实例：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Equal</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">isEqual</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span>
-  <span class="k">def</span> <span class="n">isNotEqual</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">!</span><span class="n">isEqual</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">isEqual</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span>
+  <span class="k">def</span> <span class="nf">isNotEqual</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">!</span><span class="nf">isEqual</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
 <span class="o">}</span>
 
 <span class="k">class</span> <span class="nc">Point</span><span class="o">(</span><span class="n">xc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">yc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Equal</span> <span class="o">{</span>
   <span class="k">var</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">xc</span>
   <span class="k">var</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">yc</span>
-  <span class="k">def</span> <span class="n">isEqual</span><span class="o">(</span><span class="n">obj</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span>
-    <span class="n">obj</span><span class="o">.</span><span class="n">isInstanceOf</span><span class="o">[</span><span class="kt">Point</span><span class="o">]</span> <span class="o">&amp;&amp;</span>
-    <span class="n">obj</span><span class="o">.</span><span class="n">asInstanceOf</span><span class="o">[</span><span class="kt">Point</span><span class="o">].</span><span class="n">y</span> <span class="o">==</span> <span class="n">y</span>
+  <span class="k">def</span> <span class="nf">isEqual</span><span class="o">(</span><span class="n">obj</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span>
+    <span class="nv">obj</span><span class="o">.</span><span class="py">isInstanceOf</span><span class="o">[</span><span class="kt">Point</span><span class="o">]</span> <span class="o">&amp;&amp;</span>
+    <span class="nv">obj</span><span class="o">.</span><span class="py">asInstanceOf</span><span class="o">[</span><span class="kt">Point</span><span class="o">].</span><span class="py">y</span> <span class="o">==</span> <span class="n">y</span>
 <span class="o">}</span>
 
 <span class="k">object</span> <span class="nc">TraitsTest</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">p1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
-      <span class="k">val</span> <span class="n">p2</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
-      <span class="k">val</span> <span class="n">p3</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">p1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+      <span class="k">val</span> <span class="nv">p2</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
+      <span class="k">val</span> <span class="nv">p3</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
 
-      <span class="n">println</span><span class="o">(</span><span class="n">p1</span><span class="o">.</span><span class="n">isNotEqual</span><span class="o">(</span><span class="n">p2</span><span class="o">))</span>
-      <span class="n">println</span><span class="o">(</span><span class="n">p1</span><span class="o">.</span><span class="n">isNotEqual</span><span class="o">(</span><span class="n">p3</span><span class="o">))</span>
-      <span class="n">println</span><span class="o">(</span><span class="n">p1</span><span class="o">.</span><span class="n">isNotEqual</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
+      <span class="nf">println</span><span class="o">(</span><span class="nv">p1</span><span class="o">.</span><span class="py">isNotEqual</span><span class="o">(</span><span class="n">p2</span><span class="o">))</span>
+      <span class="nf">println</span><span class="o">(</span><span class="nv">p1</span><span class="o">.</span><span class="py">isNotEqual</span><span class="o">(</span><span class="n">p3</span><span class="o">))</span>
+      <span class="nf">println</span><span class="o">(</span><span class="nv">p1</span><span class="o">.</span><span class="py">isNotEqual</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -492,7 +496,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -664,7 +668,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

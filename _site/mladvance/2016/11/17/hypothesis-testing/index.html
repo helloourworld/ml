@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -214,30 +218,30 @@
     <span class="k">import</span> <span class="nn">org.apache.spark.rdd.RDD</span>
 
     <span class="c1">// a vector composed of the frequencies of events
-</span>    <span class="k">val</span> <span class="n">vec</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">vec</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">)</span>
 <span class="c1">//    val vec: Vector = Vectors.dense(0.1, 0.15, 0.2, 0.3, 0.25)
 </span>
     <span class="c1">// compute the goodness of fit. If a second vector to test against is not supplied
 </span>    <span class="c1">// as a parameter, the test runs against a uniform distribution.
-</span>    <span class="k">val</span> <span class="n">goodnessOfFitTestResult</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">chiSqTest</span><span class="o">(</span><span class="n">vec</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">goodnessOfFitTestResult</span> <span class="k">=</span> <span class="nv">Statistics</span><span class="o">.</span><span class="py">chiSqTest</span><span class="o">(</span><span class="n">vec</span><span class="o">)</span>
     <span class="c1">// summary of the test including the p-value, degrees of freedom, test statistic, the method
 </span>    <span class="c1">// used, and the null hypothesis.
-</span>    <span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">"$goodnessOfFitTestResult\n"</span><span class="o">)</span>
+</span>    <span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"$goodnessOfFitTestResult\n"</span><span class="o">)</span>
 
     <span class="c1">// a contingency matrix. Create a dense matrix ((1.0, 2.0), (3.0, 4.0), (5.0, 6.0))
-</span>    <span class="k">val</span> <span class="n">mat</span><span class="k">:</span> <span class="kt">Matrix</span> <span class="o">=</span> <span class="nc">Matrices</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">,</span> <span class="mf">5.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">4.0</span><span class="o">,</span> <span class="mf">6.0</span><span class="o">))</span>
+</span>    <span class="k">val</span> <span class="nv">mat</span><span class="k">:</span> <span class="kt">Matrix</span> <span class="o">=</span> <span class="nv">Matrices</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">,</span> <span class="mf">5.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">4.0</span><span class="o">,</span> <span class="mf">6.0</span><span class="o">))</span>
 
     <span class="c1">// conduct Pearson's independence test on the input contingency matrix
-</span>    <span class="k">val</span> <span class="n">independenceTestResult</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">chiSqTest</span><span class="o">(</span><span class="n">mat</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">independenceTestResult</span> <span class="k">=</span> <span class="nv">Statistics</span><span class="o">.</span><span class="py">chiSqTest</span><span class="o">(</span><span class="n">mat</span><span class="o">)</span>
     <span class="c1">// summary of the test including the p-value, degrees of freedom
-</span>    <span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">"$independenceTestResult\n"</span><span class="o">)</span>
+</span>    <span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"$independenceTestResult\n"</span><span class="o">)</span>
 
-    <span class="k">val</span> <span class="n">obs</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">]</span> <span class="k">=</span>
-      <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="o">(</span>
+    <span class="k">val</span> <span class="nv">obs</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">]</span> <span class="k">=</span>
+      <span class="nv">sc</span><span class="o">.</span><span class="py">parallelize</span><span class="o">(</span>
         <span class="nc">Seq</span><span class="o">(</span>
-          <span class="nc">LabeledPoint</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">)),</span>
-          <span class="nc">LabeledPoint</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">)),</span>
-          <span class="nc">LabeledPoint</span><span class="o">(-</span><span class="mf">1.0</span><span class="o">,</span> <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(-</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">)</span>
+          <span class="nc">LabeledPoint</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">)),</span>
+          <span class="nc">LabeledPoint</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">)),</span>
+          <span class="nc">LabeledPoint</span><span class="o">(-</span><span class="mf">1.0</span><span class="o">,</span> <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(-</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">)</span>
           <span class="o">)</span>
         <span class="o">)</span>
       <span class="o">)</span> <span class="c1">// (feature, label) pairs.
@@ -245,10 +249,10 @@
     <span class="c1">// The contingency table is constructed from the raw (feature, label) pairs and used to conduct
 </span>    <span class="c1">// the independence test. Returns an array containing the ChiSquaredTestResult for every feature
 </span>    <span class="c1">// against the label.
-</span>    <span class="k">val</span> <span class="n">featureTestResults</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">ChiSqTestResult</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">chiSqTest</span><span class="o">(</span><span class="n">obs</span><span class="o">)</span>
-    <span class="n">featureTestResults</span><span class="o">.</span><span class="n">zipWithIndex</span><span class="o">.</span><span class="n">foreach</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="k">=&gt;</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"Column "</span> <span class="o">+</span> <span class="o">(</span><span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="o">).</span><span class="n">toString</span> <span class="o">+</span> <span class="s">":"</span><span class="o">)</span>
-      <span class="n">println</span><span class="o">(</span><span class="n">k</span> <span class="o">+</span> <span class="s">"\n"</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">featureTestResults</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">ChiSqTestResult</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Statistics</span><span class="o">.</span><span class="py">chiSqTest</span><span class="o">(</span><span class="n">obs</span><span class="o">)</span>
+    <span class="nv">featureTestResults</span><span class="o">.</span><span class="py">zipWithIndex</span><span class="o">.</span><span class="py">foreach</span> <span class="o">{</span> <span class="nf">case</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="k">=&gt;</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"Column "</span> <span class="o">+</span> <span class="o">(</span><span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="o">).</span><span class="py">toString</span> <span class="o">+</span> <span class="s">":"</span><span class="o">)</span>
+      <span class="nf">println</span><span class="o">(</span><span class="n">k</span> <span class="o">+</span> <span class="s">"\n"</span><span class="o">)</span>
     <span class="o">}</span>  <span class="c1">// summary of the test
 </span>
 </code></pre></div></div>
@@ -260,19 +264,19 @@
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.Statistics</span>
     <span class="k">import</span> <span class="nn">org.apache.spark.rdd.RDD</span>
 
-    <span class="k">val</span> <span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="o">(</span><span class="nc">Seq</span><span class="o">(</span><span class="mf">0.1</span><span class="o">,</span> <span class="mf">0.15</span><span class="o">,</span> <span class="mf">0.2</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">,</span> <span class="mf">0.25</span><span class="o">))</span>  <span class="c1">// an RDD of sample data
+    <span class="k">val</span> <span class="nv">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="nv">sc</span><span class="o">.</span><span class="py">parallelize</span><span class="o">(</span><span class="nc">Seq</span><span class="o">(</span><span class="mf">0.1</span><span class="o">,</span> <span class="mf">0.15</span><span class="o">,</span> <span class="mf">0.2</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">,</span> <span class="mf">0.25</span><span class="o">))</span>  <span class="c1">// an RDD of sample data
 </span>
     <span class="c1">// run a KS test for the sample versus a standard normal distribution
-</span>    <span class="k">val</span> <span class="n">testResult</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">kolmogorovSmirnovTest</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="s">"norm"</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">testResult</span> <span class="k">=</span> <span class="nv">Statistics</span><span class="o">.</span><span class="py">kolmogorovSmirnovTest</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="s">"norm"</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
     <span class="c1">// summary of the test including the p-value, test statistic, and null hypothesis if our p-value
 </span>    <span class="c1">// indicates significance, we can reject the null hypothesis.
-</span>    <span class="n">println</span><span class="o">(</span><span class="n">testResult</span><span class="o">)</span>
-    <span class="n">println</span><span class="o">()</span>
+</span>    <span class="nf">println</span><span class="o">(</span><span class="n">testResult</span><span class="o">)</span>
+    <span class="nf">println</span><span class="o">()</span>
 
     <span class="c1">// perform a KS test using a cumulative distribution function of our making
-</span>    <span class="k">val</span> <span class="n">myCDF</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="mf">0.1</span> <span class="o">-&gt;</span> <span class="mf">0.2</span><span class="o">,</span> <span class="mf">0.15</span> <span class="o">-&gt;</span> <span class="mf">0.6</span><span class="o">,</span> <span class="mf">0.2</span> <span class="o">-&gt;</span> <span class="mf">0.05</span><span class="o">,</span> <span class="mf">0.3</span> <span class="o">-&gt;</span> <span class="mf">0.05</span><span class="o">,</span> <span class="mf">0.25</span> <span class="o">-&gt;</span> <span class="mf">0.1</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">testResult2</span> <span class="k">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">kolmogorovSmirnovTest</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">myCDF</span><span class="o">)</span>
-    <span class="n">println</span><span class="o">(</span><span class="n">testResult2</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">myCDF</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="mf">0.1</span> <span class="o">-&gt;</span> <span class="mf">0.2</span><span class="o">,</span> <span class="mf">0.15</span> <span class="o">-&gt;</span> <span class="mf">0.6</span><span class="o">,</span> <span class="mf">0.2</span> <span class="o">-&gt;</span> <span class="mf">0.05</span><span class="o">,</span> <span class="mf">0.3</span> <span class="o">-&gt;</span> <span class="mf">0.05</span><span class="o">,</span> <span class="mf">0.25</span> <span class="o">-&gt;</span> <span class="mf">0.1</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">testResult2</span> <span class="k">=</span> <span class="nv">Statistics</span><span class="o">.</span><span class="py">kolmogorovSmirnovTest</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">myCDF</span><span class="o">)</span>
+    <span class="nf">println</span><span class="o">(</span><span class="n">testResult2</span><span class="o">)</span>
 </code></pre></div></div>
 
 <h2 id="流式显著性检测">流式显著性检测</h2>
@@ -308,15 +312,15 @@
 
 <p>  <code class="highlighter-rouge">StreamingTest</code>支持流式假设检测。下面是一个应用的例子。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="n">ssc</span><span class="o">.</span><span class="n">textFileStream</span><span class="o">(</span><span class="n">dataDir</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="s">","</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
-  <span class="k">case</span> <span class="nc">Array</span><span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">BinarySample</span><span class="o">(</span><span class="n">label</span><span class="o">.</span><span class="n">toBoolean</span><span class="o">,</span> <span class="n">value</span><span class="o">.</span><span class="n">toDouble</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">data</span> <span class="k">=</span> <span class="nv">ssc</span><span class="o">.</span><span class="py">textFileStream</span><span class="o">(</span><span class="n">dataDir</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="n">line</span> <span class="k">=&gt;</span> <span class="nv">line</span><span class="o">.</span><span class="py">split</span><span class="o">(</span><span class="s">","</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
+  <span class="k">case</span> <span class="nc">Array</span><span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">BinarySample</span><span class="o">(</span><span class="nv">label</span><span class="o">.</span><span class="py">toBoolean</span><span class="o">,</span> <span class="nv">value</span><span class="o">.</span><span class="py">toDouble</span><span class="o">)</span>
 <span class="o">})</span>
-<span class="k">val</span> <span class="n">streamingTest</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">StreamingTest</span><span class="o">()</span>
-  <span class="o">.</span><span class="n">setPeacePeriod</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
-  <span class="o">.</span><span class="n">setWindowSize</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
-  <span class="o">.</span><span class="n">setTestMethod</span><span class="o">(</span><span class="s">"welch"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">out</span> <span class="k">=</span> <span class="n">streamingTest</span><span class="o">.</span><span class="n">registerStream</span><span class="o">(</span><span class="n">data</span><span class="o">)</span>
-<span class="n">out</span><span class="o">.</span><span class="n">print</span><span class="o">()</span>
+<span class="k">val</span> <span class="nv">streamingTest</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">StreamingTest</span><span class="o">()</span>
+  <span class="o">.</span><span class="py">setPeacePeriod</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+  <span class="o">.</span><span class="py">setWindowSize</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+  <span class="o">.</span><span class="py">setTestMethod</span><span class="o">(</span><span class="s">"welch"</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">out</span> <span class="k">=</span> <span class="nv">streamingTest</span><span class="o">.</span><span class="py">registerStream</span><span class="o">(</span><span class="n">data</span><span class="o">)</span>
+<span class="nv">out</span><span class="o">.</span><span class="py">print</span><span class="o">()</span>
 </code></pre></div></div>
 
 <h1 id="参考文献">参考文献</h1>
@@ -553,7 +557,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -725,7 +729,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

@@ -6,3 +6,16 @@
 * 欢迎star
 * 欢迎fork
 * Happy hacking ^_^
+"""
+Speed :
+Jekyll server --watch --limit_posts 5
+
+Git:
+ git config --global core.autocrlf false
+
+Jupyter :
+ jupyter nbconvert JD_Python_2_Describtive_Statistics.ipynb --to slides --post serve
+
+
+http://blog.csdn.net/mmc2015/article/details/51885869
+"""

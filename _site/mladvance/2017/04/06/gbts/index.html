@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -246,27 +250,27 @@
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.model.GradientBoostedTreesModel</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
 <span class="c1">// 准备数据
-</span><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="nc">MLUtils</span><span class="o">.</span><span class="n">loadLibSVMFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/mllib/sample_libsvm_data.txt"</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">data</span> <span class="k">=</span> <span class="nv">MLUtils</span><span class="o">.</span><span class="py">loadLibSVMFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/mllib/sample_libsvm_data.txt"</span><span class="o">)</span>
 <span class="c1">// Split the data into training and test sets (30% held out for testing)
-</span><span class="k">val</span> <span class="n">splits</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.7</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">))</span>
-<span class="k">val</span> <span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">testData</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="n">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="n">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
+</span><span class="k">val</span> <span class="nv">splits</span> <span class="k">=</span> <span class="nv">data</span><span class="o">.</span><span class="py">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.7</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">))</span>
+<span class="nf">val</span> <span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">testData</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="nf">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="nf">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
 <span class="c1">// 训练模型
 // The defaultParams for Classification use LogLoss by default.
-</span><span class="k">val</span> <span class="n">boostingStrategy</span> <span class="k">=</span> <span class="nc">BoostingStrategy</span><span class="o">.</span><span class="n">defaultParams</span><span class="o">(</span><span class="s">"Classification"</span><span class="o">)</span>
-<span class="n">boostingStrategy</span><span class="o">.</span><span class="n">numIterations</span> <span class="k">=</span> <span class="mi">3</span> <span class="c1">// Note: Use more iterations in practice.
-</span><span class="n">boostingStrategy</span><span class="o">.</span><span class="n">treeStrategy</span><span class="o">.</span><span class="n">numClasses</span> <span class="k">=</span> <span class="mi">2</span>
-<span class="n">boostingStrategy</span><span class="o">.</span><span class="n">treeStrategy</span><span class="o">.</span><span class="n">maxDepth</span> <span class="k">=</span> <span class="mi">5</span>
+</span><span class="k">val</span> <span class="nv">boostingStrategy</span> <span class="k">=</span> <span class="nv">BoostingStrategy</span><span class="o">.</span><span class="py">defaultParams</span><span class="o">(</span><span class="s">"Classification"</span><span class="o">)</span>
+<span class="nv">boostingStrategy</span><span class="o">.</span><span class="py">numIterations</span> <span class="k">=</span> <span class="mi">3</span> <span class="c1">// Note: Use more iterations in practice.
+</span><span class="nv">boostingStrategy</span><span class="o">.</span><span class="py">treeStrategy</span><span class="o">.</span><span class="py">numClasses</span> <span class="k">=</span> <span class="mi">2</span>
+<span class="nv">boostingStrategy</span><span class="o">.</span><span class="py">treeStrategy</span><span class="o">.</span><span class="py">maxDepth</span> <span class="k">=</span> <span class="mi">5</span>
 <span class="c1">// Empty categoricalFeaturesInfo indicates all features are continuous.
-</span><span class="n">boostingStrategy</span><span class="o">.</span><span class="n">treeStrategy</span><span class="o">.</span><span class="n">categoricalFeaturesInfo</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]()</span>
-<span class="k">val</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">GradientBoostedTrees</span><span class="o">.</span><span class="n">train</span><span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">boostingStrategy</span><span class="o">)</span>
+</span><span class="nv">boostingStrategy</span><span class="o">.</span><span class="py">treeStrategy</span><span class="o">.</span><span class="py">categoricalFeaturesInfo</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]()</span>
+<span class="k">val</span> <span class="nv">model</span> <span class="k">=</span> <span class="nv">GradientBoostedTrees</span><span class="o">.</span><span class="py">train</span><span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">boostingStrategy</span><span class="o">)</span>
 <span class="c1">// 用测试数据评价模型
-</span><span class="k">val</span> <span class="n">labelAndPreds</span> <span class="k">=</span> <span class="n">testData</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">point</span> <span class="k">=&gt;</span>
-  <span class="k">val</span> <span class="n">prediction</span> <span class="k">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">point</span><span class="o">.</span><span class="n">features</span><span class="o">)</span>
-  <span class="o">(</span><span class="n">point</span><span class="o">.</span><span class="n">label</span><span class="o">,</span> <span class="n">prediction</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">labelAndPreds</span> <span class="k">=</span> <span class="nv">testData</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="n">point</span> <span class="k">=&gt;</span>
+  <span class="k">val</span> <span class="nv">prediction</span> <span class="k">=</span> <span class="nv">model</span><span class="o">.</span><span class="py">predict</span><span class="o">(</span><span class="nv">point</span><span class="o">.</span><span class="py">features</span><span class="o">)</span>
+  <span class="o">(</span><span class="nv">point</span><span class="o">.</span><span class="py">label</span><span class="o">,</span> <span class="n">prediction</span><span class="o">)</span>
 <span class="o">}</span>
-<span class="k">val</span> <span class="n">testErr</span> <span class="k">=</span> <span class="n">labelAndPreds</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">r</span> <span class="k">=&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">_1</span> <span class="o">!=</span> <span class="n">r</span><span class="o">.</span><span class="n">_2</span><span class="o">).</span><span class="n">count</span><span class="o">.</span><span class="n">toDouble</span> <span class="o">/</span> <span class="n">testData</span><span class="o">.</span><span class="n">count</span><span class="o">()</span>
-<span class="n">println</span><span class="o">(</span><span class="s">"Test Error = "</span> <span class="o">+</span> <span class="n">testErr</span><span class="o">)</span>
-<span class="n">println</span><span class="o">(</span><span class="s">"Learned classification GBT model:\n"</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">toDebugString</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">testErr</span> <span class="k">=</span> <span class="nv">labelAndPreds</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="n">r</span> <span class="k">=&gt;</span> <span class="nv">r</span><span class="o">.</span><span class="py">_1</span> <span class="o">!=</span> <span class="nv">r</span><span class="o">.</span><span class="py">_2</span><span class="o">).</span><span class="py">count</span><span class="o">.</span><span class="py">toDouble</span> <span class="o">/</span> <span class="nv">testData</span><span class="o">.</span><span class="py">count</span><span class="o">()</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Test Error = "</span> <span class="o">+</span> <span class="n">testErr</span><span class="o">)</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Learned classification GBT model:\n"</span> <span class="o">+</span> <span class="nv">model</span><span class="o">.</span><span class="py">toDebugString</span><span class="o">)</span>
 </code></pre></div></div>
 <p>  下面的代码是回归的例子。</p>
 
@@ -275,26 +279,26 @@
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.tree.model.GradientBoostedTreesModel</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.util.MLUtils</span>
 <span class="c1">// 准备数据
-</span><span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="nc">MLUtils</span><span class="o">.</span><span class="n">loadLibSVMFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/mllib/sample_libsvm_data.txt"</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">data</span> <span class="k">=</span> <span class="nv">MLUtils</span><span class="o">.</span><span class="py">loadLibSVMFile</span><span class="o">(</span><span class="n">sc</span><span class="o">,</span> <span class="s">"data/mllib/sample_libsvm_data.txt"</span><span class="o">)</span>
 <span class="c1">// Split the data into training and test sets (30% held out for testing)
-</span><span class="k">val</span> <span class="n">splits</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.7</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">))</span>
-<span class="k">val</span> <span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">testData</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="n">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="n">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
+</span><span class="k">val</span> <span class="nv">splits</span> <span class="k">=</span> <span class="nv">data</span><span class="o">.</span><span class="py">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.7</span><span class="o">,</span> <span class="mf">0.3</span><span class="o">))</span>
+<span class="nf">val</span> <span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">testData</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="nf">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="nf">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
 <span class="c1">// 训练模型
 // The defaultParams for Regression use SquaredError by default.
-</span><span class="k">val</span> <span class="n">boostingStrategy</span> <span class="k">=</span> <span class="nc">BoostingStrategy</span><span class="o">.</span><span class="n">defaultParams</span><span class="o">(</span><span class="s">"Regression"</span><span class="o">)</span>
-<span class="n">boostingStrategy</span><span class="o">.</span><span class="n">numIterations</span> <span class="k">=</span> <span class="mi">3</span> <span class="c1">// Note: Use more iterations in practice.
-</span><span class="n">boostingStrategy</span><span class="o">.</span><span class="n">treeStrategy</span><span class="o">.</span><span class="n">maxDepth</span> <span class="k">=</span> <span class="mi">5</span>
+</span><span class="k">val</span> <span class="nv">boostingStrategy</span> <span class="k">=</span> <span class="nv">BoostingStrategy</span><span class="o">.</span><span class="py">defaultParams</span><span class="o">(</span><span class="s">"Regression"</span><span class="o">)</span>
+<span class="nv">boostingStrategy</span><span class="o">.</span><span class="py">numIterations</span> <span class="k">=</span> <span class="mi">3</span> <span class="c1">// Note: Use more iterations in practice.
+</span><span class="nv">boostingStrategy</span><span class="o">.</span><span class="py">treeStrategy</span><span class="o">.</span><span class="py">maxDepth</span> <span class="k">=</span> <span class="mi">5</span>
 <span class="c1">// Empty categoricalFeaturesInfo indicates all features are continuous.
-</span><span class="n">boostingStrategy</span><span class="o">.</span><span class="n">treeStrategy</span><span class="o">.</span><span class="n">categoricalFeaturesInfo</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]()</span>
-<span class="k">val</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">GradientBoostedTrees</span><span class="o">.</span><span class="n">train</span><span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">boostingStrategy</span><span class="o">)</span>
+</span><span class="nv">boostingStrategy</span><span class="o">.</span><span class="py">treeStrategy</span><span class="o">.</span><span class="py">categoricalFeaturesInfo</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]()</span>
+<span class="k">val</span> <span class="nv">model</span> <span class="k">=</span> <span class="nv">GradientBoostedTrees</span><span class="o">.</span><span class="py">train</span><span class="o">(</span><span class="n">trainingData</span><span class="o">,</span> <span class="n">boostingStrategy</span><span class="o">)</span>
 <span class="c1">// 用测试数据评价模型
-</span><span class="k">val</span> <span class="n">labelsAndPredictions</span> <span class="k">=</span> <span class="n">testData</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">point</span> <span class="k">=&gt;</span>
-  <span class="k">val</span> <span class="n">prediction</span> <span class="k">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">point</span><span class="o">.</span><span class="n">features</span><span class="o">)</span>
-  <span class="o">(</span><span class="n">point</span><span class="o">.</span><span class="n">label</span><span class="o">,</span> <span class="n">prediction</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">labelsAndPredictions</span> <span class="k">=</span> <span class="nv">testData</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="n">point</span> <span class="k">=&gt;</span>
+  <span class="k">val</span> <span class="nv">prediction</span> <span class="k">=</span> <span class="nv">model</span><span class="o">.</span><span class="py">predict</span><span class="o">(</span><span class="nv">point</span><span class="o">.</span><span class="py">features</span><span class="o">)</span>
+  <span class="o">(</span><span class="nv">point</span><span class="o">.</span><span class="py">label</span><span class="o">,</span> <span class="n">prediction</span><span class="o">)</span>
 <span class="o">}</span>
-<span class="k">val</span> <span class="n">testMSE</span> <span class="k">=</span> <span class="n">labelsAndPredictions</span><span class="o">.</span><span class="n">map</span><span class="o">{</span> <span class="k">case</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="o">((</span><span class="n">v</span> <span class="o">-</span> <span class="n">p</span><span class="o">),</span> <span class="mi">2</span><span class="o">)}.</span><span class="n">mean</span><span class="o">()</span>
-<span class="n">println</span><span class="o">(</span><span class="s">"Test Mean Squared Error = "</span> <span class="o">+</span> <span class="n">testMSE</span><span class="o">)</span>
-<span class="n">println</span><span class="o">(</span><span class="s">"Learned regression GBT model:\n"</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">toDebugString</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">testMSE</span> <span class="k">=</span> <span class="nv">labelsAndPredictions</span><span class="o">.</span><span class="py">map</span><span class="o">{</span> <span class="nf">case</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">math</span><span class="o">.</span><span class="py">pow</span><span class="o">((</span><span class="n">v</span> <span class="o">-</span> <span class="n">p</span><span class="o">),</span> <span class="mi">2</span><span class="o">)}.</span><span class="py">mean</span><span class="o">()</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Test Mean Squared Error = "</span> <span class="o">+</span> <span class="n">testMSE</span><span class="o">)</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Learned regression GBT model:\n"</span> <span class="o">+</span> <span class="nv">model</span><span class="o">.</span><span class="py">toDebugString</span><span class="o">)</span>
 </code></pre></div></div>
 
 <h2 id="5-源码分析">5 源码分析</h2>
@@ -303,15 +307,15 @@
 
 <p>  梯度提升树的训练从<code class="highlighter-rouge">run</code>方法开始。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span><span class="k">:</span> <span class="kt">GradientBoostedTreesModel</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">algo</span> <span class="k">=</span> <span class="n">boostingStrategy</span><span class="o">.</span><span class="n">treeStrategy</span><span class="o">.</span><span class="n">algo</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">run</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">])</span><span class="k">:</span> <span class="kt">GradientBoostedTreesModel</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">algo</span> <span class="k">=</span> <span class="nv">boostingStrategy</span><span class="o">.</span><span class="py">treeStrategy</span><span class="o">.</span><span class="py">algo</span>
     <span class="n">algo</span> <span class="k">match</span> <span class="o">{</span>
       <span class="k">case</span> <span class="nc">Regression</span> <span class="k">=&gt;</span>
-        <span class="nc">GradientBoostedTrees</span><span class="o">.</span><span class="n">boost</span><span class="o">(</span><span class="n">input</span><span class="o">,</span> <span class="n">input</span><span class="o">,</span> <span class="n">boostingStrategy</span><span class="o">,</span> <span class="n">validate</span> <span class="k">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="nv">GradientBoostedTrees</span><span class="o">.</span><span class="py">boost</span><span class="o">(</span><span class="n">input</span><span class="o">,</span> <span class="n">input</span><span class="o">,</span> <span class="n">boostingStrategy</span><span class="o">,</span> <span class="n">validate</span> <span class="k">=</span> <span class="kc">false</span><span class="o">)</span>
       <span class="k">case</span> <span class="nc">Classification</span> <span class="k">=&gt;</span>
         <span class="c1">// Map labels to -1, +1 so binary classification can be treated as regression.
-</span>        <span class="k">val</span> <span class="n">remappedInput</span> <span class="k">=</span> <span class="n">input</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="k">new</span> <span class="nc">LabeledPoint</span><span class="o">((</span><span class="n">x</span><span class="o">.</span><span class="n">label</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">x</span><span class="o">.</span><span class="n">features</span><span class="o">))</span>
-        <span class="nc">GradientBoostedTrees</span><span class="o">.</span><span class="n">boost</span><span class="o">(</span><span class="n">remappedInput</span><span class="o">,</span> <span class="n">remappedInput</span><span class="o">,</span> <span class="n">boostingStrategy</span><span class="o">,</span> <span class="n">validate</span> <span class="k">=</span> <span class="kc">false</span><span class="o">)</span>
+</span>        <span class="k">val</span> <span class="nv">remappedInput</span> <span class="k">=</span> <span class="nv">input</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="k">new</span> <span class="nc">LabeledPoint</span><span class="o">((</span><span class="nv">x</span><span class="o">.</span><span class="py">label</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="nv">x</span><span class="o">.</span><span class="py">features</span><span class="o">))</span>
+        <span class="nv">GradientBoostedTrees</span><span class="o">.</span><span class="py">boost</span><span class="o">(</span><span class="n">remappedInput</span><span class="o">,</span> <span class="n">remappedInput</span><span class="o">,</span> <span class="n">boostingStrategy</span><span class="o">,</span> <span class="n">validate</span> <span class="k">=</span> <span class="kc">false</span><span class="o">)</span>
       <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nc">IllegalArgumentException</span><span class="o">(</span><span class="n">s</span><span class="s">"$algo is not supported by the gradient boosting."</span><span class="o">)</span>
     <span class="o">}</span>
@@ -327,32 +331,32 @@
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 初始化梯度提升参数
 // 迭代次数，默认为100
-</span><span class="k">val</span> <span class="n">numIterations</span> <span class="k">=</span> <span class="n">boostingStrategy</span><span class="o">.</span><span class="n">numIterations</span>
+</span><span class="k">val</span> <span class="nv">numIterations</span> <span class="k">=</span> <span class="nv">boostingStrategy</span><span class="o">.</span><span class="py">numIterations</span>
 <span class="c1">// 基学习器
-</span><span class="k">val</span> <span class="n">baseLearners</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">DecisionTreeModel</span><span class="o">](</span><span class="n">numIterations</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">baseLearners</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">DecisionTreeModel</span><span class="o">](</span><span class="n">numIterations</span><span class="o">)</span>
 <span class="c1">// 基学习器权重
-</span><span class="k">val</span> <span class="n">baseLearnerWeights</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">numIterations</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">baseLearnerWeights</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">numIterations</span><span class="o">)</span>
 <span class="c1">// 损失函数，分类时，用对数损失，回归时，用误差平方损失
-</span><span class="k">val</span> <span class="n">loss</span> <span class="k">=</span> <span class="n">boostingStrategy</span><span class="o">.</span><span class="n">loss</span>
-<span class="k">val</span> <span class="n">learningRate</span> <span class="k">=</span> <span class="n">boostingStrategy</span><span class="o">.</span><span class="n">learningRate</span>
+</span><span class="k">val</span> <span class="nv">loss</span> <span class="k">=</span> <span class="nv">boostingStrategy</span><span class="o">.</span><span class="py">loss</span>
+<span class="k">val</span> <span class="nv">learningRate</span> <span class="k">=</span> <span class="nv">boostingStrategy</span><span class="o">.</span><span class="py">learningRate</span>
 <span class="c1">// Prepare strategy for individual trees, which use regression with variance impurity.
 // 回归时，使用方差计算不纯度
-</span><span class="k">val</span> <span class="n">treeStrategy</span> <span class="k">=</span> <span class="n">boostingStrategy</span><span class="o">.</span><span class="n">treeStrategy</span><span class="o">.</span><span class="n">copy</span>
-<span class="k">val</span> <span class="n">validationTol</span> <span class="k">=</span> <span class="n">boostingStrategy</span><span class="o">.</span><span class="n">validationTol</span>
-<span class="n">treeStrategy</span><span class="o">.</span><span class="n">algo</span> <span class="k">=</span> <span class="nc">Regression</span>
-<span class="n">treeStrategy</span><span class="o">.</span><span class="n">impurity</span> <span class="k">=</span> <span class="nc">Variance</span>
+</span><span class="k">val</span> <span class="nv">treeStrategy</span> <span class="k">=</span> <span class="nv">boostingStrategy</span><span class="o">.</span><span class="py">treeStrategy</span><span class="o">.</span><span class="py">copy</span>
+<span class="k">val</span> <span class="nv">validationTol</span> <span class="k">=</span> <span class="nv">boostingStrategy</span><span class="o">.</span><span class="py">validationTol</span>
+<span class="nv">treeStrategy</span><span class="o">.</span><span class="py">algo</span> <span class="k">=</span> <span class="nc">Regression</span>
+<span class="nv">treeStrategy</span><span class="o">.</span><span class="py">impurity</span> <span class="k">=</span> <span class="nc">Variance</span>
 <span class="c1">// 缓存输入数据
-</span><span class="k">val</span> <span class="n">persistedInput</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">input</span><span class="o">.</span><span class="n">getStorageLevel</span> <span class="o">==</span> <span class="nc">StorageLevel</span><span class="o">.</span><span class="nc">NONE</span><span class="o">)</span> <span class="o">{</span>
-   <span class="n">input</span><span class="o">.</span><span class="n">persist</span><span class="o">(</span><span class="nc">StorageLevel</span><span class="o">.</span><span class="nc">MEMORY_AND_DISK</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">persistedInput</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="nv">input</span><span class="o">.</span><span class="py">getStorageLevel</span> <span class="o">==</span> <span class="nv">StorageLevel</span><span class="o">.</span><span class="py">NONE</span><span class="o">)</span> <span class="o">{</span>
+   <span class="nv">input</span><span class="o">.</span><span class="py">persist</span><span class="o">(</span><span class="nv">StorageLevel</span><span class="o">.</span><span class="py">MEMORY_AND_DISK</span><span class="o">)</span>
    <span class="kc">true</span>
 <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
    <span class="kc">false</span>
 <span class="o">}</span>
 <span class="c1">// Prepare periodic checkpointers
-</span><span class="k">val</span> <span class="n">predErrorCheckpointer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PeriodicRDDCheckpointer</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)](</span>
-    <span class="n">treeStrategy</span><span class="o">.</span><span class="n">getCheckpointInterval</span><span class="o">,</span> <span class="n">input</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">validatePredErrorCheckpointer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PeriodicRDDCheckpointer</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)](</span>
-    <span class="n">treeStrategy</span><span class="o">.</span><span class="n">getCheckpointInterval</span><span class="o">,</span> <span class="n">input</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">predErrorCheckpointer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PeriodicRDDCheckpointer</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)](</span>
+    <span class="nv">treeStrategy</span><span class="o">.</span><span class="py">getCheckpointInterval</span><span class="o">,</span> <span class="nv">input</span><span class="o">.</span><span class="py">sparkContext</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">validatePredErrorCheckpointer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PeriodicRDDCheckpointer</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)](</span>
+    <span class="nv">treeStrategy</span><span class="o">.</span><span class="py">getCheckpointInterval</span><span class="o">,</span> <span class="nv">input</span><span class="o">.</span><span class="py">sparkContext</span><span class="o">)</span>
 </code></pre></div></div>
 
 <ul>
@@ -360,25 +364,25 @@
 </ul>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//通过训练数据训练出一颗决策树，具体信息请参考随机森林的分析
-</span><span class="k">val</span> <span class="n">firstTreeModel</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DecisionTree</span><span class="o">(</span><span class="n">treeStrategy</span><span class="o">).</span><span class="n">run</span><span class="o">(</span><span class="n">input</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">firstTreeWeight</span> <span class="k">=</span> <span class="mf">1.0</span>
-<span class="n">baseLearners</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="k">=</span> <span class="n">firstTreeModel</span>
-<span class="n">baseLearnerWeights</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="k">=</span> <span class="n">firstTreeWeight</span>
+</span><span class="k">val</span> <span class="nv">firstTreeModel</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DecisionTree</span><span class="o">(</span><span class="n">treeStrategy</span><span class="o">).</span><span class="py">run</span><span class="o">(</span><span class="n">input</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">firstTreeWeight</span> <span class="k">=</span> <span class="mf">1.0</span>
+<span class="nf">baseLearners</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="k">=</span> <span class="n">firstTreeModel</span>
+<span class="nf">baseLearnerWeights</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="k">=</span> <span class="n">firstTreeWeight</span>
 <span class="k">var</span> <span class="n">predError</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span> <span class="k">=</span> <span class="nc">GradientBoostedTreesModel</span><span class="o">.</span>
-      <span class="n">computeInitialPredictionAndError</span><span class="o">(</span><span class="n">input</span><span class="o">,</span> <span class="n">firstTreeWeight</span><span class="o">,</span> <span class="n">firstTreeModel</span><span class="o">,</span> <span class="n">loss</span><span class="o">)</span>
-<span class="n">predErrorCheckpointer</span><span class="o">.</span><span class="n">update</span><span class="o">(</span><span class="n">predError</span><span class="o">)</span>
+      <span class="nf">computeInitialPredictionAndError</span><span class="o">(</span><span class="n">input</span><span class="o">,</span> <span class="n">firstTreeWeight</span><span class="o">,</span> <span class="n">firstTreeModel</span><span class="o">,</span> <span class="n">loss</span><span class="o">)</span>
+<span class="nv">predErrorCheckpointer</span><span class="o">.</span><span class="py">update</span><span class="o">(</span><span class="n">predError</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>  这里比较关键的是通过<code class="highlighter-rouge">GradientBoostedTreesModel.computeInitialPredictionAndError</code>计算初始的预测和误差。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">computeInitialPredictionAndError</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">computeInitialPredictionAndError</span><span class="o">(</span>
       <span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">],</span>
       <span class="n">initTreeWeight</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
       <span class="n">initTree</span><span class="k">:</span> <span class="kt">DecisionTreeModel</span><span class="o">,</span>
       <span class="n">loss</span><span class="k">:</span> <span class="kt">Loss</span><span class="o">)</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="n">data</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">lp</span> <span class="k">=&gt;</span>
-      <span class="k">val</span> <span class="n">pred</span> <span class="k">=</span> <span class="n">initTreeWeight</span> <span class="o">*</span> <span class="n">initTree</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">lp</span><span class="o">.</span><span class="n">features</span><span class="o">)</span>
-      <span class="k">val</span> <span class="n">error</span> <span class="k">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">computeError</span><span class="o">(</span><span class="n">pred</span><span class="o">,</span> <span class="n">lp</span><span class="o">.</span><span class="n">label</span><span class="o">)</span>
+    <span class="nv">data</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="n">lp</span> <span class="k">=&gt;</span>
+      <span class="k">val</span> <span class="nv">pred</span> <span class="k">=</span> <span class="n">initTreeWeight</span> <span class="o">*</span> <span class="nv">initTree</span><span class="o">.</span><span class="py">predict</span><span class="o">(</span><span class="nv">lp</span><span class="o">.</span><span class="py">features</span><span class="o">)</span>
+      <span class="k">val</span> <span class="nv">error</span> <span class="k">=</span> <span class="nv">loss</span><span class="o">.</span><span class="py">computeError</span><span class="o">(</span><span class="n">pred</span><span class="o">,</span> <span class="nv">lp</span><span class="o">.</span><span class="py">label</span><span class="o">)</span>
       <span class="o">(</span><span class="n">pred</span><span class="o">,</span> <span class="n">error</span><span class="o">)</span>
     <span class="o">}</span>
   <span class="o">}</span>
@@ -387,14 +391,14 @@
 <p>  根据选择的损失函数的不同，<code class="highlighter-rouge">computeError</code>的实现不同。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//对数损失的实现
-</span><span class="k">override</span> <span class="k">private</span><span class="o">[</span><span class="kt">mllib</span><span class="o">]</span> <span class="k">def</span> <span class="n">computeError</span><span class="o">(</span><span class="n">prediction</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">margin</span> <span class="k">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">label</span> <span class="o">*</span> <span class="n">prediction</span>
+</span><span class="k">override</span> <span class="k">private</span><span class="o">[</span><span class="kt">mllib</span><span class="o">]</span> <span class="k">def</span> <span class="nf">computeError</span><span class="o">(</span><span class="n">prediction</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">margin</span> <span class="k">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">label</span> <span class="o">*</span> <span class="n">prediction</span>
     <span class="c1">// The following is equivalent to 2.0 * log(1 + exp(-margin)) but more numerically stable.
-</span>    <span class="mf">2.0</span> <span class="o">*</span> <span class="nc">MLUtils</span><span class="o">.</span><span class="n">log1pExp</span><span class="o">(-</span><span class="n">margin</span><span class="o">)</span>
+</span>    <span class="mf">2.0</span> <span class="o">*</span> <span class="nv">MLUtils</span><span class="o">.</span><span class="py">log1pExp</span><span class="o">(-</span><span class="n">margin</span><span class="o">)</span>
 <span class="o">}</span>
 <span class="c1">//误差平方损失
-</span><span class="k">override</span> <span class="k">private</span><span class="o">[</span><span class="kt">mllib</span><span class="o">]</span> <span class="k">def</span> <span class="n">computeError</span><span class="o">(</span><span class="n">prediction</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">err</span> <span class="k">=</span> <span class="n">label</span> <span class="o">-</span> <span class="n">prediction</span>
+</span><span class="k">override</span> <span class="k">private</span><span class="o">[</span><span class="kt">mllib</span><span class="o">]</span> <span class="k">def</span> <span class="nf">computeError</span><span class="o">(</span><span class="n">prediction</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">err</span> <span class="k">=</span> <span class="n">label</span> <span class="o">-</span> <span class="n">prediction</span>
     <span class="n">err</span> <span class="o">*</span> <span class="n">err</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -404,45 +408,45 @@
 </ul>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">validatePredError</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span> <span class="k">=</span> <span class="nc">GradientBoostedTreesModel</span><span class="o">.</span>
-      <span class="n">computeInitialPredictionAndError</span><span class="o">(</span><span class="n">validationInput</span><span class="o">,</span> <span class="n">firstTreeWeight</span><span class="o">,</span> <span class="n">firstTreeModel</span><span class="o">,</span> <span class="n">loss</span><span class="o">)</span>
-<span class="k">if</span> <span class="o">(</span><span class="n">validate</span><span class="o">)</span> <span class="n">validatePredErrorCheckpointer</span><span class="o">.</span><span class="n">update</span><span class="o">(</span><span class="n">validatePredError</span><span class="o">)</span>
-<span class="k">var</span> <span class="n">bestValidateError</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">validate</span><span class="o">)</span> <span class="n">validatePredError</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="o">()</span> <span class="k">else</span> <span class="mf">0.0</span>
+      <span class="nf">computeInitialPredictionAndError</span><span class="o">(</span><span class="n">validationInput</span><span class="o">,</span> <span class="n">firstTreeWeight</span><span class="o">,</span> <span class="n">firstTreeModel</span><span class="o">,</span> <span class="n">loss</span><span class="o">)</span>
+<span class="nf">if</span> <span class="o">(</span><span class="n">validate</span><span class="o">)</span> <span class="nv">validatePredErrorCheckpointer</span><span class="o">.</span><span class="py">update</span><span class="o">(</span><span class="n">validatePredError</span><span class="o">)</span>
+<span class="k">var</span> <span class="n">bestValidateError</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">validate</span><span class="o">)</span> <span class="nv">validatePredError</span><span class="o">.</span><span class="py">values</span><span class="o">.</span><span class="py">mean</span><span class="o">()</span> <span class="k">else</span> <span class="mf">0.0</span>
 <span class="k">var</span> <span class="n">bestM</span> <span class="k">=</span> <span class="mi">1</span>
 <span class="k">var</span> <span class="n">m</span> <span class="k">=</span> <span class="mi">1</span>
 <span class="k">var</span> <span class="n">doneLearning</span> <span class="k">=</span> <span class="kc">false</span>
-<span class="k">while</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="n">numIterations</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">doneLearning</span><span class="o">)</span> <span class="o">{</span>
+<span class="nf">while</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="n">numIterations</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">doneLearning</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// Update data with pseudo-residuals
 </span>    <span class="c1">// 根据梯度调整训练数据
-</span>    <span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="n">predError</span><span class="o">.</span><span class="n">zip</span><span class="o">(</span><span class="n">input</span><span class="o">).</span><span class="n">map</span> <span class="o">{</span> <span class="k">case</span> <span class="o">((</span><span class="n">pred</span><span class="o">,</span> <span class="k">_</span><span class="o">),</span> <span class="n">point</span><span class="o">)</span> <span class="k">=&gt;</span>
+</span>    <span class="k">val</span> <span class="nv">data</span> <span class="k">=</span> <span class="nv">predError</span><span class="o">.</span><span class="py">zip</span><span class="o">(</span><span class="n">input</span><span class="o">).</span><span class="py">map</span> <span class="o">{</span> <span class="nf">case</span> <span class="o">((</span><span class="n">pred</span><span class="o">,</span> <span class="k">_</span><span class="o">),</span> <span class="n">point</span><span class="o">)</span> <span class="k">=&gt;</span>
       <span class="c1">//标签为上一棵树预测的数据的负梯度方向
-</span>      <span class="nc">LabeledPoint</span><span class="o">(-</span><span class="n">loss</span><span class="o">.</span><span class="n">gradient</span><span class="o">(</span><span class="n">pred</span><span class="o">,</span> <span class="n">point</span><span class="o">.</span><span class="n">label</span><span class="o">),</span> <span class="n">point</span><span class="o">.</span><span class="n">features</span><span class="o">)</span>
+</span>      <span class="nc">LabeledPoint</span><span class="o">(-</span><span class="nv">loss</span><span class="o">.</span><span class="py">gradient</span><span class="o">(</span><span class="n">pred</span><span class="o">,</span> <span class="nv">point</span><span class="o">.</span><span class="py">label</span><span class="o">),</span> <span class="nv">point</span><span class="o">.</span><span class="py">features</span><span class="o">)</span>
     <span class="o">}</span>
     <span class="c1">//训练下一棵树
-</span>    <span class="k">val</span> <span class="n">model</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DecisionTree</span><span class="o">(</span><span class="n">treeStrategy</span><span class="o">).</span><span class="n">run</span><span class="o">(</span><span class="n">data</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">model</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DecisionTree</span><span class="o">(</span><span class="n">treeStrategy</span><span class="o">).</span><span class="py">run</span><span class="o">(</span><span class="n">data</span><span class="o">)</span>
     <span class="c1">// Update partial model
-</span>    <span class="n">baseLearners</span><span class="o">(</span><span class="n">m</span><span class="o">)</span> <span class="k">=</span> <span class="n">model</span>
+</span>    <span class="nf">baseLearners</span><span class="o">(</span><span class="n">m</span><span class="o">)</span> <span class="k">=</span> <span class="n">model</span>
     <span class="c1">// Note: The setting of baseLearnerWeights is incorrect for losses other than SquaredError.
 </span>    <span class="c1">//       Technically, the weight should be optimized for the particular loss.
 </span>    <span class="c1">//       However, the behavior should be reasonable, though not optimal.
-</span>    <span class="n">baseLearnerWeights</span><span class="o">(</span><span class="n">m</span><span class="o">)</span> <span class="k">=</span> <span class="n">learningRate</span>
+</span>    <span class="nf">baseLearnerWeights</span><span class="o">(</span><span class="n">m</span><span class="o">)</span> <span class="k">=</span> <span class="n">learningRate</span>
     <span class="c1">//更新预测和误差
-</span>    <span class="n">predError</span> <span class="k">=</span> <span class="nc">GradientBoostedTreesModel</span><span class="o">.</span><span class="n">updatePredictionError</span><span class="o">(</span>
-        <span class="n">input</span><span class="o">,</span> <span class="n">predError</span><span class="o">,</span> <span class="n">baseLearnerWeights</span><span class="o">(</span><span class="n">m</span><span class="o">),</span> <span class="n">baseLearners</span><span class="o">(</span><span class="n">m</span><span class="o">),</span> <span class="n">loss</span><span class="o">)</span>
-    <span class="n">predErrorCheckpointer</span><span class="o">.</span><span class="n">update</span><span class="o">(</span><span class="n">predError</span><span class="o">)</span>
+</span>    <span class="n">predError</span> <span class="k">=</span> <span class="nv">GradientBoostedTreesModel</span><span class="o">.</span><span class="py">updatePredictionError</span><span class="o">(</span>
+        <span class="n">input</span><span class="o">,</span> <span class="n">predError</span><span class="o">,</span> <span class="nf">baseLearnerWeights</span><span class="o">(</span><span class="n">m</span><span class="o">),</span> <span class="nf">baseLearners</span><span class="o">(</span><span class="n">m</span><span class="o">),</span> <span class="n">loss</span><span class="o">)</span>
+    <span class="nv">predErrorCheckpointer</span><span class="o">.</span><span class="py">update</span><span class="o">(</span><span class="n">predError</span><span class="o">)</span>
     <span class="c1">//当需要验证阈值，提前终止迭代时
-</span>    <span class="k">if</span> <span class="o">(</span><span class="n">validate</span><span class="o">)</span> <span class="o">{</span>
+</span>    <span class="nf">if</span> <span class="o">(</span><span class="n">validate</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">// Stop training early if
 </span>        <span class="c1">// 1. Reduction in error is less than the validationTol or
 </span>        <span class="c1">// 2. If the error increases, that is if the model is overfit.
 </span>        <span class="c1">// We want the model returned corresponding to the best validation error.
-</span>        <span class="n">validatePredError</span> <span class="k">=</span> <span class="nc">GradientBoostedTreesModel</span><span class="o">.</span><span class="n">updatePredictionError</span><span class="o">(</span>
-          <span class="n">validationInput</span><span class="o">,</span> <span class="n">validatePredError</span><span class="o">,</span> <span class="n">baseLearnerWeights</span><span class="o">(</span><span class="n">m</span><span class="o">),</span> <span class="n">baseLearners</span><span class="o">(</span><span class="n">m</span><span class="o">),</span> <span class="n">loss</span><span class="o">)</span>
-        <span class="n">validatePredErrorCheckpointer</span><span class="o">.</span><span class="n">update</span><span class="o">(</span><span class="n">validatePredError</span><span class="o">)</span>
-        <span class="k">val</span> <span class="n">currentValidateError</span> <span class="k">=</span> <span class="n">validatePredError</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="o">()</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">bestValidateError</span> <span class="o">-</span> <span class="n">currentValidateError</span> <span class="o">&lt;</span> <span class="n">validationTol</span> <span class="o">*</span> <span class="nc">Math</span><span class="o">.</span><span class="n">max</span><span class="o">(</span>
+</span>        <span class="n">validatePredError</span> <span class="k">=</span> <span class="nv">GradientBoostedTreesModel</span><span class="o">.</span><span class="py">updatePredictionError</span><span class="o">(</span>
+          <span class="n">validationInput</span><span class="o">,</span> <span class="n">validatePredError</span><span class="o">,</span> <span class="nf">baseLearnerWeights</span><span class="o">(</span><span class="n">m</span><span class="o">),</span> <span class="nf">baseLearners</span><span class="o">(</span><span class="n">m</span><span class="o">),</span> <span class="n">loss</span><span class="o">)</span>
+        <span class="nv">validatePredErrorCheckpointer</span><span class="o">.</span><span class="py">update</span><span class="o">(</span><span class="n">validatePredError</span><span class="o">)</span>
+        <span class="k">val</span> <span class="nv">currentValidateError</span> <span class="k">=</span> <span class="nv">validatePredError</span><span class="o">.</span><span class="py">values</span><span class="o">.</span><span class="py">mean</span><span class="o">()</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">bestValidateError</span> <span class="o">-</span> <span class="n">currentValidateError</span> <span class="o">&lt;</span> <span class="n">validationTol</span> <span class="o">*</span> <span class="nv">Math</span><span class="o">.</span><span class="py">max</span><span class="o">(</span>
           <span class="n">currentValidateError</span><span class="o">,</span> <span class="mf">0.01</span><span class="o">))</span> <span class="o">{</span>
           <span class="n">doneLearning</span> <span class="k">=</span> <span class="kc">true</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">currentValidateError</span> <span class="o">&lt;</span> <span class="n">bestValidateError</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">currentValidateError</span> <span class="o">&lt;</span> <span class="n">bestValidateError</span><span class="o">)</span> <span class="o">{</span>
           <span class="n">bestValidateError</span> <span class="k">=</span> <span class="n">currentValidateError</span>
           <span class="n">bestM</span> <span class="k">=</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="o">}</span>
@@ -453,16 +457,16 @@
 
 <p>  上面代码最重要的部分是更新预测和误差的实现。通过<code class="highlighter-rouge">GradientBoostedTreesModel.updatePredictionError</code>实现。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">def</span> <span class="n">updatePredictionError</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">def</span> <span class="nf">updatePredictionError</span><span class="o">(</span>
     <span class="n">data</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">LabeledPoint</span><span class="o">],</span>
     <span class="n">predictionAndError</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)],</span>
     <span class="n">treeWeight</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span>
     <span class="n">tree</span><span class="k">:</span> <span class="kt">DecisionTreeModel</span><span class="o">,</span>
     <span class="n">loss</span><span class="k">:</span> <span class="kt">Loss</span><span class="o">)</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">newPredError</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">zip</span><span class="o">(</span><span class="n">predictionAndError</span><span class="o">).</span><span class="n">mapPartitions</span> <span class="o">{</span> <span class="n">iter</span> <span class="k">=&gt;</span>
-      <span class="n">iter</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">lp</span><span class="o">,</span> <span class="o">(</span><span class="n">pred</span><span class="o">,</span> <span class="n">error</span><span class="o">))</span> <span class="k">=&gt;</span>
-        <span class="k">val</span> <span class="n">newPred</span> <span class="k">=</span> <span class="n">pred</span> <span class="o">+</span> <span class="n">tree</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">lp</span><span class="o">.</span><span class="n">features</span><span class="o">)</span> <span class="o">*</span> <span class="n">treeWeight</span>
-        <span class="k">val</span> <span class="n">newError</span> <span class="k">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">computeError</span><span class="o">(</span><span class="n">newPred</span><span class="o">,</span> <span class="n">lp</span><span class="o">.</span><span class="n">label</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">newPredError</span> <span class="k">=</span> <span class="nv">data</span><span class="o">.</span><span class="py">zip</span><span class="o">(</span><span class="n">predictionAndError</span><span class="o">).</span><span class="py">mapPartitions</span> <span class="o">{</span> <span class="n">iter</span> <span class="k">=&gt;</span>
+      <span class="nv">iter</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="nf">case</span> <span class="o">(</span><span class="n">lp</span><span class="o">,</span> <span class="o">(</span><span class="n">pred</span><span class="o">,</span> <span class="n">error</span><span class="o">))</span> <span class="k">=&gt;</span>
+        <span class="k">val</span> <span class="nv">newPred</span> <span class="k">=</span> <span class="n">pred</span> <span class="o">+</span> <span class="nv">tree</span><span class="o">.</span><span class="py">predict</span><span class="o">(</span><span class="nv">lp</span><span class="o">.</span><span class="py">features</span><span class="o">)</span> <span class="o">*</span> <span class="n">treeWeight</span>
+        <span class="k">val</span> <span class="nv">newError</span> <span class="k">=</span> <span class="nv">loss</span><span class="o">.</span><span class="py">computeError</span><span class="o">(</span><span class="n">newPred</span><span class="o">,</span> <span class="nv">lp</span><span class="o">.</span><span class="py">label</span><span class="o">)</span>
         <span class="o">(</span><span class="n">newPred</span><span class="o">,</span> <span class="n">newError</span><span class="o">)</span>
       <span class="o">}</span>
     <span class="o">}</span>
@@ -475,27 +479,27 @@
 <p>  利用梯度提升树进行预测时，调用的<code class="highlighter-rouge">predict</code>方法扩展自<code class="highlighter-rouge">TreeEnsembleModel</code>，它是树结构组合模型的表示，其核心代码如下所示：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//不同的策略采用不同的预测方法
-</span><span class="k">def</span> <span class="n">predict</span><span class="o">(</span><span class="n">features</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class="k">def</span> <span class="nf">predict</span><span class="o">(</span><span class="n">features</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
     <span class="o">(</span><span class="n">algo</span><span class="o">,</span> <span class="n">combiningStrategy</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
-      <span class="k">case</span> <span class="o">(</span><span class="nc">Regression</span><span class="o">,</span> <span class="nc">Sum</span><span class="o">)</span> <span class="k">=&gt;</span>
-        <span class="n">predictBySumming</span><span class="o">(</span><span class="n">features</span><span class="o">)</span>
-      <span class="k">case</span> <span class="o">(</span><span class="nc">Regression</span><span class="o">,</span> <span class="nc">Average</span><span class="o">)</span> <span class="k">=&gt;</span>
-        <span class="n">predictBySumming</span><span class="o">(</span><span class="n">features</span><span class="o">)</span> <span class="o">/</span> <span class="n">sumWeights</span>
+      <span class="nf">case</span> <span class="o">(</span><span class="nc">Regression</span><span class="o">,</span> <span class="nc">Sum</span><span class="o">)</span> <span class="k">=&gt;</span>
+        <span class="nf">predictBySumming</span><span class="o">(</span><span class="n">features</span><span class="o">)</span>
+      <span class="nf">case</span> <span class="o">(</span><span class="nc">Regression</span><span class="o">,</span> <span class="nc">Average</span><span class="o">)</span> <span class="k">=&gt;</span>
+        <span class="nf">predictBySumming</span><span class="o">(</span><span class="n">features</span><span class="o">)</span> <span class="o">/</span> <span class="n">sumWeights</span>
       <span class="c1">//用于梯度提升树，转换为1 或者 0
-</span>      <span class="k">case</span> <span class="o">(</span><span class="nc">Classification</span><span class="o">,</span> <span class="nc">Sum</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="c1">// binary classification
-</span>        <span class="k">val</span> <span class="n">prediction</span> <span class="k">=</span> <span class="n">predictBySumming</span><span class="o">(</span><span class="n">features</span><span class="o">)</span>
+</span>      <span class="nf">case</span> <span class="o">(</span><span class="nc">Classification</span><span class="o">,</span> <span class="nc">Sum</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="c1">// binary classification
+</span>        <span class="k">val</span> <span class="nv">prediction</span> <span class="k">=</span> <span class="nf">predictBySumming</span><span class="o">(</span><span class="n">features</span><span class="o">)</span>
         <span class="c1">// TODO: predicted labels are +1 or -1 for GBT. Need a better way to store this info.
-</span>        <span class="k">if</span> <span class="o">(</span><span class="n">prediction</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="o">)</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="mf">0.0</span>
-      <span class="k">case</span> <span class="o">(</span><span class="nc">Classification</span><span class="o">,</span> <span class="nc">Vote</span><span class="o">)</span> <span class="k">=&gt;</span>
-        <span class="n">predictByVoting</span><span class="o">(</span><span class="n">features</span><span class="o">)</span>
+</span>        <span class="nf">if</span> <span class="o">(</span><span class="n">prediction</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="o">)</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="mf">0.0</span>
+      <span class="nf">case</span> <span class="o">(</span><span class="nc">Classification</span><span class="o">,</span> <span class="nc">Vote</span><span class="o">)</span> <span class="k">=&gt;</span>
+        <span class="nf">predictByVoting</span><span class="o">(</span><span class="n">features</span><span class="o">)</span>
       <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nc">IllegalArgumentException</span><span class="o">()</span>
     <span class="o">}</span>
 <span class="o">}</span>
-<span class="k">private</span> <span class="k">def</span> <span class="n">predictBySumming</span><span class="o">(</span><span class="n">features</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">treePredictions</span> <span class="k">=</span> <span class="n">trees</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">features</span><span class="o">))</span>
+<span class="k">private</span> <span class="k">def</span> <span class="nf">predictBySumming</span><span class="o">(</span><span class="n">features</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">treePredictions</span> <span class="k">=</span> <span class="nv">trees</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">predict</span><span class="o">(</span><span class="n">features</span><span class="o">))</span>
     <span class="c1">//两个向量的内集
-</span>    <span class="n">blas</span><span class="o">.</span><span class="n">ddot</span><span class="o">(</span><span class="n">numTrees</span><span class="o">,</span> <span class="n">treePredictions</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">treeWeights</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+</span>    <span class="nv">blas</span><span class="o">.</span><span class="py">ddot</span><span class="o">(</span><span class="n">numTrees</span><span class="o">,</span> <span class="n">treePredictions</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">treeWeights</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -734,7 +738,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -906,7 +910,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

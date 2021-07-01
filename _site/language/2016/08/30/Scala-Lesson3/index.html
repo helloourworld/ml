@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -204,17 +208,17 @@
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">boole</span> <span class="n">express</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">if</span> <span class="o">(</span><span class="n">boole</span> <span class="n">express</span><span class="o">)</span>
 <span class="o">{</span>
     <span class="c1">// 如果布尔表达式为true则执行该语句块；否则跳过大括号内的语句块，执行大括号之后的语句块。
 </span><span class="o">}</span>
 
 <span class="k">#</span> <span class="n">ex</span>
 <span class="k">object</span> <span class="nc">Ifs</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">var</span> <span class="n">x</span> <span class="k">=</span> <span class="mi">10</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">){</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">" x is less than 20"</span><span class="o">);</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">){</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">" x is less than 20"</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -225,20 +229,20 @@
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span><span class="o">){</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">if</span><span class="o">(</span><span class="n">布尔表达式</span><span class="o">){</span>
    <span class="c1">// 如果布尔表达式为 true 则执行该语句块
 </span><span class="o">}</span><span class="k">else</span><span class="o">{</span>
    <span class="c1">// 如果布尔表达式为 false 则执行该语句块
 </span><span class="o">}</span>
 <span class="k">#</span> <span class="n">ex</span>
 <span class="k">object</span> <span class="nc">Ifs</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">var</span> <span class="n">x</span> <span class="k">=</span> <span class="mi">30</span><span class="o">;</span>
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">){</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">" x is less than 20"</span><span class="o">);</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">){</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">" x is less than 20"</span><span class="o">);</span>
         <span class="o">}</span><span class="k">else</span><span class="o">{</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"x is larger or eq 20"</span><span class="o">)</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"x is larger or eq 20"</span><span class="o">)</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -248,26 +252,26 @@
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">1</span><span class="o">){</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">1</span><span class="o">){</span>
    <span class="c1">// 如果布尔表达式 1 为 true 则执行该语句块
-</span><span class="o">}</span><span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">2</span><span class="o">){</span>
+</span><span class="o">}</span><span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">2</span><span class="o">){</span>
    <span class="c1">// 如果布尔表达式 2 为 true 则执行该语句块
-</span><span class="o">}</span><span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">3</span><span class="o">){</span>
+</span><span class="o">}</span><span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">3</span><span class="o">){</span>
    <span class="c1">// 如果布尔表达式 3 为 true 则执行该语句块
 </span><span class="o">}</span><span class="k">else</span> <span class="o">{</span>
    <span class="c1">// 如果以上条件都为 false 执行该语句块
 </span><span class="o">}</span>
 <span class="k">#</span> <span class="n">ex</span>
 <span class="k">object</span> <span class="nc">Ifs</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">var</span> <span class="n">x</span> <span class="k">=</span> <span class="mi">30</span><span class="o">;</span>
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">){</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">" x is less than 20"</span><span class="o">);</span>
-        <span class="o">}</span><span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">20</span><span class="o">){</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"x is leq 20"</span><span class="o">)</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">){</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">" x is less than 20"</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">20</span><span class="o">){</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"x is leq 20"</span><span class="o">)</span>
         <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
-            <span class="n">println</span> <span class="o">(</span><span class="s">"x is larger than 20"</span><span class="o">)</span>
+            <span class="nf">println</span> <span class="o">(</span><span class="s">"x is larger than 20"</span><span class="o">)</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -277,20 +281,20 @@
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">1</span><span class="o">){</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">1</span><span class="o">){</span>
    <span class="c1">// 如果布尔表达式 1 为 true 则执行该语句块
-</span>   <span class="k">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">2</span><span class="o">){</span>
+</span>   <span class="nf">if</span><span class="o">(</span><span class="n">布尔表达式</span> <span class="mi">2</span><span class="o">){</span>
       <span class="c1">// 如果布尔表达式 2 为 true 则执行该语句块
 </span>   <span class="o">}</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="n">ex</span>
 <span class="k">object</span> <span class="nc">Ifs</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">var</span> <span class="n">x</span> <span class="k">=</span> <span class="mi">30</span><span class="o">;</span>
         <span class="k">var</span> <span class="n">y</span> <span class="k">=</span> <span class="mi">20</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">){</span>
-          <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">){</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"x / y = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">));</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">){</span>
+          <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">){</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"x / y = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">));</span>
           <span class="o">}</span>
         <span class="o">}</span>
     <span class="o">}</span>
@@ -309,18 +313,18 @@
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="o">(</span><span class="n">condition</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">while</span><span class="o">(</span><span class="n">condition</span><span class="o">)</span>
 <span class="o">{</span>
-    <span class="n">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+    <span class="nf">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="n">ex</span>
 <span class="k">object</span> <span class="nc">Loops</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="c1">// 局部变量
 </span>        <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">10</span><span class="o">;</span>
         <span class="c1">// while 循环执行
-</span>        <span class="k">while</span><span class="o">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
+</span>        <span class="nf">while</span><span class="o">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
             <span class="n">a</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
         <span class="o">}</span>
     <span class="o">}</span>
@@ -341,18 +345,18 @@ do…while 循环与 while 循环类似，但是 do…while 循环会确保至�
 <p>语法格式：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">do</span>  <span class="o">{</span>
-    <span class="n">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
-<span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">condition</span><span class="o">);</span>
+    <span class="nf">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+<span class="o">}</span> <span class="nf">while</span> <span class="o">(</span><span class="n">condition</span><span class="o">);</span>
 <span class="k">#</span> <span class="n">ex</span>
 <span class="k">object</span> <span class="nc">Loops</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="c1">// 局部变量
 </span>        <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">10</span><span class="o">;</span>
         <span class="c1">// do 循环
 </span>        <span class="k">do</span><span class="o">{</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
             <span class="n">a</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="o">}</span><span class="k">while</span> <span class="o">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="o">);</span><span class="k">#</span> <span class="mi">10</span>
+        <span class="o">}</span><span class="nf">while</span> <span class="o">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="o">);</span><span class="k">#</span> <span class="mi">10</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -361,16 +365,16 @@ do…while 循环与 while 循环类似，但是 do…while 循环会确保至�
 
 <p>语法格式：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">Range</span> <span class="o">){</span>
-   <span class="n">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">for</span><span class="o">(</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">Range</span> <span class="o">){</span>
+   <span class="nf">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="n">ex</span>
 <span class="k">object</span> <span class="nc">Loops</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
         <span class="c1">//for Loop
-</span>        <span class="k">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">10</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
+</span>        <span class="nf">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">10</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -379,11 +383,11 @@ do…while 循环与 while 循环类似，但是 do…while 循环会确保至�
 <p>以下是一个使用了 i until j 语法(不包含 j)的实例:</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Loops</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
         <span class="c1">//for Loop
-</span>        <span class="k">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="n">until</span> <span class="mi">10</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
+</span>        <span class="nf">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="n">until</span> <span class="mi">10</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -392,13 +396,13 @@ do…while 循环与 while 循环类似，但是 do…while 循环会确保至�
 <p>在 for 循环 中你可以使用分号 (;) 来设置多个区间，它将迭代给定区间所有的可能值。以下实例演示了两个区间的循环实例：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Loops</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
         <span class="k">var</span> <span class="n">b</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
         <span class="c1">//for Loop
-</span>        <span class="k">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">3</span><span class="o">;</span><span class="n">b</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">3</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"Value of b: "</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span>
+</span>        <span class="nf">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">3</span><span class="o">;</span><span class="n">b</span> <span class="k">&lt;-</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">3</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"Value of b: "</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span>
 
         <span class="o">}</span>
     <span class="o">}</span>
@@ -426,17 +430,17 @@ do…while 循环与 while 循环类似，但是 do…while 循环会确保至�
 
 <p>for 循环集合</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">List</span> <span class="o">){</span>
-   <span class="n">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">for</span><span class="o">(</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">List</span> <span class="o">){</span>
+   <span class="nf">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="n">ex</span>
 <span class="k">object</span> <span class="nc">Loops</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="k">val</span> <span class="n">numList</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">)</span>
+        <span class="k">val</span> <span class="nv">numList</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">)</span>
         <span class="c1">//for Loop
-</span>        <span class="k">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="n">numList</span><span class="o">){</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"Value of a:"</span> <span class="o">+</span><span class="n">a</span><span class="o">);</span>
+</span>        <span class="nf">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="n">numList</span><span class="o">){</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"Value of a:"</span> <span class="o">+</span><span class="n">a</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -446,18 +450,18 @@ do…while 循环与 while 循环类似，但是 do…while 循环会确保至�
 Scala 可以使用一个或多个 if 语句来过滤一些元素。
 以下是在 for 循环中使用过滤器的语法。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">List</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">for</span><span class="o">(</span> <span class="k">var</span> <span class="n">x</span> <span class="k">&lt;-</span> <span class="nc">List</span>
       <span class="k">if</span> <span class="n">condition1</span><span class="o">;</span> <span class="k">if</span> <span class="n">condition2</span><span class="o">...</span>
    <span class="o">){</span>
-   <span class="n">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+   <span class="nf">statement</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 <span class="k">#</span> <span class="n">ex</span>
 <span class="k">object</span> <span class="nc">Loops</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="k">val</span> <span class="n">numList</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">,</span><span class="mi">7</span><span class="o">,</span><span class="mi">8</span><span class="o">,</span><span class="mi">9</span><span class="o">);</span>
+        <span class="k">val</span> <span class="nv">numList</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">,</span><span class="mi">7</span><span class="o">,</span><span class="mi">8</span><span class="o">,</span><span class="mi">9</span><span class="o">);</span>
         <span class="c1">//for Loop
-</span>        <span class="k">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="n">numList</span> <span class="k">if</span> <span class="n">a</span> <span class="o">!=</span> <span class="mi">3</span><span class="o">;</span> <span class="k">if</span> <span class="n">a</span><span class="o">&lt;</span><span class="mi">8</span><span class="o">){</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span><span class="n">a</span><span class="o">);</span>
+</span>        <span class="nf">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="n">numList</span> <span class="k">if</span> <span class="n">a</span> <span class="o">!=</span> <span class="mi">3</span><span class="o">;</span> <span class="k">if</span> <span class="n">a</span><span class="o">&lt;</span><span class="mi">8</span><span class="o">){</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span><span class="n">a</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -471,16 +475,16 @@ Scala 可以使用一个或多个 if 语句来过滤一些元素。
 <span class="o">}</span><span class="k">yield</span> <span class="n">x</span>
 <span class="k">#</span> <span class="n">ex</span>
 <span class="k">object</span> <span class="nc">Loops</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="k">val</span> <span class="n">numList</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">,</span><span class="mi">7</span><span class="o">,</span><span class="mi">8</span><span class="o">,</span><span class="mi">9</span><span class="o">);</span>
+        <span class="k">val</span> <span class="nv">numList</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">,</span><span class="mi">7</span><span class="o">,</span><span class="mi">8</span><span class="o">,</span><span class="mi">9</span><span class="o">);</span>
         <span class="c1">//for Loop
 </span>        <span class="k">var</span> <span class="n">retVal</span> <span class="k">=</span> <span class="k">for</span> <span class="o">{</span> <span class="n">a</span> <span class="k">&lt;-</span> <span class="n">numList</span>
                                     <span class="k">if</span> <span class="n">a</span><span class="o">!=</span> <span class="mi">3</span><span class="o">;</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">8</span>
                                     <span class="o">}</span><span class="k">yield</span> <span class="n">a</span>
         <span class="c1">//输出返回值
-</span>        <span class="k">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="n">retVal</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
+</span>        <span class="nf">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="n">retVal</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -498,15 +502,15 @@ Scala 可以使用一个或多个 if 语句来过滤一些元素。
 </span><span class="k">import</span> <span class="nn">scala.util.control._</span>
 
 <span class="c1">// 创建 Breaks 对象
-</span><span class="k">val</span> <span class="n">loop</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Breaks</span><span class="o">;</span>
+</span><span class="k">val</span> <span class="nv">loop</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Breaks</span><span class="o">;</span>
 
 <span class="c1">// 在 breakable 中循环
-</span><span class="n">loop</span><span class="o">.</span><span class="n">breakable</span><span class="o">{</span>
+</span><span class="nv">loop</span><span class="o">.</span><span class="py">breakable</span><span class="o">{</span>
     <span class="c1">// 循环
-</span>    <span class="k">for</span><span class="o">(...){</span>
+</span>    <span class="nf">for</span><span class="o">(...){</span>
        <span class="o">....</span>
        <span class="c1">// 循环中断
-</span>       <span class="n">loop</span><span class="o">.</span><span class="n">break</span><span class="o">;</span>
+</span>       <span class="nv">loop</span><span class="o">.</span><span class="py">break</span><span class="o">;</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -547,23 +551,23 @@ After the loop
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.util.control._</span>
 
 <span class="k">object</span> <span class="nc">Breaks</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
         <span class="k">var</span> <span class="n">b</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
         <span class="k">var</span> <span class="n">numList1</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">);</span>
         <span class="k">var</span> <span class="n">numList2</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">11</span><span class="o">,</span> <span class="mi">12</span><span class="o">,</span> <span class="mi">13</span><span class="o">);</span>
 
-        <span class="k">val</span> <span class="n">outer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Breaks</span><span class="o">;</span>
-        <span class="k">val</span> <span class="n">inner</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Breaks</span><span class="o">;</span>
+        <span class="k">val</span> <span class="nv">outer</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Breaks</span><span class="o">;</span>
+        <span class="k">val</span> <span class="nv">inner</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Breaks</span><span class="o">;</span>
 
-        <span class="n">outer</span><span class="o">.</span><span class="n">breakable</span> <span class="o">{</span>
-            <span class="k">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="n">numList1</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
-                <span class="n">inner</span><span class="o">.</span><span class="n">breakable</span> <span class="o">{</span>
-                    <span class="k">for</span> <span class="o">(</span><span class="n">b</span> <span class="k">&lt;-</span> <span class="n">numList2</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="n">println</span><span class="o">(</span><span class="s">"Value of b: "</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span>
-                        <span class="k">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">12</span><span class="o">)</span> <span class="o">{</span>
-                            <span class="n">inner</span><span class="o">.</span><span class="n">break</span><span class="o">;</span>
+        <span class="nv">outer</span><span class="o">.</span><span class="py">breakable</span> <span class="o">{</span>
+            <span class="nf">for</span> <span class="o">(</span><span class="n">a</span> <span class="k">&lt;-</span> <span class="n">numList1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nf">println</span><span class="o">(</span><span class="s">"Value of a: "</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
+                <span class="nv">inner</span><span class="o">.</span><span class="py">breakable</span> <span class="o">{</span>
+                    <span class="nf">for</span> <span class="o">(</span><span class="n">b</span> <span class="k">&lt;-</span> <span class="n">numList2</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="nf">println</span><span class="o">(</span><span class="s">"Value of b: "</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span>
+                        <span class="nf">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">12</span><span class="o">)</span> <span class="o">{</span>
+                            <span class="nv">inner</span><span class="o">.</span><span class="py">break</span><span class="o">;</span>
                         <span class="o">}</span>
                     <span class="o">}</span>
                 <span class="o">}</span><span class="c1">// Inner
@@ -818,7 +822,7 @@ After the loop
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -990,7 +994,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

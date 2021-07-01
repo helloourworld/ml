@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -208,12 +212,12 @@ Scala 中的 private 限定符，比 Java 更严格，在嵌套类情况下，�
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Outer</span><span class="o">{</span>
     <span class="k">class</span> <span class="nc">Inner</span><span class="o">{</span>
-    <span class="k">private</span> <span class="k">def</span> <span class="n">f</span><span class="o">(){</span><span class="n">println</span><span class="o">(</span><span class="s">"f"</span><span class="o">)}</span>
+    <span class="k">private</span> <span class="k">def</span> <span class="nf">f</span><span class="o">(){</span><span class="nf">println</span><span class="o">(</span><span class="s">"f"</span><span class="o">)}</span>
     <span class="k">class</span> <span class="nc">InnerMost</span><span class="o">{</span>
-        <span class="n">f</span><span class="o">()</span> <span class="c1">// 正确
+        <span class="nf">f</span><span class="o">()</span> <span class="c1">// 正确
 </span>        <span class="o">}</span>
     <span class="o">}</span>
-    <span class="o">(</span><span class="k">new</span> <span class="nc">Inner</span><span class="o">).</span><span class="n">f</span><span class="o">()</span> <span class="c1">//错误
+    <span class="o">(</span><span class="k">new</span> <span class="nc">Inner</span><span class="o">).</span><span class="py">f</span><span class="o">()</span> <span class="c1">//错误
 </span><span class="o">}</span>
 </code></pre></div></div>
 <p>(new Inner).f( ) 访问不合法是因为 f 在 Inner 中被声明为 private，而访问不在类Inner之内。
@@ -225,13 +229,13 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">p</span><span class="o">{</span>
 <span class="k">class</span> <span class="nc">Super</span><span class="o">{</span>
-    <span class="k">protected</span> <span class="k">def</span> <span class="n">f</span><span class="o">()</span> <span class="o">{</span><span class="n">println</span><span class="o">(</span><span class="s">"f"</span><span class="o">)}</span>
+    <span class="k">protected</span> <span class="k">def</span> <span class="nf">f</span><span class="o">()</span> <span class="o">{</span><span class="nf">println</span><span class="o">(</span><span class="s">"f"</span><span class="o">)}</span>
     <span class="o">}</span>
     <span class="k">class</span> <span class="nc">Sub</span> <span class="k">extends</span> <span class="nc">Super</span><span class="o">{</span>
-        <span class="n">f</span><span class="o">()</span>
+        <span class="nf">f</span><span class="o">()</span>
     <span class="o">}</span>
     <span class="k">class</span> <span class="nc">Other</span><span class="o">{</span>
-        <span class="o">(</span><span class="k">new</span> <span class="nc">Super</span><span class="o">).</span><span class="n">f</span><span class="o">()</span> <span class="c1">//错误
+        <span class="o">(</span><span class="k">new</span> <span class="nc">Super</span><span class="o">).</span><span class="py">f</span><span class="o">()</span> <span class="c1">//错误
 </span>    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -241,12 +245,12 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
 <p>Scala中，如果没有指定任何的修饰符，则默认为 public。这样的成员在任何地方都可以被访问。</p>
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Outer</span> <span class="o">{</span>
    <span class="k">class</span> <span class="nc">Inner</span> <span class="o">{</span>
-      <span class="k">def</span> <span class="n">f</span><span class="o">()</span> <span class="o">{</span> <span class="n">println</span><span class="o">(</span><span class="s">"f"</span><span class="o">)</span> <span class="o">}</span>
+      <span class="k">def</span> <span class="nf">f</span><span class="o">()</span> <span class="o">{</span> <span class="nf">println</span><span class="o">(</span><span class="s">"f"</span><span class="o">)</span> <span class="o">}</span>
       <span class="k">class</span> <span class="nc">InnerMost</span> <span class="o">{</span>
-         <span class="n">f</span><span class="o">()</span> <span class="c1">// 正确
+         <span class="nf">f</span><span class="o">()</span> <span class="c1">// 正确
 </span>      <span class="o">}</span>
    <span class="o">}</span>
-   <span class="o">(</span><span class="k">new</span> <span class="nc">Inner</span><span class="o">).</span><span class="n">f</span><span class="o">()</span> <span class="c1">// 正确因为 f() 是 public
+   <span class="o">(</span><span class="k">new</span> <span class="nc">Inner</span><span class="o">).</span><span class="py">f</span><span class="o">()</span> <span class="c1">// 正确因为 f() 是 public
 </span><span class="o">}</span>
 </code></pre></div></div>
 <h3 id="4-作用域保护">4 作用域保护</h3>
@@ -262,9 +266,9 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">bobsrocckets</span><span class="o">{</span>
     <span class="k">package</span> <span class="nn">navigation</span><span class="o">{</span>
         <span class="k">private</span><span class="o">[</span><span class="kt">bobsrockets</span><span class="o">]</span> <span class="k">class</span> <span class="nc">Navigator</span><span class="o">{</span>
-         <span class="k">protected</span><span class="o">[</span><span class="kt">navigation</span><span class="o">]</span> <span class="k">def</span> <span class="n">useStarChart</span><span class="o">(){}</span>
+         <span class="k">protected</span><span class="o">[</span><span class="kt">navigation</span><span class="o">]</span> <span class="k">def</span> <span class="nf">useStarChart</span><span class="o">(){}</span>
          <span class="k">class</span> <span class="nc">LegOfJourney</span><span class="o">{</span>
-             <span class="k">private</span><span class="o">[</span><span class="kt">Navigator</span><span class="o">]</span> <span class="k">val</span> <span class="n">distance</span> <span class="k">=</span> <span class="mi">100</span>
+             <span class="k">private</span><span class="o">[</span><span class="kt">Navigator</span><span class="o">]</span> <span class="k">val</span> <span class="nv">distance</span> <span class="k">=</span> <span class="mi">100</span>
              <span class="o">}</span>
             <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">var</span> <span class="n">speed</span> <span class="k">=</span> <span class="mi">200</span>
             <span class="o">}</span>
@@ -272,7 +276,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
         <span class="k">package</span> <span class="nn">launch</span><span class="o">{</span>
         <span class="k">import</span> <span class="nn">navigation._</span>
         <span class="k">object</span> <span class="nc">Vehicle</span><span class="o">{</span>
-        <span class="k">private</span><span class="o">[</span><span class="kt">launch</span><span class="o">]</span> <span class="k">val</span> <span class="n">guide</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Navigator</span>
+        <span class="k">private</span><span class="o">[</span><span class="kt">launch</span><span class="o">]</span> <span class="k">val</span> <span class="nv">guide</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Navigator</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -285,17 +289,17 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
 <h3 id="1-算术运算符">1 算术运算符</h3>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Yunsunfu</span><span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">10</span><span class="o">;</span>
         <span class="k">var</span> <span class="n">b</span> <span class="k">=</span> <span class="mi">20</span><span class="o">;</span>
         <span class="k">var</span> <span class="n">c</span> <span class="k">=</span> <span class="mi">25</span><span class="o">;</span>
         <span class="k">var</span> <span class="n">d</span> <span class="k">=</span> <span class="mi">25</span><span class="o">;</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"a+b="</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">));</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"a-b="</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="o">));</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"a*b="</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">));</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"b / a ="</span> <span class="o">+</span> <span class="o">(</span><span class="n">b</span> <span class="o">/</span> <span class="n">a</span><span class="o">));</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"b % a = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">b</span> <span class="o">%</span> <span class="n">a</span><span class="o">));</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"c % a = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">c</span> <span class="o">%</span> <span class="n">a</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"a+b="</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"a-b="</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"a*b="</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"b / a ="</span> <span class="o">+</span> <span class="o">(</span><span class="n">b</span> <span class="o">/</span> <span class="n">a</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"b % a = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">b</span> <span class="o">%</span> <span class="n">a</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"c % a = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">c</span> <span class="o">%</span> <span class="n">a</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -346,15 +350,15 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
 </table>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Test</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">10</span><span class="o">;</span>
       <span class="k">var</span> <span class="n">b</span> <span class="k">=</span> <span class="mi">20</span><span class="o">;</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"a == b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="o">)</span> <span class="o">);</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"a != b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">!=</span> <span class="n">b</span><span class="o">)</span> <span class="o">);</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"a &gt; b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">);</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"a &lt; b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">);</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"b &gt;= a = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">b</span> <span class="o">&gt;=</span> <span class="n">a</span><span class="o">)</span> <span class="o">);</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"b &lt;= a = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">b</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="o">)</span> <span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"a == b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="o">)</span> <span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"a != b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">!=</span> <span class="n">b</span><span class="o">)</span> <span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"a &gt; b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"a &lt; b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"b &gt;= a = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">b</span> <span class="o">&gt;=</span> <span class="n">a</span><span class="o">)</span> <span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"b &lt;= a = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">b</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="o">)</span> <span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -389,13 +393,13 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
 </table>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Yunsunfu</span><span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="kc">true</span><span class="o">;</span>
         <span class="k">var</span> <span class="n">b</span> <span class="k">=</span> <span class="kc">false</span><span class="o">;</span>
 
-        <span class="n">println</span><span class="o">(</span><span class="s">"a &amp;&amp; b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">));</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"a || b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">||</span> <span class="n">b</span><span class="o">));</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"! (a &amp;&amp; b) = "</span> <span class="o">+</span> <span class="o">(!(</span><span class="n">a</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">)));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"a &amp;&amp; b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"a || b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">||</span> <span class="n">b</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"! (a &amp;&amp; b) = "</span> <span class="o">+</span> <span class="o">(!(</span><span class="n">a</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">)));</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -458,17 +462,17 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
 <span class="o">~</span><span class="n">A</span>  <span class="k">=</span> <span class="mi">1100</span> <span class="mi">0011</span>
 
 <span class="k">object</span> <span class="nc">Yunsunfu</span><span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]){</span>
         <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">60</span><span class="o">;</span>
         <span class="k">var</span> <span class="n">b</span> <span class="k">=</span> <span class="mi">13</span><span class="o">;</span>
 
-        <span class="n">println</span><span class="o">(</span><span class="s">"a &amp; b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="o">));</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"a | b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="o">));</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"a ^ b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span><span class="o">^</span><span class="n">b</span><span class="o">));</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"~a = "</span> <span class="o">+</span> <span class="o">(~</span><span class="n">a</span><span class="o">));</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"a &lt;&lt; 2 ="</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="o">));</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"a \&gt;\&gt; 2 ="</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">\&gt;\&gt;</span> <span class="mi">2</span><span class="o">));</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"a \&gt;\&gt;&gt; 2 ="</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">\&gt;\&gt;&gt;</span><span class="mi">2</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"a &amp; b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"a | b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"a ^ b = "</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span><span class="o">^</span><span class="n">b</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"~a = "</span> <span class="o">+</span> <span class="o">(~</span><span class="n">a</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"a &lt;&lt; 2 ="</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"a \&gt;\&gt; 2 ="</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">\&gt;\&gt;</span> <span class="mi">2</span><span class="o">));</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"a \&gt;\&gt;&gt; 2 ="</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">\&gt;\&gt;&gt;</span><span class="mi">2</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
 
@@ -597,50 +601,50 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
 </table>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Yunsunfu</span> <span class="o">{</span>
-   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
       <span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="mi">10</span><span class="o">;</span>
       <span class="k">var</span> <span class="n">b</span> <span class="k">=</span> <span class="mi">20</span><span class="o">;</span>
       <span class="k">var</span> <span class="n">c</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
 
       <span class="n">c</span> <span class="k">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">;</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"c = a + b  ="</span> <span class="o">+</span> <span class="n">c</span> <span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"c = a + b  ="</span> <span class="o">+</span> <span class="n">c</span> <span class="o">);</span>
 
       <span class="n">c</span> <span class="o">+=</span> <span class="n">a</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"c += a  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"c += a  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
 
       <span class="n">c</span> <span class="o">-=</span> <span class="n">a</span><span class="o">;</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"c -= a  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"c -= a  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
 
       <span class="n">c</span> <span class="o">*=</span> <span class="n">a</span><span class="o">;</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"c *= a  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"c *= a  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
 
       <span class="n">a</span> <span class="k">=</span> <span class="mi">10</span><span class="o">;</span>
       <span class="n">c</span> <span class="k">=</span> <span class="mi">15</span><span class="o">;</span>
       <span class="n">c</span> <span class="o">/=</span> <span class="n">a</span><span class="o">;</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"c /= a  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"c /= a  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
 
       <span class="n">a</span> <span class="k">=</span> <span class="mi">10</span><span class="o">;</span>
       <span class="n">c</span> <span class="k">=</span> <span class="mi">15</span><span class="o">;</span>
       <span class="n">c</span> <span class="o">%=</span> <span class="n">a</span><span class="o">;</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"c %= a  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"c %= a  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
 
       <span class="n">c</span> <span class="o">&lt;&lt;=</span> <span class="mi">2</span><span class="o">;</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"c &lt;&lt;= 2  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"c &lt;&lt;= 2  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
 
       <span class="n">c</span> <span class="o">&gt;&gt;=</span> <span class="mi">2</span><span class="o">;</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"c &gt;&gt;=2  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"c &gt;&gt;=2  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
 
       <span class="n">c</span> <span class="o">&gt;&gt;=</span> <span class="mi">2</span><span class="o">;</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"c &gt;&gt;=2  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"c &gt;&gt;=2  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
 
       <span class="n">c</span> <span class="o">&amp;=</span> <span class="mi">2</span><span class="o">;</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"c &amp;= 2  ="</span> <span class="o">+</span><span class="n">c</span><span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"c &amp;= 2  ="</span> <span class="o">+</span><span class="n">c</span><span class="o">);</span>
 
       <span class="n">c</span> <span class="o">^=</span> <span class="mi">2</span><span class="o">;</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"c ^= 2  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"c ^= 2  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
 
       <span class="n">c</span> <span class="o">|=</span> <span class="mi">2</span><span class="o">;</span>
-      <span class="n">println</span><span class="o">(</span><span class="s">"c |= 2  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
+      <span class="nf">println</span><span class="o">(</span><span class="s">"c |= 2  ="</span> <span class="o">+</span> <span class="n">c</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="n">output</span><span class="k">:</span>
@@ -902,7 +906,7 @@ Java中允许这两种访问，因为它允许外部类访问内部类的私有�
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -1074,7 +1078,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

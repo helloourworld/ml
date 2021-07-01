@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -230,13 +234,13 @@ val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.sql.SparkSession</span>
 <span class="c1">// Create a SparkSession. No need to create SparkContext
 // You automatically get it as part of the SparkSession
-</span><span class="k">val</span> <span class="n">warehouseLocation</span> <span class="k">=</span> <span class="s">"file:${system:user.dir}/spark-warehouse"</span>
-<span class="k">val</span> <span class="n">spark</span> <span class="k">=</span> <span class="nc">SparkSession</span>
-   <span class="o">.</span><span class="n">builder</span><span class="o">()</span>
-   <span class="o">.</span><span class="n">appName</span><span class="o">(</span><span class="s">"SparkSessionZipsExample"</span><span class="o">)</span>
-   <span class="o">.</span><span class="n">config</span><span class="o">(</span><span class="s">"spark.sql.warehouse.dir"</span><span class="o">,</span> <span class="n">warehouseLocation</span><span class="o">)</span>
-   <span class="o">.</span><span class="n">enableHiveSupport</span><span class="o">()</span>
-   <span class="o">.</span><span class="n">getOrCreate</span><span class="o">()</span>
+</span><span class="k">val</span> <span class="nv">warehouseLocation</span> <span class="k">=</span> <span class="s">"file:${system:user.dir}/spark-warehouse"</span>
+<span class="k">val</span> <span class="nv">spark</span> <span class="k">=</span> <span class="nc">SparkSession</span>
+   <span class="o">.</span><span class="py">builder</span><span class="o">()</span>
+   <span class="o">.</span><span class="py">appName</span><span class="o">(</span><span class="s">"SparkSessionZipsExample"</span><span class="o">)</span>
+   <span class="o">.</span><span class="py">config</span><span class="o">(</span><span class="s">"spark.sql.warehouse.dir"</span><span class="o">,</span> <span class="n">warehouseLocation</span><span class="o">)</span>
+   <span class="o">.</span><span class="py">enableHiveSupport</span><span class="o">()</span>
+   <span class="o">.</span><span class="py">getOrCreate</span><span class="o">()</span>
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
@@ -305,17 +309,17 @@ spark.catalog.listTables.show(false)
 One quick way to generate a Dataset is by using the spark.range method. When learning to manipulate <a href="http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.Dataset">Dataset</a> with its API, this quick method proves useful. For example,</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//create a Dataset using spark.range starting from 5 to 100, with increments of 5
-</span><span class="k">val</span> <span class="n">numDS</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">5</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">numDS</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">range</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">5</span><span class="o">)</span>
 <span class="c1">// reverse the order and display first 5 items
-</span><span class="n">numDS</span><span class="o">.</span><span class="n">orderBy</span><span class="o">(</span><span class="n">desc</span><span class="o">(</span><span class="s">"id"</span><span class="o">)).</span><span class="n">show</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
+</span><span class="nv">numDS</span><span class="o">.</span><span class="py">orderBy</span><span class="o">(</span><span class="nf">desc</span><span class="o">(</span><span class="s">"id"</span><span class="o">)).</span><span class="py">show</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
 <span class="c1">//compute descriptive stats and display them
-</span><span class="n">numDs</span><span class="o">.</span><span class="n">describe</span><span class="o">().</span><span class="n">show</span><span class="o">()</span>
+</span><span class="nv">numDs</span><span class="o">.</span><span class="py">describe</span><span class="o">().</span><span class="py">show</span><span class="o">()</span>
 <span class="c1">// create a DataFrame using spark.createDataFrame from a List or Seq
-</span><span class="k">val</span> <span class="n">langPercentDF</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="o">(</span><span class="nc">List</span><span class="o">((</span><span class="s">"Scala"</span><span class="o">,</span> <span class="mi">35</span><span class="o">),</span> <span class="o">(</span><span class="s">"Python"</span><span class="o">,</span> <span class="mi">30</span><span class="o">),</span> <span class="o">(</span><span class="s">"R"</span><span class="o">,</span> <span class="mi">15</span><span class="o">),</span> <span class="o">(</span><span class="s">"Java"</span><span class="o">,</span> <span class="mi">20</span><span class="o">)))</span>
+</span><span class="k">val</span> <span class="nv">langPercentDF</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">createDataFrame</span><span class="o">(</span><span class="nc">List</span><span class="o">((</span><span class="s">"Scala"</span><span class="o">,</span> <span class="mi">35</span><span class="o">),</span> <span class="o">(</span><span class="s">"Python"</span><span class="o">,</span> <span class="mi">30</span><span class="o">),</span> <span class="o">(</span><span class="s">"R"</span><span class="o">,</span> <span class="mi">15</span><span class="o">),</span> <span class="o">(</span><span class="s">"Java"</span><span class="o">,</span> <span class="mi">20</span><span class="o">)))</span>
 <span class="c1">//rename the columns
-</span><span class="k">val</span> <span class="n">lpDF</span> <span class="k">=</span> <span class="n">langPercentDF</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="o">(</span><span class="s">"_1"</span><span class="o">,</span> <span class="s">"language"</span><span class="o">).</span><span class="n">withColumnRenamed</span><span class="o">(</span><span class="s">"_2"</span><span class="o">,</span> <span class="s">"percent"</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">lpDF</span> <span class="k">=</span> <span class="nv">langPercentDF</span><span class="o">.</span><span class="py">withColumnRenamed</span><span class="o">(</span><span class="s">"_1"</span><span class="o">,</span> <span class="s">"language"</span><span class="o">).</span><span class="py">withColumnRenamed</span><span class="o">(</span><span class="s">"_2"</span><span class="o">,</span> <span class="s">"percent"</span><span class="o">)</span>
 <span class="c1">//order the DataFrame in descending order of percentage
-</span><span class="n">lpDF</span><span class="o">.</span><span class="n">orderBy</span><span class="o">(</span><span class="n">desc</span><span class="o">(</span><span class="s">"percent"</span><span class="o">)).</span><span class="n">show</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
+</span><span class="nv">lpDF</span><span class="o">.</span><span class="py">orderBy</span><span class="o">(</span><span class="nf">desc</span><span class="o">(</span><span class="s">"percent"</span><span class="o">)).</span><span class="py">show</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
 </code></pre></div></div>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; numDS.orderBy<span class="o">(</span>desc<span class="o">(</span><span class="s2">"id"</span><span class="o">))</span>.show<span class="o">(</span>5<span class="o">)</span>
@@ -367,10 +371,10 @@ scala&gt; lpDF.orderBy<span class="o">(</span>desc<span class="o">(</span><span 
 <p>Like any Scala object you can use spark, the SparkSession object, to access its public methods and instance fields. I can read JSON or CVS or TXT file, or I can read a parquet table. For example, in this code snippet, we will read a JSON file of zip codes, which returns a DataFrame, a collection of generic Rows.</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// read the json file and create the dataframe
-</span><span class="k">val</span> <span class="n">jsonFile</span> <span class="k">=</span> <span class="n">args</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">zipsDF</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="o">(</span><span class="n">jsonFile</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">jsonFile</span> <span class="k">=</span> <span class="nf">args</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">zipsDF</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span><span class="py">json</span><span class="o">(</span><span class="n">jsonFile</span><span class="o">)</span>
 <span class="c1">//filter all cities whose population &gt; 40K
-</span><span class="n">zipsDF</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">zipsDF</span><span class="o">.</span><span class="n">col</span><span class="o">(</span><span class="s">"pop"</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">40000</span><span class="o">).</span><span class="n">show</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+</span><span class="nv">zipsDF</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="nv">zipsDF</span><span class="o">.</span><span class="py">col</span><span class="o">(</span><span class="s">"pop"</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">40000</span><span class="o">).</span><span class="py">show</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
 </code></pre></div></div>
 
 <h1 id="using-spark-sql-with-sparksession">Using Spark SQL with SparkSession</h1>
@@ -380,10 +384,10 @@ scala&gt; lpDF.orderBy<span class="o">(</span>desc<span class="o">(</span><span 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Now create an SQL table and issue SQL queries against it without
 // using the sqlContext but through the SparkSession object.
 // Creates a temporary view of the DataFrame
-</span><span class="n">zipsDF</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="o">(</span><span class="s">"zips_table"</span><span class="o">)</span>
-<span class="n">zipsDF</span><span class="o">.</span><span class="n">cache</span><span class="o">()</span>
-<span class="k">val</span> <span class="n">resultsDF</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">(</span><span class="s">"SELECT city, pop, state, zip FROM zips_table"</span><span class="o">)</span>
-<span class="n">resultsDF</span><span class="o">.</span><span class="n">show</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+</span><span class="nv">zipsDF</span><span class="o">.</span><span class="py">createOrReplaceTempView</span><span class="o">(</span><span class="s">"zips_table"</span><span class="o">)</span>
+<span class="nv">zipsDF</span><span class="o">.</span><span class="py">cache</span><span class="o">()</span>
+<span class="k">val</span> <span class="nv">resultsDF</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"SELECT city, pop, state, zip FROM zips_table"</span><span class="o">)</span>
+<span class="nv">resultsDF</span><span class="o">.</span><span class="py">show</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
 </code></pre></div></div>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; df2.filter<span class="o">(</span>df2.col<span class="o">(</span><span class="s2">"age"</span><span class="o">)</span> <span class="o">&gt;</span>10 <span class="o">)</span>.show<span class="o">(</span>10<span class="o">)</span>
@@ -417,12 +421,12 @@ scala&gt; resultDF.show<span class="o">()</span>
 <p>Next, we are going to create a Hive table and issue queries against it using SparkSession object as you would with a HiveContext.</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//drop the table if exists to get around existing table error
-</span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">(</span><span class="s">"DROP TABLE IF EXISTS zips_hive_table"</span><span class="o">)</span>
+</span><span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"DROP TABLE IF EXISTS zips_hive_table"</span><span class="o">)</span>
 <span class="c1">//save as a hive table
-</span><span class="n">spark</span><span class="o">.</span><span class="n">table</span><span class="o">(</span><span class="s">"zips_table"</span><span class="o">).</span><span class="n">write</span><span class="o">.</span><span class="n">saveAsTable</span><span class="o">(</span><span class="s">"zips_hive_table"</span><span class="o">)</span>
+</span><span class="nv">spark</span><span class="o">.</span><span class="py">table</span><span class="o">(</span><span class="s">"zips_table"</span><span class="o">).</span><span class="py">write</span><span class="o">.</span><span class="py">saveAsTable</span><span class="o">(</span><span class="s">"zips_hive_table"</span><span class="o">)</span>
 <span class="c1">//make a similar query against the hive table
-</span><span class="k">val</span> <span class="n">resultsHiveDF</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">(</span><span class="s">"SELECT city, pop, state, zip FROM zips_hive_table WHERE pop &gt; 40000"</span><span class="o">)</span>
-<span class="n">resultsHiveDF</span><span class="o">.</span><span class="n">show</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">resultsHiveDF</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"SELECT city, pop, state, zip FROM zips_hive_table WHERE pop &gt; 40000"</span><span class="o">)</span>
+<span class="nv">resultsHiveDF</span><span class="o">.</span><span class="py">show</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
 </code></pre></div></div>
 <p><img src="/images/spark/sparksession3.png" alt="Output from the Hive Table" /></p>
 
@@ -689,7 +693,7 @@ SparkContext as it relates to Driver and Cluster Manager</p>
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -861,7 +865,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

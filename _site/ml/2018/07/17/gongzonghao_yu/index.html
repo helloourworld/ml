@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -382,7 +386,7 @@ constant |          5   .2041241    24.49   0.000
 
 <h4 id="坑三-目标变量问题">坑三—-目标变量问题</h4>
 
-<p>在进行监督型模型训练时，目标变量的确定，直接关系到最终模型的效果。这里边有一些小坑，目标变量是能够反映问题的实质么?数据准备过程中，是否加入了噪音?在模型影响因素的选择中，是不是有一些是对目标变量的强拟合?坑虽小，往往在模型开发大半才会发现，不得不引起重视。</p>
+<p>在进行监督型模型训练时，目标变量的确定，直接关系到最终模型的效果。这里边有一些小坑，目标变量是能够反映问题的实质么?数据准备过程中，是否加入了噪音?在模型影响因素的选择中，使用了未来的信息（Accept Leaksfrom the Future）。例如，预报芝加哥银行在某天的利率，使用神经网络建模，模型的准确率达到95%。但在模型中却原来是使用3日的移动平均来预报，但却把移动平均的中点设在今天。因而要仔细查看那些让结果表现得异常好的变量，这些变量有可能是不应该使用，或者不应该直接使用的。坑虽小，往往在模型开发大半才会发现，不得不引起重视。</p>
 
 <h3 id="流程之建模">流程之建模</h3>
 
@@ -433,6 +437,13 @@ constant |          5   .2041241    24.49   0.000
                         </a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/ml/2018/09/21/regime_with_hmm/" data-toggle="tooltip" data-placement="top" title="Market-Regimes with a Hidden-Markov Model">
+                        Next<br>
+                        <span>Market-Regimes with a Hidden-Markov Model</span>
+                        </a>
+                    </li>
                     
                 </ul>
                     <div class="ds-share flat"
@@ -642,7 +653,7 @@ constant |          5   .2041241    24.49   0.000
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -814,7 +825,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

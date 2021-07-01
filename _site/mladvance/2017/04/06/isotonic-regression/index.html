@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -308,63 +312,63 @@
 <h3 id="41-实例">4.1 实例</h3>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.regression.</span><span class="o">{</span><span class="nc">IsotonicRegression</span><span class="o">,</span> <span class="nc">IsotonicRegressionModel</span><span class="o">}</span>
-<span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="o">(</span><span class="s">"data/mllib/sample_isotonic_regression_data.txt"</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">data</span> <span class="k">=</span> <span class="nv">sc</span><span class="o">.</span><span class="py">textFile</span><span class="o">(</span><span class="s">"data/mllib/sample_isotonic_regression_data.txt"</span><span class="o">)</span>
 <span class="c1">// 创建（label, feature, weight） tuples ，权重默认设置为1.0
-</span><span class="k">val</span> <span class="n">parsedData</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">line</span> <span class="k">=&gt;</span>
-  <span class="k">val</span> <span class="n">parts</span> <span class="k">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="sc">','</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">toDouble</span><span class="o">)</span>
-  <span class="o">(</span><span class="n">parts</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="n">parts</span><span class="o">(</span><span class="mi">1</span><span class="o">),</span> <span class="mf">1.0</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">parsedData</span> <span class="k">=</span> <span class="nv">data</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="n">line</span> <span class="k">=&gt;</span>
+  <span class="k">val</span> <span class="nv">parts</span> <span class="k">=</span> <span class="nv">line</span><span class="o">.</span><span class="py">split</span><span class="o">(</span><span class="sc">','</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">toDouble</span><span class="o">)</span>
+  <span class="o">(</span><span class="nf">parts</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="nf">parts</span><span class="o">(</span><span class="mi">1</span><span class="o">),</span> <span class="mf">1.0</span><span class="o">)</span>
 <span class="o">}</span>
 <span class="c1">// Split data into training (60%) and test (40%) sets.
-</span><span class="k">val</span> <span class="n">splits</span> <span class="k">=</span> <span class="n">parsedData</span><span class="o">.</span><span class="n">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.6</span><span class="o">,</span> <span class="mf">0.4</span><span class="o">),</span> <span class="n">seed</span> <span class="k">=</span> <span class="mi">11L</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">training</span> <span class="k">=</span> <span class="n">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">test</span> <span class="k">=</span> <span class="n">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">splits</span> <span class="k">=</span> <span class="nv">parsedData</span><span class="o">.</span><span class="py">randomSplit</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">0.6</span><span class="o">,</span> <span class="mf">0.4</span><span class="o">),</span> <span class="n">seed</span> <span class="k">=</span> <span class="mi">11L</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">training</span> <span class="k">=</span> <span class="nf">splits</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">test</span> <span class="k">=</span> <span class="nf">splits</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
 <span class="c1">// Create isotonic regression model from training data.
 // Isotonic parameter defaults to true so it is only shown for demonstration
-</span><span class="k">val</span> <span class="n">model</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">IsotonicRegression</span><span class="o">().</span><span class="n">setIsotonic</span><span class="o">(</span><span class="kc">true</span><span class="o">).</span><span class="n">run</span><span class="o">(</span><span class="n">training</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">model</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">IsotonicRegression</span><span class="o">().</span><span class="py">setIsotonic</span><span class="o">(</span><span class="kc">true</span><span class="o">).</span><span class="py">run</span><span class="o">(</span><span class="n">training</span><span class="o">)</span>
 <span class="c1">// Create tuples of predicted and real labels.
-</span><span class="k">val</span> <span class="n">predictionAndLabel</span> <span class="k">=</span> <span class="n">test</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">point</span> <span class="k">=&gt;</span>
-  <span class="k">val</span> <span class="n">predictedLabel</span> <span class="k">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="o">(</span><span class="n">point</span><span class="o">.</span><span class="n">_2</span><span class="o">)</span>
-  <span class="o">(</span><span class="n">predictedLabel</span><span class="o">,</span> <span class="n">point</span><span class="o">.</span><span class="n">_1</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">predictionAndLabel</span> <span class="k">=</span> <span class="nv">test</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="n">point</span> <span class="k">=&gt;</span>
+  <span class="k">val</span> <span class="nv">predictedLabel</span> <span class="k">=</span> <span class="nv">model</span><span class="o">.</span><span class="py">predict</span><span class="o">(</span><span class="nv">point</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">predictedLabel</span><span class="o">,</span> <span class="nv">point</span><span class="o">.</span><span class="py">_1</span><span class="o">)</span>
 <span class="o">}</span>
 <span class="c1">// Calculate mean squared error between predicted and real labels.
-</span><span class="k">val</span> <span class="n">meanSquaredError</span> <span class="k">=</span> <span class="n">predictionAndLabel</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="k">case</span> <span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">l</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="o">((</span><span class="n">p</span> <span class="o">-</span> <span class="n">l</span><span class="o">),</span> <span class="mi">2</span><span class="o">)</span> <span class="o">}.</span><span class="n">mean</span><span class="o">()</span>
-<span class="n">println</span><span class="o">(</span><span class="s">"Mean Squared Error = "</span> <span class="o">+</span> <span class="n">meanSquaredError</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">meanSquaredError</span> <span class="k">=</span> <span class="nv">predictionAndLabel</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="nf">case</span> <span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">l</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">math</span><span class="o">.</span><span class="py">pow</span><span class="o">((</span><span class="n">p</span> <span class="o">-</span> <span class="n">l</span><span class="o">),</span> <span class="mi">2</span><span class="o">)</span> <span class="o">}.</span><span class="py">mean</span><span class="o">()</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Mean Squared Error = "</span> <span class="o">+</span> <span class="n">meanSquaredError</span><span class="o">)</span>
 </code></pre></div></div>
 
 <h3 id="42-训练过程分析">4.2 训练过程分析</h3>
 
 <p>  <code class="highlighter-rouge">parallelPoolAdjacentViolators</code>方法用于实现保序回归的训练。<code class="highlighter-rouge">parallelPoolAdjacentViolators</code>方法的代码如下：</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="n">parallelPoolAdjacentViolators</span><span class="o">(</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">def</span> <span class="nf">parallelPoolAdjacentViolators</span><span class="o">(</span>
       <span class="n">input</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)])</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">parallelStepResult</span> <span class="k">=</span> <span class="n">input</span>
+    <span class="k">val</span> <span class="nv">parallelStepResult</span> <span class="k">=</span> <span class="n">input</span>
       <span class="c1">//以（feature，label）为key进行排序
-</span>      <span class="o">.</span><span class="n">sortBy</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="n">_2</span><span class="o">,</span> <span class="n">x</span><span class="o">.</span><span class="n">_1</span><span class="o">))</span>
-      <span class="o">.</span><span class="n">glom</span><span class="o">()</span><span class="c1">//合并不同分区的数据为一个数组
-</span>      <span class="o">.</span><span class="n">flatMap</span><span class="o">(</span><span class="n">poolAdjacentViolators</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">collect</span><span class="o">()</span>
-      <span class="o">.</span><span class="n">sortBy</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="n">_2</span><span class="o">,</span> <span class="n">x</span><span class="o">.</span><span class="n">_1</span><span class="o">))</span> <span class="c1">// Sort again because collect() doesn't promise ordering.
-</span>    <span class="n">poolAdjacentViolators</span><span class="o">(</span><span class="n">parallelStepResult</span><span class="o">)</span>
+</span>      <span class="o">.</span><span class="py">sortBy</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="nv">x</span><span class="o">.</span><span class="py">_2</span><span class="o">,</span> <span class="nv">x</span><span class="o">.</span><span class="py">_1</span><span class="o">))</span>
+      <span class="o">.</span><span class="py">glom</span><span class="o">()</span><span class="c1">//合并不同分区的数据为一个数组
+</span>      <span class="o">.</span><span class="py">flatMap</span><span class="o">(</span><span class="n">poolAdjacentViolators</span><span class="o">)</span>
+      <span class="o">.</span><span class="py">collect</span><span class="o">()</span>
+      <span class="o">.</span><span class="py">sortBy</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="nv">x</span><span class="o">.</span><span class="py">_2</span><span class="o">,</span> <span class="nv">x</span><span class="o">.</span><span class="py">_1</span><span class="o">))</span> <span class="c1">// Sort again because collect() doesn't promise ordering.
+</span>    <span class="nf">poolAdjacentViolators</span><span class="o">(</span><span class="n">parallelStepResult</span><span class="o">)</span>
   <span class="o">}</span>
 </code></pre></div></div>
 <p>  <code class="highlighter-rouge">parallelPoolAdjacentViolators</code>方法的主要实现是<code class="highlighter-rouge">poolAdjacentViolators</code>方法，该方法主要的实现过程如下：</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
-<span class="k">val</span> <span class="n">len</span> <span class="k">=</span> <span class="n">input</span><span class="o">.</span><span class="n">length</span>
-<span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
+<span class="k">val</span> <span class="nv">len</span> <span class="k">=</span> <span class="nv">input</span><span class="o">.</span><span class="py">length</span>
+<span class="nf">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
      <span class="k">var</span> <span class="n">j</span> <span class="k">=</span> <span class="n">i</span>
      <span class="c1">//找到破坏单调性的元祖的index
-</span>     <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">input</span><span class="o">(</span><span class="n">j</span><span class="o">).</span><span class="n">_1</span> <span class="o">&gt;</span> <span class="n">input</span><span class="o">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">).</span><span class="n">_1</span><span class="o">)</span> <span class="o">{</span>
+</span>     <span class="nf">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nf">input</span><span class="o">(</span><span class="n">j</span><span class="o">).</span><span class="py">_1</span> <span class="o">&gt;</span> <span class="nf">input</span><span class="o">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">).</span><span class="py">_1</span><span class="o">)</span> <span class="o">{</span>
        <span class="n">j</span> <span class="k">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
      <span class="o">}</span>
      <span class="c1">// 如果没有找到违规点，移动到下一个数据点
-</span>     <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="o">)</span> <span class="o">{</span>
+</span>     <span class="nf">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="o">)</span> <span class="o">{</span>
        <span class="n">i</span> <span class="k">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
      <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
        <span class="c1">// 否则用pool方法处理违规的节点
 </span>       <span class="c1">// 并且检查pool之后，之前处理过的节点是否违反了单调性约束
-</span>       <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">input</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="n">_1</span> <span class="o">&gt;</span> <span class="n">input</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">).</span><span class="n">_1</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">pool</span><span class="o">(</span><span class="n">input</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">)</span>
+</span>       <span class="nf">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nf">input</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="py">_1</span> <span class="o">&gt;</span> <span class="nf">input</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">).</span><span class="py">_1</span><span class="o">)</span> <span class="o">{</span>
+          <span class="nf">pool</span><span class="o">(</span><span class="n">input</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">)</span>
           <span class="n">i</span> <span class="k">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span>
        <span class="o">}</span>
        <span class="n">i</span> <span class="k">=</span> <span class="n">j</span>
@@ -374,42 +378,42 @@
 
 <p>  <code class="highlighter-rouge">pool</code>方法的实现如下所示。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">pool</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)],</span> <span class="n">start</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">pool</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)],</span> <span class="n">start</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
       <span class="c1">//取得i到j之间的元组组成的子序列
-</span>      <span class="k">val</span> <span class="n">poolSubArray</span> <span class="k">=</span> <span class="n">input</span><span class="o">.</span><span class="n">slice</span><span class="o">(</span><span class="n">start</span><span class="o">,</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+</span>      <span class="k">val</span> <span class="nv">poolSubArray</span> <span class="k">=</span> <span class="nv">input</span><span class="o">.</span><span class="py">slice</span><span class="o">(</span><span class="n">start</span><span class="o">,</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
       <span class="c1">//求子序列sum（label * w）之和
-</span>      <span class="k">val</span> <span class="n">weightedSum</span> <span class="k">=</span> <span class="n">poolSubArray</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">lp</span> <span class="k">=&gt;</span> <span class="n">lp</span><span class="o">.</span><span class="n">_1</span> <span class="o">*</span> <span class="n">lp</span><span class="o">.</span><span class="n">_3</span><span class="o">).</span><span class="n">sum</span>
+</span>      <span class="k">val</span> <span class="nv">weightedSum</span> <span class="k">=</span> <span class="nv">poolSubArray</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">lp</span> <span class="k">=&gt;</span> <span class="nv">lp</span><span class="o">.</span><span class="py">_1</span> <span class="o">*</span> <span class="nv">lp</span><span class="o">.</span><span class="py">_3</span><span class="o">).</span><span class="py">sum</span>
       <span class="c1">//求权重之和
-</span>      <span class="k">val</span> <span class="n">weight</span> <span class="k">=</span> <span class="n">poolSubArray</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">_3</span><span class="o">).</span><span class="n">sum</span>
+</span>      <span class="k">val</span> <span class="nv">weight</span> <span class="k">=</span> <span class="nv">poolSubArray</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">_3</span><span class="o">).</span><span class="py">sum</span>
       <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="n">start</span>
       <span class="c1">//子区间的所有元组标签相同，即拥有相同的预测
-</span>      <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+</span>      <span class="nf">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">//修改标签值为两者之商
-</span>        <span class="n">input</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="n">weightedSum</span> <span class="o">/</span> <span class="n">weight</span><span class="o">,</span> <span class="n">input</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="n">_2</span><span class="o">,</span> <span class="n">input</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="n">_3</span><span class="o">)</span>
+</span>        <span class="nf">input</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="n">weightedSum</span> <span class="o">/</span> <span class="n">weight</span><span class="o">,</span> <span class="nf">input</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="py">_2</span><span class="o">,</span> <span class="nf">input</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="py">_3</span><span class="o">)</span>
         <span class="n">i</span> <span class="k">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
       <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>  经过上文的处理之后，<code class="highlighter-rouge">input</code>根据中的<code class="highlighter-rouge">label</code>和<code class="highlighter-rouge">feature</code>均是按升序排列。对于拥有相同预测的点，我们只保留两个特征边界点。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">compressed</span> <span class="k">=</span> <span class="nc">ArrayBuffer</span><span class="o">.</span><span class="n">empty</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span>
-<span class="k">var</span> <span class="o">(</span><span class="n">curLabel</span><span class="o">,</span> <span class="n">curFeature</span><span class="o">,</span> <span class="n">curWeight</span><span class="o">)</span> <span class="k">=</span> <span class="n">input</span><span class="o">.</span><span class="n">head</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">compressed</span> <span class="k">=</span> <span class="nv">ArrayBuffer</span><span class="o">.</span><span class="py">empty</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span>
+<span class="nf">var</span> <span class="o">(</span><span class="n">curLabel</span><span class="o">,</span> <span class="n">curFeature</span><span class="o">,</span> <span class="n">curWeight</span><span class="o">)</span> <span class="k">=</span> <span class="nv">input</span><span class="o">.</span><span class="py">head</span>
 <span class="k">var</span> <span class="n">rightBound</span> <span class="k">=</span> <span class="n">curFeature</span>
-<span class="k">def</span> <span class="n">merge</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+<span class="k">def</span> <span class="nf">merge</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
     <span class="n">compressed</span> <span class="o">+=</span> <span class="o">((</span><span class="n">curLabel</span><span class="o">,</span> <span class="n">curFeature</span><span class="o">,</span> <span class="n">curWeight</span><span class="o">))</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">rightBound</span> <span class="o">&gt;</span> <span class="n">curFeature</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">rightBound</span> <span class="o">&gt;</span> <span class="n">curFeature</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">compressed</span> <span class="o">+=</span> <span class="o">((</span><span class="n">curLabel</span><span class="o">,</span> <span class="n">rightBound</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">))</span>
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="n">i</span> <span class="k">=</span> <span class="mi">1</span>
-<span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">input</span><span class="o">.</span><span class="n">length</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">feature</span><span class="o">,</span> <span class="n">weight</span><span class="o">)</span> <span class="k">=</span> <span class="n">input</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">label</span> <span class="o">==</span> <span class="n">curLabel</span><span class="o">)</span> <span class="o">{</span>
+<span class="nf">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="nv">input</span><span class="o">.</span><span class="py">length</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nf">val</span> <span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">feature</span><span class="o">,</span> <span class="n">weight</span><span class="o">)</span> <span class="k">=</span> <span class="nf">input</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">label</span> <span class="o">==</span> <span class="n">curLabel</span><span class="o">)</span> <span class="o">{</span>
        <span class="c1">//权重叠加
 </span>       <span class="n">curWeight</span> <span class="o">+=</span> <span class="n">weight</span>
        <span class="n">rightBound</span> <span class="k">=</span> <span class="n">feature</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span><span class="c1">//如果标签不同，合并
-</span>       <span class="n">merge</span><span class="o">()</span>
+</span>       <span class="nf">merge</span><span class="o">()</span>
        <span class="n">curLabel</span> <span class="k">=</span> <span class="n">label</span>
        <span class="n">curFeature</span> <span class="k">=</span> <span class="n">feature</span>
        <span class="n">curWeight</span> <span class="k">=</span> <span class="n">weight</span>
@@ -417,42 +421,42 @@
     <span class="o">}</span>
     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="o">}</span>
-<span class="n">merge</span><span class="o">()</span>
+<span class="nf">merge</span><span class="o">()</span>
 </code></pre></div></div>
 
 <p>  最后将训练的结果保存为模型。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//标签集
-</span><span class="k">val</span> <span class="n">predictions</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">isotonic</span><span class="o">)</span> <span class="n">pooled</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">_1</span><span class="o">)</span> <span class="k">else</span> <span class="n">pooled</span><span class="o">.</span><span class="n">map</span><span class="o">(-</span><span class="k">_</span><span class="o">.</span><span class="n">_1</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">predictions</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">isotonic</span><span class="o">)</span> <span class="nv">pooled</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">_1</span><span class="o">)</span> <span class="k">else</span> <span class="nv">pooled</span><span class="o">.</span><span class="py">map</span><span class="o">(-</span><span class="nv">_</span><span class="o">.</span><span class="py">_1</span><span class="o">)</span>
 <span class="c1">//特征集
-</span><span class="k">val</span> <span class="n">boundaries</span> <span class="k">=</span> <span class="n">pooled</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">_2</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">boundaries</span> <span class="k">=</span> <span class="nv">pooled</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>
 <span class="k">new</span> <span class="nc">IsotonicRegressionModel</span><span class="o">(</span><span class="n">boundaries</span><span class="o">,</span> <span class="n">predictions</span><span class="o">,</span> <span class="n">isotonic</span><span class="o">)</span>
 </code></pre></div></div>
 
 <h3 id="43-预测过程分析">4.3 预测过程分析</h3>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">predict</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">linearInterpolation</span><span class="o">(</span><span class="n">x1</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">y1</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x2</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">y2</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">predict</span><span class="o">(</span><span class="n">testData</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">linearInterpolation</span><span class="o">(</span><span class="n">x1</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">y1</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x2</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">y2</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">{</span>
       <span class="n">y1</span> <span class="o">+</span> <span class="o">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x1</span><span class="o">)</span> <span class="o">/</span> <span class="o">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="o">)</span>
     <span class="o">}</span>
     <span class="c1">//二分查找index
-</span>    <span class="k">val</span> <span class="n">foundIndex</span> <span class="k">=</span> <span class="n">binarySearch</span><span class="o">(</span><span class="n">boundaries</span><span class="o">,</span> <span class="n">testData</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">insertIndex</span> <span class="k">=</span> <span class="o">-</span><span class="n">foundIndex</span> <span class="o">-</span> <span class="mi">1</span>
+</span>    <span class="k">val</span> <span class="nv">foundIndex</span> <span class="k">=</span> <span class="nf">binarySearch</span><span class="o">(</span><span class="n">boundaries</span><span class="o">,</span> <span class="n">testData</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">insertIndex</span> <span class="k">=</span> <span class="o">-</span><span class="n">foundIndex</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="c1">// Find if the index was lower than all values,
 </span>    <span class="c1">// higher than all values, in between two values or exact match.
-</span>    <span class="k">if</span> <span class="o">(</span><span class="n">insertIndex</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">predictions</span><span class="o">.</span><span class="n">head</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">insertIndex</span> <span class="o">==</span> <span class="n">boundaries</span><span class="o">.</span><span class="n">length</span><span class="o">){</span>
-      <span class="n">predictions</span><span class="o">.</span><span class="n">last</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">foundIndex</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">linearInterpolation</span><span class="o">(</span>
-        <span class="n">boundaries</span><span class="o">(</span><span class="n">insertIndex</span> <span class="o">-</span> <span class="mi">1</span><span class="o">),</span>
-        <span class="n">predictions</span><span class="o">(</span><span class="n">insertIndex</span> <span class="o">-</span> <span class="mi">1</span><span class="o">),</span>
-        <span class="n">boundaries</span><span class="o">(</span><span class="n">insertIndex</span><span class="o">),</span>
-        <span class="n">predictions</span><span class="o">(</span><span class="n">insertIndex</span><span class="o">),</span>
+</span>    <span class="nf">if</span> <span class="o">(</span><span class="n">insertIndex</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nv">predictions</span><span class="o">.</span><span class="py">head</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">insertIndex</span> <span class="o">==</span> <span class="nv">boundaries</span><span class="o">.</span><span class="py">length</span><span class="o">){</span>
+      <span class="nv">predictions</span><span class="o">.</span><span class="py">last</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">foundIndex</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nf">linearInterpolation</span><span class="o">(</span>
+        <span class="nf">boundaries</span><span class="o">(</span><span class="n">insertIndex</span> <span class="o">-</span> <span class="mi">1</span><span class="o">),</span>
+        <span class="nf">predictions</span><span class="o">(</span><span class="n">insertIndex</span> <span class="o">-</span> <span class="mi">1</span><span class="o">),</span>
+        <span class="nf">boundaries</span><span class="o">(</span><span class="n">insertIndex</span><span class="o">),</span>
+        <span class="nf">predictions</span><span class="o">(</span><span class="n">insertIndex</span><span class="o">),</span>
         <span class="n">testData</span><span class="o">)</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-      <span class="n">predictions</span><span class="o">(</span><span class="n">foundIndex</span><span class="o">)</span>
+      <span class="nf">predictions</span><span class="o">(</span><span class="n">foundIndex</span><span class="o">)</span>
     <span class="o">}</span>
   <span class="o">}</span>
 </code></pre></div></div>
@@ -706,7 +710,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -878,7 +882,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

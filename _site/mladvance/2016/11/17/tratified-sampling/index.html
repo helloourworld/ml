@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -214,36 +218,36 @@
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.SparkContext</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.SparkContext._</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.rdd.PairRDDFunctions</span>
-<span class="k">val</span> <span class="n">sc</span><span class="k">:</span> <span class="kt">SparkContext</span> <span class="o">=</span> <span class="o">...</span>
-<span class="k">val</span> <span class="n">data</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD[(K, V)] of any key value pairs
-</span><span class="k">val</span> <span class="n">fractions</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// specify the exact fraction desired from each key
+<span class="k">val</span> <span class="nv">sc</span><span class="k">:</span> <span class="kt">SparkContext</span> <span class="o">=</span> <span class="o">...</span>
+<span class="k">val</span> <span class="nv">data</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD[(K, V)] of any key value pairs
+</span><span class="k">val</span> <span class="nv">fractions</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// specify the exact fraction desired from each key
 // Get an exact sample from each stratum
-</span><span class="k">val</span> <span class="n">approxSample</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sampleByKey</span><span class="o">(</span><span class="n">withReplacement</span> <span class="k">=</span> <span class="kc">false</span><span class="o">,</span> <span class="n">fractions</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">exactSample</span> <span class="k">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sampleByKeyExact</span><span class="o">(</span><span class="n">withReplacement</span> <span class="k">=</span> <span class="kc">false</span><span class="o">,</span> <span class="n">fractions</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">approxSample</span> <span class="k">=</span> <span class="nv">data</span><span class="o">.</span><span class="py">sampleByKey</span><span class="o">(</span><span class="n">withReplacement</span> <span class="k">=</span> <span class="kc">false</span><span class="o">,</span> <span class="n">fractions</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">exactSample</span> <span class="k">=</span> <span class="nv">data</span><span class="o">.</span><span class="py">sampleByKeyExact</span><span class="o">(</span><span class="n">withReplacement</span> <span class="k">=</span> <span class="kc">false</span><span class="o">,</span> <span class="n">fractions</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>  当<code class="highlighter-rouge">withReplacement</code>为<code class="highlighter-rouge">true</code>时，采用<code class="highlighter-rouge">PoissonSampler</code>取样器，当<code class="highlighter-rouge">withReplacement</code>为<code class="highlighter-rouge">false</code>使，采用<code class="highlighter-rouge">BernoulliSampler</code>取样器。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">sampleByKey</span><span class="o">(</span><span class="n">withReplacement</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">sampleByKey</span><span class="o">(</span><span class="n">withReplacement</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span>
       <span class="n">fractions</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">Double</span><span class="o">],</span>
-      <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="nc">Utils</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">nextLong</span><span class="o">)</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)]</span> <span class="k">=</span> <span class="n">self</span><span class="o">.</span><span class="n">withScope</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">samplingFunc</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">withReplacement</span><span class="o">)</span> <span class="o">{</span>
-      <span class="nc">StratifiedSamplingUtils</span><span class="o">.</span><span class="n">getPoissonSamplingFunction</span><span class="o">(</span><span class="n">self</span><span class="o">,</span> <span class="n">fractions</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
+      <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="nv">Utils</span><span class="o">.</span><span class="py">random</span><span class="o">.</span><span class="py">nextLong</span><span class="o">)</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)]</span> <span class="k">=</span> <span class="nv">self</span><span class="o">.</span><span class="py">withScope</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">samplingFunc</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">withReplacement</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nv">StratifiedSamplingUtils</span><span class="o">.</span><span class="py">getPoissonSamplingFunction</span><span class="o">(</span><span class="n">self</span><span class="o">,</span> <span class="n">fractions</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-      <span class="nc">StratifiedSamplingUtils</span><span class="o">.</span><span class="n">getBernoulliSamplingFunction</span><span class="o">(</span><span class="n">self</span><span class="o">,</span> <span class="n">fractions</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
+      <span class="nv">StratifiedSamplingUtils</span><span class="o">.</span><span class="py">getBernoulliSamplingFunction</span><span class="o">(</span><span class="n">self</span><span class="o">,</span> <span class="n">fractions</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
     <span class="o">}</span>
-    <span class="n">self</span><span class="o">.</span><span class="n">mapPartitionsWithIndex</span><span class="o">(</span><span class="n">samplingFunc</span><span class="o">,</span> <span class="n">preservesPartitioning</span> <span class="k">=</span> <span class="kc">true</span><span class="o">)</span>
+    <span class="nv">self</span><span class="o">.</span><span class="py">mapPartitionsWithIndex</span><span class="o">(</span><span class="n">samplingFunc</span><span class="o">,</span> <span class="n">preservesPartitioning</span> <span class="k">=</span> <span class="kc">true</span><span class="o">)</span>
   <span class="o">}</span>
-<span class="k">def</span> <span class="n">sampleByKeyExact</span><span class="o">(</span>
+<span class="k">def</span> <span class="nf">sampleByKeyExact</span><span class="o">(</span>
       <span class="n">withReplacement</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span>
       <span class="n">fractions</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">Double</span><span class="o">],</span>
-      <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="nc">Utils</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">nextLong</span><span class="o">)</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)]</span> <span class="k">=</span> <span class="n">self</span><span class="o">.</span><span class="n">withScope</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">samplingFunc</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">withReplacement</span><span class="o">)</span> <span class="o">{</span>
-      <span class="nc">StratifiedSamplingUtils</span><span class="o">.</span><span class="n">getPoissonSamplingFunction</span><span class="o">(</span><span class="n">self</span><span class="o">,</span> <span class="n">fractions</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
+      <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="nv">Utils</span><span class="o">.</span><span class="py">random</span><span class="o">.</span><span class="py">nextLong</span><span class="o">)</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)]</span> <span class="k">=</span> <span class="nv">self</span><span class="o">.</span><span class="py">withScope</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">samplingFunc</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">withReplacement</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nv">StratifiedSamplingUtils</span><span class="o">.</span><span class="py">getPoissonSamplingFunction</span><span class="o">(</span><span class="n">self</span><span class="o">,</span> <span class="n">fractions</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-      <span class="nc">StratifiedSamplingUtils</span><span class="o">.</span><span class="n">getBernoulliSamplingFunction</span><span class="o">(</span><span class="n">self</span><span class="o">,</span> <span class="n">fractions</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
+      <span class="nv">StratifiedSamplingUtils</span><span class="o">.</span><span class="py">getBernoulliSamplingFunction</span><span class="o">(</span><span class="n">self</span><span class="o">,</span> <span class="n">fractions</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
     <span class="o">}</span>
-    <span class="n">self</span><span class="o">.</span><span class="n">mapPartitionsWithIndex</span><span class="o">(</span><span class="n">samplingFunc</span><span class="o">,</span> <span class="n">preservesPartitioning</span> <span class="k">=</span> <span class="kc">true</span><span class="o">)</span>
+    <span class="nv">self</span><span class="o">.</span><span class="py">mapPartitionsWithIndex</span><span class="o">(</span><span class="n">samplingFunc</span><span class="o">,</span> <span class="n">preservesPartitioning</span> <span class="k">=</span> <span class="kc">true</span><span class="o">)</span>
   <span class="o">}</span>
 </code></pre></div></div>
 <p>  下面我们分别来看<code class="highlighter-rouge">sampleByKey</code>和<code class="highlighter-rouge">sampleByKeyExact</code>的实现。</p>
@@ -256,21 +260,21 @@
 
 <p>  我们首先看泊松抽样器的实现。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">getPoissonSamplingFunction</span><span class="o">[</span><span class="kt">K:</span> <span class="kt">ClassTag</span>, <span class="kt">V:</span> <span class="kt">ClassTag</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">getPoissonSamplingFunction</span><span class="o">[</span><span class="kt">K:</span> <span class="kt">ClassTag</span>, <span class="kt">V:</span> <span class="kt">ClassTag</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
       <span class="n">fractions</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">Double</span><span class="o">],</span>
       <span class="n">exact</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span>
       <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Int</span><span class="o">,</span> <span class="kt">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)])</span> <span class="k">=&gt;</span> <span class="nc">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)]</span> <span class="k">=</span> <span class="o">{</span>
       <span class="o">(</span><span class="n">idx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">iter</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)])</span> <span class="k">=&gt;</span> <span class="o">{</span>
               <span class="c1">//初始化随机生成器
-</span>              <span class="k">val</span> <span class="n">rng</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">RandomDataGenerator</span><span class="o">()</span>
-              <span class="n">rng</span><span class="o">.</span><span class="n">reSeed</span><span class="o">(</span><span class="n">seed</span> <span class="o">+</span> <span class="n">idx</span><span class="o">)</span>
-              <span class="n">iter</span><span class="o">.</span><span class="n">flatMap</span> <span class="o">{</span> <span class="n">item</span> <span class="k">=&gt;</span>
+</span>              <span class="k">val</span> <span class="nv">rng</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">RandomDataGenerator</span><span class="o">()</span>
+              <span class="nv">rng</span><span class="o">.</span><span class="py">reSeed</span><span class="o">(</span><span class="n">seed</span> <span class="o">+</span> <span class="n">idx</span><span class="o">)</span>
+              <span class="nv">iter</span><span class="o">.</span><span class="py">flatMap</span> <span class="o">{</span> <span class="n">item</span> <span class="k">=&gt;</span>
                 <span class="c1">//获得下一个泊松值
-</span>                <span class="k">val</span> <span class="n">count</span> <span class="k">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">nextPoisson</span><span class="o">(</span><span class="n">fractions</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="n">_1</span><span class="o">))</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-                  <span class="nc">Iterator</span><span class="o">.</span><span class="n">empty</span>
+</span>                <span class="k">val</span> <span class="nv">count</span> <span class="k">=</span> <span class="nv">rng</span><span class="o">.</span><span class="py">nextPoisson</span><span class="o">(</span><span class="nf">fractions</span><span class="o">(</span><span class="nv">item</span><span class="o">.</span><span class="py">_1</span><span class="o">))</span>
+                <span class="nf">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                  <span class="nv">Iterator</span><span class="o">.</span><span class="py">empty</span>
                 <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                  <span class="nc">Iterator</span><span class="o">.</span><span class="n">fill</span><span class="o">(</span><span class="n">count</span><span class="o">)(</span><span class="n">item</span><span class="o">)</span>
+                  <span class="nv">Iterator</span><span class="o">.</span><span class="py">fill</span><span class="o">(</span><span class="n">count</span><span class="o">)(</span><span class="n">item</span><span class="o">)</span>
                 <span class="o">}</span>
               <span class="o">}</span>
             <span class="o">}</span>
@@ -280,18 +284,18 @@
 
 <h3 id="12-伯努利抽样器">1.2 伯努利抽样器</h3>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">getBernoulliSamplingFunction</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">getBernoulliSamplingFunction</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
       <span class="n">fractions</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">Double</span><span class="o">],</span>
       <span class="n">exact</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span>
       <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Int</span><span class="o">,</span> <span class="kt">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)])</span> <span class="k">=&gt;</span> <span class="nc">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)]</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">var</span> <span class="n">samplingRateByKey</span> <span class="k">=</span> <span class="n">fractions</span>
+    <span class="k">var</span> <span class="n">samplingRateByKey</span> <span class="k">=</span> <span class="nf">fractions</span>
     <span class="o">(</span><span class="n">idx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">iter</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)])</span> <span class="k">=&gt;</span> <span class="o">{</span>
       <span class="c1">//初始化随机生成器
-</span>      <span class="k">val</span> <span class="n">rng</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">RandomDataGenerator</span><span class="o">()</span>
-      <span class="n">rng</span><span class="o">.</span><span class="n">reSeed</span><span class="o">(</span><span class="n">seed</span> <span class="o">+</span> <span class="n">idx</span><span class="o">)</span>
+</span>      <span class="k">val</span> <span class="nv">rng</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">RandomDataGenerator</span><span class="o">()</span>
+      <span class="nv">rng</span><span class="o">.</span><span class="py">reSeed</span><span class="o">(</span><span class="n">seed</span> <span class="o">+</span> <span class="n">idx</span><span class="o">)</span>
       <span class="c1">// Must use the same invoke pattern on the rng as in getSeqOp for without replacement
 </span>      <span class="c1">// in order to generate the same sequence of random numbers when creating the sample
-</span>      <span class="n">iter</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">t</span> <span class="k">=&gt;</span> <span class="n">rng</span><span class="o">.</span><span class="n">nextUniform</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">samplingRateByKey</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="n">_1</span><span class="o">))</span>
+</span>      <span class="nv">iter</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="n">t</span> <span class="k">=&gt;</span> <span class="nv">rng</span><span class="o">.</span><span class="py">nextUniform</span><span class="o">()</span> <span class="o">&lt;</span> <span class="nf">samplingRateByKey</span><span class="o">(</span><span class="nv">t</span><span class="o">.</span><span class="py">_1</span><span class="o">))</span>
     <span class="o">}</span>
   <span class="o">}</span>
 </code></pre></div></div>
@@ -302,28 +306,28 @@
 
 <h3 id="21-泊松抽样器">2.1 泊松抽样器</h3>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">counts</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="n">rdd</span><span class="o">.</span><span class="n">countByKey</span><span class="o">())</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">counts</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="nv">rdd</span><span class="o">.</span><span class="py">countByKey</span><span class="o">())</span>
 <span class="c1">//计算立即接受的样本数量，并且为每层生成候选名单
-</span><span class="k">val</span> <span class="n">finalResult</span> <span class="k">=</span> <span class="n">getAcceptanceResults</span><span class="o">(</span><span class="n">rdd</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">fractions</span><span class="o">,</span> <span class="n">counts</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">finalResult</span> <span class="k">=</span> <span class="nf">getAcceptanceResults</span><span class="o">(</span><span class="n">rdd</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">fractions</span><span class="o">,</span> <span class="n">counts</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
 <span class="c1">//决定接受样本的阈值，生成准确的样本大小
-</span><span class="k">val</span> <span class="n">thresholdByKey</span> <span class="k">=</span> <span class="n">computeThresholdByKey</span><span class="o">(</span><span class="n">finalResult</span><span class="o">,</span> <span class="n">fractions</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="nv">thresholdByKey</span> <span class="k">=</span> <span class="nf">computeThresholdByKey</span><span class="o">(</span><span class="n">finalResult</span><span class="o">,</span> <span class="n">fractions</span><span class="o">)</span>
 <span class="o">(</span><span class="n">idx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">iter</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)])</span> <span class="k">=&gt;</span> <span class="o">{</span>
-     <span class="k">val</span> <span class="n">rng</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">RandomDataGenerator</span><span class="o">()</span>
-     <span class="n">rng</span><span class="o">.</span><span class="n">reSeed</span><span class="o">(</span><span class="n">seed</span> <span class="o">+</span> <span class="n">idx</span><span class="o">)</span>
-     <span class="n">iter</span><span class="o">.</span><span class="n">flatMap</span> <span class="o">{</span> <span class="n">item</span> <span class="k">=&gt;</span>
-          <span class="k">val</span> <span class="n">key</span> <span class="k">=</span> <span class="n">item</span><span class="o">.</span><span class="n">_1</span>
-          <span class="k">val</span> <span class="n">acceptBound</span> <span class="k">=</span> <span class="n">finalResult</span><span class="o">(</span><span class="n">key</span><span class="o">).</span><span class="n">acceptBound</span>
+     <span class="k">val</span> <span class="nv">rng</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">RandomDataGenerator</span><span class="o">()</span>
+     <span class="nv">rng</span><span class="o">.</span><span class="py">reSeed</span><span class="o">(</span><span class="n">seed</span> <span class="o">+</span> <span class="n">idx</span><span class="o">)</span>
+     <span class="nv">iter</span><span class="o">.</span><span class="py">flatMap</span> <span class="o">{</span> <span class="n">item</span> <span class="k">=&gt;</span>
+          <span class="k">val</span> <span class="nv">key</span> <span class="k">=</span> <span class="nv">item</span><span class="o">.</span><span class="py">_1</span>
+          <span class="k">val</span> <span class="nv">acceptBound</span> <span class="k">=</span> <span class="nf">finalResult</span><span class="o">(</span><span class="n">key</span><span class="o">).</span><span class="py">acceptBound</span>
           <span class="c1">// Must use the same invoke pattern on the rng as in getSeqOp for with replacement
 </span>          <span class="c1">// in order to generate the same sequence of random numbers when creating the sample
-</span>          <span class="k">val</span> <span class="n">copiesAccepted</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">acceptBound</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="mi">0L</span> <span class="k">else</span> <span class="n">rng</span><span class="o">.</span><span class="n">nextPoisson</span><span class="o">(</span><span class="n">acceptBound</span><span class="o">)</span>
+</span>          <span class="k">val</span> <span class="nv">copiesAccepted</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">acceptBound</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="mi">0L</span> <span class="k">else</span> <span class="nv">rng</span><span class="o">.</span><span class="py">nextPoisson</span><span class="o">(</span><span class="n">acceptBound</span><span class="o">)</span>
           <span class="c1">//候选名单
-</span>          <span class="k">val</span> <span class="n">copiesWaitlisted</span> <span class="k">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">nextPoisson</span><span class="o">(</span><span class="n">finalResult</span><span class="o">(</span><span class="n">key</span><span class="o">).</span><span class="n">waitListBound</span><span class="o">)</span>
-          <span class="k">val</span> <span class="n">copiesInSample</span> <span class="k">=</span> <span class="n">copiesAccepted</span> <span class="o">+</span>
-            <span class="o">(</span><span class="mi">0</span> <span class="n">until</span> <span class="n">copiesWaitlisted</span><span class="o">).</span><span class="n">count</span><span class="o">(</span><span class="n">i</span> <span class="k">=&gt;</span> <span class="n">rng</span><span class="o">.</span><span class="n">nextUniform</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">thresholdByKey</span><span class="o">(</span><span class="n">key</span><span class="o">))</span>
-          <span class="k">if</span> <span class="o">(</span><span class="n">copiesInSample</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nc">Iterator</span><span class="o">.</span><span class="n">fill</span><span class="o">(</span><span class="n">copiesInSample</span><span class="o">.</span><span class="n">toInt</span><span class="o">)(</span><span class="n">item</span><span class="o">)</span>
+</span>          <span class="k">val</span> <span class="nv">copiesWaitlisted</span> <span class="k">=</span> <span class="nv">rng</span><span class="o">.</span><span class="py">nextPoisson</span><span class="o">(</span><span class="nf">finalResult</span><span class="o">(</span><span class="n">key</span><span class="o">).</span><span class="py">waitListBound</span><span class="o">)</span>
+          <span class="k">val</span> <span class="nv">copiesInSample</span> <span class="k">=</span> <span class="n">copiesAccepted</span> <span class="o">+</span>
+            <span class="o">(</span><span class="mi">0</span> <span class="n">until</span> <span class="n">copiesWaitlisted</span><span class="o">).</span><span class="py">count</span><span class="o">(</span><span class="n">i</span> <span class="k">=&gt;</span> <span class="nv">rng</span><span class="o">.</span><span class="py">nextUniform</span><span class="o">()</span> <span class="o">&lt;</span> <span class="nf">thresholdByKey</span><span class="o">(</span><span class="n">key</span><span class="o">))</span>
+          <span class="nf">if</span> <span class="o">(</span><span class="n">copiesInSample</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nv">Iterator</span><span class="o">.</span><span class="py">fill</span><span class="o">(</span><span class="nv">copiesInSample</span><span class="o">.</span><span class="py">toInt</span><span class="o">)(</span><span class="n">item</span><span class="o">)</span>
           <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="nc">Iterator</span><span class="o">.</span><span class="n">empty</span>
+            <span class="nv">Iterator</span><span class="o">.</span><span class="py">empty</span>
           <span class="o">}</span>
      <span class="o">}</span>
 <span class="o">}</span>
@@ -331,21 +335,21 @@
 
 <h3 id="22-伯努利抽样">2.2 伯努利抽样</h3>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">getBernoulliSamplingFunction</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">getBernoulliSamplingFunction</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">](</span><span class="n">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)],</span>
       <span class="n">fractions</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">Double</span><span class="o">],</span>
       <span class="n">exact</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span>
       <span class="n">seed</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Int</span><span class="o">,</span> <span class="kt">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)])</span> <span class="k">=&gt;</span> <span class="nc">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)]</span> <span class="k">=</span> <span class="o">{</span>
     <span class="k">var</span> <span class="n">samplingRateByKey</span> <span class="k">=</span> <span class="n">fractions</span>
     <span class="c1">//计算立即接受的样本数量，并且为每层生成候选名单
-</span>    <span class="k">val</span> <span class="n">finalResult</span> <span class="k">=</span> <span class="n">getAcceptanceResults</span><span class="o">(</span><span class="n">rdd</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="n">fractions</span><span class="o">,</span> <span class="nc">None</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
+</span>    <span class="k">val</span> <span class="nv">finalResult</span> <span class="k">=</span> <span class="nf">getAcceptanceResults</span><span class="o">(</span><span class="n">rdd</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="n">fractions</span><span class="o">,</span> <span class="nc">None</span><span class="o">,</span> <span class="n">seed</span><span class="o">)</span>
     <span class="c1">//决定接受样本的阈值，生成准确的样本大小
-</span>    <span class="n">samplingRateByKey</span> <span class="k">=</span> <span class="n">computeThresholdByKey</span><span class="o">(</span><span class="n">finalResult</span><span class="o">,</span> <span class="n">fractions</span><span class="o">)</span>
+</span>    <span class="n">samplingRateByKey</span> <span class="k">=</span> <span class="nf">computeThresholdByKey</span><span class="o">(</span><span class="n">finalResult</span><span class="o">,</span> <span class="n">fractions</span><span class="o">)</span>
     <span class="o">(</span><span class="n">idx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">iter</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)])</span> <span class="k">=&gt;</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">rng</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">RandomDataGenerator</span><span class="o">()</span>
-      <span class="n">rng</span><span class="o">.</span><span class="n">reSeed</span><span class="o">(</span><span class="n">seed</span> <span class="o">+</span> <span class="n">idx</span><span class="o">)</span>
+      <span class="k">val</span> <span class="nv">rng</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">RandomDataGenerator</span><span class="o">()</span>
+      <span class="nv">rng</span><span class="o">.</span><span class="py">reSeed</span><span class="o">(</span><span class="n">seed</span> <span class="o">+</span> <span class="n">idx</span><span class="o">)</span>
       <span class="c1">// Must use the same invoke pattern on the rng as in getSeqOp for without replacement
 </span>      <span class="c1">// in order to generate the same sequence of random numbers when creating the sample
-</span>      <span class="n">iter</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">t</span> <span class="k">=&gt;</span> <span class="n">rng</span><span class="o">.</span><span class="n">nextUniform</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">samplingRateByKey</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="n">_1</span><span class="o">))</span>
+</span>      <span class="nv">iter</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="n">t</span> <span class="k">=&gt;</span> <span class="nv">rng</span><span class="o">.</span><span class="py">nextUniform</span><span class="o">()</span> <span class="o">&lt;</span> <span class="nf">samplingRateByKey</span><span class="o">(</span><span class="nv">t</span><span class="o">.</span><span class="py">_1</span><span class="o">))</span>
     <span class="o">}</span>
   <span class="o">}</span>
 </code></pre></div></div>
@@ -579,7 +583,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -751,7 +755,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

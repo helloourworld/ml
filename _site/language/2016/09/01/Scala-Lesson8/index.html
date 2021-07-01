@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -209,11 +213,11 @@
    <span class="k">var</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">xc</span>
    <span class="k">var</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">yc</span>
 
-   <span class="k">def</span> <span class="n">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">x</span> <span class="k">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span>
       <span class="n">y</span> <span class="k">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span>
-      <span class="n">println</span> <span class="o">(</span><span class="s">"x 的坐标点: "</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
-      <span class="n">println</span> <span class="o">(</span><span class="s">"y 的坐标点: "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+      <span class="nf">println</span> <span class="o">(</span><span class="s">"x 的坐标点: "</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
+      <span class="nf">println</span> <span class="o">(</span><span class="s">"y 的坐标点: "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -231,20 +235,20 @@
    <span class="k">var</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">xc</span>
    <span class="k">var</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">yc</span>
 
-   <span class="k">def</span> <span class="n">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">x</span> <span class="k">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span>
       <span class="n">y</span> <span class="k">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span>
-      <span class="n">println</span> <span class="o">(</span><span class="s">"x 的坐标点: "</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
-      <span class="n">println</span> <span class="o">(</span><span class="s">"y 的坐标点: "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+      <span class="nf">println</span> <span class="o">(</span><span class="s">"x 的坐标点: "</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
+      <span class="nf">println</span> <span class="o">(</span><span class="s">"y 的坐标点: "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="k">object</span> <span class="nc">Objects1</span><span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">pt</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">)</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">pt</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">)</span>
 
         <span class="c1">//移到一个新的位置
-</span>        <span class="n">pt</span><span class="o">.</span><span class="n">move</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+</span>        <span class="nv">pt</span><span class="o">.</span><span class="py">move</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="n">output</span>
@@ -299,25 +303,25 @@ u.email // "lj@mail"
    <span class="k">var</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">xc</span>
    <span class="k">var</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">yc</span>
 
-   <span class="k">def</span> <span class="n">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">x</span> <span class="k">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span>
       <span class="n">y</span> <span class="k">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span>
-      <span class="n">println</span> <span class="o">(</span><span class="s">"x 的坐标点: "</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
-      <span class="n">println</span> <span class="o">(</span><span class="s">"y 的坐标点: "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+      <span class="nf">println</span> <span class="o">(</span><span class="s">"x 的坐标点: "</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
+      <span class="nf">println</span> <span class="o">(</span><span class="s">"y 的坐标点: "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
 
-<span class="k">class</span> <span class="nc">Location</span><span class="o">(</span><span class="k">override</span> <span class="k">val</span> <span class="n">xc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="k">override</span> <span class="k">val</span> <span class="n">yc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
-   <span class="k">val</span> <span class="n">zc</span> <span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Point</span><span class="o">(</span><span class="n">xc</span><span class="o">,</span> <span class="n">yc</span><span class="o">){</span>
+<span class="k">class</span> <span class="nc">Location</span><span class="o">(</span><span class="k">override</span> <span class="k">val</span> <span class="nv">xc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="k">override</span> <span class="k">val</span> <span class="nv">yc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
+   <span class="k">val</span> <span class="nv">zc</span> <span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Point</span><span class="o">(</span><span class="n">xc</span><span class="o">,</span> <span class="n">yc</span><span class="o">){</span>
    <span class="k">var</span> <span class="n">z</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">zc</span>
 
-   <span class="k">def</span> <span class="n">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">dz</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">dz</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">x</span> <span class="k">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span>
       <span class="n">y</span> <span class="k">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span>
       <span class="n">z</span> <span class="k">=</span> <span class="n">z</span> <span class="o">+</span> <span class="n">dz</span>
-      <span class="n">println</span> <span class="o">(</span><span class="s">"x 的坐标点 : "</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
-      <span class="n">println</span> <span class="o">(</span><span class="s">"y 的坐标点 : "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
-      <span class="n">println</span> <span class="o">(</span><span class="s">"z 的坐标点 : "</span> <span class="o">+</span> <span class="n">z</span><span class="o">);</span>
+      <span class="nf">println</span> <span class="o">(</span><span class="s">"x 的坐标点 : "</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
+      <span class="nf">println</span> <span class="o">(</span><span class="s">"y 的坐标点 : "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+      <span class="nf">println</span> <span class="o">(</span><span class="s">"z 的坐标点 : "</span> <span class="o">+</span> <span class="n">z</span><span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -331,39 +335,39 @@ u.email // "lj@mail"
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.io._</span>
 
-<span class="k">class</span> <span class="nc">Point</span><span class="o">(</span><span class="k">val</span> <span class="n">xc</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="k">val</span> <span class="n">yc</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+<span class="k">class</span> <span class="nc">Point</span><span class="o">(</span><span class="k">val</span> <span class="nv">xc</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="k">val</span> <span class="nv">yc</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
    <span class="k">var</span> <span class="n">x</span><span class="k">:</span><span class="kt">Int</span> <span class="o">=</span> <span class="n">xc</span>
    <span class="k">var</span> <span class="n">y</span><span class="k">:</span><span class="kt">Int</span> <span class="o">=</span> <span class="n">yc</span>
 
-   <span class="k">def</span> <span class="n">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">x</span> <span class="k">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span>
       <span class="n">y</span> <span class="k">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span>
-      <span class="n">println</span> <span class="o">(</span><span class="s">"x 的坐标点:"</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
-      <span class="n">println</span> <span class="o">(</span><span class="s">"y 的坐标点:"</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+      <span class="nf">println</span> <span class="o">(</span><span class="s">"x 的坐标点:"</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
+      <span class="nf">println</span> <span class="o">(</span><span class="s">"y 的坐标点:"</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
 
-<span class="k">class</span> <span class="nc">Location</span><span class="o">(</span><span class="k">override</span> <span class="k">val</span> <span class="n">xc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="k">override</span> <span class="k">val</span> <span class="n">yc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
-                        <span class="k">val</span> <span class="n">zc</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Point</span><span class="o">(</span><span class="n">xc</span><span class="o">,</span> <span class="n">yc</span><span class="o">){</span>
+<span class="k">class</span> <span class="nc">Location</span><span class="o">(</span><span class="k">override</span> <span class="k">val</span> <span class="nv">xc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="k">override</span> <span class="k">val</span> <span class="nv">yc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
+                        <span class="k">val</span> <span class="nv">zc</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Point</span><span class="o">(</span><span class="n">xc</span><span class="o">,</span> <span class="n">yc</span><span class="o">){</span>
     <span class="k">var</span> <span class="n">z</span><span class="k">:</span><span class="kt">Int</span> <span class="o">=</span> <span class="n">zc</span>
 
-    <span class="k">def</span> <span class="n">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="n">dz</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span><span class="kt">Int</span><span class="o">,</span> <span class="n">dz</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">x</span> <span class="k">=</span> <span class="n">x</span><span class="o">+</span> <span class="n">dx</span>
         <span class="n">y</span> <span class="k">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span>
         <span class="n">z</span> <span class="k">=</span> <span class="n">z</span> <span class="o">+</span> <span class="n">dz</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"x的坐标点:"</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"y的坐标点:"</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">"z的坐标点:"</span> <span class="o">+</span> <span class="n">z</span><span class="o">);</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"x的坐标点:"</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"y的坐标点:"</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+        <span class="nf">println</span><span class="o">(</span><span class="s">"z的坐标点:"</span> <span class="o">+</span> <span class="n">z</span><span class="o">);</span>
 
     <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="k">object</span> <span class="nc">Objects2</span><span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span><span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">loc</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Location</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">15</span><span class="o">)</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span><span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">loc</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Location</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">15</span><span class="o">)</span>
 
         <span class="c1">//移到一个新的位置
-</span>        <span class="n">loc</span><span class="o">.</span><span class="n">move</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">15</span><span class="o">);</span>
+</span>        <span class="nv">loc</span><span class="o">.</span><span class="py">move</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">15</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -372,19 +376,19 @@ u.email // "lj@mail"
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Person</span> <span class="o">{</span>
   <span class="k">var</span> <span class="n">name</span> <span class="k">=</span> <span class="s">""</span>
-  <span class="k">override</span> <span class="k">def</span> <span class="n">toString</span> <span class="k">=</span> <span class="n">getClass</span><span class="o">.</span><span class="n">getName</span> <span class="o">+</span> <span class="s">"[name="</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"]"</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">toString</span> <span class="k">=</span> <span class="nv">getClass</span><span class="o">.</span><span class="py">getName</span> <span class="o">+</span> <span class="s">"[name="</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"]"</span>
 <span class="o">}</span>
 
 <span class="k">class</span> <span class="nc">Employee</span> <span class="k">extends</span> <span class="nc">Person</span> <span class="o">{</span>
   <span class="k">var</span> <span class="n">salary</span> <span class="k">=</span> <span class="mf">0.0</span>
-  <span class="k">override</span> <span class="k">def</span> <span class="n">toString</span> <span class="k">=</span> <span class="k">super</span><span class="o">.</span><span class="n">toString</span> <span class="o">+</span> <span class="s">"[salary="</span> <span class="o">+</span> <span class="n">salary</span> <span class="o">+</span> <span class="s">"]"</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">toString</span> <span class="k">=</span> <span class="nv">super</span><span class="o">.</span><span class="py">toString</span> <span class="o">+</span> <span class="s">"[salary="</span> <span class="o">+</span> <span class="n">salary</span> <span class="o">+</span> <span class="s">"]"</span>
 <span class="o">}</span>
 
 <span class="k">object</span> <span class="nc">Objects3</span> <span class="k">extends</span> <span class="nc">App</span> <span class="o">{</span>
-  <span class="k">val</span> <span class="n">fred</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Employee</span>
-  <span class="n">fred</span><span class="o">.</span><span class="n">name</span> <span class="k">=</span> <span class="s">"Fred"</span>
-  <span class="n">fred</span><span class="o">.</span><span class="n">salary</span> <span class="k">=</span> <span class="mi">50000</span>
-  <span class="n">println</span><span class="o">(</span><span class="n">fred</span><span class="o">)</span>
+  <span class="k">val</span> <span class="nv">fred</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Employee</span>
+  <span class="nv">fred</span><span class="o">.</span><span class="py">name</span> <span class="k">=</span> <span class="s">"Fred"</span>
+  <span class="nv">fred</span><span class="o">.</span><span class="py">salary</span> <span class="k">=</span> <span class="mi">50000</span>
+  <span class="nf">println</span><span class="o">(</span><span class="n">fred</span><span class="o">)</span>
 <span class="o">}</span>
 <span class="k">#</span> <span class="n">output</span>
 <span class="nc">Employee</span><span class="o">[</span><span class="kt">name=Fred</span><span class="o">][</span><span class="kt">salary=</span><span class="err">50000</span><span class="kt">.</span><span class="err">0</span><span class="o">]</span>
@@ -402,23 +406,23 @@ u.email // "lj@mail"
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.io._</span>
 
-<span class="k">class</span> <span class="nc">Point</span><span class="o">(</span><span class="k">val</span> <span class="n">xc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="k">val</span> <span class="n">yc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+<span class="k">class</span> <span class="nc">Point</span><span class="o">(</span><span class="k">val</span> <span class="nv">xc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="k">val</span> <span class="nv">yc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">var</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">xc</span>
     <span class="k">var</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">yc</span>
-    <span class="k">def</span> <span class="n">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">move</span><span class="o">(</span><span class="n">dx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">dy</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">x</span> <span class="o">+=</span> <span class="n">dx</span>
         <span class="n">y</span> <span class="o">+=</span> <span class="n">dy</span>
     <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="k">object</span> <span class="nc">Objects4</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">point</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">)</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">point</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">)</span>
         <span class="n">printPoint</span>
 
-        <span class="k">def</span> <span class="n">printPoint</span> <span class="o">{</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"x 的坐标点："</span> <span class="o">+</span> <span class="n">point</span><span class="o">.</span><span class="n">x</span><span class="o">);</span>
-            <span class="n">println</span><span class="o">(</span><span class="s">"y 的坐标点："</span> <span class="o">+</span> <span class="n">point</span><span class="o">.</span><span class="n">y</span><span class="o">);</span>
+        <span class="k">def</span> <span class="nf">printPoint</span> <span class="o">{</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"x 的坐标点："</span> <span class="o">+</span> <span class="nv">point</span><span class="o">.</span><span class="py">x</span><span class="o">);</span>
+            <span class="nf">println</span><span class="o">(</span><span class="s">"y 的坐标点："</span> <span class="o">+</span> <span class="nv">point</span><span class="o">.</span><span class="py">y</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -427,35 +431,35 @@ u.email // "lj@mail"
 <h3 id="伴生对象实例">伴生对象实例</h3>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 私有构造方法
-</span><span class="k">class</span> <span class="nc">Marker</span> <span class="k">private</span><span class="o">(</span><span class="k">val</span> <span class="n">color</span><span class="k">:</span><span class="kt">String</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="k">class</span> <span class="nc">Marker</span> <span class="nf">private</span><span class="o">(</span><span class="k">val</span> <span class="nv">color</span><span class="k">:</span><span class="kt">String</span><span class="o">)</span> <span class="o">{</span>
 
-  <span class="n">println</span><span class="o">(</span><span class="s">"创建"</span> <span class="o">+</span> <span class="k">this</span><span class="o">)</span>
+  <span class="nf">println</span><span class="o">(</span><span class="s">"创建"</span> <span class="o">+</span> <span class="k">this</span><span class="o">)</span>
 
-  <span class="k">override</span> <span class="k">def</span> <span class="n">toString</span><span class="o">()</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"颜色标记："</span><span class="o">+</span> <span class="n">color</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">toString</span><span class="o">()</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"颜色标记："</span><span class="o">+</span> <span class="n">color</span>
 
 <span class="o">}</span>
 
 <span class="c1">// 伴生对象，与类共享名字，可以访问类的私有属性和方法
 </span><span class="k">object</span> <span class="nc">Marker</span><span class="o">{</span>
 
-    <span class="k">private</span> <span class="k">val</span> <span class="n">markers</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">Marker</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="nv">markers</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">Marker</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span>
       <span class="s">"red"</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">Marker</span><span class="o">(</span><span class="s">"red"</span><span class="o">),</span>
       <span class="s">"blue"</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">Marker</span><span class="o">(</span><span class="s">"blue"</span><span class="o">),</span>
       <span class="s">"green"</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">Marker</span><span class="o">(</span><span class="s">"green"</span><span class="o">)</span>
     <span class="o">)</span>
 
-    <span class="k">def</span> <span class="n">apply</span><span class="o">(</span><span class="n">color</span><span class="k">:</span><span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-      <span class="k">if</span><span class="o">(</span><span class="n">markers</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">color</span><span class="o">))</span> <span class="n">markers</span><span class="o">(</span><span class="n">color</span><span class="o">)</span> <span class="k">else</span> <span class="kc">null</span>
+    <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">color</span><span class="k">:</span><span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+      <span class="nf">if</span><span class="o">(</span><span class="nv">markers</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="n">color</span><span class="o">))</span> <span class="nf">markers</span><span class="o">(</span><span class="n">color</span><span class="o">)</span> <span class="k">else</span> <span class="kc">null</span>
     <span class="o">}</span>
 
 
-    <span class="k">def</span> <span class="n">getMarker</span><span class="o">(</span><span class="n">color</span><span class="k">:</span><span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-      <span class="k">if</span><span class="o">(</span><span class="n">markers</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">color</span><span class="o">))</span> <span class="n">markers</span><span class="o">(</span><span class="n">color</span><span class="o">)</span> <span class="k">else</span> <span class="kc">null</span>
+    <span class="k">def</span> <span class="nf">getMarker</span><span class="o">(</span><span class="n">color</span><span class="k">:</span><span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+      <span class="nf">if</span><span class="o">(</span><span class="nv">markers</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="n">color</span><span class="o">))</span> <span class="nf">markers</span><span class="o">(</span><span class="n">color</span><span class="o">)</span> <span class="k">else</span> <span class="kc">null</span>
     <span class="o">}</span>
-    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
-        <span class="n">println</span><span class="o">(</span><span class="nc">Marker</span><span class="o">(</span><span class="s">"red"</span><span class="o">))</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span>
+        <span class="nf">println</span><span class="o">(</span><span class="nc">Marker</span><span class="o">(</span><span class="s">"red"</span><span class="o">))</span>
         <span class="c1">// 单例函数调用，省略了.(点)符号
-</span>        <span class="n">println</span><span class="o">(</span><span class="nc">Marker</span> <span class="n">getMarker</span> <span class="s">"blue"</span><span class="o">)</span>
+</span>        <span class="nf">println</span><span class="o">(</span><span class="nc">Marker</span> <span class="n">getMarker</span> <span class="s">"blue"</span><span class="o">)</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -689,7 +693,7 @@ u.email // "lj@mail"
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -861,7 +865,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>

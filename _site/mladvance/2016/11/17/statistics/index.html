@@ -76,6 +76,10 @@
                     </li>
                     
                     <li>
+                        <a href="/2018-7-17-gongzonghao_yu/">数据挖掘，你我常常忽略的小问题</a>
+                    </li>
+                    
+                    <li>
                         <a href="/about/">About</a>
                     </li>
                     
@@ -207,26 +211,26 @@
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.spark.mllib.linalg.Vector</span>
 <span class="k">import</span> <span class="nn">org.apache.spark.mllib.stat.</span><span class="o">{</span><span class="nc">MultivariateStatisticalSummary</span><span class="o">,</span> <span class="nc">Statistics</span><span class="o">}</span>
-<span class="k">val</span> <span class="n">observations</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Vector</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of Vectors
+<span class="k">val</span> <span class="nv">observations</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Vector</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// an RDD of Vectors
 // Compute column summary statistics.
-</span><span class="k">val</span> <span class="n">summary</span><span class="k">:</span> <span class="kt">MultivariateStatisticalSummary</span> <span class="o">=</span> <span class="nc">Statistics</span><span class="o">.</span><span class="n">colStats</span><span class="o">(</span><span class="n">observations</span><span class="o">)</span>
-<span class="n">println</span><span class="o">(</span><span class="n">summary</span><span class="o">.</span><span class="n">mean</span><span class="o">)</span> <span class="c1">// a dense vector containing the mean value for each column
-</span><span class="n">println</span><span class="o">(</span><span class="n">summary</span><span class="o">.</span><span class="n">variance</span><span class="o">)</span> <span class="c1">// column-wise variance
-</span><span class="n">println</span><span class="o">(</span><span class="n">summary</span><span class="o">.</span><span class="n">numNonzeros</span><span class="o">)</span> <span class="c1">// number of nonzeros in each column
+</span><span class="k">val</span> <span class="nv">summary</span><span class="k">:</span> <span class="kt">MultivariateStatisticalSummary</span> <span class="o">=</span> <span class="nv">Statistics</span><span class="o">.</span><span class="py">colStats</span><span class="o">(</span><span class="n">observations</span><span class="o">)</span>
+<span class="nf">println</span><span class="o">(</span><span class="nv">summary</span><span class="o">.</span><span class="py">mean</span><span class="o">)</span> <span class="c1">// a dense vector containing the mean value for each column
+</span><span class="nf">println</span><span class="o">(</span><span class="nv">summary</span><span class="o">.</span><span class="py">variance</span><span class="o">)</span> <span class="c1">// column-wise variance
+</span><span class="nf">println</span><span class="o">(</span><span class="nv">summary</span><span class="o">.</span><span class="py">numNonzeros</span><span class="o">)</span> <span class="c1">// number of nonzeros in each column
 </span></code></pre></div></div>
 <p>  下面我们具体看看<code class="highlighter-rouge">colStats</code>方法的实现。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">colStats</span><span class="o">(</span><span class="n">X</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Vector</span><span class="o">])</span><span class="k">:</span> <span class="kt">MultivariateStatisticalSummary</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">new</span> <span class="nc">RowMatrix</span><span class="o">(</span><span class="n">X</span><span class="o">).</span><span class="n">computeColumnSummaryStatistics</span><span class="o">()</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">colStats</span><span class="o">(</span><span class="n">X</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Vector</span><span class="o">])</span><span class="k">:</span> <span class="kt">MultivariateStatisticalSummary</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">new</span> <span class="nc">RowMatrix</span><span class="o">(</span><span class="n">X</span><span class="o">).</span><span class="py">computeColumnSummaryStatistics</span><span class="o">()</span>
   <span class="o">}</span>
 </code></pre></div></div>
 <p>  上面的代码非常明显，利用传入的<code class="highlighter-rouge">RDD</code>创建<code class="highlighter-rouge">RowMatrix</code>对象，利用方法<code class="highlighter-rouge">computeColumnSummaryStatistics</code>统计指标。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">computeColumnSummaryStatistics</span><span class="o">()</span><span class="k">:</span> <span class="kt">MultivariateStatisticalSummary</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">summary</span> <span class="k">=</span> <span class="n">rows</span><span class="o">.</span><span class="n">treeAggregate</span><span class="o">(</span><span class="k">new</span> <span class="nc">MultivariateOnlineSummarizer</span><span class="o">)(</span>
-      <span class="o">(</span><span class="n">aggregator</span><span class="o">,</span> <span class="n">data</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">aggregator</span><span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="n">data</span><span class="o">),</span>
-      <span class="o">(</span><span class="n">aggregator1</span><span class="o">,</span> <span class="n">aggregator2</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">aggregator1</span><span class="o">.</span><span class="n">merge</span><span class="o">(</span><span class="n">aggregator2</span><span class="o">))</span>
-    <span class="n">updateNumRows</span><span class="o">(</span><span class="n">summary</span><span class="o">.</span><span class="n">count</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">computeColumnSummaryStatistics</span><span class="o">()</span><span class="k">:</span> <span class="kt">MultivariateStatisticalSummary</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">summary</span> <span class="k">=</span> <span class="nv">rows</span><span class="o">.</span><span class="py">treeAggregate</span><span class="o">(</span><span class="k">new</span> <span class="nc">MultivariateOnlineSummarizer</span><span class="o">)(</span>
+      <span class="o">(</span><span class="n">aggregator</span><span class="o">,</span> <span class="n">data</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">aggregator</span><span class="o">.</span><span class="py">add</span><span class="o">(</span><span class="n">data</span><span class="o">),</span>
+      <span class="o">(</span><span class="n">aggregator1</span><span class="o">,</span> <span class="n">aggregator2</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">aggregator1</span><span class="o">.</span><span class="py">merge</span><span class="o">(</span><span class="n">aggregator2</span><span class="o">))</span>
+    <span class="nf">updateNumRows</span><span class="o">(</span><span class="nv">summary</span><span class="o">.</span><span class="py">count</span><span class="o">)</span>
     <span class="n">summary</span>
   <span class="o">}</span>
 </code></pre></div></div>
@@ -235,41 +239,41 @@
 我们先来看<code class="highlighter-rouge">add</code>代码。</p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Since</span><span class="o">(</span><span class="s">"1.1.0"</span><span class="o">)</span>
-  <span class="k">def</span> <span class="n">add</span><span class="o">(</span><span class="n">sample</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">this.</span><span class="k">type</span> <span class="o">=</span> <span class="n">add</span><span class="o">(</span><span class="n">sample</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">)</span>
-  <span class="k">private</span><span class="o">[</span><span class="kt">spark</span><span class="o">]</span> <span class="k">def</span> <span class="n">add</span><span class="o">(</span><span class="n">instance</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span> <span class="n">weight</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">this.</span><span class="k">type</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">weight</span> <span class="o">==</span> <span class="mf">0.0</span><span class="o">)</span> <span class="k">return</span> <span class="k">this</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">n</span> <span class="k">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">size</span>
-      <span class="n">currMean</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
-      <span class="n">currM2n</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
-      <span class="n">currM2</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
-      <span class="n">currL1</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
-      <span class="n">nnz</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
-      <span class="n">currMax</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">fill</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)(</span><span class="nc">Double</span><span class="o">.</span><span class="nc">MinValue</span><span class="o">)</span>
-      <span class="n">currMin</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">fill</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)(</span><span class="nc">Double</span><span class="o">.</span><span class="nc">MaxValue</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">add</span><span class="o">(</span><span class="n">sample</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">this.</span><span class="k">type</span> <span class="o">=</span> <span class="nf">add</span><span class="o">(</span><span class="n">sample</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">)</span>
+  <span class="k">private</span><span class="o">[</span><span class="kt">spark</span><span class="o">]</span> <span class="k">def</span> <span class="nf">add</span><span class="o">(</span><span class="n">instance</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">,</span> <span class="n">weight</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">this.</span><span class="k">type</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">weight</span> <span class="o">==</span> <span class="mf">0.0</span><span class="o">)</span> <span class="k">return</span> <span class="k">this</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">n</span> <span class="k">=</span> <span class="nv">instance</span><span class="o">.</span><span class="py">size</span>
+      <span class="n">currMean</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
+      <span class="n">currM2n</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
+      <span class="n">currM2</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
+      <span class="n">currL1</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
+      <span class="n">nnz</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
+      <span class="n">currMax</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">fill</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)(</span><span class="nv">Double</span><span class="o">.</span><span class="py">MinValue</span><span class="o">)</span>
+      <span class="n">currMin</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">fill</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)(</span><span class="nv">Double</span><span class="o">.</span><span class="py">MaxValue</span><span class="o">)</span>
     <span class="o">}</span>
-    <span class="k">val</span> <span class="n">localCurrMean</span> <span class="k">=</span> <span class="n">currMean</span>
-    <span class="k">val</span> <span class="n">localCurrM2n</span> <span class="k">=</span> <span class="n">currM2n</span>
-    <span class="k">val</span> <span class="n">localCurrM2</span> <span class="k">=</span> <span class="n">currM2</span>
-    <span class="k">val</span> <span class="n">localCurrL1</span> <span class="k">=</span> <span class="n">currL1</span>
-    <span class="k">val</span> <span class="n">localNnz</span> <span class="k">=</span> <span class="n">nnz</span>
-    <span class="k">val</span> <span class="n">localCurrMax</span> <span class="k">=</span> <span class="n">currMax</span>
-    <span class="k">val</span> <span class="n">localCurrMin</span> <span class="k">=</span> <span class="n">currMin</span>
-    <span class="n">instance</span><span class="o">.</span><span class="n">foreachActive</span> <span class="o">{</span> <span class="o">(</span><span class="n">index</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">localCurrMax</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">localCurrMax</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="k">=</span> <span class="n">value</span>
+    <span class="k">val</span> <span class="nv">localCurrMean</span> <span class="k">=</span> <span class="n">currMean</span>
+    <span class="k">val</span> <span class="nv">localCurrM2n</span> <span class="k">=</span> <span class="n">currM2n</span>
+    <span class="k">val</span> <span class="nv">localCurrM2</span> <span class="k">=</span> <span class="n">currM2</span>
+    <span class="k">val</span> <span class="nv">localCurrL1</span> <span class="k">=</span> <span class="n">currL1</span>
+    <span class="k">val</span> <span class="nv">localNnz</span> <span class="k">=</span> <span class="n">nnz</span>
+    <span class="k">val</span> <span class="nv">localCurrMax</span> <span class="k">=</span> <span class="n">currMax</span>
+    <span class="k">val</span> <span class="nv">localCurrMin</span> <span class="k">=</span> <span class="n">currMin</span>
+    <span class="nv">instance</span><span class="o">.</span><span class="py">foreachActive</span> <span class="o">{</span> <span class="o">(</span><span class="n">index</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span>
+      <span class="nf">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="nf">localCurrMax</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+          <span class="nf">localCurrMax</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="k">=</span> <span class="n">value</span>
         <span class="o">}</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">localCurrMin</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">localCurrMin</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="k">=</span> <span class="n">value</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="nf">localCurrMin</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+          <span class="nf">localCurrMin</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="k">=</span> <span class="n">value</span>
         <span class="o">}</span>
-        <span class="k">val</span> <span class="n">prevMean</span> <span class="k">=</span> <span class="n">localCurrMean</span><span class="o">(</span><span class="n">index</span><span class="o">)</span>
-        <span class="k">val</span> <span class="n">diff</span> <span class="k">=</span> <span class="n">value</span> <span class="o">-</span> <span class="n">prevMean</span>
-        <span class="n">localCurrMean</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="k">=</span> <span class="n">prevMean</span> <span class="o">+</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">diff</span> <span class="o">/</span> <span class="o">(</span><span class="n">localNnz</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">+</span> <span class="n">weight</span><span class="o">)</span>
-        <span class="n">localCurrM2n</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="o">(</span><span class="n">value</span> <span class="o">-</span> <span class="n">localCurrMean</span><span class="o">(</span><span class="n">index</span><span class="o">))</span> <span class="o">*</span> <span class="n">diff</span>
-        <span class="n">localCurrM2</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">value</span> <span class="o">*</span> <span class="n">value</span>
-        <span class="n">localCurrL1</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">abs</span><span class="o">(</span><span class="n">value</span><span class="o">)</span>
-        <span class="n">localNnz</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">+=</span> <span class="n">weight</span>
+        <span class="k">val</span> <span class="nv">prevMean</span> <span class="k">=</span> <span class="nf">localCurrMean</span><span class="o">(</span><span class="n">index</span><span class="o">)</span>
+        <span class="k">val</span> <span class="nv">diff</span> <span class="k">=</span> <span class="n">value</span> <span class="o">-</span> <span class="n">prevMean</span>
+        <span class="nf">localCurrMean</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="k">=</span> <span class="n">prevMean</span> <span class="o">+</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">diff</span> <span class="o">/</span> <span class="o">(</span><span class="nf">localNnz</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">+</span> <span class="n">weight</span><span class="o">)</span>
+        <span class="nf">localCurrM2n</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="o">(</span><span class="n">value</span> <span class="o">-</span> <span class="nf">localCurrMean</span><span class="o">(</span><span class="n">index</span><span class="o">))</span> <span class="o">*</span> <span class="n">diff</span>
+        <span class="nf">localCurrM2</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">value</span> <span class="o">*</span> <span class="n">value</span>
+        <span class="nf">localCurrL1</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="nv">math</span><span class="o">.</span><span class="py">abs</span><span class="o">(</span><span class="n">value</span><span class="o">)</span>
+        <span class="nf">localNnz</span><span class="o">(</span><span class="n">index</span><span class="o">)</span> <span class="o">+=</span> <span class="n">weight</span>
       <span class="o">}</span>
     <span class="o">}</span>
     <span class="n">weightSum</span> <span class="o">+=</span> <span class="n">weight</span>
@@ -298,45 +302,45 @@
 
 <p>  <code class="highlighter-rouge">merge</code>方法相对比较简单，它只是对两个<code class="highlighter-rouge">MultivariateOnlineSummarizer</code>对象的指标作合并操作。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">def</span> <span class="n">merge</span><span class="o">(</span><span class="n">other</span><span class="k">:</span> <span class="kt">MultivariateOnlineSummarizer</span><span class="o">)</span><span class="k">:</span> <span class="kt">this.</span><span class="k">type</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="n">weightSum</span> <span class="o">!=</span> <span class="mf">0.0</span> <span class="o">&amp;&amp;</span> <span class="n">other</span><span class="o">.</span><span class="n">weightSum</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">totalCnt</span> <span class="o">+=</span> <span class="n">other</span><span class="o">.</span><span class="n">totalCnt</span>
-      <span class="n">weightSum</span> <span class="o">+=</span> <span class="n">other</span><span class="o">.</span><span class="n">weightSum</span>
-      <span class="n">weightSquareSum</span> <span class="o">+=</span> <span class="n">other</span><span class="o">.</span><span class="n">weightSquareSum</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">def</span> <span class="nf">merge</span><span class="o">(</span><span class="n">other</span><span class="k">:</span> <span class="kt">MultivariateOnlineSummarizer</span><span class="o">)</span><span class="k">:</span> <span class="kt">this.</span><span class="k">type</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="py">weightSum</span> <span class="o">!=</span> <span class="mf">0.0</span> <span class="o">&amp;&amp;</span> <span class="nv">other</span><span class="o">.</span><span class="py">weightSum</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">totalCnt</span> <span class="o">+=</span> <span class="nv">other</span><span class="o">.</span><span class="py">totalCnt</span>
+      <span class="n">weightSum</span> <span class="o">+=</span> <span class="nv">other</span><span class="o">.</span><span class="py">weightSum</span>
+      <span class="n">weightSquareSum</span> <span class="o">+=</span> <span class="nv">other</span><span class="o">.</span><span class="py">weightSquareSum</span>
       <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
-      <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">val</span> <span class="n">thisNnz</span> <span class="k">=</span> <span class="n">nnz</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
-        <span class="k">val</span> <span class="n">otherNnz</span> <span class="k">=</span> <span class="n">other</span><span class="o">.</span><span class="n">nnz</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
-        <span class="k">val</span> <span class="n">totalNnz</span> <span class="k">=</span> <span class="n">thisNnz</span> <span class="o">+</span> <span class="n">otherNnz</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">totalNnz</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="o">{</span>
-          <span class="k">val</span> <span class="n">deltaMean</span> <span class="k">=</span> <span class="n">other</span><span class="o">.</span><span class="n">currMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">-</span> <span class="n">currMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+      <span class="nf">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">thisNnz</span> <span class="k">=</span> <span class="nf">nnz</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+        <span class="k">val</span> <span class="nv">otherNnz</span> <span class="k">=</span> <span class="nv">other</span><span class="o">.</span><span class="py">nnz</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+        <span class="k">val</span> <span class="nv">totalNnz</span> <span class="k">=</span> <span class="n">thisNnz</span> <span class="o">+</span> <span class="n">otherNnz</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">totalNnz</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">val</span> <span class="nv">deltaMean</span> <span class="k">=</span> <span class="nv">other</span><span class="o">.</span><span class="py">currMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">-</span> <span class="nf">currMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
           <span class="c1">// merge mean together
-</span>          <span class="n">currMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+=</span> <span class="n">deltaMean</span> <span class="o">*</span> <span class="n">otherNnz</span> <span class="o">/</span> <span class="n">totalNnz</span>
+</span>          <span class="nf">currMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+=</span> <span class="n">deltaMean</span> <span class="o">*</span> <span class="n">otherNnz</span> <span class="o">/</span> <span class="n">totalNnz</span>
           <span class="c1">// merge m2n together，不单纯是累加
-</span>          <span class="n">currM2n</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+=</span> <span class="n">other</span><span class="o">.</span><span class="n">currM2n</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+</span> <span class="n">deltaMean</span> <span class="o">*</span> <span class="n">deltaMean</span> <span class="o">*</span> <span class="n">thisNnz</span> <span class="o">*</span> <span class="n">otherNnz</span> <span class="o">/</span> <span class="n">totalNnz</span>
+</span>          <span class="nf">currM2n</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+=</span> <span class="nv">other</span><span class="o">.</span><span class="py">currM2n</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+</span> <span class="n">deltaMean</span> <span class="o">*</span> <span class="n">deltaMean</span> <span class="o">*</span> <span class="n">thisNnz</span> <span class="o">*</span> <span class="n">otherNnz</span> <span class="o">/</span> <span class="n">totalNnz</span>
           <span class="c1">// merge m2 together
-</span>          <span class="n">currM2</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+=</span> <span class="n">other</span><span class="o">.</span><span class="n">currM2</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+</span>          <span class="nf">currM2</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+=</span> <span class="nv">other</span><span class="o">.</span><span class="py">currM2</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
           <span class="c1">// merge l1 together
-</span>          <span class="n">currL1</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+=</span> <span class="n">other</span><span class="o">.</span><span class="n">currL1</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+</span>          <span class="nf">currL1</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+=</span> <span class="nv">other</span><span class="o">.</span><span class="py">currL1</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
           <span class="c1">// merge max and min
-</span>          <span class="n">currMax</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="n">math</span><span class="o">.</span><span class="n">max</span><span class="o">(</span><span class="n">currMax</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">other</span><span class="o">.</span><span class="n">currMax</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
-          <span class="n">currMin</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="n">math</span><span class="o">.</span><span class="n">min</span><span class="o">(</span><span class="n">currMin</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">other</span><span class="o">.</span><span class="n">currMin</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
+</span>          <span class="nf">currMax</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="nv">math</span><span class="o">.</span><span class="py">max</span><span class="o">(</span><span class="nf">currMax</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="nv">other</span><span class="o">.</span><span class="py">currMax</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
+          <span class="nf">currMin</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="nv">math</span><span class="o">.</span><span class="py">min</span><span class="o">(</span><span class="nf">currMin</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="nv">other</span><span class="o">.</span><span class="py">currMin</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
         <span class="o">}</span>
-        <span class="n">nnz</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="n">totalNnz</span>
+        <span class="nf">nnz</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="n">totalNnz</span>
         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
       <span class="o">}</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">weightSum</span> <span class="o">==</span> <span class="mf">0.0</span> <span class="o">&amp;&amp;</span> <span class="n">other</span><span class="o">.</span><span class="n">weightSum</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">this</span><span class="o">.</span><span class="n">n</span> <span class="k">=</span> <span class="n">other</span><span class="o">.</span><span class="n">n</span>
-      <span class="k">this</span><span class="o">.</span><span class="n">currMean</span> <span class="k">=</span> <span class="n">other</span><span class="o">.</span><span class="n">currMean</span><span class="o">.</span><span class="n">clone</span><span class="o">()</span>
-      <span class="k">this</span><span class="o">.</span><span class="n">currM2n</span> <span class="k">=</span> <span class="n">other</span><span class="o">.</span><span class="n">currM2n</span><span class="o">.</span><span class="n">clone</span><span class="o">()</span>
-      <span class="k">this</span><span class="o">.</span><span class="n">currM2</span> <span class="k">=</span> <span class="n">other</span><span class="o">.</span><span class="n">currM2</span><span class="o">.</span><span class="n">clone</span><span class="o">()</span>
-      <span class="k">this</span><span class="o">.</span><span class="n">currL1</span> <span class="k">=</span> <span class="n">other</span><span class="o">.</span><span class="n">currL1</span><span class="o">.</span><span class="n">clone</span><span class="o">()</span>
-      <span class="k">this</span><span class="o">.</span><span class="n">totalCnt</span> <span class="k">=</span> <span class="n">other</span><span class="o">.</span><span class="n">totalCnt</span>
-      <span class="k">this</span><span class="o">.</span><span class="n">weightSum</span> <span class="k">=</span> <span class="n">other</span><span class="o">.</span><span class="n">weightSum</span>
-      <span class="k">this</span><span class="o">.</span><span class="n">weightSquareSum</span> <span class="k">=</span> <span class="n">other</span><span class="o">.</span><span class="n">weightSquareSum</span>
-      <span class="k">this</span><span class="o">.</span><span class="n">nnz</span> <span class="k">=</span> <span class="n">other</span><span class="o">.</span><span class="n">nnz</span><span class="o">.</span><span class="n">clone</span><span class="o">()</span>
-      <span class="k">this</span><span class="o">.</span><span class="n">currMax</span> <span class="k">=</span> <span class="n">other</span><span class="o">.</span><span class="n">currMax</span><span class="o">.</span><span class="n">clone</span><span class="o">()</span>
-      <span class="k">this</span><span class="o">.</span><span class="n">currMin</span> <span class="k">=</span> <span class="n">other</span><span class="o">.</span><span class="n">currMin</span><span class="o">.</span><span class="n">clone</span><span class="o">()</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">weightSum</span> <span class="o">==</span> <span class="mf">0.0</span> <span class="o">&amp;&amp;</span> <span class="nv">other</span><span class="o">.</span><span class="py">weightSum</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="py">n</span> <span class="k">=</span> <span class="nv">other</span><span class="o">.</span><span class="py">n</span>
+      <span class="k">this</span><span class="o">.</span><span class="py">currMean</span> <span class="k">=</span> <span class="nv">other</span><span class="o">.</span><span class="py">currMean</span><span class="o">.</span><span class="py">clone</span><span class="o">()</span>
+      <span class="k">this</span><span class="o">.</span><span class="py">currM2n</span> <span class="k">=</span> <span class="nv">other</span><span class="o">.</span><span class="py">currM2n</span><span class="o">.</span><span class="py">clone</span><span class="o">()</span>
+      <span class="k">this</span><span class="o">.</span><span class="py">currM2</span> <span class="k">=</span> <span class="nv">other</span><span class="o">.</span><span class="py">currM2</span><span class="o">.</span><span class="py">clone</span><span class="o">()</span>
+      <span class="k">this</span><span class="o">.</span><span class="py">currL1</span> <span class="k">=</span> <span class="nv">other</span><span class="o">.</span><span class="py">currL1</span><span class="o">.</span><span class="py">clone</span><span class="o">()</span>
+      <span class="k">this</span><span class="o">.</span><span class="py">totalCnt</span> <span class="k">=</span> <span class="nv">other</span><span class="o">.</span><span class="py">totalCnt</span>
+      <span class="k">this</span><span class="o">.</span><span class="py">weightSum</span> <span class="k">=</span> <span class="nv">other</span><span class="o">.</span><span class="py">weightSum</span>
+      <span class="k">this</span><span class="o">.</span><span class="py">weightSquareSum</span> <span class="k">=</span> <span class="nv">other</span><span class="o">.</span><span class="py">weightSquareSum</span>
+      <span class="k">this</span><span class="o">.</span><span class="py">nnz</span> <span class="k">=</span> <span class="nv">other</span><span class="o">.</span><span class="py">nnz</span><span class="o">.</span><span class="py">clone</span><span class="o">()</span>
+      <span class="k">this</span><span class="o">.</span><span class="py">currMax</span> <span class="k">=</span> <span class="nv">other</span><span class="o">.</span><span class="py">currMax</span><span class="o">.</span><span class="py">clone</span><span class="o">()</span>
+      <span class="k">this</span><span class="o">.</span><span class="py">currMin</span> <span class="k">=</span> <span class="nv">other</span><span class="o">.</span><span class="py">currMin</span><span class="o">.</span><span class="py">clone</span><span class="o">()</span>
     <span class="o">}</span>
     <span class="k">this</span>
   <span class="o">}</span>
@@ -351,30 +355,30 @@
 
 <p>  所以，真实的样本均值和样本方差通过下面的代码实现。</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">override</span> <span class="k">def</span> <span class="n">mean</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">realMean</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">override</span> <span class="k">def</span> <span class="nf">mean</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">realMean</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
     <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">realMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="n">currMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="n">nnz</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">/</span> <span class="n">weightSum</span><span class="o">)</span>
+    <span class="nf">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nf">realMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="nf">currMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="nf">nnz</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">/</span> <span class="n">weightSum</span><span class="o">)</span>
       <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="o">}</span>
-    <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">realMean</span><span class="o">)</span>
+    <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="n">realMean</span><span class="o">)</span>
   <span class="o">}</span>
- <span class="k">override</span> <span class="k">def</span> <span class="n">variance</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">realVariance</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">denominator</span> <span class="k">=</span> <span class="n">weightSum</span> <span class="o">-</span> <span class="o">(</span><span class="n">weightSquareSum</span> <span class="o">/</span> <span class="n">weightSum</span><span class="o">)</span>
+ <span class="k">override</span> <span class="k">def</span> <span class="nf">variance</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">realVariance</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">[</span><span class="kt">Double</span><span class="o">](</span><span class="n">n</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">denominator</span> <span class="k">=</span> <span class="n">weightSum</span> <span class="o">-</span> <span class="o">(</span><span class="n">weightSquareSum</span> <span class="o">/</span> <span class="n">weightSum</span><span class="o">)</span>
     <span class="c1">// Sample variance is computed, if the denominator is less than 0, the variance is just 0.
-</span>    <span class="k">if</span> <span class="o">(</span><span class="n">denominator</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">val</span> <span class="n">deltaMean</span> <span class="k">=</span> <span class="n">currMean</span>
+</span>    <span class="nf">if</span> <span class="o">(</span><span class="n">denominator</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">deltaMean</span> <span class="k">=</span> <span class="n">currMean</span>
       <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
-      <span class="k">val</span> <span class="n">len</span> <span class="k">=</span> <span class="n">currM2n</span><span class="o">.</span><span class="n">length</span>
-      <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">realVariance</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="n">currM2n</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+</span> <span class="n">deltaMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">*</span> <span class="n">deltaMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">*</span> <span class="n">nnz</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">*</span>
-          <span class="o">(</span><span class="n">weightSum</span> <span class="o">-</span> <span class="n">nnz</span><span class="o">(</span><span class="n">i</span><span class="o">))</span> <span class="o">/</span> <span class="n">weightSum</span><span class="o">)</span> <span class="o">/</span> <span class="n">denominator</span>
+      <span class="k">val</span> <span class="nv">len</span> <span class="k">=</span> <span class="nv">currM2n</span><span class="o">.</span><span class="py">length</span>
+      <span class="nf">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nf">realVariance</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="nf">currM2n</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+</span> <span class="nf">deltaMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">*</span> <span class="nf">deltaMean</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">*</span> <span class="nf">nnz</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">*</span>
+          <span class="o">(</span><span class="n">weightSum</span> <span class="o">-</span> <span class="nf">nnz</span><span class="o">(</span><span class="n">i</span><span class="o">))</span> <span class="o">/</span> <span class="n">weightSum</span><span class="o">)</span> <span class="o">/</span> <span class="n">denominator</span>
         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
       <span class="o">}</span>
     <span class="o">}</span>
-    <span class="nc">Vectors</span><span class="o">.</span><span class="n">dense</span><span class="o">(</span><span class="n">realVariance</span><span class="o">)</span>
+    <span class="nv">Vectors</span><span class="o">.</span><span class="py">dense</span><span class="o">(</span><span class="n">realVariance</span><span class="o">)</span>
   <span class="o">}</span>
 </code></pre></div></div>
 
@@ -615,7 +619,7 @@
                             
         				
                             
-                				<a href="/tags/#ML" title="ML" rel="2">
+                				<a href="/tags/#ML" title="ML" rel="3">
                                 ML
                                 </a>
                             
@@ -787,7 +791,7 @@ var duoshuoQuery = {short_name:"machinelearningadvance"};
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Big Data Memo 2018
+                    Copyright &copy; Big Data Memo 2021
                 </p>
             </div>
         </div>
