@@ -122,3 +122,5 @@ friends: [
 ]
 
 feed: /atom.xml
+
+theme: jekyll-theme-time-machine
