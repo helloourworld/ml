@@ -134,4 +134,6 @@ Icon
 ## hack for graddle wrapper
 !wrapper/*.jar
 !**/wrapper/*.jar
-/_site/
+
+## dirs
+_site/
