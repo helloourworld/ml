@@ -20,7 +20,7 @@ tags:
 
 数据挖掘，让我们从下面这张图开始吧。
 
-![]({{site.baseurl}}/images/timg.jpeg)
+![]("{{site.baseurl}}/images/timg.jpeg")
 图一 从现实世界到模型世界
 图片来自网络，版权无关。
 
