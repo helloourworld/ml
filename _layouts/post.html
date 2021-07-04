@@ -65,7 +65,7 @@ layout: default
                 <ul class="pager">
                     {% if page.previous.url %}
                     <li class="previous">
-                        <a href="{{ page.previous.url  | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
+                        <a href="{{ page.previous.url | prepend: site.baseurl  | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
                         Previous<br>
                         <span>{{page.previous.title}}</span>
                         </a>
@@ -73,7 +73,7 @@ layout: default
                     {% endif %}
                     {% if page.next.url %}
                     <li class="next">
-                        <a href="{{ page.next.url  | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
+                        <a href="{{ page.next.url | prepend: site.baseurl  | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
                         Next<br>
                         <span>{{page.next.title}}</span>
                         </a>
@@ -176,7 +176,7 @@ layout: default
         </div>
     </div>
 </article>
-<script type="text/javascript"  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 {% if site.duoshuo_username %}
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
