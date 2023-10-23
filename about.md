@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "About"
-description: "Hey, this is Lijun Yu."
+description: "Hey, this is Lijun David Yu. I am currently a quant, major in portfolio management and algorithms. Please refer to Legend Python for more."
 header-img: "images/IMG_0006.JPG"
 ---
 
